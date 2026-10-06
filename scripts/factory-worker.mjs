@@ -41,6 +41,7 @@ export async function produce(job,{root,origin,history,update,cancelled,novelty}
       const themes=Object.keys(SPIRAL_THEMES),theme=themes[(job.ordinal+attempt)%themes.length];
       const seed=exact?(job.options.source.project?.seed??1):randomInt(1,1000000);
       let r;try{r=automatic&&job.mode!=='statistics'?automaticCandidate(job.options,seed,history,attempted,guard):job.options.source?sourceRecipe(job.options.source,seed):recipe(seed,job.mode,theme);}catch(error){if(error.code==='REPETITION_LIMIT'&&candidates.length)break;throw error;}r.exact=exact;attempted.push(r);
+      if(!exact&&!automatic&&r.mode==='arena')Object.assign(r,{arenaGame:job.options.arenaGame??'links',arenaShape:['triangle','square','hexagon','star','circle'][attempt%5],territoryDuration:job.options.duration<=37?30:job.options.duration<=52?45:60});
       const fingerprint=createHash('sha256').update(identity(r)).digest('hex'),shape=structure(r);
       if(!exact&&seen.has(fingerprint))continue;
       if(automatic&&!guard.check(r).allowed){if(exact)throw repetitionError(guard.check(r).reason);continue;}

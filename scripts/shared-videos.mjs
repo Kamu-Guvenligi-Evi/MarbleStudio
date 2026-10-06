@@ -12,7 +12,9 @@ export async function sharedVideos(project,{enabled=true}={}){
     ids.add(entry.id);
     const info=await stat(path.join(project,'work-videos',entry.id,entry.videoFile));
     if(info.size!==entry.bytes)throw new Error('Ortak videolar henüz indirilmedi. GitHub Desktop üzerinden Pull işlemini tamamlayın.');
-    jobs.push({...entry,files:[entry.videoFile,'cover.jpg','metadata.json'],shared:true,state:'done',stage:'Ortak çalışma videosu',progress:100});
+    let contentKind=entry.contentKind??entry.mode;
+    if(entry.mode==='arena'&&!entry.contentKind){const metadata=JSON.parse(await readFile(path.join(project,'work-videos',entry.id,'metadata.json'),'utf8'));if(metadata.recipe?.arenaGame==='territory')contentKind='territory';}
+    jobs.push({...entry,contentKind,files:[entry.videoFile,'cover.jpg','metadata.json'],shared:true,state:'done',stage:'Ortak çalışma videosu',progress:100});
   }
   return jobs;
 }

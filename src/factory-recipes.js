@@ -15,7 +15,7 @@ export const COURSE_PROFILES={
 };
 
 export function validateBatch(raw={}){
-  if(raw.automatic===true){const mode=raw.automaticMode??'auto';if(!['auto','track','arena','spiral','statistics'].includes(mode))throw new Error('Otomatik tür geçersiz.');return {...validateBatch({...raw,automatic:false,source:null,strategy:'variations',modes:[['auto','statistics'].includes(mode)?'track':mode]}),automatic:true,automaticMode:mode};}
+  if(raw.automatic===true){const mode=raw.automaticMode??'auto';if(!['auto','track','arena','territory','spiral','statistics'].includes(mode))throw new Error('Otomatik tür geçersiz.');return {...validateBatch({...raw,automatic:false,source:null,strategy:'variations',modes:[['auto','statistics'].includes(mode)?'track':mode==='territory'?'arena':mode]}),arenaGame:mode==='territory'?'territory':'links',automatic:true,automaticMode:mode};}
   const count=Number(raw.count??3),duration=Number(raw.duration??55);
   if(!Number.isInteger(count)||count<1||count>30)throw new Error('Video sayısı 1–30 olmalı.');
   if(!Number.isInteger(duration)||duration<25||duration>90)throw new Error('Süre 25–90 saniye olmalı.');
@@ -34,6 +34,7 @@ export function validateBatch(raw={}){
   const strategy=source?choose('strategy',['exact','variations'],'exact'):'variations';
   if(source?.mode==='statistics'&&strategy!=='exact')throw new Error('İstatistik tablosu aynı çalışma olarak dışa aktarılır.');
   return {count:strategy==='exact'?1:count,duration,modes:[...new Set(modes)],language,channel,source,strategy,youtube,
+    arenaGame:choose('arenaGame',['links','territory'],source?.project?.arenaGame??'links'),
     orientation:choose('orientation',['portrait','landscape','square'],source?.mode==='statistics'?'landscape':'portrait'),
     resolution:choose('resolution',[720,1080],1080),fps:choose('fps',[30,60],60),audio:choose('audio',['all','effects','music','none'],'all'),
     template:choose('template',['minimal','broadcast','cinema'],'minimal'),hook:String(raw.hook??'').trim().slice(0,100),outro:String(raw.outro??'').trim().slice(0,100)};

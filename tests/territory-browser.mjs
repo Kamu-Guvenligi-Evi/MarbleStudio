@@ -7,7 +7,7 @@ try{
  await page.locator('#nav-arena').click();await page.locator('#arena-game').selectOption('territory');
  assert.equal(await page.locator('#watch-title').innerText(),'Alan Savaşı');assert.ok(await page.locator('#arena-shape').isVisible());
  await page.locator('#arena-shape').selectOption('star');await page.locator('#territory-duration').selectOption('30');
- await page.reload();await page.waitForFunction(()=>window.marbleStudio);await page.locator('#nav-arena').click();
+ await page.reload();await page.waitForFunction(()=>window.marbleStudio);await page.locator('#nav-territory').click();
  assert.equal(await page.locator('#arena-game').inputValue(),'territory');assert.equal(await page.locator('#arena-shape').inputValue(),'star');assert.equal(await page.locator('#territory-duration').inputValue(),'30');
  assert.match(await page.locator('#ranking').innerText(),/% alan/);
  await page.setViewportSize({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.screenshot({path:'artifacts/territory-mobile.png',fullPage:true});

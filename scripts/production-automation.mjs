@@ -15,14 +15,15 @@ export function leastRecent(values,used,pick=randomInt){
   const min=Math.min(...scores.map(x=>x.score)),pool=scores.filter(x=>x.score===min);return pool[pick(pool.length)].value;
 }
 const recipeOf=job=>job.recipe??job.options?.source;
+export const automaticKind=job=>(job.recipe?.arenaGame??job.options?.source?.project?.arenaGame??job.options?.arenaGame)==='territory'&&job.mode==='arena'?'territory':job.mode;
 const zodiacTR={Aries:'Koç',Taurus:'Boğa',Gemini:'İkizler',Cancer:'Yengeç',Leo:'Aslan',Virgo:'Başak',Libra:'Terazi',Scorpio:'Akrep',Sagittarius:'Yay',Capricorn:'Oğlak',Aquarius:'Kova',Pisces:'Balık'};
 export async function planAutomatic(options,history,project,guard=createRepetitionGuard(history)){
   const recent=history.slice(-300);
   const spiralAvailable=Object.keys(SPIRAL_THEMES).some(theme=>Object.keys(SPIRAL_VARIANTS).some(variant=>guard.check({mode:'spiral',seed:1,count:1,theme,variant}).allowed));
-  const modes=spiralAvailable?['track','arena','spiral']:['track','arena'];
+  const modes=spiralAvailable?['track','arena','territory','spiral']:['track','arena','territory'];
   if(options.automaticMode==='spiral'&&!spiralAvailable)throw repetitionError('Spiral tema ve davranışları tekrar korumasında. Başka bir tür seç; süre ve video aralığı dolunca spiral yeniden kullanılabilir.');
-  const mode=options.automaticMode==='auto'?leastRecent(modes,recent.map(j=>j.mode)):options.automaticMode;
-  const base={...options,modes:[mode],orientation:mode==='statistics'?'landscape':'portrait',audio:mode==='statistics'?'none':'all',strategy:mode==='statistics'?'exact':'variations'};
+  const kind=options.automaticMode==='auto'?leastRecent(modes,recent.map(automaticKind)):options.automaticMode,mode=kind==='territory'?'arena':kind;
+  const base={...options,modes:[mode],arenaGame:kind==='territory'?'territory':'links',orientation:mode==='statistics'?'landscape':'portrait',audio:mode==='statistics'?'none':'all',strategy:mode==='statistics'?'exact':'variations'};
   if(mode==='statistics'){
     const {items}=JSON.parse(await readFile(path.join(project,'public/statistics/manifest.json'),'utf8'));
     const unused=[];
@@ -56,7 +57,8 @@ export function automaticCandidate(options,seed,history=[],attempted=[],guard=cr
     if(mode==='spiral'){r.theme=Object.keys(SPIRAL_THEMES)[i%6];r.variant=Object.keys(SPIRAL_VARIANTS)[Math.floor(i/6)%4];}
     if(mode==='arena'){
       r.count=6+2*(i%8);r.energy=[.85,1,1.15][Math.floor(i/8)%3];
-      if(i>=24)Object.assign(r,{arenaGame:'territory',arenaShape:['triangle','square','hexagon','star','circle'][(i-24)%5],territoryDuration:45});
+      if(options.arenaGame==='territory')Object.assign(r,{arenaGame:'territory',arenaShape:['triangle','square','hexagon','star','circle'][i%5],territoryDuration:[30,45,60][Math.floor(i/5)%3]});
+      else r.arenaGame='links';
     }
     if(mode!=='spiral'&&auto.ballNames.length)r.count=Math.min(r.count,Math.floor(auto.ballNames.length/2)*2);
     Object.assign(r,{language:options.language,rosterCategory:auto.rosterCategory,music:auto.music,ballNames:auto.ballNames,ballImages:auto.ballImages,sound:true,trails:true,presentation:{countdown:0,outro:2,camera:'smart'}});

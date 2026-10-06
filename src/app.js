@@ -27,11 +27,12 @@ import './studio-light.css';
 const $ = s => document.querySelector(s);
 const canvas = $('#race'), ctx = canvas.getContext('2d');
 const modeDrafts={};
-for(const mode of ['track','arena','spiral']){
+for(const mode of ['track','arena','territory','spiral']){
   try{const raw=JSON.parse(localStorage.getItem('marble-studio-'+mode+'-v1'));if(raw)modeDrafts[mode]={...normalizeProject(raw),spiralSfxVersion:raw.spiralSfxVersion??0,preset:raw.preset??'saved',speed:raw.speed??'1'};}catch{}
 }
 const legacyDraft=loadDraft();
 if(legacyDraft&&!modeDrafts[legacyDraft.mode==='arena'?'arena':'track'])modeDrafts[legacyDraft.mode==='arena'?'arena':'track']=legacyDraft;
+if(modeDrafts.arena?.arenaGame==='territory'){if(!modeDrafts.territory)modeDrafts.territory=modeDrafts.arena;delete modeDrafts.arena;}
 const draft=modeDrafts.track;
 let trackPreset=draft?.preset??'saved';
 let gameMode='track';
@@ -69,7 +70,7 @@ function archiveBrowserVideo(blob,options){
   void workbench.uploadVideo(blob,options).then(()=>toast('Video arşive eklendi; GitHub’a otomatik gönderilecek.')).catch(()=>toast('Video indirildi. Ortak arşive eklemek için video hizmetini açıp Videolarım → Video yükle kullan.'));
 }
 const statistics = createStatistics({notify:toast,onVideoRecorded:archiveBrowserVideo,onRecordingChange:active=>{
-  $('#nav-track').disabled=active;$('#nav-arena').disabled=active;$('#nav-spiral').disabled=active;
+  $('#nav-track').disabled=active;$('#nav-arena').disabled=active;$('#nav-territory').disabled=active;$('#nav-spiral').disabled=active;
   $('#open-settings').disabled=active;
   for(const id of ['studio-export','studio-backup','studio-restore','studio-works'])$('#'+id).disabled=active;
 }});
@@ -77,19 +78,20 @@ const statistics = createStatistics({notify:toast,onVideoRecorded:archiveBrowser
 createBallEditor({getImages:()=>ballImages,getNames:()=>ballNames,getCount:()=>Number($('#count').value),notify:toast,onRosterChange:(images,names)=>{if(isRecording())throw new Error('Kadroyu kayıt bittikten sonra değiştir.');ballImages=normalizeBallImages(images);ballNames=normalizeNames(names);resetRace();},onChange:next=>{if(isRecording())throw new Error('Görseli kayıt bittikten sonra ekle.');ballImages=next;resetRace();},onNamesChange:next=>{if(isRecording())throw new Error('İsmi kayıt bittikten sonra değiştir.');ballNames=normalizeNames(next);resetRace();}});
 function getProject(){return {mode:gameMode,spiralTheme,variant:spiralBehavior,energy:arenaEnergy,arenaGame,arenaShape,territoryDuration,spiralSfxVersion:1,preset:trackPreset,speed:$('#speed').value,name:projectName,sequence:structuredClone(sequence??[]),seed:Number($('#seed').value),count:Number($('#count').value),sound:$('#sound').checked,visualStyle:'neon',trails:$('#trails').checked,ballImages:[...ballImages],ballNames:[...ballNames],presentation:{...presentation}};}
 function persistDraft(){
-  modeDrafts[gameMode]=getProject();
-  try{localStorage.setItem('marble-studio-'+gameMode+'-v1',JSON.stringify(modeDrafts[gameMode]));$('#save-status').textContent='✓ Bu yarışın ayarları kaydedildi';}
+  const key=gameMode==='arena'&&arenaGame==='territory'?'territory':gameMode;modeDrafts[key]=getProject();
+  try{localStorage.setItem('marble-studio-'+key+'-v1',JSON.stringify(modeDrafts[key]));$('#save-status').textContent='✓ Bu yarışın ayarları kaydedildi';}
   catch{$('#save-status').textContent='Ayarlar bu oturumda saklanıyor';}
 }
 function switchRaceMode(mode,force=false){
   if(isRecording()||recordStarting||raceStarting||exportPreparing||statistics.isRecording())return;
-  if(mode!==gameMode||force){
+  const key=mode,territory=key==='territory';if(territory)mode='arena';
+  if(mode!==gameMode||(mode==='arena'&&(arenaGame==='territory')!==territory)||force){
     if(!force)persistDraft();music.suspend();gameMode=mode;
-    const saved=modeDrafts[mode];
+    const saved=modeDrafts[key];
     sequence=saved?.sequence?.length?structuredClone(saved.sequence):null;
-    projectName=saved?.name??(mode==='spiral'?'Spiral çoğalma':mode==='arena'?'Küre arenası':'Parkur yarışı');
+    projectName=saved?.name??(territory?'Alan Savaşı':mode==='spiral'?'Spiral çoğalma':mode==='arena'?'Küre arenası':'Parkur yarışı');
     trackPreset=saved?.preset??'saved';
-    spiralTheme=normalizeSpiralTheme(saved?.spiralTheme);spiralBehavior=saved?.variant??'classic';arenaEnergy=saved?.energy??1;arenaGame=saved?.arenaGame??'links';arenaShape=saved?.arenaShape??'triangle';territoryDuration=saved?.territoryDuration??45;
+    spiralTheme=normalizeSpiralTheme(saved?.spiralTheme);spiralBehavior=saved?.variant??'classic';arenaEnergy=saved?.energy??1;arenaGame=territory?'territory':'links';arenaShape=saved?.arenaShape??'triangle';territoryDuration=saved?.territoryDuration??45;
     ballImages=normalizeBallImages(saved?.ballImages);ballImages.forEach(loadBallImage);
     ballNames=normalizeNames(saved?.ballNames);presentation=normalizePresentation(saved?.presentation);syncPresentation();
     $('#seed').value=saved?.seed??2048;$('#count').value=saved?.count??(mode==='spiral'?1:12);
@@ -163,10 +165,11 @@ function setView(next, focus = true) {
   if(next==='watch')$('#'+gameMode+'-view').append($('#watch-view'));
   for(const mode of ['track','arena','statistics','spiral']){
     $('#'+mode+'-view').hidden=workspace!==mode;
-    $('#nav-'+mode).setAttribute('aria-pressed',String(workspace===mode));
+    $('#nav-'+mode).setAttribute('aria-pressed',String(workspace===mode&&(mode!=='arena'||arenaGame!=='territory')));
   }
+  $('#nav-territory').setAttribute('aria-pressed',String(workspace==='arena'&&arenaGame==='territory'));
   $('#watch-view').hidden=next!=='watch';statistics.setActive(next==='statistics');
-  document.title='Marble Studio — '+(workspace==='statistics'?'İstatistik yarışı':workspace==='spiral'?'Spiral çoğalma':workspace==='arena'?'Küre arenası':'Parkur yarışı');
+  document.title='Marble Studio — '+(workspace==='statistics'?'İstatistik yarışı':workspace==='spiral'?'Spiral çoğalma':workspace==='arena'?(arenaGame==='territory'?'Alan Savaşı':'Küre arenası'):'Parkur yarışı');
   updateUI();draw();window.scrollTo({top:0,behavior:'instant'});
   if(focus)$(next==='statistics'?'#statistics-title':'#watch-title').focus({preventScroll:true});
 }
@@ -216,7 +219,7 @@ function updateUI() {
   $('#new-race').disabled=empty||locked;
   $('#pause').disabled=empty || raceStarting || recordStarting || exportPreparing || (isRecording() && race.state==='finished');
   $('#record').disabled=empty||recordStarting||raceStarting||exportPreparing;
-  for(const mode of ['track','arena','statistics','spiral'])$('#nav-'+mode).disabled=locked;
+  for(const mode of ['track','arena','territory','statistics','spiral'])$('#nav-'+mode).disabled=locked;
   for(const selector of ['#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#sound','#open-settings'])$(selector).disabled=locked;
   $('#ranking-title').textContent=gameMode==='spiral'?'Spiraldeki toplar':race.finished.length?'Sonuçlar':race.state==='ready'?'Yarışmacılar':'Canlı sıralama';
   const spiral=gameMode==='spiral',arena=gameMode==='arena',territory=arena&&race.arenaGame==='territory',active=arena?race.balls.filter(b=>b.eliminatedAt===null).length:0;
@@ -252,7 +255,7 @@ function recordingUI(active) {
   $('#record').classList.toggle('recording',active);
   $('#record').innerHTML=active?'■ Kaydı bitir ve indir':'<span aria-hidden="true">●</span> Videoya kaydet';
   $('#record-help').textContent=active?'Kayıt sürüyor. Bu sekmeyi açık tut; finişte videon otomatik indirilecek.':'Yarış baştan oynatılır ve kaydedilir. Bittiğinde dikey videon otomatik iner.';
-  for(const selector of ['#nav-track','#nav-arena','#nav-statistics','#nav-spiral','#open-settings','#reset','#speed','#new-race','#camera','#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#sound'])$(selector).disabled=active;
+  for(const selector of ['#nav-track','#nav-arena','#nav-territory','#nav-statistics','#nav-spiral','#open-settings','#reset','#speed','#new-race','#camera','#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#sound'])$(selector).disabled=active;
 }
 async function startRecord() {
   if(recordStarting||raceStarting||exportPreparing)return;
@@ -274,7 +277,7 @@ async function startRecord() {
     const session=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:10_000_000});
     const chunks=[];
     const filename=gameMode==='spiral'?`marble-spiral-${race.seed}.webm`:gameMode==='arena'?`marble-orbit-${race.seed}.webm`:`marble-${race.sectionCount}-bolum-${race.seed}.webm`;
-    const recordingMode=gameMode,recordingTitle=projectName;
+    const recordingMode=gameMode==='arena'&&arenaGame==='territory'?'territory':gameMode,recordingTitle=projectName;
     let failed=false;
     session.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};
     session.onstop=()=>{
@@ -301,10 +304,11 @@ function stopRecord() {
 
 $('#new-race').onclick=()=>startRace(true);$('#pause').onclick=togglePause;$('#reset').onclick=resetRace;
 $('#nav-track').onclick=()=>switchRaceMode('track');$('#nav-arena').onclick=()=>switchRaceMode('arena');
+$('#nav-territory').onclick=()=>switchRaceMode('territory');
 $('#nav-spiral').onclick=()=>switchRaceMode('spiral');
 $('#nav-statistics').onclick=()=>setView('statistics');
 $('#count').onchange=resetRace;
-$('#arena-game').onchange=()=>{arenaGame=$('#arena-game').value;resetRace();};
+$('#arena-game').onchange=()=>switchRaceMode($('#arena-game').value==='territory'?'territory':'arena');
 $('#arena-shape').onchange=()=>{arenaShape=$('#arena-shape').value;resetRace();};
 $('#territory-duration').onchange=()=>{territoryDuration=Number($('#territory-duration').value);resetRace();};
 $('#speed').onchange=persistDraft;
@@ -361,10 +365,11 @@ function previewThumbnail(){
 async function openSnapshot(raw){
   if(busy())throw new Error('Önce kaydı bitir.');const saved=normalizeSnapshot(raw);document.body.classList.remove('automatic-home');persistDraft();
   if(saved.mode==='statistics'){statistics.loadSnapshot(saved.statistics);statistics.persist();setView('statistics');return;}
-  modeDrafts[saved.mode]={...saved.project,preset:'saved',speed:'1',spiralSfxVersion:1};
+  const key=saved.mode==='arena'&&saved.project.arenaGame==='territory'?'territory':saved.mode;
+  modeDrafts[key]={...saved.project,preset:'saved',speed:'1',spiralSfxVersion:1};
   // Persist the currently open race before replacing the selected draft.
-  localStorage.setItem('marble-studio-'+saved.mode+'-v1',JSON.stringify(modeDrafts[saved.mode]));
-  switchRaceMode(saved.mode,true);music.importPlan(saved.music);persistDraft();
+  localStorage.setItem('marble-studio-'+key+'-v1',JSON.stringify(modeDrafts[key]));
+  switchRaceMode(key,true);music.importPlan(saved.music);persistDraft();
 }
 const workbench=createWorkbench({capture:captureSnapshot,openSnapshot,thumbnail:previewThumbnail,title:()=>view==='statistics'?statistics.snapshot().heading:projectName,notify:toast,isLocked:busy});
 $('#studio-export').onclick=()=>workbench.openExport();
@@ -385,4 +390,4 @@ $('#studio-backup-file').onchange=async e=>{
   }catch(error){toast(error.message);}finally{e.target.value='';}
 };
 
-createAutomaticHome({create:options=>workbench.createAutomatic(options),videos:()=>workbench.openVideos(),works:()=>workbench.openWorks(),youtubeAccounts:()=>workbench.youtubeAccounts(),busy,pause:()=>{paused=true;statistics.pause();music.suspend();updateUI();}});
+createAutomaticHome({create:options=>workbench.createAutomatic(options),videos:()=>workbench.openVideos(),works:()=>workbench.openWorks(),youtubeAccounts:()=>workbench.youtubeAccounts(),edit:kind=>{if(kind==='statistics')setView('statistics');else if(kind!=='auto')switchRaceMode(kind);},busy,pause:()=>{paused=true;statistics.pause();music.suspend();updateUI();}});

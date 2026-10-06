@@ -13,7 +13,7 @@ try{
  await page.setViewportSize({width:390,height:844});
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  await page.screenshot({path:'artifacts/automatic-home-mobile.png'});
- const options=await page.evaluate(async()=>{const {automaticOptions}=await import('/src/automatic-home.js');return Promise.all(['auto','track','arena','spiral','statistics'].map(automaticOptions));});
+ const options=await page.evaluate(async()=>{const {automaticOptions}=await import('/src/automatic-home.js');return Promise.all(['auto','track','arena','territory','spiral','statistics'].map(automaticOptions));});
  for(const option of options){assert.equal(validateBatch(option).count,1);assert.equal(option.resolution,1080);assert.equal(option.automatic,true);assert.equal(option.source,undefined);}
  await page.locator('#automatic-edit').click();assert.equal(await page.locator('#watch-view').isVisible(),true);
  await page.locator('#automatic-back').click();assert.equal(await page.locator('main').isVisible(),false);

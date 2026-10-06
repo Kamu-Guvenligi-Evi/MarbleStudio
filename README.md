@@ -4,7 +4,7 @@
 
 ## Hızlı kullanım
 
-Studio artık sade bir başlangıç ekranıyla açılır. **Bana bırak → Videomu oluştur** tek bir videoyu otomatik hazırlar. İstersen Parkur, Arena, Spiral veya İstatistik seçebilirsin. Yarış düzeni, kadro, müzik, süre ve çıktı ayarları otomatik belirlenir. Yarışlar doğal hızda, 25–180 saniyelik dikey 1080p MP4; istatistikler kaynaklı kütüphaneden bir konuyla yaklaşık 30 saniyelik yatay MP4 olarak hazırlanır. İstatistik çıktısı sessizdir.
+Studio artık sade bir başlangıç ekranıyla açılır. **Bana bırak → Videomu oluştur** tek bir videoyu otomatik hazırlar. İstersen Parkur, Küre Arenası, Alan Savaşı, Spiral veya İstatistik seçebilirsin. Yarış düzeni, kadro, müzik, süre ve çıktı ayarları otomatik belirlenir. Yarışlar doğal hızda, 25–180 saniyelik dikey 1080p ve 60 FPS MP4; istatistikler kaynaklı kütüphaneden bir konuyla yaklaşık 30 saniyelik yatay MP4 olarak hazırlanır. İstatistik çıktısı sessizdir.
 
 **Videolarım** üretim durumunu, izlemeyi ve indirmeyi açar. **Kendim düzenleyeyim** ayrıntılı editöre geçer; **Ana ekran** sade görünüme döner. Editöre doğrudan erişim: `http://127.0.0.1:5173?edit=1`. Otomatik üretim mevcut taslakları değiştirmez.
 
@@ -118,11 +118,11 @@ Yeni taslaklar `marble-studio-track-v1` ve `marble-studio-arena-v1` anahtarları
 
 ## Alan Savaşı
 
-**Kendim düzenleyeyim → Arena → Arena oyunu → Alan Savaşı** ile açılır. Üçgen, kare, altıgen, yıldız veya daire seç; mevcut ülke, takım, burç veya özel görsel kadron yarışsın. Toplar kendi bölgelerinden çıkıp iz çizer; geri döndüklerinde çevreledikleri alanı ele geçirir. Rakibin açık izine dokunmak hamlesini iptal eder. Rakiplerin bölgeleri de el değiştirebilir. 30, 45 veya 60 saniye sonunda en çok alanı olan kazanır; eşit alan varsa beraberlik gösterilir.
+Ana ekrandaki **Alan Savaşı → Videomu oluştur** ile şekil, kadro ve müzik otomatik seçilir; 60 FPS MP4 üretilip ortak GitHub arşivine gönderilir. **Bana bırak** da Alan Savaşı'nı küre arenasından ayrı bir içerik olarak dönüşümlü seçer. **Kendim düzenleyeyim → Alan Savaşı** doğrudan editörü açar. Üçgen, kare, altıgen, yıldız veya daire seç; mevcut ülke, takım, burç veya özel görsel kadron yarışsın. Toplar kendi bölgelerinden çıkıp iz çizer; geri döndüklerinde çevreledikleri alanı ele geçirir. Rakibin açık izine dokunmak hamlesini iptal eder. Rakiplerin bölgeleri de el değiştirebilir. 30, 45 veya 60 saniye sonunda en çok alanı olan kazanır; eşit alan varsa beraberlik gösterilir.
 
-Şekil, süre ve kadro taslaklarda, kaydedilmiş çalışmalarda ve yedeklerde korunur. **Video oluştur** aynı mücadeleyi MP4 olarak üretir; otomatik Arena üretimi de şekilleri kullanabilir. Görsel referans: [üçgen alan mücadelesi](https://www.youtube.com/shorts/1vDss0KwZgk). Referans video uygulamaya eklenmez; alan kapatma ve çizim uygulamanın kendi simülasyonudur.
+Şekil, süre ve kadro taslaklarda, kaydedilmiş çalışmalarda ve yedeklerde korunur. Alan Savaşı taslağı `marble-studio-territory-v1` altında küre arenasından ayrı saklanır; eski Arena içindeki Alan Savaşı taslağı ilk açılışta taşınır. **Video oluştur** aynı mücadeleyi 60 FPS MP4 olarak üretir. İçerik Atölyesi'nde Arena içeriğini **Alan Savaşı** seçerek seri veya günlük üretim yapılabilir. Çalışmalarım ve Videolarım listeleri bu içeriği Alan Savaşı adıyla gösterir. Görsel referans: [üçgen alan mücadelesi](https://www.youtube.com/shorts/1vDss0KwZgk). Referans video uygulamaya eklenmez; alan kapatma ve çizim uygulamanın kendi simülasyonudur.
 
-Kontroller: `node tests/territory.mjs`, yerel sunucu açıkken `node tests/territory-browser.mjs`; gerçek MP4 için `node tests/territory-export.mjs`. Deneme çıktıları `artifacts/` altındadır.
+Kontroller: `node tests/territory.mjs`, yerel sunucu açıkken `node tests/territory-browser.mjs` ve `node tests/territory-integration.mjs`; gerçek otomatik 60 FPS MP4 için `node tests/territory-integration.mjs --export`. Deneme çıktıları `artifacts/` altındadır.
 
 ## Geliştirme ve kontrol
 

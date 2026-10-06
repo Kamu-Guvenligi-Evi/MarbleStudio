@@ -33,7 +33,7 @@ export async function addVideoToArchive({archive,root,job,existing=[]}){
   const {size}=await import('node:fs/promises').then(fs=>fs.stat(path.join(target,videoFile)));
   const clean={id,title:String(meta.title??job.copy?.title??'Video').slice(0,160),mode:job.mode,description:String(meta.description??''),recipe:meta.recipe??{},video:meta.video??{},musicCredits:meta.musicCredits??[],sha256:digest,bytes:size};
   await writeFile(path.join(target,'metadata.json'),JSON.stringify(clean,null,2));
-  return {id,mode:job.mode,copy:{title:clean.title},createdAt:job.createdAt??new Date().toISOString(),completedAt:job.completedAt??new Date().toISOString(),videoFile,files:[videoFile,'cover.jpg','metadata.json'],options:{channel:'Ortak çalışma videoları'},sha256:digest,bytes:size};
+  return {id,mode:job.mode,contentKind:job.contentKind??(job.mode==='arena'&&clean.recipe.arenaGame==='territory'?'territory':job.mode),copy:{title:clean.title},createdAt:job.createdAt??new Date().toISOString(),completedAt:job.completedAt??new Date().toISOString(),videoFile,files:[videoFile,'cover.jpg','metadata.json'],options:{channel:'Ortak çalışma videoları'},sha256:digest,bytes:size};
 }
 export function createVideoGithubSync({project,root,getJobs,save,enabled=true,allowLocalRemote=false}){
   let busy=false,closed=false;

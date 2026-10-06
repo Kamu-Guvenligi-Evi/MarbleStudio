@@ -1,0 +1,41 @@
+.app-header{justify-content:space-between;padding:0 max(28px,calc((100vw - 1400px)/2));gap:24px;flex-wrap:wrap;height:auto;min-height:76px}
+.factory-link{font-size:12px;color:#a7e2cc;text-decoration:none;white-space:nowrap}
+.view-tabs button span{border:0;font-size:15px}
+.race-workspace .watch-view{max-width:1440px;padding:32px 40px 60px}
+.race-workspace .watch-heading{align-items:center;margin-bottom:24px;gap:20px}
+.race-workspace h1{font-size:32px;letter-spacing:-1px}
+.workspace-description{font-size:13px;color:#a6b2bf;line-height:1.7;margin-top:10px}
+.race-setup-bar{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;padding:18px 20px;margin-bottom:22px;border:1px solid #2b3743;background:#171e26;border-radius:12px}
+.race-setup-bar>label:not(.switch-label){display:grid;gap:8px;color:#abbac8;font-size:11px;min-width:130px}
+.race-setup-bar select{color:#e1e9f1;background:#10171f;border:1px solid #34404c;border-radius:7px;padding:11px 32px 11px 12px;min-height:42px}
+.race-setup-bar .switch-label{align-self:center;margin:18px 0 0;color:#abbac8;font-size:12px}
+.race-setup-bar .settings-button{margin-left:auto;color:#becad5}
+.workspace-rules{margin:0 0 22px;padding:15px 20px;border-left:3px solid #bba2ef;border-radius:0 8px 8px 0;background:#211e30;color:#c2bbd6;font-size:12px;line-height:1.8}
+.race-workspace .watch-layout{grid-template-columns:minmax(0,1fr) 330px;align-items:start;gap:24px}
+.race-workspace .race-stage{width:100%;max-width:none;min-width:0;background:#0d131d;border-color:#2c3945}
+.race-workspace .race-stage canvas{display:block;width:100%;height:min(65vh,740px);object-fit:contain;background:#080e18}
+.race-workspace .stage-top{border-bottom:1px solid #293440}
+.race-workspace .watch-sidebar{min-width:0}
+.race-workspace .race-info,.race-workspace .video-panel,.race-workspace .music-panel{border:1px solid #2e3a43;border-radius:12px;background:#171e26}
+.race-workspace .video-panel{background:#1c2925}
+.race-workspace .music-panel>summary{font-size:14px;font-weight:600;cursor:pointer;color:#dce7ef;list-style-position:inside}
+.race-workspace .music-panel[open]>summary{margin-bottom:16px}
+.race-workspace .transport{flex-wrap:wrap;gap:10px}
+#arena-view .eyebrow{color:#c3adf1}
+#arena-view .race-stage{border-color:#443b59}
+#nav-arena[aria-pressed=true]{background:#322c42;color:#e0cef9}
+#nav-arena[aria-pressed=true] span{background:transparent;color:#d6bbff}
+@media(max-width:1000px){.race-workspace .watch-layout{grid-template-columns:minmax(0,1fr) 285px}.race-workspace .watch-view{padding:26px 22px}.race-setup-bar{gap:12px}.race-setup-bar .settings-button{margin-left:0}}
+@media(max-width:760px){.app-header{height:auto;padding:16px 18px;flex-wrap:wrap;gap:16px}.view-tabs{width:100%;justify-content:stretch}.view-tabs button{flex:1;justify-content:center;padding:10px 6px;font-size:11px}.race-workspace .watch-layout{grid-template-columns:minmax(0,1fr)}.race-workspace .watch-sidebar{display:grid;grid-template-columns:1fr 1fr;gap:16px}.race-workspace .music-panel{grid-column:1/-1}.race-workspace .watch-heading{align-items:flex-start;flex-direction:column;gap:12px}.race-workspace .race-stage canvas{height:65vh}}
+@media(max-width:500px){.race-workspace .watch-view{padding:22px 14px 40px}.race-workspace h1{font-size:27px}.race-setup-bar{padding:15px;display:grid;grid-template-columns:1fr 1fr;gap:14px 10px}.race-setup-bar>label:not(.switch-label){min-width:0}.race-setup-bar select{width:100%;min-width:0;padding-right:16px}.race-setup-bar .button{font-size:11px;padding:10px}.race-setup-bar .switch-label{margin:0}.race-setup-bar .settings-button{grid-column:1/-1;justify-self:start}.race-workspace .watch-sidebar{grid-template-columns:1fr}.race-workspace .transport{padding:12px}.race-workspace .transport #clock{margin-left:auto}.race-workspace .stage-reset{font-size:11px}.race-workspace .save-status{white-space:normal}.workspace-rules{padding:12px 15px}}
+
+#spiral-view .eyebrow{color:#f4c66d}
+#spiral-view #ranking{min-height:200px}
+#nav-spiral[aria-pressed=true]{background:#403323;color:#ffdda2}
+@media(max-width:760px){.view-tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px}}
+
+.studio-actions{display:flex;gap:6px}.studio-actions .button{font-size:11px;padding:8px}
+.studio-export-bar{max-width:1000px;margin:18px auto 0;padding:0 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}.studio-export-bar span{font-size:12px;color:#a6b2bf}
+.race-workspace .watch-view{max-width:1000px;padding-top:22px}.race-workspace .watch-layout{grid-template-columns:minmax(0,1fr) 300px}
+.race-workspace .race-stage canvas{height:min(72vh,850px)}
+@media(max-width:760px){.race-workspace .watch-layout{grid-template-columns:1fr}.workspace-rules{font-size:11px;line-height:1.5;padding:8px 12px;margin-bottom:12px}.race-workspace .watch-heading{margin-bottom:12px}.race-setup-bar{margin-bottom:12px;padding:12px}.studio-export-bar{margin-top:10px}.studio-export-bar .button{width:100%}#spiral-view #ranking{min-height:0}.race-workspace .race-stage canvas{height:62vh}.app-header{gap:10px}.studio-actions{margin-left:auto}}

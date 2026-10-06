@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import {createCameraDirector,normalizeNames,normalizePresentation} from '../src/presentation.js';
+import {normalizeProject,serializeProject,parseProject} from '../src/projects.js';
+import {Race} from '../src/physics.js';
+assert.equal(normalizeNames(['  Can  ','   '])[0],'Can');assert.equal(normalizeNames(['',''])[1],null);
+assert.throws(()=>normalizeNames(['a'.repeat(25)]));assert.throws(()=>normalizeNames([{}]));
+assert.throws(()=>normalizePresentation({countdown:-1}));assert.throws(()=>normalizePresentation({outro:0}));
+assert.throws(()=>normalizePresentation({camera:'bad'}));
+const project=normalizeProject({sequence:['shortcut'],ballNames:['Can','<b>Test</b>'],presentation:{countdown:0,outro:7,camera:'smart'}});
+assert.deepEqual(parseProject(serializeProject(project)),project);
+assert.deepEqual(normalizePresentation(),{countdown:3,outro:4,camera:'smart'});
+const first=new Race({sequence:['shortcut'],ballNames:project.ballNames}),second=new Race({sequence:['shortcut']});
+first.start();second.start();while(first.state!=='finished'){first.step();second.step();}
+assert.deepEqual(first.finished.map(b=>[b.id,b.finishedAt]),second.finished.map(b=>[b.id,b.finishedAt]));assert.equal(first.balls[0].name,'Can');
+first.dispose();second.dispose();
+const mock={finishY:6000,finished:[],balls:[2200,1500,1480,1450,600].map((y,id)=>({id,finishedAt:null,body:{position:{y}}}))};
+const director=createCameraDirector();assert.equal(director.target(mock,'smart',.01),1020,'Camera follows the close group, not isolated leader');
+mock.balls[2].body.position.y=1490;assert.equal(director.target(mock,'smart',.01),1030,'Anchor stays on group');
+mock.balls[0].body.position.y=4500;assert.equal(director.target(mock,'smart',.01),4120,'Camera returns to leader before finish');
+mock.finished=[mock.balls[0]];assert.equal(director.target(mock,'smart',.01),5400,'Camera holds finish after first crossing');
+assert.equal(director.target(mock,'leader',.01),4040);assert.equal(director.target(mock,'pack',.01),1030);
+console.log('PASS: names and timing validation, legacy defaults, backup roundtrip, unchanged physics, camera group tracking, finish priority and manual modes.');

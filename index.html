@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101316"><title>Marble Studio — Parkur yarışı</title>
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="./" aria-label="Marble Studio ana sayfa"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>Marble <strong>Studio</strong></a>
+    <a class="factory-link" hidden href="http://127.0.0.1:5180/factory.html" target="_blank" rel="noopener">İçerik Atölyesi ↗</a>
+    <details class="studio-actions"><summary>Yedekler</summary><div class="backup-menu"><button id="studio-backup" class="button subtle">Yedek indir</button><button id="studio-restore" class="button subtle">Yedek yükle</button><input id="studio-backup-file" type="file" accept=".json" hidden></div></details>
+    <nav class="view-tabs" aria-label="Yarış türleri">
+      <button id="nav-track" aria-pressed="true"><span aria-hidden="true">↘</span> Parkur</button>
+      <button id="nav-arena" aria-pressed="false"><span aria-hidden="true">◉</span> Arena</button>
+      <button id="nav-statistics" aria-pressed="false"><span aria-hidden="true">▥</span> İstatistik</button>
+      <button id="nav-spiral" aria-pressed="false"><span aria-hidden="true">◎</span> Spiral</button>
+    </nav>
+  </header>
+
+  <div class="studio-export-bar"><button id="studio-export" class="button primary">Video oluştur</button><div><button id="studio-works" class="button secondary">Çalışmalarım</button><button id="studio-videos" class="button secondary">Videolarım</button></div></div>
+  <main>
+    <section id="track-view" class="race-workspace" aria-label="Parkur yarışı"></section>
+    <section id="arena-view" class="race-workspace" aria-label="Küre arenası" hidden></section>
+    <section id="spiral-view" class="race-workspace" aria-label="Spiral çoğalma" hidden></section>
+    <section id="watch-view" class="watch-view" aria-labelledby="watch-title" hidden>
+      <div class="watch-heading"><div><p id="race-eyebrow" class="eyebrow">PARKUR YARIŞI</p><h1 id="watch-title" tabindex="-1">Parkur yarışı</h1><p id="race-description" class="workspace-description">Hazır parkurunu seç, kadronu kur ve yarışı başlat.</p></div><span id="save-status" class="save-status" role="status">Taslak kaydediliyor</span></div>
+      <div class="race-setup-bar">
+        <label id="track-preset-field" for="track-preset">Hazır parkur<select id="track-preset"><option value="saved">Mevcut parkur</option><option value="cascade">Neon Cascade</option><option value="pinball">Pinball Garden</option><option value="velocity">Velocity</option><option value="clockwork">Clockwork</option></select></label>
+        <label id="spiral-theme-field" for="spiral-theme" hidden>Spiral teması<select id="spiral-theme"></select></label>
+        <label for="count"><span id="count-label">Yarışmacı sayısı</span><select id="count"><option id="count-single" value="1" hidden disabled>1</option><option>6</option><option>8</option><option>10</option><option selected>12</option><option>14</option><option>16</option><option>18</option><option>20</option></select></label>
+        <button id="open-balls" class="button secondary">Kadroyu seç</button>
+        <label class="switch-label" for="sound"><input id="sound" type="checkbox" role="switch"><span>Çarpışma sesi</span></label>
+        <button id="open-settings" class="button subtle settings-button">⚙ Yarış ayarları</button>
+      </div>
+      <p id="arena-rules" class="workspace-rules" hidden>Her top 3 bağla başlar. Duvara çarptıkça bağ kurar, rakiplerinin bağlarını keser. Bağı kalmayan elenir; son bağlı top kazanır.</p>
+      <p id="spiral-rules" class="workspace-rules" hidden>Top sağ üstten düşer. Buza çarpan top bir parça kırıp kaybolur; toplar bitince dışarıdan yeni bir top gelir. ×2 noktasına ulaşan top çoğalır, sonraki grubun çarpanı artar. Buzun tamamı kırılınca kayıt tamamlanır.</p>
+      <div class="watch-layout">
+        <section class="race-stage" aria-label="Yarış görüntüsü">
+          <div class="stage-top"><span id="stage-state">Hazır</span><button id="cinema" title="Tam ekran aç">⛶ Tam ekran</button></div>
+          <canvas id="race" width="1080" height="1920" aria-label="Top yarışı simülasyonu"></canvas>
+          <div class="transport"><button id="pause" class="button stage-play">▶ Başlat</button><span id="clock">00:00.00</span><button id="reset" class="stage-reset" title="Aynı yarışı başa al">↺ Başa al</button><button id="new-race" class="stage-reset" title="Aynı parkurda yeni diziliş ve hareketlerle yarış">⚄ Yeni yarış</button></div>
+        </section>
+        <aside class="watch-sidebar">
+          <section class="race-info"><div class="panel-title"><h2 id="ranking-title">Yarışmacılar</h2><span id="finish-count">12 top</span></div><div id="ranking"></div><div class="progress-heading"><span>Parkur ilerlemesi</span><span id="progress-label">0%</span></div><div class="progress-track"><div id="progress-bar"></div></div></section>
+          <section class="video-panel"><details id="webm-options"><summary>Tarayıcı kaydı · WebM</summary><p id="record-help">Yarış baştan oynatılır ve kaydedilir. Bittiğinde dikey videon otomatik iner.</p><button id="record" class="button primary"><span aria-hidden="true">●</span> Videoya kaydet</button><span class="video-format">Dikey video · 1080 × 1920 · WebM</span></details></section>
+          <details class="music-panel" aria-labelledby="music-title">
+            <summary id="music-title">Yarış müziği</summary><p>Müzik yarışta çalar ve videoya eklenir.</p>
+            <label for="music-mode">Müzik düzeni</label><select id="music-mode"><option value="leader">Öndeki ülke veya kişiye göre · Parkur</option><option value="fixed">Tek müzik</option></select>
+            <div id="music-countries">
+              <p>Lider değişince müzik anında değişir. Yeniden öne geçen ülke veya kişi kaldığı yerden devam eder. Yeni yarışta tüm parçalar başa döner.</p>
+              <details><summary>Ülke ve kişi müziklerini seç</summary>
+                <label for="music-country">Ülke veya kişi</label><select id="music-country"></select>
+                <label for="music-country-track">Bu ülkenin müziği</label><select id="music-country-track"><option value="">Müzik seçilmedi</option></select>
+                <audio id="country-music-preview" controls preload="none" aria-label="Seçili ülkenin müziğini ön dinle"></audio>
+              </details>
+              <p id="music-leader-status" role="status">Ülke–müzik eşleştirmelerini seç.</p>
+              <a href="/music/LICENSES.txt" target="_blank" rel="noopener noreferrer">Hazır müziklerin kaynak ve atıf bilgileri</a>
+            </div>
+            <div id="music-fixed">
+            <label for="music-track">Müzik seç</label><select id="music-track"><option value="">Müzik yok</option></select>
+            </div>
+            <label for="music-volume">Müzik seviyesi <output id="music-volume-value" for="music-volume">35%</output></label><input id="music-volume" type="range" min="0" max="100" value="35">
+            <button id="music-preview" class="button secondary" disabled>Ön dinle</button>
+            <details id="music-credit" hidden><summary>Kaynak / atıf metni</summary><p>Parçanın kaynak ve lisans bilgileri. <a id="music-source" target="_blank" rel="noopener noreferrer">Kaynağı aç</a></p><textarea id="music-attribution" readonly aria-label="Müzik atıf metni"></textarea><button id="music-copy" class="button secondary">Atıf metnini kopyala</button></details>
+            <audio id="music-audio" loop preload="auto" hidden></audio>
+          </details>
+          <section id="download-panel" class="download-panel" hidden><span aria-hidden="true">✓</span><div><h2>Videon hazır.</h2><p>Tekrar indirmek istersen burada.</p><a id="download-video" class="button secondary" download>Videoyu indir ↓</a></div></section>
+          <details class="playback-settings"><summary>İzleme seçenekleri</summary><label for="speed">Oynatma hızı<select id="speed"><option value="0.5">Yavaş · 0.5×</option><option value="1" selected>Normal · 1×</option><option value="1.5">Hızlı · 1.5×</option><option value="2">Çok hızlı · 2×</option></select></label><label for="camera">Kamera<select id="camera"><option value="smart">Akıllı · Mücadele ve finiş</option><option value="leader">Öndeki topu takip et</option><option value="pack">Grubu takip et</option></select></label></details>
+        </aside>
+      </div>
+    </section>
+    <section id="statistics-view" class="statistics-view" aria-labelledby="statistics-title" hidden></section>
+  </main>
+
+<dialog id="balls-dialog" class="projects-dialog" aria-labelledby="balls-title">
+    <div class="dialog-heading"><div><p class="eyebrow">YARIŞMACILARINI ÖZELLEŞTİR</p><h2 id="balls-title">Yarışmacı kadron</h2></div><button class="close-dialog" data-close="balls-dialog" aria-label="Top ayarlarını kapat">×</button></div>
+    <p>Kütüphaneden yarışmacı seç veya kendi görselini yükle. İsimler ve görseller otomatik kaydedilir.</p>
+    <button id="open-catalog" class="button primary">Görsel kütüphanesini aç ↗</button>
+    <input id="ball-image-file" type="file" accept="image/png,image/jpeg,image/webp" hidden><p id="ball-image-status" role="status"></p><div id="ball-image-list"></div>
+  </dialog>
+  <dialog id="catalog-dialog" class="catalog-dialog" aria-labelledby="catalog-title">
+    <div class="dialog-heading"><div><p class="eyebrow">EVRENİN YARIŞMACILARI</p><h2 id="catalog-title">Görsel kütüphanesi</h2><p id="catalog-total" class="catalog-subtitle">Kütüphane hazırlanıyor…</p></div><button class="close-dialog" data-close="catalog-dialog" aria-label="Görsel kütüphanesini kapat">×</button></div>
+    <div id="catalog-roster" class="catalog-roster" aria-label="Top seçimi"></div>
+    <div class="catalog-controls"><label for="catalog-search">Görsel ara<input id="catalog-search" type="search" placeholder="Türkiye, Galatasaray, Atatürk…" autocomplete="off"></label><label for="catalog-target">Görselin ekleneceği top<select id="catalog-target"></select></label></div>
+    <div id="catalog-categories" class="catalog-categories" aria-label="Görsel kategorileri"></div>
+    <div class="catalog-actions"><p id="catalog-count" role="status"></p><button id="catalog-fill" class="button secondary" disabled>Bu kategoriden kadro oluştur</button></div>
+    <p id="catalog-status" role="status" aria-live="polite"></p><button id="catalog-retry" class="button secondary" hidden>Yeniden dene</button>
+    <div id="catalog-grid" class="catalog-grid"></div>
+    <footer class="catalog-footer"><span>Bir görsel seç: topa eklenir, sıradaki topa geçilir.</span><a href="/catalog/credits.html" target="_blank" rel="noopener">Görsel kaynakları ve kullanım bilgileri ↗</a></footer>
+  </dialog>
+  <dialog id="settings-dialog" class="settings-dialog" aria-labelledby="settings-title">
+    <div class="dialog-heading"><div><p class="eyebrow">İSTEĞİNE GÖRE</p><h2 id="settings-title">Yarış ayarları</h2></div><button class="close-dialog" data-close="settings-dialog" aria-label="Ayarları kapat">×</button></div>
+    <label class="switch-label settings-toggle" for="trails"><span><b>Topların arkasında iz bırak</b><small>Renkli ışık izleriyle topların hareketini takip et.</small></span><input id="trails" type="checkbox" role="switch" checked></label>
+    <div class="setting-field"><label for="seed">Aynı yarışı tekrar kullan</label><p>Yeni yarışta otomatik değişir; topların yerleri ve engellerin başlangıç düzeni yenilenir. Başa al ve video kaydı aynı yarışı tekrarlar.</p><div class="seed-field"><input id="seed" type="number" min="1" max="999999" value="2048"><button id="shuffle" class="button secondary">Yeni düzen</button></div></div>
+    <div class="video-timing-fields"><label for="countdown-seconds">Geri sayım <span><input id="countdown-seconds" type="number" min="0" max="5" step="1" value="3"> sn</span><small>0 seçersen yarış hemen başlar.</small></label><label for="outro-seconds">Video sonunda sonuçlar <span><input id="outro-seconds" type="number" min="1" max="10" step="1" value="4"> sn</span><small>Tüm toplar bitirdikten sonra gösterilir.</small></label></div>
+    <p class="settings-hint">Yeni düzen yeni bir yarış oluşturur; Başa al aynı yarışı korur. Süreler bir sonraki yarış ve kayıtta kullanılır.</p><button id="settings-done" class="button primary">Tamam</button>
+  </dialog>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/src/app.js"></script>
+</body>
+</html>

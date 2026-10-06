@@ -1,0 +1,678 @@
+[
+  {
+    "entityId": "athletes-5f433912a6",
+    "name": "Lionel Messi",
+    "category": "athletes",
+    "fallbackCountryCode": "ar",
+    "fallbackCountryId": "countries-23d8e01560",
+    "trackId": "person-messi"
+  },
+  {
+    "entityId": "athletes-fefb028662",
+    "name": "Cristiano Ronaldo",
+    "category": "athletes",
+    "fallbackCountryCode": "pt",
+    "fallbackCountryId": "countries-bc811258ae",
+    "trackId": "person-ronaldo"
+  },
+  {
+    "entityId": "athletes-e9cd910e6f",
+    "name": "Neymar",
+    "category": "athletes",
+    "fallbackCountryCode": "br",
+    "fallbackCountryId": "countries-3eb6578614",
+    "trackId": "person-neymar"
+  },
+  {
+    "entityId": "athletes-b1c8cd7a75",
+    "name": "Kylian Mbappé",
+    "category": "athletes",
+    "fallbackCountryCode": "fr",
+    "fallbackCountryId": "countries-b858a87c07"
+  },
+  {
+    "entityId": "athletes-acaf2f994d",
+    "name": "Erling Haaland",
+    "category": "athletes",
+    "fallbackCountryCode": "no",
+    "fallbackCountryId": "countries-fd12863535",
+    "trackId": "person-haaland"
+  },
+  {
+    "entityId": "athletes-a33bc61b7a",
+    "name": "Arda Güler",
+    "category": "athletes",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2"
+  },
+  {
+    "entityId": "athletes-f0018b632d",
+    "name": "Hakan Çalhanoğlu",
+    "category": "athletes",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2"
+  },
+  {
+    "entityId": "athletes-16f558bd04",
+    "name": "Mete Gazoz",
+    "category": "athletes",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2"
+  },
+  {
+    "entityId": "athletes-45b6ea86a8",
+    "name": "Michael Jordan",
+    "category": "athletes",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800",
+    "trackId": "person-jordan"
+  },
+  {
+    "entityId": "athletes-f511669021",
+    "name": "LeBron James",
+    "category": "athletes",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800",
+    "trackId": "person-lebron"
+  },
+  {
+    "entityId": "athletes-f7c53fceff",
+    "name": "Kobe Bryant",
+    "category": "athletes",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800"
+  },
+  {
+    "entityId": "athletes-43a4606b28",
+    "name": "Stephen Curry",
+    "category": "athletes",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800"
+  },
+  {
+    "entityId": "athletes-36e78ddcbe",
+    "name": "Muhammad Ali",
+    "category": "athletes",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800"
+  },
+  {
+    "entityId": "athletes-742c81f08b",
+    "name": "Mike Tyson",
+    "category": "athletes",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800"
+  },
+  {
+    "entityId": "athletes-837f7c983c",
+    "name": "Usain Bolt",
+    "category": "athletes",
+    "fallbackCountryCode": "jm",
+    "fallbackCountryId": "countries-112f489f6b",
+    "trackId": "person-bolt"
+  },
+  {
+    "entityId": "athletes-a5e89da422",
+    "name": "Serena Williams",
+    "category": "athletes",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800"
+  },
+  {
+    "entityId": "athletes-30da519ee0",
+    "name": "Roger Federer",
+    "category": "athletes",
+    "fallbackCountryCode": "ch",
+    "fallbackCountryId": "countries-482bd64c6c"
+  },
+  {
+    "entityId": "athletes-7262342e3f",
+    "name": "Rafael Nadal",
+    "category": "athletes",
+    "fallbackCountryCode": "es",
+    "fallbackCountryId": "countries-09cd68a2a7"
+  },
+  {
+    "entityId": "athletes-8fbfae035b",
+    "name": "Novak Djokovic",
+    "category": "athletes",
+    "fallbackCountryCode": "rs",
+    "fallbackCountryId": "countries-03aae0c369"
+  },
+  {
+    "entityId": "athletes-c979f984b2",
+    "name": "Lewis Hamilton",
+    "category": "athletes",
+    "fallbackCountryCode": "gb",
+    "fallbackCountryId": "countries-61fc7bcf04"
+  },
+  {
+    "entityId": "athletes-fad783d8dd",
+    "name": "Max Verstappen",
+    "category": "athletes",
+    "fallbackCountryCode": "nl",
+    "fallbackCountryId": "countries-595477bd43",
+    "trackId": "person-verstappen"
+  },
+  {
+    "entityId": "athletes-612fb39e15",
+    "name": "Michael Schumacher",
+    "category": "athletes",
+    "fallbackCountryCode": "de",
+    "fallbackCountryId": "countries-600ccd1b71"
+  },
+  {
+    "entityId": "celebrities-6f5eddc3bf",
+    "name": "Taylor Swift",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800",
+    "trackId": "person-swift"
+  },
+  {
+    "entityId": "celebrities-f4803ddde6",
+    "name": "Beyoncé",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800",
+    "trackId": "person-beyonce"
+  },
+  {
+    "entityId": "celebrities-7129fa37d6",
+    "name": "Rihanna",
+    "category": "celebrities",
+    "fallbackCountryCode": "bb",
+    "fallbackCountryId": "countries-9a900f5389",
+    "trackId": "person-rihanna"
+  },
+  {
+    "entityId": "celebrities-8987f033aa",
+    "name": "Ariana Grande",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800",
+    "trackId": "person-grande"
+  },
+  {
+    "entityId": "celebrities-4a9484d8c3",
+    "name": "Billie Eilish",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800",
+    "trackId": "person-eilish"
+  },
+  {
+    "entityId": "celebrities-defaac58f7",
+    "name": "Dua Lipa",
+    "category": "celebrities",
+    "fallbackCountryCode": "gb",
+    "fallbackCountryId": "countries-61fc7bcf04",
+    "trackId": "person-dua"
+  },
+  {
+    "entityId": "celebrities-461d189b83",
+    "name": "Shakira",
+    "category": "celebrities",
+    "fallbackCountryCode": "co",
+    "fallbackCountryId": "countries-87dda20416",
+    "trackId": "country-co"
+  },
+  {
+    "entityId": "celebrities-a864762bfd",
+    "name": "Lady Gaga",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800",
+    "trackId": "person-gaga"
+  },
+  {
+    "entityId": "celebrities-461e1ea626",
+    "name": "Michael Jackson",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800",
+    "trackId": "person-jackson"
+  },
+  {
+    "entityId": "celebrities-dc1dda6f1c",
+    "name": "Freddie Mercury",
+    "category": "celebrities",
+    "fallbackCountryCode": "gb",
+    "fallbackCountryId": "countries-61fc7bcf04",
+    "trackId": "person-mercury"
+  },
+  {
+    "entityId": "celebrities-8c379b58b4",
+    "name": "Elvis Presley",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800",
+    "trackId": "person-elvis"
+  },
+  {
+    "entityId": "celebrities-4b5de81bf8",
+    "name": "Eminem",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800",
+    "trackId": "person-eminem"
+  },
+  {
+    "entityId": "celebrities-874eb17745",
+    "name": "Snoop Dogg",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800",
+    "trackId": "person-snoop"
+  },
+  {
+    "entityId": "celebrities-01dbaf118f",
+    "name": "The Weeknd",
+    "category": "celebrities",
+    "fallbackCountryCode": "ca",
+    "fallbackCountryId": "countries-1c42c72cf9",
+    "trackId": "person-weeknd"
+  },
+  {
+    "entityId": "celebrities-bf8b528db1",
+    "name": "Tarkan",
+    "category": "celebrities",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2",
+    "trackId": "person-tarkan"
+  },
+  {
+    "entityId": "celebrities-7058e150f7",
+    "name": "Barış Manço",
+    "category": "celebrities",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2",
+    "trackId": "person-manco"
+  },
+  {
+    "entityId": "celebrities-180adf722a",
+    "name": "Ajda Pekkan",
+    "category": "celebrities",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2",
+    "trackId": "person-ajda"
+  },
+  {
+    "entityId": "celebrities-e80f1778c4",
+    "name": "Sezen Aksu",
+    "category": "celebrities",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2",
+    "trackId": "person-sezen"
+  },
+  {
+    "entityId": "celebrities-83c6413270",
+    "name": "Cem Yılmaz",
+    "category": "celebrities",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2"
+  },
+  {
+    "entityId": "celebrities-b74a658292",
+    "name": "Kemal Sunal",
+    "category": "celebrities",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2",
+    "trackId": "person-sunal"
+  },
+  {
+    "entityId": "celebrities-f02c38f1e4",
+    "name": "Şener Şen",
+    "category": "celebrities",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2"
+  },
+  {
+    "entityId": "celebrities-220d326f6f",
+    "name": "Leonardo DiCaprio",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800"
+  },
+  {
+    "entityId": "celebrities-f8c4bb244e",
+    "name": "Brad Pitt",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800"
+  },
+  {
+    "entityId": "celebrities-a82b4fb857",
+    "name": "Keanu Reeves",
+    "category": "celebrities",
+    "fallbackCountryCode": "ca",
+    "fallbackCountryId": "countries-1c42c72cf9"
+  },
+  {
+    "entityId": "celebrities-d39366ae3f",
+    "name": "Tom Cruise",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800",
+    "trackId": "person-cruise"
+  },
+  {
+    "entityId": "celebrities-f4400c4774",
+    "name": "Johnny Depp",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800",
+    "trackId": "person-depp"
+  },
+  {
+    "entityId": "celebrities-da5eb37184",
+    "name": "Dwayne Johnson",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800"
+  },
+  {
+    "entityId": "celebrities-e31eb2eb5e",
+    "name": "Scarlett Johansson",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800"
+  },
+  {
+    "entityId": "celebrities-2aebf97498",
+    "name": "Angelina Jolie",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800"
+  },
+  {
+    "entityId": "celebrities-05ecde3672",
+    "name": "Zendaya",
+    "category": "celebrities",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800"
+  },
+  {
+    "entityId": "politicians-227b70f8d1",
+    "name": "Recep Tayyip Erdoğan",
+    "category": "politicians",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2",
+    "trackId": "person-erdogan"
+  },
+  {
+    "entityId": "politicians-19d4b22212",
+    "name": "Kemal Kılıçdaroğlu",
+    "category": "politicians",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2",
+    "trackId": "person-kilicdaroglu"
+  },
+  {
+    "entityId": "politicians-bd570bd4ed",
+    "name": "Özgür Özel",
+    "category": "politicians",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2"
+  },
+  {
+    "entityId": "politicians-6d77e934de",
+    "name": "Ekrem İmamoğlu",
+    "category": "politicians",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2",
+    "trackId": "person-imamoglu"
+  },
+  {
+    "entityId": "politicians-c230a3ac67",
+    "name": "Mansur Yavaş",
+    "category": "politicians",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2"
+  },
+  {
+    "entityId": "politicians-e9916c6559",
+    "name": "Devlet Bahçeli",
+    "category": "politicians",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2"
+  },
+  {
+    "entityId": "politicians-a5c3b1149e",
+    "name": "Meral Akşener",
+    "category": "politicians",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2"
+  },
+  {
+    "entityId": "politicians-e2787c99c5",
+    "name": "Donald Trump",
+    "category": "politicians",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800",
+    "trackId": "person-trump"
+  },
+  {
+    "entityId": "politicians-6d3786503b",
+    "name": "Joe Biden",
+    "category": "politicians",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800"
+  },
+  {
+    "entityId": "politicians-2158658684",
+    "name": "Barack Obama",
+    "category": "politicians",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800"
+  },
+  {
+    "entityId": "politicians-36834274f2",
+    "name": "Vladimir Putin",
+    "category": "politicians",
+    "fallbackCountryCode": "ru",
+    "fallbackCountryId": "countries-67b8b1c4fe",
+    "trackId": "person-putin"
+  },
+  {
+    "entityId": "politicians-43c6a21225",
+    "name": "Volodymyr Zelenskyy",
+    "category": "politicians",
+    "fallbackCountryCode": "ua",
+    "fallbackCountryId": "countries-1589fe079b"
+  },
+  {
+    "entityId": "politicians-e5024205f8",
+    "name": "Emmanuel Macron",
+    "category": "politicians",
+    "fallbackCountryCode": "fr",
+    "fallbackCountryId": "countries-b858a87c07"
+  },
+  {
+    "entityId": "politicians-075509292f",
+    "name": "Angela Merkel",
+    "category": "politicians",
+    "fallbackCountryCode": "de",
+    "fallbackCountryId": "countries-600ccd1b71"
+  },
+  {
+    "entityId": "politicians-b5dc8d742a",
+    "name": "Xi Jinping",
+    "category": "politicians",
+    "fallbackCountryCode": "cn",
+    "fallbackCountryId": "countries-b0bc9abd90"
+  },
+  {
+    "entityId": "politicians-5142718f8e",
+    "name": "Narendra Modi",
+    "category": "politicians",
+    "fallbackCountryCode": "in",
+    "fallbackCountryId": "countries-af10ef20dd"
+  },
+  {
+    "entityId": "politicians-e8b285b146",
+    "name": "Luiz Inácio Lula",
+    "category": "politicians",
+    "fallbackCountryCode": "br",
+    "fallbackCountryId": "countries-3eb6578614"
+  },
+  {
+    "entityId": "politicians-fff1276e4f",
+    "name": "Javier Milei",
+    "category": "politicians",
+    "fallbackCountryCode": "ar",
+    "fallbackCountryId": "countries-23d8e01560"
+  },
+  {
+    "entityId": "politicians-e443429e20",
+    "name": "Giorgia Meloni",
+    "category": "politicians",
+    "fallbackCountryCode": "it",
+    "fallbackCountryId": "countries-6c5522ca8a"
+  },
+  {
+    "entityId": "politicians-1e6ce2b706",
+    "name": "Kim Jong Un",
+    "category": "politicians",
+    "fallbackCountryCode": "kp",
+    "fallbackCountryId": "countries-513c04e7ae",
+    "trackId": "person-kim"
+  },
+  {
+    "entityId": "politicians-e6969b9072",
+    "name": "Abdullah Öcalan",
+    "category": "politicians",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2"
+  },
+  {
+    "entityId": "politicians-05c64d53ca",
+    "name": "Selahattin Demirtaş",
+    "category": "politicians",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2"
+  },
+  {
+    "entityId": "politicians-3f2296bb1d",
+    "name": "Mao Zedong",
+    "category": "politicians",
+    "fallbackCountryCode": "cn",
+    "fallbackCountryId": "countries-b0bc9abd90",
+    "trackId": "red-sun-in-the-sky"
+  },
+  {
+    "entityId": "history-9da8f58fab",
+    "name": "Mustafa Kemal Atatürk",
+    "category": "history",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2",
+    "trackId": "person-ataturk"
+  },
+  {
+    "entityId": "history-d4e638effa",
+    "name": "Fatih Sultan Mehmet",
+    "category": "history",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2"
+  },
+  {
+    "entityId": "history-c348b1c33b",
+    "name": "Kanuni Sultan Süleyman",
+    "category": "history",
+    "fallbackCountryCode": "tr",
+    "fallbackCountryId": "countries-d9e83874d2"
+  },
+  {
+    "entityId": "history-1785ed6ccf",
+    "name": "Napolyon Bonapart",
+    "category": "history",
+    "fallbackCountryCode": "fr",
+    "fallbackCountryId": "countries-b858a87c07",
+    "trackId": "person-napoleon"
+  },
+  {
+    "entityId": "history-b37c90207b",
+    "name": "Jül Sezar",
+    "category": "history",
+    "fallbackCountryCode": "it",
+    "fallbackCountryId": "countries-6c5522ca8a"
+  },
+  {
+    "entityId": "history-0dedad8c84",
+    "name": "Büyük İskender",
+    "category": "history",
+    "fallbackCountryCode": "gr",
+    "fallbackCountryId": "countries-de06109890"
+  },
+  {
+    "entityId": "history-06a01eca1c",
+    "name": "Cengiz Han",
+    "category": "history",
+    "fallbackCountryCode": "mn",
+    "fallbackCountryId": "countries-78dc0cd3e7",
+    "trackId": "country-mn"
+  },
+  {
+    "entityId": "history-33b39c5346",
+    "name": "Kleopatra",
+    "category": "history",
+    "fallbackCountryCode": "eg",
+    "fallbackCountryId": "countries-3a1c21a559"
+  },
+  {
+    "entityId": "history-9e79b81a3a",
+    "name": "Kraliçe Victoria",
+    "category": "history",
+    "fallbackCountryCode": "gb",
+    "fallbackCountryId": "countries-61fc7bcf04"
+  },
+  {
+    "entityId": "history-bf3c8ce723",
+    "name": "Abraham Lincoln",
+    "category": "history",
+    "fallbackCountryCode": "us",
+    "fallbackCountryId": "countries-da2b128800"
+  },
+  {
+    "entityId": "history-7303d2c9c8",
+    "name": "Albert Einstein",
+    "category": "history",
+    "fallbackCountryCode": "de",
+    "fallbackCountryId": "countries-600ccd1b71"
+  },
+  {
+    "entityId": "history-d3d8d01803",
+    "name": "Nikola Tesla",
+    "category": "history",
+    "fallbackCountryCode": "rs",
+    "fallbackCountryId": "countries-03aae0c369"
+  },
+  {
+    "entityId": "history-3e2b1c4f7d",
+    "name": "Isaac Newton",
+    "category": "history",
+    "fallbackCountryCode": "gb",
+    "fallbackCountryId": "countries-61fc7bcf04"
+  },
+  {
+    "entityId": "history-a5ff0f7ae8",
+    "name": "Marie Curie",
+    "category": "history",
+    "fallbackCountryCode": "pl",
+    "fallbackCountryId": "countries-f437cb078a"
+  },
+  {
+    "entityId": "history-d667c9927d",
+    "name": "Leonardo da Vinci",
+    "category": "history",
+    "fallbackCountryCode": "it",
+    "fallbackCountryId": "countries-6c5522ca8a"
+  },
+  {
+    "entityId": "history-1bb33a8240",
+    "name": "İbn Sina",
+    "category": "history",
+    "fallbackCountryCode": "ir",
+    "fallbackCountryId": "countries-aa1553beed"
+  }
+]

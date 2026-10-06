@@ -1,0 +1,35 @@
+{
+  "verifiedAt": "2026-10-02",
+  "sources": [
+    {"title":"UEFA: şampiyon kulüpler ve güncel toplamlar","url":"https://www.uefa.com/uefachampionsleague/news/0275-1541637ad1db-88aeeefefefd-1000--all-time-honours-board/"},
+    {"title":"UEFA: kulüplerin kazandığı sezonlar","url":"https://es.uefa.com/uefachampionsleague/news/0254-0e97b2d74bea-89896c169762-1000--los-equipos-mas-laureados/"},
+    {"title":"UEFA: bütün sezonların arşivi","url":"https://www.uefa.com/uefachampionsleague/history/"},
+    {"title":"UEFA: geçmiş finallerin sonuç tablosu","url":"https://www.uefa.com/newsfiles/240459.pdf"}
+  ],
+  "winners": {
+    "Real Madrid": [1956,1957,1958,1959,1960,1966,1998,2000,2002,2014,2016,2017,2018,2022,2024],
+    "Milan": [1963,1969,1989,1990,1994,2003,2007],
+    "Liverpool": [1977,1978,1981,1984,2005,2019],
+    "Bayern Münih": [1974,1975,1976,2001,2013,2020],
+    "Barcelona": [1992,2006,2009,2011,2015],
+    "Ajax": [1971,1972,1973,1995],
+    "Inter": [1964,1965,2010],
+    "Manchester United": [1968,1999,2008],
+    "Benfica": [1961,1962],
+    "Nottingham Forest": [1979,1980],
+    "Juventus": [1985,1996],
+    "Porto": [1987,2004],
+    "Chelsea": [2012,2021],
+    "Paris Saint-Germain": [2025,2026],
+    "Celtic": [1967],
+    "Feyenoord": [1970],
+    "Aston Villa": [1982],
+    "Hamburg": [1983],
+    "Steaua Bükreş": [1986],
+    "PSV Eindhoven": [1988],
+    "Kızılyıldız": [1991],
+    "Marsilya": [1993],
+    "Borussia Dortmund": [1997],
+    "Manchester City": [2023]
+  }
+}

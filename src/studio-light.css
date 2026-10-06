@@ -1,0 +1,59 @@
+/* Quiet surfaces and one primary export action across the workspaces. */
+.app-header{min-height:64px;gap:18px;background:#12171b;border-bottom:1px solid #273039}
+.app-header .brand{font-size:19px}
+.app-header .view-tabs{background:transparent;border:0;padding:0;gap:4px}
+.app-header .view-tabs button{padding:10px 16px;border-radius:7px;font-size:13px}
+.app-header .view-tabs button[aria-pressed=true]{background:#26342c;color:#d3edbc}
+.studio-actions{position:relative;display:block;margin-left:auto;order:3}
+.studio-actions>summary{cursor:pointer;font-size:12px;color:#b4bec6;padding:12px;list-style-position:inside}
+.backup-menu{position:absolute;right:0;top:100%;z-index:20;min-width:160px;padding:8px;background:#192127;border:1px solid #35414a;border-radius:9px;box-shadow:0 8px 24px #0004}
+.backup-menu .button{display:block;width:100%;text-align:left;min-height:40px}
+.studio-export-bar{max-width:1000px;padding:0 40px;margin-top:20px;flex-direction:row-reverse;gap:12px}
+.studio-export-bar>div{gap:4px}
+.studio-export-bar>div .button{background:transparent;border-color:transparent;color:#b9c5cc;padding:10px 12px}
+.studio-export-bar>.primary{padding:11px 18px;font-size:13px}
+.race-workspace .watch-heading{margin-bottom:20px;align-items:center}
+.race-workspace h1,.statistics-view .page-heading h1{font-size:26px;letter-spacing:-.6px}
+#race-eyebrow,.workspace-description,.statistics-view .page-heading .eyebrow,.statistics-view .page-heading>div>p:last-child{display:none}
+.save-status{font-size:11px;color:#9caea5}
+.race-setup-bar{background:transparent;border:0;border-bottom:1px solid #2a353d;padding:0 0 20px;border-radius:0;gap:14px}
+.race-setup-bar select{background:#192127;border-color:#35414a}
+.race-workspace .watch-layout{gap:20px}
+.race-workspace .race-stage{border-radius:10px;box-shadow:none}
+.race-workspace .race-info,.race-workspace .music-panel,.race-workspace .video-panel{background:transparent;border:0;border-radius:0;padding:16px 0;margin:0;border-bottom:1px solid #2a353d;box-shadow:none}
+.race-workspace .watch-sidebar{gap:0}
+.race-workspace .video-panel{order:4}
+.race-workspace .video-panel details{margin:0}
+.race-workspace .music-panel>summary,.playback-settings>summary{font-size:13px}
+.race-workspace .race-info{padding-top:0}
+.workspace-rules{background:transparent;border:0;color:#aab6bf;padding:0;font-size:12px;line-height:1.6}
+.statistics-view .statistics-card{background:transparent;box-shadow:none;border-color:#2c363e;border-radius:10px}
+.statistics-view .statistics-export{border:0;border-top:1px solid #2c363e;padding:16px 0}
+.statistics-export summary{font-size:13px;color:#b3c4ca;cursor:pointer}
+.statistics-view .statistics-card>.eyebrow{display:none}
+.workbench-dialog{background:#151d23;border-color:#34414a;border-radius:14px;padding:24px;box-shadow:0 16px 56px #0006}
+.workbench-dialog::backdrop{background:#070b10a8;backdrop-filter:blur(2px)}
+.wb-heading{margin-bottom:20px}.wb-heading .eyebrow{display:none}.wb-heading h2{font-size:23px;margin:0}
+.wb-source{padding:0 0 16px;background:transparent;border-bottom:1px solid #303d45;border-radius:0;gap:14px;margin-bottom:18px}
+.wb-source img{width:48px;height:60px}.wb-source p{margin:5px 0 0}
+.wb-formats label{padding:12px;border-radius:8px;background:transparent;gap:6px}
+.wb-formats span{font-size:25px}.wb-formats label:has(input:checked){background:#25352b;border-color:#a9cf85}
+.workbench-dialog input:not([type=radio]),.workbench-dialog select{background:#11191f;border-color:#39464f;padding:10px;border-radius:7px}
+.wb-card{background:transparent;border-color:#303e47;border-radius:10px}
+.wb-close{background:transparent;color:#b8c6cf}.wb-close:hover{background:#29363e}
+.workbench-dialog :focus-visible,.studio-actions>summary:focus-visible{outline:2px solid #c7ed99;outline-offset:3px}
+@media(max-width:760px){
+ .app-header{padding:12px 16px;gap:10px}.app-header .brand{font-size:18px}
+ .studio-actions{order:0}.view-tabs{order:4}
+ .app-header .view-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%}
+ .app-header .view-tabs button{padding:10px 4px;font-size:12px;min-width:0}.view-tabs button span{display:none}
+ .studio-export-bar{padding:0 14px;margin-top:14px;flex-wrap:nowrap;gap:6px}
+ .studio-export-bar>div{width:auto;flex:1;gap:0}
+ .studio-export-bar .button{width:auto;min-height:42px;font-size:11px;padding:10px}
+ .studio-export-bar>div .button{padding:10px 8px}
+ .race-workspace .watch-heading{flex-direction:row;gap:12px;margin-bottom:18px}
+ .race-workspace h1,.statistics-view .page-heading h1{font-size:23px}
+ .race-workspace .save-status{max-width:110px;text-align:right;font-size:10px}
+ .race-setup-bar{padding:0 0 16px;margin-bottom:16px}
+ .race-workspace .watch-sidebar{display:flex;gap:0}.workbench-dialog{padding:18px}
+}

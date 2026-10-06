@@ -1,0 +1,45 @@
+import {chromium} from 'playwright';
+import assert from 'node:assert/strict';
+const browser=await chromium.launch({channel:'chrome',headless:true});
+try {
+  const page=await browser.newPage();await page.goto('http://127.0.0.1:5173?edit=1');
+  const result=await page.evaluate(async()=>{
+    const {prepareCatalogImage,upgradeCatalogImages}=await import('/src/image-catalog.js');
+    const {drawMarble}=await import('/src/marble-art.js');
+    const {loadBallImage}=await import('/src/ball-images.js');
+    const sample=document.createElement('canvas');sample.width=240;sample.height=120;
+    const sampleCtx=sample.getContext('2d');sampleCtx.fillStyle='#ff0000';sampleCtx.fillRect(0,0,240,120);
+    const personal=sample.toDataURL('image/png');
+    const covered=await prepareCatalogImage({id:'fill-test',src:personal,fit:'contain'});
+    sampleCtx.fillStyle='#00ff00';sampleCtx.fillRect(0,0,24,120);
+    sampleCtx.fillStyle='#0000ff';sampleCtx.fillRect(216,0,24,120);
+    const complete=await prepareCatalogImage({id:'complete-emblem',src:sample.toDataURL('image/png'),fit:'contain'});
+    const whole=new Image();whole.src=complete;await whole.decode();
+    const check=document.createElement('canvas');check.width=check.height=128;const checkCtx=check.getContext('2d');checkCtx.drawImage(whole,0,0);
+    const left=[...checkCtx.getImageData(13,64,1,1).data],right=[...checkCtx.getImageData(114,64,1,1).data];
+    const img=await loadBallImage(covered),probe=document.createElement('canvas');probe.width=probe.height=128;
+    const ctx=probe.getContext('2d');ctx.drawImage(img,0,0);
+    const corner=[...ctx.getImageData(2,2,1,1).data];
+    ctx.clearRect(0,0,128,128);drawMarble(ctx,{color:'#00ff00',imageSrc:covered,id:0},64,64,40);
+    const rim=[...ctx.getImageData(64,102,1,1).data];
+    const catalog=await(await fetch('/catalog/manifest.json')).json(),item=catalog.items.find(i=>i.name==='Türkiye');
+    const original=new Image();original.src=item.src;await original.decode();
+    const oldCanvas=document.createElement('canvas');oldCanvas.width=oldCanvas.height=128;const oldCtx=oldCanvas.getContext('2d');
+    oldCtx.fillStyle='#f4f6fb';oldCtx.fillRect(0,0,128,128);
+    const scale=112/Math.hypot(original.naturalWidth,original.naturalHeight),w=original.naturalWidth*scale,h=original.naturalHeight*scale;
+    oldCtx.drawImage(original,(128-w)/2,(128-h)/2,w,h);
+    const legacy=oldCanvas.toDataURL('image/webp',.9);
+    const expected=await prepareCatalogImage(item),upgraded=await upgradeCatalogImages([legacy,personal,null]);
+    const draft=JSON.parse(localStorage.getItem('marble-studio-track-v1'));draft.ballImages=[legacy,personal];localStorage.setItem('marble-studio-track-v1',JSON.stringify(draft));
+    return {corner,rim,left,right,changed:upgraded[0]===expected&&expected!==legacy,personalPreserved:upgraded[1]===personal,expected,personal};
+  });
+  assert.ok(result.corner[0]>240&&result.corner[1]<15,'Wide image must fill the square without pale padding');
+  assert.ok(result.rim[0]>220&&result.rim[1]<30,'Image must reach the marble rim');
+  assert.ok(result.left[1]>180&&result.left[0]<80,'Left emblem edge must remain visible');
+  assert.ok(result.right[2]>180&&result.right[0]<80,'Right emblem edge must remain visible');
+  assert.ok(result.changed);assert.ok(result.personalPreserved);
+  await page.reload();await page.waitForFunction(()=>window.marbleStudio);
+  const draft=await page.evaluate(()=>JSON.parse(localStorage.getItem('marble-studio-track-v1')));
+  assert.equal(draft.ballImages[0],result.expected);assert.equal(draft.ballImages[1],result.personal);
+  console.log('PASS: filled backdrop, complete emblem edges, marble rim, legacy migration, personal-image preservation and upgraded draft persistence.');
+}finally{await browser.close();}

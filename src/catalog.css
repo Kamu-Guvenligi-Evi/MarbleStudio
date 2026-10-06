@@ -1,0 +1,23 @@
+.catalog-dialog{width:min(1050px,calc(100vw - 24px));background:radial-gradient(ellipse at 90% 0,#242045 0,transparent 45%),#0b1120;color:#e8efff;border:1px solid #7080b34d;padding:26px;max-height:92vh}
+body{background:radial-gradient(ellipse at 5% 10%,#26204555,transparent 48%),radial-gradient(ellipse at 95% 65%,#123b5050,transparent 50%),#0b101b}
+#open-balls{border-color:#8acdde70;background:linear-gradient(120deg,#182d3e,#242139);color:#ceefff}
+.catalog-subtitle{color:#a3b3d2;font-size:13px;margin:8px 0 0}
+.catalog-roster{display:flex;gap:7px;overflow-x:auto;padding:5px 2px 12px;margin-bottom:14px}
+.catalog-slot{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:2px solid #506080;background:#18213c;color:#dce8ff;font-weight:700;overflow:hidden;padding:0;cursor:pointer}
+.catalog-slot img{width:100%;height:100%;object-fit:cover}.catalog-slot[aria-pressed=true]{border-color:#9bfbff;box-shadow:0 0 14px #66deff50;outline:2px solid #9bfbff;outline-offset:2px}
+.catalog-controls{display:grid;grid-template-columns:1fr 260px;gap:14px;margin-bottom:18px}.catalog-controls label{font-size:12px;color:#c0cbe0;display:grid;gap:8px;min-width:0}
+.catalog-controls input,.catalog-controls select{width:100%;min-width:0;border:1px solid #526084;background:#10192e;color:#eef5ff;border-radius:9px;padding:12px;font:inherit;font-size:14px}
+.catalog-categories{display:flex;flex-wrap:wrap;gap:7px}.catalog-categories button{border:1px solid #455070;background:#141e34;color:#c4d1eb;border-radius:20px;padding:9px 13px;font-size:12px;cursor:pointer}
+.catalog-categories button[aria-pressed=true]{background:#c2f7ff;border-color:#c2f7ff;color:#101a30;font-weight:700}
+.catalog-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}.catalog-actions p{font-size:12px;color:#a8bada}.catalog-actions .button{font-size:12px}
+#catalog-status{font-size:12px;color:#aeeaf1;min-height:18px;line-height:1.6;margin:10px 0 18px}
+.catalog-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.catalog-card{min-width:0;border:1px solid #334363;border-radius:12px;overflow:hidden;background:#121c31;transition:border-color .15s,transform .15s}
+.catalog-card:hover{border-color:#85e6fa;transform:translateY(-2px)}.catalog-card>button{display:flex;flex-direction:column;align-items:center;width:100%;padding:12px 8px 6px;background:transparent;border:0;color:#edf4ff;cursor:pointer;gap:11px}
+.catalog-card img{width:86px;height:86px;border-radius:50%;object-fit:cover;object-position:50% 22%;background:#e9eef7;border:1px solid #738ab0;max-width:100%;aspect-ratio:1}.catalog-card img.catalog-contain{object-position:center}
+.catalog-card button span{font-size:12px;line-height:1.4;min-height:34px;display:grid;place-items:center;overflow-wrap:anywhere}.catalog-card>a{display:block;text-align:center;font-size:10px;color:#9daccc;padding:4px 0 10px}
+.catalog-empty{grid-column:1/-1;padding:35px 10px;color:#b4c4df;line-height:1.6;text-align:center}
+.catalog-footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid #334363;margin-top:22px;padding-top:16px;font-size:11px;line-height:1.6;color:#9eafd0}.catalog-footer a{color:#a3e5f4}
+.catalog-dialog :focus-visible{outline:2px solid #a1f2ff;outline-offset:3px}.catalog-dialog button:disabled{opacity:.45;cursor:wait}
+#balls-dialog{width:min(800px,calc(100vw - 24px))}#open-catalog{margin:8px 0 12px;background:linear-gradient(120deg,#b8f5ff,#cabaff);border:0;color:#101a30}
+@media(max-width:750px){.catalog-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.catalog-controls{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.catalog-dialog{padding:18px 12px}.catalog-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.catalog-card img{width:70px;height:70px}.catalog-card button span{font-size:11px}.catalog-card>button{padding:10px 5px 3px}.catalog-controls{grid-template-columns:1fr}.catalog-categories button{font-size:11px;padding:8px 10px}.catalog-actions{align-items:flex-start}.catalog-actions .button{font-size:11px;padding:10px}.ball-image-row .ball-name-input{flex-basis:calc(100% - 58px)}.ball-image-row [data-library]{margin-left:50px}}

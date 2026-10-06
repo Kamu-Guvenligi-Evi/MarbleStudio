@@ -1,0 +1,166 @@
+{
+  "id": "historical-lifespans",
+  "title": "Tarihi kişiler: yaşam süreleri",
+  "category": "Tarih",
+  "unit": "yıl yaşam",
+  "source": "Wikidata · doğum ve ölüm tarihleri",
+  "sources": [
+    {
+      "title": "Albert Einstein · yaşam tarihleri",
+      "url": "https://www.wikidata.org/wiki/Q937"
+    },
+    {
+      "title": "Marie Curie · yaşam tarihleri",
+      "url": "https://www.wikidata.org/wiki/Q7186"
+    },
+    {
+      "title": "Nikola Tesla · yaşam tarihleri",
+      "url": "https://www.wikidata.org/wiki/Q9036"
+    },
+    {
+      "title": "Charles Darwin · yaşam tarihleri",
+      "url": "https://www.wikidata.org/wiki/Q1035"
+    },
+    {
+      "title": "Fyodor Dostoyevski · yaşam tarihleri",
+      "url": "https://www.wikidata.org/wiki/Q991"
+    },
+    {
+      "title": "Lev Tolstoy · yaşam tarihleri",
+      "url": "https://www.wikidata.org/wiki/Q7243"
+    },
+    {
+      "title": "Vincent van Gogh · yaşam tarihleri",
+      "url": "https://www.wikidata.org/wiki/Q5582"
+    },
+    {
+      "title": "Pablo Picasso · yaşam tarihleri",
+      "url": "https://www.wikidata.org/wiki/Q5593"
+    },
+    {
+      "title": "Frida Kahlo · yaşam tarihleri",
+      "url": "https://www.wikidata.org/wiki/Q5588"
+    },
+    {
+      "title": "Alan Turing · yaşam tarihleri",
+      "url": "https://www.wikidata.org/wiki/Q7251"
+    },
+    {
+      "title": "Leonardo da Vinci · yaşam tarihleri",
+      "url": "https://www.wikidata.org/wiki/Q762"
+    },
+    {
+      "title": "Isaac Newton · yaşam tarihleri",
+      "url": "https://www.wikidata.org/wiki/Q935"
+    }
+  ],
+  "retrievedAt": "2026-10-02T16:00:58.160794+00:00",
+  "license": "Wikidata CC0",
+  "interpolation": "step",
+  "snapshot": true,
+  "periodLabel": "Yaşam süresi",
+  "note": "Seçili kişilerin doğum ve ölüm tarihinden hesaplanan tamamlanmış yaşam yılı karşılaştırması. Bir tarihsel güç, başarı veya popülerlik puanı değildir. Sabit karşılaştırmadır; zaman serisi değildir.",
+  "facts": [
+    {
+      "name": "Albert Einstein",
+      "born": "1879-03-14",
+      "died": "1955-04-18",
+      "age": 76,
+      "source": "https://www.wikidata.org/wiki/Q937",
+      "retrievedAt": "2026-10-02T16:00:42.388025+00:00"
+    },
+    {
+      "name": "Marie Curie",
+      "born": "1867-11-07",
+      "died": "1934-07-04",
+      "age": 66,
+      "source": "https://www.wikidata.org/wiki/Q7186",
+      "retrievedAt": "2026-10-02T16:00:44.057794+00:00"
+    },
+    {
+      "name": "Nikola Tesla",
+      "born": "1856-07-10",
+      "died": "1943-01-07",
+      "age": 86,
+      "source": "https://www.wikidata.org/wiki/Q9036",
+      "retrievedAt": "2026-10-02T16:00:45.354537+00:00"
+    },
+    {
+      "name": "Charles Darwin",
+      "born": "1809-02-12",
+      "died": "1882-04-19",
+      "age": 73,
+      "source": "https://www.wikidata.org/wiki/Q1035",
+      "retrievedAt": "2026-10-02T16:00:46.664580+00:00"
+    },
+    {
+      "name": "Fyodor Dostoyevski",
+      "born": "1821-10-30",
+      "died": "1881-01-28",
+      "age": 59,
+      "source": "https://www.wikidata.org/wiki/Q991",
+      "retrievedAt": "2026-10-02T16:00:47.828529+00:00"
+    },
+    {
+      "name": "Lev Tolstoy",
+      "born": "1828-08-28",
+      "died": "1910-11-07",
+      "age": 82,
+      "source": "https://www.wikidata.org/wiki/Q7243",
+      "retrievedAt": "2026-10-02T16:00:49.459108+00:00"
+    },
+    {
+      "name": "Vincent van Gogh",
+      "born": "1853-03-30",
+      "died": "1890-07-29",
+      "age": 37,
+      "source": "https://www.wikidata.org/wiki/Q5582",
+      "retrievedAt": "2026-10-02T16:00:51.137582+00:00"
+    },
+    {
+      "name": "Pablo Picasso",
+      "born": "1881-10-25",
+      "died": "1973-04-08",
+      "age": 91,
+      "source": "https://www.wikidata.org/wiki/Q5593",
+      "retrievedAt": "2026-10-02T16:00:52.839088+00:00"
+    },
+    {
+      "name": "Frida Kahlo",
+      "born": "1907-07-06",
+      "died": "1954-07-13",
+      "age": 47,
+      "source": "https://www.wikidata.org/wiki/Q5588",
+      "retrievedAt": "2026-10-02T16:00:54.045612+00:00"
+    },
+    {
+      "name": "Alan Turing",
+      "born": "1912-06-23",
+      "died": "1954-06-07",
+      "age": 41,
+      "source": "https://www.wikidata.org/wiki/Q7251",
+      "retrievedAt": "2026-10-02T16:00:55.197658+00:00"
+    },
+    {
+      "name": "Leonardo da Vinci",
+      "born": "1452-04-15",
+      "died": "1519-05-02",
+      "age": 67,
+      "source": "https://www.wikidata.org/wiki/Q762",
+      "retrievedAt": "2026-10-02T16:00:56.720002+00:00"
+    },
+    {
+      "name": "Isaac Newton",
+      "born": "1642-12-25",
+      "died": "1727-03-20",
+      "age": 84,
+      "source": "https://www.wikidata.org/wiki/Q935",
+      "retrievedAt": "2026-10-02T16:00:58.160794+00:00"
+    }
+  ],
+  "csv": "/statistics/historical-lifespans.csv",
+  "start": 2026,
+  "end": 2026,
+  "entities": 12,
+  "rows": 1
+}

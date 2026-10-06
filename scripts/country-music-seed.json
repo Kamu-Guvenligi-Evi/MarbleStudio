@@ -1,0 +1,2000 @@
+[
+  {
+    "code": "az",
+    "country": "Azerbaycan",
+    "title": "Azerbaycan Milli Marşı",
+    "query": "Azerbaijan national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=wFHmoFkWPzo",
+    "sourceTitle": "Azerbaijan National Anthem (Instrumental)",
+    "sourceDuration": 133,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Azerbaijan National Anthem (Instrumental)",
+        "id": "wFHmoFkWPzo",
+        "duration": 133
+      },
+      {
+        "title": "National Anthem of Azerbaijan - \"Azərbaycan marşı\" (Instrumental)",
+        "id": "n4cufLe-6co",
+        "duration": 140
+      },
+      {
+        "title": "National Anthem of Azerbaijan - \"Azərbaycan marşı\" (Instrumental Version in G-Minor)",
+        "id": "P7I5bpXDlU4",
+        "duration": 126
+      }
+    ]
+  },
+  {
+    "code": "de",
+    "country": "Almanya",
+    "title": "Rammstein - Du hast",
+    "query": "Rammstein Du hast official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=KRRoQkkwuJE",
+    "sourceTitle": "Du hast",
+    "sourceDuration": 235,
+    "uploader": "Rammstein Official",
+    "candidates": [
+      {
+        "title": "Du hast",
+        "id": "KRRoQkkwuJE",
+        "duration": 235
+      },
+      {
+        "title": "Rammstein - Du Hast (Official 4K Video)",
+        "id": "W3q8Od5qJio",
+        "duration": 236
+      },
+      {
+        "title": "Rammstein - Du Hast (Official Audio)",
+        "id": "EcDirznHpWU",
+        "duration": 240
+      }
+    ],
+    "clipStartSeconds": 30.8,
+    "clipEndSeconds": 61.2,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/37020193"
+  },
+  {
+    "code": "fr",
+    "country": "Fransa",
+    "title": "Stromae - Alors on danse (nakarat)",
+    "query": "Stromae Alors on danse audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=GPoPKwXybY4",
+    "sourceTitle": "Stromae - Alors on danse (nakarat)",
+    "clipStartSeconds": 47.1,
+    "clipEndSeconds": 79.1,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/37041087"
+  },
+  {
+    "code": "it",
+    "country": "İtalya",
+    "title": "Dean Martin - That's Amore",
+    "query": "Dean Martin Thats Amore official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=RUz1pZ_LujU",
+    "sourceTitle": "Dean Martin - That's Amore (Lyric Video)",
+    "sourceDuration": 188,
+    "uploader": "Dean Martin",
+    "candidates": [
+      {
+        "title": "Dean Martin - That's Amore (Lyric Video)",
+        "id": "RUz1pZ_LujU",
+        "duration": 188
+      },
+      {
+        "title": "Dean Martin - That's Amore",
+        "id": "OnFlx2Lnr9Q",
+        "duration": 187
+      },
+      {
+        "title": "That's Amore",
+        "id": "GZGJaL7HKe4",
+        "duration": 185
+      }
+    ],
+    "clipStartSeconds": 21.1,
+    "clipEndSeconds": 58.6,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/36966083"
+  },
+  {
+    "code": "es",
+    "country": "İspanya",
+    "title": "Macarena",
+    "query": "Los Del Rio Macarena Bayside Boys audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=6yM4If9OfLg",
+    "sourceTitle": "Macarena (Bayside Boys Remix)",
+    "sourceDuration": 253,
+    "uploader": "Los del Rio Oficial",
+    "candidates": [
+      {
+        "title": "Macarena (Bayside Boys Remix)",
+        "id": "6yM4If9OfLg",
+        "duration": 253
+      },
+      {
+        "title": "Los Del Rio - Macarena (Bayside Boys Remix)",
+        "id": "zWaymcVmJ-A",
+        "duration": 223
+      },
+      {
+        "title": "Macarena (Bayside Boys Remix)",
+        "id": "zAVPXPOS-c0",
+        "duration": 254
+      }
+    ],
+    "clipStartSeconds": 55.65,
+    "clipEndSeconds": 73.95,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/36959652"
+  },
+  {
+    "code": "pt",
+    "country": "Portekiz",
+    "title": "Portekiz Milli Marşı",
+    "query": "Portugal national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=gFpl1iDl42A",
+    "sourceTitle": "Portugal National Anthem (Instrumental)",
+    "sourceDuration": 71,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Portugal National Anthem (Instrumental)",
+        "id": "gFpl1iDl42A",
+        "duration": 71
+      },
+      {
+        "title": "National Anthem of Portugal (FIFA version)",
+        "id": "DLRCxCZ7aIk",
+        "duration": 69
+      },
+      {
+        "title": "Portugal National Anthem",
+        "id": "_NWsDA4gB_A",
+        "duration": 71
+      }
+    ]
+  },
+  {
+    "code": "gb",
+    "country": "Birleşik Krallık",
+    "title": "Never Gonna Give You Up",
+    "query": "Rick Astley Never Gonna Give You Up official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "sourceTitle": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+    "sourceDuration": 214,
+    "uploader": "Rick Astley",
+    "candidates": [
+      {
+        "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+        "id": "dQw4w9WgXcQ",
+        "duration": 214
+      },
+      {
+        "title": "Never Gonna Give You Up (2022 Remaster)",
+        "id": "3BFTio5296w",
+        "duration": 214
+      },
+      {
+        "title": "Rick Astley - Never Gonna Give You Up",
+        "id": "7FwDP17XPlk",
+        "duration": 214
+      }
+    ],
+    "clipStartSeconds": 42.9,
+    "clipEndSeconds": 59.9,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/37481838"
+  },
+  {
+    "code": "us",
+    "country": "ABD",
+    "title": "Rammstein - Amerika (nakarat)",
+    "query": "Rammstein Amerika official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=7Q7UbdMHGcM",
+    "sourceTitle": "Rammstein - Amerika (nakarat)",
+    "clipStartSeconds": 15.5,
+    "clipEndSeconds": 30.9,
+    "excerptLabel": "Nakarat",
+    "cueSource": "https://lrclib.net/api/get/34404080",
+    "selectionOrigin": "user"
+  },
+  {
+    "code": "ca",
+    "country": "Kanada",
+    "title": "Hotline Bling",
+    "query": "Drake Hotline Bling official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=zt6aRKpf9T4",
+    "sourceTitle": "Drake - Hotline Bling (Official Audio)",
+    "sourceDuration": 268,
+    "uploader": "Drake",
+    "candidates": [
+      {
+        "title": "Drake - Hotline Bling",
+        "id": "uxpDa-c-4Mc",
+        "duration": 296
+      },
+      {
+        "title": "Drake - Hotline Bling (Official Audio)",
+        "id": "zt6aRKpf9T4",
+        "duration": 268
+      },
+      {
+        "title": "Drake - Hotline Bling (Lyrics)",
+        "id": "LxxnSDmGUc4",
+        "duration": 223
+      }
+    ],
+    "clipStartSeconds": 1.85,
+    "clipEndSeconds": 29.85,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/37522644"
+  },
+  {
+    "code": "br",
+    "country": "Brezilya",
+    "title": "Samba de Janeiro",
+    "query": "Bellini Samba de Janeiro radio edit audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=IIYqJiiHPZM",
+    "sourceTitle": "Bellini - Samba De Janeiro (Radio Edit) [Audio HQ]",
+    "sourceDuration": 168,
+    "uploader": "GoldenMusic",
+    "candidates": [
+      {
+        "title": "Bellini - Samba De Janeiro (Radio Edit) [Audio HQ]",
+        "id": "IIYqJiiHPZM",
+        "duration": 168
+      },
+      {
+        "title": "Bellini - Samba de Janeiro (Radio Edit)",
+        "id": "mYZ4puaMRWA",
+        "duration": 171
+      },
+      {
+        "title": "Bellini - Samba De Janeiro",
+        "id": "HAiHEQblKeQ",
+        "duration": 170
+      }
+    ],
+    "clipStartSeconds": 0,
+    "clipEndSeconds": 32,
+    "excerptLabel": "Nakarat / bilinen motif"
+  },
+  {
+    "code": "ar",
+    "country": "Arjantin",
+    "title": "Muchachos",
+    "query": "La Mosca Muchachos Ahora Nos Volvimos a Ilusionar audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=i4t1bGD-j9M",
+    "sourceTitle": "Muchachos, ahora nos volvimos a ilusionar",
+    "sourceDuration": 153,
+    "uploader": "La Mosca Oficial",
+    "candidates": [
+      {
+        "title": "Muchachos, ahora nos volvimos a ilusionar",
+        "id": "i4t1bGD-j9M",
+        "duration": 153
+      },
+      {
+        "title": "La Mosca - Muchachos, ahora nos volvimos a ilusionar",
+        "id": "fyoZLEGfhZw",
+        "duration": 144
+      },
+      {
+        "title": "MUCHACHOS AHORA NOS VOLVIMOS A ILUSIONAR ARGENTINA - FER ROMERO (LETRA) LA MOSCA (MELODIA ORIG.)",
+        "id": "4NzsAsez8zc",
+        "duration": 179
+      }
+    ]
+  },
+  {
+    "code": "mx",
+    "country": "Meksika",
+    "title": "Jarabe Tapatio",
+    "query": "Jarabe Tapatio Mexican Hat Dance mariachi audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=6qdX9jeVC6s",
+    "sourceTitle": "Jarabe tapatío",
+    "sourceDuration": 150,
+    "uploader": "Mariachi Vargas Oficial",
+    "candidates": [
+      {
+        "title": "Jarabe tapatío",
+        "id": "6qdX9jeVC6s",
+        "duration": 150
+      },
+      {
+        "title": "Mexican Hat Dance (Jarabe Tapatio)",
+        "id": "CGms1r5hqdA",
+        "duration": 163
+      },
+      {
+        "title": "El Jarabe Tapatio-The Mexican Hat Dance",
+        "id": "q-Rqdgna3Yw",
+        "duration": 144
+      }
+    ],
+    "clipStartSeconds": 0,
+    "clipEndSeconds": 32,
+    "excerptLabel": "Nakarat / bilinen motif"
+  },
+  {
+    "code": "jp",
+    "country": "Japonya",
+    "title": "Tokyo Drift",
+    "query": "Teriyaki Boyz Tokyo Drift audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=pS5d77DQHOI",
+    "sourceTitle": "Tokyo Drift (Fast & Furious)",
+    "sourceDuration": 256,
+    "uploader": "TokyoDriftVEVO",
+    "candidates": [
+      {
+        "title": "Teriyaki Boyz - Tokyo Drift [AUDIO]",
+        "id": "aAiAu3-rNEg",
+        "duration": 258
+      },
+      {
+        "title": "Tokyo Drift (Fast & Furious)",
+        "id": "pS5d77DQHOI",
+        "duration": 256
+      },
+      {
+        "title": "Tokyo Drift (Fast & Furious)",
+        "id": "_SVxbdQR6Eg",
+        "duration": 256
+      }
+    ],
+    "clipStartSeconds": 11.15,
+    "clipEndSeconds": 39.15,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/20865859"
+  },
+  {
+    "code": "kr",
+    "country": "Güney Kore",
+    "title": "Gangnam Style",
+    "query": "PSY Gangnam Style official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=CVxMTl6cUSE",
+    "sourceTitle": "Gangnam Style (강남스타일)",
+    "sourceDuration": 220,
+    "uploader": "officialpsy",
+    "candidates": [
+      {
+        "title": "Gangnam Style (강남스타일)",
+        "id": "CVxMTl6cUSE",
+        "duration": 220
+      },
+      {
+        "title": "PSY - GANGNAM STYLE (Audio)",
+        "id": "4pJx72N-x6k",
+        "duration": 253
+      },
+      {
+        "title": "PSY - GANGNAM STYLE(강남스타일) M/V",
+        "id": "9bZkp7q19f0",
+        "duration": 253
+      }
+    ],
+    "clipStartSeconds": 65.95,
+    "clipEndSeconds": 94.05,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/37499653"
+  },
+  {
+    "code": "ru",
+    "country": "Rusya",
+    "title": "Dschinghis Khan - Moskau",
+    "query": "Dschinghis Khan Moskau audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=aqLEAmrfInk",
+    "sourceTitle": "Moskau",
+    "sourceDuration": 271,
+    "uploader": "Dschinghis Khan",
+    "candidates": [
+      {
+        "title": "Moskau",
+        "id": "aqLEAmrfInk",
+        "duration": 271
+      },
+      {
+        "title": "Dschinghis Khan – Moskau (1979, full album version)",
+        "id": "5H9cs1A5T2c",
+        "duration": 357
+      },
+      {
+        "title": "Dschinghis Khan - Moskau (Starparade 14.06.1979)",
+        "id": "lyuFLU2Zqz0",
+        "duration": 269
+      }
+    ],
+    "clipStartSeconds": 74.8,
+    "clipEndSeconds": 105.8,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/34515213"
+  },
+  {
+    "code": "ua",
+    "country": "Ukrayna",
+    "title": "Dancing Lasha Tumbai",
+    "query": "Verka Serduchka Dancing Lasha Tumbai audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=j27XTq5G5eg",
+    "sourceTitle": "Dancing Lasha Tumbai",
+    "sourceDuration": 180,
+    "uploader": "VERKA SERDUCHKA OFFICIAL",
+    "candidates": [
+      {
+        "title": "Dancing Lasha Tumbai",
+        "id": "j27XTq5G5eg",
+        "duration": 180
+      },
+      {
+        "title": "Verka Serduchka - Dancing Lasha Tumbai (LIVE) | Ukraine 🇺🇦 | Grand Final | Eurovision 2007",
+        "id": "hfjHJneVonE",
+        "duration": 193
+      },
+      {
+        "title": "Dancing Lasha Tumbai (2015)",
+        "id": "QSu_FHd_aDQ",
+        "duration": 182
+      }
+    ],
+    "clipStartSeconds": 79.95,
+    "clipEndSeconds": 107.95,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/35025007"
+  },
+  {
+    "code": "pl",
+    "country": "Polonya",
+    "title": "Polish Cow",
+    "query": "Polish Cow full version Cypis",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=6GCng7cjJ7M",
+    "sourceTitle": "Cypis - Gdzie jest biały węgorz? (Zejście) [English Lyrics]",
+    "sourceDuration": 244,
+    "uploader": "Undefeated",
+    "candidates": [
+      {
+        "title": "Cypis - Gdzie jest biały węgorz? (Zejście) [English Lyrics]",
+        "id": "6GCng7cjJ7M",
+        "duration": 244
+      },
+      {
+        "title": "Polish cow (English Lyrics Full Version)",
+        "id": "OyDyOweu-PA",
+        "duration": 224
+      }
+    ],
+    "clipStartSeconds": 0.35,
+    "clipEndSeconds": 32.25,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/14415419"
+  },
+  {
+    "code": "nl",
+    "country": "Hollanda",
+    "title": "Vengaboys - We Like To Party!",
+    "query": "Vengaboys We Like To Party official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=6Zbi0XmGtMw",
+    "sourceTitle": "Vengaboys - We like to Party! (The Vengabus)",
+    "sourceDuration": 225,
+    "uploader": "Vengaboys",
+    "candidates": [
+      {
+        "title": "Vengaboys - We like to Party! (The Vengabus)",
+        "id": "6Zbi0XmGtMw",
+        "duration": 225
+      },
+      {
+        "title": "We like to Party! (The Vengabus) Six Flags (Six Flags)",
+        "id": "N4Db0oYKXvw",
+        "duration": 225
+      },
+      {
+        "title": "Vengaboys - We Like To Party! (The Vengabus) [Official Audio]",
+        "id": "StGqPCXMRuk",
+        "duration": 223
+      }
+    ],
+    "clipStartSeconds": 7,
+    "clipEndSeconds": 39,
+    "excerptLabel": "Nakarat / bilinen motif"
+  },
+  {
+    "code": "be",
+    "country": "Belçika",
+    "title": "Technotronic - Pump Up The Jam",
+    "query": "Technotronic Pump Up The Jam official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=9EcjWd-O4jI",
+    "sourceTitle": "Technotronic - Pump Up The Jam (Official Music Video)",
+    "sourceDuration": 222,
+    "uploader": "Technotronic",
+    "candidates": [
+      {
+        "title": "Technotronic - Pump Up The Jam (Official Music Video)",
+        "id": "9EcjWd-O4jI",
+        "duration": 222
+      },
+      {
+        "title": "Technotronic - Pump Up The Jam | COUNTDOWN (1989)",
+        "id": "sgJC3T0JWDY",
+        "duration": 233
+      },
+      {
+        "title": "Technotronic - Pump up the Jam (Audio)",
+        "id": "7ZQQZ5B72gQ",
+        "duration": 325
+      }
+    ],
+    "clipStartSeconds": 15.25,
+    "clipEndSeconds": 47.25,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/36954843"
+  },
+  {
+    "code": "ch",
+    "country": "İsviçre",
+    "title": "Chicken Dance",
+    "query": "Werner Thomas Chicken Dance instrumental",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=W-bYMZORE0g",
+    "sourceTitle": "The Chicken Dance",
+    "sourceDuration": 172,
+    "uploader": "Fun Party DJ - Topic",
+    "candidates": [
+      {
+        "title": "The Chicken Dance",
+        "id": "W-bYMZORE0g",
+        "duration": 172
+      },
+      {
+        "title": "The Chicken Dance - Werner Thomas (Instrumental)",
+        "id": "rFRVUJiJEzM",
+        "duration": 274
+      },
+      {
+        "title": "The Chicken Dance (Karaoke)",
+        "id": "G_PFGL_kgGw",
+        "duration": 194
+      }
+    ],
+    "clipStartSeconds": 0,
+    "clipEndSeconds": 32,
+    "excerptLabel": "Nakarat / bilinen motif"
+  },
+  {
+    "code": "at",
+    "country": "Avusturya",
+    "title": "Avusturya Milli Marşı",
+    "query": "Austria national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=BSJjNJYbhxc",
+    "sourceTitle": "Austria National Anthem (Instrumental)",
+    "sourceDuration": 90,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Austria National Anthem (Instrumental)",
+        "id": "BSJjNJYbhxc",
+        "duration": 90
+      },
+      {
+        "title": "National Anthem of Austria (Official Instrumental version)",
+        "id": "mSq215SybmQ",
+        "duration": 83
+      },
+      {
+        "title": "Austria National Anthem",
+        "id": "U2dZ_7qhhX0",
+        "duration": 90
+      }
+    ]
+  },
+  {
+    "code": "se",
+    "country": "İsveç",
+    "title": "Caramelldansen",
+    "query": "Caramelldansen Swedish original audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=6-8E4Nirh9s",
+    "sourceTitle": "Caramella Girls - Caramelldansen HD Version (Swedish Original) Official",
+    "sourceDuration": 176,
+    "uploader": "Caramella Girls",
+    "candidates": [
+      {
+        "title": "Caramella Girls - Caramelldansen HD Version (Swedish Original) Official",
+        "id": "6-8E4Nirh9s",
+        "duration": 176
+      },
+      {
+        "title": "Caramell - Caramelldansen (Swedish Original)",
+        "id": "H2kdPzjbTkw",
+        "duration": 211
+      },
+      {
+        "title": "Caramella Girls - Caramelldansen Swedish Original (Official)",
+        "id": "zvq9r6R6QAY",
+        "duration": 179
+      }
+    ],
+    "clipStartSeconds": 51.1,
+    "clipEndSeconds": 74.5,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/34606406"
+  },
+  {
+    "code": "no",
+    "country": "Norveç",
+    "title": "The Fox",
+    "query": "Ylvis The Fox What Does The Fox Say audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=klYkzgWOE9k",
+    "sourceTitle": "Ylvis: The Fox [What Does The Fox Say?] (Audio)",
+    "sourceDuration": 213,
+    "uploader": "Cadince MasterDrop 9837",
+    "candidates": [
+      {
+        "title": "Ylvis: The Fox [What Does The Fox Say?] (Audio)",
+        "id": "klYkzgWOE9k",
+        "duration": 213
+      },
+      {
+        "title": "Ylvis - The Fox (What Does The Fox Say?) [Official music video HD]",
+        "id": "jofNR_WkoCE",
+        "duration": 225
+      },
+      {
+        "title": "Ylvis - The Fox Lyrics (What Does The Fox Say?) [Official Lyrics video HD]",
+        "id": "BRAWVIX7mv0",
+        "duration": 218
+      }
+    ],
+    "clipStartSeconds": 35.2,
+    "clipEndSeconds": 60.2,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/33420136"
+  },
+  {
+    "code": "fi",
+    "country": "Finlandiya",
+    "title": "Ievan Polkka",
+    "query": "Loituma Ievan Polkka original audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=hqthspSKZV8",
+    "sourceTitle": "Loituma \"Ievan polkka\"",
+    "sourceDuration": 165,
+    "uploader": "kantelar",
+    "candidates": [
+      {
+        "title": "Loituma \"Ievan polkka\"",
+        "id": "hqthspSKZV8",
+        "duration": 165
+      },
+      {
+        "title": "Loituma - Ievan Polkka, good sound, WITH LYRICS",
+        "id": "P-KjGrbuov4",
+        "duration": 158
+      },
+      {
+        "title": "Loituma - Ievan Polkka [HIGH QUALITY]",
+        "id": "4gIpc31yp68",
+        "duration": 166
+      }
+    ],
+    "clipStartSeconds": 90,
+    "clipEndSeconds": 118,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/35898861"
+  },
+  {
+    "code": "dk",
+    "country": "Danimarka",
+    "title": "Barbie Girl",
+    "query": "Aqua Barbie Girl official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=zRspR_Mni-Y",
+    "sourceTitle": "Aqua - Barbie Girl [Audio HQ]",
+    "sourceDuration": 194,
+    "uploader": "GoldenMusic",
+    "candidates": [
+      {
+        "title": "Aqua - Barbie Girl [Audio HQ]",
+        "id": "zRspR_Mni-Y",
+        "duration": 194
+      },
+      {
+        "title": "Aqua - Barbie Girl",
+        "id": "AWFQx0gGXjs",
+        "duration": 195
+      },
+      {
+        "title": "Aqua - Barbie Girl (Official Music Video)",
+        "id": "ZyhrYis509A",
+        "duration": 202
+      }
+    ],
+    "clipStartSeconds": 9.6,
+    "clipEndSeconds": 26.3,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/36989577"
+  },
+  {
+    "code": "is",
+    "country": "İzlanda",
+    "title": "We Are Number One",
+    "query": "LazyTown We Are Number One original",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=bfLIhiNWtsI",
+    "sourceTitle": "LazyTown - We Are Number One  * ORIGINAL Version - Villain Robbie's Dream Team | First upload",
+    "sourceDuration": 135,
+    "uploader": "Bubble093 Dance & Creations",
+    "candidates": [
+      {
+        "title": "LazyTown - We Are Number One  * ORIGINAL Version - Villain Robbie's Dream Team | First upload",
+        "id": "bfLIhiNWtsI",
+        "duration": 135
+      },
+      {
+        "title": "Lazy Town | We are Number One Music Video Videos For Kids",
+        "id": "PfYnvDL0Qcw",
+        "duration": 171
+      },
+      {
+        "title": "We are number one",
+        "id": "G1FT7k1b1cs",
+        "duration": 142
+      }
+    ]
+  },
+  {
+    "code": "ie",
+    "country": "İrlanda",
+    "title": "Rocky Road to Dublin",
+    "query": "The Dubliners Rocky Road to Dublin audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=p3nXku80y2Y",
+    "sourceTitle": "The Dubliners - Rocky Road To Dublin [HQ][HD]+ Lyrics",
+    "sourceDuration": 148,
+    "uploader": "AlleLiedtexte",
+    "candidates": [
+      {
+        "title": "The Dubliners - Rocky Road To Dublin [HQ][HD]+ Lyrics",
+        "id": "p3nXku80y2Y",
+        "duration": 148
+      },
+      {
+        "title": "The Rocky Road to Dublin",
+        "id": "2zhp5CmhsTs",
+        "duration": 159
+      },
+      {
+        "title": "The Rocky Road to Dublin (Live)",
+        "id": "deY8jH9zw6M",
+        "duration": 146
+      }
+    ],
+    "clipStartSeconds": 28.4,
+    "clipEndSeconds": 54.7,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/18358080"
+  },
+  {
+    "code": "gr",
+    "country": "Yunanistan",
+    "title": "Zorba's Dance",
+    "query": "Mikis Theodorakis Zorbas Dance audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=Xsen9Jh-TPo",
+    "sourceTitle": "Zorba's Dance - Mikis Theodorakis [Original Score]",
+    "sourceDuration": 253,
+    "uploader": "FM Records",
+    "candidates": [
+      {
+        "title": "Zorba's Dance - Mikis Theodorakis [Original Score]",
+        "id": "Xsen9Jh-TPo",
+        "duration": 253
+      },
+      {
+        "title": "Μίκης Θεοδωράκης | Mikis Theodorakis - Zorba΄s Dance - Official Audio Release",
+        "id": "vxw1QaqnbPU",
+        "duration": 226
+      }
+    ],
+    "clipStartSeconds": 0,
+    "clipEndSeconds": 32,
+    "excerptLabel": "Nakarat / bilinen motif"
+  },
+  {
+    "code": "bg",
+    "country": "Bulgaristan",
+    "title": "Dom Dom Yes Yes",
+    "query": "Biser King Dom Dom Yes Yes official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=PDuizoc-knI",
+    "sourceTitle": "Biser King Dom Dom Yes Yes (OFFICIAL VIDEO)",
+    "sourceDuration": 209,
+    "uploader": "Random Songs With Subtitles",
+    "candidates": [
+      {
+        "title": "Biser King Dom Dom Yes Yes (OFFICIAL VIDEO)",
+        "id": "PDuizoc-knI",
+        "duration": 209
+      },
+      {
+        "title": "Dom Dom Yes Yes",
+        "id": "EqhJFEsCNQ0",
+        "duration": 208
+      },
+      {
+        "title": "Dom Dom Yes Yes",
+        "id": "OQaVP6NHTLk",
+        "duration": 209
+      }
+    ]
+  },
+  {
+    "code": "ro",
+    "country": "Romanya",
+    "title": "O-Zone - Dragostea Din Tei",
+    "query": "O Zone Dragostea Din Tei official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=hciq7Wp0SqE",
+    "sourceTitle": "O-Zone - Dragostea Din Tei [Audio HQ]",
+    "sourceDuration": 217,
+    "uploader": "GoldenMusic",
+    "candidates": [
+      {
+        "title": "O-Zone - Dragostea Din Tei [Audio HQ]",
+        "id": "hciq7Wp0SqE",
+        "duration": 217
+      },
+      {
+        "title": "O-Zone - Dragostea Din Tei [Official Video]",
+        "id": "YnopHCL1Jk8",
+        "duration": 286
+      },
+      {
+        "title": "O-Zone - Dragostea Din Tei (ZDF 2004)",
+        "id": "3FFC6tDSdmY",
+        "duration": 214
+      }
+    ],
+    "clipStartSeconds": 63.4,
+    "clipEndSeconds": 93.4,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/37499813"
+  },
+  {
+    "code": "rs",
+    "country": "Sırbistan",
+    "title": "Sırbistan Milli Marşı",
+    "query": "Serbia national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=Iu_Wz_buPOk",
+    "sourceTitle": "Serbia National Anthem (Instrumental)",
+    "sourceDuration": 107,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Serbia National Anthem (Instrumental)",
+        "id": "Iu_Wz_buPOk",
+        "duration": 107
+      },
+      {
+        "title": "National Anthem of Serbia-Боже правде (Official Instrumental version)",
+        "id": "X8KZXgCRZyU",
+        "duration": 91
+      },
+      {
+        "title": "Serbia National Anthem",
+        "id": "YTAOmK2MolU",
+        "duration": 107
+      }
+    ]
+  },
+  {
+    "code": "hr",
+    "country": "Hırvatistan",
+    "title": "Hırvatistan Milli Marşı",
+    "query": "Croatia national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=X3xNDB_kGk0",
+    "sourceTitle": "Croatia National Anthem (Instrumental)",
+    "sourceDuration": 60,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Croatia National Anthem (Instrumental)",
+        "id": "X3xNDB_kGk0",
+        "duration": 60
+      },
+      {
+        "title": "National Anthem of Croatia (FIFA version)",
+        "id": "bMk_uKy6CxE",
+        "duration": 73
+      },
+      {
+        "title": "Croatia National Anthem",
+        "id": "Vi2A2CIbERs",
+        "duration": 60
+      }
+    ]
+  },
+  {
+    "code": "ba",
+    "country": "Bosna Hersek",
+    "title": "Bosna Hersek Milli Marşı",
+    "query": "Bosnia and Herzegovina national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=0FX2KneBLwg",
+    "sourceTitle": "Bosnia and Herzegovina National Anthem (Instrumental)",
+    "sourceDuration": 121,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Bosnia and Herzegovina National Anthem (Instrumental)",
+        "id": "0FX2KneBLwg",
+        "duration": 121
+      },
+      {
+        "title": "National Anthem of Bosnia and Herzegovina (Official Instrumental version)",
+        "id": "y48wSdM4tfM",
+        "duration": 80
+      },
+      {
+        "title": "Bosnia and Herzegovina National Anthem (Instrumental)",
+        "id": "fl3h9UsTJFA",
+        "duration": 125
+      }
+    ]
+  },
+  {
+    "code": "al",
+    "country": "Arnavutluk",
+    "title": "Arnavutluk Milli Marşı",
+    "query": "Albania national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=IHm9HmHM4Tw",
+    "sourceTitle": "Albania National Anthem (Instrumental)",
+    "sourceDuration": 66,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Albania National Anthem (Instrumental)",
+        "id": "IHm9HmHM4Tw",
+        "duration": 66
+      },
+      {
+        "title": "[1983 | Rare] \"Himni i Flamurit\" - PSR Albania National Anthem - 40th Anniversary Albanian Army",
+        "id": "COaCGpw8yBA",
+        "duration": 45
+      },
+      {
+        "title": "Albania National Anthem",
+        "id": "h330hK08gqM",
+        "duration": 66
+      }
+    ]
+  },
+  {
+    "code": "hu",
+    "country": "Macaristan",
+    "title": "Hungarian Dance No. 5",
+    "query": "Brahms Hungarian Dance No 5 orchestra",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=Nzo3atXtm54",
+    "sourceTitle": "Johannes Brahms -- Hungarian Dance No.5 - Hungarian Symphony Orchestra Budapest",
+    "sourceDuration": 226,
+    "uploader": "MelosKonzerte",
+    "candidates": [
+      {
+        "title": "Johannes Brahms -- Hungarian Dance No.5 - Hungarian Symphony Orchestra Budapest",
+        "id": "Nzo3atXtm54",
+        "duration": 226
+      },
+      {
+        "title": "Brahms - Hungarian Dances No. 5 & 6 conducted by Maciej Tomasiewicz",
+        "id": "O192eo9zbT4",
+        "duration": 401
+      },
+      {
+        "title": "Gustavo Dudamel - Hungarian Dance No. 5 - Brahms",
+        "id": "ynCEvFaJCZg",
+        "duration": 200
+      }
+    ],
+    "clipStartSeconds": 0,
+    "clipEndSeconds": 32,
+    "excerptLabel": "Nakarat / bilinen motif"
+  },
+  {
+    "code": "cz",
+    "country": "Çekya",
+    "title": "Çekya Milli Marşı",
+    "query": "Czech Republic national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=2k-MvHo2IUg",
+    "sourceTitle": "CZECH REPUBLIC | national anthem | instrumental",
+    "sourceDuration": 73,
+    "uploader": "National Anthems",
+    "candidates": [
+      {
+        "title": "CZECH REPUBLIC | national anthem | instrumental",
+        "id": "2k-MvHo2IUg",
+        "duration": 73
+      },
+      {
+        "title": "Czech Republic (Czechia) - Kde domov můj? - Czech National Anthem (Instrumental)",
+        "id": "nAvPU-YClFE",
+        "duration": 65
+      },
+      {
+        "title": "Czech Republic National Anthem",
+        "id": "B9PFhsJWI_M",
+        "duration": 65
+      }
+    ]
+  },
+  {
+    "code": "ge",
+    "country": "Gürcistan",
+    "title": "Gürcistan Milli Marşı",
+    "query": "Georgia national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=6DRDIwrYLgY",
+    "sourceTitle": "National Anthem of Georgia-თავისუფლება (Official Instrumental version)",
+    "sourceDuration": 88,
+    "uploader": "Lesaphir",
+    "candidates": [
+      {
+        "title": "National Anthem of Georgia-თავისუფლება (Official Instrumental version)",
+        "id": "6DRDIwrYLgY",
+        "duration": 88
+      },
+      {
+        "title": "Georgia National Anthem (Instrumental)",
+        "id": "tYhNwr9sxcQ",
+        "duration": 85
+      },
+      {
+        "title": "Georgia National Anthem (Instrumental)",
+        "id": "dE1cx6NfiV8",
+        "duration": 87
+      }
+    ]
+  },
+  {
+    "code": "kz",
+    "country": "Kazakistan",
+    "title": "Kazakistan Milli Marşı",
+    "query": "Kazakhstan national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=n3Mqhi-z1cE",
+    "sourceTitle": "Kazakhstan National Anthem (Instrumental)",
+    "sourceDuration": 104,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Kazakhstan National Anthem (Instrumental)",
+        "id": "n3Mqhi-z1cE",
+        "duration": 104
+      },
+      {
+        "title": "Meniń Qazaqstanym - National anthem of Kazakhstan",
+        "id": "EMC42SPSMfI",
+        "duration": 101
+      },
+      {
+        "title": "Kazakhstan National Anthem",
+        "id": "Pe1pNo5OiGk",
+        "duration": 103
+      }
+    ]
+  },
+  {
+    "code": "uz",
+    "country": "Özbekistan",
+    "title": "Özbekistan Milli Marşı",
+    "query": "Uzbekistan national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=wDA4becKgek",
+    "sourceTitle": "Uzbekistan National Anthem (Instrumental)",
+    "sourceDuration": 147,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Uzbekistan National Anthem (Instrumental)",
+        "id": "wDA4becKgek",
+        "duration": 147
+      },
+      {
+        "title": "Uzbekistan Anthem Instrumental \"Oʻzbekiston Respublikasining Davlat Madhiyasi\"",
+        "id": "qrPE8FkT9ns",
+        "duration": 98
+      },
+      {
+        "title": "Anonymous: National Anthem of the Republic of Uzbekistan",
+        "id": "gozQhmFiD2o",
+        "duration": 64
+      }
+    ]
+  },
+  {
+    "code": "kg",
+    "country": "Kırgızistan",
+    "title": "My Name Is",
+    "query": "D Billions My Name Is Chicky Cha Cha",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=pifBpLAun6U",
+    "sourceTitle": "My Name Is | D Billions Kids Songs",
+    "sourceDuration": 80,
+    "uploader": "D Billions",
+    "candidates": [
+      {
+        "title": "My Name Is | D Billions Kids Songs",
+        "id": "pifBpLAun6U",
+        "duration": 80
+      },
+      {
+        "title": "My Name Is with DB Anime Heroes | D Billions Kids Songs",
+        "id": "HW7AURwaFH0",
+        "duration": 115
+      }
+    ]
+  },
+  {
+    "code": "tm",
+    "country": "Türkmenistan",
+    "title": "Türkmenistan Milli Marşı",
+    "query": "Turkmenistan national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=VULx1tmzf1k",
+    "sourceTitle": "Turkmenistan National Anthem (Instrumental)",
+    "sourceDuration": 175,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Turkmenistan National Anthem (Instrumental)",
+        "id": "VULx1tmzf1k",
+        "duration": 175
+      },
+      {
+        "title": "National Anthem of Turkmenistan-Türkmenistanyň Döwlet Gimni (Official Instrumental version)",
+        "id": "tqXL1CU9j5s",
+        "duration": 74
+      },
+      {
+        "title": "Turkmenistan National Anthem",
+        "id": "7j5BCcF1hTs",
+        "duration": 174
+      }
+    ]
+  },
+  {
+    "code": "mn",
+    "country": "Moğolistan",
+    "title": "Chinggis Khaanii Magtaal",
+    "query": "Batzorig Vaanchig Chinggis Khaanii Magtaal",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=p_5yt5IX38I",
+    "sourceTitle": "Chinggis khaanii Magtaal - Batzorig Vaanchig",
+    "sourceDuration": 234,
+    "uploader": "Batzorig Vaanchig",
+    "candidates": [
+      {
+        "title": "Chinggis khaanii Magtaal - Batzorig Vaanchig",
+        "id": "p_5yt5IX38I",
+        "duration": 234
+      },
+      {
+        "title": "Chingiss Khaanii Magtaal/Praise of Chinggis Khaan - Batzorig Vaanchig , Adiyadorj Gombosuren",
+        "id": "M8kCvYzavUU",
+        "duration": 180
+      },
+      {
+        "title": "Chinggis Khaan",
+        "id": "N1RoNEY37U8",
+        "duration": 308
+      }
+    ]
+  },
+  {
+    "code": "au",
+    "country": "Avustralya",
+    "title": "Down Under",
+    "query": "Men At Work Down Under official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=dbqfdC8xCRg",
+    "sourceTitle": "Down Under",
+    "sourceDuration": 221,
+    "uploader": "Men At Work",
+    "candidates": [
+      {
+        "title": "Men At Work - Down Under (Official HD Video)",
+        "id": "XfR9iY5y94s",
+        "duration": 221
+      },
+      {
+        "title": "Down Under",
+        "id": "dbqfdC8xCRg",
+        "duration": 221
+      },
+      {
+        "title": "Men at Work Down Under HQ",
+        "id": "fyHXlE9Z3m8",
+        "duration": 226
+      }
+    ],
+    "clipStartSeconds": 29.45,
+    "clipEndSeconds": 47.5,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/36842558"
+  },
+  {
+    "code": "nz",
+    "country": "Yeni Zelanda",
+    "title": "Wellerman",
+    "query": "Nathan Evans Wellerman official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=qP-7GNoDJ5c",
+    "sourceTitle": "Nathan Evans - Wellerman (Sea Shanty)",
+    "sourceDuration": 156,
+    "uploader": "NathanEvanss",
+    "candidates": [
+      {
+        "title": "Nathan Evans - Wellerman (Sea Shanty)",
+        "id": "qP-7GNoDJ5c",
+        "duration": 156
+      },
+      {
+        "title": "Nathan Evans - Wellerman (Sea Shanty / Visualiser)",
+        "id": "SLiNQhQr4G4",
+        "duration": 156
+      },
+      {
+        "title": "Nathan Evans - Wellerman (Sea Shanty) (Lyrics)",
+        "id": "bNQSMTNSnUw",
+        "duration": 153
+      }
+    ],
+    "clipStartSeconds": 12.55,
+    "clipEndSeconds": 22.6,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/23894416"
+  },
+  {
+    "code": "eg",
+    "country": "Mısır",
+    "title": "Mısır Milli Marşı",
+    "query": "Egypt national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=T3uTo3MLgIM",
+    "sourceTitle": "Egypt National Anthem (Instrumental)",
+    "sourceDuration": 86,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Egypt National Anthem (Instrumental)",
+        "id": "T3uTo3MLgIM",
+        "duration": 86
+      },
+      {
+        "title": "Egypt National Anthem (Instrumental)",
+        "id": "QU9OdxaAoO0",
+        "duration": 87
+      },
+      {
+        "title": "Egypt National Anthem",
+        "id": "SWquIW0qZ58",
+        "duration": 86
+      }
+    ]
+  },
+  {
+    "code": "ma",
+    "country": "Fas",
+    "title": "Fas Milli Marşı",
+    "query": "Morocco national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=uIKWKeoCJW0",
+    "sourceTitle": "Morocco National Anthem (Instrumental)",
+    "sourceDuration": 61,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Morocco National Anthem (Instrumental)",
+        "id": "uIKWKeoCJW0",
+        "duration": 61
+      },
+      {
+        "title": "Morocco National Anthem (Instrumental)",
+        "id": "RHg5nbLZkWY",
+        "duration": 61
+      },
+      {
+        "title": "Morocco National Anthem",
+        "id": "12C4fLjvH3A",
+        "duration": 68
+      }
+    ]
+  },
+  {
+    "code": "tn",
+    "country": "Tunus",
+    "title": "Sidi Mansour",
+    "query": "Saber Rebai Sidi Mansour official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=M1dcmKIIVGw",
+    "sourceTitle": "Saber Rebai - Sidi Mansour | صابر الرباعي - سيدي منصور",
+    "sourceDuration": 256,
+    "uploader": "Saber Rebai",
+    "candidates": [
+      {
+        "title": "Saber Rebai - Sidi Mansour | صابر الرباعي - سيدي منصور",
+        "id": "M1dcmKIIVGw",
+        "duration": 256
+      },
+      {
+        "title": "Aynu Alel",
+        "id": "Tnd0SRITBu0",
+        "duration": 244
+      },
+      {
+        "title": "Saber Rebai - Sidi Mansour  (Official Video) [4K Remastered]",
+        "id": "2ObPYnongVs",
+        "duration": 257
+      }
+    ]
+  },
+  {
+    "code": "dz",
+    "country": "Cezayir",
+    "title": "Didi",
+    "query": "Khaled Didi official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=tTcnIYYeZI8",
+    "sourceTitle": "Khaled - Didi",
+    "sourceDuration": 206,
+    "uploader": "Khaled",
+    "candidates": [
+      {
+        "title": "Khaled - Didi",
+        "id": "tTcnIYYeZI8",
+        "duration": 206
+      },
+      {
+        "title": "Khaled - Didi | High Quality Audio | Khaled",
+        "id": "jNL4mzzs5ZA",
+        "duration": 305
+      },
+      {
+        "title": "Cheb Khaled   Didi Original",
+        "id": "d43hAb8yrI0",
+        "duration": 304
+      }
+    ]
+  },
+  {
+    "code": "za",
+    "country": "Güney Afrika",
+    "title": "Jerusalema",
+    "query": "Master KG Jerusalema Nomcebo official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=fCZVL_8D048",
+    "sourceTitle": "Master KG - Jerusalema  [Feat. Nomcebo] (Official Music Video)",
+    "sourceDuration": 255,
+    "uploader": "Openmic Productions",
+    "candidates": [
+      {
+        "title": "Master KG - Jerusalema  [Feat. Nomcebo] (Official Music Video)",
+        "id": "fCZVL_8D048",
+        "duration": 255
+      },
+      {
+        "title": "Master KG - Jerusalema",
+        "id": "dD7TtmFmNRQ",
+        "duration": 342
+      },
+      {
+        "title": "Master KG ft Nomcebo - Jerusalema (Lyrics) | English | BUGG Lyrics",
+        "id": "S1gWuybLw4k",
+        "duration": 279
+      }
+    ],
+    "clipStartSeconds": 31.7,
+    "clipEndSeconds": 61.0,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/34752502"
+  },
+  {
+    "code": "ng",
+    "country": "Nijerya",
+    "title": "Love Nwantiti",
+    "query": "CKay Love Nwantiti original audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=7l22qaD31iE",
+    "sourceTitle": "CKAY - LOVE NWANTINTI | OFFICIAL AUDIO",
+    "sourceDuration": 145,
+    "uploader": "CKay",
+    "candidates": [
+      {
+        "title": "CKAY - LOVE NWANTINTI | OFFICIAL AUDIO",
+        "id": "7l22qaD31iE",
+        "duration": 145
+      },
+      {
+        "title": "CKay - Love Nwantiti Remix ft. Joeboy & Kuami Eugene [Ah Ah Ah] [Official Music Video]",
+        "id": "D-YDEyuDxWU",
+        "duration": 194
+      },
+      {
+        "title": "CKay - Love Nwantiti [Choreo Flying Steps Academy] feat. Ivana Santacruz",
+        "id": "-pPpFq92cOI",
+        "duration": 211
+      }
+    ],
+    "clipStartSeconds": 41.85,
+    "clipEndSeconds": 61.85,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/18654177"
+  },
+  {
+    "code": "sn",
+    "country": "Senegal",
+    "title": "Senegal Milli Marşı",
+    "query": "Senegal national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=uUTWUdEGPh0",
+    "sourceTitle": "Senegal National Anthem (Instrumental)",
+    "sourceDuration": 56,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Senegal National Anthem (Instrumental)",
+        "id": "uUTWUdEGPh0",
+        "duration": 56
+      },
+      {
+        "title": "National Anthem of Senegal-Le Lion rouge (Official Instrumental version)",
+        "id": "2bA4ExKpLO8",
+        "duration": 65
+      },
+      {
+        "title": "Senegal National Anthem (Instrumental)",
+        "id": "1CBYHhKplmY",
+        "duration": 56
+      }
+    ]
+  },
+  {
+    "code": "sa",
+    "country": "Suudi Arabistan",
+    "title": "Suudi Arabistan Milli Marşı",
+    "query": "Saudi Arabia national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=tcHpqhCpRYk",
+    "sourceTitle": "Saudi Arabia national anthem (instrumental)",
+    "sourceDuration": 76,
+    "uploader": "RWN38",
+    "candidates": [
+      {
+        "title": "Saudi Arabia national anthem (instrumental)",
+        "id": "tcHpqhCpRYk",
+        "duration": 76
+      },
+      {
+        "title": "Saudi Arabia National Anthem (Instrumental)",
+        "id": "YjvXMCwLeCw",
+        "duration": 34
+      },
+      {
+        "title": "Saudi Arabia [Aash Al Maleek] (Long Live Our Beloved King) (, \"Hasten to glory and supremacy!…\")",
+        "id": "mv94AGG_Xqk",
+        "duration": 53
+      }
+    ]
+  },
+  {
+    "code": "qa",
+    "country": "Katar",
+    "title": "Katar Milli Marşı",
+    "query": "Qatar national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=u_GCokRLQVA",
+    "sourceTitle": "Qatar National Anthem (Instrumental)",
+    "sourceDuration": 87,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Qatar National Anthem (Instrumental)",
+        "id": "u_GCokRLQVA",
+        "duration": 87
+      },
+      {
+        "title": "National Anthem of Qatar - FIFA Version - Stadium Sensation 🇶🇦🏟️",
+        "id": "PEkXecfBCvA",
+        "duration": 89
+      },
+      {
+        "title": "Qatar National Anthem",
+        "id": "dD3AiseYXKQ",
+        "duration": 81
+      }
+    ]
+  },
+  {
+    "code": "ae",
+    "country": "BAE",
+    "title": "Habibi Welcome to Dubai",
+    "query": "Habibi Welcome to Dubai song full",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=f2LXCW-bdGY",
+    "sourceTitle": "Habibi Come To Dubai - Drinche ft. Dalvin",
+    "sourceDuration": 137,
+    "uploader": "Drinche",
+    "candidates": [
+      {
+        "title": "Habibi Come To Dubai - Drinche ft. Dalvin",
+        "id": "f2LXCW-bdGY",
+        "duration": 137
+      },
+      {
+        "title": "Ricky Rich, Dardan & DJ Gimi-O – Habibi (Albanian Remix) [Official Lyric Video]",
+        "id": "haCN6Fc5Qtw",
+        "duration": 130
+      },
+      {
+        "title": "Along & Alan Walker - Headlights (feat. KIDDO) Dubai 2022",
+        "id": "2mEPcOw67ME",
+        "duration": 163
+      }
+    ]
+  },
+  {
+    "code": "ir",
+    "country": "İran",
+    "title": "İran Milli Marşı",
+    "query": "Iran national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=giPj7x1KKbY",
+    "sourceTitle": "Anthem of Iran (Worldcup version)",
+    "sourceDuration": 56,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Iran National Anthem (Instrumental)",
+        "id": "UkCM2V5aO4o",
+        "duration": 68
+      },
+      {
+        "title": "National Anthem of Iran-سرود ملی ایران (Official Instrumental version)",
+        "id": "pHEIp6rc7XE",
+        "duration": 74
+      },
+      {
+        "title": "Anthem of Iran (Worldcup version)",
+        "id": "giPj7x1KKbY",
+        "duration": 56
+      }
+    ]
+  },
+  {
+    "code": "iq",
+    "country": "Irak",
+    "title": "Irak Milli Marşı",
+    "query": "Iraq national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=7HXxV0sFKJ8",
+    "sourceTitle": "National Anthem of Iraq-موطني (Official Instrumental version)",
+    "sourceDuration": 74,
+    "uploader": "Lesaphir",
+    "candidates": [
+      {
+        "title": "National Anthem of Iraq-موطني (Official Instrumental version)",
+        "id": "7HXxV0sFKJ8",
+        "duration": 74
+      },
+      {
+        "title": "Iraq National Anthem (Instrumental)",
+        "id": "8r3XRXU4p7Y",
+        "duration": 105
+      },
+      {
+        "title": "Iraq National Anthem",
+        "id": "ToCvdGnK_w0",
+        "duration": 106
+      }
+    ]
+  },
+  {
+    "code": "ps",
+    "country": "Filistin",
+    "title": "Dammi Falastini",
+    "query": "Mohammed Assaf Dammi Falastini official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=8BoIPd8Odfs",
+    "sourceTitle": "Dammi Falastini",
+    "sourceDuration": 241,
+    "uploader": "Mohammad Assaf - Topic",
+    "candidates": [
+      {
+        "title": "Dammi Falastini",
+        "id": "8BoIPd8Odfs",
+        "duration": 241
+      },
+      {
+        "title": "انا دمي فلسطيني     $$  محمد عساف  Mohammed Assaf",
+        "id": "9PqKGZ7Yvq8",
+        "duration": 221
+      },
+      {
+        "title": "My Blood is Palestinian",
+        "id": "EPO5HrZg7MA",
+        "duration": 221
+      }
+    ]
+  },
+  {
+    "code": "il",
+    "country": "İsrail",
+    "title": "Hava Nagila",
+    "query": "Hava Nagila instrumental traditional",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=ucXtx2b8heY",
+    "sourceTitle": "Hava Nagila - Andrea Giuffredi - trumpet",
+    "sourceDuration": 146,
+    "uploader": "Duque do Brasil",
+    "candidates": [
+      {
+        "title": "Israeli Folk Song - “Hava Nagila” (instrumental)",
+        "id": "Zsb83iEdz2U",
+        "duration": 178
+      },
+      {
+        "title": "Hava Nagila - Andrea Giuffredi - trumpet",
+        "id": "ucXtx2b8heY",
+        "duration": 146
+      },
+      {
+        "title": "Hava Nagila",
+        "id": "H_WN-xTp7oU",
+        "duration": 163
+      }
+    ]
+  },
+  {
+    "code": "id",
+    "country": "Endonezya",
+    "title": "Endonezya Milli Marşı",
+    "query": "Indonesia national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=dI7ffUcptWQ",
+    "sourceTitle": "Indonesia National Anthem (Instrumental)",
+    "sourceDuration": 110,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Indonesia National Anthem (Instrumental)",
+        "id": "dI7ffUcptWQ",
+        "duration": 110
+      },
+      {
+        "title": "National Anthem of Indonesia-Indonesia Raya (Official Instrumental version)",
+        "id": "OKx7t4owS-Q",
+        "duration": 109
+      },
+      {
+        "title": "Indonesia National Anthem",
+        "id": "wn_RJhvJEAA",
+        "duration": 109
+      }
+    ]
+  },
+  {
+    "code": "my",
+    "country": "Malezya",
+    "title": "Malezya Milli Marşı",
+    "query": "Malaysia national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=cxRTBa47FmA",
+    "sourceTitle": "National Anthem of Malaysia (Instrumental)",
+    "sourceDuration": 87,
+    "uploader": "GreatAnthem",
+    "candidates": [
+      {
+        "title": "National Anthem of Malaysia (Instrumental)",
+        "id": "cxRTBa47FmA",
+        "duration": 87
+      },
+      {
+        "title": "Malaysia National Anthem (Instrumental)",
+        "id": "NW0khaNkoUI",
+        "duration": 43
+      },
+      {
+        "title": "Malaysia - Negaraku - Malaysian National Anthem (My Country) (Edit Version)",
+        "id": "_HAtz9RsJEQ",
+        "duration": 43
+      }
+    ]
+  },
+  {
+    "code": "th",
+    "country": "Tayland",
+    "title": "Tayland Milli Marşı",
+    "query": "Thailand national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=cOWfayODNZ4",
+    "sourceTitle": "Thailand National Anthem (Instrumental)",
+    "sourceDuration": 45,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Thailand National Anthem (Instrumental)",
+        "id": "cOWfayODNZ4",
+        "duration": 45
+      },
+      {
+        "title": "National Anthem of Thailand-เพลงชาติไทย (Official Instrumental version)",
+        "id": "C8zWZUaR8bE",
+        "duration": 48
+      },
+      {
+        "title": "Thailand National Anthem",
+        "id": "1C1JUROyTYI",
+        "duration": 44
+      }
+    ]
+  },
+  {
+    "code": "vn",
+    "country": "Vietnam",
+    "title": "2 Phut Hon",
+    "query": "Phao 2 Phut Hon KAIZ remix official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=yoZy2E17-50",
+    "sourceTitle": "Phao - 2 Phut Hon (KAIZ Remix) | TikTok Vietnamese Music 2020",
+    "sourceDuration": 261,
+    "uploader": "Light Night Music",
+    "candidates": [
+      {
+        "title": "Phao - 2 Phut Hon (KAIZ Remix) | TikTok Vietnamese Music 2020",
+        "id": "yoZy2E17-50",
+        "duration": 261
+      },
+      {
+        "title": "Pháo - 2 Phút Hơn (KAIZ Remix) [Official Audio]",
+        "id": "CmmUQZXcHAI",
+        "duration": 190
+      },
+      {
+        "title": "Nightcore - 2 Phút Hơn (KAIZ Remix) (Pháo) [NCR Release]",
+        "id": "krvAv0UiEnM",
+        "duration": 191
+      }
+    ]
+  },
+  {
+    "code": "pk",
+    "country": "Pakistan",
+    "title": "Bado Badi",
+    "query": "Chahat Fateh Ali Khan Bado Badi original song",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=kHeRAUEy-l8",
+    "sourceTitle": "bado badi original song | aye haye oye hoye | Official Video |  chahat fateh ali khan | Bado Badi",
+    "sourceDuration": 265,
+    "uploader": "ShekhTanveerVEVO",
+    "candidates": [
+      {
+        "title": "Shekh Tanveer - Bado Badi - Chahat Fateh Ali Khan",
+        "id": "XmgVCW0NKyM",
+        "duration": 184
+      },
+      {
+        "title": "bado badi original song | aye haye oye hoye | Official Video |  chahat fateh ali khan | Bado Badi",
+        "id": "kHeRAUEy-l8",
+        "duration": 265
+      },
+      {
+        "title": "Bakra Laray Bado Badi | New Parody Song 2024 | Abu Huraira & Dua Shiwani | Beautiful Video",
+        "id": "wa4VwJp22To",
+        "duration": 207
+      }
+    ]
+  },
+  {
+    "code": "bd",
+    "country": "Bangladeş",
+    "title": "Bangladeş Milli Marşı",
+    "query": "Bangladesh national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=O0UFup1VmgU",
+    "sourceTitle": "Bangladesh National Anthem (Instrumental)",
+    "sourceDuration": 135,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Bangladesh National Anthem (Instrumental)",
+        "id": "O0UFup1VmgU",
+        "duration": 135
+      },
+      {
+        "title": "National anthem of Bangladesh 🇧🇩! (Instrumental) best version! 🌹",
+        "id": "eSIhF4ZNYbQ",
+        "duration": 88
+      },
+      {
+        "title": "National Anthem of Bangladesh Instrumental",
+        "id": "Ea6FGeEgsmQ",
+        "duration": 95
+      }
+    ]
+  },
+  {
+    "code": "cl",
+    "country": "Şili",
+    "title": "Dubidubidu",
+    "query": "Christell Dubidubidu audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=KM8rr3XJpZY",
+    "sourceTitle": "Christell - Dubidubidu Chipi Chipi Chapa Chapa (Official Lyric Video)",
+    "sourceDuration": 228,
+    "uploader": "Christell",
+    "candidates": [
+      {
+        "title": "Dubidubidu (Chipi Chipi Chapa Chapa)",
+        "id": "BKabOfxDpqM",
+        "duration": 227
+      },
+      {
+        "title": "Christell - Dubidubidu Chipi Chipi Chapa Chapa (Official Lyric Video)",
+        "id": "KM8rr3XJpZY",
+        "duration": 228
+      },
+      {
+        "title": "Christell - Dubidubidu (chipi chipi chapa chapa) (Letra/Lyrics)",
+        "id": "ez81gvF8Ez8",
+        "duration": 227
+      }
+    ],
+    "clipStartSeconds": 45.5,
+    "clipEndSeconds": 71.5,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/25101571"
+  },
+  {
+    "code": "co",
+    "country": "Kolombiya",
+    "title": "Waka Waka",
+    "query": "Shakira Waka Waka This Time for Africa official audio",
+    "kind": "meme",
+    "source": "https://www.youtube.com/watch?v=Dv-vENHAhyU",
+    "sourceTitle": "Shakira - Waka Waka (This Time For Africa) (Audio)",
+    "sourceDuration": 202,
+    "uploader": "aa",
+    "candidates": [
+      {
+        "title": "Shakira - Waka Waka (This Time For Africa) (Audio)",
+        "id": "Dv-vENHAhyU",
+        "duration": 202
+      },
+      {
+        "title": "Shakira - Waka Waka (This Time For Africa) (Lyrics)",
+        "id": "czWcyZRAMtk",
+        "duration": 202
+      },
+      {
+        "title": "Shakira - Waka Waka (This Time for Africa) (Audio)",
+        "id": "rjJKXxUx2PU",
+        "duration": 204
+      }
+    ],
+    "clipStartSeconds": 47.8,
+    "clipEndSeconds": 63.8,
+    "excerptLabel": "Nakarat / bilinen motif",
+    "cueSource": "https://lrclib.net/api/get/36615547"
+  },
+  {
+    "code": "uy",
+    "country": "Uruguay",
+    "title": "Uruguay Milli Marşı",
+    "query": "Uruguay national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=a7S65s28Urk",
+    "sourceTitle": "National Anthem of Uruguay-Himno Nacional de Uruguay (Official Instrumental version)",
+    "sourceDuration": 104,
+    "uploader": "Lesaphir",
+    "candidates": [
+      {
+        "title": "National Anthem of Uruguay-Himno Nacional de Uruguay (Official Instrumental version)",
+        "id": "a7S65s28Urk",
+        "duration": 104
+      },
+      {
+        "title": "Uruguay National Anthem (Instrumental)",
+        "id": "NO_L6VFpigE",
+        "duration": 115
+      },
+      {
+        "title": "Uruguay - Himno Nacional - Orientales, la Patria o la Tumba! - Uruguayan National Anthem...",
+        "id": "C2lPaQ1Sg-U",
+        "duration": 115
+      }
+    ]
+  },
+  {
+    "code": "pe",
+    "country": "Peru",
+    "title": "Peru Milli Marşı",
+    "query": "Peru national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=2IvvhLf71Uk",
+    "sourceTitle": "National Anthem of Peru-Himno Nacional del Perú (Official Instrumental version)",
+    "sourceDuration": 64,
+    "uploader": "Lesaphir",
+    "candidates": [
+      {
+        "title": "National Anthem of Peru-Himno Nacional del Perú (Official Instrumental version)",
+        "id": "2IvvhLf71Uk",
+        "duration": 64
+      },
+      {
+        "title": "Peru National Anthem (Instrumental)",
+        "id": "yTBVmONcMM0",
+        "duration": 190
+      },
+      {
+        "title": "Peru National Anthem (Instrumental)",
+        "id": "atf_kRHWm1U",
+        "duration": 190
+      }
+    ]
+  },
+  {
+    "code": "ec",
+    "country": "Ekvador",
+    "title": "Ekvador Milli Marşı",
+    "query": "Ecuador national anthem instrumental",
+    "kind": "anthem",
+    "source": "https://www.youtube.com/watch?v=bDdhJ2CmZ0o",
+    "sourceTitle": "Ecuador National Anthem (Instrumental)",
+    "sourceDuration": 199,
+    "uploader": "National Anthems Channel",
+    "candidates": [
+      {
+        "title": "Ecuador National Anthem (Instrumental)",
+        "id": "bDdhJ2CmZ0o",
+        "duration": 199
+      },
+      {
+        "title": "National anthem of Ecuador (Salve, oh patria!)",
+        "id": "Ka5fYZmvQBw",
+        "duration": 76
+      },
+      {
+        "title": "Ecuador National Anthem (Instrumental)",
+        "id": "RxqxSGqrXC8",
+        "duration": 199
+      }
+    ]
+  }
+]

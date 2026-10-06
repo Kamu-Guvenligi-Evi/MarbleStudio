@@ -1,0 +1,1146 @@
+[
+  {
+    "id": "countries",
+    "name": "Ülkeler",
+    "items": [
+      [
+        "Türkiye",
+        "tr"
+      ],
+      [
+        "Azerbaycan",
+        "az"
+      ],
+      [
+        "Almanya",
+        "de"
+      ],
+      [
+        "Fransa",
+        "fr"
+      ],
+      [
+        "İtalya",
+        "it"
+      ],
+      [
+        "İspanya",
+        "es"
+      ],
+      [
+        "Portekiz",
+        "pt"
+      ],
+      [
+        "Birleşik Krallık",
+        "gb"
+      ],
+      [
+        "ABD",
+        "us"
+      ],
+      [
+        "Kanada",
+        "ca"
+      ],
+      [
+        "Brezilya",
+        "br"
+      ],
+      [
+        "Arjantin",
+        "ar"
+      ],
+      [
+        "Meksika",
+        "mx"
+      ],
+      [
+        "Japonya",
+        "jp"
+      ],
+      [
+        "Güney Kore",
+        "kr"
+      ],
+      [
+        "Çin",
+        "cn"
+      ],
+      [
+        "Hindistan",
+        "in"
+      ],
+      [
+        "Rusya",
+        "ru"
+      ],
+      [
+        "Ukrayna",
+        "ua"
+      ],
+      [
+        "Polonya",
+        "pl"
+      ],
+      [
+        "Hollanda",
+        "nl"
+      ],
+      [
+        "Belçika",
+        "be"
+      ],
+      [
+        "İsviçre",
+        "ch"
+      ],
+      [
+        "Avusturya",
+        "at"
+      ],
+      [
+        "İsveç",
+        "se"
+      ],
+      [
+        "Norveç",
+        "no"
+      ],
+      [
+        "Finlandiya",
+        "fi"
+      ],
+      [
+        "Danimarka",
+        "dk"
+      ],
+      [
+        "İzlanda",
+        "is"
+      ],
+      [
+        "İrlanda",
+        "ie"
+      ],
+      [
+        "Yunanistan",
+        "gr"
+      ],
+      [
+        "Bulgaristan",
+        "bg"
+      ],
+      [
+        "Romanya",
+        "ro"
+      ],
+      [
+        "Sırbistan",
+        "rs"
+      ],
+      [
+        "Hırvatistan",
+        "hr"
+      ],
+      [
+        "Bosna Hersek",
+        "ba"
+      ],
+      [
+        "Arnavutluk",
+        "al"
+      ],
+      [
+        "Macaristan",
+        "hu"
+      ],
+      [
+        "Çekya",
+        "cz"
+      ],
+      [
+        "Gürcistan",
+        "ge"
+      ],
+      [
+        "Kazakistan",
+        "kz"
+      ],
+      [
+        "Özbekistan",
+        "uz"
+      ],
+      [
+        "Kırgızistan",
+        "kg"
+      ],
+      [
+        "Türkmenistan",
+        "tm"
+      ],
+      [
+        "Moğolistan",
+        "mn"
+      ],
+      [
+        "Avustralya",
+        "au"
+      ],
+      [
+        "Yeni Zelanda",
+        "nz"
+      ],
+      [
+        "Mısır",
+        "eg"
+      ],
+      [
+        "Fas",
+        "ma"
+      ],
+      [
+        "Tunus",
+        "tn"
+      ],
+      [
+        "Cezayir",
+        "dz"
+      ],
+      [
+        "Güney Afrika",
+        "za"
+      ],
+      [
+        "Nijerya",
+        "ng"
+      ],
+      [
+        "Senegal",
+        "sn"
+      ],
+      [
+        "Suudi Arabistan",
+        "sa"
+      ],
+      [
+        "Katar",
+        "qa"
+      ],
+      [
+        "BAE",
+        "ae"
+      ],
+      [
+        "İran",
+        "ir"
+      ],
+      [
+        "Irak",
+        "iq"
+      ],
+      [
+        "Filistin",
+        "ps"
+      ],
+      [
+        "İsrail",
+        "il"
+      ],
+      [
+        "Endonezya",
+        "id"
+      ],
+      [
+        "Malezya",
+        "my"
+      ],
+      [
+        "Tayland",
+        "th"
+      ],
+      [
+        "Vietnam",
+        "vn"
+      ],
+      [
+        "Pakistan",
+        "pk"
+      ],
+      [
+        "Bangladeş",
+        "bd"
+      ],
+      [
+        "Şili",
+        "cl"
+      ],
+      [
+        "Kolombiya",
+        "co"
+      ],
+      [
+        "Uruguay",
+        "uy"
+      ],
+      [
+        "Peru",
+        "pe"
+      ],
+      [
+        "Ekvador",
+        "ec"
+      ]
+    ]
+  },
+  {
+    "id": "teams",
+    "name": "Takımlar",
+    "items": [
+      [
+        "Galatasaray",
+        "Galatasaray S.K."
+      ],
+      [
+        "Fenerbahçe",
+        "Fenerbahçe S.K."
+      ],
+      [
+        "Beşiktaş",
+        "Beşiktaş J.K."
+      ],
+      [
+        "Trabzonspor",
+        "Trabzonspor"
+      ],
+      [
+        "Bursaspor",
+        "Bursaspor"
+      ],
+      [
+        "Başakşehir",
+        "İstanbul Başakşehir F.K."
+      ],
+      [
+        "Real Madrid",
+        "Real Madrid CF"
+      ],
+      [
+        "Barcelona",
+        "FC Barcelona"
+      ],
+      [
+        "Manchester United",
+        "Manchester United F.C."
+      ],
+      [
+        "Manchester City",
+        "Manchester City F.C."
+      ],
+      [
+        "Liverpool",
+        "Liverpool F.C."
+      ],
+      [
+        "Arsenal",
+        "Arsenal F.C."
+      ],
+      [
+        "Chelsea",
+        "Chelsea F.C."
+      ],
+      [
+        "Bayern Münih",
+        "FC Bayern Munich"
+      ],
+      [
+        "Dortmund",
+        "Borussia Dortmund"
+      ],
+      [
+        "PSG",
+        "Paris Saint-Germain F.C."
+      ],
+      [
+        "Juventus",
+        "Juventus FC"
+      ],
+      [
+        "Milan",
+        "AC Milan"
+      ],
+      [
+        "Inter",
+        "Inter Milan"
+      ],
+      [
+        "Napoli",
+        "SSC Napoli"
+      ],
+      [
+        "Ajax",
+        "AFC Ajax"
+      ],
+      [
+        "Benfica",
+        "S.L. Benfica"
+      ],
+      [
+        "Porto",
+        "FC Porto"
+      ],
+      [
+        "Atletico Madrid",
+        "Atlético Madrid"
+      ],
+      [
+        "LA Lakers",
+        "Los Angeles Lakers"
+      ],
+      [
+        "Chicago Bulls",
+        "Chicago Bulls"
+      ],
+      [
+        "Boston Celtics",
+        "Boston Celtics"
+      ],
+      [
+        "Golden State Warriors",
+        "Golden State Warriors"
+      ]
+    ]
+  },
+  {
+    "id": "celebrities",
+    "name": "Ünlüler",
+    "items": [
+      [
+        "Taylor Swift",
+        "Taylor Swift"
+      ],
+      [
+        "Beyoncé",
+        "Beyoncé"
+      ],
+      [
+        "Rihanna",
+        "Rihanna"
+      ],
+      [
+        "Ariana Grande",
+        "Ariana Grande"
+      ],
+      [
+        "Billie Eilish",
+        "Billie Eilish"
+      ],
+      [
+        "Dua Lipa",
+        "Dua Lipa"
+      ],
+      [
+        "Shakira",
+        "Shakira"
+      ],
+      [
+        "Lady Gaga",
+        "Lady Gaga"
+      ],
+      [
+        "Michael Jackson",
+        "Michael Jackson"
+      ],
+      [
+        "Freddie Mercury",
+        "Freddie Mercury"
+      ],
+      [
+        "Elvis Presley",
+        "Elvis Presley"
+      ],
+      [
+        "Eminem",
+        "Eminem"
+      ],
+      [
+        "Snoop Dogg",
+        "Snoop Dogg"
+      ],
+      [
+        "The Weeknd",
+        "The Weeknd"
+      ],
+      [
+        "Tarkan",
+        "Tarkan (singer)"
+      ],
+      [
+        "Barış Manço",
+        "Barış Manço"
+      ],
+      [
+        "Ajda Pekkan",
+        "Ajda Pekkan"
+      ],
+      [
+        "Sezen Aksu",
+        "Sezen Aksu"
+      ],
+      [
+        "Cem Yılmaz",
+        "Cem Yılmaz"
+      ],
+      [
+        "Kemal Sunal",
+        "Kemal Sunal"
+      ],
+      [
+        "Şener Şen",
+        "Şener Şen"
+      ],
+      [
+        "Leonardo DiCaprio",
+        "Leonardo DiCaprio"
+      ],
+      [
+        "Brad Pitt",
+        "Brad Pitt"
+      ],
+      [
+        "Keanu Reeves",
+        "Keanu Reeves"
+      ],
+      [
+        "Tom Cruise",
+        "Tom Cruise"
+      ],
+      [
+        "Johnny Depp",
+        "Johnny Depp"
+      ],
+      [
+        "Dwayne Johnson",
+        "Dwayne Johnson"
+      ],
+      [
+        "Scarlett Johansson",
+        "Scarlett Johansson"
+      ],
+      [
+        "Angelina Jolie",
+        "Angelina Jolie"
+      ],
+      [
+        "Zendaya",
+        "Zendaya"
+      ]
+    ]
+  },
+  {
+    "id": "politicians",
+    "name": "Siyasetçiler",
+    "items": [
+      [
+        "Recep Tayyip Erdoğan",
+        "Recep Tayyip Erdoğan"
+      ],
+      [
+        "Kemal Kılıçdaroğlu",
+        "Kemal Kılıçdaroğlu"
+      ],
+      [
+        "Özgür Özel",
+        "Özgür Özel"
+      ],
+      [
+        "Ekrem İmamoğlu",
+        "Ekrem İmamoğlu"
+      ],
+      [
+        "Mansur Yavaş",
+        "Mansur Yavaş"
+      ],
+      [
+        "Devlet Bahçeli",
+        "Devlet Bahçeli"
+      ],
+      [
+        "Meral Akşener",
+        "Meral Akşener"
+      ],
+      [
+        "Donald Trump",
+        "Donald Trump"
+      ],
+      [
+        "Joe Biden",
+        "Joe Biden"
+      ],
+      [
+        "Barack Obama",
+        "Barack Obama"
+      ],
+      [
+        "Vladimir Putin",
+        "Vladimir Putin"
+      ],
+      [
+        "Volodymyr Zelenskyy",
+        "Volodymyr Zelenskyy"
+      ],
+      [
+        "Emmanuel Macron",
+        "Emmanuel Macron"
+      ],
+      [
+        "Angela Merkel",
+        "Angela Merkel"
+      ],
+      [
+        "Xi Jinping",
+        "Xi Jinping"
+      ],
+      [
+        "Narendra Modi",
+        "Narendra Modi"
+      ],
+      [
+        "Luiz Inácio Lula",
+        "Luiz Inácio Lula da Silva"
+      ],
+      [
+        "Javier Milei",
+        "Javier Milei"
+      ],
+      [
+        "Giorgia Meloni",
+        "Giorgia Meloni"
+      ],
+      [
+        "Kim Jong Un",
+        "Kim Jong Un"
+      ],
+      [
+        "Abdullah Öcalan",
+        "Abdullah Öcalan"
+      ],
+      [
+        "Selahattin Demirtaş",
+        "Selahattin Demirtaş"
+      ],
+      [
+        "Mao Zedong",
+        "Mao Zedong"
+      ]
+    ]
+  },
+  {
+    "id": "empires",
+    "name": "Tarihi imparatorluklar",
+    "items": [
+      [
+        "Osmanlı İmparatorluğu",
+        "Ottoman Empire"
+      ],
+      [
+        "Roma İmparatorluğu",
+        "Roman Empire"
+      ],
+      [
+        "Bizans İmparatorluğu",
+        "Byzantine Empire"
+      ],
+      [
+        "Büyük Selçuklu",
+        "Seljuk Empire"
+      ],
+      [
+        "Moğol İmparatorluğu",
+        "Mongol Empire"
+      ],
+      [
+        "Britanya İmparatorluğu",
+        "British Empire"
+      ],
+      [
+        "Rus İmparatorluğu",
+        "Russian Empire"
+      ],
+      [
+        "Avusturya-Macaristan",
+        "Austria-Hungary"
+      ],
+      [
+        "Alman İmparatorluğu",
+        "German Empire"
+      ],
+      [
+        "Babür İmparatorluğu",
+        "Mughal Empire"
+      ],
+      [
+        "Safevî Devleti",
+        "Safavid Iran"
+      ],
+      [
+        "Ahameniş İmparatorluğu",
+        "Achaemenid Empire"
+      ],
+      [
+        "İnka İmparatorluğu",
+        "Inca Empire"
+      ],
+      [
+        "Aztek İmparatorluğu",
+        "Aztec Empire"
+      ],
+      [
+        "Qing Hanedanı",
+        "Qing dynasty"
+      ],
+      [
+        "Timur İmparatorluğu",
+        "Timurid Empire"
+      ]
+    ]
+  },
+  {
+    "id": "games",
+    "name": "Oyunlar",
+    "items": [
+      [
+        "Minecraft",
+        "Minecraft"
+      ],
+      [
+        "GTA V",
+        "Grand Theft Auto V"
+      ],
+      [
+        "Red Dead Redemption 2",
+        "Red Dead Redemption 2"
+      ],
+      [
+        "Counter-Strike 2",
+        "Counter-Strike 2"
+      ],
+      [
+        "Valorant",
+        "Valorant"
+      ],
+      [
+        "League of Legends",
+        "League of Legends"
+      ],
+      [
+        "Dota 2",
+        "Dota 2"
+      ],
+      [
+        "Fortnite",
+        "Fortnite"
+      ],
+      [
+        "PUBG",
+        "PUBG: Battlegrounds"
+      ],
+      [
+        "Rocket League",
+        "Rocket League"
+      ],
+      [
+        "Elden Ring",
+        "Elden Ring"
+      ],
+      [
+        "Dark Souls",
+        "Dark Souls"
+      ],
+      [
+        "The Witcher 3",
+        "The Witcher 3: Wild Hunt"
+      ],
+      [
+        "Cyberpunk 2077",
+        "Cyberpunk 2077"
+      ],
+      [
+        "God of War",
+        "God of War (2018 video game)"
+      ],
+      [
+        "Age of Empires II",
+        "Age of Empires II"
+      ],
+      [
+        "Age of Empires III",
+        "Age of Empires III"
+      ],
+      [
+        "Civilization VI",
+        "Civilization VI"
+      ],
+      [
+        "The Sims 4",
+        "The Sims 4"
+      ],
+      [
+        "Among Us",
+        "Among Us"
+      ],
+      [
+        "Fall Guys",
+        "Fall Guys"
+      ],
+      [
+        "Stardew Valley",
+        "Stardew Valley"
+      ],
+      [
+        "Hollow Knight",
+        "Hollow Knight"
+      ],
+      [
+        "Terraria",
+        "Terraria"
+      ]
+    ]
+  },
+  {
+    "id": "companies",
+    "name": "Şirketler",
+    "items": [
+      [
+        "Apple",
+        "Apple Inc."
+      ],
+      [
+        "Microsoft",
+        "Microsoft"
+      ],
+      [
+        "Google",
+        "Google"
+      ],
+      [
+        "Amazon",
+        "Amazon (company)"
+      ],
+      [
+        "Meta",
+        "Meta Platforms"
+      ],
+      [
+        "Nvidia",
+        "Nvidia"
+      ],
+      [
+        "AMD",
+        "AMD"
+      ],
+      [
+        "Intel",
+        "Intel"
+      ],
+      [
+        "Samsung",
+        "Samsung"
+      ],
+      [
+        "Sony",
+        "Sony"
+      ],
+      [
+        "Nintendo",
+        "Nintendo"
+      ],
+      [
+        "Tesla",
+        "Tesla, Inc."
+      ],
+      [
+        "SpaceX",
+        "SpaceX"
+      ],
+      [
+        "Toyota",
+        "Toyota"
+      ],
+      [
+        "BMW",
+        "BMW"
+      ],
+      [
+        "Mercedes-Benz",
+        "Mercedes-Benz"
+      ],
+      [
+        "Ferrari",
+        "Ferrari"
+      ],
+      [
+        "Porsche",
+        "Porsche"
+      ],
+      [
+        "Nike",
+        "Nike, Inc."
+      ],
+      [
+        "Adidas",
+        "Adidas"
+      ],
+      [
+        "Coca-Cola",
+        "Coca-Cola"
+      ],
+      [
+        "Pepsi",
+        "Pepsi"
+      ],
+      [
+        "McDonald's",
+        "McDonald's"
+      ],
+      [
+        "Starbucks",
+        "Starbucks"
+      ],
+      [
+        "Netflix",
+        "Netflix"
+      ],
+      [
+        "Spotify",
+        "Spotify"
+      ],
+      [
+        "YouTube",
+        "YouTube"
+      ],
+      [
+        "Turkish Airlines",
+        "Turkish Airlines"
+      ]
+    ]
+  },
+  {
+    "id": "athletes",
+    "name": "Sporcular",
+    "items": [
+      [
+        "Lionel Messi",
+        "Lionel Messi"
+      ],
+      [
+        "Cristiano Ronaldo",
+        "Cristiano Ronaldo"
+      ],
+      [
+        "Neymar",
+        "Neymar"
+      ],
+      [
+        "Kylian Mbappé",
+        "Kylian Mbappé"
+      ],
+      [
+        "Erling Haaland",
+        "Erling Haaland"
+      ],
+      [
+        "Arda Güler",
+        "Arda Güler"
+      ],
+      [
+        "Hakan Çalhanoğlu",
+        "Hakan Çalhanoğlu"
+      ],
+      [
+        "Mete Gazoz",
+        "Mete Gazoz"
+      ],
+      [
+        "Michael Jordan",
+        "Michael Jordan"
+      ],
+      [
+        "LeBron James",
+        "LeBron James"
+      ],
+      [
+        "Kobe Bryant",
+        "Kobe Bryant"
+      ],
+      [
+        "Stephen Curry",
+        "Stephen Curry"
+      ],
+      [
+        "Muhammad Ali",
+        "Muhammad Ali"
+      ],
+      [
+        "Mike Tyson",
+        "Mike Tyson"
+      ],
+      [
+        "Usain Bolt",
+        "Usain Bolt"
+      ],
+      [
+        "Serena Williams",
+        "Serena Williams"
+      ],
+      [
+        "Roger Federer",
+        "Roger Federer"
+      ],
+      [
+        "Rafael Nadal",
+        "Rafael Nadal"
+      ],
+      [
+        "Novak Djokovic",
+        "Novak Djokovic"
+      ],
+      [
+        "Lewis Hamilton",
+        "Lewis Hamilton"
+      ],
+      [
+        "Max Verstappen",
+        "Max Verstappen"
+      ],
+      [
+        "Michael Schumacher",
+        "Michael Schumacher"
+      ]
+    ]
+  },
+  {
+    "id": "history",
+    "name": "Tarihi kişiler",
+    "items": [
+      [
+        "Mustafa Kemal Atatürk",
+        "Mustafa Kemal Atatürk"
+      ],
+      [
+        "Fatih Sultan Mehmet",
+        "Mehmed II"
+      ],
+      [
+        "Kanuni Sultan Süleyman",
+        "Suleiman the Magnificent"
+      ],
+      [
+        "Napolyon Bonapart",
+        "Napoleon"
+      ],
+      [
+        "Jül Sezar",
+        "Julius Caesar"
+      ],
+      [
+        "Büyük İskender",
+        "Alexander the Great"
+      ],
+      [
+        "Cengiz Han",
+        "Genghis Khan"
+      ],
+      [
+        "Kleopatra",
+        "Cleopatra"
+      ],
+      [
+        "Kraliçe Victoria",
+        "Queen Victoria"
+      ],
+      [
+        "Abraham Lincoln",
+        "Abraham Lincoln"
+      ],
+      [
+        "Albert Einstein",
+        "Albert Einstein"
+      ],
+      [
+        "Nikola Tesla",
+        "Nikola Tesla"
+      ],
+      [
+        "Isaac Newton",
+        "Isaac Newton"
+      ],
+      [
+        "Marie Curie",
+        "Marie Curie"
+      ],
+      [
+        "Leonardo da Vinci",
+        "Leonardo da Vinci"
+      ],
+      [
+        "İbn Sina",
+        "Avicenna"
+      ]
+    ]
+  },
+  {
+    "id": "zodiac",
+    "name": "Burçlar",
+    "items": [
+      [
+        "Aries",
+        "Aries"
+      ],
+      [
+        "Taurus",
+        "Taurus"
+      ],
+      [
+        "Gemini",
+        "Gemini"
+      ],
+      [
+        "Cancer",
+        "Cancer"
+      ],
+      [
+        "Leo",
+        "Leo"
+      ],
+      [
+        "Virgo",
+        "Virgo"
+      ],
+      [
+        "Libra",
+        "Libra"
+      ],
+      [
+        "Scorpio",
+        "Scorpio"
+      ],
+      [
+        "Sagittarius",
+        "Sagittarius"
+      ],
+      [
+        "Capricorn",
+        "Capricorn"
+      ],
+      [
+        "Aquarius",
+        "Aquarius"
+      ],
+      [
+        "Pisces",
+        "Pisces"
+      ]
+    ]
+  }
+]

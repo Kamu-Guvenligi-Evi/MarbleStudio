@@ -35,7 +35,7 @@ if(legacyDraft&&!modeDrafts[legacyDraft.mode==='arena'?'arena':'track'])modeDraf
 const draft=modeDrafts.track;
 let trackPreset=draft?.preset??'saved';
 let gameMode='track';
-let spiralTheme='ice',spiralBehavior='classic',arenaEnergy=1;
+let spiralTheme='ice',spiralBehavior='classic',arenaEnergy=1,arenaGame='links',arenaShape='triangle',territoryDuration=45;
 for(const [id,theme] of Object.entries(SPIRAL_THEMES))$('#spiral-theme').add(new Option(theme.name,id));
 let sequence = draft?.sequence ?? null, projectName = draft?.name ?? 'Parkurum';
 let ballImages=await upgradeCatalogImages(normalizeBallImages(draft?.ballImages));
@@ -72,7 +72,7 @@ const statistics = createStatistics({notify:toast,onRecordingChange:active=>{
 }});
 
 createBallEditor({getImages:()=>ballImages,getNames:()=>ballNames,getCount:()=>Number($('#count').value),notify:toast,onRosterChange:(images,names)=>{if(isRecording())throw new Error('Kadroyu kayıt bittikten sonra değiştir.');ballImages=normalizeBallImages(images);ballNames=normalizeNames(names);resetRace();},onChange:next=>{if(isRecording())throw new Error('Görseli kayıt bittikten sonra ekle.');ballImages=next;resetRace();},onNamesChange:next=>{if(isRecording())throw new Error('İsmi kayıt bittikten sonra değiştir.');ballNames=normalizeNames(next);resetRace();}});
-function getProject(){return {mode:gameMode,spiralTheme,variant:spiralBehavior,energy:arenaEnergy,spiralSfxVersion:1,preset:trackPreset,speed:$('#speed').value,name:projectName,sequence:structuredClone(sequence??[]),seed:Number($('#seed').value),count:Number($('#count').value),sound:$('#sound').checked,visualStyle:'neon',trails:$('#trails').checked,ballImages:[...ballImages],ballNames:[...ballNames],presentation:{...presentation}};}
+function getProject(){return {mode:gameMode,spiralTheme,variant:spiralBehavior,energy:arenaEnergy,arenaGame,arenaShape,territoryDuration,spiralSfxVersion:1,preset:trackPreset,speed:$('#speed').value,name:projectName,sequence:structuredClone(sequence??[]),seed:Number($('#seed').value),count:Number($('#count').value),sound:$('#sound').checked,visualStyle:'neon',trails:$('#trails').checked,ballImages:[...ballImages],ballNames:[...ballNames],presentation:{...presentation}};}
 function persistDraft(){
   modeDrafts[gameMode]=getProject();
   try{localStorage.setItem('marble-studio-'+gameMode+'-v1',JSON.stringify(modeDrafts[gameMode]));$('#save-status').textContent='✓ Bu yarışın ayarları kaydedildi';}
@@ -86,7 +86,7 @@ function switchRaceMode(mode,force=false){
     sequence=saved?.sequence?.length?structuredClone(saved.sequence):null;
     projectName=saved?.name??(mode==='spiral'?'Spiral çoğalma':mode==='arena'?'Küre arenası':'Parkur yarışı');
     trackPreset=saved?.preset??'saved';
-    spiralTheme=normalizeSpiralTheme(saved?.spiralTheme);spiralBehavior=saved?.variant??'classic';arenaEnergy=saved?.energy??1;
+    spiralTheme=normalizeSpiralTheme(saved?.spiralTheme);spiralBehavior=saved?.variant??'classic';arenaEnergy=saved?.energy??1;arenaGame=saved?.arenaGame??'links';arenaShape=saved?.arenaShape??'triangle';territoryDuration=saved?.territoryDuration??45;
     ballImages=normalizeBallImages(saved?.ballImages);ballImages.forEach(loadBallImage);
     ballNames=normalizeNames(saved?.ballNames);presentation=normalizePresentation(saved?.presentation);syncPresentation();
     $('#seed').value=saved?.seed??2048;$('#count').value=saved?.count??(mode==='spiral'?1:12);
@@ -122,16 +122,19 @@ function resetRace() {
   music.setGameMode(gameMode);
   race?.dispose();
   const seed = Math.min(999999,Math.max(1,Math.floor(Number($('#seed').value)||2048))); $('#seed').value=seed;
-  race=gameMode==='spiral'?new Spiral({variant:spiralBehavior,theme:spiralTheme,seed,count:Number($('#count').value),ballImages,ballNames,onHit:tone}):gameMode==='arena'?new Arena({energy:arenaEnergy,seed,count:Number($('#count').value),ballImages,ballNames,onHit:tone}):new Race({seed,sequence:sequence?.length?sequence:null,sections:4,count:Number($('#count').value),ballImages,ballNames,onHit:tone});
+  race=gameMode==='spiral'?new Spiral({variant:spiralBehavior,theme:spiralTheme,seed,count:Number($('#count').value),ballImages,ballNames,onHit:tone}):gameMode==='arena'?new Arena({energy:arenaEnergy,arenaGame,arenaShape,territoryDuration,seed,count:Number($('#count').value),ballImages,ballNames,onHit:tone}):new Race({seed,sequence:sequence?.length?sequence:null,sections:4,count:Number($('#count').value),ballImages,ballNames,onHit:tone});
   director=createCameraDirector();resultElapsed=0;winnerElapsed=null;
   // Freeze the initial starter course too: settings never reshuffle the user's order.
   if(gameMode==='track')sequence=structuredClone(race.sequence);
   race.courseName=projectName;
+  if(race.arenaGame==='territory')race.language='tr';
   paused=false; countdown=0; cameraY=0; accumulator=0;
   syncModeUI(); updateUI(); draw(); persistDraft();
 }
 function syncModeUI(){
-  const arena=gameMode==='arena',spiral=gameMode==='spiral';
+  const arena=gameMode==='arena',spiral=gameMode==='spiral',territory=arena&&arenaGame==='territory';
+  $('#arena-options').hidden=!arena;$('#arena-game').value=arenaGame;$('#arena-shape').value=arenaShape;$('#territory-duration').value=territoryDuration;$('#arena-shape-field').hidden=!territory;$('#territory-duration-field').hidden=!territory;
+  $('#arena-rules').textContent=territory?'Kendi alanından çıkıp iz çiz. Geri dönünce kapalı bölge senin olur. Rakibinin izini keserek hamlesini boz. Süre sonunda en çok alanı olan kazanır.':'Her top 3 bağla başlar. Duvara çarptıkça bağ kurar, rakiplerinin bağlarını keser. Bağı kalmayan elenir; son bağlı top kazanır.';
   $('#track-preset-field').hidden=gameMode!=='track';$('#arena-rules').hidden=!arena;$('#camera').closest('label').hidden=gameMode!=='track';
   $('#spiral-rules').hidden=!spiral;
   $('#spiral-theme-field').hidden=!spiral;$('#spiral-theme').value=spiralTheme;
@@ -140,12 +143,12 @@ function syncModeUI(){
   $('#count-label').textContent=spiral?'Başlangıç top sayısı':'Yarışmacı sayısı';
   $('#track-preset').value=trackPreset;
   $('#track-preset option[value="saved"]').hidden=trackPreset!=='saved';
-  $('#watch-title').textContent=spiral?'Spiral çoğalma':arena?'Küre arenası':'Parkur yarışı';
-  $('#race-eyebrow').textContent=spiral?'YOLU KIR · ÇOĞAL · MERKEZE ULAŞ':arena?'BAĞ KUR · RAKİPLERİNİ ELE':'ENGELLERİ AŞ · FİNİŞE ULAŞ';
-  $('#race-description').textContent=spiral?'Bir topla başla. Spiral yolu parçalarken topların çoğalmasını izle.':arena?'Kadronu seç. Son bağlı top kalana kadar mücadele et.':'Hazır parkurunu seç, kadronu kur ve yarışı başlat.';
+  $('#watch-title').textContent=spiral?'Spiral çoğalma':territory?'Alan Savaşı':arena?'Küre arenası':'Parkur yarışı';
+  $('#race-eyebrow').textContent=spiral?'YOLU KIR · ÇOĞAL · MERKEZE ULAŞ':territory?'ALANI KAP · RAKİBİNİN İZİNİ KES':arena?'BAĞ KUR · RAKİPLERİNİ ELE':'ENGELLERİ AŞ · FİNİŞE ULAŞ';
+  $('#race-description').textContent=spiral?'Bir topla başla. Spiral yolu parçalarken topların çoğalmasını izle.':territory?'Şeklini ve kadronu seç. Kapalı bölgeleri ele geçir, en geniş alan senin olsun.':arena?'Kadronu seç. Son bağlı top kalana kadar mücadele et.':'Hazır parkurunu seç, kadronu kur ve yarışı başlat.';
   if(spiral)$('#race-description').textContent=SPIRAL_THEMES[spiralTheme].description;
-  $('.progress-heading span').textContent=spiral?'Açılan spiral yolu':arena?'Elenen toplar':'Parkur ilerlemesi';
-  $('#settings-title').textContent=spiral?'Spiral çoğalma ayarları':arena?'Küre arenası ayarları':'Parkur yarışı ayarları';
+  $('.progress-heading span').textContent=spiral?'Açılan spiral yolu':territory?'Yarış süresi':arena?'Elenen toplar':'Parkur ilerlemesi';
+  $('#settings-title').textContent=spiral?'Spiral çoğalma ayarları':territory?'Alan Savaşı ayarları':arena?'Küre arenası ayarları':'Parkur yarışı ayarları';
 }
 function setView(next, focus = true) {
   if ((isRecording() || recordStarting || raceStarting || exportPreparing) && next !== 'watch') return;
@@ -211,12 +214,12 @@ function updateUI() {
   $('#pause').disabled=empty || raceStarting || recordStarting || exportPreparing || (isRecording() && race.state==='finished');
   $('#record').disabled=empty||recordStarting||raceStarting||exportPreparing;
   for(const mode of ['track','arena','statistics','spiral'])$('#nav-'+mode).disabled=locked;
-  for(const selector of ['#count','#open-balls','#track-preset','#spiral-theme','#sound','#open-settings'])$(selector).disabled=locked;
+  for(const selector of ['#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#sound','#open-settings'])$(selector).disabled=locked;
   $('#ranking-title').textContent=gameMode==='spiral'?'Spiraldeki toplar':race.finished.length?'Sonuçlar':race.state==='ready'?'Yarışmacılar':'Canlı sıralama';
-  const spiral=gameMode==='spiral',arena=gameMode==='arena',active=arena?race.balls.filter(b=>b.eliminatedAt===null).length:0;
-  $('#finish-count').textContent=spiral?`${race.balls.length} top · ${race.totalBreaks} kırılma`:arena?`${active} / ${race.balls.length} top kaldı`:race.finished.length?`${race.finished.length} / ${race.balls.length} finish`:`${race.balls.length} top`;
-  $('#ranking').innerHTML=ranked.slice(0,5).map((b,i)=>`<div class="rank-row"><span class="rank-num">${String(i+1).padStart(2,'0')}</span><span class="rank-ball" style="background:${b.color}">${b.imageSrc?`<img src="${b.imageSrc}" alt="">`:''}</span><span class="rank-name">${escapeText(b.name)}</span><span class="rank-value">${spiral?'#'+(b.id+1):arena?(b.eliminatedAt!==null?'Elendi':race.linkCount(b)+' bağ · '+b.cuts+' kesiş'):b.finishedAt!==null?b.finishedAt.toFixed(2)+' sn':Math.round(Math.max(0,Math.min(100,(b.body.position.y-260)/(race.finishY-260)*100)))+'%'}</span></div>`).join('');
-  const progress=spiral?race.progress*100:arena?(race.balls.length-active)/race.balls.length*100:Math.max(0,Math.min(100,(ranked[0].body.position.y-260)/(race.finishY-260)*100));
+  const spiral=gameMode==='spiral',arena=gameMode==='arena',territory=arena&&race.arenaGame==='territory',active=arena?race.balls.filter(b=>b.eliminatedAt===null).length:0;
+  $('#finish-count').textContent=spiral?`${race.balls.length} top · ${race.totalBreaks} kırılma`:territory?`${Math.ceil(race.duration-race.time)} sn kaldı`:arena?`${active} / ${race.balls.length} top kaldı`:race.finished.length?`${race.finished.length} / ${race.balls.length} finish`:`${race.balls.length} top`;
+  $('#ranking').innerHTML=ranked.slice(0,5).map((b,i)=>`<div class="rank-row"><span class="rank-num">${String(i+1).padStart(2,'0')}</span><span class="rank-ball" style="background:${b.color}">${b.imageSrc?`<img src="${b.imageSrc}" alt="">`:''}</span><span class="rank-name">${escapeText(b.name)}</span><span class="rank-value">${spiral?'#'+(b.id+1):territory?race.share(b).toFixed(1)+'% alan':arena?(b.eliminatedAt!==null?'Elendi':race.linkCount(b)+' bağ · '+b.cuts+' kesiş'):b.finishedAt!==null?b.finishedAt.toFixed(2)+' sn':Math.round(Math.max(0,Math.min(100,(b.body.position.y-260)/(race.finishY-260)*100)))+'%'}</span></div>`).join('');
+  const progress=spiral?race.progress*100:territory?race.time/race.duration*100:arena?(race.balls.length-active)/race.balls.length*100:Math.max(0,Math.min(100,(ranked[0].body.position.y-260)/(race.finishY-260)*100));
   $('#progress-bar').style.width=progress+'%'; $('#progress-label').textContent=Math.round(progress)+'%';
 }
 function draw() {
@@ -246,7 +249,7 @@ function recordingUI(active) {
   $('#record').classList.toggle('recording',active);
   $('#record').innerHTML=active?'■ Kaydı bitir ve indir':'<span aria-hidden="true">●</span> Videoya kaydet';
   $('#record-help').textContent=active?'Kayıt sürüyor. Bu sekmeyi açık tut; finişte videon otomatik indirilecek.':'Yarış baştan oynatılır ve kaydedilir. Bittiğinde dikey videon otomatik iner.';
-  for(const selector of ['#nav-track','#nav-arena','#nav-statistics','#nav-spiral','#open-settings','#reset','#speed','#new-race','#camera','#count','#open-balls','#track-preset','#spiral-theme','#sound'])$(selector).disabled=active;
+  for(const selector of ['#nav-track','#nav-arena','#nav-statistics','#nav-spiral','#open-settings','#reset','#speed','#new-race','#camera','#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#sound'])$(selector).disabled=active;
 }
 async function startRecord() {
   if(recordStarting||raceStarting||exportPreparing)return;
@@ -296,6 +299,9 @@ $('#nav-track').onclick=()=>switchRaceMode('track');$('#nav-arena').onclick=()=>
 $('#nav-spiral').onclick=()=>switchRaceMode('spiral');
 $('#nav-statistics').onclick=()=>setView('statistics');
 $('#count').onchange=resetRace;
+$('#arena-game').onchange=()=>{arenaGame=$('#arena-game').value;resetRace();};
+$('#arena-shape').onchange=()=>{arenaShape=$('#arena-shape').value;resetRace();};
+$('#territory-duration').onchange=()=>{territoryDuration=Number($('#territory-duration').value);resetRace();};
 $('#speed').onchange=persistDraft;
 $('#spiral-theme').onchange=()=>{
   if(isRecording()||recordStarting||raceStarting)return;

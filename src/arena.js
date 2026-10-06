@@ -1,14 +1,17 @@
 import {COLORS,NAMES,random} from './physics.js';
 import {ballImageColor,normalizeBallImages} from './ball-images.js';
 import {normalizeNames} from './presentation.js';
+import {TerritoryBattle} from './territory.js';
 
 export const ARENA={x:270,y:510,radius:238};
+const WALL_SPEED_GAIN=.0025;
 export function pointSegmentDistance(p,a,b){
   const dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.y-a.y)*dy)/(dx*dx+dy*dy||1)));
   return Math.hypot(p.x-a.x-dx*t,p.y-a.y-dy*t);
 }
 export class Arena {
-  constructor({seed=2048,count=12,energy=1,ballImages=[],ballNames=[],rule='elimination',duration=60,onHit=()=>{}}={}){
+  constructor({seed=2048,count=12,energy=1,ballImages=[],ballNames=[],rule='elimination',duration=60,onHit=()=>{},arenaGame='links',arenaShape='triangle',territoryDuration=45}={}){
+    if(arenaGame==='territory')return new TerritoryBattle({seed,count,ballImages,ballNames,onHit,arenaShape,territoryDuration});
     this.mode='arena';this.seed=seed;this.rule=rule;this.duration=duration;this.onHit=onHit;
     this.time=0;this.state='ready';this.finished=[];this.particles=[];this.links=[];this.events=[];this.totalCuts=0;
     this.sectionCount=1;this.sections=[];this.sequence=[];this.finishY=960;this.isCustom=true;
@@ -18,7 +21,7 @@ export class Arena {
       const angle=id/count*Math.PI*2+rng()*.1,heading=rng()*Math.PI*2,speed=(165+rng()*35)*1.08*Math.max(.85,Math.min(1.15,Number(energy)||1));
       return {id,name:this.ballNames[id]??NAMES[id],imageSrc:this.ballImages[id],get color(){return ballImageColor(this.imageSrc,COLORS[id]);},
         body:{position:{x:270+Math.cos(angle)*150,y:510+Math.sin(angle)*150},velocity:{x:Math.cos(heading)*speed,y:Math.sin(heading)*speed},circleRadius:18},
-        speed,trail:[],finishedAt:null,eliminatedAt:null,cuts:0,lastWall:-1};
+        speed,initialSpeed:speed,trail:[],finishedAt:null,eliminatedAt:null,cuts:0,lastWall:-1};
     });
     if(rule==='elimination')for(const ball of this.balls)for(let j=0;j<3;j++)this.addLink(ball,ball.id/count*Math.PI*2+(j-1)*.15);
   }
@@ -37,7 +40,12 @@ export class Arena {
     for(const ball of active){const p=ball.body.position,v=ball.body.velocity;p.x+=v.x*dt;p.y+=v.y*dt;
       const dx=p.x-270,dy=p.y-510,d=Math.hypot(dx,dy),limit=238-ball.body.circleRadius;
       if(d>=limit){const nx=dx/d,ny=dy/d,dot=v.x*nx+v.y*ny;p.x=270+nx*(limit-.01);p.y=510+ny*(limit-.01);
-        if(dot>0){v.x-=2*dot*nx;v.y-=2*dot*ny;if(this.time-ball.lastWall>.12){this.addLink(ball,Math.atan2(ny,nx));ball.lastWall=this.time;this.onHit(4,p.x);this.spark(270+nx*238,510+ny*238,ball.color);}}
+        if(dot>0){
+          v.x-=2*dot*nx;v.y-=2*dot*ny;
+          // Add 0.25% of starting speed per impact, keeping the increase gradual and linear.
+          ball.speed+=ball.initialSpeed*WALL_SPEED_GAIN;
+          if(this.time-ball.lastWall>.12){this.addLink(ball,Math.atan2(ny,nx));ball.lastWall=this.time;this.onHit(4,p.x);this.spark(270+nx*238,510+ny*238,ball.color);}
+        }
       }
     }
     for(let i=0;i<active.length;i++)for(let j=i+1;j<active.length;j++){

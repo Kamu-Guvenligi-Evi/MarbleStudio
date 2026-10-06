@@ -54,7 +54,10 @@ export function automaticCandidate(options,seed,history=[],attempted=[],guard=cr
   for(let i=0;i<96;i++){
     let r=recipe(1+(seed+i*7919)%999999,mode);const auto=options.automation;
     if(mode==='spiral'){r.theme=Object.keys(SPIRAL_THEMES)[i%6];r.variant=Object.keys(SPIRAL_VARIANTS)[Math.floor(i/6)%4];}
-    if(mode==='arena'){r.count=6+2*(i%8);r.energy=[.85,1,1.15][Math.floor(i/8)%3];}
+    if(mode==='arena'){
+      r.count=6+2*(i%8);r.energy=[.85,1,1.15][Math.floor(i/8)%3];
+      if(i>=24)Object.assign(r,{arenaGame:'territory',arenaShape:['triangle','square','hexagon','star','circle'][(i-24)%5],territoryDuration:45});
+    }
     if(mode!=='spiral'&&auto.ballNames.length)r.count=Math.min(r.count,Math.floor(auto.ballNames.length/2)*2);
     Object.assign(r,{language:options.language,rosterCategory:auto.rosterCategory,music:auto.music,ballNames:auto.ballNames,ballImages:auto.ballImages,sound:true,trails:true,presentation:{countdown:0,outro:2,camera:'smart'}});
     if(mode==='track')r=withEpisode(r,auto.episodeFormat??'sprint');

@@ -64,9 +64,10 @@ export function recipe(seed,mode,theme){
     ...(mode==='track'?{profile,rhythm}:mode==='spiral'?{variant:pick(Object.keys(SPIRAL_VARIANTS))}:{energy:pick([.85,1,1.15])})};
 }
 export function identity(r){return JSON.stringify(r);}
-export function structure(r){if(r.episode)return JSON.stringify([r.mode,r.episode.format,r.episode.heats.map(h=>h.sequence.map(s=>s.type))]);return JSON.stringify([r.mode,r.mode==='statistics'?r.statistics.csv:r.mode==='track'?[r.profile,r.rhythm,(r.sequence??[]).map(s=>s.type)]:r.mode==='spiral'?[r.theme,r.variant]:[r.count,r.energy]]);}
+export function structure(r){if(r.episode)return JSON.stringify([r.mode,r.episode.format,r.episode.heats.map(h=>h.sequence.map(s=>s.type))]);return JSON.stringify([r.mode,r.mode==='statistics'?r.statistics.csv:r.mode==='track'?[r.profile,r.rhythm,(r.sequence??[]).map(s=>s.type)]:r.mode==='spiral'?[r.theme,r.variant]:[r.count,r.energy,r.arenaGame??'links',r.arenaShape??'triangle',r.territoryDuration??45]]);}
 export function copyFor(r,language,ordinal=0){
   if(r.episode)return episodeCopy(r,language);
+  if(r.mode==='arena'&&r.arenaGame==='territory')return {hook:language==='tr'?'Bu alanı kim ele geçirecek?':'Who will claim this territory?',title:language==='tr'?'Alan Savaşı · '+r.arenaShape:'Territory Battle · '+r.arenaShape,description:language==='tr'?'İz çiz, kapalı bölgeleri ele geçir, rakibinin izini kes. En çok alanı olan kazanır.':'Draw loops, capture land and cut rival trails. Most territory wins.',tags:['marbles','territory','battle',r.arenaShape],language};
   if(r.mode==='statistics')return {hook:r.statistics.heading,title:r.statistics.heading,description:r.statistics.source,tags:['statistics','data'],language};
   const hooks={
     en:{track:['Pick a color. Can it win?','Which marble wins this course?','Who will take the lead?'],spiral:['How many marbles to break it all?','One marble. Can it reach the center?','Will the spiral survive?'],arena:['Pick your survivor.','Who keeps the last link?','Which color will be the last one?']},

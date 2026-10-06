@@ -1,4 +1,5 @@
 import {SPIRAL_VARIANTS} from './spiral-variants.js';
+import {TERRITORY_SHAPES} from './territory.js';
 import { normalizeSpiralTheme } from './spiral-themes.js';
 import { normalizeSequence } from './section-settings.js';
 import { normalizeBallImages } from './ball-images.js';
@@ -18,7 +19,10 @@ export function normalizeProject(raw) {
   if(raw.mode!==undefined&&!['track','arena','spiral'].includes(raw.mode))throw new Error('Oyun modu geçersiz.');
   if(raw.variant!==undefined&&!Object.hasOwn(SPIRAL_VARIANTS,raw.variant))throw new Error('Spiral davranışı geçersiz.');
   if(raw.energy!==undefined&&![.85,1,1.15].includes(raw.energy))throw new Error('Arena hareket seviyesi geçersiz.');
-  return {variant:raw.variant??'classic',energy:raw.energy??1,...(['arena','spiral'].includes(raw.mode)?{mode:raw.mode}:{}),spiralTheme:normalizeSpiralTheme(raw.spiralTheme),name,seed,count,sound:raw.sound??false,visualStyle:'neon',trails:raw.trails??true,sequence:normalizeSequence(raw.sequence),ballImages:normalizeBallImages(raw.ballImages),ballNames:normalizeNames(raw.ballNames),presentation:normalizePresentation(raw.presentation)};
+  if(raw.arenaGame!==undefined&&!['links','territory'].includes(raw.arenaGame))throw new Error('Arena oyunu geçersiz.');
+  if(raw.arenaShape!==undefined&&!Object.hasOwn(TERRITORY_SHAPES,raw.arenaShape))throw new Error('Arena şekli geçersiz.');
+  if(raw.territoryDuration!==undefined&&![30,45,60].includes(raw.territoryDuration))throw new Error('Alan savaşı süresi geçersiz.');
+  return {...(raw.mode==='arena'?{arenaGame:raw.arenaGame??'links',arenaShape:raw.arenaShape??'triangle',territoryDuration:raw.territoryDuration??45}:{}),variant:raw.variant??'classic',energy:raw.energy??1,...(['arena','spiral'].includes(raw.mode)?{mode:raw.mode}:{}),spiralTheme:normalizeSpiralTheme(raw.spiralTheme),name,seed,count,sound:raw.sound??false,visualStyle:'neon',trails:raw.trails??true,sequence:normalizeSequence(raw.sequence),ballImages:normalizeBallImages(raw.ballImages),ballNames:normalizeNames(raw.ballNames),presentation:normalizePresentation(raw.presentation)};
 }
 export function serializeProject(project) {
   return JSON.stringify({format:'marble-studio-course',version:2,project:normalizeProject(project)},null,2);

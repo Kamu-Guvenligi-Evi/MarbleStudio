@@ -2,7 +2,9 @@ import {drawSpace} from './space-art.js';
 import {drawMarble} from './marble-art.js';
 import {drawLeaders} from './race-leaders.js';
 import {raceName} from './race-copy.js';
+import {renderTerritory} from './territory-renderer.js';
 export function renderArena(ctx,arena,{countdown=0,paused=false,trails=true}={}){
+  if(arena.arenaGame==='territory')return renderTerritory(ctx,arena,{countdown,paused,trails});
   const tr=arena.language==='tr';
   ctx.setTransform(2,0,0,2,0,0);ctx.fillStyle='#080e20';ctx.fillRect(0,0,540,960);drawSpace(ctx,0,arena.time);
   const text=(s,x,y,size=16,color='#e8f5ff')=>{ctx.font=`600 ${size}px "Segoe UI",sans-serif`;ctx.fillStyle=color;ctx.textAlign='center';ctx.fillText(s,x,y,480);};

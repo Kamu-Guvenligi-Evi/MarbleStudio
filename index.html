@@ -32,6 +32,11 @@
         <label class="switch-label" for="sound"><input id="sound" type="checkbox" role="switch"><span>Çarpışma sesi</span></label>
         <button id="open-settings" class="button subtle settings-button">⚙ Yarış ayarları</button>
       </div>
+      <div id="arena-options" class="arena-options" hidden>
+        <label>Arena oyunu <select id="arena-game"><option value="links">Küre · Bağ mücadelesi</option><option value="territory">Alan Savaşı</option></select></label>
+        <label id="arena-shape-field" hidden>Şekil <select id="arena-shape"><option value="triangle">Üçgen</option><option value="square">Kare</option><option value="hexagon">Altıgen</option><option value="star">Yıldız</option><option value="circle">Daire</option></select></label>
+        <label id="territory-duration-field" hidden>Süre <select id="territory-duration"><option value="30">30 saniye</option><option value="45" selected>45 saniye</option><option value="60">60 saniye</option></select></label>
+      </div>
       <p id="arena-rules" class="workspace-rules" hidden>Her top 3 bağla başlar. Duvara çarptıkça bağ kurar, rakiplerinin bağlarını keser. Bağı kalmayan elenir; son bağlı top kazanır.</p>
       <p id="spiral-rules" class="workspace-rules" hidden>Top sağ üstten düşer. Buza çarpan top bir parça kırıp kaybolur; toplar bitince dışarıdan yeni bir top gelir. ×2 noktasına ulaşan top çoğalır, sonraki grubun çarpanı artar. Buzun tamamı kırılınca kayıt tamamlanır.</p>
       <div class="watch-layout">

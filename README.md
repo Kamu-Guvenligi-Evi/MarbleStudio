@@ -92,7 +92,7 @@ Masaüstündeki **Marble Studio** kısayoluna veya `Baslat.cmd` dosyasına çift
 Üst menüden **Parkur yarışı**, **Küre arenası**, **İstatistik yarışı** veya **Spiral çoğalma** açılır. Uygulama doğrudan Parkur yarışı ekranında başlar. Parkur oluşturma, bölüm düzenleme ve Parkurlarım arayüzü kaldırılmıştır.
 
 - **Parkur yarışı:** Hazır parkur seç, yarışmacı sayısını ayarla, **Kadroyu seç** ile görsel kütüphanesinden yarışmacı ekle ve **Başlat** düğmesine bas. Önceki taslakta bulunan özel parkur ilk açılışta korunur; hazır parkur seçmek bunu o yarışın taslağında değiştirir.
-- **Küre arenası:** Kendi kadrosunu ve yarış ayarlarını kullanır. Toplar üç bağla başlar; duvara çarptıkça bağ kurar, rakiplerinin bağlarını keser. Bağı kalmayan elenir, son bağlı top kazanır. Kamera ve parkur seçimi bu alanda gösterilmez.
+- **Küre arenası:** Kendi kadrosunu ve yarış ayarlarını kullanır. Toplar üç bağla başlar; duvara çarptıkça bağ kurar, rakiplerinin bağlarını keser. Her duvar çarpışmasında topun hızına başlangıç hızının %0,25'i eklenir; hız küçük ve eşit adımlarla artar. Bağı kalmayan elenir, son bağlı top kazanır. Kamera ve parkur seçimi bu alanda gösterilmez.
 - **İstatistik yarışı:** Kendi veri kütüphanesi, tablo düzenlemesi, zaman çizgisi ve yatay video kaydı bulunur. Top yarışlarının ayarları bu ekranda gösterilmez.
 - **Spiral çoğalma:** Sağ üstten gelen top buza temas edince küçük bir bölgeyi kırıp kaybolur. Buz iki boyutlu bir alandır; çentikler ve kenarlarda kalan çıkıntılar sonraki toplarla kırılır, ana kütleden kopan parçalar düşer. Grup tükenince bir kare sonra dışarıdan yeni top gelir. ×2 noktasında oluşan grup 0,06 saniyelik aralıklarla kanala girer; sonraki grup için çarpan bir artar. Toplar alt tarafta hızlanır, üst tarafta yavaşlar. Her topun rengi sabittir; spiral daha kalın, sabit gri-mavi kenarlıklara sahiptir. Merkez açılınca simülasyon biter. Üst sınır 64 toptur. Başlangıç sayısı, kadro, ses, hız ve sunum ayarları ayrı saklanır; tek müzik ve 1080 × 1920 video kaydı desteklenir. Başlık kaldırılmıştır; video görüntüsünde ek logo, alt sayaç veya ilerleme çubuğu yoktur. Referans: https://www.instagram.com/reel/DcRTleaon6_/ — animasyon Canvas ile yeniden çizilir; kaynak video oynatılmaz.
 
@@ -105,6 +105,14 @@ Parkur ve arena; kadro, sayı, ses, izler, düzen numarası, oynatma hızı, sun
 **Yarış ayarları** etkin top yarışının araç çubuğundadır. **İzleme seçenekleri** hız ve kamera kontrollerini içerir. **Videoya kaydet** mevcut yarışı baştan kaydeder; tamamlandığında indirir. Kayıt sırasında yarış türünü ve kadroyu değiştirmek kilitlenir. Erken bitirmek için **Kaydı bitir ve indir** kullanılır.
 
 Yeni taslaklar `marble-studio-track-v1` ve `marble-studio-arena-v1` anahtarlarında saklanır. Eski taslak ilk geçişte ilgili alana aktarılır; eski isimli kayıtlar tarayıcıdan silinmez. İstatistik taslağı kendi anahtarını kullanır.
+
+## Alan Savaşı
+
+**Kendim düzenleyeyim → Arena → Arena oyunu → Alan Savaşı** ile açılır. Üçgen, kare, altıgen, yıldız veya daire seç; mevcut ülke, takım, burç veya özel görsel kadron yarışsın. Toplar kendi bölgelerinden çıkıp iz çizer; geri döndüklerinde çevreledikleri alanı ele geçirir. Rakibin açık izine dokunmak hamlesini iptal eder. Rakiplerin bölgeleri de el değiştirebilir. 30, 45 veya 60 saniye sonunda en çok alanı olan kazanır; eşit alan varsa beraberlik gösterilir.
+
+Şekil, süre ve kadro taslaklarda, kaydedilmiş çalışmalarda ve yedeklerde korunur. **Video oluştur** aynı mücadeleyi MP4 olarak üretir; otomatik Arena üretimi de şekilleri kullanabilir. Görsel referans: [üçgen alan mücadelesi](https://www.youtube.com/shorts/1vDss0KwZgk). Referans video uygulamaya eklenmez; alan kapatma ve çizim uygulamanın kendi simülasyonudur.
+
+Kontroller: `node tests/territory.mjs`, yerel sunucu açıkken `node tests/territory-browser.mjs`; gerçek MP4 için `node tests/territory-export.mjs`. Deneme çıktıları `artifacts/` altındadır.
 
 ## Geliştirme ve kontrol
 

@@ -2,10 +2,17 @@ import assert from 'node:assert/strict';
 import {Arena,ARENA} from '../src/arena.js';
 import {serializeProject,parseProject} from '../src/projects.js';
 const wall=new Arena({count:6});wall.start();
-const ball=wall.balls[0];ball.body.position={x:489.5,y:510};ball.body.velocity={x:180,y:0};
+const ball=wall.balls[0],startingSpeed=ball.speed;ball.body.position={x:489.5,y:510};ball.body.velocity={x:180,y:0};
 wall.step();assert.equal(wall.linkCount(ball),4);assert.ok(ball.body.velocity.x<0);
+assert.ok(Math.abs(ball.speed-startingSpeed*1.0025)<1e-9,'Each wall impact adds 0.25% of starting speed');
+assert.ok(Math.abs(Math.hypot(ball.body.velocity.x,ball.body.velocity.y)-ball.speed)<1e-9,'The velocity uses the increased speed');
 const anchor=wall.links.at(-1);assert.ok(Math.abs(Math.hypot(anchor.x-270,anchor.y-510)-238)<1e-6);
 wall.step();assert.equal(wall.linkCount(ball),4,'Remaining near a wall must not generate duplicate links');
+assert.ok(Math.abs(ball.speed-startingSpeed*1.0025)<1e-9,'Moving away from the wall must not increase speed again');
+for(let hits=2;hits<=5;hits++){
+ ball.body.position={x:489.5,y:510};ball.body.velocity={x:ball.speed,y:0};wall.step();
+ assert.ok(Math.abs(ball.speed-startingSpeed*(1+hits*.0025))<1e-9,'Speed grows linearly even when impacts occur within the link cooldown');
+}
 const battle=new Arena({count:6});battle.start();battle.time=2;
 battle.balls.forEach((b,i)=>{b.body.position={x:130+i*45,y:650};b.body.velocity={x:0,y:0};});
 battle.balls[0].body.position={x:270,y:510};battle.balls[1].body.position={x:390,y:510};

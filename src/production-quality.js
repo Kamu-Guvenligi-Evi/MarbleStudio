@@ -16,6 +16,7 @@ export function qualityReport({mode,seconds,eventTimes,samples,leadChanges=0,cov
 export function visualSimilarity(a,b){
   if(!a||!b||a.mode!==b.mode)return 0;
   if(a.mode==='spiral')return (a.theme===b.theme?0.6:0)+((a.variant??'classic')===(b.variant??'classic')?0.4:0);
+  if(a.mode==='arena'&&(a.arenaGame==='territory'||b.arenaGame==='territory')){if(a.arenaGame!==b.arenaGame)return 0;return ((a.arenaShape??'triangle')===(b.arenaShape??'triangle')?0.6:0)+(a.count===b.count?0.2:0)+((a.territoryDuration??45)===(b.territoryDuration??45)?0.2:0);}
   if(a.mode==='arena')return (a.count===b.count?0.6:0)+((a.energy??1)===(b.energy??1)?0.4:0);
   if(a.mode==='statistics')return a.statistics?.csv===b.statistics?.csv?1:0;
   if(a.episode||b.episode){

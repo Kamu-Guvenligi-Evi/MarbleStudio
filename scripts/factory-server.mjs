@@ -1,6 +1,8 @@
 import {openRepetitionLedger} from './repetition-guard.mjs';
 import {serveOutput} from './output-file.mjs';
 import {sharedVideos} from './shared-videos.mjs';
+import {createVideoGithubSync} from './video-github-sync.mjs';
+import {importVideo} from './import-video.mjs';
 import {spawn} from 'node:child_process';
 import {createFactoryStore} from './factory-store.mjs';
 import http from 'node:http';
@@ -35,6 +37,7 @@ for(const job of state.jobs)if(job.state==='done'&&job.options?.youtube&&!job.yo
 const novelty=await openRepetitionLedger(root,state.jobs.filter(j=>j.state==='done'));
 for(const job of state.jobs)if(job.state==='running'){job.state='queued';job.stage='Kesilen üretim yeniden başlatılacak';job.cancelRequested=false;}
 async function save(){try{await store.save(state);storageError=null;}catch(error){storageError=error.message;throw error;}}
+const githubSync=createVideoGithubSync({project,root,getJobs:()=>state.jobs,save,enabled:process.env.FACTORY_GITHUB_SYNC==='1'||(!process.env.FACTORY_OUTPUT&&process.env.FACTORY_GITHUB_SYNC!=='0')});
 function enqueue(options,scheduleKey=null){
   if(state.jobs.filter(j=>['queued','running'].includes(j.state)).length+options.count>100)throw new Error('Kuyruk sınırı 100 video.');
   const offset=state.jobs.length;
@@ -71,7 +74,7 @@ async function tick(){
     const key=dayKey(),pending=state.jobs.filter(j=>['queued','running'].includes(j.state)).length;
     if(schedule.lastDay!==key&&pending+schedule.options.count<=100){const added=enqueue(schedule.options,key),previous=schedule.lastDay;schedule.lastDay=key;try{await save();}catch(error){state.jobs=state.jobs.filter(j=>!added.includes(j.id));schedule.lastDay=previous;throw error;}finally{added.forEach(id=>uncommitted.delete(id));}}
   }
-  await work();void uploadReady().catch(console.error);
+  await work();void uploadReady().catch(console.error);void githubSync.run().catch(console.error);
 }
 async function body(req){let value='';for await(const chunk of req){value+=chunk;if(Buffer.byteLength(value)>2000000)throw new Error('İstek çok büyük.');}return JSON.parse(value||'{}');}
 await build({root:project,logLevel:'error'});
@@ -84,7 +87,7 @@ const server=http.createServer(async(req,res)=>{
     const allowedOrigins=new Set([origin,'http://127.0.0.1:5173']);
     if(req.headers.origin&&allowedOrigins.has(req.headers.origin)){res.setHeader('Access-Control-Allow-Origin',req.headers.origin);res.setHeader('Vary','Origin');}
     if(req.headers.host!==`127.0.0.1:${port}`||req.headers.origin&&!allowedOrigins.has(req.headers.origin))return json({error:'Yalnızca yerel üretim paneli erişebilir.'},403);
-    if(req.method==='OPTIONS'){res.writeHead(204,{'Access-Control-Allow-Methods':'GET, HEAD, POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Range','Access-Control-Max-Age':'600'});res.end();return;}
+    if(req.method==='OPTIONS'){res.writeHead(204,{'Access-Control-Allow-Methods':'GET, HEAD, POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Range, X-Marble-Mode, X-Marble-Title','Access-Control-Max-Age':'600'});res.end();return;}
     if(url.pathname==='/api/youtube/connect'&&req.method==='GET'){res.writeHead(302,{Location:youtube.begin(),'Cache-Control':'no-store'});res.end();return;}
     if(url.pathname==='/api/youtube/callback'&&req.method==='GET'){
       const account=await youtube.callback(url.searchParams.get('code'),url.searchParams.get('state'));
@@ -93,10 +96,15 @@ const server=http.createServer(async(req,res)=>{
     if(url.pathname==='/api/youtube/accounts'&&req.method==='GET')return json({configured:youtube.configured,accounts:youtube.list()});
     if(url.pathname==='/api/factory'&&req.method==='GET'){
       const offset=Math.max(0,Math.floor(Number(url.searchParams.get('offset'))||0)),limit=Math.max(1,Math.min(50,Math.floor(Number(url.searchParams.get('limit'))||12))),filter=url.searchParams.get('state')??'all';
-      const shared=await loadShared(),allJobs=[...shared,...state.jobs];
+      const shared=(await loadShared()).filter(j=>!state.jobs.some(local=>local.github?.sharedId===j.id)),allJobs=[...shared,...state.jobs];
       const jobs=allJobs.filter(j=>filter==='all'||j.state===filter).slice().reverse();
       const summary={done:allJobs.filter(j=>j.state==='done').length,pending:state.jobs.filter(j=>['running','queued'].includes(j.state)).length};
-      return json({apiVersion:4,capabilities:['studio-workbench','automatic-diversity','long-term-repetition','episode-formats','youtube-upload'],jobs:jobs.slice(offset,offset+limit).map(({recipe,analysis,structure,similarity,selectionScore,candidateReview,outputQuality,...job})=>({...job,youtube:job.youtube?{state:job.youtube.state,channelId:job.youtube.channelId,url:job.youtube.url,error:job.youtube.error}:null,options:{channel:job.options.channel,duration:job.options.duration,language:job.options.language}})),summary,total:jobs.length,schedule:state.schedule?{enabled:state.schedule.enabled,lastDay:state.schedule.lastDay,options:{channel:state.schedule.options?.channel,count:state.schedule.options?.count}}:null,schedules:state.schedules.map(s=>({id:s.id,enabled:s.enabled,lastDay:s.lastDay,channel:s.options.channel,count:s.options.count,youtubeChannelId:s.options.youtube?.channelId,privacyStatus:s.options.youtube?.privacyStatus})),output:root,storageError});
+      return json({githubSharing:githubSync.enabled,apiVersion:4,capabilities:['studio-workbench','automatic-diversity','long-term-repetition','episode-formats','youtube-upload'],jobs:jobs.slice(offset,offset+limit).map(({recipe,analysis,structure,similarity,selectionScore,candidateReview,outputQuality,...job})=>({...job,youtube:job.youtube?{state:job.youtube.state,channelId:job.youtube.channelId,url:job.youtube.url,error:job.youtube.error}:null,options:{channel:job.options.channel,duration:job.options.duration,language:job.options.language}})),summary,total:jobs.length,schedule:state.schedule?{enabled:state.schedule.enabled,lastDay:state.schedule.lastDay,options:{channel:state.schedule.options?.channel,count:state.schedule.options?.count}}:null,schedules:state.schedules.map(s=>({id:s.id,enabled:s.enabled,lastDay:s.lastDay,channel:s.options.channel,count:s.options.count,youtubeChannelId:s.options.youtube?.channelId,privacyStatus:s.options.youtube?.privacyStatus})),output:root,storageError});
+    }
+    if(url.pathname==='/api/import-video'&&req.method==='POST'){
+      if(!allowedOrigins.has(req.headers.origin))return json({error:'Geçersiz istek kaynağı.'},403);
+      const title=decodeURIComponent(String(req.headers['x-marble-title']??'Video'));
+      const job=await importVideo(req,{root,mode:String(req.headers['x-marble-mode']??'track'),title});state.jobs.push(job);await save();void githubSync.run().catch(console.error);return json({ok:true,id:job.id});
     }
     if(url.pathname.startsWith('/api/')&&req.method==='POST'){
       if(!allowedOrigins.has(req.headers.origin)||req.headers['content-type']!=='application/json')return json({error:'Geçersiz istek kaynağı.'},403);
@@ -161,5 +169,5 @@ const server=http.createServer(async(req,res)=>{
 });
 server.listen(port,'127.0.0.1',()=>{console.log('Marble Studio üretim paneli: '+origin);void save().then(tick).catch(console.error);});
 const timer=setInterval(()=>void tick().catch(console.error),1000);
-async function close(){closing=true;clearInterval(timer);while(busy||uploadBusy)await new Promise(resolve=>setTimeout(resolve,100));await save();server.close();await unlink(lockFile);}
+async function close(){closing=true;clearInterval(timer);while(busy||uploadBusy)await new Promise(resolve=>setTimeout(resolve,100));await githubSync.close();await save();server.close();await unlink(lockFile);}
 process.on('SIGINT',()=>void close());process.on('SIGTERM',()=>void close());

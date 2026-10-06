@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import {spawnSync} from 'node:child_process';
+import {mkdir,mkdtemp,writeFile,readFile,copyFile} from 'node:fs/promises';
+import path from 'node:path';
+import {createVideoGithubSync} from '../scripts/video-github-sync.mjs';
+const base=await mkdtemp(path.resolve('artifacts/github-sync-test-')),project=path.join(base,'developer'),remote=path.join(base,'remote.git'),root=path.join(base,'output');await mkdir(project);await mkdir(root);
+function git(args,cwd=project){const p=spawnSync('git',args,{cwd,windowsHide:true,encoding:'utf8',env:{...process.env,GIT_LFS_SKIP_SMUDGE:'1'}});if(p.status!==0)throw Error(p.stderr||p.stdout);return p.stdout.trim();}
+git(['init','--bare','-b','main',remote]);git(['init','-b','main']);git(['config','user.name','Test']);git(['config','user.email','test@example.com']);
+await writeFile(path.join(project,'.gitignore'),'tools/\n');await writeFile(path.join(project,'code.txt'),'original code');await writeFile(path.join(project,'staged.txt'),'original staged code');git(['add','.']);git(['commit','-m','Initial']);git(['remote','add','origin',remote]);git(['push','-u','origin','main']);
+await writeFile(path.join(project,'code.txt'),'uncommitted work');await writeFile(path.join(project,'staged.txt'),'staged work');git(['add','staged.txt']);const dirty=git(['status','--porcelain']),head=git(['rev-parse','HEAD']);
+const jobs=[];let saves=0;
+async function job(id,bytes){const dir=path.join(root,id);await mkdir(dir);await writeFile(path.join(dir,'video.mp4'),bytes);await writeFile(path.join(dir,'cover.jpg'),'cover');await writeFile(path.join(dir,'metadata.json'),JSON.stringify({title:id,recipe:{mode:'arena'},video:{duration:30},youtube:{access_token:'do-not-share'}}));const j={id,mode:'arena',state:'done',createdAt:new Date().toISOString(),options:{youtube:{token:'do-not-share'}}};jobs.push(j);return j;}
+const first=await job('job-one','first completed video'),sync=createVideoGithubSync({project,root,getJobs:()=>jobs,save:async()=>{saves++;},allowLocalRemote:true});await sync.run();assert.equal(first.github.state,'done',first.github.error);assert.equal(git(['status','--porcelain']),dirty);assert.equal(git(['rev-parse','HEAD']),head);assert.equal(git(['show','refs/heads/main:code.txt'],remote),'original code');
+let manifest=JSON.parse(git(['show','refs/heads/main:work-videos/manifest.json'],remote));assert.equal(manifest.jobs.length,1);
+assert.ok(!git(['show',`refs/heads/main:work-videos/${first.github.sharedId}/metadata.json`],remote).includes('do-not-share'));
+assert.match(git(['show',`refs/heads/main:work-videos/${first.github.sharedId}/video.mp4`],remote),/^version https:\/\/git-lfs.github.com\/spec\/v1/);
+const one=git(['rev-parse','refs/heads/main'],remote);await sync.run();assert.equal(git(['rev-parse','refs/heads/main'],remote),one,'A shared video is not recommitted');
+const other=path.join(base,'teammate');git(['clone',remote,other]);git(['config','user.name','Teammate'],other);git(['config','user.email','team@example.com'],other);await writeFile(path.join(other,'teammate.txt'),'other developer change');git(['add','teammate.txt'],other);git(['commit','-m','Teammate change'],other);git(['push','origin','main'],other);
+const second=await job('job-two','second completed video');await sync.run();assert.equal(second.github.state,'done',second.github.error);assert.equal(git(['show','refs/heads/main:teammate.txt'],remote),'other developer change');manifest=JSON.parse(git(['show','refs/heads/main:work-videos/manifest.json'],remote));assert.equal(manifest.jobs.length,2);
+const duplicate=await job('job-duplicate','first completed video');await sync.run();assert.equal(duplicate.github.state,'done');manifest=JSON.parse(git(['show','refs/heads/main:work-videos/manifest.json'],remote));assert.equal(manifest.jobs.length,2,'Same bytes are shared once');
+git(['remote','set-url','origin',path.join(base,'offline.git')]);const offline=await job('job-offline','offline completed video');await sync.run();assert.equal(offline.github.state,'retrying');assert.ok(offline.github.retryAt>Date.now());assert.equal(await readFile(path.join(root,'job-offline/video.mp4'),'utf8'),'offline completed video');
+await sync.close();await writeFile(path.join(root,'jobs.json'),JSON.stringify(jobs));const restored=JSON.parse(await readFile(path.join(root,'jobs.json'),'utf8'));
+git(['remote','set-url','origin',remote]);restored.find(j=>j.id===offline.id).github.retryAt=0;
+const restarted=createVideoGithubSync({project,root,getJobs:()=>restored,save:async()=>{saves++;},allowLocalRemote:true});await restarted.run();const recovered=restored.find(j=>j.id===offline.id);assert.equal(recovered.github.state,'done',recovered.github.error);assert.equal(git(['status','--porcelain']),dirty);assert.equal(git(['rev-parse','HEAD']),head);assert.ok(saves>=6);await restarted.close();
+console.log('PASS: automatic Git/LFS push, source staging preserved, teammate updates preserved, duplicates, offline retry, restart persistence and credential exclusion.');

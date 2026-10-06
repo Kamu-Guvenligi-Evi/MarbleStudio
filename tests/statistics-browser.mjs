@@ -5,6 +5,7 @@ fs.mkdirSync('artifacts',{recursive:true});
 const browser=await chromium.launch({channel:'chrome',headless:true});
 try {
   const page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];
+  const shared=[];await page.route('**/api/import-video',async route=>{const request=route.request();if(request.method()==='OPTIONS'){await route.fulfill({status:204,headers:{'Access-Control-Allow-Origin':'http://127.0.0.1:5173','Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, X-Marble-Mode, X-Marble-Title'}});return;}shared.push({mode:request.headers()['x-marble-mode'],bytes:request.postDataBuffer()?.length??0});await route.fulfill({json:{ok:true,id:'test-recording'},headers:{'Access-Control-Allow-Origin':'http://127.0.0.1:5173'}});});
   page.on('pageerror',error=>errors.push(error.message));
   await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
   const course=await page.evaluate(()=>window.marbleStudio.getState().sections);
@@ -55,6 +56,7 @@ try {
   await(await video).saveAs('artifacts/statistics-race.webm');
   assert.equal((await state()).recording,false);assert.equal((await state()).progress,1);
   assert.ok(fs.statSync('artifacts/statistics-race.webm').size>50000);
+  await page.waitForTimeout(100);assert.equal(shared[0]?.mode,'statistics');assert.ok(shared[0]?.bytes>50000,'Statistics recordings enter the shared-video queue');
   await page.evaluate(()=>{const video=document.createElement('video');video.id='statistics-test-video';video.src='/artifacts/statistics-race.webm';video.muted=true;document.body.append(video);});
   await page.waitForFunction(()=>document.querySelector('#statistics-test-video').readyState>=1);
   assert.deepEqual(await page.locator('#statistics-test-video').evaluate(video=>[video.videoWidth,video.videoHeight]),[1920,1080]);

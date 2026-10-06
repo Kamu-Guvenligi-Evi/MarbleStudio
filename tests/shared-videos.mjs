@@ -4,7 +4,7 @@ import {readFile,mkdtemp,mkdir,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
 const project=path.resolve('.'),jobs=await sharedVideos(project);
-assert.equal(jobs.length,32);assert.equal(new Set(jobs.map(j=>j.id)).size,32);
+assert.ok(jobs.length>=32);assert.equal(new Set(jobs.map(j=>j.id)).size,jobs.length);
 assert.ok(jobs.some(j=>j.videoFile==='video.webm'));assert.ok(jobs.some(j=>j.videoFile==='video.mp4'));
 for(const j of jobs){assert.equal(j.state,'done');assert.equal(j.shared,true);const dir=path.join(project,'work-videos',j.id);assert.equal(createHash('sha256').update(await readFile(path.join(dir,j.videoFile))).digest('hex'),j.sha256);assert.ok((await readFile(path.join(dir,'cover.jpg'))).length>100);JSON.parse(await readFile(path.join(dir,'metadata.json'),'utf8'));}
 assert.deepEqual(await sharedVideos(project,{enabled:false}),[]);

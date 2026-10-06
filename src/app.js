@@ -65,7 +65,10 @@ function toast(message) {
 function showDialog(id) { $(id).showModal(); }
 function closeDialog(id) { $(id).close(); }
 const music = await createMusic({getAudio:()=>{initAudio();return {context:audioCtx,destination:audioDestination};},notify:toast});
-const statistics = createStatistics({notify:toast,onRecordingChange:active=>{
+function archiveBrowserVideo(blob,options){
+  void workbench.uploadVideo(blob,options).then(()=>toast('Video arşive eklendi; GitHub’a otomatik gönderilecek.')).catch(()=>toast('Video indirildi. Ortak arşive eklemek için video hizmetini açıp Videolarım → Video yükle kullan.'));
+}
+const statistics = createStatistics({notify:toast,onVideoRecorded:archiveBrowserVideo,onRecordingChange:active=>{
   $('#nav-track').disabled=active;$('#nav-arena').disabled=active;$('#nav-spiral').disabled=active;
   $('#open-settings').disabled=active;
   for(const id of ['studio-export','studio-backup','studio-restore','studio-works'])$('#'+id).disabled=active;
@@ -271,6 +274,7 @@ async function startRecord() {
     const session=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:10_000_000});
     const chunks=[];
     const filename=gameMode==='spiral'?`marble-spiral-${race.seed}.webm`:gameMode==='arena'?`marble-orbit-${race.seed}.webm`:`marble-${race.sectionCount}-bolum-${race.seed}.webm`;
+    const recordingMode=gameMode,recordingTitle=projectName;
     let failed=false;
     session.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};
     session.onstop=()=>{
@@ -279,9 +283,10 @@ async function startRecord() {
       recordingUI(false);
       if(failed||!chunks.length){toast('Video kaydı oluşturulamadı. Tekrar deneyebilirsin.');return;}
       if(downloadURL)URL.revokeObjectURL(downloadURL);
-      downloadURL=URL.createObjectURL(new Blob(chunks,{type:'video/webm'}));
+      const videoBlob=new Blob(chunks,{type:'video/webm'});downloadURL=URL.createObjectURL(videoBlob);
       const link=$('#download-video');link.href=downloadURL;link.download=filename;
       $('#download-panel').hidden=false;link.click();toast('Videon hazır ve indirildi.');updateUI();
+      archiveBrowserVideo(videoBlob,{name:recordingTitle,mode:recordingMode});
     };
     session.onerror=()=>{failed=true;stopRecord();};
     recorder=session;session.start(1000);

@@ -7,7 +7,7 @@ const COLORS=['#bbef83','#79cfea','#c3a1ff','#ffbd83','#f38fad','#78dcc4','#eddb
 const number=new Intl.NumberFormat('tr-TR',{maximumFractionDigits:1});
 const compact=new Intl.NumberFormat('tr-TR',{notation:'compact',maximumFractionDigits:1});
 
-export function createStatistics({notify,onRecordingChange}) {
+export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
   const root=document.getElementById('statistics-view');
   root.innerHTML=`
     <div class="page-heading"><div><p class="eyebrow">MARBLE STUDIO / VERİ ATÖLYESİ</p><h1 id="statistics-title" tabindex="-1">İstatistik yarışı</h1><p>Verini seç. Zamanı oynat. Değişimi izle.</p></div><a class="button secondary statistics-library-link" href="#statistics-library">Veri kütüphanesi ↗</a></div>
@@ -142,8 +142,9 @@ export function createStatistics({notify,onRecordingChange}) {
         stream.getTracks().forEach(track=>track.stop());recorder=null;recordStream=null;lock(false);$('record').disabled=false;ui();
         if(failed||!chunks.length){notify('Video oluşturulamadı. Tekrar deneyebilirsin.');return;}
         if(downloadURL)URL.revokeObjectURL(downloadURL);
-        downloadURL=URL.createObjectURL(new Blob(chunks,{type:'video/webm'}));
+        const videoBlob=new Blob(chunks,{type:'video/webm'});downloadURL=URL.createObjectURL(videoBlob);
         const link=$('download');link.href=downloadURL;link.download=`istatistik-${data.frames[0].year}-${data.frames.at(-1).year}.webm`;link.hidden=false;link.click();notify('İstatistik videosu hazır.');
+        onVideoRecorded?.(videoBlob,{name:$('heading').value,mode:'statistics'});
       };
       session.start(250);playing=true;last=performance.now();ui();canvas.scrollIntoView({block:'center',behavior:'instant'});
     }catch{stream?.getTracks().forEach(track=>track.stop());recorder=null;recordStream=null;playing=false;lock(false);$('record').disabled=false;ui();notify('Video kaydı başlatılamadı. Tekrar deneyebilirsin.');}

@@ -1,4 +1,4 @@
-param([string]$Destination)
+param([string]$Destination,[string]$BrowserDirectory)
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 if (-not $Destination) { $Destination = Join-Path $projectRoot ('MarbleStudio-Friends-' + (Get-Date -Format 'yyyyMMdd') + '.zip') }
@@ -6,6 +6,11 @@ $Destination = [IO.Path]::GetFullPath($Destination)
 if (Test-Path -LiteralPath $Destination) { throw "Arşiv zaten var: $Destination" }
 $nodeBinary = (Get-Command node.exe -ErrorAction Stop).Source
 if (-not (Test-Path -LiteralPath (Join-Path $projectRoot 'node_modules/ffmpeg-static/ffmpeg.exe'))) { throw 'FFmpeg bağımlılığı eksik. Önce npm install çalıştır.' }
+if (-not $BrowserDirectory) {
+    $browserCandidate = Get-ChildItem -LiteralPath (Join-Path $projectRoot 'artifacts/portable-browser-cache') -Filter 'chrome-headless-shell.exe' -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($browserCandidate) { $BrowserDirectory = $browserCandidate.DirectoryName }
+}
+if (-not $BrowserDirectory -or -not (Test-Path -LiteralPath (Join-Path $BrowserDirectory 'chrome-headless-shell.exe'))) { throw 'Taşınabilir tarayıcı eksik. PLAYWRIGHT_BROWSERS_PATH=artifacts/portable-browser-cache ile playwright install chromium --only-shell çalıştır.' }
 
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -26,12 +31,17 @@ try {
     }
     [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive,$nodeBinary,'MarbleStudio/tools/node.exe',[IO.Compression.CompressionLevel]::Optimal) | Out-Null
     [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive,(Join-Path (Split-Path $nodeBinary) 'LICENSE'),'MarbleStudio/tools/LICENSE',[IO.Compression.CompressionLevel]::Optimal) | Out-Null
+    $BrowserDirectory = [IO.Path]::GetFullPath($BrowserDirectory).TrimEnd([IO.Path]::DirectorySeparatorChar)
+    Get-ChildItem -LiteralPath $BrowserDirectory -Recurse -File | ForEach-Object {
+        $relative = $_.FullName.Substring($BrowserDirectory.Length + 1).Replace('\','/')
+        [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive,$_.FullName,"MarbleStudio/tools/browser/$relative",[IO.Compression.CompressionLevel]::Optimal) | Out-Null
+    }
     $guide = @'
 MARBLE STUDIO - ARKADAS PAKETI
 
 1. ZIP dosyasini bir klasore ayikla.
-2. Google Chrome kurulu olmali.
-3. MarbleStudio klasorundeki Baslat.cmd dosyasina cift tikla.
+2. MarbleStudio klasorundeki Baslat.cmd dosyasina cift tikla.
+3. Node.js, npm veya Google Chrome kurulumu gerekmez. Gerekli calistiricilar paketin icindedir.
 4. Studio http://127.0.0.1:5173 adresinde, Icerik Atolyesi http://127.0.0.1:5180 adresinde acilir.
 5. Uretilen videolar bu klasordeki output altina kaydedilir.
 

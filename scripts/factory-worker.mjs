@@ -11,6 +11,7 @@ import {mkdir,writeFile,rename,stat} from 'node:fs/promises';
 import path from 'node:path';
 import ffmpeg from 'ffmpeg-static';
 import {chromium} from 'playwright';
+import {productionBrowserOptions} from './browser-runtime.mjs';
 import {recipe,sourceRecipe,identity,structure,copyFor} from '../src/factory-recipes.js';
 import {SPIRAL_THEMES} from '../src/spiral-themes.js';
 
@@ -25,7 +26,7 @@ export async function produce(job,{root,origin,history,update,cancelled,novelty}
   if(!ffmpeg)throw new Error('FFmpeg kurulu değil. npm install çalıştır.');
   if(job.options.automatic&&!job.options.automation){const options=await planAutomatic(job.options,history,path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),guard);job.options=options;job.mode=options.modes[0];await update({options,mode:job.mode});}
   const dir=path.join(root,job.id);await mkdir(dir,{recursive:true});
-  const browser=await chromium.launch({channel:'chrome',headless:true,args:['--disable-background-timer-throttling']});
+  const browser=await chromium.launch(productionBrowserOptions());
   let encoder;const controller=new AbortController();
   const deadline=setTimeout(()=>{controller.abort();encoder?.child.kill();void browser.close();},20*60*1000);
   const check=()=>{if(cancelled())throw new Error('Üretim iptal edildi.');};

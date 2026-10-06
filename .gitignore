@@ -4,3 +4,5 @@ artifacts/
 *.log
 
 output/
+tools/
+MarbleStudio-*.zip

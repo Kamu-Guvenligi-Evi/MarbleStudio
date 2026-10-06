@@ -87,6 +87,8 @@ Süper Lig sayımı 1959’dan başlar; Beşiktaş’ın yıldız hesabına ekle
 
 Masaüstündeki **Marble Studio** kısayoluna veya `Baslat.cmd` dosyasına çift tıklayın. Yerel sunucu arka planda çalışır. Geliştirme için `npm install` ve `npm run dev`.
 
+**Başka Windows PC’de kurulum olmadan:** Taşınabilir ZIP paketini bir klasöre çıkartıp `MarbleStudio/Baslat.cmd` dosyasına çift tıkla. Node.js, uygulama bağımlılıkları, FFmpeg ve video üretim tarayıcısı paketin içindedir; Node.js, npm veya Chrome kurmak gerekmez. Windows 10/11, 64 bit içindir. GitHub'daki **Code → Download ZIP** kaynak kodudur; taşınabilir paket **Releases** bölümünden indirilir.
+
 ## Dört ayrı yarış alanı
 
 Üst menüden **Parkur yarışı**, **Küre arenası**, **İstatistik yarışı** veya **Spiral çoğalma** açılır. Uygulama doğrudan Parkur yarışı ekranında başlar. Parkur oluşturma, bölüm düzenleme ve Parkurlarım arayüzü kaldırılmıştır.

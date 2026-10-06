@@ -20,7 +20,7 @@ export class Arena {
     this.balls=Array.from({length:Math.max(6,Math.min(20,count))},(_,id)=>{
       const angle=id/count*Math.PI*2+rng()*.1,heading=rng()*Math.PI*2,speed=(165+rng()*35)*1.08*Math.max(.85,Math.min(1.15,Number(energy)||1));
       return {id,name:this.ballNames[id]??NAMES[id],imageSrc:this.ballImages[id],get color(){return ballImageColor(this.imageSrc,COLORS[id]);},
-        body:{position:{x:270+Math.cos(angle)*150,y:510+Math.sin(angle)*150},velocity:{x:Math.cos(heading)*speed,y:Math.sin(heading)*speed},circleRadius:18},
+        body:{position:{x:270+Math.cos(angle)*150,y:510+Math.sin(angle)*150},velocity:{x:Math.cos(heading)*speed,y:Math.sin(heading)*speed},circleRadius:20},
         speed,initialSpeed:speed,trail:[],finishedAt:null,eliminatedAt:null,cuts:0,lastWall:-1};
     });
     if(rule==='elimination')for(const ball of this.balls)for(let j=0;j<3;j++)this.addLink(ball,ball.id/count*Math.PI*2+(j-1)*.15);

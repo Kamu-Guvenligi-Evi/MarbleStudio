@@ -640,6 +640,27 @@
       },
       "sha256": "a8beacb410a6a6e2f3f5882a7a881c32fe27aaab178eb14b45662854671fa88c",
       "bytes": 2356972
+    },
+    {
+      "id": "shared-cc573f2ed61dc02a",
+      "mode": "arena",
+      "contentKind": "arena",
+      "copy": {
+        "title": "Küre arenası"
+      },
+      "createdAt": "2026-10-06T12:54:36.341Z",
+      "completedAt": "2026-10-06T12:54:36.341Z",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "cc573f2ed61dc02adc08a2c68fcd83aebce5ad8927314df9425bb3efe4fdd381",
+      "bytes": 13480626
     }
   ]
 }

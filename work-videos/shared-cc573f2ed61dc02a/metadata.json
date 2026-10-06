@@ -1,0 +1,15 @@
+{
+  "id": "shared-cc573f2ed61dc02a",
+  "title": "Küre arenası",
+  "mode": "arena",
+  "description": "",
+  "recipe": {
+    "mode": "arena"
+  },
+  "video": {
+    "format": "video/webm"
+  },
+  "musicCredits": [],
+  "sha256": "cc573f2ed61dc02adc08a2c68fcd83aebce5ad8927314df9425bb3efe4fdd381",
+  "bytes": 13480626
+}

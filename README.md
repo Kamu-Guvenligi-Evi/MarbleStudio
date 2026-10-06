@@ -91,6 +91,8 @@ Güncelleme almak için GitHub Desktop'ta **Fetch origin → Pull origin**, ard�
 
 Geliştirme araçlarını elle yönetmek isteyenler için `npm install` ve `npm run dev` de kullanılabilir.
 
+**Ortak çalışma videoları:** Mevcut 32 farklı kayıt `work-videos/` klasöründe paylaşılır. GitHub Desktop'ta Clone/Pull yapınca videolar Git LFS üzerinden gelir. Uygulamanın **Videolarım** listesinde diğer hazır videolarla birlikte görünür; izlenebilir, indirilebilir ve klasörde açılabilir. Üretim ayarları bulunan kayıtların `metadata.json` dosyaları da paylaşılır. Yeni üretilen kişisel videolar `output/` altında kalır; ortak arşiv her kullanıcının üretim geçmişinden ayrıdır.
+
 **Başka Windows PC’de kurulum olmadan:** Taşınabilir ZIP paketini bir klasöre çıkartıp `MarbleStudio/Baslat.cmd` dosyasına çift tıkla. Node.js, uygulama bağımlılıkları, FFmpeg ve video üretim tarayıcısı paketin içindedir; Node.js, npm veya Chrome kurmak gerekmez. Windows 10/11, 64 bit içindir. GitHub'daki **Code → Download ZIP** kaynak kodudur; taşınabilir paket **Releases** bölümünden indirilir.
 
 ## Dört ayrı yarış alanı

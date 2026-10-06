@@ -1,0 +1,100 @@
+{
+  "id": "shared-4587d77822e0b52c",
+  "title": "Bu parkuru hangi top kazanır?",
+  "mode": "track",
+  "description": "Bu parkuru hangi top kazanır?\n\nMarble Studio ile oluşturulmuş özgün fizik simülasyonu.\n#shorts #marblerace #simulation",
+  "recipe": {
+    "spiralTheme": "lava",
+    "name": "Export test",
+    "seed": 2048,
+    "count": 6,
+    "sound": true,
+    "visualStyle": "neon",
+    "trails": true,
+    "sequence": [
+      {
+        "type": "shortcut",
+        "settings": {
+          "gap": 80,
+          "offset": 0
+        }
+      }
+    ],
+    "ballImages": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "ballNames": [
+      "Custom Racer",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "presentation": {
+      "countdown": 1,
+      "outro": 2,
+      "camera": "smart"
+    },
+    "version": 3,
+    "mode": "track",
+    "theme": "lava",
+    "music": {
+      "mode": "fixed",
+      "track": "cipher",
+      "volume": 15,
+      "roster": []
+    },
+    "exact": true
+  },
+  "video": {
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "duration": 5,
+    "speed": 1,
+    "codec": "H.264",
+    "audio": "all",
+    "template": "broadcast",
+    "intro": 1,
+    "outroSeconds": 2
+  },
+  "musicCredits": [
+    "Cipher — Kevin MacLeod\nhttps://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100844\nCC BY 4.0\nhttps://creativecommons.org/licenses/by/4.0/"
+  ],
+  "sha256": "4587d77822e0b52c99754f6120283fd32e41ca1de433bbfbd890f9c4a15e5fe7",
+  "bytes": 940904
+}

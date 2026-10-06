@@ -2,8 +2,8 @@ import {createReadStream} from 'node:fs';
 import {stat} from 'node:fs/promises';
 
 export async function serveOutput(req,res,target,{name,id,preview}){
-  const info=await stat(target),video=name.endsWith('.mp4');
-  const headers={'Content-Type':video?'video/mp4':name.endsWith('.jpg')?'image/jpeg':name.endsWith('.json')?'application/json':'text/plain; charset=utf-8','Accept-Ranges':'bytes','Content-Disposition':`${preview||name.endsWith('.jpg')?'inline':'attachment'}; filename="${id}-${name}"`};
+  const info=await stat(target);
+  const headers={'Content-Type':name.endsWith('.mp4')?'video/mp4':name.endsWith('.webm')?'video/webm':name.endsWith('.jpg')?'image/jpeg':name.endsWith('.json')?'application/json':'text/plain; charset=utf-8','Accept-Ranges':'bytes','Content-Disposition':`${preview||name.endsWith('.jpg')?'inline':'attachment'}; filename="${id}-${name}"`};
   let start=0,end=info.size-1,status=200;
   if(req.headers.range){
     const match=/^bytes=(\d*)-(\d*)$/.exec(req.headers.range);

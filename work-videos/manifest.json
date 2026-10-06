@@ -1,0 +1,645 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "shared-bb4483b619e890f7",
+      "mode": "track",
+      "copy": {
+        "title": "Sample Recording"
+      },
+      "createdAt": "2026-09-26T23:19:40.598106+00:00",
+      "completedAt": "2026-09-26T23:19:40.598106+00:00",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "bb4483b619e890f724f6655055e7a4576fbe23977038a8fda2f0ffb8305ea692",
+      "bytes": 5016618
+    },
+    {
+      "id": "shared-3807ac592bda5de3",
+      "mode": "track",
+      "copy": {
+        "title": "Clockwork Full Race"
+      },
+      "createdAt": "2026-09-26T23:19:58.722101+00:00",
+      "completedAt": "2026-09-26T23:19:58.722101+00:00",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "3807ac592bda5de3a180f0e76688984923bc795e7053ca6a1ec7a6c0bc6b0a58",
+      "bytes": 23397751
+    },
+    {
+      "id": "shared-407e21e60880183d",
+      "mode": "track",
+      "copy": {
+        "title": "Custom Race"
+      },
+      "createdAt": "2026-09-26T23:27:05.294564+00:00",
+      "completedAt": "2026-09-26T23:27:05.294564+00:00",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "407e21e60880183d885ed40f4a27e2bb8b6ca11558ddf36a09ade3302d6fe3b2",
+      "bytes": 23784303
+    },
+    {
+      "id": "shared-f79d7c605a9cc7ce",
+      "mode": "track",
+      "copy": {
+        "title": "Ux Race"
+      },
+      "createdAt": "2026-10-02T15:34:17.222661+00:00",
+      "completedAt": "2026-10-02T15:34:17.222661+00:00",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "f79d7c605a9cc7cebaef58d2989261f0b43b3d6afdbf05713fec0433de7260e6",
+      "bytes": 40009719
+    },
+    {
+      "id": "shared-2e24daf5314721b4",
+      "mode": "spiral",
+      "copy": {
+        "title": "Spiral Reference Rebuild"
+      },
+      "createdAt": "2026-10-04T00:32:04.884566+00:00",
+      "completedAt": "2026-10-04T00:32:04.884566+00:00",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "2e24daf5314721b45b8ad18404898469e99435566d2b9466632e3c81da6a6dcf",
+      "bytes": 177724957
+    },
+    {
+      "id": "shared-ac77f909d85b91db",
+      "mode": "spiral",
+      "copy": {
+        "title": "Spiral Test"
+      },
+      "createdAt": "2026-10-04T00:32:54.178345+00:00",
+      "completedAt": "2026-10-04T00:32:54.178345+00:00",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "ac77f909d85b91db1fdce9c1b39537ab414a5b8fe6787ec155c4279c6941aa4a",
+      "bytes": 915859
+    },
+    {
+      "id": "shared-4587d77822e0b52c",
+      "mode": "track",
+      "copy": {
+        "title": "Bu parkuru hangi top kazanır?"
+      },
+      "createdAt": "2026-10-04T15:35:46.216Z",
+      "completedAt": "2026-10-04T15:35:46.216Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "4587d77822e0b52c99754f6120283fd32e41ca1de433bbfbd890f9c4a15e5fe7",
+      "bytes": 940904
+    },
+    {
+      "id": "shared-87464eac503bdb10",
+      "mode": "arena",
+      "copy": {
+        "title": "Son bağı kim koruyacak?"
+      },
+      "createdAt": "2026-10-04T15:38:47.779Z",
+      "completedAt": "2026-10-04T15:38:47.779Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "87464eac503bdb1026378307e9a9ef57f689a12a3725ded12842ef9c5dcc23a2",
+      "bytes": 4538945
+    },
+    {
+      "id": "shared-9df4d1b0160e7fc9",
+      "mode": "spiral",
+      "copy": {
+        "title": "Lav Çekirdeği — Hepsini kırmak için kaç top gerekir?"
+      },
+      "createdAt": "2026-10-04T15:40:38.743Z",
+      "completedAt": "2026-10-04T15:40:38.743Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "9df4d1b0160e7fc9f7816adfc7362a5d01306578b9870e6e5084321a63c5dbfa",
+      "bytes": 25920239
+    },
+    {
+      "id": "shared-17ac89f7c0909527",
+      "mode": "statistics",
+      "copy": {
+        "title": "Kaynak testi"
+      },
+      "createdAt": "2026-10-04T15:41:16.707Z",
+      "completedAt": "2026-10-04T15:41:16.707Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "17ac89f7c09095274ccec9e78fa5125d74d7cdc854cc29afb87213fea7862939",
+      "bytes": 122221
+    },
+    {
+      "id": "shared-b6b260a2ce83914e",
+      "mode": "track",
+      "copy": {
+        "title": "Son engelde lider değişir mi?"
+      },
+      "createdAt": "2026-10-04T15:43:26.387Z",
+      "completedAt": "2026-10-04T15:43:26.387Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "b6b260a2ce83914e119ccb8b8b0d229f6b69eeef09aaa11c65b66f9aad1012d8",
+      "bytes": 1448157
+    },
+    {
+      "id": "shared-1faee9589368f931",
+      "mode": "statistics",
+      "copy": {
+        "title": "Statistics Race"
+      },
+      "createdAt": "2026-10-04T16:28:40.791361+00:00",
+      "completedAt": "2026-10-04T16:28:40.791361+00:00",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "1faee9589368f931cfccd49d74313fd59fef209a31b32fdcaa4bb5d848c124a5",
+      "bytes": 1994121
+    },
+    {
+      "id": "shared-e483c872cdf3946a",
+      "mode": "arena",
+      "copy": {
+        "title": "Arena Battle"
+      },
+      "createdAt": "2026-10-04T16:29:21.005578+00:00",
+      "completedAt": "2026-10-04T16:29:21.005578+00:00",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "e483c872cdf3946ab872c6969d924f41410081171465f547743fc25d74f75740",
+      "bytes": 32868990
+    },
+    {
+      "id": "shared-b191e02dd6435dd9",
+      "mode": "track",
+      "copy": {
+        "title": "Finale"
+      },
+      "createdAt": "2026-10-04T16:29:32.063841+00:00",
+      "completedAt": "2026-10-04T16:29:32.063841+00:00",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "b191e02dd6435dd9d496ed8584f244a07c5598401de496404b6ea91492cff392",
+      "bytes": 5587747
+    },
+    {
+      "id": "shared-10f7567583e6f7b2",
+      "mode": "track",
+      "copy": {
+        "title": "Catalog Race"
+      },
+      "createdAt": "2026-10-04T16:30:00.408369+00:00",
+      "completedAt": "2026-10-04T16:30:00.408369+00:00",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "10f7567583e6f7b2dd60e668a77f1e52a43c9785c44e8ac9e28665f465c64c45",
+      "bytes": 1751148
+    },
+    {
+      "id": "shared-f03d3f0925863d0d",
+      "mode": "track",
+      "copy": {
+        "title": "Portraits"
+      },
+      "createdAt": "2026-10-04T16:30:10.416984+00:00",
+      "completedAt": "2026-10-04T16:30:10.416984+00:00",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "f03d3f0925863d0db9a36eb3ed91ad5c7df5e89efba0ed0ef265aaf82b7dbe14",
+      "bytes": 2343225
+    },
+    {
+      "id": "shared-2f29d2243733cfd9",
+      "mode": "track",
+      "copy": {
+        "title": "Rengini seç. Kazanabilecek mi?"
+      },
+      "createdAt": "2026-10-04T17:32:30.134Z",
+      "completedAt": "2026-10-04T17:32:30.134Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "2f29d2243733cfd9c9832eccc44b8b60e6c16b31a98960bd1d283ccce0fc7168",
+      "bytes": 9599008
+    },
+    {
+      "id": "shared-56e7babe31a50a0c",
+      "mode": "arena",
+      "copy": {
+        "title": "En çok bağı olan kazanır mı?"
+      },
+      "createdAt": "2026-10-04T17:33:28.613Z",
+      "completedAt": "2026-10-04T17:33:28.613Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "56e7babe31a50a0cbceed1bb53ade142f904e348ccb17b28498837c35f5f2edb",
+      "bytes": 6490078
+    },
+    {
+      "id": "shared-dca7a3836743be89",
+      "mode": "spiral",
+      "copy": {
+        "title": "Buz Kıran — Tek top merkeze ulaşabilir mi?"
+      },
+      "createdAt": "2026-10-04T17:34:43.544Z",
+      "completedAt": "2026-10-04T17:34:43.544Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "dca7a3836743be890893049ba747741f271f55a4030f2b0178ce460d1790b444",
+      "bytes": 11513923
+    },
+    {
+      "id": "shared-916530f13b820fe4",
+      "mode": "statistics",
+      "copy": {
+        "title": "Turizm: pandemi kırılması"
+      },
+      "createdAt": "2026-10-04T17:35:10.016Z",
+      "completedAt": "2026-10-04T17:35:10.016Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "916530f13b820fe44a8d8b2f8860e97bec420b3f76dad421379e77b2b928d102",
+      "bytes": 905099
+    },
+    {
+      "id": "shared-fb24f7dc9c72755b",
+      "mode": "track",
+      "copy": {
+        "title": "18 yarışmacı. Tek finiş. Senin favorin kim?"
+      },
+      "createdAt": "2026-10-04T17:35:59.969Z",
+      "completedAt": "2026-10-04T17:35:59.969Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "fb24f7dc9c72755b0ad8988fc0bcd60eb1422ae4c33ad947a6aa36e030394f94",
+      "bytes": 12930515
+    },
+    {
+      "id": "shared-c90ea7dd8338398d",
+      "mode": "spiral",
+      "copy": {
+        "title": "Kutup Işıkları — Spiral ayakta kalabilecek mi?"
+      },
+      "createdAt": "2026-10-04T17:37:15.259Z",
+      "completedAt": "2026-10-04T17:37:15.259Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "c90ea7dd8338398dd3cfaa63484826d3591040e105be86870814e7ee5d75b6f6",
+      "bytes": 10496979
+    },
+    {
+      "id": "shared-a82b529cc988b22c",
+      "mode": "track",
+      "copy": {
+        "title": "12 yarışmacı. Tek kazanan."
+      },
+      "createdAt": "2026-10-04T17:39:56.633Z",
+      "completedAt": "2026-10-04T17:39:56.633Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "a82b529cc988b22c1bd7def0a2f90b8eb811ca3462046dd35e461393cacef4f6",
+      "bytes": 9718692
+    },
+    {
+      "id": "shared-524082c916cdb91d",
+      "mode": "arena",
+      "copy": {
+        "title": "Favorini seç. Sonuna kadar takip et."
+      },
+      "createdAt": "2026-10-04T17:41:24.640Z",
+      "completedAt": "2026-10-04T17:41:24.640Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "524082c916cdb91dc4d9403ba6fbc0ff5cf6beae0e201d34b8fa794824e8c84c",
+      "bytes": 7869627
+    },
+    {
+      "id": "shared-e4b2e3818b605fcc",
+      "mode": "track",
+      "copy": {
+        "title": "Sprint · Favorin kazanabilecek mi?"
+      },
+      "createdAt": "2026-10-04T18:19:36.210Z",
+      "completedAt": "2026-10-04T18:19:36.210Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "e4b2e3818b605fccaa7112c6d24c72f26c038e9fd40a29d5ebe7bd1e6c9f4a9f",
+      "bytes": 6872684
+    },
+    {
+      "id": "shared-023ca4e654701e16",
+      "mode": "track",
+      "copy": {
+        "title": "Eleme kupası · Favorin kazanabilecek mi?"
+      },
+      "createdAt": "2026-10-04T18:20:12.750Z",
+      "completedAt": "2026-10-04T18:20:12.750Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "023ca4e654701e16f5e47862e9c023d7e18f8fafa680766eb0929436972d23dd",
+      "bytes": 8111994
+    },
+    {
+      "id": "shared-911374a9a8b03fb0",
+      "mode": "track",
+      "copy": {
+        "title": "Takım mücadelesi · Favorin kazanabilecek mi?"
+      },
+      "createdAt": "2026-10-04T18:20:46.270Z",
+      "completedAt": "2026-10-04T18:20:46.270Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "911374a9a8b03fb04578b4336abdfadc8389d19386da28579571e7572e38d14d",
+      "bytes": 9066021
+    },
+    {
+      "id": "shared-629893ca67700a2a",
+      "mode": "track",
+      "copy": {
+        "title": "Sprint · Favorin kazanabilecek mi?"
+      },
+      "createdAt": "2026-10-04T18:22:34.451Z",
+      "completedAt": "2026-10-04T18:22:34.451Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "629893ca67700a2abeefd6d16c3e2293002290f5cb5fb8d1bdfd2d039c863a2c",
+      "bytes": 7655649
+    },
+    {
+      "id": "shared-c149b0c6821f18e2",
+      "mode": "track",
+      "copy": {
+        "title": "Eleme kupası · Favorin kazanabilecek mi?"
+      },
+      "createdAt": "2026-10-04T18:23:13.021Z",
+      "completedAt": "2026-10-04T18:23:13.021Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "c149b0c6821f18e2be5d552e209a9f2eb5526e75c947be183722283df66d995b",
+      "bytes": 8812602
+    },
+    {
+      "id": "shared-59e5bc707f387cc6",
+      "mode": "track",
+      "copy": {
+        "title": "Takım mücadelesi · Favorin kazanabilecek mi?"
+      },
+      "createdAt": "2026-10-04T18:23:43.606Z",
+      "completedAt": "2026-10-04T18:23:43.606Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "59e5bc707f387cc6eef63a817d7a0e5c10b05679b1711672769de4c950f5e4b8",
+      "bytes": 7990516
+    },
+    {
+      "id": "shared-28a8531a78c0c883",
+      "mode": "track",
+      "copy": {
+        "title": "Üç etaplı şampiyona · Favorin kazanabilecek mi?"
+      },
+      "createdAt": "2026-10-04T18:24:17.406Z",
+      "completedAt": "2026-10-04T18:24:17.406Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "28a8531a78c0c883946eb7e8757a94d6c7cdc58b2b029cb1c5a486eaed6f4e1b",
+      "bytes": 8222535
+    },
+    {
+      "id": "shared-a8beacb410a6a6e2",
+      "mode": "arena",
+      "copy": {
+        "title": "Alan Savaşı · triangle"
+      },
+      "createdAt": "2026-10-06T11:09:50.212Z",
+      "completedAt": "2026-10-06T11:09:50.212Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "a8beacb410a6a6e2f3f5882a7a881c32fe27aaab178eb14b45662854671fa88c",
+      "bytes": 2356972
+    }
+  ]
+}

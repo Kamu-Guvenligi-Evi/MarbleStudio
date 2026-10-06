@@ -1,0 +1,125 @@
+{
+  "id": "shared-b6b260a2ce83914e",
+  "title": "Son engelde lider değişir mi?",
+  "mode": "track",
+  "description": "Son engelde lider değişir mi?\n\nMarble Studio ile oluşturulmuş özgün fizik simülasyonu.\n#shorts #marblerace #simulation",
+  "recipe": {
+    "spiralTheme": "lava",
+    "name": "Export test",
+    "seed": 2048,
+    "count": 6,
+    "sound": true,
+    "visualStyle": "neon",
+    "trails": true,
+    "sequence": [
+      {
+        "type": "shortcut",
+        "settings": {
+          "gap": 80,
+          "offset": 0
+        }
+      }
+    ],
+    "ballImages": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "ballNames": [
+      "Custom Racer",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "presentation": {
+      "countdown": 1,
+      "outro": 2,
+      "camera": "smart"
+    },
+    "version": 3,
+    "mode": "track",
+    "theme": "lava",
+    "music": {
+      "mode": "leader",
+      "track": "",
+      "volume": 15,
+      "roster": [
+        {
+          "track": "cipher",
+          "entity": "racer-0"
+        },
+        {
+          "track": "cipher",
+          "entity": "racer-1"
+        },
+        {
+          "track": "cipher",
+          "entity": "racer-2"
+        },
+        {
+          "track": "cipher",
+          "entity": "racer-3"
+        },
+        {
+          "track": "cipher",
+          "entity": "racer-4"
+        },
+        {
+          "track": "cipher",
+          "entity": "racer-5"
+        }
+      ]
+    },
+    "exact": true
+  },
+  "video": {
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "duration": 7,
+    "speed": 1,
+    "codec": "H.264",
+    "audio": "all",
+    "template": "broadcast",
+    "intro": 1,
+    "outroSeconds": 2
+  },
+  "musicCredits": [
+    "Cipher — Kevin MacLeod\nhttps://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100844\nCC BY 4.0\nhttps://creativecommons.org/licenses/by/4.0/"
+  ],
+  "sha256": "b6b260a2ce83914e119ccb8b8b0d229f6b69eeef09aaa11c65b66f9aad1012d8",
+  "bytes": 1448157
+}

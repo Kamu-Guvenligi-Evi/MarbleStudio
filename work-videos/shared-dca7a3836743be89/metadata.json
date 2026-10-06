@@ -1,0 +1,48 @@
+{
+  "id": "shared-dca7a3836743be89",
+  "title": "Buz Kıran — Tek top merkeze ulaşabilir mi?",
+  "mode": "spiral",
+  "description": "Tek top merkeze ulaşabilir mi?\n\nMarble Studio ile oluşturulmuş özgün fizik simülasyonu.\n#shorts #marblerace #simulation",
+  "recipe": {
+    "version": 2,
+    "seed": 565823,
+    "mode": "spiral",
+    "theme": "ice",
+    "count": 1,
+    "sequence": null,
+    "variant": "burst",
+    "music": {
+      "mode": "fixed",
+      "track": "monkeys",
+      "volume": 25
+    },
+    "ballNames": [],
+    "ballImages": [],
+    "sound": true,
+    "trails": true,
+    "presentation": {
+      "countdown": 0,
+      "outro": 2,
+      "camera": "smart"
+    },
+    "exact": false
+  },
+  "video": {
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "duration": 55,
+    "speed": 1.9330974842765218,
+    "codec": "H.264",
+    "audio": "all",
+    "template": "minimal",
+    "intro": 0,
+    "outroSeconds": 2,
+    "outro": ""
+  },
+  "musicCredits": [
+    "Monkeys Spinning Monkeys — Kevin MacLeod\nhttps://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400011\nCC BY 4.0\nhttps://creativecommons.org/licenses/by/4.0/"
+  ],
+  "sha256": "dca7a3836743be890893049ba747741f271f55a4030f2b0178ce460d1790b444",
+  "bytes": 11513923
+}

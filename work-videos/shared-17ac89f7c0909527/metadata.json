@@ -1,0 +1,36 @@
+{
+  "id": "shared-17ac89f7c0909527",
+  "title": "Kaynak testi",
+  "mode": "statistics",
+  "description": "Test fixture",
+  "recipe": {
+    "version": 3,
+    "mode": "statistics",
+    "seed": 1,
+    "statistics": {
+      "csv": "Yıl,Alfa,Beta\n2000,1,5\n2001,10,4",
+      "heading": "Kaynak testi",
+      "unit": "",
+      "source": "Test fixture",
+      "duration": "15",
+      "top": "5",
+      "interpolation": "step"
+    },
+    "exact": true
+  },
+  "video": {
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "duration": 17,
+    "speed": 1,
+    "codec": "H.264",
+    "audio": "all",
+    "template": "cinema",
+    "intro": 0,
+    "outroSeconds": 2
+  },
+  "musicCredits": [],
+  "sha256": "17ac89f7c09095274ccec9e78fa5125d74d7cdc854cc29afb87213fea7862939",
+  "bytes": 122221
+}

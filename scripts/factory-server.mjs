@@ -1,5 +1,6 @@
 import {openRepetitionLedger} from './repetition-guard.mjs';
 import {serveOutput} from './output-file.mjs';
+import {sharedVideos} from './shared-videos.mjs';
 import {spawn} from 'node:child_process';
 import {createFactoryStore} from './factory-store.mjs';
 import http from 'node:http';
@@ -15,6 +16,7 @@ import {createYouTube} from './youtube-api.mjs';
 
 const project=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),root=path.resolve(process.env.FACTORY_OUTPUT||path.join(project,'output'));
 const port=Number(process.env.FACTORY_PORT||5180),origin='http://127.0.0.1:'+port;
+const loadShared=()=>sharedVideos(project,{enabled:process.env.FACTORY_SHARED_VIDEOS==='1'||(!process.env.FACTORY_OUTPUT&&process.env.FACTORY_SHARED_VIDEOS!=='0')});
 await mkdir(root,{recursive:true});
 const lockFile=path.join(root,'.factory.lock');
 try{await writeFile(lockFile,String(process.pid),{flag:'wx'});}catch(error){
@@ -91,16 +93,17 @@ const server=http.createServer(async(req,res)=>{
     if(url.pathname==='/api/youtube/accounts'&&req.method==='GET')return json({configured:youtube.configured,accounts:youtube.list()});
     if(url.pathname==='/api/factory'&&req.method==='GET'){
       const offset=Math.max(0,Math.floor(Number(url.searchParams.get('offset'))||0)),limit=Math.max(1,Math.min(50,Math.floor(Number(url.searchParams.get('limit'))||12))),filter=url.searchParams.get('state')??'all';
-      const jobs=state.jobs.filter(j=>filter==='all'||j.state===filter).slice().reverse();
-      const summary={done:state.jobs.filter(j=>j.state==='done').length,pending:state.jobs.filter(j=>['running','queued'].includes(j.state)).length};
+      const shared=await loadShared(),allJobs=[...shared,...state.jobs];
+      const jobs=allJobs.filter(j=>filter==='all'||j.state===filter).slice().reverse();
+      const summary={done:allJobs.filter(j=>j.state==='done').length,pending:state.jobs.filter(j=>['running','queued'].includes(j.state)).length};
       return json({apiVersion:4,capabilities:['studio-workbench','automatic-diversity','long-term-repetition','episode-formats','youtube-upload'],jobs:jobs.slice(offset,offset+limit).map(({recipe,analysis,structure,similarity,selectionScore,candidateReview,outputQuality,...job})=>({...job,youtube:job.youtube?{state:job.youtube.state,channelId:job.youtube.channelId,url:job.youtube.url,error:job.youtube.error}:null,options:{channel:job.options.channel,duration:job.options.duration,language:job.options.language}})),summary,total:jobs.length,schedule:state.schedule?{enabled:state.schedule.enabled,lastDay:state.schedule.lastDay,options:{channel:state.schedule.options?.channel,count:state.schedule.options?.count}}:null,schedules:state.schedules.map(s=>({id:s.id,enabled:s.enabled,lastDay:s.lastDay,channel:s.options.channel,count:s.options.count,youtubeChannelId:s.options.youtube?.channelId,privacyStatus:s.options.youtube?.privacyStatus})),output:root,storageError});
     }
     if(url.pathname.startsWith('/api/')&&req.method==='POST'){
       if(!allowedOrigins.has(req.headers.origin)||req.headers['content-type']!=='application/json')return json({error:'Geçersiz istek kaynağı.'},403);
       const input=await body(req);
       if(url.pathname==='/api/reveal'){
-        const job=state.jobs.find(j=>j.id===input.id);if(job?.state!=='done'||!/^[-a-zA-Z0-9]+$/.test(job.id))throw new Error('Hazır video bulunamadı.');
-        const target=path.join(root,job.id);if(!(await stat(target)).isDirectory())throw new Error('Video klasörü bulunamadı.');
+        const job=state.jobs.find(j=>j.id===input.id)??(await loadShared()).find(j=>j.id===input.id);if(job?.state!=='done'||!/^[-a-zA-Z0-9]+$/.test(job.id))throw new Error('Hazır video bulunamadı.');
+        const target=path.join(job.shared?path.join(project,'work-videos'):root,job.id);if(!(await stat(target)).isDirectory())throw new Error('Video klasörü bulunamadı.');
         if(process.env.FACTORY_DISABLE_REVEAL==='1')return json({ok:true});
         const command=process.platform==='win32'?'explorer.exe':process.platform==='darwin'?'open':'xdg-open';
         await new Promise((resolve,reject)=>{const child=spawn(command,[target],{windowsHide:true,stdio:'ignore'});child.once('error',reject);child.once('spawn',()=>{child.unref();resolve();});});return json({ok:true});
@@ -142,9 +145,9 @@ const server=http.createServer(async(req,res)=>{
       return json({error:'Adres bulunamadı.'},404);
     }
     if(url.pathname.startsWith('/output/')){
-      const [, ,id,name]=url.pathname.split('/'),job=state.jobs.find(j=>j.id===id);
+      const [, ,id,name]=url.pathname.split('/'),job=state.jobs.find(j=>j.id===id)??(await loadShared()).find(j=>j.id===id);
       if(job?.state!=='done'||!job.files?.includes(name)||url.pathname!==`/output/${id}/${name}`)return json({error:'Dosya bulunamadı.'},404);
-      await serveOutput(req,res,path.join(root,id,name),{name,id,preview:url.searchParams.get('preview')==='1'});return;
+      await serveOutput(req,res,path.join(job.shared?path.join(project,'work-videos'):root,id,name),{name,id,preview:url.searchParams.get('preview')==='1'});return;
     }
     if(url.pathname==='/index.html'){res.writeHead(302,{Location:'http://127.0.0.1:5173/index.html'});res.end();return;}
     if(url.pathname==='/'){res.writeHead(302,{Location:'/factory.html'});res.end();return;}

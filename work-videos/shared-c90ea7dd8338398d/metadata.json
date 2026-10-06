@@ -1,0 +1,48 @@
+{
+  "id": "shared-c90ea7dd8338398d",
+  "title": "Kutup Işıkları — Spiral ayakta kalabilecek mi?",
+  "mode": "spiral",
+  "description": "Spiral ayakta kalabilecek mi?\n\nMarble Studio ile oluşturulmuş özgün fizik simülasyonu.\n#shorts #marblerace #simulation",
+  "recipe": {
+    "version": 2,
+    "seed": 600527,
+    "mode": "spiral",
+    "theme": "aurora",
+    "count": 1,
+    "sequence": null,
+    "variant": "classic",
+    "music": {
+      "mode": "fixed",
+      "track": "weasel",
+      "volume": 25
+    },
+    "ballNames": [],
+    "ballImages": [],
+    "sound": true,
+    "trails": true,
+    "presentation": {
+      "countdown": 0,
+      "outro": 2,
+      "camera": "smart"
+    },
+    "exact": false
+  },
+  "video": {
+    "width": 720,
+    "height": 1280,
+    "fps": 30,
+    "duration": 55,
+    "speed": 2.3519654088044426,
+    "codec": "H.264",
+    "audio": "all",
+    "template": "minimal",
+    "intro": 0,
+    "outroSeconds": 2,
+    "outro": ""
+  },
+  "musicCredits": [
+    "Scheming Weasel (faster version) — Kevin MacLeod\nhttps://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100085\nCC BY 4.0\nhttps://creativecommons.org/licenses/by/4.0/"
+  ],
+  "sha256": "c90ea7dd8338398dd3cfaa63484826d3591040e105be86870814e7ee5d75b6f6",
+  "bytes": 10496979
+}

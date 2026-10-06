@@ -24,7 +24,7 @@ try{
     if(!await online('http://127.0.0.1:5173'))await serve(['node_modules/vite/bin/vite.js'],'http://127.0.0.1:5173');
     const port=await freePort(),root=await mkdtemp(path.resolve('artifacts/check-factory-'));environment.TEST_FACTORY_ORIGIN='http://127.0.0.1:'+port;
     await serve(['scripts/factory-server.mjs'],environment.TEST_FACTORY_ORIGIN+'/api/factory',{FACTORY_PORT:String(port),FACTORY_OUTPUT:root});
-    const browserNames=['studio-workspaces','recording-start-browser','statistics-browser','statistics-library-browser','arena-browser','territory-browser','presentation-browser','catalog-browser','catalog-fill','ball-images','spiral-themes','spiral-audio-browser','factory','automatic-browser','episode-browser','repetition-browser','production-browser','production-service','repetition-service'];
+    const browserNames=['studio-workspaces','recording-start-browser','statistics-browser','statistics-library-browser','arena-browser','territory-browser','presentation-browser','catalog-browser','catalog-fill','ball-images','spiral-themes','spiral-audio-browser','factory','automatic-browser','video-fps-browser','episode-browser','repetition-browser','production-browser','production-service','repetition-service'];
     if(from&&!browserNames.includes(from))throw new Error('Unknown test: '+from);
     for(const name of browserNames.slice(from?browserNames.indexOf(from):0))await command(['tests/'+name+'.mjs']);
     if(exports)await command(['tests/production-export.mjs']);

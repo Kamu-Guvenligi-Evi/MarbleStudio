@@ -60,7 +60,7 @@ export async function produce(job,{root,origin,history,update,cancelled,novelty}
     if(!candidates.length)throw new Error('Normal hızda tamamlanan uygun parkur bulunamadı. Başka bir düzenle yeniden dene.');
     candidates.sort((a,b)=>b.selectionScore-a.selectionScore);const best=candidates[0];best.candidateReview=candidateReview;best.outputQuality=outputQuality(best.analysis,best.speed);
     const copy=copyFor(best.recipe,job.options.language,job.ordinal);if(job.options.hook){copy.description=copy.description.replace(copy.hook,job.options.hook);copy.hook=job.options.hook;copy.title=job.options.hook;}
-    const fps=job.options.fps??30,duration=best.duration,frames=duration*fps,resolution=job.options.resolution??1080,orientation=job.options.orientation??'portrait';
+    const fps=job.options.fps??60,duration=best.duration,frames=duration*fps,resolution=job.options.resolution??1080,orientation=job.options.orientation??'portrait';
     const width=orientation==='landscape'?Math.round(resolution*16/9):resolution,height=orientation==='portrait'?Math.round(resolution*16/9):resolution;
     const format={fps,width,height,template:job.options.template,channel:job.options.channel,outro:job.options.outro};
     await update({...best,copy,stage:'Video işleniyor',progress:2});

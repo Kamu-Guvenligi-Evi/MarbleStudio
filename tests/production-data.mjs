@@ -14,6 +14,7 @@ class MemoryStorage{
 const source=normalizeSnapshot({mode:'track',project:{name:'My race',seed:2048,count:6,sequence:[],ballNames:['One'],presentation:{countdown:0,outro:2,camera:'leader'}},music:{mode:'leader',volume:42,roster:[{entity:'tr',track:'cipher'}]}});
 assert.equal(sourceRecipe(source,88).ballNames[0],'One');assert.equal(sourceRecipe(source,88).music.volume,42);
 assert.equal(validateBatch({source,count:20,strategy:'exact'}).count,1);
+assert.equal(validateBatch({}).fps,60);assert.equal(validateBatch({automatic:true}).fps,60);assert.equal(validateBatch({source}).fps,60);assert.equal(validateBatch({fps:30}).fps,30);
 assert.throws(()=>validateBatch({source,fps:25}));assert.throws(()=>validateBatch({orientation:'invalid'}));
 assert.throws(()=>normalizeSnapshot({...source,music:{track:'../../secrets'}}));
 const memory=new MemoryStorage();memory.setItem('unrelated','keep');memory.setItem('marble-studio-track-v1',JSON.stringify(source.project));

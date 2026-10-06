@@ -35,7 +35,7 @@ export function validateBatch(raw={}){
   if(source?.mode==='statistics'&&strategy!=='exact')throw new Error('İstatistik tablosu aynı çalışma olarak dışa aktarılır.');
   return {count:strategy==='exact'?1:count,duration,modes:[...new Set(modes)],language,channel,source,strategy,youtube,
     orientation:choose('orientation',['portrait','landscape','square'],source?.mode==='statistics'?'landscape':'portrait'),
-    resolution:choose('resolution',[720,1080],1080),fps:choose('fps',[30,60],30),audio:choose('audio',['all','effects','music','none'],'all'),
+    resolution:choose('resolution',[720,1080],1080),fps:choose('fps',[30,60],60),audio:choose('audio',['all','effects','music','none'],'all'),
     template:choose('template',['minimal','broadcast','cinema'],'minimal'),hook:String(raw.hook??'').trim().slice(0,100),outro:String(raw.outro??'').trim().slice(0,100)};
 }
 export function sourceRecipe(source,seed){

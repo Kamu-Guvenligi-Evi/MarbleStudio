@@ -3,7 +3,7 @@ import './automatic-home.css';
 const labels={track:'Parkur',arena:'Arena',spiral:'Spiral',statistics:'İstatistik'};
 export async function automaticOptions(choice){
   if(!['auto',...Object.keys(labels)].includes(choice))throw new Error('İçerik türü geçersiz.');
-  return {automatic:true,automaticMode:choice,count:1,duration:55,language:'tr',channel:'Marble Studio',resolution:1080,fps:30,template:'minimal'};
+  return {automatic:true,automaticMode:choice,count:1,duration:55,language:'tr',channel:'Marble Studio',resolution:1080,fps:60,template:'minimal'};
 }
 
 export function createAutomaticHome({create,videos,works,busy,pause,youtubeAccounts}){

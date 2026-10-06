@@ -85,7 +85,11 @@ Süper Lig sayımı 1959’dan başlar; Beşiktaş’ın yıldız hesabına ekle
 
 ## Açılış
 
-Masaüstündeki **Marble Studio** kısayoluna veya `Baslat.cmd` dosyasına çift tıklayın. Yerel sunucu arka planda çalışır. Geliştirme için `npm install` ve `npm run dev`.
+**Ortak geliştirme ve kullanım:** GitHub Desktop'ta bu depoyu **Clone** ile bilgisayarına indir, ardından **Repository → Show in Explorer** ile klasörü açıp `Baslat.cmd` dosyasına çift tıkla. İlk açılışta Node.js, uygulama bağımlılıkları ve video tarayıcısı otomatik hazırlanır; elle kurulum, npm komutu veya yönetici izni gerekmez. İlk hazırlık için internet gerekir. Sonraki açılışlarda aynı araçlar tekrar kullanılır.
+
+Güncelleme almak için GitHub Desktop'ta **Fetch origin → Pull origin**, ardından `Baslat.cmd`. Bağımlılıklar değiştiyse otomatik yenilenir; uygulamanın yönettiği sunucular yeni kodla açılır. Devam eden video üretimi varsa video hizmeti yeniden başlatılmaz; iş bitince `Baslat.cmd` yeniden açılır. Kod değişiklikleri editörde anında uygulanır. Kendi değişikliklerini GitHub Desktop'ta **Commit → Push origin** ile paylaş. Herkesin yazabilmesi için organizasyondaki ekibe bu depoda **Write** yetkisi verilmeli. Araçlar, videolar ve kişisel ayarlar Git'e gönderilmez.
+
+Geliştirme araçlarını elle yönetmek isteyenler için `npm install` ve `npm run dev` de kullanılabilir.
 
 **Başka Windows PC’de kurulum olmadan:** Taşınabilir ZIP paketini bir klasöre çıkartıp `MarbleStudio/Baslat.cmd` dosyasına çift tıkla. Node.js, uygulama bağımlılıkları, FFmpeg ve video üretim tarayıcısı paketin içindedir; Node.js, npm veya Chrome kurmak gerekmez. Windows 10/11, 64 bit içindir. GitHub'daki **Code → Download ZIP** kaynak kodudur; taşınabilir paket **Releases** bölümünden indirilir.
 

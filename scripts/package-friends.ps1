@@ -31,6 +31,9 @@ try {
     }
     [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive,$nodeBinary,'MarbleStudio/tools/node.exe',[IO.Compression.CompressionLevel]::Optimal) | Out-Null
     [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive,(Join-Path (Split-Path $nodeBinary) 'LICENSE'),'MarbleStudio/tools/LICENSE',[IO.Compression.CompressionLevel]::Optimal) | Out-Null
+    $stamp = $archive.CreateEntry('MarbleStudio/tools/dependencies.sha256')
+    $stampWriter = [IO.StreamWriter]::new($stamp.Open(),[Text.Encoding]::ASCII)
+    try { $stampWriter.Write((Get-FileHash -LiteralPath (Join-Path $projectRoot 'package-lock.json') -Algorithm SHA256).Hash) } finally { $stampWriter.Dispose() }
     $BrowserDirectory = [IO.Path]::GetFullPath($BrowserDirectory).TrimEnd([IO.Path]::DirectorySeparatorChar)
     Get-ChildItem -LiteralPath $BrowserDirectory -Recurse -File | ForEach-Object {
         $relative = $_.FullName.Substring($BrowserDirectory.Length + 1).Replace('\','/')

@@ -21,6 +21,7 @@ try{
  await page.route('**/api/queue',route=>{queued.push(route.request().postDataJSON());return route.fulfill({json:{ok:true},headers:{'Access-Control-Allow-Origin':'http://127.0.0.1:5173'}});});
  await selectTestChannel(page);
  await page.goto('http://127.0.0.1:5173');await page.waitForFunction(()=>window.marbleStudio);
+ await page.locator('#automatic-back').click();
  await page.locator('[name=kind][value=territory]').check();assert.match(await page.locator('#automatic-note').innerText(),/Üçgen/);await page.locator('#automatic-create').click();await page.waitForFunction(()=>document.querySelector('#videos-dialog').open);
  assert.equal(queued[0].automaticMode,'territory');assert.equal(queued[0].fps,240);await page.locator('#videos-dialog [data-wb-close]').click();
  await page.locator('#automatic-edit').click();assert.equal(await page.locator('#watch-title').innerText(),'Alan Savaşı');assert.equal(await page.locator('#nav-territory').getAttribute('aria-pressed'),'true');assert.equal(await page.locator('#nav-arena').getAttribute('aria-pressed'),'false');

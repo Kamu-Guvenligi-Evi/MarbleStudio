@@ -8,6 +8,24 @@ try{
  page.on('pageerror',e=>errors.push(e.message));
  await selectTestChannel(page);
  await page.goto('http://127.0.0.1:5173');
+ await page.waitForFunction(()=>window.marbleStudio&&document.querySelector('#automatic-back'));
+ assert.equal(await page.locator('#track-view #race').isVisible(),true);
+ assert.equal(await page.locator('#automatic-start').isVisible(),false);
+ assert.equal(await page.locator('#studio-export').isVisible(),true);
+ for(const mode of ['track','arena','territory','pi','statistics','spiral']){
+  await page.locator('#nav-'+mode).click();
+  const before=await page.evaluate(()=>({state:window.marbleStudio.getState(),title:document.title}));
+  await page.locator('#automatic-back').click();
+  assert.equal(await page.locator('main').isVisible(),false);
+  await page.locator('#automatic-manual').click();
+  assert.equal(await page.locator('#nav-'+mode).getAttribute('aria-pressed'),'true');
+  assert.deepEqual(await page.evaluate(()=>({workspace:window.marbleStudio.getState().workspace,seed:window.marbleStudio.getState().seed,count:window.marbleStudio.getState().count,title:document.title})),{workspace:before.state.workspace,seed:before.state.seed,count:before.state.count,title:before.title});
+ }
+ await page.locator('#automatic-back').click();
+ await page.locator('.brand').click();assert.equal(await page.locator('main').isVisible(),true);
+ await page.reload();await page.waitForFunction(()=>window.marbleStudio&&document.querySelector('#automatic-back'));
+ assert.equal(await page.locator('#track-view #race').isVisible(),true);
+ await page.locator('#automatic-back').click();
  await page.waitForFunction(()=>document.body.classList.contains('automatic-home'));
  assert.equal(await page.locator('main').isVisible(),false);
  assert.equal(await page.locator('.view-tabs').isVisible(),false);
@@ -36,5 +54,5 @@ try{
  await page.route(origin+'/api/factory?limit=1',route=>route.abort());
  await page.locator('#automatic-create').click();await page.waitForFunction(()=>!document.querySelector('#automatic-create').disabled);
  assert.ok(await page.locator('#automatic-status').textContent());assert.equal(requests.length,2);
- assert.deepEqual(errors,[]);console.log('PASS: simple home, mobile, editor return, all automatic recipes, one-click queue, duplicate prevention, statistics provenance and service error recovery.');
+ assert.deepEqual(errors,[]);console.log('PASS: manual startup and reload, six workspace round trips, brand returns to studio, optional automatic production, mobile, one-click queue, duplicate prevention and service error recovery.');
 }finally{await browser.close();}

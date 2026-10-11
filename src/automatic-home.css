@@ -20,4 +20,5 @@ body.automatic-home #automatic-start{display:block;width:min(640px,100%);margin:
 .automatic-links button{background:transparent;border:0;color:#9eb0b8;font:inherit;font-size:13px;padding:10px 0;cursor:pointer}.automatic-links button:hover{color:#e2efdf}
 .automatic-links button:focus-visible{outline:2px solid #d6fa85;outline-offset:4px}
 .studio-export-bar #automatic-back{width:auto;margin-right:auto;font-size:12px}
+#automatic-manual{margin-bottom:28px}
 @media(max-width:600px){body.automatic-home .app-header{padding:20px}.automatic-intro p{font-size:14px}.automatic-choices span{padding:11px 14px}.automatic-links{gap:14px}.automatic-youtube{grid-template-columns:1fr}.studio-export-bar{flex-wrap:wrap}.studio-export-bar #automatic-back{flex-basis:100%;text-align:left}}

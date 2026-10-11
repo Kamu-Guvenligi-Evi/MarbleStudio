@@ -12,9 +12,9 @@ Canlı içerikler ekranın tarayıcıya sunduğu yenileme hızında çizilir; 60
 
 ## Hızlı kullanım
 
-Studio artık sade bir başlangıç ekranıyla açılır. **Bana bırak → Videomu oluştur** tek bir videoyu otomatik hazırlar. İstersen Parkur, Küre Arenası, Alan Savaşı, Spiral veya İstatistik seçebilirsin. Yarış düzeni, kadro, müzik, süre ve çıktı ayarları otomatik belirlenir. Yarışlar doğal hızda, 30–180 saniyelik dikey 1080p ve 240 FPS MP4; istatistikler kaynaklı kütüphaneden bir konuyla yaklaşık 30 saniyelik yatay MP4 olarak hazırlanır. İstatistik çıktısı sessizdir.
+Studio doğrudan manuel stüdyoyla açılır. Üstteki sekmelerden Parkur, Arena, Alan Savaşı, Pi Çarpışmaları, İstatistik veya Spiral seç; kadronu ve ayarlarını düzenle, **Video oluştur** ile açık çalışmanı dışa aktar. **Çalışmalarım**, **Videolarım** ve **Yedekler** bu stüdyodan erişilir.
 
-**Videolarım** üretim durumunu, izlemeyi ve indirmeyi açar. **Kendim düzenleyeyim** ayrıntılı editöre geçer; **Ana ekran** sade görünüme döner. Editöre doğrudan erişim: `http://127.0.0.1:5173?edit=1`. Otomatik üretim mevcut taslakları değiştirmez.
+**Otomatik üretim** isteğe bağlı bir ekrandır. **Bana bırak → Videomu oluştur** veya seçtiğin içerik türüyle düzen, kadro, müzik, süre ve çıktı ayarları otomatik hazırlanır. Yarışlar doğal hızda, 30–180 saniyelik dikey 1080p ve 240 FPS MP4; istatistikler kaynaklı kütüphaneden bir konuyla yaklaşık 30 saniyelik sessiz yatay MP4 olarak hazırlanır. **Manuel stüdyoya dön** açık çalışmanı ve ayarlarını korur; **Bu türü stüdyoda düzenle** seçtiğin türün editörünü açar. Marble Studio logosu da manuel stüdyoya döner. **Videolarım** üretim durumunu, izlemeyi ve indirmeyi açar. Otomatik üretim mevcut taslakları değiştirmez.
 
 Masaüstü kısayolu Studio ve video hizmetini birlikte başlatır. Video hizmeti güncellendiyse bir kez yeniden başlatılmalıdır. **Çalışmalarım** isimli kayıtları korur; editördeki **Yedekler** menüsünden yedek alıp yükleyebilirsin. Üretilmiş videolar için ayrıca `output/` klasörünü yedekle.
 
@@ -128,7 +128,7 @@ Yeni taslaklar `marble-studio-track-v1` ve `marble-studio-arena-v1` anahtarları
 
 ## Alan Savaşı
 
-Ana ekrandaki **Alan Savaşı → Videomu oluştur** ile şekil, kadro ve müzik otomatik seçilir; 240 FPS MP4 üretilip ortak GitHub arşivine gönderilir. **Bana bırak** da Alan Savaşı'nı küre arenasından ayrı bir içerik olarak dönüşümlü seçer. **Kendim düzenleyeyim → Alan Savaşı** doğrudan editörü açar. Oyuncu sayısı 2–20 arasında seçilir; mevcut ülke, takım, burç veya özel görsel kadron yarışır. Üçgen, kare, altıgen, yıldız ve daireye ek olarak Türkiye, Almanya, Fransa, İtalya, İspanya ve Brezilya sahaları vardır.
+Stüdyodaki **Alan Savaşı** sekmesi doğrudan editörü açar. **Otomatik üretim → Alan Savaşı → Videomu oluştur** ile şekil, kadro ve müzik otomatik seçilir; 240 FPS MP4 üretilip ortak GitHub arşivine gönderilir. **Bana bırak** da Alan Savaşı'nı küre arenasından ayrı bir içerik olarak dönüşümlü seçer. Oyuncu sayısı 2–20 arasında seçilir; mevcut ülke, takım, burç veya özel görsel kadron yarışır. Üçgen, kare, altıgen, yıldız ve daireye ek olarak Türkiye, Almanya, Fransa, İtalya, İspanya ve Brezilya sahaları vardır.
 
 Toplar kendi bölgelerinden çıkıp iz çizer; geri döndüklerinde rakiplerin taralı bölgeleri dahil çevreledikleri alanı ele geçirir. Kendi alanı dışındaki rakibin gövdesine veya açık izine dokunmak onu eler ve bütün alanını saldırana geçirir. Elenen oyuncu geri doğmaz. Şimşek 2 saniye boyunca hızı 1,8 katına çıkarır; kalkan 1,5 saniye elemeyi önler. Kalkan bölgenin çalınmasını engellemez; bütün alanını kaybeden oyuncu koruma bitince elenir. Son kalan oyuncu kazanır; aksi halde 30, 45 veya 60 saniye sonunda en çok alanı olan kazanır, eşit alan beraberliktir.
 

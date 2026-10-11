@@ -376,7 +376,7 @@ for(const id of ['#countdown-seconds','#outro-seconds','#camera'])$(id).onchange
 $('#cinema').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await $('.race-stage').requestFullscreen();}catch{toast('Tam ekran kullanılamıyor.');}};
 $('#record').onclick=startRecord;
 document.addEventListener('keydown',e=>{
-  if(e.code==='Space'&&view==='watch'&&!document.querySelector('dialog[open]')&&!['INPUT','SELECT','BUTTON','A','SUMMARY'].includes(document.activeElement.tagName)){
+  if(e.code==='Space'&&view==='watch'&&!document.body.classList.contains('automatic-home')&&!document.querySelector('dialog[open]')&&!['INPUT','SELECT','BUTTON','A','SUMMARY'].includes(document.activeElement.tagName)){
     e.preventDefault();togglePause();
   }
 });
@@ -399,7 +399,7 @@ function previewThumbnail(){
   const preview=document.createElement('canvas');preview.width=240;preview.height=Math.round(240*picture.height/picture.width);preview.getContext('2d').drawImage(picture,0,0,preview.width,preview.height);return preview.toDataURL('image/jpeg',.7);
 }
 async function openSnapshot(raw){
-  if(busy())throw new Error('Önce kaydı bitir.');const saved=normalizeSnapshot(raw);document.body.classList.remove('automatic-home');persistDraft();
+  if(busy())throw new Error('Önce kaydı bitir.');const saved=normalizeSnapshot(raw);document.body.classList.remove('automatic-home');$('#automatic-back').setAttribute('aria-expanded','false');persistDraft();
   if(saved.mode==='pi'){pi.loadSnapshot(saved.project);setView('pi');return;}
   if(saved.mode==='statistics'){statistics.loadSnapshot(saved.statistics);statistics.persist();setView('statistics');return;}
   const key=saved.mode==='arena'&&saved.project.arenaGame==='territory'?'territory':saved.mode;

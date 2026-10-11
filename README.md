@@ -1,6 +1,6 @@
 # Marble Studio
 
-Edit?rde **?arp??ma sesi** yan?ndaki **Ses efekti** men?s?nden Klasik, Miyav, Havlama, Lastik oyuncak, Baloncuk, Lazer, Zil veya Tahta t?k?rt?s? se?ilebilir. **Dinle** se?ili sesi ?nceden ?alar. Yeni efektler sentezlenmi? seslerdir. Se?im her yar?? t?r? i?in kaydedilir, ?al??ma/yedek dosyalar?nda korunur ve WebM ile ayn? ?al??madan ?retilen MP4 videolara aktar?l?r. Spiral k?r?lmalar? da se?ili efekti kullan?r; d????, ?o?alma ve biti? sesleri kendi efektlerini korur.
+Editörde **Çarpışma sesi** yanındaki **Ses efekti** menüsünden Klasik, Miyav, Havlama, Lastik oyuncak, Baloncuk, Lazer, Zil veya Tahta tıkırtısı seçilebilir. **Dinle** seçili sesi önceden çalar. Yeni efektler sentezlenmiş seslerdir. Seçim her yarış türü için kaydedilir, çalışma/yedek dosyalarında korunur ve WebM ile aynı çalışmadan üretilen MP4 videolara aktarılır. Spiral kırılmaları da seçili efekti kullanır; düşüş, çoğalma ve bitiş sesleri kendi efektlerini korur.
 
 Video oluşturulmadan önce **LastBallStand** veya **VortexBallSpiral** seçilir. Seçilen ad, %13 opaklıkta ™ filigranı olarak bütün video türlerine işlenir. Seçim iptal edilirse üretim başlamaz. Otomatik YouTube yüklemesi açıksa seçilen markanın bağlı hesabı kullanılır. Günlük seri için kanal, reçete oluşturulurken seçilir; mevcut video dosyaları değişmez. Kontrol: Studio açıkken `npm.cmd run test:branding`.
 
@@ -15,6 +15,8 @@ Studio artık sade bir başlangıç ekranıyla açılır. **Bana bırak → Vide
 **Videolarım** üretim durumunu, izlemeyi ve indirmeyi açar. **Kendim düzenleyeyim** ayrıntılı editöre geçer; **Ana ekran** sade görünüme döner. Editöre doğrudan erişim: `http://127.0.0.1:5173?edit=1`. Otomatik üretim mevcut taslakları değiştirmez.
 
 Masaüstü kısayolu Studio ve video hizmetini birlikte başlatır. Video hizmeti güncellendiyse bir kez yeniden başlatılmalıdır. **Çalışmalarım** isimli kayıtları korur; editördeki **Yedekler** menüsünden yedek alıp yükleyebilirsin. Üretilmiş videolar için ayrıca `output/` klasörünü yedekle.
+
+Editörde **Hazır parkur → Rastgele parkur** yeni seed ve engel dizilimi oluşturur. Bu seçenek açıkken **Yeni yarış** tüm parkuru yeniden üretir; seed kayıtta korunur. Kontroller: `node tests/course-variety.mjs`, Studio açıkken `node tests/course-variety-browser.mjs`.
 
 ## Otomatik yarış bölümleri
 

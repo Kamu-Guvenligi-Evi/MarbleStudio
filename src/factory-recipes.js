@@ -1,3 +1,4 @@
+import {PI_MAX_DIGITS} from './pi-collisions.js';
 import {episodeCopy} from './episode-plan.js';
 import {random} from './physics.js';
 import {SECTION_SETTINGS} from './section-settings.js';
@@ -66,7 +67,7 @@ export function recipe(seed,mode,theme){
     ...(mode==='track'?{profile,rhythm}:mode==='spiral'?{variant:pick(Object.keys(SPIRAL_VARIANTS))}:{energy:pick([.85,1,1.15])})};
 }
 export function identity(r){return JSON.stringify(r);}
-export function structure(r){if(r.mode==='pi')return JSON.stringify([r.mode,r.digits,r.speed,...(r.autoIncrease?[true]:[])]);if(r.episode)return JSON.stringify([r.mode,r.episode.format,r.episode.heats.map(h=>h.sequence.map(s=>s.type))]);return JSON.stringify([r.mode,r.mode==='statistics'?r.statistics.csv:r.mode==='track'?[r.profile,r.rhythm,(r.sequence??[]).map(s=>s.type)]:r.mode==='spiral'?[r.theme,r.variant]:[r.count,r.energy,r.arenaGame??'links',r.arenaShape??'triangle',r.territoryDuration??45]]);}
+export function structure(r){if(r.mode==='pi')return JSON.stringify([r.mode,r.digits,r.speed,...(r.autoIncrease?[true,PI_MAX_DIGITS]:[])]);if(r.episode)return JSON.stringify([r.mode,r.episode.format,r.episode.heats.map(h=>h.sequence.map(s=>s.type))]);return JSON.stringify([r.mode,r.mode==='statistics'?r.statistics.csv:r.mode==='track'?[r.profile,r.rhythm,(r.sequence??[]).map(s=>s.type)]:r.mode==='spiral'?[r.theme,r.variant]:[r.count,r.energy,r.arenaGame??'links',r.arenaShape??'triangle',r.territoryDuration??45]]);}
 export function copyFor(r,language,ordinal=0){
   if(r.mode==='pi')return {hook:language==='tr'?'Çarpışmalardan π’ye':'Wait for it…π?',title:r.name,description:language==='tr'?'İki blok ve bir duvarla Galperin’in pi deneyi.':'Galperin’s pi experiment with two blocks and a wall.',tags:['pi','physics','simulation'],language};
   if(r.episode)return episodeCopy(r,language);

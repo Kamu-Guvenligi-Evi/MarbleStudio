@@ -1,18 +1,19 @@
 // Galperin's elastic collisions: a heavy block, a 1 kg block and a fixed wall.
 // Advance to each exact collision time, so fast blocks cannot tunnel at high mass ratios.
+export const PI_MAX_DIGITS=6;
 export const PI_KEY='marble-studio-pi-v1';
 export function normalizePi(raw={}){
   if(!raw||typeof raw!=='object'||Array.isArray(raw))throw new Error('Pi ayarları geçersiz.');
   const digits=Number(raw.digits??3),speed=Number(raw.speed??1);
-  if(![1,2,3,4].includes(digits))throw new Error('Pi basamak sayısı 1–4 olmalı.');
-  if(![.25,.5,1,2].includes(speed))throw new Error('Pi oynatma hızı geçersiz.');
+  if(!Number.isInteger(digits)||digits<1||digits>PI_MAX_DIGITS)throw new Error(`Pi basamak sayısı 1–${PI_MAX_DIGITS} olmalı.`);
+  if(![.25,.5,1,2,3].includes(speed))throw new Error('Pi oynatma hızı geçersiz.');
   return {name:String(raw.name??'Pi Çarpışmaları').trim().slice(0,80)||'Pi Çarpışmaları',digits,speed,sound:raw.sound!==false,autoIncrease:raw.autoIncrease===true};
 }
 
 export class PiCollisions{
   constructor(options={}){
     this.options=normalizePi(options);this.mass=100**(this.options.digits-1);
-    this.wall=444;this.heavy={x:250,width:40+(this.options.digits-1)*16,v:26};
+    this.wall=444;this.heavy={x:250,width:Math.min(104,40+(this.options.digits-1)*16),v:26};
     this.light={x:380,width:30,v:0};this.time=0;this.collisions=0;this.state='ready';
     this.lastHit=null;this.onHit=options.onHit??(()=>{});
   }
@@ -79,7 +80,7 @@ export class PiSession{
   finishRound(){
     if(this.current.state!=='finished')return;
     this.rounds.push({digits:this.current.options.digits,mass:this.mass,collisions:this.collisions,approximation:this.approximation});
-    if(this.options.autoIncrease&&this.current.options.digits<4)this.holdRemaining=2;
+    if(this.options.autoIncrease&&this.current.options.digits<PI_MAX_DIGITS)this.holdRemaining=2;
     else this.state='finished';
   }
   advanceRound(){this.createRound(this.current.options.digits+1);this.current.start();}
@@ -108,7 +109,7 @@ export class PiSession{
 
 export function analyzePi(options){
   const race=new PiSession(options);race.start();
-  for(let i=0;i<4000&&race.state!=='finished';i++)race.nextCollision();
+  for(let i=0;i<4*10**(PI_MAX_DIGITS-1)&&race.state!=='finished';i++)race.nextCollision();
   return {complete:race.state==='finished',simulationSeconds:race.time/race.options.speed,hits:race.rounds.reduce((sum,round)=>sum+round.collisions,0),rounds:race.rounds,
     collisions:race.collisions,winner:null,rescues:0,finite:[race.heavy.x,race.light.x,race.energy].every(Number.isFinite),
     score:100,coverTime:race.time/race.options.speed*.6};

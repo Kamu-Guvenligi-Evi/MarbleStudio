@@ -1,4 +1,4 @@
-import {PiSession,normalizePi,PI_KEY} from './pi-collisions.js';
+import {PiSession,normalizePi,PI_KEY,PI_MAX_DIGITS} from './pi-collisions.js';
 import {renderPi} from './pi-renderer.js';
 import './pi-studio.css';
 
@@ -7,11 +7,11 @@ export function createPiStudio({notify,onExport}){
   root.innerHTML=`<div class="watch-heading"><div><p class="eyebrow">İKİ BLOK · BİR DUVAR · π</p><h1 id="pi-title" tabindex="-1">Pi Çarpışmaları</h1><p class="workspace-description">Kütleyi artır. Çarpışmaları say. Pi’nin basamaklarını keşfet.</p></div><span id="pi-save-status" class="save-status" role="status"></span></div>
   <div class="pi-layout"><div class="pi-stage"><canvas id="pi-canvas" width="1080" height="1920" aria-label="Pi çarpışmaları: iki blok ve sağda bir tuğla duvar"></canvas></div>
   <aside class="pi-controls" aria-label="Pi çarpışma ayarları"><h2>Çarpışmalardan π’ye</h2><p>Mavi blok, 1 kg’lık mor bloğa doğru hareket eder. Blokların birbirine ve duvara her çarpması sayılır.</p>
-  <div class="pi-live-mass"><span>ŞU ANKİ KÜTLE</span><strong id="pi-mass">1 kg</strong><small id="pi-round">Tur 1 / 4</small></div>
+  <div class="pi-live-mass"><span>ŞU ANKİ KÜTLE</span><strong id="pi-mass">1 kg</strong><small id="pi-round">Tur 1 / ${PI_MAX_DIGITS}</small></div>
   <label class="pi-toggle"><input type="checkbox" id="pi-auto" checked> Her turda kilogramı otomatik artır</label>
-  <p class="pi-sequence-note">1 → 100 → 10.000 → 1.000.000 kg. Her sonuçtan sonra kısa bir ara, ardından yeni tur.</p>
-  <label>Başlangıç kütlesi<select id="pi-digits"><option value="1">1 kg · 1 basamak</option><option value="2">100 kg · 2 basamak</option><option value="3">10.000 kg · 3 basamak</option><option value="4">1.000.000 kg · 4 basamak</option></select></label>
-  <label>Oynatma hızı<select id="pi-speed"><option value="0.25">0,25× · Çok yavaş</option><option value="0.5">0,5× · Yavaş</option><option value="1" selected>1× · Normal</option><option value="2">2× · Hızlı</option></select></label>
+  <p class="pi-sequence-note">1 kg’dan 10 milyar kg’a kadar, her turda ×100. Her sonuçtan sonra kısa bir ara, ardından yeni tur.</p>
+  <label>Başlangıç kütlesi<select id="pi-digits"><option value="1">1 kg · 1 basamak</option><option value="2">100 kg · 2 basamak</option><option value="3">10.000 kg · 3 basamak</option><option value="4">1.000.000 kg · 4 basamak</option><option value="5">100.000.000 kg · 5 basamak</option><option value="6">10.000.000.000 kg · 6 basamak</option></select></label>
+  <label>Oynatma hızı<select id="pi-speed"><option value="0.25">0,25× · Çok yavaş</option><option value="0.5">0,5× · Yavaş</option><option value="1" selected>1× · Normal</option><option value="2">2× · Hızlı</option><option value="3">3× · Çok hızlı</option></select></label>
   <label class="pi-toggle"><input type="checkbox" id="pi-sound" checked> Çarpışma sesleri</label>
   <div class="pi-actions"><button id="pi-play" class="button primary">▶ Başlat</button><button id="pi-reset" class="button secondary">↻ Sıfırla</button></div>
   <div class="pi-actions"><button id="pi-step" class="button secondary">Sonraki çarpışma</button><button id="pi-fullscreen" class="button subtle">Tam ekran</button></div>
@@ -40,7 +40,7 @@ export function createPiStudio({notify,onExport}){
     $('status').textContent=race.state==='finished'?`${race.collisions} çarpışma → π ≈ ${race.approximation}`:playing?'Çarpışmalar sayılıyor…':race.state==='ready'?'Başlamaya hazır.':'Duraklatıldı. Sonraki çarpışmayı tek tek inceleyebilirsin.';
     if(race.transitioning)$('status').textContent=`${race.collisions} çarpışma → π ≈ ${race.approximation}. ${new Intl.NumberFormat('tr-TR').format(race.mass*100)} kg ${playing?'ile devam ediliyor…':'için devam et.'}`;
     $('mass').textContent=new Intl.NumberFormat('tr-TR').format(race.mass)+' kg';
-    $('round').textContent=options.autoIncrease?`Tur ${race.current.options.digits-options.digits+1} / ${5-options.digits}`:'Tek tur';
+    $('round').textContent=options.autoIncrease?`Tur ${race.current.options.digits-options.digits+1} / ${PI_MAX_DIGITS+1-options.digits}`:'Tek tur';
     canvas.setAttribute('aria-label',`Pi çarpışmaları: ${race.collisions} çarpışma, mavi blok ${race.mass} kg, mor blok 1 kg.`);
   }
   function reset(){playing=false;race=new PiSession({...options,onHit:hit});ui();draw();}

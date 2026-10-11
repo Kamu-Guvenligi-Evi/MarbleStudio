@@ -14,11 +14,11 @@ export function renderPi(ctx,session,{language='en',paused=false}={}){
   ctx.fillStyle='#233446';ctx.fillRect(32,62,476,1);
   text(tr?'Çarpışmalardan π’ye':'Count your way to π',270,127,38,accent,750);
   text(tr?'İki blok. Bir duvar. Sonsuz bir sayı.':'Two blocks. One wall. An infinite number.',270,160,16,'#93a8bb');
-  const levels=['1 kg','100 kg',tr?'10.000 kg':'10,000 kg','1M kg'];
-  for(let i=0;i<4;i++){
-    const active=digits===i+1,done=(session.rounds??[]).some(round=>round.digits===i+1),x=34+i*120;
-    box(x,193,112,37,10,active?'#173d42':'#101c29',active?'#59e1c8':'#293847');
-    text((done?'✓ ':'')+levels[i],x+56,217,13,active?'#adffe7':done?'#75bba9':'#778b9e',650);
+  const levels=['1 kg','100 kg',tr?'10.000 kg':'10,000 kg','1M kg',tr?'100 milyon kg':'100M kg',tr?'10 milyar kg':'10B kg'];
+  for(let i=0;i<levels.length;i++){
+    const active=digits===i+1,done=(session.rounds??[]).some(round=>round.digits===i+1),x=34+(i%3)*160,y=185+Math.floor(i/3)*37;
+    box(x,y,152,30,9,active?'#173d42':'#101c29',active?'#59e1c8':'#293847');
+    text((done?'✓ ':'')+levels[i],x+76,y+20,13,active?'#adffe7':done?'#75bba9':'#778b9e',650);
   }
   text(tr?'ÇARPIŞMA SAYISI':'COLLISIONS',270,275,12,'#96b3bc',650);
   ctx.save();ctx.shadowColor='#60e8c966';ctx.shadowBlur=25;text(race.collisions,270,364,88,'#b6ffe4',700);ctx.restore();
@@ -44,7 +44,7 @@ export function renderPi(ctx,session,{language='en',paused=false}={}){
     box(b.x+.5,y+.5,size-1,size-1,5,'#ffffff00','#ffffff60');ctx.fillStyle='#ffffff40';ctx.fillRect(b.x+5,y+4,size-10,2);
     text(label,b.x+size/2,y+size/2+5,Math.min(14,size*.34),'#ffffff',750);ctx.fillStyle='#00000018';ctx.fillRect(b.x+4,y+size-5,size-8,3);
   }
-  block(race.heavy,'#5ac8ff','#2460c3',({1:'1 kg',100:'100 kg',10000:'10⁴ kg',1000000:'10⁶ kg'})[race.mass]);
+  block(race.heavy,'#5ac8ff','#2460c3',({1:'1 kg',100:'100 kg',10000:'10⁴ kg',1000000:'10⁶ kg',100000000:'10⁸ kg',10000000000:'10¹⁰ kg'})[race.mass]);
   block(race.light,'#e298ff','#9542c7','1 kg');
   if(!finished&&race.lastHit&&race.time-race.lastHit.time<.16){
     const strength=1-(race.time-race.lastHit.time)/.16,x=race.lastHit.x,y=floor-16;ctx.strokeStyle='rgba(185,255,227,'+strength+')';ctx.lineWidth=2;

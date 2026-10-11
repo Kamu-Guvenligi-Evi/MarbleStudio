@@ -4,6 +4,7 @@ import {recipe} from '../src/factory-recipes.js';
 import {withEpisode,EPISODE_FORMATS} from '../src/episode-plan.js';
 import {videoTiming} from '../scripts/video-timing.mjs';
 import {outputQuality} from '../scripts/production-automation.mjs';
+import {fitTrackDuration} from '../scripts/track-duration.mjs';
 const browser=await chromium.launch({channel:'chrome',headless:true});
 try{
   const page=await browser.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -12,11 +13,12 @@ try{
     let accepted=0;const durations=[];
     for(let seed=1;seed<=16;seed++){
       const r=withEpisode(recipe(seed*7919,'track'),format);
-      const a=await page.evaluate(r=>window.factoryRenderer.probe(r),r);
+      const fitted=await fitTrackDuration(r,55,r=>page.evaluate(r=>window.factoryRenderer.probe(r),r));
+      const a=fitted.analysis;
       const timing=videoTiming(a.simulationSeconds,55,{bounded:true});
       if(a.complete&&a.finite&&timing&&outputQuality(a,1).accepted){accepted++;durations.push(timing.duration);}
     }
-    assert.ok(accepted>0,`No valid course for ${format}`);
+    assert.equal(accepted,16,`Each seed must fit and pass quality for ${format}`);
     console.log(`${format}: ${accepted}/16 accepted; durations ${durations.join(', ')}s`);
   }
   await page.goto('http://127.0.0.1:5173/?edit=1');await page.waitForFunction(()=>window.marbleStudio);

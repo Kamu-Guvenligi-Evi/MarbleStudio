@@ -1,3 +1,4 @@
+import {selectTestChannel} from './browser-channel.mjs';
 import assert from 'node:assert/strict';
 import {mkdir,readFile} from 'node:fs/promises';
 import {spawnSync} from 'node:child_process';
@@ -18,6 +19,7 @@ try{
  const page=await browser.newPage({viewport:{width:1366,height:1000}}),errors=[],queued=[];page.on('pageerror',e=>errors.push(e.message));
  await page.route('**/api/factory?*',route=>route.fulfill({json:{apiVersion:4,capabilities:['studio-workbench','automatic-diversity','long-term-repetition','episode-formats','territory-production'],jobs:[],summary:{done:0,pending:0},total:0},headers:{'Access-Control-Allow-Origin':'http://127.0.0.1:5173'}}));
  await page.route('**/api/queue',route=>{queued.push(route.request().postDataJSON());return route.fulfill({json:{ok:true},headers:{'Access-Control-Allow-Origin':'http://127.0.0.1:5173'}});});
+ await selectTestChannel(page);
  await page.goto('http://127.0.0.1:5173');await page.waitForFunction(()=>window.marbleStudio);
  await page.locator('[name=kind][value=territory]').check();assert.match(await page.locator('#automatic-note').innerText(),/Üçgen/);await page.locator('#automatic-create').click();await page.waitForFunction(()=>document.querySelector('#videos-dialog').open);
  assert.equal(queued[0].automaticMode,'territory');assert.equal(queued[0].fps,240);await page.locator('#videos-dialog [data-wb-close]').click();

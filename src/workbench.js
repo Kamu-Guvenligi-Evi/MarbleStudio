@@ -4,7 +4,7 @@ import {normalizeSnapshot} from './studio-transfer.js';
 import {createWorkStore} from './saved-works.js';
 
 const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const modeName={track:'Parkur yarışı',arena:'Küre arenası',territory:'Alan Savaşı',spiral:'Spiral çoğalma',statistics:'İstatistik yarışı'};
+const modeName={pi:'Pi Çarpışmaları',track:'Parkur yarışı',arena:'Küre arenası',territory:'Alan Savaşı',spiral:'Spiral çoğalma',statistics:'İstatistik yarışı'};
 const kindOf=record=>record.contentKind??(record.mode==='arena'&&(record.project?.arenaGame??record.recipe?.arenaGame??record.options?.arenaGame)==='territory'?'territory':record.mode);
 export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isLocked}){
   const store=createWorkStore();let source=null,ready=false,submitting=false,offset=0,poll=null,refreshing=false,works=[],exportRevision=0;
@@ -55,15 +55,15 @@ export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isL
   function updateForm(){
     const series=form.elements.strategy.value==='variations';$('video-series').hidden=!series;
     $('video-format-note').textContent=`${({portrait:'Dikey',landscape:'Yatay',square:'Kare'})[form.elements.orientation.value]} · ${form.elements.resolution.value}p · ${form.elements.fps.value} FPS · MP4. `+(series?'Kadro korunur, yarış düzenleri değişir.':'Aynı düzen ve özgün süre korunur.');
-    if(source)$('video-source-description').textContent=modeName[kindOf(source)]+(source.mode==='statistics'?' · Tablo ve kaynak bilgileriyle':' · Kadro ve seçtiğin müzikle');
+    if(source)$('video-source-description').textContent=modeName[kindOf(source)]+(source.mode==='pi'?' · Kütle oranı ve çarpışma ayarlarıyla':source.mode==='statistics'?' · Tablo ve kaynak bilgileriyle':' · Kadro ve seçtiğin müzikle');
   }
   form.addEventListener('change',()=>{updateForm();if(source)try{localStorage.setItem('marble-studio-export-'+kindOf(source)+'-v1',JSON.stringify({...Object.fromEntries(new FormData(form)),fpsDefaultVersion:3}));}catch{}});
   async function openExport(snapshot,preview){
     if(isLocked())return;const revision=++exportRevision;show($('video-dialog'));source=null;ready=false;$('video-submit').disabled=true;$('video-submit').textContent='Hazırlanıyor…';$('video-message').textContent='Çalışma hazırlanıyor…';$('video-source-name').textContent='Çalışma hazırlanıyor…';$('video-thumbnail').src=preview??thumbnail();
     try{
-      const captured=normalizeSnapshot(snapshot??await capture());if(revision!==exportRevision)return;source=captured;form.reset();form.elements.orientation.value=source.mode==='statistics'?'landscape':'portrait';form.elements.audio.value=source.mode==='statistics'?'none':source.project.sound?'all':'music';
+      const captured=normalizeSnapshot(snapshot??await capture());if(revision!==exportRevision)return;source=captured;form.reset();form.elements.orientation.value=source.mode==='statistics'?'landscape':'portrait';form.elements.audio.value=source.mode==='pi'?(source.project.sound?'effects':'none'):source.mode==='statistics'?'none':source.project.sound?'all':'music';
       try{const saved=JSON.parse(localStorage.getItem('marble-studio-export-'+kindOf(source)+'-v1')??'{}');for(const key of ['orientation','resolution','fps','audio','template','language','channel','hook','outro'])if(typeof saved[key]==='string'&&form.elements[key]){if(key==='fps'&&saved.fpsDefaultVersion!==3)continue;const input=form.elements[key];if(key==='fps'&&(!Number.isSafeInteger(Number(saved[key]))||Number(saved[key])<1))continue;if(input.tagName==='SELECT'&&![...input.options].some(o=>o.value===saved[key]))continue;if(key==='orientation'&&!['portrait','landscape','square'].includes(saved[key]))continue;input.value=saved[key];}}catch{}
-      form.elements.language.value='en';form.elements.strategy.value='exact';form.elements.strategy.querySelector('[value=variations]').disabled=source.mode==='statistics';$('video-advanced').open=false;
+      form.elements.language.value='en';form.elements.strategy.value='exact';form.elements.strategy.querySelector('[value=variations]').disabled=['statistics','pi'].includes(source.mode);$('video-advanced').open=false;
       $('video-source-name').textContent=source.mode==='statistics'?source.statistics.heading:source.project.name;updateForm();
       await checkService();if(revision!==exportRevision)return;ready=true;$('video-message').textContent='Hazır olduğunda videonu bu pencereden izleyip indirebilirsin.';
     }catch(error){if(revision!==exportRevision)return;$('video-message').textContent=error.message;}

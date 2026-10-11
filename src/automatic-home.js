@@ -15,13 +15,14 @@ export function createAutomaticHome({create,videos,works,busy,pause,youtubeAccou
     </div></fieldset><p id="automatic-note">Parkur, küre arenası, alan savaşı veya spiral seçilir. Düzen, kadro, müzik ve video ayarları otomatik hazırlanır.</p>
     <p>Tamamlanan videolar GitHub’daki ortak arşive otomatik eklenir.</p><div class="automatic-youtube"><label>YouTube kanalı<select id="automatic-youtube-channel"><option value="">YouTube kapalı</option></select></label><label>Görünürlük<select id="automatic-youtube-privacy"><option value="private">Gizli</option><option value="unlisted">Liste dışı</option><option value="public">Herkese açık</option></select></label><p><span id="automatic-youtube-note">Kanal bağlamak için İçerik Atölyesi'ni aç.</span> <a href="http://127.0.0.1:5180/factory.html#youtube" target="_blank" rel="noopener noreferrer">İçerik Atölyesi ↗</a></p></div>
     <button id="automatic-create" class="button primary" type="submit">Videomu oluştur</button><p id="automatic-status" role="status"></p></form>
-    <div class="automatic-links"><button id="automatic-videos">Videolarım</button><button id="automatic-edit">Kendim düzenleyeyim</button></div>`;
+    <div class="automatic-links"><button id="automatic-pi">π Pi Çarpışmaları</button><button id="automatic-videos">Videolarım</button><button id="automatic-edit">Kendim düzenleyeyim</button></div>`;
   document.querySelector('main').before(home);
   const back=document.createElement('button');back.id='automatic-back';back.className='button subtle';back.textContent='← Ana ekran';document.querySelector('.studio-export-bar').prepend(back);
   const $=id=>document.getElementById(id);let pending=false;
   async function refreshYouTube(){try{const info=await youtubeAccounts();const select=$('automatic-youtube-channel'),selected=select.value;select.replaceChildren(new Option('YouTube kapalı',''),...info.accounts.map(a=>new Option(a.title,a.id)));select.value=selected;$('automatic-youtube-note').textContent=info.accounts.length?'Kanal seçersen video üretim bitince otomatik yüklenir.':'Kanal bağlamak için İçerik Atölyesi’ni aç.';}catch{$('automatic-youtube-note').textContent='YouTube bağlantısı için video hizmetini aç.';}}
   const show=()=>{if(busy())return;pause();document.body.classList.add('automatic-home');document.title='Marble Studio';window.scrollTo(0,0);$('automatic-title').focus({preventScroll:true});void refreshYouTube();};
   back.onclick=show;
+  $('automatic-pi').onclick=()=>{if(busy())return;document.body.classList.remove('automatic-home');edit?.('pi');};
   $('automatic-edit').onclick=()=>{if(busy())return;document.body.classList.remove('automatic-home');const kind=new FormData($('automatic-form')).get('kind');edit?.(kind);document.querySelector(kind==='statistics'?'#statistics-title':'#watch-title').focus({preventScroll:true});};
   $('automatic-videos').onclick=videos;
   const library=document.createElement('button');library.textContent='Çalışmalarım';library.onclick=works;library.className='automatic-library';home.querySelector('.automatic-links').append(library);

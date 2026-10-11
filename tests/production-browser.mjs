@@ -1,3 +1,4 @@
+import {selectTestChannel} from './browser-channel.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -7,7 +8,8 @@ try{
   const context=await browser.newContext({acceptDownloads:true,viewport:{width:1440,height:1000}}),page=await context.newPage(),errors=[];
   page.on('pageerror',error=>errors.push(error.message));
   await context.grantPermissions(['clipboard-read','clipboard-write'],{origin:'http://127.0.0.1:5173'});
-  await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
+  await selectTestChannel(page);
+ await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
   const connect=()=>page.evaluate(origin=>document.querySelector('.factory-link').href=origin+'/factory.html',factory);await connect();
   assert.equal(await page.locator('#record').isVisible(),false);
   await page.locator('#count').selectOption('8');

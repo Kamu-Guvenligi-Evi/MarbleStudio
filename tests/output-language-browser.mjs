@@ -17,7 +17,9 @@ try{
   const {renderRace}=await import('/src/renderer.js'),{renderArena}=await import('/src/arena-renderer.js');
   const {Spiral}=await import('/src/spiral.js'),{renderSpiral}=await import('/src/spiral-renderer.js');
   const {EpisodeRace,drawEpisode}=await import('/src/episode-race.js');
+  const {PiSession}=await import('/src/pi-collisions.js'),{renderPi}=await import('/src/pi-renderer.js');
   const {recipe,copyFor}=await import('/src/factory-recipes.js'),{withEpisode}=await import('/src/episode-plan.js');
+  const {englishOutput}=await import('/src/output-language.js');
   const canvas=document.querySelector('#render'),ctx=canvas.getContext('2d');
   const capture=draw=>{window.outputTexts=[];draw();return [...window.outputTexts];};
   const track=new Race({ballNames:['Almanya','Türkiye']});track.language='tr';track.start();track.balls[0].body.position.y=500;
@@ -34,14 +36,20 @@ try{
   const spiralTexts=capture(()=>renderSpiral(ctx,spiral,{paused:true,countdown:0}));spiral.dispose();
   const episode=new EpisodeRace(withEpisode({...recipe(123,'track'),language:'tr',ballNames:['Türkiye']},'teams'));
   const episodeTexts=capture(()=>drawEpisode(ctx,episode));episode.dispose();
+  const pi=new PiSession({digits:1});pi.start();pi.step(20);
+  const piTexts=capture(()=>renderPi(ctx,pi,{language:'tr',channel:'LastBallStand'}));
   const stats=[];
+  const spawned=window.factoryRenderer.probe({mode:'spiral',seed:2048,theme:'ice',variant:'classic',count:1});
+  if(englishOutput(spawned.winner)!==spawned.winner)throw new Error('Spawned marble winner must be English');
   for(const item of (await (await fetch('/statistics/manifest.json')).json()).items){
    const csv=await (await fetch(item.csv)).text(),r={mode:'statistics',statistics:{csv,dataset:item,heading:item.title,source:item.source,unit:item.unit,duration:'30',top:'10'}};
    await window.factoryRenderer.begin({recipe:r,analysis:window.factoryRenderer.probe(r),speed:1,fps:30,copy:copyFor(r,'tr')});
    const texts=capture(()=>window.factoryRenderer.frame(899));
+   const winner=window.factoryRenderer.result().winner;
+   if(englishOutput(winner)!==winner)throw new Error(item.id+': winner metadata must be English');
    stats.push({id:item.id,title:item.title,unit:item.unit,texts});
   }
-  return {trackTexts,arenaTexts,territoryTexts,spiralTexts,episodeTexts,stats};
+  return {trackTexts,arenaTexts,territoryTexts,spiralTexts,episodeTexts,piTexts,stats};
  });
  assert.ok(results.trackTexts.includes('LIVE LEADERS'));
  assert.ok(results.trackTexts.includes('Germany'));
@@ -52,6 +60,8 @@ try{
  assert.ok(results.territoryTexts.includes('WINNER'));
  assert.ok(results.spiralTexts.includes('Paused'));
  assert.ok(results.episodeTexts.some(s=>s.includes('Team challenge · Round')));
+ assert.ok(results.piTexts.includes('Count your way to π'));
+ assert.ok(results.piTexts.includes('LastBallStand™'));
  for(const item of results.stats){assert.ok(item.texts.includes('MARBLE STUDIO / STATISTICS RACE'));assert.ok(!item.texts.includes(item.title),item.id);assert.ok(!item.texts.includes(item.unit),item.id);assert.ok(!item.texts.includes('Almanya'));}
  assert.doesNotMatch(JSON.stringify(results),/KAZANAN|ALAN LİDERLERİ|İLK \d|Duraklatıldı|EN ÇOK BAĞ/);
  await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
@@ -61,5 +71,5 @@ try{
  assert.equal(await page.locator('select[name="language"]').inputValue(),'en');
  assert.equal(await page.locator('select[name="language"] option[value="tr"]').count(),0);
  assert.deepEqual(errors,[]);
- console.log('PASS: actual canvas text is English across five video modes and all 11 statistics datasets; studio controls stay Turkish.');
+ console.log('PASS: actual canvas text is English across six video modes and all 11 statistics datasets; Pi watermark and Turkish studio controls are preserved.');
 }finally{await browser.close();}

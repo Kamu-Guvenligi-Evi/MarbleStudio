@@ -1,8 +1,10 @@
+import {selectTestChannel} from './browser-channel.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 const browser=await chromium.launch({channel:'chrome',headless:true});
 try{
  const page=await browser.newPage({viewport:{width:1366,height:1000}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await selectTestChannel(page);
  await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
  const course=await page.evaluate(()=>window.marbleStudio.getState().sections);
  await page.locator('#nav-arena').click();assert.ok(await page.locator('#track-view').isHidden());assert.ok(await page.locator('#arena-view').isVisible());

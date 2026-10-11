@@ -19,6 +19,9 @@ assert.equal(englishOutput('My custom title'),'My custom title');
 assert.equal(englishRosterName('Kanuni Sultan Süleyman'),'Suleiman the Magnificent');
 assert.equal(raceName({ballNames:['Almanya']},{id:0,name:'Almanya'}),'Germany');
 for(const mode of ['track','arena','spiral'])assert.equal(copyFor(recipe(123,mode),'tr').language,'en');
+const piSource=normalizeSnapshot({mode:'pi',project:{digits:1,name:'Pi Çarpışmaları'}});
+const piCopy=copyFor(sourceRecipe(piSource,1),'tr');
+assert.equal(piCopy.language,'en');assert.equal(piCopy.title,'Pi Collisions');
 for(const format of EPISODE_FORMATS){const copy=copyFor(withEpisode(recipe(123,'track'),format),'tr');assert.equal(copy.language,'en');assert.match(copy.description,/finish|racers|teams|stages/i);}
 const source=normalizeSnapshot({mode:'track',project:{sequence:[],ballNames:['Türkiye','Koç']}});
 assert.deepEqual(sourceRecipe(source,123).ballNames.slice(0,2),['Turkey','Aries']);

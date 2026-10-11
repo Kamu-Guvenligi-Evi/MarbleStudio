@@ -1,5 +1,7 @@
 # Marble Studio
 
+Stüdyo arayüzü Türkçedir; videolardaki hazır isimler, yarış metinleri, istatistik etiketleri, Pi anlatımı ve otomatik başlık/açıklamalar İngilizcedir. Eski Türkçe dil tercihleri yeni üretimde İngilizce uygulanır. Elle yazılan özel metinleri İngilizce girin; kişi ve kulüp özel adları özgün yazımlarını korur.
+
 Editörde **Çarpışma sesi** yanındaki **Ses efekti** menüsünden Klasik, Miyav, Havlama, Lastik oyuncak, Baloncuk, Lazer, Zil veya Tahta tıkırtısı seçilebilir. **Dinle** seçili sesi önceden çalar. Yeni efektler sentezlenmiş seslerdir. Seçim her yarış türü için kaydedilir, çalışma/yedek dosyalarında korunur ve WebM ile aynı çalışmadan üretilen MP4 videolara aktarılır. Spiral kırılmaları da seçili efekti kullanır; düşüş, çoğalma ve bitiş sesleri kendi efektlerini korur.
 
 Video oluşturulmadan önce **LastBallStand** veya **VortexBallSpiral** seçilir. Seçilen ad, %13 opaklıkta ™ filigranı olarak bütün video türlerine işlenir. Seçim iptal edilirse üretim başlamaz. Otomatik YouTube yüklemesi açıksa seçilen markanın bağlı hesabı kullanılır. Günlük seri için kanal, reçete oluşturulurken seçilir; mevcut video dosyaları değişmez. Kontrol: Studio açıkken `npm.cmd run test:branding`.
@@ -99,7 +101,7 @@ Güncelleme almak için GitHub Desktop'ta **Fetch origin → Pull origin**, ard�
 
 Geliştirme araçlarını elle yönetmek isteyenler için `npm install` ve `npm run dev` de kullanılabilir.
 
-**Ortak çalışma videoları:** Mevcut 32 farklı kayıt `work-videos/` klasöründe paylaşılır. GitHub Desktop'ta Clone/Pull yapınca videolar Git LFS üzerinden gelir. Uygulamanın **Videolarım** listesinde diğer hazır videolarla birlikte görünür; izlenebilir, indirilebilir ve klasörde açılabilir. Üretim ayarları bulunan kayıtların `metadata.json` dosyaları da paylaşılır. Yeni videoların yerel kopyaları `output/` altında kalır ve otomatik paylaşım ortak arşive bir kopyasını ekler.
+**Ortak çalışma videoları:** Paylaşılan kayıtlar `work-videos/` klasöründe tutulur. GitHub Desktop'ta Clone/Pull yapınca videolar Git LFS üzerinden gelir. Uygulamanın **Videolarım** listesinde diğer hazır videolarla birlikte görünür; izlenebilir, indirilebilir ve klasörde açılabilir. Üretim ayarları bulunan kayıtların `metadata.json` dosyaları da paylaşılır. Yeni videoların yerel kopyaları `output/` altında kalır ve otomatik paylaşım ortak arşive bir kopyasını ekler.
 
 **Yeni videolar otomatik paylaşılır:** Üretimi tamamlanan MP4'ler, tarayıcıda kaydedilen WebM'ler ve **Videolarım → Video yükle** ile eklenen dosyalar GitHub'a arka planda gönderilir. Video, kapak ve üretim bilgileri Git LFS ile `work-videos/` arşivine eklenir. Kod dosyaları ve geliştiricinin commit bekleyen değişiklikleri otomatik gönderilmez; paylaşım ayrı bir Git çalışma kopyasında yapılır. İnternet veya erişim sorunu varsa dosya yerelde korunur ve yeniden denenir. **Videolarım** paylaşım durumunu gösterir. Otomatik gönderim için GitHub hesabının organizasyon deposuna yazma erişimi ve Git kimlik doğrulaması gerekir. `FACTORY_GITHUB_SYNC=0` otomatik gönderimi kapatır. Diğer ekip üyeleri Pull ile yeni videoları alır.
 
@@ -126,11 +128,15 @@ Yeni taslaklar `marble-studio-track-v1` ve `marble-studio-arena-v1` anahtarları
 
 ## Alan Savaşı
 
-Ana ekrandaki **Alan Savaşı → Videomu oluştur** ile şekil, kadro ve müzik otomatik seçilir; 240 FPS MP4 üretilip ortak GitHub arşivine gönderilir. **Bana bırak** da Alan Savaşı'nı küre arenasından ayrı bir içerik olarak dönüşümlü seçer. **Kendim düzenleyeyim → Alan Savaşı** doğrudan editörü açar. Üçgen, kare, altıgen, yıldız veya daire seç; mevcut ülke, takım, burç veya özel görsel kadron yarışsın. Toplar kendi bölgelerinden çıkıp iz çizer; geri döndüklerinde çevreledikleri alanı ele geçirir. Rakibin açık izine dokunmak hamlesini iptal eder. Rakiplerin bölgeleri de el değiştirebilir. 30, 45 veya 60 saniye sonunda en çok alanı olan kazanır; eşit alan varsa beraberlik gösterilir.
+Ana ekrandaki **Alan Savaşı → Videomu oluştur** ile şekil, kadro ve müzik otomatik seçilir; 240 FPS MP4 üretilip ortak GitHub arşivine gönderilir. **Bana bırak** da Alan Savaşı'nı küre arenasından ayrı bir içerik olarak dönüşümlü seçer. **Kendim düzenleyeyim → Alan Savaşı** doğrudan editörü açar. Oyuncu sayısı 2–20 arasında seçilir; mevcut ülke, takım, burç veya özel görsel kadron yarışır. Üçgen, kare, altıgen, yıldız ve daireye ek olarak Türkiye, Almanya, Fransa, İtalya, İspanya ve Brezilya sahaları vardır.
+
+Toplar kendi bölgelerinden çıkıp iz çizer; geri döndüklerinde rakiplerin taralı bölgeleri dahil çevreledikleri alanı ele geçirir. Kendi alanı dışındaki rakibin gövdesine veya açık izine dokunmak onu eler ve bütün alanını saldırana geçirir. Elenen oyuncu geri doğmaz. Şimşek 2 saniye boyunca hızı 1,8 katına çıkarır; kalkan 1,5 saniye elemeyi önler. Kalkan bölgenin çalınmasını engellemez; bütün alanını kaybeden oyuncu koruma bitince elenir. Son kalan oyuncu kazanır; aksi halde 30, 45 veya 60 saniye sonunda en çok alanı olan kazanır, eşit alan beraberliktir.
+
+Ülke sınırları [Natural Earth 1:110m kamu malı verisinden](https://www.naturalearthdata.com/about/terms-of-use/) türetilmiştir ve oyun sırasında internetten indirilmez. Kesintisiz hareket için yalnız en büyük kara parçası kullanılır; adalar ve ayrı kara parçaları dahil değildir (Türkiye sahası Anadolu'dur). `src/territory-maps.js` bu küçük yerel veriyi içerir; `scripts/build-territory-maps.mjs` yerel GeoJSON'dan yeniden üretir.
 
 Şekil, süre ve kadro taslaklarda, kaydedilmiş çalışmalarda ve yedeklerde korunur. Alan Savaşı taslağı `marble-studio-territory-v1` altında küre arenasından ayrı saklanır; eski Arena içindeki Alan Savaşı taslağı ilk açılışta taşınır. **Video oluştur** aynı mücadeleyi 240 FPS MP4 olarak üretir. İçerik Atölyesi'nde Arena içeriğini **Alan Savaşı** seçerek seri veya günlük üretim yapılabilir. Çalışmalarım ve Videolarım listeleri bu içeriği Alan Savaşı adıyla gösterir. Görsel referans: [üçgen alan mücadelesi](https://www.youtube.com/shorts/1vDss0KwZgk). Referans video uygulamaya eklenmez; alan kapatma ve çizim uygulamanın kendi simülasyonudur.
 
-Kontroller: `node tests/territory.mjs`, yerel sunucu açıkken `node tests/territory-browser.mjs` ve `node tests/territory-integration.mjs`; gerçek otomatik 240 FPS MP4 için `node tests/territory-integration.mjs --export`. Deneme çıktıları `artifacts/` altındadır.
+Kontroller: `node tests/territory.mjs`, `node tests/territory-rules.mjs`, yerel sunucu açıkken `node tests/territory-browser.mjs` ve `node tests/territory-integration.mjs`; yerel MP4 için `node tests/territory-export.mjs`, gerçek otomatik 240 FPS MP4 için `node tests/territory-integration.mjs --export`. Deneme çıktıları `artifacts/` altındadır.
 
 ## Geliştirme ve kontrol
 

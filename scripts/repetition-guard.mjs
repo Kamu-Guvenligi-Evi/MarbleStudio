@@ -1,3 +1,4 @@
+import {PI_MAX_DIGITS} from '../src/pi-collisions.js';
 import {createHash} from 'node:crypto';
 import {readFile,writeFile,rename} from 'node:fs/promises';
 import path from 'node:path';
@@ -7,6 +8,7 @@ export const REPEAT_DAYS=90,REPEAT_COUNT=300;
 const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().filter(k=>value[k]!==undefined).map(k=>[k,canonical(value[k])])):value;
 const hash=value=>createHash('sha256').update(JSON.stringify(canonical(value))).digest('hex');
 export function contentKeys(r){
+  if(r.mode==='pi'){const auto=r.autoIncrease?{autoIncrease:true,maxDigits:PI_MAX_DIGITS}:{};return {exact:hash({mode:r.mode,digits:r.digits,speed:r.speed,...auto}),similar:hash({mode:r.mode,digits:r.digits,...auto})};}
   if(r.mode==='statistics'){
     const parsed=parseStatistics(r.statistics.csv);
     const columns=parsed.names.map((name,index)=>({name:name.normalize('NFC').toLocaleLowerCase('tr-TR'),index})).sort((a,b)=>a.name<b.name?-1:a.name>b.name?1:0);

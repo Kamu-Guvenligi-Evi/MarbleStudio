@@ -16,7 +16,7 @@ const get=async suffix=>(await fetch(origin+suffix)).json();
 try{
   const ready=Date.now()+60000;
   while(true){try{if((await fetch(origin+'/api/factory')).ok)break;}catch{}if(Date.now()>ready||server.exitCode!==null)throw new Error(log);await new Promise(resolve=>setTimeout(resolve,200));}
-  const first=await get('/api/factory');assert.equal(first.apiVersion,3);assert.equal(first.total,25);assert.equal(first.jobs.length,12);assert.equal(first.jobs[0].id,'fixture-24');
+  const first=await get('/api/factory');assert.equal(first.apiVersion,4);assert.equal(first.total,25);assert.equal(first.jobs.length,12);assert.equal(first.jobs[0].id,'fixture-24');
   const cors=await fetch(origin+'/api/factory',{headers:{Origin:'http://127.0.0.1:5173'}});assert.equal(cors.headers.get('access-control-allow-origin'),'http://127.0.0.1:5173');
   assert.equal((await fetch(origin+'/api/factory',{headers:{Origin:'https://example.com'}})).status,403);
   assert.equal((await fetch(origin+'/api/queue',{method:'OPTIONS',headers:{Origin:'http://127.0.0.1:5173','Access-Control-Request-Method':'POST'}})).status,204);

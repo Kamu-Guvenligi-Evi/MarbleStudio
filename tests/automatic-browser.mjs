@@ -1,3 +1,4 @@
+import {selectTestChannel} from './browser-channel.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import {validateBatch} from '../src/factory-recipes.js';
@@ -5,6 +6,7 @@ const browser=await chromium.launch({channel:'chrome',headless:true});
 try{
  const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
  page.on('pageerror',e=>errors.push(e.message));
+ await selectTestChannel(page);
  await page.goto('http://127.0.0.1:5173');
  await page.waitForFunction(()=>document.body.classList.contains('automatic-home'));
  assert.equal(await page.locator('main').isVisible(),false);

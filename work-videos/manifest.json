@@ -745,6 +745,27 @@
       },
       "sha256": "088a3277c0b1b7d91d362d11dc923b1abd5a5bc1953a9a930cece23862c4737c",
       "bytes": 976643
+    },
+    {
+      "id": "shared-b30b0cdc50cd64a0",
+      "mode": "arena",
+      "contentKind": "arena",
+      "copy": {
+        "title": "Sphere Arena"
+      },
+      "createdAt": "2026-10-11T22:18:05.322Z",
+      "completedAt": "2026-10-11T22:18:05.322Z",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "b30b0cdc50cd64a06e574b63053808c112cee2c1188a1a4e3cf1e3e54795e38c",
+      "bytes": 1405481
     }
   ]
 }

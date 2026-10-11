@@ -1,3 +1,5 @@
+import {PiSession,analyzePi} from './pi-collisions.js';
+import {renderPi} from './pi-renderer.js';
 import {EpisodeRace,drawEpisode} from './episode-race.js';
 import {prepareCatalogImage} from './image-catalog.js';
 import {Race} from './physics.js';
@@ -22,6 +24,7 @@ function statsResult(r){const data=parseStatistics(r.statistics.csv);return {com
 window.factoryRenderer={
   async prepareRoster(items){return Promise.all(items.map(prepareCatalogImage));},
   probe(recipe){
+    if(recipe.mode==='pi')return analyzePi(recipe);
     if(recipe.mode==='statistics')return statsResult(recipe);
     const eventTimes=[];let clock=0,changes=0,last=null,previous=new Map(),viewY=0;
     const samples=[],camera=createCameraDirector(),r=create(recipe,(_strength,_x,event)=>{if(event?.type!=='drop')eventTimes.push(clock);});r.start();
@@ -54,6 +57,9 @@ window.factoryRenderer={
     race?.dispose();race=null;config=job;steps=0;cameraY=0;hits=[];lastHit=new Map();musicEvents=[];lastLeader=null;director=createCameraDirector();
     canvas.width=job.width??1080;canvas.height=job.height??1920;
     if(job.recipe.mode==='statistics'){statisticsView().loadSnapshot(job.recipe.statistics);return;}
+    if(job.recipe.mode==='pi'){
+      race=new PiSession({...job.recipe,onHit:event=>{const t=(job.intro??0)+event.time/job.recipe.speed/job.speed,previous=lastHit.get('impact')??-1;if(t-previous>.025){hits.push({time:t,strength:3,x:event.x,type:'impact'});lastHit.set('impact',t);}}});race.start();return;
+    }
     await Promise.all((job.recipe.ballImages??[]).map(loadBallImage));
     race=create(job.recipe,(strength,x,effect={type:'impact'})=>{const t=(job.intro??0)+steps/120/job.speed,previous=lastHit.get(effect.type)??-1;if(t-previous>(effect.type==='ice'?.035:.025)){hits.push({time:t,strength,x,...effect});lastHit.set(effect.type,t);}});musicEvents.push({time:0,id:(race.ranking()[0]?.entrantId??race.ranking()[0]?.id)});lastLeader=(race.ranking()[0]?.entrantId??race.ranking()[0]?.id);race.start();
   },
@@ -61,6 +67,10 @@ window.factoryRenderer={
     const elapsed=index/config.fps,mode=config.recipe.mode;
     let picture;
     if(mode==='statistics')picture=statisticsView().renderFrame(elapsed/config.analysis.simulationSeconds,1/config.fps);
+    else if(mode==='pi'){
+      const target=Math.max(0,elapsed-(config.intro??0))*config.speed*config.recipe.speed;
+      race.step(Math.max(0,target-race.time));renderPi(sourceCtx,race,{language:config.copy.language});picture=source;
+    }
     else{
       const target=Math.ceil(Math.min(Math.max(0,elapsed-(config.intro??0))*config.speed,config.analysis.simulationSeconds)*120);
       while(steps<target&&!ended(race,mode,config.recipe.exact)){
@@ -79,19 +89,19 @@ window.factoryRenderer={
     const band=(text,y,accent='#bbed83',compact=false)=>{
       ctx.fillStyle='#080d16ed';ctx.fillRect(pad,y,w-pad*2,(compact?70:100)*unit);ctx.fillStyle=accent;ctx.font=`600 ${compact?32*unit:font}px Segoe UI`;ctx.textAlign='center';ctx.fillText(text,w/2,y+(compact?45:63)*unit,w-pad*3);
     };
-    if(mode!=='statistics'&&elapsed<3.5)band(config.copy.hook,(config.recipe.arenaGame==='territory'?480:330)*unit,'#bbed83',true);
+    if(!['statistics','pi'].includes(mode)&&elapsed<3.5)band(config.copy.hook,(config.recipe.arenaGame==='territory'?480:330)*unit,'#bbed83',true);
     if(config.template==='broadcast'){
       ctx.fillStyle='#a7e2cc';ctx.fillRect(0,0,w,6*unit);ctx.fillStyle='#e9fff4';ctx.font=`600 ${25*unit}px Segoe UI`;ctx.textAlign='left';ctx.fillText(config.channel??'',pad,45*unit,w-pad*2);
     }
     if(config.template==='cinema'&&config.channel){ctx.fillStyle='#eee';ctx.font=`500 ${24*unit}px Segoe UI`;ctx.textAlign='center';ctx.fillText(config.channel,w/2,50*unit,w-pad*2);}
     if(elapsed>=(config.intro??0)+config.analysis.simulationSeconds/config.speed){
-      const name=mode==='statistics'?config.analysis.winner:race.finished[0]?.name??'';
+      const name=mode==='pi'?'':mode==='statistics'?config.analysis.winner:race.finished[0]?.name??'';
       const result=mode==='spiral'?(config.copy.language==='tr'?'Merkez açıldı!':'The center is clear!'):(config.copy.language==='tr'?'Kazanan: ':'Winner: ')+name;
-      if(mode!=='statistics')band(result,h-180*unit);
+      if(!['statistics','pi'].includes(mode))band(result,h-180*unit);
       if(config.outro){ctx.fillStyle='#eff8ff';ctx.font=`500 ${26*unit}px Segoe UI`;ctx.textAlign='center';ctx.fillText(config.outro,w/2,h-35*unit,w-pad*2);}
     }
     return canvas.toDataURL('image/jpeg',.92).split(',')[1];
   },
   audio(){return {effects:hits,leaders:musicEvents};},
-  result(){return config.recipe.mode==='statistics'?{complete:true,winner:config.analysis.winner}:{complete:ended(race,config.recipe.mode,config.recipe.exact),winner:race.finished[0]?.name??null,...(race.episode?{episode:race.summary()}:{} )};},
+  result(){if(config.recipe.mode==='pi')return {complete:race.state==='finished',winner:null,collisions:race.collisions};return config.recipe.mode==='statistics'?{complete:true,winner:config.analysis.winner}:{complete:ended(race,config.recipe.mode,config.recipe.exact),winner:race.finished[0]?.name??null,...(race.episode?{episode:race.summary()}:{} )};},
 };

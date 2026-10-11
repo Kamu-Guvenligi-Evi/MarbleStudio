@@ -1,3 +1,4 @@
+import {createPiStudio} from './pi-studio.js';
 import {createAutomaticHome} from './automatic-home.js';
 import {createWorkbench} from './workbench.js';
 import {normalizeSnapshot,createBackup,parseBackup,restoreBackup,downloadJSON} from './studio-transfer.js';
@@ -77,10 +78,12 @@ function archiveBrowserVideo(blob,options){
   void workbench.uploadVideo(blob,options).then(()=>toast('Video arşive eklendi; GitHub’a otomatik gönderilecek.')).catch(()=>toast('Video indirildi. Ortak arşive eklemek için video hizmetini açıp Videolarım → Video yükle kullan.'));
 }
 const statistics = createStatistics({notify:toast,onVideoRecorded:archiveBrowserVideo,onRecordingChange:active=>{
-  $('#nav-track').disabled=active;$('#nav-arena').disabled=active;$('#nav-territory').disabled=active;$('#nav-spiral').disabled=active;
+  $('#nav-pi').disabled=active;$('#nav-track').disabled=active;$('#nav-arena').disabled=active;$('#nav-territory').disabled=active;$('#nav-spiral').disabled=active;
   $('#open-settings').disabled=active;
   for(const id of ['studio-export','studio-backup','studio-restore','studio-works'])$('#'+id).disabled=active;
 }});
+
+const pi=createPiStudio({notify:toast,onExport:()=>workbench.openExport()});
 
 createBallEditor({getImages:()=>ballImages,getNames:()=>ballNames,getCount:()=>Number($('#count').value),notify:toast,onRosterChange:(images,names)=>{if(isRecording())throw new Error('Kadroyu kayıt bittikten sonra değiştir.');ballImages=normalizeBallImages(images);ballNames=normalizeNames(names);resetRace();},onChange:next=>{if(isRecording())throw new Error('Görseli kayıt bittikten sonra ekle.');ballImages=next;resetRace();},onNamesChange:next=>{if(isRecording())throw new Error('İsmi kayıt bittikten sonra değiştir.');ballNames=normalizeNames(next);resetRace();}});
 function getProject(){return {mode:gameMode,spiralTheme,variant:spiralBehavior,energy:arenaEnergy,arenaGame,arenaShape,territoryDuration,spiralSfxVersion:1,preset:trackPreset,speed:$('#speed').value,name:projectName,sequence:structuredClone(sequence??[]),seed:Number($('#seed').value),count:Number($('#count').value),sound:$('#sound').checked,visualStyle:'neon',trails:$('#trails').checked,ballImages:[...ballImages],ballNames:[...ballNames],presentation:{...presentation}};}
@@ -167,19 +170,19 @@ function setView(next, focus = true) {
   if ((isRecording() || recordStarting || raceStarting || exportPreparing) && next !== 'watch') return;
   if (statistics.isRecording() && next !== 'statistics') return;
   if (next !== 'watch' && (race.state === 'running' || countdown>0)) paused=true;
-  if(next==='statistics')music.suspend();
+  if(['statistics','pi'].includes(next))music.suspend();
   view=next;
-  const workspace=next==='statistics'?'statistics':gameMode;
+  const workspace=['statistics','pi'].includes(next)?next:gameMode;
   if(next==='watch')$('#'+gameMode+'-view').append($('#watch-view'));
-  for(const mode of ['track','arena','statistics','spiral']){
+  for(const mode of ['track','arena','statistics','spiral','pi']){
     $('#'+mode+'-view').hidden=workspace!==mode;
     $('#nav-'+mode).setAttribute('aria-pressed',String(workspace===mode&&(mode!=='arena'||arenaGame!=='territory')));
   }
   $('#nav-territory').setAttribute('aria-pressed',String(workspace==='arena'&&arenaGame==='territory'));
-  $('#watch-view').hidden=next!=='watch';statistics.setActive(next==='statistics');
-  document.title='Marble Studio — '+(workspace==='statistics'?'İstatistik yarışı':workspace==='spiral'?'Spiral çoğalma':workspace==='arena'?(arenaGame==='territory'?'Alan Savaşı':'Küre arenası'):'Parkur yarışı');
+  $('#watch-view').hidden=next!=='watch';statistics.setActive(next==='statistics');pi.setActive(next==='pi');
+  document.title='Marble Studio — '+(workspace==='pi'?'Pi Çarpışmaları':workspace==='statistics'?'İstatistik yarışı':workspace==='spiral'?'Spiral çoğalma':workspace==='arena'?(arenaGame==='territory'?'Alan Savaşı':'Küre arenası'):'Parkur yarışı');
   updateUI();draw();window.scrollTo({top:0,behavior:'instant'});
-  if(focus)$(next==='statistics'?'#statistics-title':'#watch-title').focus({preventScroll:true});
+  if(focus)$(next==='pi'?'#pi-title':next==='statistics'?'#statistics-title':'#watch-title').focus({preventScroll:true});
 }
 function freshSeed() {
   const previous=Number($('#seed').value);
@@ -227,7 +230,7 @@ function updateUI() {
   $('#new-race').disabled=empty||locked;
   $('#pause').disabled=empty || raceStarting || recordStarting || exportPreparing || (isRecording() && race.state==='finished');
   $('#record').disabled=empty||recordStarting||raceStarting||exportPreparing;
-  for(const mode of ['track','arena','territory','statistics','spiral'])$('#nav-'+mode).disabled=locked;
+  for(const mode of ['track','arena','territory','statistics','spiral','pi'])$('#nav-'+mode).disabled=locked;
   for(const selector of ['#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#sound','#open-settings'])$(selector).disabled=locked;
   $('#ranking-title').textContent=gameMode==='spiral'?'Spiraldeki toplar':race.finished.length?'Sonuçlar':race.state==='ready'?'Yarışmacılar':'Canlı sıralama';
   const spiral=gameMode==='spiral',arena=gameMode==='arena',territory=arena&&race.arenaGame==='territory',active=arena?race.balls.filter(b=>b.eliminatedAt===null).length:0;
@@ -263,7 +266,7 @@ function recordingUI(active) {
   $('#record').classList.toggle('recording',active);
   $('#record').innerHTML=active?'■ Kaydı bitir ve indir':'<span aria-hidden="true">●</span> Videoya kaydet';
   $('#record-help').textContent=active?'Kayıt sürüyor. Bu sekmeyi açık tut; finişte videon otomatik indirilecek.':'Yarış baştan oynatılır ve kaydedilir. Bittiğinde dikey videon otomatik iner.';
-  for(const selector of ['#nav-track','#nav-arena','#nav-territory','#nav-statistics','#nav-spiral','#open-settings','#reset','#speed','#new-race','#camera','#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#sound'])$(selector).disabled=active;
+  for(const selector of ['#nav-track','#nav-arena','#nav-territory','#nav-statistics','#nav-pi','#nav-spiral','#open-settings','#reset','#speed','#new-race','#camera','#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#sound'])$(selector).disabled=active;
 }
 async function startRecord() {
   if(recordStarting||raceStarting||exportPreparing)return;
@@ -314,6 +317,7 @@ $('#new-race').onclick=()=>startRace(true);$('#pause').onclick=togglePause;$('#r
 $('#nav-track').onclick=()=>switchRaceMode('track');$('#nav-arena').onclick=()=>switchRaceMode('arena');
 $('#nav-territory').onclick=()=>switchRaceMode('territory');
 $('#nav-spiral').onclick=()=>switchRaceMode('spiral');
+$('#nav-pi').onclick=()=>setView('pi');
 $('#nav-statistics').onclick=()=>setView('statistics');
 $('#count').onchange=resetRace;
 $('#arena-game').onchange=()=>switchRaceMode($('#arena-game').value==='territory'?'territory':'arena');
@@ -355,23 +359,25 @@ document.addEventListener('keydown',e=>{
 });
 document.addEventListener('visibilitychange',()=>{last=performance.now();});
 resetRace();setView('watch',false);requestAnimationFrame(frame);
-window.marbleStudio={getStatisticsState:()=>statistics.state(),getState:()=>({music:music.state(),leader:race.ranking()[0]?.name,mode:gameMode,spiralTheme,spiralProgress:race.progress,spiralRound:race.round,spiralMultiplier:race.multiplier,consumed:race.totalConsumed,totalBreaks:race.totalBreaks,links:race.links?.length,active:race.balls.filter(b=>b.eliminatedAt===null).length,cuts:race.totalCuts,name:projectName,state:race.state,view,workspace:view==='statistics'?'statistics':gameMode,time:race.time,count:race.balls.length,finished:race.finished.length,custom:race.isCustom,paused,cameraY,finishY:race.finishY,sections:race.sections.map(s=>({type:s.type,y:s.y,settings:s.settings})),seed:race.seed,recording:isRecording(),positions:race.balls.map(b=>({x:b.body.position.x,y:b.body.position.y})),names:race.balls.map(b=>b.name),podium:race.finished.slice(0,3).map(b=>({id:b.id,name:b.name,time:b.finishedAt})),countdown,resultElapsed,presentation:{...presentation}})};
+window.marbleStudio={getPiState:()=>pi.state(),getStatisticsState:()=>statistics.state(),getState:()=>({music:music.state(),leader:race.ranking()[0]?.name,mode:gameMode,spiralTheme,spiralProgress:race.progress,spiralRound:race.round,spiralMultiplier:race.multiplier,consumed:race.totalConsumed,totalBreaks:race.totalBreaks,links:race.links?.length,active:race.balls.filter(b=>b.eliminatedAt===null).length,cuts:race.totalCuts,name:projectName,state:race.state,view,workspace:['statistics','pi'].includes(view)?view:gameMode,time:race.time,count:race.balls.length,finished:race.finished.length,custom:race.isCustom,paused,cameraY,finishY:race.finishY,sections:race.sections.map(s=>({type:s.type,y:s.y,settings:s.settings})),seed:race.seed,recording:isRecording(),positions:race.balls.map(b=>({x:b.body.position.x,y:b.body.position.y})),names:race.balls.map(b=>b.name),podium:race.finished.slice(0,3).map(b=>({id:b.id,name:b.name,time:b.finishedAt})),countdown,resultElapsed,presentation:{...presentation}})};
 
 
 const busy=()=>isRecording()||recordStarting||raceStarting||exportPreparing||statistics.isRecording();
 async function captureSnapshot(){
   if(busy())throw new Error('Önce kaydı bitir.');
+  if(view==='pi'){pi.pause();return normalizeSnapshot({mode:'pi',project:pi.snapshot()});}
   persistDraft();const mode=gameMode,project=getProject(),balls=[...race.balls],stats=view==='statistics'?statistics.snapshot():null;
   exportPreparing=true;paused=true;if(stats)statistics.pause();music.suspend();music.lock(true);updateUI();
   try{return normalizeSnapshot(stats?{mode:'statistics',statistics:stats}:{mode,project,music:await music.exportPlan(balls)});}
   finally{exportPreparing=false;music.lock(false);updateUI();}
 }
 function previewThumbnail(){
-  const picture=view==='statistics'?document.querySelector('#statistics-canvas'):canvas;
+  const picture=view==='pi'?document.querySelector('#pi-canvas'):view==='statistics'?document.querySelector('#statistics-canvas'):canvas;
   const preview=document.createElement('canvas');preview.width=240;preview.height=Math.round(240*picture.height/picture.width);preview.getContext('2d').drawImage(picture,0,0,preview.width,preview.height);return preview.toDataURL('image/jpeg',.7);
 }
 async function openSnapshot(raw){
   if(busy())throw new Error('Önce kaydı bitir.');const saved=normalizeSnapshot(raw);document.body.classList.remove('automatic-home');persistDraft();
+  if(saved.mode==='pi'){pi.loadSnapshot(saved.project);setView('pi');return;}
   if(saved.mode==='statistics'){statistics.loadSnapshot(saved.statistics);statistics.persist();setView('statistics');return;}
   const key=saved.mode==='arena'&&saved.project.arenaGame==='territory'?'territory':saved.mode;
   modeDrafts[key]={...saved.project,preset:'saved',speed:'1',spiralSfxVersion:1};
@@ -379,7 +385,7 @@ async function openSnapshot(raw){
   localStorage.setItem('marble-studio-'+key+'-v1',JSON.stringify(modeDrafts[key]));
   switchRaceMode(key,true);music.importPlan(saved.music);persistDraft();
 }
-const workbench=createWorkbench({capture:captureSnapshot,openSnapshot,thumbnail:previewThumbnail,title:()=>view==='statistics'?statistics.snapshot().heading:projectName,notify:toast,isLocked:busy});
+const workbench=createWorkbench({capture:captureSnapshot,openSnapshot,thumbnail:previewThumbnail,title:()=>view==='pi'?pi.snapshot().name:view==='statistics'?statistics.snapshot().heading:projectName,notify:toast,isLocked:busy});
 $('#studio-export').onclick=()=>workbench.openExport();
 $('#studio-works').onclick=()=>workbench.openWorks();
 $('#studio-videos').onclick=()=>workbench.openVideos();
@@ -398,4 +404,4 @@ $('#studio-backup-file').onchange=async e=>{
   }catch(error){toast(error.message);}finally{e.target.value='';}
 };
 
-createAutomaticHome({create:options=>workbench.createAutomatic(options),videos:()=>workbench.openVideos(),works:()=>workbench.openWorks(),youtubeAccounts:()=>workbench.youtubeAccounts(),edit:kind=>{if(kind==='statistics')setView('statistics');else if(kind!=='auto')switchRaceMode(kind);},busy,pause:()=>{paused=true;statistics.pause();music.suspend();updateUI();}});
+createAutomaticHome({create:options=>workbench.createAutomatic(options),videos:()=>workbench.openVideos(),works:()=>workbench.openWorks(),youtubeAccounts:()=>workbench.youtubeAccounts(),edit:kind=>{if(kind==='pi')setView('pi');else if(kind==='statistics')setView('statistics');else if(kind!=='auto')switchRaceMode(kind);},busy,pause:()=>{paused=true;pi.pause();statistics.pause();music.suspend();updateUI();}});

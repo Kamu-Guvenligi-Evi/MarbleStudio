@@ -7,7 +7,7 @@ try{
   await page.goto('http://127.0.0.1:5173?edit=1');
   await page.waitForFunction(()=>window.marbleStudio);
   const state=()=>page.evaluate(()=>window.marbleStudio.getState());
-  assert.equal(await page.locator('.view-tabs button').count(),4);
+  assert.equal(await page.locator('.view-tabs button').count(),5);
   assert.equal(await page.locator('#build-view, #library-dialog, #section-dialog, #projects-dialog').count(),0);
   assert.equal((await state()).workspace,'track');
   assert.equal(await page.locator('#track-view #race').isVisible(),true);
@@ -60,11 +60,11 @@ try{
   await page.locator('#webm-options').evaluate(el=>el.open=true);await page.locator('#record').click();await download;
   await page.waitForFunction(()=>!document.querySelector('#nav-track').disabled);
   await page.setViewportSize({width:390,height:844});
-  for(const mode of ['track','arena','statistics','spiral']){
+  for(const mode of ['track','arena','territory','statistics','spiral']){
     await page.locator('#nav-'+mode).click();
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,mode+' mobile overflow');
     await page.screenshot({path:'artifacts/studio-'+mode+'-mobile.png',fullPage:true});
   }
   assert.deepEqual(errors,[]);
-  console.log('PASS: four workspaces, editor removal, isolated rosters/settings/music, persistence, playback, recording locks/download, mobile layouts.');
+  console.log('PASS: five workspaces, editor removal, isolated rosters/settings/music, persistence, playback, recording locks/download, mobile layouts.');
 }finally{await browser.close();}

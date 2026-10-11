@@ -4,10 +4,10 @@ const browser=await chromium.launch({channel:'chrome',headless:true});
 try{
   const page=await browser.newPage({viewport:{width:1440,height:1000},acceptDownloads:true}),errors=[];
   page.on('pageerror',error=>errors.push(error.message));
-  await page.goto('http://127.0.0.1:5173?edit=1');
+  await page.goto((process.env.TEST_ORIGIN??'http://127.0.0.1:5173')+'?edit=1');
   await page.waitForFunction(()=>window.marbleStudio);
   const state=()=>page.evaluate(()=>window.marbleStudio.getState());
-  assert.equal(await page.locator('.view-tabs button').count(),4);
+  assert.equal(await page.locator('.view-tabs button').count(),6);
   assert.equal(await page.locator('#build-view, #library-dialog, #section-dialog, #projects-dialog').count(),0);
   assert.equal((await state()).workspace,'track');
   assert.equal(await page.locator('#track-view #race').isVisible(),true);

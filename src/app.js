@@ -49,6 +49,7 @@ for(const mode of ['track','arena','territory','spiral']){
 const legacyDraft=loadDraft();
 if(legacyDraft&&!modeDrafts[legacyDraft.mode==='arena'?'arena':'track'])modeDrafts[legacyDraft.mode==='arena'?'arena':'track']=legacyDraft;
 if(modeDrafts.arena?.arenaGame==='territory'){if(!modeDrafts.territory)modeDrafts.territory=modeDrafts.arena;delete modeDrafts.arena;}
+await Promise.all(Object.values(modeDrafts).map(async saved=>{saved.ballImages=await upgradeCatalogImages(normalizeBallImages(saved.ballImages));}));
 const draft=modeDrafts.track;
 let trackPreset=draft?.preset??'saved';
 let gameMode='track';
@@ -402,6 +403,7 @@ async function openSnapshot(raw){
   if(busy())throw new Error('Önce kaydı bitir.');const saved=normalizeSnapshot(raw);document.body.classList.remove('automatic-home');$('#automatic-back').setAttribute('aria-expanded','false');persistDraft();
   if(saved.mode==='pi'){pi.loadSnapshot(saved.project);setView('pi');return;}
   if(saved.mode==='statistics'){statistics.loadSnapshot(saved.statistics);statistics.persist();setView('statistics');return;}
+  saved.project.ballImages=await upgradeCatalogImages(saved.project.ballImages);
   const key=saved.mode==='arena'&&saved.project.arenaGame==='territory'?'territory':saved.mode;
   modeDrafts[key]={...saved.project,preset:'saved',speed:'1',spiralSfxVersion:1};
   // Persist the currently open race before replacing the selected draft.

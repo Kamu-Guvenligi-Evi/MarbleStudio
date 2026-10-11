@@ -72,7 +72,7 @@ export function renderSpiral(ctx,race,{countdown=0,paused=false,channel}={}){
     ctx.save();ctx.shadowColor='#020812';ctx.shadowBlur=5;ctx.shadowOffsetY=2;
     ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=surface;ctx.fill();ctx.shadowBlur=0;ctx.shadowOffsetY=0;
     const img=ballImage(b.imageSrc);if(img){ctx.clip();ctx.drawImage(img,x-r,y-r,r*2,r*2);}ctx.restore();
-    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.strokeStyle='hsl('+bh+' 90% 76%)';ctx.lineWidth=.8;ctx.stroke();
+    if(!img){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.strokeStyle='hsl('+bh+' 90% 76%)';ctx.lineWidth=.8;ctx.stroke();}
   }
   ctx.save();ctx.translate(gatePoint.x,gatePoint.y);
   ctx.beginPath();ctx.arc(0,0,19,0,Math.PI*2);ctx.fillStyle='#101820';ctx.fill();ctx.strokeStyle=theme.edge;ctx.lineWidth=1.5;ctx.stroke();

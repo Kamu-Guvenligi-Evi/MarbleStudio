@@ -3,7 +3,7 @@ import {FrameInterpolation} from './frame-interpolation.js';
 import {PiSession,analyzePi} from './pi-collisions.js';
 import {renderPi} from './pi-renderer.js';
 import {EpisodeRace,drawEpisode} from './episode-race.js';
-import {prepareCatalogImage} from './image-catalog.js';
+import {prepareCatalogImage,upgradeCatalogImages} from './image-catalog.js';
 import {Race} from './physics.js';
 import {Spiral} from './spiral.js';
 import {Arena} from './arena.js';
@@ -64,8 +64,9 @@ window.factoryRenderer={
     if(job.recipe.mode==='pi'){
       race=new PiSession({...job.recipe,onHit:event=>{const t=(job.intro??0)+event.time/job.recipe.speed/job.speed,previous=lastHit.get('impact')??-1;if(t-previous>.025){hits.push({time:t,strength:3,x:event.x,type:'impact'});lastHit.set('impact',t);}}});race.start();return;
     }
-    await Promise.all((job.recipe.ballImages??[]).map(loadBallImage));
-    race=create(job.recipe,(strength,x,effect={type:'impact'})=>{const t=(job.intro??0)+steps/120/job.speed,previous=lastHit.get(effect.type)??-1;if(t-previous>(effect.type==='ice'?.035:.025)){hits.push({time:t,strength,x,...effect});lastHit.set(effect.type,t);}});musicEvents.push({time:0,id:(race.ranking()[0]?.entrantId??race.ranking()[0]?.id)});lastLeader=(race.ranking()[0]?.entrantId??race.ranking()[0]?.id);race.start();
+    const ballImages=await upgradeCatalogImages(job.recipe.ballImages??[]);
+    await Promise.all(ballImages.map(loadBallImage));
+    race=create({...job.recipe,ballImages},(strength,x,effect={type:'impact'})=>{const t=(job.intro??0)+steps/120/job.speed,previous=lastHit.get(effect.type)??-1;if(t-previous>(effect.type==='ice'?.035:.025)){hits.push({time:t,strength,x,...effect});lastHit.set(effect.type,t);}});musicEvents.push({time:0,id:(race.ranking()[0]?.entrantId??race.ranking()[0]?.id)});lastLeader=(race.ranking()[0]?.entrantId??race.ranking()[0]?.id);race.start();
   },
   frame(index){
     const elapsed=index/config.fps,mode=config.recipe.mode;

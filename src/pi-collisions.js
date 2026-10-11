@@ -6,7 +6,7 @@ export function normalizePi(raw={}){
   const digits=Number(raw.digits??3),speed=Number(raw.speed??1);
   if(![1,2,3,4].includes(digits))throw new Error('Pi basamak sayısı 1–4 olmalı.');
   if(![.25,.5,1,2].includes(speed))throw new Error('Pi oynatma hızı geçersiz.');
-  return {name:String(raw.name??'Pi Çarpışmaları').trim().slice(0,80)||'Pi Çarpışmaları',digits,speed,sound:raw.sound!==false};
+  return {name:String(raw.name??'Pi Çarpışmaları').trim().slice(0,80)||'Pi Çarpışmaları',digits,speed,sound:raw.sound!==false,autoIncrease:raw.autoIncrease===true};
 }
 
 export class PiCollisions{
@@ -56,10 +56,60 @@ export class PiCollisions{
   dispose(){}
 }
 
+// One shared timeline for the studio and exported video. Hold each result before
+// advancing, and keep collision audio timestamps relative to the whole sequence.
+export class PiSession{
+  constructor(options={}){
+    this.options=normalizePi(options);this.onHit=options.onHit??(()=>{});
+    this.time=0;this.state='ready';this.rounds=[];this.holdRemaining=0;
+    this.createRound(this.options.digits);
+  }
+  createRound(digits){
+    const offset=this.time;
+    this.current=new PiCollisions({...this.options,digits,onHit:event=>this.onHit({...event,time:offset+event.time})});
+  }
+  get mass(){return this.current.mass;}
+  get collisions(){return this.current.collisions;}
+  get energy(){return this.current.energy;}
+  get heavy(){return this.current.heavy;}
+  get light(){return this.current.light;}
+  get approximation(){return this.current.approximation;}
+  get transitioning(){return this.state==='running'&&this.current.state==='finished';}
+  start(){if(this.state==='ready'){this.state='running';this.current.start();}}
+  finishRound(){
+    if(this.current.state!=='finished')return;
+    this.rounds.push({digits:this.current.options.digits,mass:this.mass,collisions:this.collisions,approximation:this.approximation});
+    if(this.options.autoIncrease&&this.current.options.digits<4)this.holdRemaining=2;
+    else this.state='finished';
+  }
+  advanceRound(){this.createRound(this.current.options.digits+1);this.current.start();}
+  step(seconds){
+    if(this.state!=='running'||!Number.isFinite(seconds)||seconds<=0)return;
+    let remaining=seconds;
+    while(remaining>1e-10&&this.state==='running'){
+      if(this.transitioning){
+        const elapsed=Math.min(remaining,this.holdRemaining);
+        this.time+=elapsed;remaining-=elapsed;this.holdRemaining-=elapsed;
+        if(this.holdRemaining<=1e-10)this.advanceRound();
+      }else{
+        const before=this.current.time;this.current.step(remaining);
+        const elapsed=this.current.time-before;this.time+=elapsed;remaining=Math.max(0,remaining-elapsed);
+        this.finishRound();
+      }
+    }
+  }
+  nextCollision(){
+    this.start();if(this.state!=='running')return;
+    if(this.transitioning){this.time+=this.holdRemaining;this.holdRemaining=0;this.advanceRound();}
+    const before=this.current.time;this.current.nextCollision();this.time+=this.current.time-before;this.finishRound();
+  }
+  dispose(){this.current.dispose();}
+}
+
 export function analyzePi(options){
-  const race=new PiCollisions(options);race.start();
+  const race=new PiSession(options);race.start();
   for(let i=0;i<4000&&race.state!=='finished';i++)race.nextCollision();
-  return {complete:race.state==='finished',simulationSeconds:race.time/race.options.speed,hits:race.collisions,
+  return {complete:race.state==='finished',simulationSeconds:race.time/race.options.speed,hits:race.rounds.reduce((sum,round)=>sum+round.collisions,0),rounds:race.rounds,
     collisions:race.collisions,winner:null,rescues:0,finite:[race.heavy.x,race.light.x,race.energy].every(Number.isFinite),
     score:100,coverTime:race.time/race.options.speed*.6};
 }

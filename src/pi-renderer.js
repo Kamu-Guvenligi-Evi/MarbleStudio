@@ -1,47 +1,61 @@
-export function renderPi(ctx,race,{language='en',paused=false}={}){
-  const tr=language==='tr',w=ctx.canvas.width,h=ctx.canvas.height;
+export function renderPi(ctx,session,{language='en',paused=false}={}){
+  const race=session.current??session,tr=language==='tr',w=ctx.canvas.width,h=ctx.canvas.height;
+  const auto=session.options.autoIncrease,finished=race.state==='finished',digits=race.options.digits;
+  const mass=new Intl.NumberFormat(tr?'tr-TR':'en-US').format(race.mass);
   ctx.save();ctx.setTransform(w/540,0,0,h/960,0,0);
-  ctx.fillStyle='#000';ctx.fillRect(0,0,540,960);
-  const gradient=ctx.createLinearGradient(95,0,445,0);gradient.addColorStop(0,'#00dcf4');gradient.addColorStop(1,'#37fa51');
-  const text=(value,x,y,size,color,weight=500,font='Segoe UI')=>{ctx.font=`${weight} ${size}px ${font}`;ctx.textAlign='center';ctx.fillStyle=color;ctx.fillText(value,x,y,490);};
-  text('MARBLE STUDIO',270,62,11,'#555d65',600);
-  text(tr?'Biraz bekle… π?':'Wait for it… π?',270,214,43,gradient,700);
-  text(tr?'Çarpışmalar':'Collisions',270,296,23,'#7ded79',500,'Georgia');
-  text(String(race.collisions),270,362,72,'#46e641',500,'Georgia');
-  const floor=610,wall=race.wall;
-  ctx.fillStyle='#85480f';ctx.fillRect(wall,430,540-wall,floor-430);
-  ctx.save();ctx.beginPath();ctx.rect(wall,430,540-wall,floor-430);ctx.clip();
-  ctx.strokeStyle='#d6b084';ctx.lineWidth=.8;
-  for(let row=0;row<15;row++){
-    const y=430+row*13;ctx.beginPath();ctx.moveTo(wall,y);ctx.lineTo(540,y);ctx.stroke();
-    for(let x=wall+(row%2?13:0);x<=540;x+=26){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+13);ctx.stroke();}
+  const bg=ctx.createLinearGradient(0,0,540,960);bg.addColorStop(0,'#111d2c');bg.addColorStop(.55,'#060c15');bg.addColorStop(1,'#101e29');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,540,960);
+  const glow=ctx.createRadialGradient(270,310,10,270,310,280);glow.addColorStop(0,'#18e5c510');glow.addColorStop(1,'#18e5c500');ctx.fillStyle=glow;ctx.fillRect(0,0,540,640);
+  const text=(value,x,y,size,color='#eaf5fa',weight=500,align='center')=>{ctx.font=weight+' '+size+'px "Segoe UI", sans-serif';ctx.textAlign=align;ctx.fillStyle=color;ctx.fillText(String(value),x,y,480);};
+  const box=(x,y,width,height,radius,fill,stroke)=>{ctx.beginPath();ctx.roundRect(x,y,width,height,radius);ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1;ctx.stroke();}};
+  const accent=ctx.createLinearGradient(80,0,455,0);accent.addColorStop(0,'#5be8ff');accent.addColorStop(1,'#9bffb1');
+  text('MARBLE / STUDIO',32,43,12,'#9fb1c2',650,'left');
+  text('PHYSICS LAB  ·  01',508,43,11,'#6f869b',600,'right');
+  ctx.fillStyle='#233446';ctx.fillRect(32,62,476,1);
+  text(tr?'Çarpışmalardan π’ye':'Count your way to π',270,127,38,accent,750);
+  text(tr?'İki blok. Bir duvar. Sonsuz bir sayı.':'Two blocks. One wall. An infinite number.',270,160,16,'#93a8bb');
+  const levels=['1 kg','100 kg',tr?'10.000 kg':'10,000 kg','1M kg'];
+  for(let i=0;i<4;i++){
+    const active=digits===i+1,done=(session.rounds??[]).some(round=>round.digits===i+1),x=34+i*120;
+    box(x,193,112,37,10,active?'#173d42':'#101c29',active?'#59e1c8':'#293847');
+    text((done?'✓ ':'')+levels[i],x+56,217,13,active?'#adffe7':done?'#75bba9':'#778b9e',650);
   }
-  ctx.restore();
-  ctx.strokeStyle='#d6b084';ctx.strokeRect(wall,430,540-wall,floor-430);
-  ctx.fillStyle='#bfc0c2';ctx.fillRect(0,floor,540,29);ctx.fillStyle='#ededed';ctx.fillRect(0,floor,540,2);
-  function block(b,color,label){
-    const size=b.width,y=floor-size;
-    ctx.fillStyle=color;ctx.fillRect(b.x,y,size,size);
-    ctx.strokeStyle='#ffffff66';ctx.lineWidth=1;ctx.strokeRect(b.x+.5,y+.5,size-1,size-1);
-    ctx.fillStyle='#ffffff19';ctx.fillRect(b.x+1,y+1,size-2,5);
-    text(label,b.x+size/2,y+size/2+5,Math.min(15,size*.36),'#fff',700,'Georgia');
+  text(tr?'ÇARPIŞMA SAYISI':'COLLISIONS',270,275,12,'#96b3bc',650);
+  ctx.save();ctx.shadowColor='#60e8c966';ctx.shadowBlur=25;text(race.collisions,270,364,88,'#b6ffe4',700);ctx.restore();
+  text(mass+' kg  /  1 kg',270,405,17,'#aac4d3',600);
+  const floor=640,wall=race.wall;
+  ctx.strokeStyle='#31435840';ctx.lineWidth=1;
+  for(let x=32;x<wall;x+=28){ctx.beginPath();ctx.moveTo(x,459);ctx.lineTo(x,floor);ctx.stroke();}
+  for(let y=472;y<floor;y+=28){ctx.beginPath();ctx.moveTo(32,y);ctx.lineTo(wall,y);ctx.stroke();}
+  const bricks=ctx.createLinearGradient(wall,0,540,0);bricks.addColorStop(0,'#40566b');bricks.addColorStop(1,'#233344');
+  ctx.fillStyle=bricks;ctx.fillRect(wall,457,540-wall,floor-457);
+  ctx.save();ctx.beginPath();ctx.rect(wall,457,540-wall,floor-457);ctx.clip();ctx.strokeStyle='#96b4c44a';
+  for(let row=0;row<10;row++){
+    const y=457+row*21;ctx.beginPath();ctx.moveTo(wall,y);ctx.lineTo(540,y);ctx.stroke();
+    for(let x=wall+(row%2?21:0);x<540;x+=42){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+21);ctx.stroke();}
   }
-  block(race.heavy,'#438bd2',({1:'1 kg',100:'100 kg',10000:'10⁴ kg',1000000:'10⁶ kg'})[race.mass]);
-  block(race.light,'#bd4edf','1 kg');
-  if(race.state!=='finished'&&race.lastHit&&race.time-race.lastHit.time<.14){
-    const strength=1-(race.time-race.lastHit.time)/.14;
-    ctx.strokeStyle=`rgba(239,255,201,${strength*.8})`;ctx.lineWidth=2;
-    const x=race.lastHit.x,y=floor-16;
-    for(let i=0;i<7;i++){const a=i/7*Math.PI*2;ctx.beginPath();ctx.moveTo(x+Math.cos(a)*5,y+Math.sin(a)*5);ctx.lineTo(x+Math.cos(a)*16,y+Math.sin(a)*16);ctx.stroke();}
+  ctx.restore();ctx.fillStyle='#83afc5';ctx.fillRect(wall,457,3,floor-457);
+  ctx.fillStyle='#203b48';ctx.fillRect(0,floor,540,17);
+  ctx.save();ctx.shadowColor='#63edcc';ctx.shadowBlur=12;ctx.fillStyle='#92d5c8';ctx.fillRect(0,floor,540,2);ctx.restore();
+  ctx.fillStyle='#0a101a';ctx.fillRect(0,floor+17,540,8);
+  function block(b,top,bottom,label){
+    const size=b.width,y=floor-size,fill=ctx.createLinearGradient(b.x,y,b.x+size,y+size);fill.addColorStop(0,top);fill.addColorStop(1,bottom);
+    ctx.save();ctx.shadowColor=bottom;ctx.shadowBlur=18;box(b.x,y,size,size,5,fill);ctx.restore();
+    box(b.x+.5,y+.5,size-1,size-1,5,'#ffffff00','#ffffff60');ctx.fillStyle='#ffffff40';ctx.fillRect(b.x+5,y+4,size-10,2);
+    text(label,b.x+size/2,y+size/2+5,Math.min(14,size*.34),'#ffffff',750);ctx.fillStyle='#00000018';ctx.fillRect(b.x+4,y+size-5,size-8,3);
   }
-  text('π = 3.14159265358…',270,692,31,gradient,500,'Georgia');
-  if(race.state==='finished'){
-    text(tr?`${race.collisions} çarpışma`:`${race.collisions} collisions`,270,775,24,'#f4f6f4',600);
-    text(`π ≈ ${race.approximation}`,270,819,36,gradient,600,'Georgia');
-    text(tr?'Enerji korunur. Sayılar ortaya çıkar.':'Energy conserved. Digits revealed.',270,867,15,'#8a929a');
-  }else{
-    text(paused?(tr?'DURAKLATILDI':'PAUSED'):(tr?'İKİ BLOK. BİR DUVAR.':'TWO BLOCKS. ONE WALL.'),270,839,12,'#666e76',600);
-    text(`${new Intl.NumberFormat('en-US').format(race.mass)} : 1`,270,871,17,'#949aa1',500,'Georgia');
+  block(race.heavy,'#5ac8ff','#2460c3',({1:'1 kg',100:'100 kg',10000:'10⁴ kg',1000000:'10⁶ kg'})[race.mass]);
+  block(race.light,'#e298ff','#9542c7','1 kg');
+  if(!finished&&race.lastHit&&race.time-race.lastHit.time<.16){
+    const strength=1-(race.time-race.lastHit.time)/.16,x=race.lastHit.x,y=floor-16;ctx.strokeStyle='rgba(185,255,227,'+strength+')';ctx.lineWidth=2;
+    for(let i=0;i<8;i++){const a=i/8*Math.PI*2;ctx.beginPath();ctx.moveTo(x+Math.cos(a)*7,y+Math.sin(a)*7);ctx.lineTo(x+Math.cos(a)*23,y+Math.sin(a)*23);ctx.stroke();}
   }
-  ctx.restore();
+  box(32,714,476,133,18,'#111f2d','#2d4050');
+  text(finished?(tr?'BİR BASAMAK DAHA KEŞFEDİLDİ':'ANOTHER DIGIT REVEALED'):(tr?'SAYILARIN ARDINDAKİ SIR':'THE PATTERN BEHIND THE NUMBERS'),270,747,11,'#94afbd',650);
+  text(finished?'π ≈ '+race.approximation:'π = 3.14159265358…',270,791,finished?37:30,accent,650);
+  text(finished?race.collisions+(tr?' çarpışma · ':' collisions · ')+mass+' kg':(tr?'Her çarpışma, sayıya bir adım daha.':'Every collision brings us one step closer.'),270,821,13,'#a2b8c9');
+  const status=paused?(tr?'DURAKLATILDI':'PAUSED'):session.transitioning?(tr?'KÜTLE ×100 · SONRAKİ TUR':'MASS ×100 · NEXT ROUND'):session.state==='finished'?(tr?'DENEY TAMAMLANDI':'EXPERIMENT COMPLETE'):auto?(tr?'OTOMATİK KÜTLE ARTIŞI':'AUTOMATIC MASS INCREASE'):(tr?'TAM ESNEK ÇARPIŞMALAR':'PERFECTLY ELASTIC COLLISIONS');
+  text(status,270,891,12,'#82c8b5',650);
+  if(session.transitioning){const progress=1-session.holdRemaining/2;box(170,908,200,3,1,'#243d46');if(progress>0)box(170,908,200*progress,3,1,'#79e8c5');}
+  text('π',270,943,17,'#4a6275',600);ctx.restore();
 }

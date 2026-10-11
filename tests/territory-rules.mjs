@@ -18,7 +18,7 @@ battle.start();battle.step();assert.equal(battle.state,'finished');assert.deepEq
 
 const contact=make(),[hunter,greedy]=contact.balls;
 const hit=contact.neighbors(hunter.cell)[0];
-greedy.cell=hit;greedy.trail=[contact.neighbors(hit)[0]];hunter.route=[hit];
+greedy.cell=hit;greedy.body.position=contact.position(hit);greedy.trail=[contact.neighbors(hit)[0]];hunter.route=[hit];
 contact.advance(hunter);assert.equal(greedy.eliminatedAt,0,'Touching an exposed body also eliminates it');
 const safe=make(),[visitor,defender]=safe.balls;
 visitor.route=[defender.cell];safe.advance(visitor);

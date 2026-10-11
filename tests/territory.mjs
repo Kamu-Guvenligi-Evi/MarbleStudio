@@ -18,7 +18,9 @@ assert.equal(b.area,121,'Only the closed 11 by 11 region is filled');
 assert.equal(fence.balls[1].area,0);assert.equal(b.trail.length,0);
 const fight=create({arenaShape:'square'}),attacker=fight.balls[0],victim=fight.balls[1],target=fight.neighbors(attacker.cell)[0];
 victim.trail=[target];fight.trailOwners[target]=victim.id;attacker.route=[target];fight.advance(attacker);
-assert.equal(attacker.cuts,1);assert.equal(victim.trail.length,0);assert.equal(victim.eliminatedAt,null,'A cut cancels the excursion; the racer stays in the battle');
+assert.equal(attacker.cuts,1);assert.equal(victim.trail.length,0);assert.equal(victim.eliminatedAt,0,'Cutting an exposed trail eliminates its owner');
+assert.equal(victim.area,0);assert.equal(attacker.area,18,'All of the eliminated player’s territory transfers to the attacker');
+const frozenVictim=structuredClone(victim);fight.advance(victim);assert.deepEqual(victim,frozenVictim);
 for(const shape of Object.keys(TERRITORY_SHAPES))for(const count of [6,20]){
  const a=create({arenaShape:shape,count,territoryDuration:30}),replay=create({arenaShape:shape,count,territoryDuration:30});
  assert.ok(a instanceof TerritoryBattle);const mask=[...a.cells].map(x=>x===-2);a.start();replay.start();
@@ -26,7 +28,8 @@ for(const shape of Object.keys(TERRITORY_SHAPES))for(const count of [6,20]){
   a.step(1000/30);replay.step(1000/30);
   for(const ball of a.balls){assert.notEqual(a.cells[ball.cell],-2);assert.ok(Number.isFinite(ball.body.position.x));assert.ok(Number.isFinite(ball.body.position.y));}
  }
- assert.equal(a.time,30);assert.ok(a.totalClaims>0);assert.ok(a.winners.length>0);
+ assert.ok(a.time>0&&a.time<=30);assert.ok(a.totalClaims>0);assert.ok(a.winners.length>0);
+ if(a.time<30)assert.equal(a.balls.filter(b=>b.eliminatedAt===null).length,1);
  assert.equal(a.winners[0].area,Math.max(...a.balls.map(b=>b.area)));
  assert.deepEqual(a.cells,replay.cells);assert.deepEqual(a.balls.map(b=>b.body.position),replay.balls.map(b=>b.body.position));
  assert.deepEqual([...a.cells].map(x=>x===-2),mask,'The shape boundary never changes');
@@ -39,4 +42,4 @@ for(const shape of Object.keys(TERRITORY_SHAPES))for(const count of [6,20]){
 }
 assert.throws(()=>normalizeSnapshot({mode:'arena',project:{arenaGame:'territory',arenaShape:'bad'}}));
 assert.throws(()=>normalizeSnapshot({mode:'arena',project:{arenaGame:'territory',territoryDuration:999}}));
-console.log('PASS: enclosed capture, stolen land, interrupted trails, five bounded shapes, 6/20 racers, deterministic replay, timed winners and export roundtrip.');
+console.log('PASS: enclosed capture, stolen land, elimination and territory inheritance, 11 bounded maps, 6/20 racers, deterministic replay, winners and export roundtrip.');

@@ -13,6 +13,8 @@ import { createStatistics } from './statistics.js';
 import { Spiral } from './spiral.js';
 import { renderSpiral } from './spiral-renderer.js';
 import { Arena } from './arena.js';
+import { TERRITORY_SHAPES, TERRITORY_BUFFS } from './territory.js';
+import { COUNTRY_MAPS } from './territory-maps.js';
 import { renderArena } from './arena-renderer.js';
 import { Race } from './physics.js';
 import { renderRace } from './renderer.js';
@@ -26,6 +28,11 @@ import './studio-light.css';
 
 const $ = s => document.querySelector(s);
 const canvas = $('#race'), ctx = canvas.getContext('2d');
+for(const [id,name] of Object.entries(TERRITORY_SHAPES))if(!$('#arena-shape').querySelector(`option[value="${id}"]`))$('#arena-shape').add(new Option(name,id));
+for(let count=2;count<=20;count++)if(!$('#count').querySelector(`option[value="${count}"]`)){
+  const option=new Option(String(count),String(count));option.dataset.territoryOnly='true';option.hidden=true;option.disabled=true;
+  $('#count').add(option,[...$('#count').options].find(o=>Number(o.value)>count)??null);
+}
 const modeDrafts={};
 for(const mode of ['track','arena','territory','spiral']){
   try{const raw=JSON.parse(localStorage.getItem('marble-studio-'+mode+'-v1'));if(raw)modeDrafts[mode]={...normalizeProject(raw),spiralSfxVersion:raw.spiralSfxVersion??0,preset:raw.preset??'saved',speed:raw.speed??'1'};}catch{}
@@ -139,18 +146,19 @@ function resetRace() {
 function syncModeUI(){
   const arena=gameMode==='arena',spiral=gameMode==='spiral',territory=arena&&arenaGame==='territory';
   $('#arena-options').hidden=!arena;$('#arena-game').value=arenaGame;$('#arena-shape').value=arenaShape;$('#territory-duration').value=territoryDuration;$('#arena-shape-field').hidden=!territory;$('#territory-duration-field').hidden=!territory;
-  $('#arena-rules').textContent=territory?'Kendi alanından çıkıp iz çiz. Geri dönünce kapalı bölge senin olur. Rakibinin izini keserek hamlesini boz. Süre sonunda en çok alanı olan kazanır.':'Her top 3 bağla başlar. Duvara çarptıkça bağ kurar, rakiplerinin bağlarını keser. Bağı kalmayan elenir; son bağlı top kazanır.';
+  $('#arena-rules').textContent=territory?`Rakiplerin taralı alanlarını kapalı iz çizerek ele geçir. Kendi alanı dışındaki rakibe veya açık izine dokun: elenir, tüm alanı sana geçer. ⚡ Hız: ${TERRITORY_BUFFS.speed.duration} saniye ×1,8. 🛡 Dokunulmazlık: ${String(TERRITORY_BUFFS.shield.duration).replace('.',',')} saniye. Son kalan veya süre sonunda en çok alanı olan kazanır.`+(COUNTRY_MAPS[arenaShape]?' Ülke sahası ana kara sınırlarından sadeleştirilmiştir; ayrı adalar ve kara parçaları dahil değildir.':''):'Her top 3 bağla başlar. Duvara çarptıkça bağ kurar, rakiplerinin bağlarını keser. Bağı kalmayan elenir; son bağlı top kazanır.';
   $('#track-preset-field').hidden=gameMode!=='track';$('#arena-rules').hidden=!arena;$('#camera').closest('label').hidden=gameMode!=='track';
   $('#spiral-rules').hidden=!spiral;
   $('#spiral-theme-field').hidden=!spiral;$('#spiral-theme').value=spiralTheme;
   $('#trails').closest('.settings-toggle').hidden=spiral;
   $('#count-single').hidden=!spiral;$('#count-single').disabled=!spiral;
-  $('#count-label').textContent=spiral?'Başlangıç top sayısı':'Yarışmacı sayısı';
+  for(const option of $('#count').querySelectorAll('[data-territory-only]')){option.hidden=!territory;option.disabled=!territory;}
+  $('#count-label').textContent=spiral?'Başlangıç top sayısı':territory?'Oyuncu sayısı (2–20)':'Yarışmacı sayısı';
   $('#track-preset').value=trackPreset;
   $('#track-preset option[value="saved"]').hidden=trackPreset!=='saved';
   $('#watch-title').textContent=spiral?'Spiral çoğalma':territory?'Alan Savaşı':arena?'Küre arenası':'Parkur yarışı';
   $('#race-eyebrow').textContent=spiral?'YOLU KIR · ÇOĞAL · MERKEZE ULAŞ':territory?'ALANI KAP · RAKİBİNİN İZİNİ KES':arena?'BAĞ KUR · RAKİPLERİNİ ELE':'ENGELLERİ AŞ · FİNİŞE ULAŞ';
-  $('#race-description').textContent=spiral?'Bir topla başla. Spiral yolu parçalarken topların çoğalmasını izle.':territory?'Şeklini ve kadronu seç. Kapalı bölgeleri ele geçir, en geniş alan senin olsun.':arena?'Kadronu seç. Son bağlı top kalana kadar mücadele et.':'Hazır parkurunu seç, kadronu kur ve yarışı başlat.';
+  $('#race-description').textContent=spiral?'Bir topla başla. Spiral yolu parçalarken topların çoğalmasını izle.':territory?'Haritanı ve oyuncu sayını seç. Rakiplerini ele, alanlarını al ve güçlendirmeleri topla.':arena?'Kadronu seç. Son bağlı top kalana kadar mücadele et.':'Hazır parkurunu seç, kadronu kur ve yarışı başlat.';
   if(spiral)$('#race-description').textContent=SPIRAL_THEMES[spiralTheme].description;
   $('.progress-heading span').textContent=spiral?'Açılan spiral yolu':territory?'Yarış süresi':arena?'Elenen toplar':'Parkur ilerlemesi';
   $('#settings-title').textContent=spiral?'Spiral çoğalma ayarları':territory?'Alan Savaşı ayarları':arena?'Küre arenası ayarları':'Parkur yarışı ayarları';
@@ -223,9 +231,9 @@ function updateUI() {
   for(const selector of ['#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#sound','#open-settings'])$(selector).disabled=locked;
   $('#ranking-title').textContent=gameMode==='spiral'?'Spiraldeki toplar':race.finished.length?'Sonuçlar':race.state==='ready'?'Yarışmacılar':'Canlı sıralama';
   const spiral=gameMode==='spiral',arena=gameMode==='arena',territory=arena&&race.arenaGame==='territory',active=arena?race.balls.filter(b=>b.eliminatedAt===null).length:0;
-  $('#finish-count').textContent=spiral?`${race.balls.length} top · ${race.totalBreaks} kırılma`:territory?`${Math.ceil(race.duration-race.time)} sn kaldı`:arena?`${active} / ${race.balls.length} top kaldı`:race.finished.length?`${race.finished.length} / ${race.balls.length} finish`:`${race.balls.length} top`;
-  $('#ranking').innerHTML=ranked.slice(0,5).map((b,i)=>`<div class="rank-row"><span class="rank-num">${String(i+1).padStart(2,'0')}</span><span class="rank-ball" style="background:${b.color}">${b.imageSrc?`<img src="${b.imageSrc}" alt="">`:''}</span><span class="rank-name">${escapeText(b.name)}</span><span class="rank-value">${spiral?'#'+(b.id+1):territory?race.share(b).toFixed(1)+'% alan':arena?(b.eliminatedAt!==null?'Elendi':race.linkCount(b)+' bağ · '+b.cuts+' kesiş'):b.finishedAt!==null?b.finishedAt.toFixed(2)+' sn':Math.round(Math.max(0,Math.min(100,(b.body.position.y-260)/(race.finishY-260)*100)))+'%'}</span></div>`).join('');
-  const progress=spiral?race.progress*100:territory?race.time/race.duration*100:arena?(race.balls.length-active)/race.balls.length*100:Math.max(0,Math.min(100,(ranked[0].body.position.y-260)/(race.finishY-260)*100));
+  $('#finish-count').textContent=spiral?`${race.balls.length} top · ${race.totalBreaks} kırılma`:territory?`${active}/${race.balls.length} oyuncu · ${race.state==='finished'?'Bitti':Math.ceil(race.duration-race.time)+' sn'}`:arena?`${active} / ${race.balls.length} top kaldı`:race.finished.length?`${race.finished.length} / ${race.balls.length} finish`:`${race.balls.length} top`;
+  $('#ranking').innerHTML=ranked.slice(0,5).map((b,i)=>`<div class="rank-row"><span class="rank-num">${String(i+1).padStart(2,'0')}</span><span class="rank-ball" style="background:${b.color}">${b.imageSrc?`<img src="${b.imageSrc}" alt="">`:''}</span><span class="rank-name">${escapeText(b.name)}</span><span class="rank-value">${spiral?'#'+(b.id+1):territory?(b.eliminatedAt!==null?'Elendi':race.share(b).toFixed(1)+'% alan'+(b.speedUntil>race.time?' ⚡':'')+(b.shieldUntil>race.time?' 🛡':'')):arena?(b.eliminatedAt!==null?'Elendi':race.linkCount(b)+' bağ · '+b.cuts+' kesiş'):b.finishedAt!==null?b.finishedAt.toFixed(2)+' sn':Math.round(Math.max(0,Math.min(100,(b.body.position.y-260)/(race.finishY-260)*100)))+'%'}</span></div>`).join('');
+  const progress=spiral?race.progress*100:territory?(race.state==='finished'?100:race.time/race.duration*100):arena?(race.balls.length-active)/race.balls.length*100:Math.max(0,Math.min(100,(ranked[0].body.position.y-260)/(race.finishY-260)*100));
   $('#progress-bar').style.width=progress+'%'; $('#progress-label').textContent=Math.round(progress)+'%';
 }
 function draw() {

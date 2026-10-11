@@ -661,6 +661,69 @@
       },
       "sha256": "cc573f2ed61dc02adc08a2c68fcd83aebce5ad8927314df9425bb3efe4fdd381",
       "bytes": 13480626
+    },
+    {
+      "id": "shared-0d7e58de19fd09e9",
+      "mode": "arena",
+      "contentKind": "arena",
+      "copy": {
+        "title": "Favorini seç. Sonuna kadar takip et."
+      },
+      "createdAt": "2026-10-06T11:44:02.666Z",
+      "completedAt": "2026-10-06T11:46:13.328Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "0d7e58de19fd09e9bbe6ffbc33a12b48f4194252453baaa500f12fe00fc6bc7c",
+      "bytes": 8408988
+    },
+    {
+      "id": "shared-ed90ae107899dd6f",
+      "mode": "track",
+      "contentKind": "track",
+      "copy": {
+        "title": "Liderliği kim ele geçirecek?"
+      },
+      "createdAt": "2026-10-06T12:02:25.112Z",
+      "completedAt": "2026-10-06T12:04:15.411Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "ed90ae107899dd6fb00f6a95b25aa15d1b4ce28fafb7ae355397172441c44cbb",
+      "bytes": 4719074
+    },
+    {
+      "id": "shared-95fe33e051f16863",
+      "mode": "track",
+      "contentKind": "track",
+      "copy": {
+        "title": "6 yarışmacı. Tek finiş. Senin favorin kim?"
+      },
+      "createdAt": "2026-10-06T14:33:53.383Z",
+      "completedAt": "2026-10-06T14:38:24.183Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "95fe33e051f16863af8f10b849df204afe9352899c6ea1ad11bcf8399f478ad3",
+      "bytes": 9720312
     }
   ]
 }

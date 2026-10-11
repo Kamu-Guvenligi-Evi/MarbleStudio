@@ -47,6 +47,8 @@ export class TerritoryBattle{
   speed(b){return b.speedUntil>this.time?TERRITORY_BUFFS.speed.multiplier:1;}
   seekPickup(b){
     if(this.time<(b.nextPickupLookAt??0)||b.trail.length>30)return;
+    // Bank an almost finished claim before taking a buff detour.
+    if(b.trail.length&&b.route.slice(0,8).some(cell=>this.cells[cell]===b.id))return;
     b.nextPickupLookAt=this.time+.35;
     const p=this.position(b.cell),wanted=this.pickups.filter(item=>{
       const q=this.position(item.cell),active=b[item.type==='speed'?'speedUntil':'shieldUntil']>this.time;
@@ -66,6 +68,29 @@ export class TerritoryBattle{
       if(depth[cell]>=16)continue;
       for(const n of this.neighbors(cell))if(parent[n]===-1){parent[n]=cell;depth[n]=depth[cell]+1;queue.push(n);}
     }
+  }
+  tryCloseTrail(b){
+    if(!this.exposed(b)||b.trail.length<12||this.protected(b)||this.time<(b.nextSafetyLookAt??0))return false;
+    b.nextSafetyLookAt=this.time+.6;
+    if(b.route.slice(0,8).some(cell=>this.cells[cell]===b.id))return false;
+    const p=this.position(b.cell),others=this.balls.filter(other=>other!==b&&other.eliminatedAt===null);
+    if(!others.some(other=>Math.hypot(p.x-other.body.position.x,p.y-other.body.position.y)<60))return false;
+    // Only a nearby exit from immediate danger; keep ordinary greedy loops elsewhere.
+    const parent=new Int16Array(6400).fill(-1),depth=new Uint8Array(6400),queue=[b.cell];parent[b.cell]=b.cell;
+    for(let head=0;head<queue.length;head++){
+      const cell=queue[head];
+      if(this.cells[cell]===b.id){
+        const path=[];for(let i=cell;i!==b.cell;i=parent[i])path.push(i);
+        b.route=path.reverse();return true;
+      }
+      if(depth[cell]>=8)continue;
+      for(const n of this.neighbors(cell))if(parent[n]===-1){
+        const q=this.position(n);
+        if(others.some(other=>Math.hypot(q.x-other.body.position.x,q.y-other.body.position.y)<b.body.circleRadius+other.body.circleRadius+5))continue;
+        parent[n]=cell;depth[n]=depth[cell]+1;queue.push(n);
+      }
+    }
+    return false;
   }
   plan(b){
     if(b.eliminatedAt!==null)return;
@@ -146,7 +171,7 @@ export class TerritoryBattle{
   move(b,dt){
     const before={...b.body.position};let budget=dt*this.speed(b)/.035;
     while(budget>1e-8&&b.eliminatedAt===null){
-      if(b.phase===0&&!b.retreating)this.seekPickup(b);
+      if(b.phase===0&&!b.retreating&&!this.tryCloseTrail(b))this.seekPickup(b);
       if(!b.route.length)this.plan(b);if(!b.route.length)break;
       const p=this.position(b.cell),q=this.position(b.route[0]);
       const amount=Math.min(budget,b.retreating?b.phase:1-b.phase);

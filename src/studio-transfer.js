@@ -1,8 +1,10 @@
+import {normalizePi,PI_KEY} from './pi-collisions.js';
 import {normalizeProject} from './projects.js';
 import {parseStatistics} from './statistics-data.js';
 
 export function normalizeSnapshot(raw) {
   if(!raw||typeof raw!=='object')throw new Error('Studio çalışması geçersiz.');
+  if(raw.mode==='pi')return {mode:'pi',project:normalizePi(raw.project)};
   if(raw.mode==='statistics'){
     const s=raw.statistics;if(!s)throw new Error('İstatistik tablosu eksik.');parseStatistics(s.csv);
     const statistics={csv:s.csv};
@@ -34,6 +36,7 @@ export function parseBackup(text){
     if(!/^marble-studio-[a-z0-9-]+$/.test(key)||typeof value!=='string')throw new Error('Yedekte geçersiz kayıt var.');
     let data;try{data=JSON.parse(value);}catch{throw new Error('Yedekte okunamayan ayar: '+key);}
     if(/^marble-studio-(track|arena|spiral)-v1$/.test(key))normalizeProject(data);
+    if(key===PI_KEY)normalizePi(data);
     if(key==='marble-studio-statistics-v1')normalizeSnapshot({mode:'statistics',statistics:data});
   }
   return b;

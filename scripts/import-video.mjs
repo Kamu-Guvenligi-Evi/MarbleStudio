@@ -7,7 +7,7 @@ import {spawn} from 'node:child_process';
 import path from 'node:path';
 import ffmpeg from 'ffmpeg-static';
 export async function importVideo(request,{root,mode='track',title='Video'}){
-  const type=String(request.headers['content-type']??'').split(';')[0];if(!['video/mp4','video/webm'].includes(type)||!['track','arena','territory','spiral','statistics'].includes(mode))throw new Error('MP4 veya WebM video seçin.');
+  const type=String(request.headers['content-type']??'').split(';')[0];if(!['video/mp4','video/webm'].includes(type)||!['track','arena','territory','spiral','statistics','pi'].includes(mode))throw new Error('MP4 veya WebM video seçin.');
   const contentKind=mode;if(mode==='territory')mode='arena';const recipe={mode,...(contentKind==='territory'?{arenaGame:'territory'}:{})};
   const id=randomUUID(),dir=path.resolve(root,id),videoFile=type==='video/webm'?'video.webm':'video.mp4';
   if(path.dirname(dir)!==path.resolve(root))throw new Error('Video klasörü doğrulanamadı.');await mkdir(dir,{recursive:true});

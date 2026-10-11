@@ -5,7 +5,7 @@ function separated(race){
   const live=race.balls.filter(b=>b.eliminatedAt===null);
   for(let i=0;i<live.length;i++)for(let j=i+1;j<live.length;j++){
     const a=live[i].body.position,b=live[j].body.position;
-    assert.ok(Math.hypot(a.x-b.x,a.y-b.y)>=20-1e-7,`${race.arenaShape}: players ${live[i].id}/${live[j].id} overlap at ${race.time}`);
+    assert.ok(Math.hypot(a.x-b.x,a.y-b.y)>=live[i].body.circleRadius+live[j].body.circleRadius+2-1e-7,`${race.arenaShape}: players ${live[i].id}/${live[j].id} overlap at ${race.time}`);
   }
 }
 function place(race,b,cell){b.cell=cell;b.body.position=race.position(cell);b.phase=0;b.route=[];}
@@ -26,18 +26,21 @@ assert.equal(mover.cell,goal,'A protected obstacle must not permanently stop mov
 assert.ok(blocked.balls.every(b=>b.eliminatedAt===null),'Protected bodies survive contact');
 
 // Head-on players may retreat and reroute, but may never pass through each other.
-const headOn=new TerritoryBattle({arenaShape:'square',count:2});
-const [left,right]=headOn.balls;
+for(const count of [2,3]){
+const headOn=new TerritoryBattle({arenaShape:'square',count});
+const left=headOn.balls[0],right=headOn.balls[count-1];
+if(count===3)headOn.balls[1].eliminatedAt=0;
 place(headOn,left,start);place(headOn,right,start+16);headOn.plan=()=>{};
 left.route=Array.from({length:16},(_,i)=>start+i+1);
 right.route=Array.from({length:16},(_,i)=>start+15-i);
 for(const b of headOn.balls)b.shieldUntil=100;
 for(let i=0;i<600;i++){
   headOn.time+=1/120;
-  for(const b of headOn.balls)headOn.move(b,1/120);
+  for(const b of [left,right])headOn.move(b,1/120);
   separated(headOn);
 }
 assert.equal(left.cell,start+16);assert.equal(right.cell,start);
+}
 
 // Check every simulation tick, including speed and shield pickups, on every arena.
 for(const arenaShape of Object.keys(TERRITORY_SHAPES)){

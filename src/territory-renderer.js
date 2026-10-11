@@ -22,15 +22,15 @@ export function renderTerritory(ctx,race,{countdown=0,paused=false}={}){
   for(const pickup of race.pickups){const p=race.position(pickup.cell);ctx.beginPath();ctx.arc(p.x,p.y,15,0,Math.PI*2);ctx.fillStyle='#091827ee';ctx.fill();ctx.strokeStyle=pickup.type==='speed'?'#ffe66d':'#8ce9ff';ctx.lineWidth=1.5;ctx.stroke();buffIcon(ctx,pickup.type,p.x,p.y,10);}
   ctx.restore();path();ctx.strokeStyle='#adcdf0';ctx.lineWidth=2;ctx.stroke();
   // Bodies stay fully visible at coastlines; shields sit behind every player.
-  for(const b of race.balls)if(b.eliminatedAt===null&&b.shieldUntil>race.time){const {x,y}=b.body.position;ctx.beginPath();ctx.arc(x,y,15,0,Math.PI*2);ctx.fillStyle='#8ce9ff30';ctx.fill();ctx.strokeStyle='#8ce9ff';ctx.lineWidth=2;ctx.stroke();}
+  for(const b of race.balls)if(b.eliminatedAt===null&&b.shieldUntil>race.time){const {x,y}=b.body.position;ctx.beginPath();ctx.arc(x,y,b.body.circleRadius+6,0,Math.PI*2);ctx.fillStyle='#8ce9ff30';ctx.fill();ctx.strokeStyle='#8ce9ff';ctx.lineWidth=2;ctx.stroke();}
   for(const b of race.balls){
     if(b.eliminatedAt!==null)continue;
-    const {x,y}=b.body.position;
-    ctx.beginPath();ctx.arc(x,y,10,0,Math.PI*2);ctx.fillStyle='#050b17';ctx.fill();
-    drawMarble(ctx,b,x,y,9);
-    ctx.beginPath();ctx.arc(x,y,9,0,Math.PI*2);ctx.strokeStyle='#f5f8ff';ctx.lineWidth=1;ctx.stroke();
-    if(!b.imageSrc){ctx.beginPath();ctx.arc(x,y,6.5,0,Math.PI*2);ctx.fillStyle='#081020e8';ctx.fill();ctx.font='800 10px Segoe UI';ctx.textAlign='center';ctx.fillStyle='#fff';ctx.fillText(String(b.id+1),x,y+3.5);}
-    if(b.speedUntil>race.time)buffIcon(ctx,'speed',x+12,y-12,7);
+    const {x,y}=b.body.position,r=b.body.circleRadius;
+    ctx.beginPath();ctx.arc(x,y,r+1,0,Math.PI*2);ctx.fillStyle='#050b17';ctx.fill();
+    drawMarble(ctx,b,x,y,r);
+    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.strokeStyle='#f5f8ff';ctx.lineWidth=1;ctx.stroke();
+    if(!b.imageSrc){ctx.beginPath();ctx.arc(x,y,8,0,Math.PI*2);ctx.fillStyle='#081020e8';ctx.fill();ctx.font='800 12px Segoe UI';ctx.textAlign='center';ctx.fillStyle='#fff';ctx.fillText(String(b.id+1),x,y+4);}
+    if(b.speedUntil>race.time)buffIcon(ctx,'speed',x+r+3,y-r-3,7);
   }
   const leaders=race.ranking().filter(b=>b.eliminatedAt===null).slice(0,3);leaders.forEach((b,i)=>{const x=270+(i-(leaders.length-1)/2)*170;ctx.fillStyle=b.color;ctx.fillRect(x-63,786,126,3);text(`${race.share(b).toFixed(1)}%`,x,822,25);text(raceName(race,b),x,847,12,'#bdd1e7');});
   const event=race.events[0];if(event){const name=raceName(race,race.balls[event.owner]);text(event.type==='elimination'?(tr?`${raceName(race,race.balls[event.cutter])}, ${name} oyuncusunu eledi · alanı devraldı`:`${raceName(race,race.balls[event.cutter])} eliminated ${name} and took their land`):event.type==='speed'?(tr?`${name} · ${TERRITORY_BUFFS.speed.duration} saniye hız artışı`:`${name} · ${TERRITORY_BUFFS.speed.duration} seconds of speed`):event.type==='shield'?(tr?`${name} · ${String(TERRITORY_BUFFS.shield.duration).replace('.',',')} saniye dokunulmazlık`:`${name} · ${TERRITORY_BUFFS.shield.duration} seconds of invincibility`):(tr?`${name} yeni alan ele geçirdi`:`${name} captured more land`),270,878,12,'#b5c9dd');}

@@ -33,6 +33,28 @@ pickup.time=3.49;assert.equal(pickup.protected(runner),true);
 pickup.time=3.5;assert.equal(pickup.protected(runner),false);assert.equal(pickup.speed(runner),1.8);
 pickup.time=4;assert.equal(pickup.speed(runner),1);
 assert.ok(TERRITORY_BUFFS.speed.multiplier>1);
+for(const type of ['speed','shield']){
+  const chase=make(),b=chase.balls[0],start=40*80+40,goal=start-6;
+  b.cell=start;b.body.position=chase.position(start);chase.setOwner(start,b.id);
+  b.route=Array.from({length:6},(_,i)=>start-i-1);chase.plan=()=>{};
+  chase.pickups=[{type,cell:start-8*80,expiresAt:10}];
+  let collected=false;
+  for(let i=0;i<240;i++){
+    const before={...b.body.position};chase.time+=1/120;chase.move(b,1/120);
+    assert.ok(Math.hypot(b.body.position.x-before.x,b.body.position.y-before.y)<=6*1.8/.035/120+1e-7,'Seeking a buff must not teleport');
+    if(!chase.pickups.length)collected=true;
+  }
+  assert.ok(collected,`A nearby ${type} pickup off the original route is deliberately collected`);
+  assert.equal(b.cell,goal,'After collecting a buff, the original route is completed');
+}
+for(const scenario of ['distant','active','expiring','long-trail']){
+  const chase=make(),b=chase.balls[0],start=40*80+40;
+  b.cell=start;b.body.position=chase.position(start);b.route=[start-1];
+  chase.pickups=[{type:'speed',cell:start-(scenario==='distant'?24:8)*80,expiresAt:scenario==='expiring'?.1:10}];
+  if(scenario==='active')b.speedUntil=5;
+  if(scenario==='long-trail')b.trail=Array.from({length:31},(_,i)=>start+i);
+  chase.seekPickup(b);assert.deepEqual(b.route,[start-1],`${scenario}: keep taking land instead of chasing this buff`);
+}
 const plain=make(),fast=make();
 for(const race of [plain,fast]){
   const b=race.balls[0],start=40*80+30;

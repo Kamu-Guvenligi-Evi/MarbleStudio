@@ -1,3 +1,4 @@
+import {FrameInterpolation} from './frame-interpolation.js';
 import {EpisodeRace,drawEpisode} from './episode-race.js';
 import {prepareCatalogImage} from './image-catalog.js';
 import {Race} from './physics.js';
@@ -16,6 +17,8 @@ const canvas=document.querySelector('#render'),ctx=canvas.getContext('2d');
 const source=document.createElement('canvas');source.width=1080;source.height=1920;const sourceCtx=source.getContext('2d');
 const create=(r,onHit=()=>{})=>{const race=new (r.episode?EpisodeRace:({track:Race,spiral:Spiral,arena:Arena}[r.mode]))({...r,onHit});race.language=r.language??'en';return race;};
 const ended=(r,mode,exact=false)=>mode==='track'&&!exact&&!r.episode?r.finished.length>0:r.state==='finished';
+const interpolation=new FrameInterpolation();
+let previousCameraY=0;
 let race,config,steps=0,cameraY=0,director,hits=[],lastHit=new Map(),musicEvents=[],lastLeader=null,statistics;
 function statisticsView(){if(!statistics){const root=document.createElement('div');root.id='statistics-view';root.hidden=true;document.body.append(root);statistics=createStatistics({notify:()=>{},onRecordingChange:()=>{}});}return statistics;}
 function statsResult(r){const data=parseStatistics(r.statistics.csv);return {complete:true,simulationSeconds:Number(r.statistics.duration),winner:statisticsAt(data,data.frames.at(-1).year)[0].name,hits:0,rescues:0,finite:true,score:100,coverTime:Number(r.statistics.duration)*.75};}
@@ -51,7 +54,7 @@ window.factoryRenderer={
     r.dispose();return result;
   },
   async begin(job){
-    race?.dispose();race=null;config=job;steps=0;cameraY=0;hits=[];lastHit=new Map();musicEvents=[];lastLeader=null;director=createCameraDirector();
+    race?.dispose();race=null;config=job;steps=0;cameraY=0;previousCameraY=0;hits=[];lastHit=new Map();musicEvents=[];lastLeader=null;director=createCameraDirector();
     canvas.width=job.width??1080;canvas.height=job.height??1920;
     if(job.recipe.mode==='statistics'){statisticsView().loadSnapshot(job.recipe.statistics);return;}
     await Promise.all((job.recipe.ballImages??[]).map(loadBallImage));
@@ -60,17 +63,19 @@ window.factoryRenderer={
   frame(index){
     const elapsed=index/config.fps,mode=config.recipe.mode;
     let picture;
-    if(mode==='statistics')picture=statisticsView().renderFrame(elapsed/config.analysis.simulationSeconds,1/config.fps);
+    if(mode==='statistics')picture=statisticsView().renderFrame(elapsed/config.analysis.simulationSeconds,1/config.fps,config.channel);
     else{
       const target=Math.ceil(Math.min(Math.max(0,elapsed-(config.intro??0))*config.speed,config.analysis.simulationSeconds)*120);
       while(steps<target&&!ended(race,mode,config.recipe.exact)){
         const leader=(race.ranking()[0]?.entrantId??race.ranking()[0]?.id);
         if(leader!==lastLeader){musicEvents.push({time:(config.intro??0)+steps/120/config.speed,id:leader});lastLeader=leader;}
-        const round=race.round;race.step(1000/120);steps++;
-        if(round!==race.round){cameraY=0;director=createCameraDirector();}
+        const round=race.round;interpolation.capture(race.current??race);previousCameraY=cameraY;race.step(1000/120);steps++;
+        if(round!==race.round){cameraY=0;previousCameraY=0;director=createCameraDirector();}
         if(mode==='track'){const aim=director.target(race.current??race,config.recipe.presentation?.camera??'smart',1/120);cameraY+=(aim-cameraY)*(1-Math.exp(-4/120));}
       }
-      ({track:renderRace,spiral:renderSpiral,arena:renderArena}[mode])(sourceCtx,race.current??race,{cameraY,countdown:Math.max(0,(config.intro??0)-elapsed),paused:false,trails:config.recipe.trails??true,preview:null,suppressFinale:!!race.episode});if(race.episode)drawEpisode(sourceCtx,race);picture=source;
+      const simulationTime=Math.min(Math.max(0,elapsed-(config.intro??0))*config.speed,config.analysis.simulationSeconds);
+      const alpha=ended(race,mode,config.recipe.exact)?1:Math.max(0,Math.min(1,simulationTime*120-(steps-1)));
+      interpolation.draw(race.current??race,alpha,()=>({track:renderRace,spiral:renderSpiral,arena:renderArena}[mode])(sourceCtx,race.current??race,{cameraY:previousCameraY+(cameraY-previousCameraY)*alpha,countdown:Math.max(0,(config.intro??0)-elapsed),paused:false,trails:config.recipe.trails??true,preview:null,suppressFinale:!!race.episode,channel:config.channel}));if(race.episode)drawEpisode(sourceCtx,race);picture=source;
     }
     const w=canvas.width,h=canvas.height,scale=Math.min(w/picture.width,h/picture.height);
     ctx.fillStyle=config.template==='cinema'?'#030507':'#0b1018';ctx.fillRect(0,0,w,h);

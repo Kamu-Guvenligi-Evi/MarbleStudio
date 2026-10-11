@@ -1,4 +1,5 @@
 import {SPIRAL_VARIANTS} from './spiral-variants.js';
+import {normalizeCollisionSound} from './impact-audio.js';
 import {TERRITORY_SHAPES} from './territory.js';
 import { normalizeSpiralTheme } from './spiral-themes.js';
 import { normalizeSequence } from './section-settings.js';
@@ -22,7 +23,7 @@ export function normalizeProject(raw) {
   if(raw.arenaGame!==undefined&&!['links','territory'].includes(raw.arenaGame))throw new Error('Arena oyunu geçersiz.');
   if(raw.arenaShape!==undefined&&!Object.hasOwn(TERRITORY_SHAPES,raw.arenaShape))throw new Error('Arena şekli geçersiz.');
   if(raw.territoryDuration!==undefined&&![30,45,60].includes(raw.territoryDuration))throw new Error('Alan savaşı süresi geçersiz.');
-  return {...(raw.mode==='arena'?{arenaGame:raw.arenaGame??'links',arenaShape:raw.arenaShape??'triangle',territoryDuration:raw.territoryDuration??45}:{}),variant:raw.variant??'classic',energy:raw.energy??1,...(['arena','spiral'].includes(raw.mode)?{mode:raw.mode}:{}),spiralTheme:normalizeSpiralTheme(raw.spiralTheme),name,seed,count,sound:raw.sound??false,visualStyle:'neon',trails:raw.trails??true,sequence:normalizeSequence(raw.sequence),ballImages:normalizeBallImages(raw.ballImages),ballNames:normalizeNames(raw.ballNames),presentation:normalizePresentation(raw.presentation)};
+  return {...(raw.mode==='arena'?{arenaGame:raw.arenaGame??'links',arenaShape:raw.arenaShape??'triangle',territoryDuration:raw.territoryDuration??45}:{}),variant:raw.variant??'classic',energy:raw.energy??1,...(['arena','spiral'].includes(raw.mode)?{mode:raw.mode}:{}),spiralTheme:normalizeSpiralTheme(raw.spiralTheme),name,seed,count,sound:raw.sound??false,collisionSound:normalizeCollisionSound(raw.collisionSound),visualStyle:'neon',trails:raw.trails??true,sequence:normalizeSequence(raw.sequence),ballImages:normalizeBallImages(raw.ballImages),ballNames:normalizeNames(raw.ballNames),presentation:normalizePresentation(raw.presentation)};
 }
 export function serializeProject(project) {
   return JSON.stringify({format:'marble-studio-course',version:2,project:normalizeProject(project)},null,2);

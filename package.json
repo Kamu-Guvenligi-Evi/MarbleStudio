@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test:branding": "node tests/channel-branding-browser.mjs",
     "test:spiral": "node tests/spiral.mjs && node tests/spiral-browser.mjs",
     "test:workspaces": "node tests/studio-workspaces.mjs",
     "test:stories": "python tests/statistics-stories.py && node tests/statistics-library.mjs && node tests/statistics-library-browser.mjs",

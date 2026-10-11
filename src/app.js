@@ -1,7 +1,9 @@
+import {chooseVideoChannel} from './channel-branding.js';
+import {FrameInterpolation} from './frame-interpolation.js';
 import {createAutomaticHome} from './automatic-home.js';
 import {createWorkbench} from './workbench.js';
 import {normalizeSnapshot,createBackup,parseBackup,restoreBackup,downloadJSON} from './studio-transfer.js';
-import {playEffect} from './impact-audio.js';
+import {playEffect,COLLISION_SOUNDS,normalizeCollisionSound,collisionEvent,effectInterval} from './impact-audio.js';
 import { SPIRAL_THEMES, normalizeSpiralTheme } from './spiral-themes.js';
 import './style.css';
 import './editor-detail.css';
@@ -15,6 +17,8 @@ import { renderSpiral } from './spiral-renderer.js';
 import { Arena } from './arena.js';
 import { renderArena } from './arena-renderer.js';
 import { Race } from './physics.js';
+import { COURSE_META } from './courses.js';
+import { recipe } from './factory-recipes.js';
 import { renderRace } from './renderer.js';
 import { loadDraft, normalizeProject } from './projects.js';
 import { createBallEditor } from './ball-editor.js';
@@ -25,6 +29,9 @@ import { normalizeNames, normalizePresentation, createCameraDirector } from './p
 import './studio-light.css';
 
 const $ = s => document.querySelector(s);
+for(const [id,name] of Object.entries(COLLISION_SOUNDS))$('#collision-sound').add(new Option(name,id));
+$('#track-preset').add(new Option('Rastgele parkur','random'));
+for(const [id,course] of Object.entries(COURSE_META))if(!$('#track-preset').querySelector(`option[value="${id}"]`))$('#track-preset').add(new Option(course.name,id));
 const canvas = $('#race'), ctx = canvas.getContext('2d');
 const modeDrafts={};
 for(const mode of ['track','arena','territory','spiral']){
@@ -48,10 +55,13 @@ syncPresentation();
 await Promise.all(ballImages.map(loadBallImage));
 if(draft){$('#seed').value=draft.seed;$('#count').value=draft.count;$('#sound').checked=draft.sound;$('#trails').checked=draft.trails;}
 $('#speed').value=draft?.speed??'1';
+$('#collision-sound').value=normalizeCollisionSound(draft?.collisionSound);
 let race, view = 'watch', cameraY = 0, paused = false, countdown = 0;
 let last = 0, accumulator = 0, uiTick = 0;
+const interpolation = new FrameInterpolation();
 let recorder = null, downloadURL = null;
 let recordStarting = false;
+let recordingChannel=null;
 let raceStarting = false;
 let exportPreparing = false;
 let raceStartRevision = 0;
@@ -76,7 +86,7 @@ const statistics = createStatistics({notify:toast,onVideoRecorded:archiveBrowser
 }});
 
 createBallEditor({getImages:()=>ballImages,getNames:()=>ballNames,getCount:()=>Number($('#count').value),notify:toast,onRosterChange:(images,names)=>{if(isRecording())throw new Error('Kadroyu kayıt bittikten sonra değiştir.');ballImages=normalizeBallImages(images);ballNames=normalizeNames(names);resetRace();},onChange:next=>{if(isRecording())throw new Error('Görseli kayıt bittikten sonra ekle.');ballImages=next;resetRace();},onNamesChange:next=>{if(isRecording())throw new Error('İsmi kayıt bittikten sonra değiştir.');ballNames=normalizeNames(next);resetRace();}});
-function getProject(){return {mode:gameMode,spiralTheme,variant:spiralBehavior,energy:arenaEnergy,arenaGame,arenaShape,territoryDuration,spiralSfxVersion:1,preset:trackPreset,speed:$('#speed').value,name:projectName,sequence:structuredClone(sequence??[]),seed:Number($('#seed').value),count:Number($('#count').value),sound:$('#sound').checked,visualStyle:'neon',trails:$('#trails').checked,ballImages:[...ballImages],ballNames:[...ballNames],presentation:{...presentation}};}
+function getProject(){return {mode:gameMode,spiralTheme,variant:spiralBehavior,energy:arenaEnergy,arenaGame,arenaShape,territoryDuration,spiralSfxVersion:1,preset:trackPreset,speed:$('#speed').value,name:projectName,sequence:structuredClone(sequence??[]),seed:Number($('#seed').value),count:Number($('#count').value),sound:$('#sound').checked,collisionSound:$('#collision-sound').value,visualStyle:'neon',trails:$('#trails').checked,ballImages:[...ballImages],ballNames:[...ballNames],presentation:{...presentation}};}
 function persistDraft(){
   const key=gameMode==='arena'&&arenaGame==='territory'?'territory':gameMode;modeDrafts[key]=getProject();
   try{localStorage.setItem('marble-studio-'+key+'-v1',JSON.stringify(modeDrafts[key]));$('#save-status').textContent='✓ Bu yarışın ayarları kaydedildi';}
@@ -96,7 +106,7 @@ function switchRaceMode(mode,force=false){
     ballNames=normalizeNames(saved?.ballNames);presentation=normalizePresentation(saved?.presentation);syncPresentation();
     $('#seed').value=saved?.seed??2048;$('#count').value=saved?.count??(mode==='spiral'?1:12);
     $('#sound').checked=mode==='spiral'&& !saved?.spiralSfxVersion?true:saved?.sound??false;$('#trails').checked=saved?.trails??true;
-    $('#speed').value=saved?.speed??'1';
+    $('#speed').value=saved?.speed??'1';$('#collision-sound').value=normalizeCollisionSound(saved?.collisionSound);
     $('#download-panel').hidden=true;
     resetRace();
   }
@@ -113,7 +123,12 @@ function initAudio() {
 const effectTimes=new Map();
 function tone(strength, x, effect) {
   if (!$('#sound').checked || !audioCtx || audioCtx.state !== 'running') return;
-  if(effect){const now=audioCtx.currentTime,previous=effectTimes.get(effect.type)??-1;if(now-previous<(effect.type==='ice'?.035:.025))return;effectTimes.set(effect.type,now);playEffect(audioCtx,audioBus,{...effect,x});return;}
+  if(effect||$('#collision-sound').value!=='classic'){
+    const event=collisionEvent({...effect,type:effect?.type??'impact',x,strength},$('#collision-sound').value);
+    const now=audioCtx.currentTime,key=event.type+'|'+event.collisionSound,previous=effectTimes.get(key)??-1;
+    if(now-previous<effectInterval(event))return;
+    effectTimes.set(key,now);playEffect(audioCtx,audioBus,event);return;
+  }
   const now = audioCtx.currentTime; if (now - lastTone < .045) return; lastTone = now;
   const osc = audioCtx.createOscillator(), gain = audioCtx.createGain(), pan = audioCtx.createStereoPanner();
   osc.type = 'sine'; osc.frequency.setValueAtTime(260+x*1.3, now); osc.frequency.exponentialRampToValueAtTime(130+x*.4, now+.075);
@@ -177,6 +192,7 @@ function freshSeed() {
   const previous=Number($('#seed').value);
   const value=crypto.getRandomValues(new Uint32Array(1))[0];
   $('#seed').value=1+((previous-1+1+value%999998)%999999);
+  if(gameMode==='track'&&trackPreset==='random')sequence=recipe(Number($('#seed').value),'track').sequence;
 }
 async function startRace(fresh = false) {
   if (!race.sectionCount || isRecording() || recordStarting || raceStarting || exportPreparing) return;
@@ -220,7 +236,7 @@ function updateUI() {
   $('#pause').disabled=empty || raceStarting || recordStarting || exportPreparing || (isRecording() && race.state==='finished');
   $('#record').disabled=empty||recordStarting||raceStarting||exportPreparing;
   for(const mode of ['track','arena','territory','statistics','spiral'])$('#nav-'+mode).disabled=locked;
-  for(const selector of ['#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#sound','#open-settings'])$(selector).disabled=locked;
+  for(const selector of ['#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#collision-sound','#preview-collision-sound','#sound','#open-settings'])$(selector).disabled=locked;
   $('#ranking-title').textContent=gameMode==='spiral'?'Spiraldeki toplar':race.finished.length?'Sonuçlar':race.state==='ready'?'Yarışmacılar':'Canlı sıralama';
   const spiral=gameMode==='spiral',arena=gameMode==='arena',territory=arena&&race.arenaGame==='territory',active=arena?race.balls.filter(b=>b.eliminatedAt===null).length:0;
   $('#finish-count').textContent=spiral?`${race.balls.length} top · ${race.totalBreaks} kırılma`:territory?`${Math.ceil(race.duration-race.time)} sn kaldı`:arena?`${active} / ${race.balls.length} top kaldı`:race.finished.length?`${race.finished.length} / ${race.balls.length} finish`:`${race.balls.length} top`;
@@ -230,7 +246,8 @@ function updateUI() {
 }
 function draw() {
   if (view!=='watch') return;
-  (gameMode==='spiral'?renderSpiral:gameMode==='arena'?renderArena:renderRace)(ctx,race,{cameraY,countdown,paused,trails:$('#trails').checked,preview:null,winnerElapsed,resultElapsed});
+  interpolation.draw(race, race.state==='running'&&!paused ? accumulator*120 : 1, () =>
+    (gameMode==='spiral'?renderSpiral:gameMode==='arena'?renderArena:renderRace)(ctx,race,{cameraY,countdown,paused,trails:$('#trails').checked,preview:null,winnerElapsed,resultElapsed,channel:recordingChannel}));
 }
 function frame(now) {
   const elapsed=Math.min((now-last)/1000||0,.06); last=now;
@@ -238,7 +255,7 @@ function frame(now) {
     if(countdown>0) {countdown-=elapsed;if(countdown<=0){countdown=0;race.start();}}
     else if(race.state==='running') {
       accumulator+=elapsed*Number($('#speed').value);
-      while(accumulator>=1/120){race.step();accumulator-=1/120;}
+      while(accumulator>=1/120){interpolation.capture(race);race.step();accumulator-=1/120;}
       const target=gameMode!=='track'?0:director.target(race,presentation.camera,elapsed);
       cameraY+=(target-cameraY)*(1-Math.exp(-elapsed*4));
     }
@@ -255,7 +272,7 @@ function recordingUI(active) {
   $('#record').classList.toggle('recording',active);
   $('#record').innerHTML=active?'■ Kaydı bitir ve indir':'<span aria-hidden="true">●</span> Videoya kaydet';
   $('#record-help').textContent=active?'Kayıt sürüyor. Bu sekmeyi açık tut; finişte videon otomatik indirilecek.':'Yarış baştan oynatılır ve kaydedilir. Bittiğinde dikey videon otomatik iner.';
-  for(const selector of ['#nav-track','#nav-arena','#nav-territory','#nav-statistics','#nav-spiral','#open-settings','#reset','#speed','#new-race','#camera','#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#sound'])$(selector).disabled=active;
+  for(const selector of ['#nav-track','#nav-arena','#nav-territory','#nav-statistics','#nav-spiral','#open-settings','#reset','#speed','#new-race','#camera','#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#collision-sound','#preview-collision-sound','#sound'])$(selector).disabled=active;
 }
 async function startRecord() {
   if(recordStarting||raceStarting||exportPreparing)return;
@@ -268,11 +285,12 @@ async function startRecord() {
   recordStarting=true;
   let stream;
   try {
+    recordingChannel=await chooseVideoChannel();if(!recordingChannel)return;
     recordingUI(true);updateUI();
     await Promise.all(ballImages.map(loadBallImage));
     initAudio();resetRace();$('#speed').value='1';
     await music.prepare({mode:gameMode,balls:race.balls});
-    stream=canvas.captureStream(60);
+    stream=canvas.captureStream();
     if($('#sound').checked||music.enabled())audioDestination.stream.getAudioTracks().forEach(t=>stream.addTrack(t.clone()));
     const session=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:10_000_000});
     const chunks=[];
@@ -283,6 +301,7 @@ async function startRecord() {
     session.onstop=()=>{
       stream.getTracks().forEach(t=>t.stop());
       if(recorder===session)recorder=null;
+      recordingChannel=null;
       recordingUI(false);
       if(failed||!chunks.length){toast('Video kaydı oluşturulamadı. Tekrar deneyebilirsin.');return;}
       if(downloadURL)URL.revokeObjectURL(downloadURL);
@@ -294,7 +313,7 @@ async function startRecord() {
     session.onerror=()=>{failed=true;stopRecord();};
     recorder=session;session.start(1000);
     beginRace();cameraY=0;$('#download-panel').hidden=true;setView('watch');recordingUI(true);updateUI();
-  } catch(error) {stream?.getTracks().forEach(t=>t.stop());recorder=null;recordingUI(false);toast('Kayıt başlatılamadı. Müziğin yüklendiğini kontrol edip tekrar dene.');}
+  } catch(error) {stream?.getTracks().forEach(t=>t.stop());recorder=null;recordingChannel=null;recordingUI(false);toast('Kayıt başlatılamadı. Müziğin yüklendiğini kontrol edip tekrar dene.');}
   finally {recordStarting=false;updateUI();}
 }
 function stopRecord() {
@@ -319,10 +338,13 @@ $('#spiral-theme').onchange=()=>{
 $('#track-preset').onchange=()=>{
   trackPreset=$('#track-preset').value;
   if(trackPreset==='saved')return;
+  if(trackPreset==='random'){freshSeed();projectName='Rastgele parkur';resetRace();return;}
   const presetRace=new Race({preset:trackPreset,seed:Number($('#seed').value),sections:4});
   sequence=structuredClone(presetRace.sequence);presetRace.dispose();projectName=$('#track-preset').selectedOptions[0].textContent;resetRace();
 };
 $('#sound').onchange=()=>{if($('#sound').checked)initAudio();persistDraft();};
+$('#collision-sound').onchange=()=>{$('#sound').checked=true;initAudio();effectTimes.clear();persistDraft();};
+$('#preview-collision-sound').onclick=async()=>{initAudio();await audioCtx.resume();playEffect(audioCtx,audioBus,collisionEvent({type:'impact',x:270,strength:5},$('#collision-sound').value));};
 $('#open-settings').onclick=()=>showDialog('#settings-dialog');
 $('#settings-done').onclick=()=>closeDialog('#settings-dialog');
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>closeDialog('#'+b.dataset.close));

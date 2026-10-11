@@ -1,6 +1,12 @@
 const speed = { key:'speed', label:'Hareket hızı', min:.5, max:1.8, step:.1, value:1, unit:'×' };
 const direction = { key:'direction', label:'Dönüş yönü', value:'auto', options:[['auto','Düzene göre'],['clockwise','Saat yönü'],['counterclockwise','Saat yönünün tersi']] };
 export const SECTION_SETTINGS = {
+  staircase: [{key:'slope',label:'Basamak eğimi',min:.8,max:1.2,step:.1,value:1,unit:'×'},direction],
+  diamonds: [{key:'size',label:'Elmas büyüklüğü',min:.8,max:1.2,step:.1,value:1,unit:'×'}],
+  rotorgates: [speed,direction],
+  weave: [{key:'travel',label:'Hareket mesafesi',min:.6,max:1.1,step:.1,value:1,unit:'×'},speed],
+  switchback: [{key:'slope',label:'Viraj eğimi',min:.8,max:1.2,step:.1,value:1,unit:'×'},direction],
+  sieve: [{key:'size',label:'Eleğin büyüklüğü',min:.8,max:1.1,step:.1,value:1,unit:'×'}],
   shortcut: [{key:'gap',label:'Kestirme giriş genişliği',min:64,max:110,step:2,value:80,unit:''},{key:'offset',label:'Kestirmenin konumu',min:-50,max:50,step:10,value:0,unit:''}],
   crossramps: [{key:'slope',label:'Rampa eğimi',min:.85,max:1.15,step:.05,value:1,unit:'×'},{key:'side',label:'İlk rampanın yönü',value:'right',options:[['right','Sağa'],['left','Sola']]}],
   funnel: [{key:'gap',label:'Geçit genişliği',min:90,max:160,step:2,value:112,unit:''},speed,direction],

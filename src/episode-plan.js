@@ -1,3 +1,4 @@
+import {SECTION_SETTINGS} from './section-settings.js';
 import {random} from './physics.js';
 import {normalizeSection} from './section-settings.js';
 
@@ -10,8 +11,9 @@ export function withEpisode(recipe,format){
   if(recipe.mode!=='track'||!EPISODE_FORMATS.includes(format))throw new Error('Invalid episode format');
   const rng=random(recipe.seed^0x193a),rounds=['elimination','championship'].includes(format)?3:1;
   const heats=Array.from({length:rounds},(_,index)=>{
-    const pool=[...pools[rounds===1?(format==='teams'?1:0):index]];
-    const sequence=Array.from({length:(rounds===1?4:2)+Math.floor(rng()*2)},()=>{
+    const preferred=pools[rounds===1?(format==='teams'?1:0):index];
+    const pool=[...new Set([...preferred,...Object.keys(SECTION_SETTINGS)])];
+    const sequence=Array.from({length:rounds===1?12+Math.floor(rng()*5):3+Math.floor(rng()*5)},()=>{
       const type=pool.splice(Math.floor(rng()*pool.length),1)[0];
       return normalizeSection(recipe.sequence?.find(s=>s.type===type)??type);
     });

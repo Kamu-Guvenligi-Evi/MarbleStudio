@@ -41,7 +41,7 @@ export function createEditor({ getRace, onChange, onInspect, onOpenLibrary, onCl
     </button>`).join('');
   $('#library-courses').innerHTML = Object.entries(COURSE_META).map(([key, meta]) => `
     <button class="library-card" data-course="${key}" aria-label="${meta.name} parkurunu ekle">
-      <span class="card-image">${meta.modules.slice(0,4).map(t => previews[t]).join('')}</span><span class="card-copy"><b>${meta.name}</b><small>${courseDescriptions[key]}</small><span class="card-add">4 bölüm ekle <span aria-hidden="true">＋</span></span></span>
+      <span class="card-image">${meta.modules.slice(0,4).map(t => previews[t]).join('')}</span><span class="card-copy"><b>${meta.name}</b><small>${courseDescriptions[key] ?? meta.modules.slice(0,4).map(t=>MODULES[t].name).join(' · ')}</small><span class="card-add">4 bölüm ekle <span aria-hidden="true">＋</span></span></span>
     </button>`).join('');
 
   function current() { return structuredClone(getRace().sequence); }

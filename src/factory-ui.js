@@ -1,11 +1,13 @@
+import {brandVideoOptions} from './channel-branding.js';
+const youtubeAccounts=async()=>{const response=await fetch('/api/youtube/accounts');if(!response.ok)throw new Error('YouTube hesaplar? okunamad?.');return response.json();};
 import {normalizeSnapshot} from './studio-transfer.js';
 const $=s=>document.querySelector(s),form=$('#batch');let state=null,signature='',source=null,offset=0,compatible=false;const limit=12;
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function options(){const data=new FormData(form);return {channel:data.get('channel'),count:Number(form.elements.count.value),duration:Number(data.get('duration')),language:data.get('language'),modes:data.getAll('mode'),source,arenaGame:data.get('arenaGame'),strategy:data.get('strategy'),orientation:data.get('orientation'),resolution:Number(data.get('resolution')),fps:Number(data.get('fps')),audio:data.get('audio'),template:data.get('template'),hook:data.get('hook'),outro:data.get('outro'),youtube:data.get('youtubeChannel')?{channelId:data.get('youtubeChannel'),privacyStatus:data.get('youtubePrivacy')}:null};}
 async function post(route,body){if(!compatible)throw new Error('Atölye hizmetini yeniden başlat. Açık hizmet eski sürümü kullanıyor veya bağlantı kurulamadı.');const res=await fetch('/api/'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const value=await res.json();if(!res.ok)throw new Error(value.error);signature='';await refresh();}
 async function action(fn){try{$('#notice').textContent='';await fn();}catch(e){$('#notice').textContent=e.message;}}
-form.onsubmit=e=>{e.preventDefault();void action(async()=>{const button=form.querySelector('[type=submit]');button.disabled=true;try{await post('queue',options());$('#notice').textContent='Üretim kuyruğuna eklendi.';}finally{button.disabled=false;}});};
-$('#schedule').onclick=()=>action(()=>post('schedules',{...options(),action:'add'}));
+form.onsubmit=e=>{e.preventDefault();void action(async()=>{const button=form.querySelector('[type=submit]');button.disabled=true;try{const selected=await brandVideoOptions(options(),youtubeAccounts);if(!selected)return;await post('queue',selected);$('#notice').textContent='Üretim kuyruğuna eklendi.';}finally{button.disabled=false;}});};
+$('#schedule').onclick=()=>action(async()=>{if(!form.reportValidity())return;const selected=await brandVideoOptions(options(),youtubeAccounts);if(selected)await post('schedules',{...selected,action:'add'});});
 $('#schedule-status').onclick=e=>{const button=e.target.closest('button');if(!button)return;if(button.dataset.schedule)void action(()=>post('schedules',{action:'remove',id:button.dataset.schedule}));if(button.dataset.legacy)void action(()=>post('schedule',{enabled:false}));};
 $('#jobs').onclick=e=>{const button=e.target.closest('button[data-action]');if(button)void action(()=>post(button.dataset.action,{id:button.dataset.id}));};
 async function loadYouTube(){

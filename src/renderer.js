@@ -1,3 +1,4 @@
+import {drawChannelWatermark} from './channel-branding.js';
 ﻿import { drawMarble } from './marble-art.js';
 import { drawFinale } from './finale.js';
 import { drawSpace } from './space-art.js';
@@ -5,7 +6,7 @@ import { SECTION_LABELS, SECTION_LABELS_TR } from './race-copy.js';
 import { drawLeaders } from './race-leaders.js';
 const W=540,H=960,BG='#080e20';
 
-export function renderRace(ctx,race,{cameraY,countdown,paused,trails=false,preview,suppressFinale=false}) {
+export function renderRace(ctx,race,{cameraY,countdown,paused,trails=false,preview,suppressFinale=false,channel}) {
   const text=(str,x,y,size,color='#edf7ff',align='center')=>{
     ctx.fillStyle=color;ctx.font=`600 ${size}px "Segoe UI",sans-serif`;ctx.textAlign=align;ctx.fillText(str,x,y,440);
   };
@@ -17,6 +18,7 @@ export function renderRace(ctx,race,{cameraY,countdown,paused,trails=false,previ
   };
   ctx.setTransform(2,0,0,2,0,0);ctx.fillStyle=BG;ctx.fillRect(0,0,W,H);
   drawSpace(ctx,cameraY,race.time);
+  drawChannelWatermark(ctx,channel);
   ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
   ctx.save();ctx.translate(0,-cameraY);
   // World coordinates keep arena decoration anchored to the track.

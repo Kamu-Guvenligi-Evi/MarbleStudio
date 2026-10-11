@@ -48,9 +48,10 @@ export async function produce(job,{root,origin,history,update,cancelled,novelty}
       const analysis=await page.evaluate(r=>window.factoryRenderer.probe(r),r);
       const intro=exact&&r.mode!=='statistics'?(r.presentation?.countdown??0):0;
       const outroSeconds=exact&&r.mode!=='statistics'?(r.presentation?.outro??2):2;
-      const timing=videoTiming(analysis.simulationSeconds,job.options.duration,{exact,intro,outro:outroSeconds});
+      const timing=videoTiming(analysis.simulationSeconds,job.options.duration,{exact,intro,outro:outroSeconds,bounded:r.mode==='track'});
       const duration=timing?.duration??null,speed=timing?.speed??1;
       const review={attempt:attempt+1,seed:r.seed,structure:shape,score:analysis.score,duration,speed,output:outputQuality(analysis,speed),accepted:false};candidateReview.push(review);
+      if(exact&&!timing)throw new Error('Parkur videosu 30–180 saniye içinde tamamlanmalı. Bölüm sayısını veya düzeni değiştir.');
       if(!analysis.complete||!analysis.finite){if(exact)throw new Error('Bu çalışma süre sınırı içinde tamamlanmadı. Ayarları değiştirip yeniden dene.');continue;}
       if(!exact&&(!timing||analysis.hits<3||analysis.rescues>40))continue;
       if(automatic&&!review.output.accepted)continue;
@@ -61,7 +62,7 @@ export async function produce(job,{root,origin,history,update,cancelled,novelty}
     if(!candidates.length)throw new Error('Normal hızda tamamlanan uygun parkur bulunamadı. Başka bir düzenle yeniden dene.');
     candidates.sort((a,b)=>b.selectionScore-a.selectionScore);const best=candidates[0];best.candidateReview=candidateReview;best.outputQuality=outputQuality(best.analysis,best.speed);
     const copy=copyFor(best.recipe,job.options.language,job.ordinal);if(job.options.hook){copy.description=copy.description.replace(copy.hook,job.options.hook);copy.hook=job.options.hook;copy.title=job.options.hook;}
-    const fps=job.options.fps??60,duration=best.duration,frames=duration*fps,resolution=job.options.resolution??1080,orientation=job.options.orientation??'portrait';
+    const fps=job.options.fps??240,duration=best.duration,frames=duration*fps,resolution=job.options.resolution??1080,orientation=job.options.orientation??'portrait';
     const width=orientation==='landscape'?Math.round(resolution*16/9):resolution,height=orientation==='portrait'?Math.round(resolution*16/9):resolution;
     const format={fps,width,height,template:job.options.template,channel:job.options.channel,outro:job.options.outro};
     await update({...best,copy,stage:'Video işleniyor',progress:2});

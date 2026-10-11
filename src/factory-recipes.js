@@ -1,3 +1,4 @@
+import {COURSE_META} from './courses.js';
 import {episodeCopy} from './episode-plan.js';
 import {random} from './physics.js';
 import {SECTION_SETTINGS} from './section-settings.js';
@@ -6,6 +7,7 @@ import {SPIRAL_VARIANTS} from './spiral-variants.js';
 import {normalizeSnapshot} from './studio-transfer.js';
 
 export const COURSE_PROFILES={
+  ...Object.fromEntries(Object.entries(COURSE_META).map(([id,c])=>[id,c.modules])),
   sprint:['crossramps','slalom','fork','shortcut'],
   pinball:['pegs','wheels','drift','funnel'],
   timing:['pulse','pendulum','wheels','drift'],
@@ -18,7 +20,7 @@ export function validateBatch(raw={}){
   if(raw.automatic===true){const mode=raw.automaticMode??'auto';if(!['auto','track','arena','territory','spiral','statistics'].includes(mode))throw new Error('Otomatik tür geçersiz.');return {...validateBatch({...raw,automatic:false,source:null,strategy:'variations',modes:[['auto','statistics'].includes(mode)?'track':mode==='territory'?'arena':mode]}),arenaGame:mode==='territory'?'territory':'links',automatic:true,automaticMode:mode};}
   const count=Number(raw.count??3),duration=Number(raw.duration??55);
   if(!Number.isInteger(count)||count<1||count>30)throw new Error('Video sayısı 1–30 olmalı.');
-  if(!Number.isInteger(duration)||duration<25||duration>90)throw new Error('Süre 25–90 saniye olmalı.');
+  if(!Number.isInteger(duration)||duration<30||duration>180)throw new Error('Süre 30–180 saniye olmalı.');
   const source=raw.source?normalizeSnapshot(raw.source):null;
   const modes=source?[source.mode]:raw.modes??['track','spiral','arena'];
   if(!Array.isArray(modes)||!modes.length||modes.some(x=>!['track','spiral','arena','statistics'].includes(x))||(!source&&modes.includes('statistics')))throw new Error('En az bir geçerli format seç.');
@@ -31,12 +33,14 @@ export function validateBatch(raw={}){
   }:null;
   if(youtube&&(!/^UC[A-Za-z0-9_-]{22}$/.test(youtube.channelId)||!['private','unlisted','public'].includes(youtube.privacyStatus)))throw new Error('YouTube yükleme ayarı geçersiz.');
   const choose=(key,allowed,fallback)=>{const value=raw[key]??fallback;if(!allowed.includes(value))throw new Error('Geçersiz dışa aktarma ayarı: '+key);return value;};
+  const fps=Number(raw.fps??240);
+  if(!Number.isSafeInteger(fps)||fps<1)throw new Error('Kare hızı pozitif tam sayı olmalı.');
   const strategy=source?choose('strategy',['exact','variations'],'exact'):'variations';
   if(source?.mode==='statistics'&&strategy!=='exact')throw new Error('İstatistik tablosu aynı çalışma olarak dışa aktarılır.');
   return {count:strategy==='exact'?1:count,duration,modes:[...new Set(modes)],language,channel,source,strategy,youtube,
     arenaGame:choose('arenaGame',['links','territory'],source?.project?.arenaGame??'links'),
     orientation:choose('orientation',['portrait','landscape','square'],source?.mode==='statistics'?'landscape':'portrait'),
-    resolution:choose('resolution',[720,1080],1080),fps:choose('fps',[30,60],60),audio:choose('audio',['all','effects','music','none'],'all'),
+    resolution:choose('resolution',[720,1080],1080),fps,audio:choose('audio',['all','effects','music','none'],'all'),
     template:choose('template',['minimal','broadcast','cinema'],'minimal'),hook:String(raw.hook??'').trim().slice(0,100),outro:String(raw.outro??'').trim().slice(0,100)};
 }
 export function sourceRecipe(source,seed){
@@ -46,7 +50,7 @@ export function sourceRecipe(source,seed){
 export function recipe(seed,mode,theme){
   const rng=random(seed),pick=a=>a[Math.floor(rng()*a.length)];
   const profile=pick(Object.keys(COURSE_PROFILES)),rhythm=pick(['build','waves','steady']);
-  const types=Object.keys(SECTION_SETTINGS),sequence=[],length=pick([4,5,6,7,8]);
+  const types=Object.keys(SECTION_SETTINGS),sequence=[],length=pick([6,7,8,9,10,12,14,16]);
   for(let i=0;i<length;i++){
     const pool=i%3===2?types:COURSE_PROFILES[profile];
     let available=pool.filter(t=>sequence.at(-1)?.type!==t&&sequence.filter(s=>s.type===t).length<2);

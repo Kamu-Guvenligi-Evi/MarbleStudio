@@ -1,3 +1,4 @@
+import {drawChannelWatermark,chooseVideoChannel} from './channel-branding.js';
 import './statistics.css';
 import {DEMO_CSV,STATISTICS_KEY,parseStatistics,statisticsAt} from './statistics-data.js';
 import {createStatisticsLibrary} from './statistics-library.js';
@@ -37,7 +38,7 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
   $('csv-help').textContent='2–30 yarışmacı, 1–301 yıl. Tek satır sabit karşılaştırmadır. Pozitif sayılar veya 0; binlik ayıracı kullanma. Virgül veya noktalı virgülle ayrılmış CSV kabul edilir.';
   root.querySelector('.statistics-data > p').textContent='İlk sütun yıl, diğer sütunlar yarışmacı adları. Her yıl için bütün değerleri doldur. Akıcı geçiş ara değerleri hesaplar; yıllık geçiş verilen değerleri korur. Tek yıl satırı sabit karşılaştırma oluşturur.';
   const positions=new Map();
-  let axisMax=0;
+  let axisMax=0,watermarkChannel=null,channelChoosing=false;
   const settings=['heading','unit','source','duration','top','interpolation'];
   try {
     const saved=JSON.parse(localStorage.getItem(STATISTICS_KEY));
@@ -77,13 +78,14 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
   function text(value,x,y,size,color,weight=400,align='left',width){
     ctx.fillStyle=color;ctx.font=`${weight} ${size}px "Segoe UI", sans-serif`;ctx.textAlign=align;ctx.fillText(value,x,y,width);
   }
-  function draw(dt=0){
+  function draw(dt=0,channel=watermarkChannel){
     const rows=ranking(),count=top(),gap=690/count,barHeight=Math.min(52,gap*.72);
     const left=370,width=1280,startY=245,peak=rows[0].value;
     const scale=statisticsScale(peak||1);
     axisMax=animateStatisticsScale(axisMax,scale.max,peak,dt);
     const max=axisMax;
     ctx.fillStyle='#111820';ctx.fillRect(0,0,1920,1080);
+    drawChannelWatermark(ctx,channel,1920,1080);
     ctx.fillStyle='#bbef83';ctx.fillRect(70,70,5,75);
     text('MARBLE STUDIO / İSTATİSTİK YARIŞI',96,83,18,'#a6bdaf',600);
     text($('heading').value.trim()||'Yıllara göre sıralama',94,137,44,'#f2f6f0',650,'left',1450);
@@ -125,21 +127,25 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
     onRecordingChange(value);
   }
   function stopRecording(){if(recorder?.state==='recording'){playing=false;syncPositions();draw();recorder.stop();$('record').disabled=true;ui();}}
-  function record(){
+  async function record(){
+    if(channelChoosing)return;
     if(recordBusy){stopRecording();return;}
     if(library?.busy()){notify('Veri seti açılıyor; ardından kaydı başlatabilirsin.');return;}
     if(!window.MediaRecorder||!canvas.captureStream){notify('Video kaydı için Chrome veya Edge ile aç.');return;}
     const mime=['video/webm;codecs=vp8','video/webm;codecs=vp9','video/webm'].find(type=>MediaRecorder.isTypeSupported(type));
     if(!mime){notify('Bu tarayıcı WebM kaydını desteklemiyor.');return;}
+    channelChoosing=true;
+    try{watermarkChannel=await chooseVideoChannel();}finally{channelChoosing=false;}
+    if(!watermarkChannel)return;
     let stream;
     try {
-      reset();lock(true);stream=canvas.captureStream(60);recordStream=stream;
+      reset();lock(true);stream=canvas.captureStream();recordStream=stream;
       const session=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:8_000_000}),chunks=[];
       let failed=false;recorder=session;
       session.ondataavailable=event=>{if(event.data.size)chunks.push(event.data);};
       session.onerror=()=>{failed=true;stopRecording();};
       session.onstop=()=>{
-        stream.getTracks().forEach(track=>track.stop());recorder=null;recordStream=null;lock(false);$('record').disabled=false;ui();
+        stream.getTracks().forEach(track=>track.stop());recorder=null;recordStream=null;watermarkChannel=null;lock(false);$('record').disabled=false;ui();
         if(failed||!chunks.length){notify('Video oluşturulamadı. Tekrar deneyebilirsin.');return;}
         if(downloadURL)URL.revokeObjectURL(downloadURL);
         const videoBlob=new Blob(chunks,{type:'video/webm'});downloadURL=URL.createObjectURL(videoBlob);
@@ -147,7 +153,7 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
         onVideoRecorded?.(videoBlob,{name:$('heading').value,mode:'statistics'});
       };
       session.start(250);playing=true;last=performance.now();ui();canvas.scrollIntoView({block:'center',behavior:'instant'});
-    }catch{stream?.getTracks().forEach(track=>track.stop());recorder=null;recordStream=null;playing=false;lock(false);$('record').disabled=false;ui();notify('Video kaydı başlatılamadı. Tekrar deneyebilirsin.');}
+    }catch{stream?.getTracks().forEach(track=>track.stop());recorder=null;recordStream=null;watermarkChannel=null;playing=false;lock(false);$('record').disabled=false;ui();notify('Video kaydı başlatılamadı. Tekrar deneyebilirsin.');}
   }
   function applyCSV(value,item=null){
     const parsed=parseStatistics(value); // Validate everything before replacing the current project.
@@ -201,7 +207,7 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
       for(const key of settings)if(value[key]!==undefined)$(key).value=String(value[key]);
       reset();
     },
-    renderFrame(value,dt){progress=Math.max(0,Math.min(1,value));draw(dt);return canvas;},
+    renderFrame(value,dt,channel){progress=Math.max(0,Math.min(1,value));draw(dt,channel);return canvas;},
     isRecording:()=>recordBusy,
     setActive(value){active=value;if(!active){playing=false;syncPositions();}last=performance.now();if(active){draw();ui();}},
     state:()=>({progress,year:year(),playing,recording:recordBusy,names:[...data.names],ranking:ranking(),duration:duration(),datasetId:dataset?.id??null,snapshot:snapshot(),interpolation:$('interpolation').value,axisMax}),

@@ -1,3 +1,4 @@
+import {drawChannelWatermark} from './channel-branding.js';
 import { SPIRAL_THEMES } from './spiral-themes.js';
 import { gatePoint } from './spiral.js';
 import { ballImage } from './ball-images.js';
@@ -36,7 +37,7 @@ function iceTexture(ice,theme){
   return entry.canvas;
 }
 
-export function renderSpiral(ctx,race,{countdown=0,paused=false}={}){
+export function renderSpiral(ctx,race,{countdown=0,paused=false,channel}={}){
   const w=ctx.canvas.width,h=ctx.canvas.height,theme=SPIRAL_THEMES[race.theme]||SPIRAL_THEMES.ice;
   ctx.save();ctx.setTransform(w/540,0,0,h/960,0,0);
   const background=ctx.createRadialGradient(270,450,60,270,480,530);
@@ -60,6 +61,7 @@ export function renderSpiral(ctx,race,{countdown=0,paused=false}={}){
     if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y);
   }
   ctx.strokeStyle=theme.rail;ctx.lineWidth=3;ctx.lineCap='round';ctx.stroke();
+  drawChannelWatermark(ctx,channel,540,960,theme===SPIRAL_THEMES.ice?'#526781':'#ffffff');
   for(const b of race.balls){
     if(race.time<b.release&&!b.airborne)continue;
     const {x,y}=b.body.position,r=b.body.circleRadius,bh=b.hue;

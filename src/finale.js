@@ -22,7 +22,7 @@ export function drawFinale(ctx,race) {
       ctx.save();ctx.translate(x,y);ctx.rotate(i*1.7);ctx.fillStyle=i%2?winner.color+'75':'#e4f6ff60';ctx.fillRect(-2,-4,4,8);ctx.restore();
     }
     for(const radius of [90,108]) {ctx.beginPath();ctx.arc(270,315,radius,0,Math.PI*2);ctx.strokeStyle=winner.color+'55';ctx.lineWidth=1;ctx.stroke();}
-    text(race.language==='tr'?'Y A R I Ş I N  K A Z A N A N I':'R A C E  W I N N E R',270,175,15,winner.color);portrait(winner,270,315,68);
+    text('R A C E  W I N N E R',270,175,15,winner.color);portrait(winner,270,315,68);
     text(raceName(race,winner),270,425,34);text(`${winner.finishedAt.toFixed(2)} s`,270,458,16,winner.color);
     race.finished.slice(1,3).forEach((ball,index)=>{
       const y=568+index*90;
@@ -33,7 +33,7 @@ export function drawFinale(ctx,race) {
     });
   }else {
     ctx.fillStyle='#080e20ee';ctx.fillRect(27,0,486,67);ctx.fillStyle=winner.color;ctx.fillRect(27,65,486,2);portrait(winner,50,34,18);
-    text(`${race.language==='tr'?'Kazanan':'Winner'} · ${raceName(race,winner)}`,80,40,16,'#eef0f1','left',405);
+    text(`Winner · ${raceName(race,winner)}`,80,40,16,'#eef0f1','left',405);
   }
   ctx.restore();
 }

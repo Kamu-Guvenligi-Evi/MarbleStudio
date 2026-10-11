@@ -44,7 +44,7 @@ function acceptSource(value){
   form.querySelector('fieldset').hidden=true;form.elements.strategy.value='exact';form.elements.count.value='1';form.elements.count.disabled=true;form.elements.duration.closest('label').hidden=true;
   form.elements.orientation.value=source.mode==='statistics'?'landscape':'portrait';
   form.elements.audio.value=source.mode==='statistics'?'none':source.project.sound?'all':'music';
-  form.elements.language.value='tr';
+  form.elements.language.value='en';
   form.elements.strategy.querySelector('[value=variations]').disabled=source.mode==='statistics';
   $('#notice').textContent='Çalışman hazır. Aynı çalışma seçildiğinde özgün süre ve düzen korunur.';
 }

@@ -1,3 +1,4 @@
+import {englishRosterName} from './output-language.js';
 import { loadBallImage, normalizeBallImages } from './ball-images.js';
 import { portraitFrame } from './portrait-framing.js';
 
@@ -114,7 +115,7 @@ export function createImageCatalog({getImages,getNames,getCount,onRosterChange,o
       const sources=await Promise.all(items.map(prepareCatalogImage));
       if(!dialog.open||original!==getImages()||namesOriginal!==getNames())throw new Error('Seçim değişti. Görselleri yeniden seç.');
       const images=[...original],names=[...namesOriginal];
-      sources.forEach((src,i)=>{const target=bulk?i:index;images[target]=src;names[target]=items[i].name.slice(0,24);});
+      sources.forEach((src,i)=>{const target=bulk?i:index;images[target]=src;names[target]=englishRosterName(items[i].name);});
       onRosterChange(images,names);onApplied();
       if(!bulk)selected=(selected+1)%getCount();
       status(bulk?`${sources.length} topa görsel ve isim eklendi. Kadron hazır.`:`${items[0].name}, ${index+1}. topa eklendi. Sırada ${selected+1}. top var.`);

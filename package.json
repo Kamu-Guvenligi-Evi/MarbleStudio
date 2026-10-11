@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test:output-language": "node tests/output-language.mjs",
+    "test:output-language-browser": "node tests/output-language-browser.mjs",
     "test:branding": "node tests/channel-branding-browser.mjs",
     "test:spiral": "node tests/spiral.mjs && node tests/spiral-browser.mjs",
     "test:workspaces": "node tests/studio-workspaces.mjs",

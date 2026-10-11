@@ -1,3 +1,4 @@
+import {englishOutput} from './output-language.js';
 import {FrameInterpolation} from './frame-interpolation.js';
 import {EpisodeRace,drawEpisode} from './episode-race.js';
 import {prepareCatalogImage} from './image-catalog.js';
@@ -15,7 +16,7 @@ import {qualityReport} from './production-quality.js';
 
 const canvas=document.querySelector('#render'),ctx=canvas.getContext('2d');
 const source=document.createElement('canvas');source.width=1080;source.height=1920;const sourceCtx=source.getContext('2d');
-const create=(r,onHit=()=>{})=>{const race=new (r.episode?EpisodeRace:({track:Race,spiral:Spiral,arena:Arena}[r.mode]))({...r,onHit});race.language=r.language??'en';return race;};
+const create=(r,onHit=()=>{})=>{const race=new (r.episode?EpisodeRace:({track:Race,spiral:Spiral,arena:Arena}[r.mode]))({...r,onHit});race.language='en';for(const ball of race.balls)ball.name=englishOutput(ball.name);return race;};
 const ended=(r,mode,exact=false)=>mode==='track'&&!exact&&!r.episode?r.finished.length>0:r.state==='finished';
 const interpolation=new FrameInterpolation();
 let previousCameraY=0;
@@ -82,7 +83,7 @@ window.factoryRenderer={
     ctx.drawImage(picture,(w-picture.width*scale)/2,(h-picture.height*scale)/2,picture.width*scale,picture.height*scale);
     const unit=Math.min(w,h)/1080,pad=48*unit,font=38*unit;
     const band=(text,y,accent='#bbed83',compact=false)=>{
-      ctx.fillStyle='#080d16ed';ctx.fillRect(pad,y,w-pad*2,(compact?70:100)*unit);ctx.fillStyle=accent;ctx.font=`600 ${compact?32*unit:font}px Segoe UI`;ctx.textAlign='center';ctx.fillText(text,w/2,y+(compact?45:63)*unit,w-pad*3);
+      ctx.fillStyle='#080d16ed';ctx.fillRect(pad,y,w-pad*2,(compact?70:100)*unit);ctx.fillStyle=accent;ctx.font=`600 ${compact?32*unit:font}px Segoe UI`;ctx.textAlign='center';ctx.fillText(englishOutput(text),w/2,y+(compact?45:63)*unit,w-pad*3);
     };
     if(mode!=='statistics'&&elapsed<3.5)band(config.copy.hook,330*unit,'#bbed83',true);
     if(config.template==='broadcast'){
@@ -91,9 +92,9 @@ window.factoryRenderer={
     if(config.template==='cinema'&&config.channel){ctx.fillStyle='#eee';ctx.font=`500 ${24*unit}px Segoe UI`;ctx.textAlign='center';ctx.fillText(config.channel,w/2,50*unit,w-pad*2);}
     if(elapsed>=(config.intro??0)+config.analysis.simulationSeconds/config.speed){
       const name=mode==='statistics'?config.analysis.winner:race.finished[0]?.name??'';
-      const result=mode==='spiral'?(config.copy.language==='tr'?'Merkez açıldı!':'The center is clear!'):(config.copy.language==='tr'?'Kazanan: ':'Winner: ')+name;
+      const result=mode==='spiral'?'The center is clear!':'Winner: '+englishOutput(name);
       if(mode!=='statistics')band(result,h-180*unit);
-      if(config.outro){ctx.fillStyle='#eff8ff';ctx.font=`500 ${26*unit}px Segoe UI`;ctx.textAlign='center';ctx.fillText(config.outro,w/2,h-35*unit,w-pad*2);}
+      if(config.outro){ctx.fillStyle='#eff8ff';ctx.font=`500 ${26*unit}px Segoe UI`;ctx.textAlign='center';ctx.fillText(englishOutput(config.outro),w/2,h-35*unit,w-pad*2);}
     }
     return canvas.toDataURL('image/jpeg',.92).split(',')[1];
   },

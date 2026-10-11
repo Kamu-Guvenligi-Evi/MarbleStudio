@@ -51,7 +51,7 @@ export async function createMusic({getAudio, notify}) {
     $('music-credit').hidden=!track;
     if(track) {
       $('music-source').href=track.source;
-      $('music-attribution').value=[`${track.title} — ${track.artist}`,track.source,`${track.license}${track.licenseUrl?': '+track.licenseUrl:''}`,'Bu videoda müzik kesilmiş, tekrarlanmış ve diğer seslerle karıştırılmış olabilir.'].join('\n');
+      $('music-attribution').value=[`${track.title} — ${track.artist}`,track.source,`${track.license}${track.licenseUrl?': '+track.licenseUrl:''}`,'Music may have been edited, looped and mixed with other sounds in this video.'].join('\n');
     }
     persist();if(racing)play();
   }

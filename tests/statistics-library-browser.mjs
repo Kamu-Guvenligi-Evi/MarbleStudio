@@ -22,12 +22,12 @@ try{
   await page.locator('#statistics-provenance summary').click();assert.match(await page.locator('#statistics-dataset-note').innerText(),/1955\/56/);
   assert.ok(await page.locator('#statistics-dataset-sources a').count()>0);
   await page.locator('#statistics-category').selectOption('Nüfus');assert.equal(await page.locator('[data-dataset]').count(),1);
-  await select('population');assert.equal((await state()).names.length,30);assert.match(await page.locator('#statistics-unit').inputValue(),/milyon/);
+  await select('population');assert.equal((await state()).names.length,30);assert.match(await page.locator('#statistics-unit').inputValue(),/million/);
   assert.equal((await state()).interpolation,'linear');
   await page.locator('#statistics-category').selectOption('');await select('gdp');
-  assert.match(await page.locator('#statistics-unit').inputValue(),/milyar/);
+  assert.match(await page.locator('#statistics-unit').inputValue(),/billion/);
   await page.reload();await page.waitForFunction(()=>window.marbleStudio);await page.locator('#nav-statistics').click();
-  assert.equal((await state()).datasetId,'gdp');assert.match(await page.locator('#statistics-source').inputValue(),/Dünya Bankası/);
+  assert.equal((await state()).datasetId,'gdp');assert.match(await page.locator('#statistics-source').inputValue(),/World Bank/);
   assert.equal(await page.locator('[data-dataset="historical-lifespans"]').count(),0);
   assert.equal(await page.locator('#statistics-category option[value="Tarih"]').count(),0);
   await page.locator('#statistics-csv').fill('Yıl,A,B\n2000,,2');await page.locator('#statistics-apply').click();assert.equal((await state()).datasetId,'gdp');
@@ -35,7 +35,7 @@ try{
   assert.equal(await page.locator('#statistics-provenance').isHidden(),true);
   assert.equal(await page.locator('#statistics-source').inputValue(),'','Custom data must not keep the previous dataset source credit');
   await page.locator('#statistics-category').selectOption('');await select('european-cup');
-  await page.locator('#statistics-webm-options').evaluate(el=>el.open=true);await page.locator('#statistics-record').click();assert.equal(await page.locator('[data-dataset="gdp"]').isDisabled(),true);
+  await page.locator('#statistics-webm-options').evaluate(el=>el.open=true);await page.locator('#statistics-record').click();await page.locator('#channel-choice select').selectOption('LastBallStand');await page.locator('#channel-choice button[type=submit]').click();await page.waitForFunction(()=>window.marbleStudio.getStatisticsState().recording);assert.equal(await page.locator('[data-dataset="gdp"]').isDisabled(),true);
   await page.waitForFunction(()=>window.marbleStudio.getStatisticsState().progress>.06);
   const download=page.waitForEvent('download').catch(async error=>{throw new Error(`${error.message}; ${await page.locator('#toast').innerText()}; ${JSON.stringify(await state())}`);});
   await page.locator('#statistics-webm-options').evaluate(el=>el.open=true);await page.locator('#statistics-record').click();await download;

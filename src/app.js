@@ -1,3 +1,4 @@
+import {englishOutput} from './output-language.js';
 import {chooseVideoChannel} from './channel-branding.js';
 import {FrameInterpolation} from './frame-interpolation.js';
 import {createAutomaticHome} from './automatic-home.js';
@@ -147,7 +148,7 @@ function resetRace() {
   // Freeze the initial starter course too: settings never reshuffle the user's order.
   if(gameMode==='track')sequence=structuredClone(race.sequence);
   race.courseName=projectName;
-  if(race.arenaGame==='territory')race.language='tr';
+  race.language='en';
   paused=false; countdown=0; cameraY=0; accumulator=0;
   syncModeUI(); updateUI(); draw(); persistDraft();
 }
@@ -294,8 +295,8 @@ async function startRecord() {
     if($('#sound').checked||music.enabled())audioDestination.stream.getAudioTracks().forEach(t=>stream.addTrack(t.clone()));
     const session=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:10_000_000});
     const chunks=[];
-    const filename=gameMode==='spiral'?`marble-spiral-${race.seed}.webm`:gameMode==='arena'?`marble-orbit-${race.seed}.webm`:`marble-${race.sectionCount}-bolum-${race.seed}.webm`;
-    const recordingMode=gameMode==='arena'&&arenaGame==='territory'?'territory':gameMode,recordingTitle=projectName;
+    const filename=gameMode==='spiral'?`marble-spiral-${race.seed}.webm`:gameMode==='arena'?`marble-orbit-${race.seed}.webm`:`marble-${race.sectionCount}-sections-${race.seed}.webm`;
+    const recordingMode=gameMode==='arena'&&arenaGame==='territory'?'territory':gameMode,recordingTitle=englishOutput(projectName);
     let failed=false;
     session.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};
     session.onstop=()=>{

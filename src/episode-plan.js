@@ -23,18 +23,14 @@ export function withEpisode(recipe,format){
 }
 
 export function episodeCopy(r,language){
-  const tr=language==='tr',format=r.episode.format,name=FORMAT_NAMES[language][format];
-  const rules=tr?{
-    sprint:'Finişe ilk ulaşan kazanır.',
-    elimination:'12 yarışmacı → 8 → 4. Finalde ilk gelen kazanır.',
-    teams:'3 takım, dörder yarışmacı. İlk 6 finiş: 6–1 puan. En yüksek toplam kazanır.',
-    championship:'3 farklı etap. Her etapta ilk 6 finiş: 6–1 puan. Toplam puan kazanır.',
-  }:{
+  language='en';
+  const format=r.episode.format,name=FORMAT_NAMES[language][format];
+  const rules={
     sprint:'First across the finish wins.',
     elimination:'12 racers → 8 → 4. First across the final wins.',
     teams:'3 teams of 4. First 6 finishers score 6–1. Highest team total wins.',
     championship:'3 different stages. First 6 score 6–1 each stage. Highest total wins.',
   };
-  const tie=tr?' Eşitlikte son etaptan geriye doğru finiş sıraları karşılaştırılır.':' Ties compare finish places from the last stage backwards.';
-  return {hook:name,title:name+' · '+(tr?'Favorin kazanabilecek mi?':'Can your favorite win?'),description:rules[format]+(['teams','championship'].includes(format)?tie:''),rules:rules[format],tags:['shorts','marble race','physics simulation',format],language};
+  const tie=' Ties compare finish places from the last stage backwards.';
+  return {hook:name,title:name+' · Can your favorite win?',description:rules[format]+(['teams','championship'].includes(format)?tie:''),rules:rules[format],tags:['shorts','marble race','physics simulation',format],language};
 }

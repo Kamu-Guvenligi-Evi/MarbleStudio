@@ -91,7 +91,7 @@ export function renderSpiral(ctx,race,{countdown=0,paused=false,channel}={}){
     ctx.fillStyle=p.white?theme.chip[0]:theme.chip[1];ctx.fill();ctx.strokeStyle=theme.chip[0];ctx.lineWidth=.5;ctx.stroke();ctx.restore();
   }
   if(countdown>0||paused){
-    ctx.fillStyle='#0008';ctx.fillRect(0,245,540,490);ctx.fillStyle='#fff';ctx.font='bold 42px Arial';ctx.fillText(paused?'Duraklatıldı':Math.ceil(countdown),270,490);
+    ctx.fillStyle='#0008';ctx.fillRect(0,245,540,490);ctx.fillStyle='#fff';ctx.font='bold 42px Arial';ctx.fillText(paused?'Paused':Math.ceil(countdown),270,490);
   }
   ctx.restore();
 }

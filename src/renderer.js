@@ -2,7 +2,7 @@ import {drawChannelWatermark} from './channel-branding.js';
 ﻿import { drawMarble } from './marble-art.js';
 import { drawFinale } from './finale.js';
 import { drawSpace } from './space-art.js';
-import { SECTION_LABELS, SECTION_LABELS_TR } from './race-copy.js';
+import { SECTION_LABELS } from './race-copy.js';
 import { drawLeaders } from './race-leaders.js';
 const W=540,H=960,BG='#080e20';
 
@@ -30,7 +30,7 @@ export function renderRace(ctx,race,{cameraY,countdown,paused,trails=false,previ
     ctx.strokeStyle=section.color+'30';ctx.lineWidth=1;
     ctx.beginPath();ctx.moveTo(42,section.y+30);ctx.lineTo(498,section.y+30);ctx.stroke();
     text(String(section.sourceIndex+1).padStart(2,'0'),49,section.y+58,12,section.color,'left');
-    text(((race.language==='tr'?SECTION_LABELS_TR:SECTION_LABELS)[section.type]??'Track section').toLocaleUpperCase(race.language==='tr'?'tr-TR':'en-US'),82,section.y+58,11,section.color+'b0','left');
+    text((SECTION_LABELS[section.type]??'Track section').toLocaleUpperCase('en-US'),82,section.y+58,11,section.color+'b0','left');
   }
   for(const x of [28,511]) {
     ctx.fillStyle='#59dfff35';ctx.fillRect(x,cameraY,1,H);
@@ -66,7 +66,7 @@ export function renderRace(ctx,race,{cameraY,countdown,paused,trails=false,previ
   for(let i=0;i<24;i++)for(let row=0;row<2;row++) {
     ctx.fillStyle=(i+row)%2?'#142239':'#e9fbff';ctx.fillRect(30+i*20,race.finishY+row*10,20,10);
   }
-  text(race.language==='tr'?'FİNİŞ':'FINISH',270,race.finishY-23,20,'#92f3ff');
+  text('FINISH',270,race.finishY-23,20,'#92f3ff');
   ctx.save();ctx.globalCompositeOperation='lighter';ctx.lineCap='round';
   for(const p of race.particles) {
     if(p.y<cameraY-20||p.y>cameraY+H+20)continue;
@@ -99,7 +99,7 @@ export function renderRace(ctx,race,{cameraY,countdown,paused,trails=false,previ
     ctx.fillStyle='#080e2070';ctx.fillRect(0,0,W,H);
     ctx.beginPath();ctx.arc(270,460,80,-Math.PI/2,-Math.PI/2+Math.PI*2*(countdown%1));ctx.strokeStyle='#76eeff';ctx.lineWidth=5;ctx.stroke();
     text(String(Math.ceil(countdown)),270,490,100);
-  }else if(race.state==='ready'&&preview===null)text(race.language==='tr'?'Yarışmacını seç.':'Pick your racer.',270,125,18,'#a8cce5');
+  }else if(race.state==='ready'&&preview===null)text('Pick your racer.',270,125,18,'#a8cce5');
   if(race.finished.length&&preview===null&&!suppressFinale)drawFinale(ctx,race);
   if(paused&&preview===null) {
     ctx.fillStyle='#080e20ee';ctx.fillRect(165,433,210,64);text('Paused',270,473,18);

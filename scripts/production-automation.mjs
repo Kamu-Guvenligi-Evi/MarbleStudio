@@ -1,3 +1,4 @@
+import {englishRosterName} from '../src/output-language.js';
 import {EPISODE_FORMATS,withEpisode} from '../src/episode-plan.js';
 import {createRepetitionGuard,repetitionError} from './repetition-guard.mjs';
 import {SPIRAL_THEMES} from '../src/spiral-themes.js';
@@ -16,14 +17,13 @@ export function leastRecent(values,used,pick=randomInt){
 }
 const recipeOf=job=>job.recipe??job.options?.source;
 export const automaticKind=job=>(job.recipe?.arenaGame??job.options?.source?.project?.arenaGame??job.options?.arenaGame)==='territory'&&job.mode==='arena'?'territory':job.mode;
-const zodiacTR={Aries:'Koç',Taurus:'Boğa',Gemini:'İkizler',Cancer:'Yengeç',Leo:'Aslan',Virgo:'Başak',Libra:'Terazi',Scorpio:'Akrep',Sagittarius:'Yay',Capricorn:'Oğlak',Aquarius:'Kova',Pisces:'Balık'};
 export async function planAutomatic(options,history,project,guard=createRepetitionGuard(history)){
   const recent=history.slice(-300);
   const spiralAvailable=Object.keys(SPIRAL_THEMES).some(theme=>Object.keys(SPIRAL_VARIANTS).some(variant=>guard.check({mode:'spiral',seed:1,count:1,theme,variant}).allowed));
   const modes=spiralAvailable?['track','arena','territory','spiral']:['track','arena','territory'];
   if(options.automaticMode==='spiral'&&!spiralAvailable)throw repetitionError('Spiral tema ve davranışları tekrar korumasında. Başka bir tür seç; süre ve video aralığı dolunca spiral yeniden kullanılabilir.');
   const kind=options.automaticMode==='auto'?leastRecent(modes,recent.map(automaticKind)):options.automaticMode,mode=kind==='territory'?'arena':kind;
-  const base={...options,modes:[mode],arenaGame:kind==='territory'?'territory':'links',orientation:mode==='statistics'?'landscape':'portrait',audio:mode==='statistics'?'none':'all',strategy:mode==='statistics'?'exact':'variations'};
+  const base={...options,language:'en',modes:[mode],arenaGame:kind==='territory'?'territory':'links',orientation:mode==='statistics'?'landscape':'portrait',audio:mode==='statistics'?'none':'all',strategy:mode==='statistics'?'exact':'variations'};
   if(mode==='statistics'){
     const {items}=JSON.parse(await readFile(path.join(project,'public/statistics/manifest.json'),'utf8'));
     const unused=[];
@@ -42,12 +42,12 @@ export async function planAutomatic(options,history,project,guard=createRepetiti
   const track=leastRecent(available,recent.map(j=>recipeOf(j)?.music?.track));
   const catalog=JSON.parse(await readFile(path.join(project,'public/catalog/manifest.json'),'utf8'));
   const category=mode==='spiral'?'colors':leastRecent(['countries','teams','zodiac'],recent.filter(j=>j.mode!=='spiral').map(j=>j.options?.automation?.rosterCategory));
-  const items=catalog.items.filter(i=>i.category===category),used=recent.flatMap(j=>recipeOf(j)?.ballNames??[]),members=[];
+  const items=catalog.items.filter(i=>i.category===category),used=recent.flatMap(j=>recipeOf(j)?.ballNames??[]).map(englishRosterName),members=[];
   while(members.length<Math.min(20,items.length)){
-    const name=leastRecent(items.filter(i=>!members.includes(i)).map(i=>i.name),used);members.push(items.find(i=>i.name===name));
+    const name=leastRecent(items.filter(i=>!members.includes(i)).map(i=>englishRosterName(i.name)),used);members.push(items.find(i=>englishRosterName(i.name)===name));
   }
   for(const item of members)if(!/^\/catalog\/[a-zA-Z0-9-]+\.(png|webp|jpg|svg)$/.test(item.src))throw new Error('Kadro görseli yolu geçersiz.');
-  return {...base,source:null,automation:{version:2,...(mode==='track'?{episodeFormat:leastRecent(EPISODE_FORMATS,guard.recentFormats??recent.filter(j=>j.mode==='track').map(j=>recipeOf(j)?.episode?.format??'sprint'))}:{}),rosterCategory:category,catalogItems:members,ballNames:members.map(i=>(options.language==='tr'&&category==='zodiac'?zodiacTR[i.name]??i.name:i.name).slice(0,24)),ballImages:[],music:{mode:'fixed',track,volume:25},reason:'Müzik ve kadro kategorisi son 300 üretime göre dönüşümlü seçilir; düzenler ayrıca karşılaştırılır.'}};
+  return {...base,source:null,automation:{version:2,...(mode==='track'?{episodeFormat:leastRecent(EPISODE_FORMATS,guard.recentFormats??recent.filter(j=>j.mode==='track').map(j=>recipeOf(j)?.episode?.format??'sprint'))}:{}),rosterCategory:category,catalogItems:members,ballNames:members.map(i=>englishRosterName(i.name)),ballImages:[],music:{mode:'fixed',track,volume:25},reason:'Müzik ve kadro kategorisi son 300 üretime göre dönüşümlü seçilir; düzenler ayrıca karşılaştırılır.'}};
 }
 
 export function automaticCandidate(options,seed,history=[],attempted=[],guard=createRepetitionGuard(history)){
@@ -61,7 +61,7 @@ export function automaticCandidate(options,seed,history=[],attempted=[],guard=cr
       else r.arenaGame='links';
     }
     if(mode!=='spiral'&&auto.ballNames.length)r.count=Math.min(r.count,Math.floor(auto.ballNames.length/2)*2);
-    Object.assign(r,{language:options.language,rosterCategory:auto.rosterCategory,music:auto.music,ballNames:auto.ballNames,ballImages:auto.ballImages,sound:true,trails:true,presentation:{countdown:0,outro:2,camera:'smart'}});
+    Object.assign(r,{language:'en',rosterCategory:auto.rosterCategory,music:auto.music,ballNames:auto.ballNames,ballImages:auto.ballImages,sound:true,trails:true,presentation:{countdown:0,outro:2,camera:'smart'}});
     if(mode==='track')r=withEpisode(r,auto.episodeFormat??'sprint');
     const shape=structure(r);if(attempted.some(a=>structure(a)===shape))continue;
     if(!guard.check(r).allowed)continue;

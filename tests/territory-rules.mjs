@@ -50,7 +50,7 @@ for(const type of ['speed','shield']){
 for(const scenario of ['distant','active','expiring','long-trail']){
   const chase=make(),b=chase.balls[0],start=40*80+40;
   b.cell=start;b.body.position=chase.position(start);b.route=[start-1];
-  chase.pickups=[{type:'speed',cell:start-(scenario==='distant'?24:8)*80,expiresAt:scenario==='expiring'?.1:10}];
+  chase.pickups=[{type:'speed',cell:start-(scenario==='distant'?32:8)*80,expiresAt:scenario==='expiring'?.1:10}];
   if(scenario==='active')b.speedUntil=5;
   if(scenario==='long-trail')b.trail=Array.from({length:31},(_,i)=>start+i);
   chase.seekPickup(b);assert.deepEqual(b.route,[start-1],`${scenario}: keep taking land instead of chasing this buff`);

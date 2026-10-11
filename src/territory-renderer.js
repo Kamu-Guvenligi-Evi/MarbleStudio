@@ -2,7 +2,7 @@ import {drawSpace} from './space-art.js';
 import {drawMarble} from './marble-art.js';
 import {drawLeaders} from './race-leaders.js';
 import {raceName} from './race-copy.js';
-import {TERRITORY_SHAPES,TERRITORY_BUFFS} from './territory.js';
+import {TERRITORY_SHAPES,TERRITORY_BUFFS,TERRITORY_PICKUP_RADIUS} from './territory.js';
 function buffIcon(ctx,type,x,y,size=12){
   ctx.save();ctx.translate(x,y);ctx.scale(size/12,size/12);ctx.beginPath();
   if(type==='speed'){ctx.moveTo(2,-11);ctx.lineTo(-7,2);ctx.lineTo(0,2);ctx.lineTo(-2,11);ctx.lineTo(8,-3);ctx.lineTo(1,-3);}
@@ -19,7 +19,7 @@ export function renderTerritory(ctx,race,{countdown=0,paused=false}={}){
   ctx.strokeStyle='#ffffff24';ctx.lineWidth=.8;ctx.beginPath();for(const i of race.valid)if(race.cells[i]>=0){const p=race.position(i);ctx.moveTo(p.x-3,p.y+3);ctx.lineTo(p.x+3,p.y-3);}ctx.stroke();
   ctx.strokeStyle='#ffffff0b';ctx.lineWidth=.5;for(let i=0;i<=80;i++){ctx.beginPath();ctx.moveTo(30+i*6,270);ctx.lineTo(30+i*6,750);ctx.moveTo(30,270+i*6);ctx.lineTo(510,270+i*6);ctx.stroke();}
   for(const b of race.balls)if(b.trail.length){ctx.beginPath();b.trail.forEach((cell,i)=>{const p=race.position(cell);i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y);});ctx.lineTo(b.body.position.x,b.body.position.y);ctx.strokeStyle='#07101a';ctx.lineWidth=5;ctx.stroke();ctx.strokeStyle=b.color;ctx.lineWidth=2.5;ctx.stroke();}
-  for(const pickup of race.pickups){const p=race.position(pickup.cell);ctx.beginPath();ctx.arc(p.x,p.y,15,0,Math.PI*2);ctx.fillStyle='#091827ee';ctx.fill();ctx.strokeStyle=pickup.type==='speed'?'#ffe66d':'#8ce9ff';ctx.lineWidth=1.5;ctx.stroke();buffIcon(ctx,pickup.type,p.x,p.y,10);}
+  for(const pickup of race.pickups){const p=race.position(pickup.cell);ctx.beginPath();ctx.arc(p.x,p.y,TERRITORY_PICKUP_RADIUS,0,Math.PI*2);ctx.fillStyle='#091827ee';ctx.fill();ctx.strokeStyle=pickup.type==='speed'?'#ffe66d':'#8ce9ff';ctx.lineWidth=1.5;ctx.stroke();buffIcon(ctx,pickup.type,p.x,p.y,10);}
   ctx.restore();path();ctx.strokeStyle='#adcdf0';ctx.lineWidth=2;ctx.stroke();
   // Bodies stay fully visible at coastlines; shields sit behind every player.
   for(const b of race.balls)if(b.eliminatedAt===null&&b.shieldUntil>race.time){const {x,y}=b.body.position;ctx.beginPath();ctx.arc(x,y,b.body.circleRadius+6,0,Math.PI*2);ctx.fillStyle='#8ce9ff30';ctx.fill();ctx.strokeStyle='#8ce9ff';ctx.lineWidth=2;ctx.stroke();}

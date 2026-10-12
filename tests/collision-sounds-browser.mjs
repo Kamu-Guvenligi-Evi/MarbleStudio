@@ -4,7 +4,7 @@ const browser=await chromium.launch({channel:'chrome',headless:true});
 try{
   const page=await browser.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
-  assert.equal(await page.locator('#collision-sound option').count(),8);
+  assert.equal(await page.locator('#collision-sound option').count(),10);
   await page.locator('#collision-sound').selectOption('meow');
   assert.ok(await page.locator('#sound').isChecked());
   await page.locator('#preview-collision-sound').click();
@@ -27,6 +27,12 @@ try{
   for(const [left,right] of energies){assert.ok(left>0);assert.ok(right>left);}
   await page.locator('#sound').uncheck();await page.reload();await page.waitForFunction(()=>window.marbleStudio);
   await page.locator('#nav-arena').click();assert.equal(await page.locator('#sound').isChecked(),false);
+  for(const sound of ['cash-register','minecraft-villager']){
+    await page.locator('#collision-sound').selectOption(sound);await page.locator('#preview-collision-sound').click();
+    assert.ok(await page.locator('#sound').isChecked());
+    await page.reload();await page.waitForFunction(()=>window.marbleStudio);await page.locator('#nav-arena').click();
+    assert.equal(await page.locator('#collision-sound').inputValue(),sound);
+  }
   assert.deepEqual(errors,[]);
-  console.log('PASS: sound selector, preview, per-mode persistence, mute persistence and eight stereo Web Audio effects.');
+  console.log('PASS: sound selector, preview, per-mode persistence, mute persistence and ten stereo Web Audio effects.');
 }finally{await browser.close();}

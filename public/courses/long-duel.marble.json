@@ -1,0 +1,234 @@
+{
+  "format": "marble-studio-course",
+  "version": 2,
+  "project": {
+    "maxSpeed": 6,
+    "variant": "classic",
+    "energy": 1,
+    "spiralTheme": "ice",
+    "name": "Uzun düello · 2 top · 30+ sn",
+    "seed": 2048,
+    "count": 2,
+    "sound": true,
+    "collisionSound": "classic",
+    "visualStyle": "neon",
+    "trails": true,
+    "sequence": [
+      {
+        "type": "switchback",
+        "settings": {
+          "slope": 1,
+          "direction": "auto"
+        }
+      },
+      {
+        "type": "slalom",
+        "settings": {
+          "slope": 1,
+          "side": "auto"
+        }
+      },
+      {
+        "type": "diamonds",
+        "settings": {
+          "size": 1
+        }
+      },
+      {
+        "type": "rotorgates",
+        "settings": {
+          "speed": 1,
+          "direction": "auto"
+        }
+      },
+      {
+        "type": "fork",
+        "settings": {
+          "speed": 1,
+          "direction": "auto"
+        }
+      },
+      {
+        "type": "staircase",
+        "settings": {
+          "slope": 1,
+          "direction": "auto"
+        }
+      },
+      {
+        "type": "weave",
+        "settings": {
+          "travel": 1,
+          "speed": 1
+        }
+      },
+      {
+        "type": "switchback",
+        "settings": {
+          "slope": 1,
+          "direction": "auto"
+        }
+      },
+      {
+        "type": "funnel",
+        "settings": {
+          "gap": 112,
+          "speed": 1,
+          "direction": "auto"
+        }
+      },
+      {
+        "type": "sieve",
+        "settings": {
+          "size": 1
+        }
+      },
+      {
+        "type": "slalom",
+        "settings": {
+          "slope": 1,
+          "side": "auto"
+        }
+      },
+      {
+        "type": "wheels",
+        "settings": {
+          "speed": 1,
+          "direction": "auto"
+        }
+      },
+      {
+        "type": "switchback",
+        "settings": {
+          "slope": 1,
+          "direction": "auto"
+        }
+      },
+      {
+        "type": "pendulum",
+        "settings": {
+          "speed": 1,
+          "amplitude": 1
+        }
+      },
+      {
+        "type": "diamonds",
+        "settings": {
+          "size": 1
+        }
+      },
+      {
+        "type": "fork",
+        "settings": {
+          "speed": 1,
+          "direction": "auto"
+        }
+      },
+      {
+        "type": "staircase",
+        "settings": {
+          "slope": 1,
+          "direction": "auto"
+        }
+      },
+      {
+        "type": "weave",
+        "settings": {
+          "travel": 1,
+          "speed": 1
+        }
+      },
+      {
+        "type": "slalom",
+        "settings": {
+          "slope": 1,
+          "side": "auto"
+        }
+      },
+      {
+        "type": "rotorgates",
+        "settings": {
+          "speed": 1,
+          "direction": "auto"
+        }
+      },
+      {
+        "type": "switchback",
+        "settings": {
+          "slope": 1,
+          "direction": "auto"
+        }
+      },
+      {
+        "type": "funnel",
+        "settings": {
+          "gap": 112,
+          "speed": 1,
+          "direction": "auto"
+        }
+      },
+      {
+        "type": "sieve",
+        "settings": {
+          "size": 1
+        }
+      },
+      {
+        "type": "slalom",
+        "settings": {
+          "slope": 1,
+          "side": "auto"
+        }
+      }
+    ],
+    "ballImages": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "ballNames": [
+      "Lime",
+      "Lavender",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "presentation": {
+      "countdown": 3,
+      "outro": 2,
+      "camera": "smart"
+    }
+  }
+}

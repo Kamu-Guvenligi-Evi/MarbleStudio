@@ -15,6 +15,7 @@ import {chromium} from 'playwright';
 import {productionBrowserOptions} from './browser-runtime.mjs';
 import {recipe,sourceRecipe,identity,structure,copyFor} from '../src/factory-recipes.js';
 import {SPIRAL_THEMES} from '../src/spiral-themes.js';
+import {DEFAULT_VIDEO_FPS} from '../src/video-settings.js';
 
 function processFFmpeg(args){
   const child=spawn(ffmpeg,args,{windowsHide:true,stdio:['pipe','ignore','pipe']});let log='';
@@ -70,7 +71,7 @@ export async function produce(job,{root,origin,history,update,cancelled,novelty}
     if(!candidates.length)throw new Error('Normal hızda tamamlanan uygun parkur bulunamadı. Başka bir düzenle yeniden dene.');
     candidates.sort((a,b)=>b.selectionScore-a.selectionScore);const best=candidates[0];best.candidateReview=candidateReview;best.outputQuality=outputQuality(best.analysis,best.speed);
     const copy=copyFor(best.recipe,job.options.language,job.ordinal);if(job.options.hook){copy.description=copy.description.replace(copy.hook,job.options.hook);copy.hook=job.options.hook;copy.title=job.options.hook;}
-    const fps=job.options.fps??240,duration=best.duration,frames=duration*fps,resolution=job.options.resolution??1080,orientation=job.options.orientation??'portrait';
+    const fps=job.options.fps??DEFAULT_VIDEO_FPS,duration=best.duration,frames=duration*fps,resolution=job.options.resolution??1080,orientation=job.options.orientation??'portrait';
     const width=orientation==='landscape'?Math.round(resolution*16/9):resolution,height=orientation==='portrait'?Math.round(resolution*16/9):resolution;
     const format={fps,width,height,template:job.options.template,channel:job.options.channel,outro:job.options.outro};
     await update({...best,copy,stage:'Video işleniyor',progress:2});
@@ -91,8 +92,9 @@ export async function produce(job,{root,origin,history,update,cancelled,novelty}
     if(!actual.complete||actual.winner!==best.analysis.winner)throw new Error('Kaydedilen sonuç ön simülasyonla eşleşmedi; video hazır olarak işaretlenmedi.');
     await update({stage:'Ses ve dosya kontrolü',progress:94});
     const events=await page.evaluate(()=>window.factoryRenderer.audio());
+    const generatedAudio=best.recipe.mode==='spiral'&&best.recipe.spiralHypnotic?await page.evaluate(({duration,audio})=>window.factoryRenderer.hypnoticAudio(duration,audio),{duration,audio:job.options.audio??'all'}):null;
     const audio=path.join(dir,'impacts.wav'),project=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-    const soundtrack=await productionAudio({events,recipe:best.recipe,duration,audio:job.options.audio??'all',project,signal:controller.signal});await writeFile(audio,soundtrack.buffer);check();
+    const soundtrack=await productionAudio({events,recipe:best.recipe,duration,audio:job.options.audio??'all',project,signal:controller.signal,generatedAudio});await writeFile(audio,soundtrack.buffer);check();
     const temporary=path.join(dir,'video.pending.mp4'),output=path.join(dir,'video.mp4');
     encoder=processFFmpeg(['-hide_banner','-loglevel','error','-y','-i',silent,'-i',audio,'-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','160k','-t',String(duration),'-movflags','+faststart',temporary]);encoder.child.stdin.end();await encoder.done;encoder=null;check();
     // Decode the entire result before publishing it as a completed job.

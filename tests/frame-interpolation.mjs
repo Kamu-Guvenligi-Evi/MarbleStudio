@@ -7,7 +7,7 @@ import {TerritoryBattle} from '../src/territory.js';
 import {validateBatch} from '../src/factory-recipes.js';
 
 for(const fps of [30,60,90,120,144,165,240,360,480])assert.equal(validateBatch({fps}).fps,fps);
-assert.equal(validateBatch().fps,240);
+assert.equal(validateBatch().fps,144);
 for(const fps of [0,-1,NaN,Infinity,59.5,'bad'])assert.throws(()=>validateBatch({fps}));
 const state=race=>JSON.stringify({bodies:[...race.balls.map(b=>b.body),...(race.obstacles??[])].map(b=>({position:b.position,velocity:b.velocity,angle:b.angle,vertices:b.vertices?.map(v=>({x:v.x,y:v.y}))})),particles:race.particles});
 for(const Type of [Race,Arena,Spiral,TerritoryBattle]){

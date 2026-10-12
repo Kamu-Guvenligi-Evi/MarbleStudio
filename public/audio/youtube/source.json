@@ -1,0 +1,31 @@
+{
+  "method": "User-selected single effects; edge silence trimmed, 5/25 ms fades, mono PCM at 24 kHz, peak normalized to 0.6.",
+  "clips": [
+    {
+      "id": "cash-register",
+      "name": "Kasa · Cha-Ching",
+      "video": "EuLJv2qONRY",
+      "start": 2.85,
+      "end": 4.55,
+      "source": "https://www.youtube.com/watch?v=EuLJv2qONRY",
+      "sourceTitle": "Cha-Ching! Money SOUND ( HD ) THE LUCKY SOUND",
+      "creator": "SoundFX_exe",
+      "rate": 24000,
+      "duration": 1.7,
+      "file": "/audio/youtube/cash-register.wav"
+    },
+    {
+      "id": "minecraft-villager",
+      "name": "Minecraft köylüsü",
+      "video": "fiwRZ_j61Dc",
+      "start": 2.1,
+      "end": 2.67,
+      "source": "https://www.youtube.com/watch?v=fiwRZ_j61Dc",
+      "sourceTitle": "Minecraft villager sound effect",
+      "creator": "TenAthlete Minecraft",
+      "rate": 24000,
+      "duration": 0.57,
+      "file": "/audio/youtube/minecraft-villager.wav"
+    }
+  ]
+}

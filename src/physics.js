@@ -18,11 +18,12 @@ export function random(seed) {
 }
 
 export class Race {
-  constructor({ seed = 2048, count = 12, preset = 'cascade', sections = 6, sequence = null, previewIndex = null, ballImages = [], ballNames = [], onHit = () => {} } = {}) {
+  constructor({ seed = 2048, count = 12, preset = 'cascade', sections = 6, sequence = null, previewIndex = null, ballImages = [], ballNames = [], maxSpeed = 18, onHit = () => {} } = {}) {
     this.ballImages=normalizeBallImages(ballImages);
     this.ballNames=normalizeNames(ballNames);
     this.seed = Math.max(1, Math.min(999999, Math.floor(Number(seed) || 2048)));
     this.preset = COURSE_META[preset] ? preset : 'cascade';
+    this.maxSpeed=Number.isFinite(maxSpeed)&&maxSpeed>=1&&maxSpeed<=18?maxSpeed:18;
     this.sectionCount = [4, 6, 8].includes(Number(sections)) ? Number(sections) : 6;
     if(sequence !== null) sequence = normalizeSequence(sequence);
     this.isCustom = sequence !== null;
@@ -79,7 +80,7 @@ export class Race {
     for (const b of this.balls) {
       const body = b.body;
       // Keep a tunnelling guard, without braking normal ramp and free-fall speeds.
-      if (body.speed > 18) Body.setVelocity(body, { x: body.velocity.x * 18 / body.speed, y: body.velocity.y * 18 / body.speed });
+      if (body.speed > this.maxSpeed) Body.setVelocity(body, { x: body.velocity.x * this.maxSpeed / body.speed, y: body.velocity.y * this.maxSpeed / body.speed });
       if (b.finishedAt === null) {
         const waitingAtGate = this.course.gates.some(g => !g.open && Math.abs(body.position.y - g.body.position.y) < 45 && Math.abs(body.position.x - g.body.position.x) < 130);
         if (!waitingAtGate && Math.abs(body.position.y - b.lastY) < .13 && body.speed < .45) b.stuckFor += dt / 1000;

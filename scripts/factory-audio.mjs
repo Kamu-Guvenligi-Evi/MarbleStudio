@@ -17,13 +17,20 @@ async function decode(file,signal){
   const data=Buffer.concat(chunks),samples=new Float32Array(data.length/4);for(let i=0;i<samples.length;i++)samples[i]=data.readFloatLE(i*4);
   if(!samples.length)throw new Error('Müzik dosyası boş.');return samples;
 }
-export async function productionAudio({events,recipe,duration,audio,project,signal}){
+export async function productionAudio({events,recipe,duration,audio,project,signal,generatedAudio}){
+  if(recipe.mode==='spiral'&&recipe.spiralHypnotic&&!recipe.spiralHypnoticMuted&&audio!=='none'){
+    if(!generatedAudio)throw new Error('Hipnotik ses Web Audio ile oluşturulamadı.');
+    const buffer=Buffer.from(generatedAudio,'base64');
+    if(buffer.length<44||buffer.toString('ascii',0,4)!=='RIFF'||buffer.toString('ascii',8,12)!=='WAVE'||buffer.readUInt16LE(22)!==2||buffer.readUInt32LE(24)!==48000||buffer.length!==44+Math.ceil(duration*48000)*4)throw new Error('Hipnotik ses verisi geçersiz.');
+    return {buffer,credits:[]};
+  }
   const rate=48000,samples=new Float32Array(Math.ceil(duration*rate)),credits=[];
+  if(recipe.mode==='spiral'&&recipe.spiralHypnotic)audio='none';
   const lastEffects=new Map();
   if(audio==='all'||audio==='effects')for(const e of events.effects){
     const event=collisionEvent(e,recipe.collisionSound),key=event.type+'|'+event.collisionSound;
     if(event.collisionSound&&event.collisionSound!=='classic'){
-      if(e.time-(lastEffects.get(key)??-1)<effectInterval(event))continue;
+      if(e.time-(lastEffects.get(key)??-Infinity)<effectInterval(event))continue;
       lastEffects.set(key,e.time);
     }
     const start=Math.max(0,Math.floor(e.time*rate)),effect=effectSamples(event,rate);

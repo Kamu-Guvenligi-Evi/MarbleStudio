@@ -1,4 +1,5 @@
 import {PI_MAX_DIGITS} from '../src/pi-collisions.js';
+import {spiralMultiplierLayout} from '../src/spiral.js';
 import {createHash} from 'node:crypto';
 import {readFile,writeFile,rename} from 'node:fs/promises';
 import path from 'node:path';
@@ -21,12 +22,16 @@ export function contentKeys(r){
   const roster=Array.from({length:count},(_,i)=>images[i]??'color-'+i);
   const physical={mode:r.mode,seed:r.seed,count,roster,...(r.mode==='track'?{sequence:r.sequence}:r.mode==='arena'?{energy:r.energy??1,...(r.arenaGame==='territory'?{arenaGame:r.arenaGame,arenaShape:r.arenaShape??'triangle',territoryDuration:r.territoryDuration??45}:{})}:{theme:r.theme??r.spiralTheme??'ice',variant:r.variant??'classic'})};
   if(r.mode==='arena'&&r.arenaGame!=='territory'&&r.arenaLinkMode==='prelinked')Object.assign(physical,{arenaLinkMode:'prelinked',arenaInitialLinks:r.arenaInitialLinks??15});
+  if(r.mode==='track'&&r.maxSpeed!==undefined&&r.maxSpeed!==18)physical.maxSpeed=r.maxSpeed;
   if(r.episode)physical.episode={version:r.episode.version,format:r.episode.format,heats:r.episode.heats.map(h=>({seed:h.seed,sequence:h.sequence}))};
   const similar={...physical};delete similar.seed;similar.roster=[...roster].sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b)));
   if(r.mode==='track')similar.sequence=(r.sequence??[]).map(s=>typeof s==='string'?s:s.type);
   if(r.episode)similar.episode={version:r.episode.version,format:r.episode.format,heats:r.episode.heats.map(h=>({sequence:h.sequence.map(s=>s.type)}))};
-  // Spiral's visible identity is its material and breaking behavior, not its random seed.
-  if(r.mode==='spiral'){delete similar.roster;delete similar.count;}
+  // Seeded multiplier locations and values change the visible spiral gameplay.
+  if(r.mode==='spiral'){
+    physical.multipliers=spiralMultiplierLayout(r.seed).map(g=>[Math.round(g.distance),g.value]);
+    similar.multipliers=physical.multipliers;delete similar.roster;delete similar.count;
+  }
   return {exact:hash(physical),similar:hash(similar)};
 }
 export function repetitionError(message='Uzun süreli tekrar korumasını geçen yeni içerik bulunamadı. Başka bir tür seç veya içerik kütüphanesini genişlet.'){

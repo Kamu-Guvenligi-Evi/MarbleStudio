@@ -6,6 +6,7 @@ import {normalizeProject} from '../src/projects.js';
 assert.equal(normalizeProject({name:'Legacy',mode:'spiral',count:1,sequence:[]}).spiralTheme,'ice');
 assert.equal(normalizeProject({name:'Invalid',spiralTheme:'missing',sequence:[]}).spiralTheme,'ice');
 const browser=await chromium.launch({channel:'chrome',headless:true});
+const lastTheme=Object.keys(SPIRAL_THEMES).at(-1);
 try{
   const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
@@ -23,10 +24,10 @@ try{
   await page.locator('#nav-arena').click();
   assert.ok(await page.locator('#spiral-theme-field').isHidden());
   await page.locator('#nav-spiral').click();
-  assert.equal(await page.locator('#spiral-theme').inputValue(),'cosmic');
+  assert.equal(await page.locator('#spiral-theme').inputValue(),lastTheme);
   await page.reload();await page.waitForFunction(()=>window.marbleStudio);
   await page.locator('#nav-spiral').click();
-  assert.equal(await page.locator('#spiral-theme').inputValue(),'cosmic');
+  assert.equal(await page.locator('#spiral-theme').inputValue(),lastTheme);
   await page.setViewportSize({width:390,height:844});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await page.setViewportSize({width:900,height:1080});
@@ -39,12 +40,12 @@ try{
       const tile=document.createElement('div'),label=document.createElement('div'),canvas=document.createElement('canvas');
       label.textContent=theme.name;label.style='color:#e9eef5;font:600 17px Arial;padding:12px 0';
       canvas.width=540;canvas.height=960;canvas.style='width:270px;height:480px;border-radius:12px';
-      const race=new Spiral({theme:id});race.start();race.step(60000);
+      const race=new Spiral({theme:id});race.start();race.step(4500);
       renderSpiral(canvas.getContext('2d'),race);
       tile.append(label,canvas);document.querySelector('#theme-sheet').append(tile);
     }
   });
   await page.locator('#theme-sheet').screenshot({path:'artifacts/spiral-theme-collection.png'});
   assert.deepEqual(errors,[]);
-  console.log('PASS: six themes, legacy defaults, persistence, mode isolation, mobile layout and rendering.');
+  console.log(`PASS: ${Object.keys(SPIRAL_THEMES).length} themes, legacy defaults, persistence, mode isolation, mobile layout and rendering.`);
 }finally{await browser.close();}

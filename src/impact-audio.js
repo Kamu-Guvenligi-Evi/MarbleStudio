@@ -1,5 +1,6 @@
-// Shared deterministic synthesis for live Web Audio and offline video exports.
-export const COLLISION_SOUNDS={classic:'Klasik',meow:'Miyav',woof:'Havlama',squeak:'Lastik oyuncak',pop:'Baloncuk',laser:'Lazer',bell:'Zil',wood:'Tahta tıkırtısı'};
+import {RECORDED_SOUNDS,recordedSamples} from './recorded-sounds.js';
+// Shared deterministic synthesis and recorded PCM for live and offline exports.
+export const COLLISION_SOUNDS={classic:'Klasik',meow:'Miyav',woof:'Havlama',squeak:'Lastik oyuncak',pop:'Baloncuk',laser:'Lazer',bell:'Zil',wood:'Tahta tıkırtısı',...Object.fromEntries(Object.entries(RECORDED_SOUNDS).map(([id,clip])=>[id,clip.name]))};
 export const normalizeCollisionSound=value=>Object.hasOwn(COLLISION_SOUNDS,value)?value:'classic';
 export function collisionEvent(event={},sound='classic'){
   const collision=['impact','ice'].includes(event.type??'impact');
@@ -7,10 +8,12 @@ export function collisionEvent(event={},sound='classic'){
 }
 export function effectInterval(event={}){
   const sound=normalizeCollisionSound(event.collisionSound);
+  if(RECORDED_SOUNDS[sound])return RECORDED_SOUNDS[sound].duration;
   return ({meow:.22,woof:.18,squeak:.12,bell:.1})[sound]??(sound==='classic'?(event.type==='ice'?.035:.045):.07);
 }
 export function effectSamples(event={},rate=48000){
   const type=event.type??'impact',sound=['impact','ice'].includes(type)?normalizeCollisionSound(event.collisionSound):'classic';
+  const recorded=recordedSamples(sound,rate);if(recorded)return recorded;
   const duration=sound==='classic'?({ice:.24,multiply:.36,drop:.16,complete:.7,impact:.09})[type]??.09:({meow:.42,woof:.26,squeak:.22,pop:.1,laser:.2,bell:.48,wood:.08})[sound];
   const out=new Float32Array(Math.ceil(rate*duration));
   let noise=(event.seed??17)|0,previous=0;

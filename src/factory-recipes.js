@@ -1,3 +1,4 @@
+import {spiralMultiplierLayout} from './spiral.js';
 import {OUTPUT_LANGUAGE,englishOutput,englishRosterName} from './output-language.js';
 import {COURSE_META} from './courses.js';
 import {PI_MAX_DIGITS} from './pi-collisions.js';
@@ -5,6 +6,7 @@ import {episodeCopy} from './episode-plan.js';
 import {random} from './physics.js';
 import {SECTION_SETTINGS} from './section-settings.js';
 import {SPIRAL_THEMES} from './spiral-themes.js';
+import {DEFAULT_VIDEO_FPS} from './video-settings.js';
 import {SPIRAL_VARIANTS} from './spiral-variants.js';
 import {normalizeSnapshot} from './studio-transfer.js';
 import {isBreaker} from './breaker-video.js';
@@ -37,7 +39,7 @@ export function validateBatch(raw={}){
   }:null;
   if(youtube&&(!/^UC[A-Za-z0-9_-]{22}$/.test(youtube.channelId)||!['private','unlisted','public'].includes(youtube.privacyStatus)))throw new Error('YouTube yükleme ayarı geçersiz.');
   const choose=(key,allowed,fallback)=>{const value=raw[key]??fallback;if(!allowed.includes(value))throw new Error('Geçersiz dışa aktarma ayarı: '+key);return value;};
-  const fps=Number(raw.fps??240);
+  const fps=Number(raw.fps??DEFAULT_VIDEO_FPS);
   if(!Number.isSafeInteger(fps)||fps<1)throw new Error('Kare hızı pozitif tam sayı olmalı.');
   const strategy=source?choose('strategy',['exact','variations'],'exact'):'variations';
   if((['statistics','pi','ball-duel'].includes(source?.mode)||isBreaker(source?.mode))&&strategy!=='exact')throw new Error('Bu mod aynı çalışma olarak dışa aktarılır.');
@@ -76,7 +78,7 @@ export function recipe(seed,mode,theme){
     ...(mode==='track'?{profile,rhythm}:mode==='spiral'?{variant:pick(Object.keys(SPIRAL_VARIANTS))}:{energy:pick([.85,1,1.15])})};
 }
 export function identity(r){return JSON.stringify(r);}
-export function structure(r){if(r.mode==='ball-duel')return JSON.stringify([r.mode,r.hp,r.playbackSpeed,r.theme,r.names,r.colors,r.ballImages]);if(isBreaker(r.mode))return JSON.stringify([r.mode,r.theme,r.liveColors,r.mapId,r.playbackSpeed,r.clipSeconds]);if(r.mode==='pi')return JSON.stringify([r.mode,r.digits,r.speed,...(r.autoIncrease?[true,PI_MAX_DIGITS]:[])]);if(r.episode)return JSON.stringify([r.mode,r.episode.format,r.episode.heats.map(h=>h.sequence.map(s=>s.type))]);return JSON.stringify([r.mode,r.mode==='statistics'?r.statistics.csv:r.mode==='track'?[r.profile,r.rhythm,(r.sequence??[]).map(s=>s.type)]:r.mode==='spiral'?[r.theme,r.variant]:[r.count,r.energy,r.arenaGame??'links',r.arenaShape??'triangle',r.territoryDuration??45,...(r.arenaGame!=='territory'&&r.arenaLinkMode==='prelinked'?['prelinked',r.arenaInitialLinks??15]:[])]]);}
+export function structure(r){if(r.mode==='ball-duel')return JSON.stringify([r.mode,r.hp,r.playbackSpeed,r.theme,r.names,r.colors,r.ballImages]);if(isBreaker(r.mode))return JSON.stringify([r.mode,r.theme,r.liveColors,r.mapId,r.playbackSpeed,r.clipSeconds]);if(r.mode==='pi')return JSON.stringify([r.mode,r.digits,r.speed,...(r.autoIncrease?[true,PI_MAX_DIGITS]:[])]);if(r.episode)return JSON.stringify([r.mode,r.episode.format,r.episode.heats.map(h=>h.sequence.map(s=>s.type))]);return JSON.stringify([r.mode,r.mode==='statistics'?r.statistics.csv:r.mode==='track'?[r.profile,r.rhythm,(r.sequence??[]).map(s=>s.type)]:r.mode==='spiral'?[r.theme,r.variant,spiralMultiplierLayout(r.seed).map(g=>[Math.round(g.distance),g.value])]:[r.count,r.energy,r.arenaGame??'links',r.arenaShape??'triangle',r.territoryDuration??45,...(r.arenaGame!=='territory'&&r.arenaLinkMode==='prelinked'?['prelinked',r.arenaInitialLinks??15]:[])]]);}
 export function copyFor(r,language,ordinal=0){
   if(r.mode==='ball-duel'){const hook='Who will be the last ball standing?';return {hook,title:r.names.join(' vs ')+' | Ball Duel',description:hook+'\nA physics arena duel created with Marble Studio.',tags:['shorts','marbles','physics','ball-duel'],language:OUTPUT_LANGUAGE};}
   if(isBreaker(r.mode)){const hook=r.mode==='glass-breaker'?'Will all the glass break?':'Can the marbles clear every block?';return {hook,title:hook,description:hook+'\nAn original physics simulation created with Marble Studio.',tags:['shorts','marbles','physics',r.mode],language:OUTPUT_LANGUAGE};}
@@ -98,7 +100,7 @@ export function copyFor(r,language,ordinal=0){
     if(noun){hooks[language][r.mode]=[`Which ${noun} will win?`,'Pick your favorite. Follow the finish.'];extra[r.mode]=[`${r.count} contenders. One winner.`,'Will the lead change at the end?'];}
   }
   const variants=[...hooks[language][r.mode],...extra[r.mode]],hook=variants[(ordinal+Math.floor(r.seed/7))%variants.length];
-  const theme=({ice:'Ice Breaker',lava:'Lava Core',aurora:'Aurora',gold:'Gold Rush',candy:'Candy Spiral',cosmic:'Cosmic Crystal'})[r.theme];
+  const theme=(SPIRAL_THEMES[r.theme]??SPIRAL_THEMES.ice).englishName;
   const title=(r.mode==='spiral'?theme+' — ':'')+hook;
   return {hook,title,description:hook+'\n\n'+'An original physics simulation created with Marble Studio.'+'\n#shorts #marblerace #simulation',tags:['shorts','marble race','physics simulation',r.mode],language};
 }

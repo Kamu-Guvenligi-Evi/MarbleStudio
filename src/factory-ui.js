@@ -1,7 +1,9 @@
 import {brandVideoOptions} from './channel-branding.js';
+import {DEFAULT_VIDEO_FPS} from './video-settings.js';
 const youtubeAccounts=async()=>{const response=await fetch('/api/youtube/accounts');if(!response.ok)throw new Error('YouTube hesaplar? okunamad?.');return response.json();};
 import {normalizeSnapshot} from './studio-transfer.js';
 const $=s=>document.querySelector(s),form=$('#batch');let state=null,signature='',source=null,offset=0,compatible=false;const limit=12;
+form.elements.fps.value=String(DEFAULT_VIDEO_FPS);
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function options(){const data=new FormData(form);return {channel:data.get('channel'),count:Number(form.elements.count.value),duration:Number(data.get('duration')),language:data.get('language'),modes:data.getAll('mode'),source,arenaGame:data.get('arenaGame'),strategy:data.get('strategy'),orientation:data.get('orientation'),resolution:Number(data.get('resolution')),fps:Number(data.get('fps')),audio:data.get('audio'),template:data.get('template'),hook:data.get('hook'),outro:data.get('outro'),youtube:data.get('youtubeChannel')?{channelId:data.get('youtubeChannel'),privacyStatus:data.get('youtubePrivacy')}:null};}
 async function post(route,body){if(!compatible)throw new Error('Atölye hizmetini yeniden başlat. Açık hizmet eski sürümü kullanıyor veya bağlantı kurulamadı.');const res=await fetch('/api/'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const value=await res.json();if(!res.ok)throw new Error(value.error);signature='';await refresh();}

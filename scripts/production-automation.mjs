@@ -19,7 +19,8 @@ const recipeOf=job=>job.recipe??job.options?.source;
 export const automaticKind=job=>(job.recipe?.arenaGame??job.options?.source?.project?.arenaGame??job.options?.arenaGame)==='territory'&&job.mode==='arena'?'territory':job.mode;
 export async function planAutomatic(options,history,project,guard=createRepetitionGuard(history)){
   const recent=history.slice(-300);
-  const spiralAvailable=Object.keys(SPIRAL_THEMES).some(theme=>Object.keys(SPIRAL_VARIANTS).some(variant=>guard.check({mode:'spiral',seed:1,count:1,theme,variant}).allowed));
+  const spiralSeed=randomInt(1,1000000);
+  const spiralAvailable=Object.keys(SPIRAL_THEMES).some(theme=>Object.keys(SPIRAL_VARIANTS).some(variant=>guard.check({mode:'spiral',seed:spiralSeed,count:1,theme,variant}).allowed));
   const modes=spiralAvailable?['track','arena','territory','spiral']:['track','arena','territory'];
   if(options.automaticMode==='spiral'&&!spiralAvailable)throw repetitionError('Spiral tema ve davranışları tekrar korumasında. Başka bir tür seç; süre ve video aralığı dolunca spiral yeniden kullanılabilir.');
   const kind=options.automaticMode==='auto'?leastRecent(modes,recent.map(automaticKind)):options.automaticMode,mode=kind==='territory'?'arena':kind;
@@ -54,7 +55,10 @@ export function automaticCandidate(options,seed,history=[],attempted=[],guard=cr
   const mode=options.modes[0],recent=history.slice(-300).map(recipeOf).filter(Boolean),pool=[];
   for(let i=0;i<96;i++){
     let r=recipe(1+(seed+i*7919)%999999,mode);const auto=options.automation;
-    if(mode==='spiral'){r.theme=Object.keys(SPIRAL_THEMES)[i%6];r.variant=Object.keys(SPIRAL_VARIANTS)[Math.floor(i/6)%4];}
+    if(mode==='spiral'){
+      const themes=Object.keys(SPIRAL_THEMES),variants=Object.keys(SPIRAL_VARIANTS);
+      r.theme=themes[i%themes.length];r.variant=variants[Math.floor(i/themes.length)%variants.length];
+    }
     if(mode==='arena'){
       r.count=6+2*(i%8);r.energy=[.85,1,1.15][Math.floor(i/8)%3];
       if(options.arenaGame==='territory')Object.assign(r,{arenaGame:'territory',arenaShape:['triangle','square','hexagon','star','circle'][i%5],territoryDuration:[30,45,60][Math.floor(i/5)%3]});

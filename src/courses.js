@@ -5,6 +5,7 @@ const { Bodies, Body, Composite } = Matter;
 export const SECTION_HEIGHT = 650;
 export const COURSE_START = 430;
 export const COURSE_META = {
+  longduel: {name:'Uzun düello · 2 top · 30+ sn',accent:'#daa5ff',count:2,maxSpeed:6,modules:['switchback','slalom','diamonds','rotorgates','fork','staircase','weave','switchback','funnel','sieve','slalom','wheels','switchback','pendulum','diamonds','fork','staircase','weave','slalom','rotorgates','switchback','funnel','sieve','slalom']},
   stairway: {name:'Basamak ekspresi',accent:'#82d9ff',modules:['staircase', 'crossramps', 'diamonds', 'fork', 'sieve', 'weave', 'shortcut', 'slalom']},
   gemrun: {name:'Elmas vadisi',accent:'#82d9ff',modules:['diamonds', 'sieve', 'fork', 'pegs', 'staircase', 'drift', 'funnel', 'rotorgates']},
   rotorfactory: {name:'Rotor fabrikası',accent:'#82d9ff',modules:['rotorgates', 'wheels', 'pulse', 'weave', 'pendulum', 'diamonds', 'fork', 'drift']},

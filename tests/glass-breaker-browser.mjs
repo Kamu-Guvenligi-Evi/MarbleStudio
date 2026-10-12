@@ -44,6 +44,7 @@ try{
   await page.locator('#live-colors').uncheck();
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await page.screenshot({path:'artifacts/glass-breaker/chrome-mobile.jpg',type:'jpeg',quality:65});
-  await page.goto(origin);await page.locator('#automatic-start a[href="/glass-breaker.html"]').click();await page.waitForURL('**/glass-breaker.html');
+  await page.goto(origin);await page.locator('.view-tabs a[href="/glass-breaker.html"]').click();await page.waitForURL('**/glass-breaker.html');
+  await page.goto(origin);await page.locator('#automatic-back').click();await page.locator('#automatic-start a[href="/glass-breaker.html"]').click();await page.waitForURL('**/glass-breaker.html');
   assert.deepEqual(errors,[]);console.log('PASS: controls, batches, mobile layout; six distinct themes, preserved simulation, keyboard selection and persisted appearance.');
 }finally{await browser.close();}

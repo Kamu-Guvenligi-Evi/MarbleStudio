@@ -1,3 +1,4 @@
+import {englishRosterName} from './output-language.js';
 import Matter from 'matter-js';
 import {Race,COLORS,NAMES} from './physics.js';
 import {EPISODE_FORMATS,FORMAT_NAMES} from './episode-plan.js';
@@ -7,9 +8,9 @@ export class EpisodeRace {
   constructor(config){
     const e=config.episode;
     if(e?.version!==1||!EPISODE_FORMATS.includes(e.format)||config.count!==12||e.heats?.length!==(['elimination','championship'].includes(e.format)?3:1))throw new Error('Invalid episode rules');
-    this.config=config;this.episode=e;this.language=config.language??'en';this.round=0;
+    this.config=config;this.episode=e;this.language='en';this.round=0;
     this.time=0;this.state='ready';this.finished=[];this.results=[];this.totalRescues=0;this.pause=0;
-    this.entrants=Array.from({length:12},(_,id)=>({id,name:config.ballNames?.[id]??NAMES[id],imageSrc:config.ballImages?.[id],team:id%3,points:0,lastPlace:99,places:[],color:COLORS[id]}));
+    this.entrants=Array.from({length:12},(_,id)=>({id,name:englishRosterName(config.ballNames?.[id]??NAMES[id]),imageSrc:config.ballImages?.[id],team:id%3,points:0,lastPlace:99,places:[],color:COLORS[id]}));
     this.active=[...this.entrants];this.openHeat();
   }
   openHeat(){
@@ -31,7 +32,7 @@ export class EpisodeRace {
   start(){if(this.state==='ready'){this.state='running';this.current.start();}}
   target(){return this.episode.format==='elimination'?[8,4,1][this.round]:this.episode.format==='sprint'?1:6;}
   standings(){
-    if(this.episode.format==='teams')return [0,1,2].map(team=>({id:team,name:(this.language==='tr'?'Takım ':'Team ')+['A','B','C'][team],points:this.entrants.filter(e=>e.team===team).reduce((s,e)=>s+e.points,0),lastPlace:Math.min(...this.entrants.filter(e=>e.team===team).map(e=>e.lastPlace))})).sort((a,b)=>b.points-a.points||a.lastPlace-b.lastPlace||a.id-b.id);
+    if(this.episode.format==='teams')return [0,1,2].map(team=>({id:team,name:('Team ')+['A','B','C'][team],points:this.entrants.filter(e=>e.team===team).reduce((s,e)=>s+e.points,0),lastPlace:Math.min(...this.entrants.filter(e=>e.team===team).map(e=>e.lastPlace))})).sort((a,b)=>b.points-a.points||a.lastPlace-b.lastPlace||a.id-b.id);
     return [...this.entrants].sort((a,b)=>b.points-a.points||this.results.reduceRight((tie,_,i)=>tie||(a.places[i]-b.places[i]),0)||a.id-b.id);
   }
   liveStandings(){
@@ -66,25 +67,25 @@ export class EpisodeRace {
 }
 
 export function drawEpisode(ctx,race){
-  const tr=race.language==='tr',format=race.episode.format;
+  const format=race.episode.format;
   ctx.save();ctx.setTransform(2,0,0,2,0,0);
   const text=(s,y,size=17,color='#edf7ff')=>{ctx.fillStyle=color;ctx.font=`600 ${size}px Segoe UI`;ctx.textAlign='center';ctx.fillText(s,270,y,470);};
   if(race.state==='finished'){
     ctx.fillStyle='#080e20f5';ctx.fillRect(0,0,540,960);
-    text(FORMAT_NAMES[race.language][format],230,25);text(tr?'KAZANAN':'WINNER',300,18,'#bbed83');text(race.finished[0].name,355,32);
-    if(['teams','championship'].includes(format))race.standings().slice(0,6).forEach((e,i)=>text(`${i+1}. ${e.name} · ${e.points} ${tr?'puan':'pts'}`,440+i*45,20));
-    else text(tr?'Finiş sırasıyla belirlendi.':'Decided by finish order.',430,18);
+    text(FORMAT_NAMES.en[format],230,25);text('WINNER',300,18,'#bbed83');text(race.finished[0].name,355,32);
+    if(['teams','championship'].includes(format))race.standings().slice(0,6).forEach((e,i)=>text(`${i+1}. ${e.name} · ${e.points} pts`,440+i*45,20));
+    else text('Decided by finish order.',430,18);
   }else{
     ctx.fillStyle='#080e20ef';ctx.fillRect(25,800,490,138);
-    text(`${FORMAT_NAMES[race.language][format]} · ${tr?'Tur':'Round'} ${race.round+1}/${race.episode.heats.length}`,831,19,'#bbed83');
+    text(`${FORMAT_NAMES.en[format]} · Round ${race.round+1}/${race.episode.heats.length}`,831,19,'#bbed83');
     if(race.pause>0){
-      text(tr?'Etap tamamlandı':'Stage complete',869);
+      text('Stage complete',869);
       const last=race.results.at(-1);text(last.finishers.slice(0,3).map(id=>race.entrants[id].name).join(' · '),905,16);
-    }else if(format==='elimination')text(race.round<2?(tr?`İlk ${race.target()} yarışmacı devam eder`:`First ${race.target()} qualify`):(tr?'Final: İlk finiş kazanır':'Final: first finish wins'),880);
+    }else if(format==='elimination')text(race.round<2?(`First ${race.target()} qualify`):('Final: first finish wins'),880);
     else if(['teams','championship'].includes(format)){
-      text(tr?'İlk 6 finiş: 6–1 puan':'First 6 finishers: 6–1 points',866,16);
+      text('First 6 finishers: 6–1 points',866,16);
       text(race.liveStandings().slice(0,3).map(e=>`${e.name}: ${e.points}`).join(' · '),901,15);
-    }else text(tr?'İlk finiş kazanır':'First across the finish wins',880);
+    }else text('First across the finish wins',880);
   }
   ctx.restore();
 }

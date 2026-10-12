@@ -32,7 +32,7 @@ export function createPiStudio({notify,onExport}){
     gain.gain.setValueAtTime(.045,now);gain.gain.exponentialRampToValueAtTime(.001,now+.055);
     osc.connect(gain);gain.connect(audio.destination);osc.start(now);osc.stop(now+.06);osc.onended=()=>{osc.disconnect();gain.disconnect();};
   }
-  function draw(){renderPi(ctx,race,{language:'tr',paused:!playing&&race.state==='running'});}
+  function draw(){renderPi(ctx,race,{paused:!playing&&race.state==='running'});}
   function ui(){
     $('play').textContent=playing?'Ⅱ Duraklat':race.state==='finished'?'↻ Yeniden oynat':race.state==='ready'?'▶ Başlat':'▶ Devam et';
     $('count').textContent=String(race.collisions);$('time').textContent=race.time.toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})+' sn';

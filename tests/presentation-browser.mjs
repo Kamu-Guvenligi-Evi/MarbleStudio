@@ -1,3 +1,4 @@
+import {selectTestChannel} from './browser-channel.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -6,6 +7,7 @@ const browser=await chromium.launch({channel:'chrome',headless:true});
 try {
  const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
  page.on('pageerror',e=>errors.push(e.message));
+ await selectTestChannel(page);
  await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
  await page.evaluate(()=>{
    const c=document.createElement('canvas');c.width=c.height=128;const ctx=c.getContext('2d');ctx.fillStyle='#1755a0';ctx.fillRect(0,0,128,128);ctx.fillStyle='#fff';ctx.font='bold 72px sans-serif';ctx.textAlign='center';ctx.fillText('★',64,90);

@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {mkdtemp,readFile} from 'node:fs/promises';
+import path from 'node:path';
+import {produce} from '../scripts/factory-worker.mjs';
+import {planAutomatic} from '../scripts/production-automation.mjs';
+import {validateBatch} from '../src/factory-recipes.js';
+const root=await mkdtemp(path.resolve('artifacts/track-duration-export-'));
+const options=await planAutomatic(validateBatch({automatic:true,automaticMode:'track',count:1,duration:30,fps:12,resolution:720,audio:'none'}),[],path.resolve('.'));
+options.automation.episodeFormat='sprint';
+const job={id:'duration-check',mode:'track',ordinal:0,options};
+await produce(job,{root,origin:'http://127.0.0.1:5173',history:[],cancelled:()=>false,update:async patch=>Object.assign(job,patch)});
+assert.equal(job.state,'done');assert.equal(job.candidateReview.length,1);
+assert.ok(job.duration>=30&&job.duration<=180);assert.equal(job.speed,1);
+assert.ok(job.candidateReview[0].durationPasses.length<=6);
+const meta=JSON.parse(await readFile(path.join(root,job.id,'metadata.json'),'utf8'));
+assert.equal(meta.video.duration,job.duration);assert.ok(meta.outputQuality.accepted);
+assert.deepEqual(meta.analysis.episode,job.analysis.episode);
+console.log(`PASS: real MP4 encoded/decoded in range at 1x; one candidate, ${job.candidateReview[0].durationPasses.length} calibration passes. ${root}`);

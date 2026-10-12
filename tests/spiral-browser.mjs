@@ -1,10 +1,12 @@
+import {selectTestChannel} from './browser-channel.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 const browser=await chromium.launch({channel:'chrome',headless:true});
 try{
   const page=await browser.newPage({viewport:{width:1440,height:1000},acceptDownloads:true}),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
-  await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
+  await selectTestChannel(page);
+ await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
   const state=()=>page.evaluate(()=>window.marbleStudio.getState());
   await page.locator('#nav-spiral').click();
   assert.equal((await state()).mode,'spiral');assert.equal((await state()).count,1);

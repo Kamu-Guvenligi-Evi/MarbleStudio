@@ -21,7 +21,7 @@ for(const [digits,count] of [[1,3],[2,31],[3,314],[4,3141],[5,31415],[6,314159]]
   assert.equal(analyzePi({digits,speed:.5}).simulationSeconds,race.time*2);
   const source=normalizeSnapshot({mode:'pi',project:{digits,speed:.5,sound:false}});
   const batch=validateBatch({source});assert.equal(batch.strategy,'exact');assert.deepEqual(batch.modes,['pi']);
-  const recipe=sourceRecipe(source,1);assert.equal(recipe.digits,digits);assert.equal(copyFor(recipe,'tr').language,'tr');
+  const recipe=sourceRecipe(source,1);assert.equal(recipe.digits,digits);assert.equal(copyFor(recipe,'tr').language,'en');
   assert.throws(()=>validateBatch({source,strategy:'variations'}));
 }
 assert.throws(()=>normalizePi({digits:7}));assert.throws(()=>normalizePi({speed:0}));assert.throws(()=>normalizePi(null));

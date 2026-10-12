@@ -1,3 +1,4 @@
+import {selectTestChannel} from './browser-channel.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 
@@ -13,7 +14,8 @@ try {
       constructor(stream,options){super(stream,options);window.recordingSessions.push(this);}
     };
   });
-  await page.goto('http://127.0.0.1:5173?edit=1');
+  await selectTestChannel(page);
+ await page.goto('http://127.0.0.1:5173?edit=1');
   await page.waitForFunction(()=>window.marbleStudio);
   await page.locator('#nav-track').click();
   await page.evaluate(async()=>{

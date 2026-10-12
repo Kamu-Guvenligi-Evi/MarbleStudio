@@ -1,3 +1,4 @@
+import {selectTestChannel} from './browser-channel.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -7,7 +8,8 @@ try {
   const page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];
   const shared=[];await page.route('**/api/import-video',async route=>{const request=route.request();if(request.method()==='OPTIONS'){await route.fulfill({status:204,headers:{'Access-Control-Allow-Origin':'http://127.0.0.1:5173','Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, X-Marble-Mode, X-Marble-Title'}});return;}shared.push({mode:request.headers()['x-marble-mode'],bytes:request.postDataBuffer()?.length??0});await route.fulfill({json:{ok:true,id:'test-recording'},headers:{'Access-Control-Allow-Origin':'http://127.0.0.1:5173'}});});
   page.on('pageerror',error=>errors.push(error.message));
-  await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
+  await selectTestChannel(page);
+ await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
   const course=await page.evaluate(()=>window.marbleStudio.getState().sections);
   const state=()=>page.evaluate(()=>window.marbleStudio.getStatisticsState());
   await page.locator('#nav-statistics').click();
@@ -63,10 +65,10 @@ try {
   await page.locator('#statistics-test-video').evaluate(video=>video.remove());
   await page.locator('#statistics-canvas').screenshot({path:'artifacts/statistics-final.png'});
   assert.equal(await page.locator('#nav-track').isDisabled(),false);
-  await page.evaluate(()=>{
+  await page.evaluate(async()=>{
     const canvas=document.querySelector('#statistics-canvas'),capture=canvas.captureStream;
     canvas.captureStream=()=>{throw new Error('Simulated recording failure');};
-    try{document.querySelector('#statistics-record').onclick();}finally{canvas.captureStream=capture;}
+    try{await document.querySelector('#statistics-record').onclick();}finally{canvas.captureStream=capture;}
   });
   assert.equal((await state()).recording,false);assert.equal(await page.locator('#nav-track').isDisabled(),false);
   await page.locator('#statistics-webm-options').evaluate(el=>el.open=true);await page.locator('#statistics-record').click();

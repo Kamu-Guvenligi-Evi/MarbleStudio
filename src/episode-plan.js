@@ -1,3 +1,4 @@
+import {SECTION_SETTINGS} from './section-settings.js';
 import {random} from './physics.js';
 import {normalizeSection} from './section-settings.js';
 
@@ -10,8 +11,9 @@ export function withEpisode(recipe,format){
   if(recipe.mode!=='track'||!EPISODE_FORMATS.includes(format))throw new Error('Invalid episode format');
   const rng=random(recipe.seed^0x193a),rounds=['elimination','championship'].includes(format)?3:1;
   const heats=Array.from({length:rounds},(_,index)=>{
-    const pool=[...pools[rounds===1?(format==='teams'?1:0):index]];
-    const sequence=Array.from({length:(rounds===1?4:2)+Math.floor(rng()*2)},()=>{
+    const preferred=pools[rounds===1?(format==='teams'?1:0):index];
+    const pool=[...new Set([...preferred,...Object.keys(SECTION_SETTINGS)])];
+    const sequence=Array.from({length:rounds===1?12+Math.floor(rng()*5):3+Math.floor(rng()*5)},()=>{
       const type=pool.splice(Math.floor(rng()*pool.length),1)[0];
       return normalizeSection(recipe.sequence?.find(s=>s.type===type)??type);
     });
@@ -21,18 +23,14 @@ export function withEpisode(recipe,format){
 }
 
 export function episodeCopy(r,language){
-  const tr=language==='tr',format=r.episode.format,name=FORMAT_NAMES[language][format];
-  const rules=tr?{
-    sprint:'Finişe ilk ulaşan kazanır.',
-    elimination:'12 yarışmacı → 8 → 4. Finalde ilk gelen kazanır.',
-    teams:'3 takım, dörder yarışmacı. İlk 6 finiş: 6–1 puan. En yüksek toplam kazanır.',
-    championship:'3 farklı etap. Her etapta ilk 6 finiş: 6–1 puan. Toplam puan kazanır.',
-  }:{
+  language='en';
+  const format=r.episode.format,name=FORMAT_NAMES[language][format];
+  const rules={
     sprint:'First across the finish wins.',
     elimination:'12 racers → 8 → 4. First across the final wins.',
     teams:'3 teams of 4. First 6 finishers score 6–1. Highest team total wins.',
     championship:'3 different stages. First 6 score 6–1 each stage. Highest total wins.',
   };
-  const tie=tr?' Eşitlikte son etaptan geriye doğru finiş sıraları karşılaştırılır.':' Ties compare finish places from the last stage backwards.';
-  return {hook:name,title:name+' · '+(tr?'Favorin kazanabilecek mi?':'Can your favorite win?'),description:rules[format]+(['teams','championship'].includes(format)?tie:''),rules:rules[format],tags:['shorts','marble race','physics simulation',format],language};
+  const tie=' Ties compare finish places from the last stage backwards.';
+  return {hook:name,title:name+' · Can your favorite win?',description:rules[format]+(['teams','championship'].includes(format)?tie:''),rules:rules[format],tags:['shorts','marble race','physics simulation',format],language};
 }

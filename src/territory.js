@@ -5,6 +5,8 @@ import {COUNTRY_MAPS} from './territory-maps.js';
 
 export const TERRITORY_SHAPES={triangle:'Üçgen',square:'Kare',hexagon:'Altıgen',star:'Yıldız',circle:'Daire',...Object.fromEntries(Object.entries(COUNTRY_MAPS).map(([id,map])=>[id,map.name]))};
 export const TERRITORY_BUFFS={speed:{duration:2,multiplier:1.8},shield:{duration:1.5}};
+export const TERRITORY_BALL_RADIUS=11;
+export const TERRITORY_PICKUP_RADIUS=15;
 export function shapeOutline(shape){
   if(COUNTRY_MAPS[shape])return COUNTRY_MAPS[shape].outline.map(p=>({...p}));
   if(shape==='triangle')return [{x:270,y:280},{x:508,y:740},{x:32,y:740}];
@@ -34,7 +36,7 @@ export class TerritoryBattle{
       if(!candidates.length)throw new Error('Bu haritada oyuncular için yeterli başlangıç alanı yok.');
       let home=candidates[Math.floor(this.rng()*candidates.length)],best=-1;
       if(starts.length)for(const cell of candidates){const p=this.position(cell),distance=Math.min(...starts.map(i=>{const q=this.position(i);return (p.x-q.x)**2+(p.y-q.y)**2;}));if(distance>best){best=distance;home=cell;}}
-      starts.push(home);return {id,name:names[id]??NAMES[id],imageSrc:images[id],color:COLORS[id],cell:home,home,area:0,cuts:0,claims:0,trail:[],route:[],phase:0,speedUntil:0,shieldUntil:0,eliminatedAt:null,finishedAt:null,body:{position:this.position(home),velocity:{x:0,y:0},circleRadius:9}};
+      starts.push(home);return {id,name:names[id]??NAMES[id],imageSrc:images[id],color:COLORS[id],cell:home,home,area:0,cuts:0,claims:0,trail:[],route:[],phase:0,speedUntil:0,shieldUntil:0,eliminatedAt:null,finishedAt:null,body:{position:this.position(home),velocity:{x:0,y:0},circleRadius:TERRITORY_BALL_RADIUS}};
     });
     for(const b of this.balls)this.seedHome(b);
   }
@@ -44,6 +46,75 @@ export class TerritoryBattle{
   seedHome(b){const x=b.home%80,y=Math.floor(b.home/80);for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)this.setOwner((y+dy)*80+x+dx,b.id);}
   rectangleValid(cell,dx,dy){const x=cell%80,y=Math.floor(cell/80),x2=x+dx,y2=y+dy;if(x2<0||x2>=80||y2<0||y2>=80)return false;for(let yy=Math.min(y,y2);yy<=Math.max(y,y2);yy++)for(let xx=Math.min(x,x2);xx<=Math.max(x,x2);xx++)if(this.cells[yy*80+xx]===-2)return false;return true;}
   speed(b){return b.speedUntil>this.time?TERRITORY_BUFFS.speed.multiplier:1;}
+  localRoute(b,accept,maxSteps=24){
+    const others=this.balls.filter(other=>other!==b&&other.eliminatedAt===null);
+    const parent=new Int16Array(6400).fill(-1),depth=new Uint8Array(6400),queue=[b.cell];parent[b.cell]=b.cell;
+    for(let head=0;head<queue.length;head++){
+      const cell=queue[head];
+      if(accept(cell,depth[cell])){
+        const path=[];for(let i=cell;i!==b.cell;i=parent[i])path.push(i);
+        return {cell,path:path.reverse()};
+      }
+      if(depth[cell]>=maxSteps)continue;
+      for(const n of this.neighbors(cell))if(parent[n]===-1){
+        const p=this.position(n);
+        if(others.some(other=>Math.hypot(p.x-other.body.position.x,p.y-other.body.position.y)<b.body.circleRadius+other.body.circleRadius+5))continue;
+        parent[n]=cell;depth[n]=depth[cell]+1;queue.push(n);
+      }
+    }
+    return null;
+  }
+  resumeAfterPickup(b){
+    const original=b.pickupTarget.resumeRoute,targets=new Map();
+    original.forEach((cell,i)=>{if(!targets.has(cell))targets.set(cell,i);});
+    const join=this.localRoute(b,cell=>targets.has(cell));
+    b.pickupTarget=null;b.nextPickupLookAt=this.time+.35;
+    // Rejoin at the nearest point instead of finishing a wasted out-and-back trip.
+    b.route=join?join.path.concat(original.slice(targets.get(join.cell)+1)):[];
+  }
+  seekPickup(b){
+    if(b.pickupTarget||this.time<(b.nextPickupLookAt??0))return;
+    // Bank an almost finished claim before taking a buff detour.
+    if(b.trail.length&&b.route.slice(0,8).some(cell=>this.cells[cell]===b.id))return;
+    b.nextPickupLookAt=this.time+.35;
+    const maxSteps=b.trail.length>30?6:24,p=this.position(b.cell),wanted=this.pickups.filter(item=>{
+      const q=this.position(item.cell),active=b[item.type==='speed'?'speedUntil':'shieldUntil']>this.time;
+      return !active&&item.expiresAt>this.time+.15&&Math.hypot(p.x-q.x,p.y-q.y)<=maxSteps*6;
+    });
+    if(!wanted.length)return;
+    const targets=new Map(wanted.map(item=>[item.cell,item]));
+    const reachable=(cell,steps)=>targets.has(cell)&&targets.get(cell).expiresAt>this.time+steps*.035/this.speed(b)+.15;
+    // An exposed player prefers a close shield; otherwise take the nearest useful buff.
+    const shield=this.exposed(b)?this.localRoute(b,(cell,steps)=>reachable(cell,steps)&&targets.get(cell).type==='shield',Math.min(maxSteps,12)):null;
+    const target=shield??this.localRoute(b,reachable,maxSteps);
+    if(!target)return;
+    if(!target.path.length){this.collectPickups(b);return;}
+    b.pickupTarget={item:targets.get(target.cell),resumeRoute:[b.cell,...b.route]};
+    b.route=target.path;
+  }
+  tryCloseTrail(b){
+    if(!this.exposed(b)||b.trail.length<12||this.protected(b)||this.time<(b.nextSafetyLookAt??0))return false;
+    b.nextSafetyLookAt=this.time+.6;
+    if(b.route.slice(0,8).some(cell=>this.cells[cell]===b.id))return false;
+    const p=this.position(b.cell),others=this.balls.filter(other=>other!==b&&other.eliminatedAt===null);
+    if(!others.some(other=>Math.hypot(p.x-other.body.position.x,p.y-other.body.position.y)<60))return false;
+    // Only a nearby exit from immediate danger; keep ordinary greedy loops elsewhere.
+    const parent=new Int16Array(6400).fill(-1),depth=new Uint8Array(6400),queue=[b.cell];parent[b.cell]=b.cell;
+    for(let head=0;head<queue.length;head++){
+      const cell=queue[head];
+      if(this.cells[cell]===b.id){
+        const path=[];for(let i=cell;i!==b.cell;i=parent[i])path.push(i);
+        b.route=path.reverse();return true;
+      }
+      if(depth[cell]>=8)continue;
+      for(const n of this.neighbors(cell))if(parent[n]===-1){
+        const q=this.position(n);
+        if(others.some(other=>Math.hypot(q.x-other.body.position.x,q.y-other.body.position.y)<b.body.circleRadius+other.body.circleRadius+5))continue;
+        parent[n]=cell;depth[n]=depth[cell]+1;queue.push(n);
+      }
+    }
+    return false;
+  }
   plan(b){
     if(b.eliminatedAt!==null)return;
     if(this.cells[b.cell]!==b.id){
@@ -84,9 +155,69 @@ export class TerritoryBattle{
   }
   clearTrail(b){const old=b.trail;b.trail=[];for(const i of old)if(this.trailOwners[i]===b.id)this.trailOwners[i]=this.balls.find(other=>other.eliminatedAt===null&&other.trail.includes(i))?.id??-1;}
   protected(b){return b.shieldUntil>this.time;}
+  exposed(b){return b.trail.length>0&&this.cells[b.cell]!==b.id;}
+  contact(b,p){
+    for(const other of this.balls){
+      if(other===b||other.eliminatedAt!==null)continue;
+      const q=other.body.position;
+      // Include the visible outline. Resolve contact before two bodies overlap.
+      if(Math.hypot(p.x-q.x,p.y-q.y)>=b.body.circleRadius+other.body.circleRadius+2-1e-8)continue;
+      if(this.exposed(other)&&this.eliminate(other,b))continue;
+      if(this.exposed(b))this.eliminate(b,other);
+      return false;
+    }
+    return true;
+  }
+  detour(b){
+    if(this.time<(b.nextDetourAt??0))return;
+    b.nextDetourAt=this.time+.15;
+    const obstacles=this.balls.filter(other=>other!==b&&other.eliminatedAt===null).map(other=>({...other.body.position,id:other.id,spacing:b.body.circleRadius+other.body.circleRadius+2}));
+    const p=this.position(b.cell),nearest=obstacles.reduce((best,o)=>!best||Math.hypot(o.x-p.x,o.y-p.y)<Math.hypot(best.x-p.x,best.y-p.y)?o:best,null);
+    const clear=(from,to)=>{
+      const p=this.position(from),q=this.position(to),dx=q.x-p.x,dy=q.y-p.y;
+      return obstacles.every(o=>{const t=Math.max(0,Math.min(1,((o.x-p.x)*dx+(o.y-p.y)*dy)/(dx*dx+dy*dy)));return Math.hypot(p.x+dx*t-o.x,p.y+dy*t-o.y)>=o.spacing-1e-8;});
+    };
+    // Rejoin the existing route around a blocking body, without choosing new land.
+    const targets=new Map();b.route.forEach((cell,i)=>{if(cell!==b.cell&&!targets.has(cell))targets.set(cell,i);});
+    const parent=new Int16Array(6400).fill(-1),queue=[b.cell];parent[b.cell]=b.cell;
+    for(let head=0;head<queue.length;head++){
+      const cell=queue[head];
+      if(targets.has(cell)){
+        const path=[];for(let i=cell;i!==b.cell;i=parent[i])path.push(i);
+        b.route=path.reverse().concat(b.route.slice(targets.get(cell)+1));return;
+      }
+      // Alternate passing sides so head-on players do not mirror every detour.
+      const adjacent=this.neighbors(cell);if(nearest&&b.id>nearest.id)adjacent.reverse();
+      for(const n of adjacent)if(parent[n]===-1&&clear(cell,n)){parent[n]=cell;queue.push(n);}
+    }
+  }
+  move(b,dt){
+    if(b.eliminatedAt!==null)return;
+    this.collectPickups(b);
+    const before={...b.body.position};let budget=dt*this.speed(b)/.035;
+    while(budget>1e-8&&b.eliminatedAt===null){
+      if(b.phase===0&&!b.retreating){
+        if(b.pickupTarget&&(!this.pickups.includes(b.pickupTarget.item)||b.pickupTarget.item.expiresAt<=this.time))this.resumeAfterPickup(b);
+        if(this.tryCloseTrail(b))b.pickupTarget=null;else this.seekPickup(b);
+      }
+      if(!b.route.length)this.plan(b);if(!b.route.length)break;
+      const p=this.position(b.cell),q=this.position(b.route[0]);
+      const amount=Math.min(budget,b.retreating?b.phase:1-b.phase);
+      const phase=b.phase+(b.retreating?-amount:amount),next={x:p.x+(q.x-p.x)*phase,y:p.y+(q.y-p.y)*phase};
+      if(!this.contact(b,next)){
+        if(b.eliminatedAt!==null)break;
+        if(b.phase>0)b.retreating=true;else this.detour(b);
+        break;
+      }
+      b.phase=phase;b.body.position=next;budget-=amount;this.collectPickups(b);
+      if(b.retreating&&b.phase<=1e-8){b.phase=0;b.retreating=false;this.detour(b);break;}
+      if(!b.retreating&&b.phase>=1-1e-8){this.advance(b);b.phase=0;}
+    }
+    b.body.velocity=b.eliminatedAt!==null?{x:0,y:0}:{x:(b.body.position.x-before.x)/dt,y:(b.body.position.y-before.y)/dt};
+  }
   eliminate(victim,attacker){
     if(victim===attacker||victim.eliminatedAt!==null||attacker.eliminatedAt!==null||this.protected(victim))return false;
-    victim.eliminatedAt=this.time;victim.speedUntil=0;victim.shieldUntil=0;victim.route=[];victim.body.velocity={x:0,y:0};this.clearTrail(victim);
+    victim.eliminatedAt=this.time;victim.speedUntil=0;victim.shieldUntil=0;victim.route=[];victim.pickupTarget=null;victim.body.velocity={x:0,y:0};this.clearTrail(victim);
     let transferred=0;for(const i of this.valid)if(this.cells[i]===victim.id){this.setOwner(i,attacker.id);transferred++;}
     attacker.cuts++;this.totalCuts++;this.onHit(6,this.position(attacker.cell).x);
     this.events.unshift({type:'elimination',cutter:attacker.id,owner:victim.id,cells:transferred,time:this.time});return true;
@@ -102,9 +233,11 @@ export class TerritoryBattle{
     }
   }
   collectPickups(b){
-    const p=this.position(b.cell);
+    if(b.eliminatedAt!==null)return;
+    const p=b.body.position;
     this.pickups=this.pickups.filter(item=>{
-      const q=this.position(item.cell);if(Math.hypot(p.x-q.x,p.y-q.y)>15)return true;
+      if(item.expiresAt<=this.time)return false;
+      const q=this.position(item.cell);if(Math.hypot(p.x-q.x,p.y-q.y)>b.body.circleRadius+TERRITORY_PICKUP_RADIUS)return true;
       b[item.type==='speed'?'speedUntil':'shieldUntil']=this.time+TERRITORY_BUFFS[item.type].duration;
       this.events.unshift({type:item.type,owner:b.id,time:this.time});this.onHit(3,p.x);return false;
     });
@@ -121,13 +254,13 @@ export class TerritoryBattle{
   }
   advance(b){
     if(b.eliminatedAt!==null)return;
-    if(!b.route.length)this.plan(b);const next=b.route.shift();if(next===undefined)return;
-    b.cell=next;
+    if(!b.route.length)this.plan(b);const next=b.route[0];if(next===undefined)return;
+    const p=this.position(next);if(!this.contact(b,p))return;
+    b.route.shift();b.cell=next;b.body.position=p;
     this.collectPickups(b);
     for(const victim of this.balls){
       if(victim===b||victim.eliminatedAt!==null)continue;
-      const p=this.position(next),q=this.position(victim.cell);
-      if(victim.trail.includes(next)||(victim.trail.length&&this.cells[victim.cell]!==victim.id&&Math.hypot(p.x-q.x,p.y-q.y)<=18))this.eliminate(victim,b);
+      if(victim.trail.includes(next))this.eliminate(victim,b);
     }
     if(this.cells[next]===b.id){if(b.trail.length)this.capture(b);}else if(!b.trail.includes(next)){this.trailOwners[next]=b.id;b.trail.push(next);}
   }
@@ -144,10 +277,7 @@ export class TerritoryBattle{
       for(const b of this.balls){
         if(b.eliminatedAt!==null)continue;
         if(!b.area&&!this.protected(b)&&b.lastConqueror!==undefined){const conqueror=this.balls[b.lastConqueror];const owner=conqueror.eliminatedAt===null?conqueror:this.ranking().find(other=>other!==b&&other.eliminatedAt===null);if(owner)this.eliminate(b,owner);continue;}
-        const speed=this.speed(b);
-        b.phase+=dt*speed/.035;while(b.phase>=1&&b.eliminatedAt===null){b.phase--;this.advance(b);}
-        if(b.eliminatedAt!==null)continue;
-        const p=this.position(b.cell),q=this.position(b.route[0]??b.cell);b.body.position={x:p.x+(q.x-p.x)*b.phase,y:p.y+(q.y-p.y)*b.phase};b.body.velocity={x:(q.x-p.x)*speed/.035,y:(q.y-p.y)*speed/.035};
+        this.move(b,dt);
       }
       remaining-=dt;if(this.balls.filter(b=>b.eliminatedAt===null).length===1)this.finish();
     }

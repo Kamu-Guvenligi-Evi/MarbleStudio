@@ -661,6 +661,132 @@
       },
       "sha256": "cc573f2ed61dc02adc08a2c68fcd83aebce5ad8927314df9425bb3efe4fdd381",
       "bytes": 13480626
+    },
+    {
+      "id": "shared-0d7e58de19fd09e9",
+      "mode": "arena",
+      "contentKind": "arena",
+      "copy": {
+        "title": "Favorini seç. Sonuna kadar takip et."
+      },
+      "createdAt": "2026-10-06T11:44:02.666Z",
+      "completedAt": "2026-10-06T11:46:13.328Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "0d7e58de19fd09e9bbe6ffbc33a12b48f4194252453baaa500f12fe00fc6bc7c",
+      "bytes": 8408988
+    },
+    {
+      "id": "shared-ed90ae107899dd6f",
+      "mode": "track",
+      "contentKind": "track",
+      "copy": {
+        "title": "Liderliği kim ele geçirecek?"
+      },
+      "createdAt": "2026-10-06T12:02:25.112Z",
+      "completedAt": "2026-10-06T12:04:15.411Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "ed90ae107899dd6fb00f6a95b25aa15d1b4ce28fafb7ae355397172441c44cbb",
+      "bytes": 4719074
+    },
+    {
+      "id": "shared-95fe33e051f16863",
+      "mode": "track",
+      "contentKind": "track",
+      "copy": {
+        "title": "6 yarışmacı. Tek finiş. Senin favorin kim?"
+      },
+      "createdAt": "2026-10-06T14:33:53.383Z",
+      "completedAt": "2026-10-06T14:38:24.183Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "95fe33e051f16863af8f10b849df204afe9352899c6ea1ad11bcf8399f478ad3",
+      "bytes": 9720312
+    },
+    {
+      "id": "shared-088a3277c0b1b7d9",
+      "mode": "arena",
+      "contentKind": "arena",
+      "copy": {
+        "title": "Küre arenası"
+      },
+      "createdAt": "2026-10-11T20:07:27.484Z",
+      "completedAt": "2026-10-11T20:07:27.484Z",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "088a3277c0b1b7d91d362d11dc923b1abd5a5bc1953a9a930cece23862c4737c",
+      "bytes": 976643
+    },
+    {
+      "id": "shared-b30b0cdc50cd64a0",
+      "mode": "arena",
+      "contentKind": "arena",
+      "copy": {
+        "title": "Sphere Arena"
+      },
+      "createdAt": "2026-10-11T22:18:05.322Z",
+      "completedAt": "2026-10-11T22:18:05.322Z",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "b30b0cdc50cd64a06e574b63053808c112cee2c1188a1a4e3cf1e3e54795e38c",
+      "bytes": 1405481
+    },
+    {
+      "id": "shared-99d36e201a18eba8",
+      "mode": "track",
+      "contentKind": "track",
+      "copy": {
+        "title": "My Course"
+      },
+      "createdAt": "2026-10-11T22:24:20.272Z",
+      "completedAt": "2026-10-11T22:24:20.272Z",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "99d36e201a18eba822e5251e1b9383f08ae3b2d29857ad4461b113b469ec16ea",
+      "bytes": 5931561
     }
   ]
 }

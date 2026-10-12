@@ -1,5 +1,6 @@
 import {LeaderMusic} from './leader-music.js';
 import {prepareCatalogImage} from './image-catalog.js';
+import {englishOutput} from './output-language.js';
 
 const fold=value=>String(value??'').toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i').trim();
 export async function createCountryMusic({tracks,getAudio,notify,onChange}) {
@@ -30,7 +31,7 @@ export async function createCountryMusic({tracks,getAudio,notify,onChange}) {
   function trackFor(country){return tracks.find(track=>track.id===(assignments[country]??assignments[fallbackIds.get(country)]));}
   function identify(ball){
     if(!ball)return null;
-    return byImage.get(ball.imageSrc)??countries.find(c=>fold(c.name)===fold(ball.name))?.id??null;
+    return byImage.get(ball.imageSrc)??countries.find(c=>fold(englishOutput(c.name))===fold(englishOutput(ball.name)))?.id??null;
   }
   function render(){
     const track=trackFor(selector.value);song.value=track?.id??'';

@@ -35,6 +35,7 @@ try{
   assert.equal((await state()).state,'lost');assert.equal((await state()).balls,0);
   await page.locator('#resume').click();
   assert.equal((await state()).state,'running');assert.equal((await state()).balls,1);
-  await page.goto(origin);await page.locator('#automatic-start a[href="/spiral-breaker.html"]').click();await page.waitForURL('**/spiral-breaker.html');
+  await page.goto(origin);await page.locator('.view-tabs a[href="/spiral-breaker.html"]').click();await page.waitForURL('**/spiral-breaker.html');
+  await page.goto(origin);await page.locator('#automatic-back').click();await page.locator('#automatic-start a[href="/spiral-breaker.html"]').click();await page.waitForURL('**/spiral-breaker.html');
   assert.deepEqual(errors,[]);console.log('PASS: navigation, simulation, pause, restart, mouse, keyboard, touch, audio, mobile layout, permanent ball loss and game-over restart.');
 }finally{await browser.close();}

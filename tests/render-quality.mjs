@@ -6,7 +6,7 @@ const browser=await chromium.launch({channel:'chrome',headless:true});
 try {
   const page=await browser.newPage({viewport:{width:600,height:1000}}),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
-  await page.goto('http://127.0.0.1:5173?edit=1');
+  await page.goto('http://127.0.0.1:5173/factory-render.html');
   const metrics=await page.evaluate(async()=>{
     const {Race}=await import('/src/physics.js');const {renderRace}=await import('/src/renderer.js');
     document.body.innerHTML='<canvas id="visual" width="1080" height="1920" style="width:540px;height:960px"></canvas>';

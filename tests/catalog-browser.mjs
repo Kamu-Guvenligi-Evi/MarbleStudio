@@ -5,7 +5,7 @@ const browser=await chromium.launch({channel:'chrome',headless:true});
 try {
   const page=await browser.newPage({viewport:{width:1280,height:1000}}),errors=[],external=[];
   page.on('pageerror',e=>errors.push(e.message));
-  page.on('request',r=>{if(/^https?:/.test(r.url())&&!r.url().startsWith('http://127.0.0.1:5173/'))external.push(r.url());});
+  page.on('request',r=>{if(/^https?:/.test(r.url())&&!/^http:\/\/127\.0\.0\.1:(5173|5180)\//.test(r.url()))external.push(r.url());});
   await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
   await page.locator('#open-balls').click();await page.locator('[data-library="2"]').click();
   await page.waitForFunction(()=>document.querySelectorAll('[data-catalog-item]').length>20);
@@ -15,7 +15,7 @@ try {
   await page.locator('[data-catalog-item]').click();await page.waitForFunction(()=>document.querySelector('#catalog-status').textContent.includes('eklendi'));
   assert.equal(await page.locator('#catalog-target').inputValue(),'3');
   const draft=await page.evaluate(()=>JSON.parse(localStorage.getItem('marble-studio-track-v1')));
-  assert.equal(draft.ballNames[2],'Türkiye');assert.match(draft.ballImages[2],/^data:image\/webp/);
+  assert.equal(draft.ballNames[2],'Turkey');assert.match(draft.ballImages[2],/^data:image\/webp/);
   await page.locator('#catalog-search').fill('');await page.locator('[data-category="teams"]').click();
   await page.locator('#catalog-fill').click();await page.waitForFunction(()=>document.querySelector('#catalog-status').textContent.includes('Kadron hazır'));
   const roster=await page.evaluate(()=>JSON.parse(localStorage.getItem('marble-studio-track-v1')));
@@ -35,7 +35,7 @@ try {
   assert.deepEqual(verification.failures,[]);assert.equal(verification.categories,10);
   assert.ok(verification.counts.every(count=>count>=10),'Every category has a usable selection');
   await page.setViewportSize({width:1280,height:1000});await page.locator('#nav-track').click();
-  const download=page.waitForEvent('download');await page.locator('#webm-options').evaluate(el=>el.open=true);await page.locator('#record').click();await page.waitForFunction(()=>window.marbleStudio.getState().time>1);await page.locator('#webm-options').evaluate(el=>el.open=true);await page.locator('#record').click();await(await download).saveAs('artifacts/catalog-race.webm');
+  const download=page.waitForEvent('download');await page.locator('#webm-options').evaluate(el=>el.open=true);await page.locator('#record').click();await page.locator('#channel-choice select').selectOption('LastBallStand');await page.locator('#channel-choice button[type=submit]').click();await page.waitForFunction(()=>window.marbleStudio.getState().time>1);await page.locator('#webm-options').evaluate(el=>el.open=true);await page.locator('#record').click();await(await download).saveAs('artifacts/catalog-race.webm');
   assert.ok(fs.statSync('artifacts/catalog-race.webm').size>10000);assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
   console.log(`PASS: ${verification.count} local assets decode and rasterize; search, single assignment, unique category roster, names, persistence, mobile, empty search and recorded video.`);
 }finally{await browser.close();}

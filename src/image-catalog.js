@@ -1,3 +1,4 @@
+import {englishRosterName} from './output-language.js';
 import { loadBallImage, normalizeBallImages } from './ball-images.js';
 import { portraitFrame } from './portrait-framing.js';
 
@@ -14,13 +15,11 @@ async function renderCatalogImage(item) {
   const face=portraitFrame(item,img),size=face?256:128;
   const canvas=document.createElement('canvas');canvas.width=canvas.height=size;
   const ctx=canvas.getContext('2d');ctx.fillStyle='#f4f6fb';ctx.fillRect(0,0,size,size);
-  // Keep the circle filled, with the complete emblem sharp over a soft backdrop.
+  // Fill the marble with a sharp square crop; the renderer clips it to a circle.
   const side=Math.min(img.naturalWidth,img.naturalHeight);
   const offsetY=(img.naturalHeight-side)*(item.fit==='contain'?.5:.22);
   if(item.fit==='contain') {
-    ctx.save();ctx.filter='blur(7px)';
-    ctx.drawImage(img,(img.naturalWidth-side)/2,offsetY,side,side,-12,-12,152,152);ctx.restore();
-    // Trim transparent asset margins before fitting the visible artwork.
+    // Trim transparent asset margins before cropping the visible artwork.
     const probe=document.createElement('canvas');probe.width=probe.height=128;
     const scan=probe.getContext('2d',{willReadFrequently:true});scan.drawImage(img,0,0,128,128);
     const data=scan.getImageData(0,0,128,128).data;let left=128,top=128,right=-1,bottom=-1;
@@ -28,14 +27,8 @@ async function renderCatalogImage(item) {
     if(right>=left) {
       const sx=left/128*img.naturalWidth,sy=top/128*img.naturalHeight;
       const sw=(right-left+1)/128*img.naturalWidth,sh=(bottom-top+1)/128*img.naturalHeight;
-      // Round badges can fill the marble; rectangular flags still keep all corners.
-      let radius=0;
-      const cx=(left+right+1)/2,cy=(top+bottom+1)/2;
-      for(let y=top;y<=bottom;y++)for(let x=left;x<=right;x++)if(data[(y*128+x)*4+3]>16) {
-        radius=Math.max(radius,Math.hypot((x+.5-cx)*img.naturalWidth/128,(y+.5-cy)*img.naturalHeight/128));
-      }
-      const scale=62/(radius+Math.max(img.naturalWidth,img.naturalHeight)/256),w=sw*scale,h=sh*scale;
-      ctx.drawImage(img,sx,sy,sw,sh,(128-w)/2,(128-h)/2,w,h);
+      const crop=Math.min(sw,sh);
+      ctx.drawImage(img,sx+(sw-crop)/2,sy+(sh-crop)/2,crop,crop,0,0,size,size);
     }
   }else if(face)ctx.drawImage(img,face.x,face.y,face.side,face.side,0,0,size,size);
   else ctx.drawImage(img,(img.naturalWidth-side)/2,offsetY,side,side,0,0,size,size);
@@ -114,7 +107,7 @@ export function createImageCatalog({getImages,getNames,getCount,onRosterChange,o
       const sources=await Promise.all(items.map(prepareCatalogImage));
       if(!dialog.open||original!==getImages()||namesOriginal!==getNames())throw new Error('Seçim değişti. Görselleri yeniden seç.');
       const images=[...original],names=[...namesOriginal];
-      sources.forEach((src,i)=>{const target=bulk?i:index;images[target]=src;names[target]=items[i].name.slice(0,24);});
+      sources.forEach((src,i)=>{const target=bulk?i:index;images[target]=src;names[target]=englishRosterName(items[i].name);});
       onRosterChange(images,names);onApplied();
       if(!bulk)selected=(selected+1)%getCount();
       status(bulk?`${sources.length} topa görsel ve isim eklendi. Kadron hazır.`:`${items[0].name}, ${index+1}. topa eklendi. Sırada ${selected+1}. top var.`);

@@ -17,12 +17,12 @@ try{
     return results;
   });
   for(const r of results){assert.ok(r.left>0);assert.ok(r.right>r.left,r.type+' stereo position');}
-  await page.goto('http://127.0.0.1:5180/factory-render.html');await page.waitForFunction(()=>window.factoryRenderer);
-  const captured=await page.evaluate(()=>{
+  await page.goto((process.env.TEST_FACTORY_ORIGIN??'http://127.0.0.1:5173')+'/factory-render.html');await page.waitForFunction(()=>window.factoryRenderer);
+  const captured=await page.evaluate(async()=>{
     const recipe={mode:'spiral',seed:2048,variant:'classic',theme:'ice',count:1},analysis=window.factoryRenderer.probe(recipe);
-    window.factoryRenderer.begin({recipe,analysis,speed:3,fps:30,copy:{hook:'Test',language:'en'}});
+    await window.factoryRenderer.begin({recipe,analysis,speed:3,fps:30,copy:{hook:'Test',language:'en'}});
     window.factoryRenderer.frame(Math.ceil((analysis.simulationSeconds/3+1)*30));
-    return {events:window.factoryRenderer.audio(),result:window.factoryRenderer.result()};
+    return {events:window.factoryRenderer.audio().effects,result:window.factoryRenderer.result()};
   });
   assert.ok(captured.result.complete);
   for(const type of ['drop','impact','ice','multiply','complete'])assert.ok(captured.events.some(e=>e.type===type),type+' export event');

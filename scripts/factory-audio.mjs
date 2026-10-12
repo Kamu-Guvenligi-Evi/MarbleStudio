@@ -2,7 +2,7 @@ import {spawn} from 'node:child_process';
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
 import ffmpeg from 'ffmpeg-static';
-import {effectSamples} from '../src/impact-audio.js';
+import {effectSamples,collisionEvent,effectInterval} from '../src/impact-audio.js';
 
 export function musicSegments(music,leaders,duration){
   if(!music)return [];
@@ -19,8 +19,14 @@ async function decode(file,signal){
 }
 export async function productionAudio({events,recipe,duration,audio,project,signal}){
   const rate=48000,samples=new Float32Array(Math.ceil(duration*rate)),credits=[];
+  const lastEffects=new Map();
   if(audio==='all'||audio==='effects')for(const e of events.effects){
-    const start=Math.max(0,Math.floor(e.time*rate)),effect=effectSamples(e,rate);
+    const event=collisionEvent(e,recipe.collisionSound),key=event.type+'|'+event.collisionSound;
+    if(event.collisionSound&&event.collisionSound!=='classic'){
+      if(e.time-(lastEffects.get(key)??-1)<effectInterval(event))continue;
+      lastEffects.set(key,e.time);
+    }
+    const start=Math.max(0,Math.floor(e.time*rate)),effect=effectSamples(event,rate);
     for(let i=0;i<effect.length&&start+i<samples.length;i++)samples[start+i]+=effect[i]*.35;
   }
   if(audio==='all'||audio==='music'){

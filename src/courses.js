@@ -5,6 +5,19 @@ const { Bodies, Body, Composite } = Matter;
 export const SECTION_HEIGHT = 650;
 export const COURSE_START = 430;
 export const COURSE_META = {
+  stairway: {name:'Basamak ekspresi',accent:'#82d9ff',modules:['staircase', 'crossramps', 'diamonds', 'fork', 'sieve', 'weave', 'shortcut', 'slalom']},
+  gemrun: {name:'Elmas vadisi',accent:'#82d9ff',modules:['diamonds', 'sieve', 'fork', 'pegs', 'staircase', 'drift', 'funnel', 'rotorgates']},
+  rotorfactory: {name:'Rotor fabrikası',accent:'#82d9ff',modules:['rotorgates', 'wheels', 'pulse', 'weave', 'pendulum', 'diamonds', 'fork', 'drift']},
+  weaver: {name:'Dokuma yarışı',accent:'#82d9ff',modules:['weave', 'drift', 'sieve', 'staircase', 'rotorgates', 'fork', 'slalom', 'shortcut']},
+  hairpins: {name:'Viraj rallisi',accent:'#82d9ff',modules:['switchback', 'slalom', 'crossramps', 'staircase', 'shortcut', 'diamonds', 'weave', 'funnel']},
+  sifter: {name:'Elek bahçesi',accent:'#82d9ff',modules:['sieve', 'pegs', 'diamonds', 'funnel', 'weave', 'drift', 'rotorgates', 'fork']},
+  roulette: {name:'Şans çarkı',accent:'#82d9ff',modules:['wheels', 'rotorgates', 'diamonds', 'pulse', 'fork', 'sieve', 'pendulum', 'shortcut']},
+  zigzag: {name:'Zikzak kanyonu',accent:'#82d9ff',modules:['crossramps', 'staircase', 'switchback', 'slalom', 'drift', 'weave', 'fork', 'diamonds']},
+  labyrinth: {name:'Rota labirenti',accent:'#82d9ff',modules:['fork', 'diamonds', 'shortcut', 'sieve', 'funnel', 'switchback', 'pulse', 'weave']},
+  metronome: {name:'Ritim tüneli',accent:'#82d9ff',modules:['pulse', 'rotorgates', 'pendulum', 'weave', 'wheels', 'drift', 'staircase', 'sieve']},
+  avalanche: {name:'Çarpışma şelalesi',accent:'#82d9ff',modules:['pegs', 'sieve', 'diamonds', 'wheels', 'funnel', 'staircase', 'rotorgates', 'drift']},
+  grandtour: {name:'Büyük tur',accent:'#82d9ff',modules:['switchback', 'diamonds', 'rotorgates', 'weave', 'sieve', 'staircase', 'pulse', 'shortcut']},
+
   cascade: { name: 'Neon Cascade', accent: '#d6fa85', modules: ['funnel', 'fork', 'wheels', 'slalom', 'pulse', 'drift', 'pegs', 'pendulum'] },
   pinball: { name: 'Pinball Garden', accent: '#c9acff', modules: ['pegs', 'wheels', 'fork', 'pendulum', 'drift', 'pulse', 'funnel', 'slalom'] },
   velocity: { name: 'Velocity', accent: '#ffb587', modules: ['slalom', 'fork', 'drift', 'funnel', 'pendulum', 'wheels', 'pulse', 'pegs'] },
@@ -12,6 +25,12 @@ export const COURSE_META = {
 };
 
 export const MODULES = {
+  staircase: {name:'Basamak yarışı',subtitle:'Kısa basamaklardan sekerek ilerle.',icon:'≋',color:'#ffcb89'},
+  diamonds: {name:'Elmas labirenti',subtitle:'Elmasların arasından rotanı seç.',icon:'◇',color:'#9cf0dc'},
+  rotorgates: {name:'Rotor kapıları',subtitle:'Üç dönüşte doğru anı yakala.',icon:'✳',color:'#daa5ff'},
+  weave: {name:'Dokuma geçidi',subtitle:'Hareketli engellerin arasından süzül.',icon:'↔',color:'#82d9ff'},
+  switchback: {name:'Keskin virajlar',subtitle:'Uzun rampalarda yön değiştir.',icon:'⌁',color:'#ffa8c8'},
+  sieve: {name:'Çift elek',subtitle:'İki sıra engel, birçok farklı çıkış.',icon:'⠿',color:'#e2ee8e'},
   shortcut: { name: 'Riskli kestirme', subtitle: 'Ortayı yakala, uzun yolu geride bırak.', icon: '⑂', color: '#f4c65b', tag: 'Pozisyon değiştirir' },
   crossramps: { name: 'Çapraz hız rampaları', subtitle: 'Kısa rampalar, hızlı çapraz geçişler.', icon: '≋', color: '#71d8f2', tag: 'Hızlı' },
   funnel: { name: 'Darboğaz', subtitle: 'Dar geçit, kalabalık çıkış.', icon: '⋁', color: '#d6fa85' },
@@ -80,6 +99,41 @@ export function buildCourse(world, rng, preset, sectionCount, customSequence = n
     currentSection = { index: previewIndex === null ? index : 0, sourceIndex:index, type, settings, y, endY: y + SECTION_HEIGHT, ...MODULES[type] };
     if(included()) sections.push(currentSection);
     switch (type) {
+      case 'staircase': {
+        const x = v => direction === 1 ? v : 540-v;
+        for(let i=0;i<5;i++) {
+          const left=i%2===0;
+          line(x(left?26:514),y+75+i*100,x(left?195:345),y+75+i*100+65*settings.slope);
+        }
+        break;
+      }
+      case 'diamonds': {
+        for(const [x,dy] of [[155,135],[385,135],[270,315],[125,485],[415,485]]) {
+          const body=Bodies.polygon(x,y+dy,4,38*settings.size,{isStatic:true,restitution:.5,friction:0,frictionStatic:0});
+          Body.rotate(body,Math.PI/4);add(body,'splitter');
+        }
+        break;
+      }
+      case 'rotorgates': {
+        for(const [x,dy] of [[145,130],[395,300],[220,480]])spin(x,y+dy,170,direction*.9,phase+dy/100);
+        break;
+      }
+      case 'weave': {
+        for(let i=0;i<4;i++)translate(270,y+95+i*135,28,145,.7,phase+i*Math.PI/2);
+        break;
+      }
+      case 'switchback': {
+        const x=v=>direction===1?v:540-v;
+        for(let i=0;i<3;i++) {
+          const left=i%2===0;
+          line(x(left?26:514),y+85+i*175,x(left?350:190),y+85+i*175+110*settings.slope);
+        }
+        break;
+      }
+      case 'sieve': {
+        for(let row=0;row<3;row++)for(let col=0;col<4;col++)circle(90+col*110+(row%2)*15,y+135+row*165,22*settings.size,'peg');
+        break;
+      }
       case 'shortcut': {
         const center = 270 + settings.offset, half = settings.gap / 2;
         // The middle stays open; missed entries flow down the two longer banks.

@@ -9,12 +9,12 @@ export function drawMarble(ctx,ball,x,y,r) {
   ctx.fillStyle=glow;ctx.fillRect(x-r*1.65,y-r*1.65,r*3.3,r*3.3);
   const shell=ctx.createRadialGradient(x-r*.35,y-r*.45,r*.05,x+r*.22,y+r*.3,r*1.35);
   shell.addColorStop(0,'#ffffff');shell.addColorStop(.25,ball.color);shell.addColorStop(.65,ball.color);shell.addColorStop(1,'#11182e');
-  circle(r);ctx.fillStyle=shell;ctx.fill();ctx.strokeStyle=ball.color;ctx.lineWidth=1;ctx.stroke();
   const portrait=ballImage(ball.imageSrc);
+  circle(r);ctx.fillStyle=shell;ctx.fill();
+  if(!portrait){ctx.strokeStyle=ball.color;ctx.lineWidth=1;ctx.stroke();}
   if(portrait) {
     ctx.save();circle(r);ctx.clip();const s=Math.min(portrait.naturalWidth,portrait.naturalHeight);
     ctx.drawImage(portrait,(portrait.naturalWidth-s)/2,(portrait.naturalHeight-s)/2,s,s,x-r,y-r,r*2,r*2);ctx.restore();
-    circle(r-.5);ctx.strokeStyle=ball.color;ctx.lineWidth=1;ctx.stroke();
   }else {
     ctx.save();circle(r-1);ctx.clip();ctx.translate(x,y);ctx.rotate((ball.body?.angle??0)+ball.id*.7);
     ctx.strokeStyle='#ffffff60';ctx.lineWidth=r*.22;ctx.beginPath();

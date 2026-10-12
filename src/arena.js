@@ -4,7 +4,7 @@ import {normalizeNames} from './presentation.js';
 import {TerritoryBattle} from './territory.js';
 
 export const ARENA={x:270,y:510,radius:238};
-const WALL_SPEED_GAIN=.0025;
+const WALL_SPEED_GAIN=.01;
 export function pointSegmentDistance(p,a,b){
   const dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.y-a.y)*dy)/(dx*dx+dy*dy||1)));
   return Math.hypot(p.x-a.x-dx*t,p.y-a.y-dy*t);
@@ -42,7 +42,7 @@ export class Arena {
       if(d>=limit){const nx=dx/d,ny=dy/d,dot=v.x*nx+v.y*ny;p.x=270+nx*(limit-.01);p.y=510+ny*(limit-.01);
         if(dot>0){
           v.x-=2*dot*nx;v.y-=2*dot*ny;
-          // Add 0.25% of starting speed per impact, keeping the increase gradual and linear.
+          // Add 1% of starting speed per impact, keeping the increase gradual and linear.
           ball.speed+=ball.initialSpeed*WALL_SPEED_GAIN;
           if(this.time-ball.lastWall>.12){this.addLink(ball,Math.atan2(ny,nx));ball.lastWall=this.time;this.onHit(4,p.x);this.spark(270+nx*238,510+ny*238,ball.color);}
         }

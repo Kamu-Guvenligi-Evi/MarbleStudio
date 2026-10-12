@@ -1,11 +1,13 @@
+import {englishOutput} from './output-language.js';
+import {drawChannelWatermark,chooseVideoChannel} from './channel-branding.js';
 import './statistics.css';
 import {DEMO_CSV,STATISTICS_KEY,parseStatistics,statisticsAt} from './statistics-data.js';
 import {createStatisticsLibrary} from './statistics-library.js';
 import {statisticsScale,animateStatisticsScale} from './statistics-scale.js';
 
 const COLORS=['#bbef83','#79cfea','#c3a1ff','#ffbd83','#f38fad','#78dcc4','#eddb80','#94b4ff','#c3d9ba','#d5b08b'];
-const number=new Intl.NumberFormat('tr-TR',{maximumFractionDigits:1});
-const compact=new Intl.NumberFormat('tr-TR',{notation:'compact',maximumFractionDigits:1});
+const number=new Intl.NumberFormat('en-US',{maximumFractionDigits:1});
+const compact=new Intl.NumberFormat('en-US',{notation:'compact',maximumFractionDigits:1});
 
 export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
   const root=document.getElementById('statistics-view');
@@ -20,7 +22,7 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
         <p id="statistics-summary" class="statistics-summary"></p>
       </section>
       <aside class="statistics-options">
-        <section class="statistics-card"><p class="eyebrow">SUNUM</p><label for="statistics-heading">Video başlığı</label><input id="statistics-heading" maxlength="60" value="Zamanla değişen sıralama"><div class="statistics-fields"><div><label for="statistics-unit">Değer birimi</label><input id="statistics-unit" maxlength="24" value="puan"></div><div><label for="statistics-top">Gösterilecek sıra</label><select id="statistics-top"><option value="5">İlk 5</option><option value="10" selected>İlk 10</option><option value="15">İlk 15</option></select></div></div><label for="statistics-source">Veri kaynağı / açıklama</label><input id="statistics-source" maxlength="120" value="Örnek veri · Gerçek istatistik değildir."><label for="statistics-duration">Yarış süresi</label><select id="statistics-duration"><option value="15">15 saniye</option><option value="30" selected>30 saniye</option><option value="60">1 dakika</option><option value="120">2 dakika</option></select><p id="statistics-save" class="statistics-note" role="status">Bu tarayıcıda otomatik saklanır.</p></section>
+        <section class="statistics-card"><p class="eyebrow">SUNUM</p><label for="statistics-heading">Video başlığı (İngilizce)</label><input id="statistics-heading" maxlength="60" value="Rankings Over Time"><div class="statistics-fields"><div><label for="statistics-unit">Değer birimi (İngilizce)</label><input id="statistics-unit" maxlength="24" value="points"></div><div><label for="statistics-top">Gösterilecek sıra</label><select id="statistics-top"><option value="5">İlk 5</option><option value="10" selected>İlk 10</option><option value="15">İlk 15</option></select></div></div><label for="statistics-source">Veri kaynağı / açıklama (İngilizce)</label><input id="statistics-source" maxlength="120" value="Sample data · Not real statistics."><label for="statistics-duration">Yarış süresi</label><select id="statistics-duration"><option value="15">15 saniye</option><option value="30" selected>30 saniye</option><option value="60">1 dakika</option><option value="120">2 dakika</option></select><p id="statistics-save" class="statistics-note" role="status">Bu tarayıcıda otomatik saklanır.</p></section>
         <section class="statistics-card statistics-export"><details id="statistics-webm-options"><summary>Tarayıcı kaydı · WebM</summary><button id="statistics-record" class="button primary">● Videoya kaydet</button><span class="statistics-note">Yatay · 1920 × 1080 · WebM · Sessiz</span><a id="statistics-download" class="button secondary" download hidden>Son videoyu indir ↓</a><p class="statistics-note">Kayıt boyunca bu sekmeyi görünür tut.</p></details></section>
       </aside>
     </div>
@@ -37,7 +39,7 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
   $('csv-help').textContent='2–30 yarışmacı, 1–301 yıl. Tek satır sabit karşılaştırmadır. Pozitif sayılar veya 0; binlik ayıracı kullanma. Virgül veya noktalı virgülle ayrılmış CSV kabul edilir.';
   root.querySelector('.statistics-data > p').textContent='İlk sütun yıl, diğer sütunlar yarışmacı adları. Her yıl için bütün değerleri doldur. Akıcı geçiş ara değerleri hesaplar; yıllık geçiş verilen değerleri korur. Tek yıl satırı sabit karşılaştırma oluşturur.';
   const positions=new Map();
-  let axisMax=0;
+  let axisMax=0,watermarkChannel=null,channelChoosing=false;
   const settings=['heading','unit','source','duration','top','interpolation'];
   try {
     const saved=JSON.parse(localStorage.getItem(STATISTICS_KEY));
@@ -75,17 +77,18 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
     $('summary').textContent=leaders;canvas.setAttribute('aria-label',`${snapshot()?'Sabit karşılaştırma':Math.floor(year())+' yılı'}, ${leaders}`);
   }
   function text(value,x,y,size,color,weight=400,align='left',width){
-    ctx.fillStyle=color;ctx.font=`${weight} ${size}px "Segoe UI", sans-serif`;ctx.textAlign=align;ctx.fillText(value,x,y,width);
+    ctx.fillStyle=color;ctx.font=`${weight} ${size}px "Segoe UI", sans-serif`;ctx.textAlign=align;ctx.fillText(englishOutput(value),x,y,width);
   }
-  function draw(dt=0){
+  function draw(dt=0,channel=watermarkChannel){
     const rows=ranking(),count=top(),gap=690/count,barHeight=Math.min(52,gap*.72);
     const left=370,width=1280,startY=245,peak=rows[0].value;
     const scale=statisticsScale(peak||1);
     axisMax=animateStatisticsScale(axisMax,scale.max,peak,dt);
     const max=axisMax;
     ctx.fillStyle='#111820';ctx.fillRect(0,0,1920,1080);
+    drawChannelWatermark(ctx,channel,1920,1080);
     ctx.fillStyle='#bbef83';ctx.fillRect(70,70,5,75);
-    text('MARBLE STUDIO / İSTATİSTİK YARIŞI',96,83,18,'#a6bdaf',600);
+    text('MARBLE STUDIO / STATISTICS RACE',96,83,18,'#a6bdaf',600);
     text($('heading').value.trim()||'Yıllara göre sıralama',94,137,44,'#f2f6f0',650,'left',1450);
     const demo=csv.trim()===DEMO_CSV.trim();
     text(demo?'ÖRNEK VERİ':snapshot()?'SABİT KARŞILAŞTIRMA':`${data.frames[0].year} — ${data.frames.at(-1).year}`,1835,84,19,demo?'#bbef83':'#9faeb7',600,'right');
@@ -94,7 +97,7 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
     for(let i=0;i*tickStep<=max*(1+1e-10);i++){
       const value=i*tickStep,x=left+width*value/max;
       ctx.strokeStyle='#ffffff0d';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,220);ctx.lineTo(x,947);ctx.stroke();
-      const label=tickStep<1?new Intl.NumberFormat('tr-TR',{maximumSignificantDigits:3}).format(value):compact.format(value);
+      const label=tickStep<1?new Intl.NumberFormat('en-US',{maximumSignificantDigits:3}).format(value):compact.format(value);
       text(label,x,218,18,'#748c9b',400,'center');
     }
     ctx.save();ctx.beginPath();ctx.rect(50,229,1830,715);ctx.clip();
@@ -112,7 +115,7 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
     ctx.restore();ctx.globalAlpha=1;
     text(snapshot()?(dataset?.periodLabel??'Karşılaştırma'):String(Math.floor(year())),1835,1014,snapshot()?42:88,'#e5efe7',700,'right',snapshot()?500:undefined);
     text(demo?'Örnek veri · Gerçek istatistik değildir.':($('source').value.trim()||'Kaynak belirtilmedi'),75,991,20,'#8ca2af',400,'left',1280);
-    text(`İLK ${count}  /  ${data.names.length} YARIŞMACI`,75,1026,17,'#647c8a',500);
+    text(`TOP ${count}  /  ${data.names.length} CONTESTANTS`,75,1026,17,'#647c8a',500);
     ctx.fillStyle='#213039';ctx.fillRect(0,1068,1920,12);ctx.fillStyle='#bbef83';ctx.fillRect(0,1068,1920*progress,12);
   }
   function reset(){progress=0;playing=false;ending=0;syncPositions();draw();ui();}
@@ -125,38 +128,42 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
     onRecordingChange(value);
   }
   function stopRecording(){if(recorder?.state==='recording'){playing=false;syncPositions();draw();recorder.stop();$('record').disabled=true;ui();}}
-  function record(){
+  async function record(){
+    if(channelChoosing)return;
     if(recordBusy){stopRecording();return;}
     if(library?.busy()){notify('Veri seti açılıyor; ardından kaydı başlatabilirsin.');return;}
     if(!window.MediaRecorder||!canvas.captureStream){notify('Video kaydı için Chrome veya Edge ile aç.');return;}
     const mime=['video/webm;codecs=vp8','video/webm;codecs=vp9','video/webm'].find(type=>MediaRecorder.isTypeSupported(type));
     if(!mime){notify('Bu tarayıcı WebM kaydını desteklemiyor.');return;}
+    channelChoosing=true;
+    try{watermarkChannel=await chooseVideoChannel();}finally{channelChoosing=false;}
+    if(!watermarkChannel)return;
     let stream;
     try {
-      reset();lock(true);stream=canvas.captureStream(60);recordStream=stream;
+      reset();lock(true);stream=canvas.captureStream();recordStream=stream;
       const session=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:8_000_000}),chunks=[];
       let failed=false;recorder=session;
       session.ondataavailable=event=>{if(event.data.size)chunks.push(event.data);};
       session.onerror=()=>{failed=true;stopRecording();};
       session.onstop=()=>{
-        stream.getTracks().forEach(track=>track.stop());recorder=null;recordStream=null;lock(false);$('record').disabled=false;ui();
+        stream.getTracks().forEach(track=>track.stop());recorder=null;recordStream=null;watermarkChannel=null;lock(false);$('record').disabled=false;ui();
         if(failed||!chunks.length){notify('Video oluşturulamadı. Tekrar deneyebilirsin.');return;}
         if(downloadURL)URL.revokeObjectURL(downloadURL);
         const videoBlob=new Blob(chunks,{type:'video/webm'});downloadURL=URL.createObjectURL(videoBlob);
-        const link=$('download');link.href=downloadURL;link.download=`istatistik-${data.frames[0].year}-${data.frames.at(-1).year}.webm`;link.hidden=false;link.click();notify('İstatistik videosu hazır.');
-        onVideoRecorded?.(videoBlob,{name:$('heading').value,mode:'statistics'});
+        const link=$('download');link.href=downloadURL;link.download=`statistics-${data.frames[0].year}-${data.frames.at(-1).year}.webm`;link.hidden=false;link.click();notify('İstatistik videosu hazır.');
+        onVideoRecorded?.(videoBlob,{name:englishOutput($('heading').value),mode:'statistics'});
       };
       session.start(250);playing=true;last=performance.now();ui();canvas.scrollIntoView({block:'center',behavior:'instant'});
-    }catch{stream?.getTracks().forEach(track=>track.stop());recorder=null;recordStream=null;playing=false;lock(false);$('record').disabled=false;ui();notify('Video kaydı başlatılamadı. Tekrar deneyebilirsin.');}
+    }catch{stream?.getTracks().forEach(track=>track.stop());recorder=null;recordStream=null;watermarkChannel=null;playing=false;lock(false);$('record').disabled=false;ui();notify('Video kaydı başlatılamadı. Tekrar deneyebilirsin.');}
   }
   function applyCSV(value,item=null){
     const parsed=parseStatistics(value); // Validate everything before replacing the current project.
     if(item&&(parsed.names.length!==item.entities||parsed.frames.length!==item.rows))throw new Error('Veri dosyası kütüphane kaydıyla eşleşmiyor.');
-    if(!item&&dataset&&$('source').value===dataset.source)$('source').value='';
+    if(!item&&dataset&&englishOutput($('source').value)===englishOutput(dataset.source))$('source').value='';
     dataset=item;
     data=parsed;csv=value;$('csv').value=value;
-    if(item){$('heading').value=item.title;$('unit').value=item.unit;$('source').value=item.source;$('interpolation').value=item.interpolation==='step'?'step':'linear';}
-    if(csv.trim()!==DEMO_CSV.trim()&&$('source').value==='Örnek veri · Gerçek istatistik değildir.')$('source').value='';
+    if(item){$('heading').value=englishOutput(item.title);$('unit').value=englishOutput(item.unit);$('source').value=englishOutput(item.source);$('interpolation').value=item.interpolation==='step'?'step':'linear';}
+    if(csv.trim()!==DEMO_CSV.trim()&&englishOutput($('source').value)==='Sample data · Not real statistics.')$('source').value='';
     reset();persist();library?.refresh();$('data-status').textContent=`✓ ${data.names.length} yarışmacı · ${snapshot()?'sabit karşılaştırma':data.frames.length+' yıl'} yüklendi.`;
   }
   $('play').onclick=toggle;$('reset').onclick=reset;$('record').onclick=record;
@@ -201,7 +208,7 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
       for(const key of settings)if(value[key]!==undefined)$(key).value=String(value[key]);
       reset();
     },
-    renderFrame(value,dt){progress=Math.max(0,Math.min(1,value));draw(dt);return canvas;},
+    renderFrame(value,dt,channel){progress=Math.max(0,Math.min(1,value));draw(dt,channel);return canvas;},
     isRecording:()=>recordBusy,
     setActive(value){active=value;if(!active){playing=false;syncPositions();}last=performance.now();if(active){draw();ui();}},
     state:()=>({progress,year:year(),playing,recording:recordBusy,names:[...data.names],ranking:ranking(),duration:duration(),datasetId:dataset?.id??null,snapshot:snapshot(),interpolation:$('interpolation').value,axisMax}),

@@ -1,26 +1,28 @@
-export function renderPi(ctx,session,{language='en',paused=false}={}){
-  const race=session.current??session,tr=language==='tr',w=ctx.canvas.width,h=ctx.canvas.height;
+import {drawChannelWatermark} from './channel-branding.js';
+export function renderPi(ctx,session,{paused=false,channel}={}){
+  const race=session.current??session,w=ctx.canvas.width,h=ctx.canvas.height;
   const auto=session.options.autoIncrease,finished=race.state==='finished',digits=race.options.digits;
-  const mass=new Intl.NumberFormat(tr?'tr-TR':'en-US').format(race.mass);
+  const mass=new Intl.NumberFormat('en-US').format(race.mass);
   ctx.save();ctx.setTransform(w/540,0,0,h/960,0,0);
   const bg=ctx.createLinearGradient(0,0,540,960);bg.addColorStop(0,'#111d2c');bg.addColorStop(.55,'#060c15');bg.addColorStop(1,'#101e29');
   ctx.fillStyle=bg;ctx.fillRect(0,0,540,960);
   const glow=ctx.createRadialGradient(270,310,10,270,310,280);glow.addColorStop(0,'#18e5c510');glow.addColorStop(1,'#18e5c500');ctx.fillStyle=glow;ctx.fillRect(0,0,540,640);
+  drawChannelWatermark(ctx,channel);
   const text=(value,x,y,size,color='#eaf5fa',weight=500,align='center')=>{ctx.font=weight+' '+size+'px "Segoe UI", sans-serif';ctx.textAlign=align;ctx.fillStyle=color;ctx.fillText(String(value),x,y,480);};
   const box=(x,y,width,height,radius,fill,stroke)=>{ctx.beginPath();ctx.roundRect(x,y,width,height,radius);ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1;ctx.stroke();}};
   const accent=ctx.createLinearGradient(80,0,455,0);accent.addColorStop(0,'#5be8ff');accent.addColorStop(1,'#9bffb1');
   text('MARBLE / STUDIO',32,43,12,'#9fb1c2',650,'left');
   text('PHYSICS LAB  ·  01',508,43,11,'#6f869b',600,'right');
   ctx.fillStyle='#233446';ctx.fillRect(32,62,476,1);
-  text(tr?'Çarpışmalardan π’ye':'Count your way to π',270,127,38,accent,750);
-  text(tr?'İki blok. Bir duvar. Sonsuz bir sayı.':'Two blocks. One wall. An infinite number.',270,160,16,'#93a8bb');
-  const levels=['1 kg','100 kg',tr?'10.000 kg':'10,000 kg','1M kg',tr?'100 milyon kg':'100M kg',tr?'10 milyar kg':'10B kg'];
+  text('Count your way to π',270,127,38,accent,750);
+  text('Two blocks. One wall. An infinite number.',270,160,16,'#93a8bb');
+  const levels=['1 kg','100 kg','10,000 kg','1M kg','100M kg','10B kg'];
   for(let i=0;i<levels.length;i++){
     const active=digits===i+1,done=(session.rounds??[]).some(round=>round.digits===i+1),x=34+(i%3)*160,y=185+Math.floor(i/3)*37;
     box(x,y,152,30,9,active?'#173d42':'#101c29',active?'#59e1c8':'#293847');
     text((done?'✓ ':'')+levels[i],x+76,y+20,13,active?'#adffe7':done?'#75bba9':'#778b9e',650);
   }
-  text(tr?'ÇARPIŞMA SAYISI':'COLLISIONS',270,275,12,'#96b3bc',650);
+  text('COLLISIONS',270,275,12,'#96b3bc',650);
   ctx.save();ctx.shadowColor='#60e8c966';ctx.shadowBlur=25;text(race.collisions,270,364,88,'#b6ffe4',700);ctx.restore();
   text(mass+' kg  /  1 kg',270,405,17,'#aac4d3',600);
   const floor=640,wall=race.wall;
@@ -51,10 +53,10 @@ export function renderPi(ctx,session,{language='en',paused=false}={}){
     for(let i=0;i<8;i++){const a=i/8*Math.PI*2;ctx.beginPath();ctx.moveTo(x+Math.cos(a)*7,y+Math.sin(a)*7);ctx.lineTo(x+Math.cos(a)*23,y+Math.sin(a)*23);ctx.stroke();}
   }
   box(32,714,476,133,18,'#111f2d','#2d4050');
-  text(finished?(tr?'BİR BASAMAK DAHA KEŞFEDİLDİ':'ANOTHER DIGIT REVEALED'):(tr?'SAYILARIN ARDINDAKİ SIR':'THE PATTERN BEHIND THE NUMBERS'),270,747,11,'#94afbd',650);
+  text(finished?('ANOTHER DIGIT REVEALED'):('THE PATTERN BEHIND THE NUMBERS'),270,747,11,'#94afbd',650);
   text(finished?'π ≈ '+race.approximation:'π = 3.14159265358…',270,791,finished?37:30,accent,650);
-  text(finished?race.collisions+(tr?' çarpışma · ':' collisions · ')+mass+' kg':(tr?'Her çarpışma, sayıya bir adım daha.':'Every collision brings us one step closer.'),270,821,13,'#a2b8c9');
-  const status=paused?(tr?'DURAKLATILDI':'PAUSED'):session.transitioning?(tr?'KÜTLE ×100 · SONRAKİ TUR':'MASS ×100 · NEXT ROUND'):session.state==='finished'?(tr?'DENEY TAMAMLANDI':'EXPERIMENT COMPLETE'):auto?(tr?'OTOMATİK KÜTLE ARTIŞI':'AUTOMATIC MASS INCREASE'):(tr?'TAM ESNEK ÇARPIŞMALAR':'PERFECTLY ELASTIC COLLISIONS');
+  text(finished?race.collisions+(' collisions · ')+mass+' kg':('Every collision brings us one step closer.'),270,821,13,'#a2b8c9');
+  const status=paused?('PAUSED'):session.transitioning?('MASS ×100 · NEXT ROUND'):session.state==='finished'?('EXPERIMENT COMPLETE'):auto?('AUTOMATIC MASS INCREASE'):('PERFECTLY ELASTIC COLLISIONS');
   text(status,270,891,12,'#82c8b5',650);
   if(session.transitioning){const progress=1-session.holdRemaining/2;box(170,908,200,3,1,'#243d46');if(progress>0)box(170,908,200*progress,3,1,'#79e8c5');}
   text('π',270,943,17,'#4a6275',600);ctx.restore();

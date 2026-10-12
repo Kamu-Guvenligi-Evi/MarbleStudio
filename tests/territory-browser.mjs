@@ -1,9 +1,10 @@
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
+const origin=process.env.TEST_STUDIO_ORIGIN||'http://127.0.0.1:5173';
 const browser=await chromium.launch({channel:'chrome',headless:true});
 try{
  const page=await browser.newPage({viewport:{width:1366,height:1000}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
+ await page.goto(origin+'?edit=1');await page.waitForFunction(()=>window.marbleStudio);
  await page.locator('#nav-arena').click();await page.locator('#arena-game').selectOption('territory');
  assert.match(await page.locator('#arena-rules').innerText(),/Hız: 2 saniye/);assert.match(await page.locator('#arena-rules').innerText(),/Dokunulmazlık: 1,5 saniye/);
  assert.equal(await page.locator('#watch-title').innerText(),'Alan Savaşı');assert.ok(await page.locator('#arena-shape').isVisible());
@@ -15,7 +16,7 @@ try{
  assert.match(await page.locator('#ranking').innerText(),/% alan/);
  await page.setViewportSize({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.screenshot({path:'artifacts/territory-mobile.png',fullPage:true});
  await page.locator('#arena-game').selectOption('links');assert.ok(await page.locator('#arena-shape').isHidden());assert.equal(await page.locator('#watch-title').innerText(),'Küre arenası');
- await page.goto('http://127.0.0.1:5173/factory-render.html');await page.waitForFunction(()=>window.factoryRenderer);
+ await page.goto(origin+'/factory-render.html');await page.waitForFunction(()=>window.factoryRenderer);
  const report=await page.evaluate(async()=>{
   const catalog=await (await fetch('/catalog/manifest.json')).json(),items=catalog.items.filter(i=>i.category==='teams').slice(0,6);
   const ballImages=await window.factoryRenderer.prepareRoster(items);

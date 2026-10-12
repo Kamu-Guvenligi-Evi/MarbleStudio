@@ -30,7 +30,10 @@
     "check": "node scripts/check.mjs --browser",
     "check:export": "node scripts/check.mjs --export",
     "test:production": "node tests/production-data.mjs",
-    "test:production-browser": "node tests/production-browser.mjs"
+    "test:production-browser": "node tests/production-browser.mjs",
+    "test:output-language": "node tests/output-language.mjs",
+    "test:output-language-browser": "node tests/output-language-browser.mjs",
+    "test:branding": "node tests/channel-branding-browser.mjs"
   },
   "dependencies": {
     "matter-js": "0.20.0",

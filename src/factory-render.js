@@ -1,7 +1,9 @@
+import {englishOutput} from './output-language.js';
+import {FrameInterpolation} from './frame-interpolation.js';
 import {PiSession,analyzePi} from './pi-collisions.js';
 import {renderPi} from './pi-renderer.js';
 import {EpisodeRace,drawEpisode} from './episode-race.js';
-import {prepareCatalogImage} from './image-catalog.js';
+import {prepareCatalogImage,upgradeCatalogImages} from './image-catalog.js';
 import {Race} from './physics.js';
 import {Spiral} from './spiral.js';
 import {Arena} from './arena.js';
@@ -16,11 +18,13 @@ import {qualityReport} from './production-quality.js';
 
 const canvas=document.querySelector('#render'),ctx=canvas.getContext('2d');
 const source=document.createElement('canvas');source.width=1080;source.height=1920;const sourceCtx=source.getContext('2d');
-const create=(r,onHit=()=>{})=>{const race=new (r.episode?EpisodeRace:({track:Race,spiral:Spiral,arena:Arena}[r.mode]))({...r,onHit});race.language=r.language??'en';return race;};
+const create=(r,onHit=()=>{})=>{const race=new (r.episode?EpisodeRace:({track:Race,spiral:Spiral,arena:Arena}[r.mode]))({...r,onHit});race.language='en';for(const ball of race.balls)ball.name=englishOutput(ball.name);return race;};
 const ended=(r,mode,exact=false)=>mode==='track'&&!exact&&!r.episode?r.finished.length>0:r.state==='finished';
+const interpolation=new FrameInterpolation();
+let previousCameraY=0;
 let race,config,steps=0,cameraY=0,director,hits=[],lastHit=new Map(),musicEvents=[],lastLeader=null,statistics;
 function statisticsView(){if(!statistics){const root=document.createElement('div');root.id='statistics-view';root.hidden=true;document.body.append(root);statistics=createStatistics({notify:()=>{},onRecordingChange:()=>{}});}return statistics;}
-function statsResult(r){const data=parseStatistics(r.statistics.csv);return {complete:true,simulationSeconds:Number(r.statistics.duration),winner:statisticsAt(data,data.frames.at(-1).year)[0].name,hits:0,rescues:0,finite:true,score:100,coverTime:Number(r.statistics.duration)*.75};}
+function statsResult(r){const data=parseStatistics(r.statistics.csv);return {complete:true,simulationSeconds:Number(r.statistics.duration),winner:englishOutput(statisticsAt(data,data.frames.at(-1).year)[0].name),hits:0,rescues:0,finite:true,score:100,coverTime:Number(r.statistics.duration)*.75};}
 window.factoryRenderer={
   async prepareRoster(items){return Promise.all(items.map(prepareCatalogImage));},
   probe(recipe){
@@ -50,44 +54,47 @@ window.factoryRenderer={
     const coverScore=s=>Math.min(20,s.events)+Math.min(20,s.motion)+s.visible*20+(s.close?10:0);
     coverSamples.sort((a,b)=>coverScore(b)-coverScore(a));
     const report=qualityReport({mode:recipe.mode,seconds:r.time,eventTimes,samples,leadChanges:changes,coverTime:coverSamples[0]?.time??r.time*.5});
-    const result={complete,simulationSeconds:r.time,hits:eventTimes.length,rescues:r.rescues??0,winner:r.finished[0]?.name??null,finite,...report,...(r.episode?{episode:r.summary()}:{} )};
+    const result={complete,simulationSeconds:r.time,hits:eventTimes.length,rescues:r.rescues??0,winner:englishOutput(r.finished[0]?.name??null),finite,...report,...(r.episode?{episode:r.summary()}:{} )};
     r.dispose();return result;
   },
   async begin(job){
-    race?.dispose();race=null;config=job;steps=0;cameraY=0;hits=[];lastHit=new Map();musicEvents=[];lastLeader=null;director=createCameraDirector();
+    race?.dispose();race=null;config=job;steps=0;cameraY=0;previousCameraY=0;hits=[];lastHit=new Map();musicEvents=[];lastLeader=null;director=createCameraDirector();
     canvas.width=job.width??1080;canvas.height=job.height??1920;
     if(job.recipe.mode==='statistics'){statisticsView().loadSnapshot(job.recipe.statistics);return;}
     if(job.recipe.mode==='pi'){
       race=new PiSession({...job.recipe,onHit:event=>{const t=(job.intro??0)+event.time/job.recipe.speed/job.speed,previous=lastHit.get('impact')??-1;if(t-previous>.025){hits.push({time:t,strength:3,x:event.x,type:'impact'});lastHit.set('impact',t);}}});race.start();return;
     }
-    await Promise.all((job.recipe.ballImages??[]).map(loadBallImage));
-    race=create(job.recipe,(strength,x,effect={type:'impact'})=>{const t=(job.intro??0)+steps/120/job.speed,previous=lastHit.get(effect.type)??-1;if(t-previous>(effect.type==='ice'?.035:.025)){hits.push({time:t,strength,x,...effect});lastHit.set(effect.type,t);}});musicEvents.push({time:0,id:(race.ranking()[0]?.entrantId??race.ranking()[0]?.id)});lastLeader=(race.ranking()[0]?.entrantId??race.ranking()[0]?.id);race.start();
+    const ballImages=await upgradeCatalogImages(job.recipe.ballImages??[]);
+    await Promise.all(ballImages.map(loadBallImage));
+    race=create({...job.recipe,ballImages},(strength,x,effect={type:'impact'})=>{const t=(job.intro??0)+steps/120/job.speed,previous=lastHit.get(effect.type)??-1;if(t-previous>(effect.type==='ice'?.035:.025)){hits.push({time:t,strength,x,...effect});lastHit.set(effect.type,t);}});musicEvents.push({time:0,id:(race.ranking()[0]?.entrantId??race.ranking()[0]?.id)});lastLeader=(race.ranking()[0]?.entrantId??race.ranking()[0]?.id);race.start();
   },
   frame(index){
     const elapsed=index/config.fps,mode=config.recipe.mode;
     let picture;
-    if(mode==='statistics')picture=statisticsView().renderFrame(elapsed/config.analysis.simulationSeconds,1/config.fps);
+    if(mode==='statistics')picture=statisticsView().renderFrame(elapsed/config.analysis.simulationSeconds,1/config.fps,config.channel);
     else if(mode==='pi'){
       const target=Math.max(0,elapsed-(config.intro??0))*config.speed*config.recipe.speed;
-      race.step(Math.max(0,target-race.time));renderPi(sourceCtx,race,{language:config.copy.language});picture=source;
+      race.step(Math.max(0,target-race.time));renderPi(sourceCtx,race,{channel:config.channel});picture=source;
     }
     else{
       const target=Math.ceil(Math.min(Math.max(0,elapsed-(config.intro??0))*config.speed,config.analysis.simulationSeconds)*120);
       while(steps<target&&!ended(race,mode,config.recipe.exact)){
         const leader=(race.ranking()[0]?.entrantId??race.ranking()[0]?.id);
         if(leader!==lastLeader){musicEvents.push({time:(config.intro??0)+steps/120/config.speed,id:leader});lastLeader=leader;}
-        const round=race.round;race.step(1000/120);steps++;
-        if(round!==race.round){cameraY=0;director=createCameraDirector();}
+        const round=race.round;interpolation.capture(race.current??race);previousCameraY=cameraY;race.step(1000/120);steps++;
+        if(round!==race.round){cameraY=0;previousCameraY=0;director=createCameraDirector();}
         if(mode==='track'){const aim=director.target(race.current??race,config.recipe.presentation?.camera??'smart',1/120);cameraY+=(aim-cameraY)*(1-Math.exp(-4/120));}
       }
-      ({track:renderRace,spiral:renderSpiral,arena:renderArena}[mode])(sourceCtx,race.current??race,{cameraY,countdown:Math.max(0,(config.intro??0)-elapsed),paused:false,trails:config.recipe.trails??true,preview:null,suppressFinale:!!race.episode});if(race.episode)drawEpisode(sourceCtx,race);picture=source;
+      const simulationTime=Math.min(Math.max(0,elapsed-(config.intro??0))*config.speed,config.analysis.simulationSeconds);
+      const alpha=ended(race,mode,config.recipe.exact)?1:Math.max(0,Math.min(1,simulationTime*120-(steps-1)));
+      interpolation.draw(race.current??race,alpha,()=>({track:renderRace,spiral:renderSpiral,arena:renderArena}[mode])(sourceCtx,race.current??race,{cameraY:previousCameraY+(cameraY-previousCameraY)*alpha,countdown:Math.max(0,(config.intro??0)-elapsed),paused:false,trails:config.recipe.trails??true,preview:null,suppressFinale:!!race.episode,channel:config.channel}));if(race.episode)drawEpisode(sourceCtx,race);picture=source;
     }
     const w=canvas.width,h=canvas.height,scale=Math.min(w/picture.width,h/picture.height);
     ctx.fillStyle=config.template==='cinema'?'#030507':'#0b1018';ctx.fillRect(0,0,w,h);
     ctx.drawImage(picture,(w-picture.width*scale)/2,(h-picture.height*scale)/2,picture.width*scale,picture.height*scale);
     const unit=Math.min(w,h)/1080,pad=48*unit,font=38*unit;
     const band=(text,y,accent='#bbed83',compact=false)=>{
-      ctx.fillStyle='#080d16ed';ctx.fillRect(pad,y,w-pad*2,(compact?70:100)*unit);ctx.fillStyle=accent;ctx.font=`600 ${compact?32*unit:font}px Segoe UI`;ctx.textAlign='center';ctx.fillText(text,w/2,y+(compact?45:63)*unit,w-pad*3);
+      ctx.fillStyle='#080d16ed';ctx.fillRect(pad,y,w-pad*2,(compact?70:100)*unit);ctx.fillStyle=accent;ctx.font=`600 ${compact?32*unit:font}px Segoe UI`;ctx.textAlign='center';ctx.fillText(englishOutput(text),w/2,y+(compact?45:63)*unit,w-pad*3);
     };
     if(!['statistics','pi'].includes(mode)&&elapsed<3.5)band(config.copy.hook,(config.recipe.arenaGame==='territory'?480:330)*unit,'#bbed83',true);
     if(config.template==='broadcast'){
@@ -96,12 +103,12 @@ window.factoryRenderer={
     if(config.template==='cinema'&&config.channel){ctx.fillStyle='#eee';ctx.font=`500 ${24*unit}px Segoe UI`;ctx.textAlign='center';ctx.fillText(config.channel,w/2,50*unit,w-pad*2);}
     if(elapsed>=(config.intro??0)+config.analysis.simulationSeconds/config.speed){
       const name=mode==='pi'?'':mode==='statistics'?config.analysis.winner:race.finished[0]?.name??'';
-      const result=mode==='spiral'?(config.copy.language==='tr'?'Merkez açıldı!':'The center is clear!'):(config.copy.language==='tr'?'Kazanan: ':'Winner: ')+name;
+      const result=mode==='spiral'?'The center is clear!':'Winner: '+englishOutput(name);
       if(!['statistics','pi'].includes(mode))band(result,h-180*unit);
-      if(config.outro){ctx.fillStyle='#eff8ff';ctx.font=`500 ${26*unit}px Segoe UI`;ctx.textAlign='center';ctx.fillText(config.outro,w/2,h-35*unit,w-pad*2);}
+      if(config.outro){ctx.fillStyle='#eff8ff';ctx.font=`500 ${26*unit}px Segoe UI`;ctx.textAlign='center';ctx.fillText(englishOutput(config.outro),w/2,h-35*unit,w-pad*2);}
     }
     return canvas.toDataURL('image/jpeg',.92).split(',')[1];
   },
   audio(){return {effects:hits,leaders:musicEvents};},
-  result(){if(config.recipe.mode==='pi')return {complete:race.state==='finished',winner:null,collisions:race.collisions};return config.recipe.mode==='statistics'?{complete:true,winner:config.analysis.winner}:{complete:ended(race,config.recipe.mode,config.recipe.exact),winner:race.finished[0]?.name??null,...(race.episode?{episode:race.summary()}:{} )};},
+  result(){if(config.recipe.mode==='pi')return {complete:race.state==='finished',winner:null,collisions:race.collisions};return config.recipe.mode==='statistics'?{complete:true,winner:config.analysis.winner}:{complete:ended(race,config.recipe.mode,config.recipe.exact),winner:englishOutput(race.finished[0]?.name??null),...(race.episode?{episode:race.summary()}:{} )};},
 };

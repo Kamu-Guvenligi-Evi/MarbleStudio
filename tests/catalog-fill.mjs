@@ -35,11 +35,11 @@ try {
   });
   assert.ok(result.corner[0]>240&&result.corner[1]<15,'Wide image must fill the square without pale padding');
   assert.ok(result.rim[0]>220&&result.rim[1]<30,'Image must reach the marble rim');
-  assert.ok(result.left[1]>180&&result.left[0]<80,'Left emblem edge must remain visible');
-  assert.ok(result.right[2]>180&&result.right[0]<80,'Right emblem edge must remain visible');
+  assert.ok(result.left[0]>220&&result.left[1]<30,'Wide artwork must cover the circle with its sharp center crop');
+  assert.ok(result.right[0]>220&&result.right[2]<30,'Wide artwork must crop its outer edges instead of shrinking');
   assert.ok(result.changed);assert.ok(result.personalPreserved);
   await page.reload();await page.waitForFunction(()=>window.marbleStudio);
   const draft=await page.evaluate(()=>JSON.parse(localStorage.getItem('marble-studio-track-v1')));
   assert.equal(draft.ballImages[0],result.expected);assert.equal(draft.ballImages[1],result.personal);
-  console.log('PASS: filled backdrop, complete emblem edges, marble rim, legacy migration, personal-image preservation and upgraded draft persistence.');
+  console.log('PASS: sharp cover crop, marble rim, legacy migration, personal-image preservation and upgraded draft persistence.');
 }finally{await browser.close();}

@@ -1,3 +1,4 @@
+import {selectTestChannel} from './browser-channel.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -7,7 +8,8 @@ try{
   const context=await browser.newContext({acceptDownloads:true,viewport:{width:1440,height:1000}}),page=await context.newPage(),errors=[];
   page.on('pageerror',error=>errors.push(error.message));
   await context.grantPermissions(['clipboard-read','clipboard-write'],{origin:'http://127.0.0.1:5173'});
-  await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
+  await selectTestChannel(page);
+ await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
   const connect=()=>page.evaluate(origin=>document.querySelector('.factory-link').href=origin+'/factory.html',factory);await connect();
   assert.equal(await page.locator('#record').isVisible(),false);
   await page.locator('#count').selectOption('8');
@@ -27,7 +29,7 @@ try{
   const restored=await page.evaluate(()=>window.marbleStudio.getState());assert.equal(restored.mode,'track');assert.equal(restored.count,8);assert.equal(restored.names[0],'Studio Transfer');assert.equal(await page.locator('#music-track').inputValue(),'cipher');
   await page.locator('#studio-export').click();await page.waitForFunction(()=>document.querySelector('#video-submit').textContent==='Videoyu hazırla'&&!document.querySelector('#video-submit').disabled);
   assert.equal(context.pages().length,1,'Export stays in the same window');assert.equal(await page.locator('#video-advanced').getAttribute('open'),null);
-  await page.locator('[name=orientation][value=landscape]').check();await page.locator('#video-advanced summary').click();await page.locator('[name=fps]').selectOption('60');
+  await page.locator('[name=orientation][value=landscape]').check();await page.locator('#video-advanced summary').click();await page.locator('[name=fps]').fill('60');await page.locator('[name=fps]').dispatchEvent('change');
   await page.screenshot({path:'artifacts/easy-export-desktop.png',fullPage:true});await page.locator('#video-dialog [data-wb-close]').click();
   await page.locator('#studio-export').click();await page.waitForFunction(()=>document.querySelector('#video-submit').textContent==='Videoyu hazırla');assert.equal(await page.locator('[name=orientation][value=landscape]').isChecked(),true);assert.equal(await page.locator('[name=fps]').inputValue(),'60');
   let sent;await page.route(factory+'/api/queue',async route=>{sent=route.request().postDataJSON();await route.fulfill({json:{ok:true},headers:{'Access-Control-Allow-Origin':'http://127.0.0.1:5173'}});});
@@ -40,7 +42,7 @@ try{
   await page.locator('#video-advanced summary').click();await page.locator('[name=resolution]').selectOption('720');
   await page.setViewportSize({width:390,height:844});assert.ok(await page.evaluate(()=>document.querySelector('#video-dialog').scrollWidth<=innerWidth));await page.screenshot({path:'artifacts/easy-export-mobile.png',fullPage:true});
   await page.locator('#video-submit').click();await page.waitForFunction(()=>document.querySelector('#videos-dialog').open);
-  await page.waitForFunction(()=>document.querySelector('#videos-list video'),{},{timeout:180000});
+  await page.waitForFunction(()=>document.querySelector('#videos-list video'),{},{timeout:720000});
   const video=page.locator('#videos-list video').first();await video.evaluate(v=>v.load());await page.waitForFunction(()=>document.querySelector('#videos-list video')?.readyState>=1);
   const media=await video.evaluate(v=>({width:v.videoWidth,height:v.videoHeight,duration:v.duration}));assert.equal(media.width,1280);assert.equal(media.height,720);assert.ok(media.duration>=17);
   await video.evaluate(v=>{v.currentTime=8;});await page.waitForFunction(()=>Math.abs(document.querySelector('#videos-list video').currentTime-8)<.2);

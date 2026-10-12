@@ -1,3 +1,4 @@
+import {drawChannelWatermark} from './channel-branding.js';
 import { SPIRAL_THEMES } from './spiral-themes.js';
 import { gatePoint } from './spiral.js';
 import { ballImage } from './ball-images.js';
@@ -36,7 +37,7 @@ function iceTexture(ice,theme){
   return entry.canvas;
 }
 
-export function renderSpiral(ctx,race,{countdown=0,paused=false}={}){
+export function renderSpiral(ctx,race,{countdown=0,paused=false,channel}={}){
   const w=ctx.canvas.width,h=ctx.canvas.height,theme=SPIRAL_THEMES[race.theme]||SPIRAL_THEMES.ice;
   ctx.save();ctx.setTransform(w/540,0,0,h/960,0,0);
   const background=ctx.createRadialGradient(270,450,60,270,480,530);
@@ -60,6 +61,7 @@ export function renderSpiral(ctx,race,{countdown=0,paused=false}={}){
     if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y);
   }
   ctx.strokeStyle=theme.rail;ctx.lineWidth=3;ctx.lineCap='round';ctx.stroke();
+  drawChannelWatermark(ctx,channel,540,960,theme===SPIRAL_THEMES.ice?'#526781':'#ffffff');
   for(const b of race.balls){
     if(race.time<b.release&&!b.airborne)continue;
     const {x,y}=b.body.position,r=b.body.circleRadius,bh=b.hue;
@@ -70,7 +72,7 @@ export function renderSpiral(ctx,race,{countdown=0,paused=false}={}){
     ctx.save();ctx.shadowColor='#020812';ctx.shadowBlur=5;ctx.shadowOffsetY=2;
     ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=surface;ctx.fill();ctx.shadowBlur=0;ctx.shadowOffsetY=0;
     const img=ballImage(b.imageSrc);if(img){ctx.clip();ctx.drawImage(img,x-r,y-r,r*2,r*2);}ctx.restore();
-    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.strokeStyle='hsl('+bh+' 90% 76%)';ctx.lineWidth=.8;ctx.stroke();
+    if(!img){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.strokeStyle='hsl('+bh+' 90% 76%)';ctx.lineWidth=.8;ctx.stroke();}
   }
   ctx.save();ctx.translate(gatePoint.x,gatePoint.y);
   ctx.beginPath();ctx.arc(0,0,19,0,Math.PI*2);ctx.fillStyle='#101820';ctx.fill();ctx.strokeStyle=theme.edge;ctx.lineWidth=1.5;ctx.stroke();
@@ -89,7 +91,7 @@ export function renderSpiral(ctx,race,{countdown=0,paused=false}={}){
     ctx.fillStyle=p.white?theme.chip[0]:theme.chip[1];ctx.fill();ctx.strokeStyle=theme.chip[0];ctx.lineWidth=.5;ctx.stroke();ctx.restore();
   }
   if(countdown>0||paused){
-    ctx.fillStyle='#0008';ctx.fillRect(0,245,540,490);ctx.fillStyle='#fff';ctx.font='bold 42px Arial';ctx.fillText(paused?'Duraklatıldı':Math.ceil(countdown),270,490);
+    ctx.fillStyle='#0008';ctx.fillRect(0,245,540,490);ctx.fillStyle='#fff';ctx.font='bold 42px Arial';ctx.fillText(paused?'Paused':Math.ceil(countdown),270,490);
   }
   ctx.restore();
 }

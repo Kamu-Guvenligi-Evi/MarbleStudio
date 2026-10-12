@@ -10,4 +10,4 @@ for(const j of jobs){assert.equal(j.state,'done');assert.equal(j.shared,true);co
 assert.deepEqual(await sharedVideos(project,{enabled:false}),[]);
 const test=await mkdtemp(path.join(project,'artifacts/shared-video-validation-'));await mkdir(path.join(test,'work-videos'));
 await writeFile(path.join(test,'work-videos/manifest.json'),JSON.stringify({version:1,jobs:[{...jobs[0],id:'../../private'}]}));await assert.rejects(sharedVideos(test),/geçersiz/);
-console.log('PASS: shared catalog, 32 unique video hashes, posters/metadata, MP4/WebM, isolation and invalid paths.');
+console.log(`PASS: shared catalog, ${jobs.length} unique video hashes, posters/metadata, MP4/WebM, isolation and invalid paths.`);

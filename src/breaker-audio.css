@@ -1,0 +1,11 @@
+.game-toolbar{z-index:2}
+.breaker-sounds{margin-top:18px;padding:13px;border:1px solid #34463d;border-radius:12px;background:#17211d;font-size:13px}
+.breaker-sounds summary{cursor:pointer;font-weight:600;color:#9ff0d1}
+.breaker-sounds p,.breaker-sounds small{color:#a9bdb3;line-height:1.5}
+.sound-volume{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.sound-volume input{min-width:0;max-width:60%;accent-color:#68eed2}
+.sound-event{display:grid;grid-template-columns:minmax(0,1fr) minmax(95px,1fr) 30px;align-items:center;gap:6px;margin:8px 0}
+.sound-event select{width:100%;min-width:0;padding:6px;font:inherit;border:1px solid #42564b;border-radius:6px;background:#101a15;color:#e8eeeb}
+.sound-event button{padding:6px;border:1px solid #42564b;border-radius:6px;background:#23382d;color:#c8ffe7}
+.sound-event button:disabled{opacity:.5;cursor:wait}
+.breaker-sounds small{display:block;margin-top:12px}

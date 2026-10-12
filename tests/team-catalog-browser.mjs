@@ -26,6 +26,11 @@ try{
     if(new URL(route.request().url()).hostname==='127.0.0.1')return route.continue();
     external.push(route.request().url());return route.abort();
   });
+  // Keep live fixture requests separate from the catalog's offline asset check.
+  await page.route('**/api/matches?**',route=>{
+    const query=new URL(route.request().url()).searchParams;
+    return route.fulfill({json:{league:query.get('league'),date:query.get('date'),updatedAt:new Date().toISOString(),stale:false,events:[]}});
+  });
   await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
   const failed=await page.evaluate(async()=>{
     const {prepareCatalogImage}=await import('/src/image-catalog.js');

@@ -1,5 +1,11 @@
 # Marble Studio
 
+## Cam Kırıcı
+
+Ana ekrandaki **Cam Kırıcı** bağlantısı veya `/glass-breaker.html`, CodeCraftedPhysics'in [cam kırma videosundan](https://www.youtube.com/shorts/K-xjYapAV9M) uyarlanan bağımsız oyunu açar. Sağ üstten bırakılan toplar spiral kanalı dolaşır, soldan cama girer ve darbe sırasında tüketilir. Cam korunarak 1, 2, 5, 10, 15… 100 topluk gruplar denenir; hareket durulduğunda sonraki denemeye geçilir. Üçgen cam parçaları, darbe çatlakları, dönen ve yerçekimiyle düşen kırıklar ve çarpışma sesleri bulunur. Cam yüzdesi gerçekten kırılan yüzey alanını ölçer; videodaki yüzdeler veya bitiş süresi sabitlenmez.
+
+Toplar başlangıç hızı olmadan yerçekimiyle düşer. **Top ekle** düğmesi veya daireye dokunma aynı girişten yeni top bırakır. Otomatik gruplar kapatılabilir; hız 1×, 3×, 10× veya 25× seçilebilir. Oyun alanındaki × rozeti grubun top sayısını gösterir. Boşluk duraklatır, R aynı camı yeniden başlatır, A top ekler; **Yeni cam** farklı bir kırılma deseni oluşturur. Testler: `npm run test:glass` (tarayıcı testi için açık Studio adresi `TEST_STUDIO_ORIGIN` ile seçilebilir). Bu bağımsız oyun otomatik MP4 üretim kuyruğuna bağlı değildir.
+
 Stüdyo arayüzü Türkçedir; videolardaki hazır isimler, yarış metinleri, istatistik etiketleri, Pi anlatımı ve otomatik başlık/açıklamalar İngilizcedir. Eski Türkçe dil tercihleri yeni üretimde İngilizce uygulanır. Elle yazılan özel metinleri İngilizce girin; kişi ve kulüp özel adları özgün yazımlarını korur.
 
 Editörde **Çarpışma sesi** yanındaki **Ses efekti** menüsünden Klasik, Miyav, Havlama, Lastik oyuncak, Baloncuk, Lazer, Zil veya Tahta tıkırtısı seçilebilir. **Dinle** seçili sesi önceden çalar. Yeni efektler sentezlenmiş seslerdir. Seçim her yarış türü için kaydedilir, çalışma/yedek dosyalarında korunur ve WebM ile aynı çalışmadan üretilen MP4 videolara aktarılır. Spiral kırılmaları da seçili efekti kullanır; düşüş, çoğalma ve bitiş sesleri kendi efektlerini korur.

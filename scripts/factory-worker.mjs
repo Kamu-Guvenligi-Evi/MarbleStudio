@@ -45,6 +45,7 @@ export async function produce(job,{root,origin,history,update,cancelled,novelty}
       if(!exact&&!automatic&&r.mode==='arena')Object.assign(r,{arenaGame:job.options.arenaGame??'links',arenaShape:['triangle','square','hexagon','star','circle'][attempt%5],territoryDuration:job.options.duration<=37?30:job.options.duration<=52?45:60});
       const intro=exact&&r.mode!=='statistics'?(r.presentation?.countdown??0):0;
       const outroSeconds=exact&&r.mode!=='statistics'?(r.presentation?.outro??2):2;
+      if(r.mode==='spiral-breaker')r.clipSeconds=job.options.duration-intro-outroSeconds;
       let fitted;
       if(r.mode==='track'&&!exact&&!job.options.source){
         fitted=await fitTrackDuration(r,job.options.duration,r=>page.evaluate(r=>window.factoryRenderer.probe(r),r),{intro,outro:outroSeconds,check,onPass:pass=>update({stage:'Parkur süresi ayarlanıyor · '+pass,progress:0})});

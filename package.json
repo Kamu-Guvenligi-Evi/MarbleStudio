@@ -6,9 +6,11 @@
   "scripts": {
     "test:matches": "node tests/matches.mjs && node tests/matches-browser.mjs && node tests/match-banner-browser.mjs",
     "test:teams": "node tests/team-catalog-browser.mjs",
-    "test:output-language": "node tests/output-language.mjs",
-    "test:output-language-browser": "node tests/output-language-browser.mjs",
-    "test:branding": "node tests/channel-branding-browser.mjs",
+    "test:duel": "node tests/ball-duel.mjs && node tests/ball-duel-browser.mjs",
+    "test:duel:video": "node tests/ball-duel-video.mjs",
+    "test:glass": "node tests/glass-breaker.mjs && node tests/glass-pane-renderer.mjs && node tests/glass-breaker-browser.mjs",
+    "test:breaker": "node tests/spiral-breaker.mjs && node tests/spiral-breaker-browser.mjs",
+    "test:breaker:maps": "node tests/breaker-maps.mjs && node tests/breaker-maps-browser.mjs",
     "test:spiral": "node tests/spiral.mjs && node tests/spiral-browser.mjs",
     "test:workspaces": "node tests/studio-workspaces.mjs",
     "test:stories": "python tests/statistics-stories.py && node tests/statistics-library.mjs && node tests/statistics-library-browser.mjs",
@@ -32,7 +34,10 @@
     "check": "node scripts/check.mjs --browser",
     "check:export": "node scripts/check.mjs --export",
     "test:production": "node tests/production-data.mjs",
-    "test:production-browser": "node tests/production-browser.mjs"
+    "test:production-browser": "node tests/production-browser.mjs",
+    "test:output-language": "node tests/output-language.mjs",
+    "test:output-language-browser": "node tests/output-language-browser.mjs",
+    "test:branding": "node tests/channel-branding-browser.mjs"
   },
   "dependencies": {
     "matter-js": "0.20.0",

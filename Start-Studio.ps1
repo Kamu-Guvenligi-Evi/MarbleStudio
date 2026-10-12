@@ -1,6 +1,8 @@
 ﻿param([switch]$NoBrowser,[int]$StudioPort=5173,[int]$FactoryPort=5180)
 $ErrorActionPreference = 'Stop'
 $studioRoot = $PSScriptRoot
+$env:VITE_FACTORY_ORIGIN = "http://127.0.0.1:$FactoryPort"
+$env:MARBLE_STUDIO_PORT = "$StudioPort"
 & (Join-Path $studioRoot 'scripts/bootstrap-runtime.ps1')
 . (Join-Path $studioRoot 'scripts/service-state.ps1')
 $studioAddress = "http://127.0.0.1:$StudioPort"

@@ -1,12 +1,14 @@
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import {mkdir} from 'node:fs/promises';
+import {selectTestChannel} from './browser-channel.mjs';
 const browser=await chromium.launch({channel:'chrome',headless:true});
 try{
   const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[];
   page.on('pageerror',error=>errors.push(error.message));
+  await selectTestChannel(page);
   await page.goto((process.env.TEST_ORIGIN??'http://127.0.0.1:5173'));await page.waitForFunction(()=>window.marbleStudio);
-  await page.locator('#automatic-pi').click();
+  await page.locator('#nav-pi').click();
   const state=()=>page.evaluate(()=>window.marbleStudio.getPiState());
   assert.equal(await page.locator('#pi-view').isVisible(),true);
   assert.equal(await page.locator('#watch-view').isVisible(),false);
@@ -32,7 +34,7 @@ try{
   assert.equal(await page.locator('#video-form [name=strategy] [value=variations]').evaluate(el=>el.disabled),true);
   assert.equal(await page.locator('#video-form [name=audio]').inputValue(),'none');
   await page.locator('#video-dialog [data-wb-close]').click();
-  await page.reload();await page.waitForFunction(()=>window.marbleStudio);await page.locator('#automatic-pi').click();
+  await page.reload();await page.waitForFunction(()=>window.marbleStudio);await page.locator('#nav-pi').click();
   assert.equal((await state()).digits,2);assert.equal((await state()).sound,false);
   await page.locator('#pi-digits').selectOption('1');await page.locator('#pi-auto').check();
   for(let i=0;i<3;i++)await page.locator('#pi-step').click();
@@ -46,7 +48,7 @@ try{
   await page.waitForFunction(()=>window.marbleStudio.getPiState().state==='finished',null,{timeout:45000});
   assert.deepEqual((await state()).rounds.map(r=>r.collisions),[3,31,314,3141,31415,314159]);
   await page.locator('#pi-reset').click();assert.equal((await state()).mass,1);
-  await page.reload();await page.waitForFunction(()=>window.marbleStudio);await page.locator('#automatic-pi').click();
+  await page.reload();await page.waitForFunction(()=>window.marbleStudio);await page.locator('#nav-pi').click();
   assert.equal((await state()).autoIncrease,true);
   await mkdir('artifacts',{recursive:true});await page.screenshot({path:'artifacts/pi-desktop.png',fullPage:true});
   await page.setViewportSize({width:390,height:844});

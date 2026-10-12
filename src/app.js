@@ -40,8 +40,8 @@ $('#track-preset').add(new Option('Rastgele parkur','random'));
 for(const [id,course] of Object.entries(COURSE_META))if(!$('#track-preset').querySelector(`option[value="${id}"]`))$('#track-preset').add(new Option(course.name,id));
 const canvas = $('#race'), ctx = canvas.getContext('2d');
 for(const [id,name] of Object.entries(TERRITORY_SHAPES))if(!$('#arena-shape').querySelector(`option[value="${id}"]`))$('#arena-shape').add(new Option(name,id));
-for(let count=2;count<=20;count++)if(!$('#count').querySelector(`option[value="${count}"]`)){
-  const option=new Option(String(count),String(count));option.dataset.territoryOnly='true';option.hidden=true;option.disabled=true;
+for(let count=2;count<=20;count++)if(![...$('#count').options].some(option=>Number(option.value)===count)){
+  const option=new Option(String(count),String(count));option.dataset.extendedCount='true';option.hidden=true;option.disabled=true;
   $('#count').add(option,[...$('#count').options].find(o=>Number(o.value)>count)??null);
 }
 const modeDrafts={};
@@ -177,9 +177,10 @@ function syncModeUI(){
   $('#spiral-rules').hidden=!spiral;
   $('#spiral-theme-field').hidden=!spiral;$('#spiral-theme').value=spiralTheme;
   $('#trails').closest('.settings-toggle').hidden=spiral;
-  $('#count-single').hidden=!spiral;$('#count-single').disabled=!spiral;
-  for(const option of $('#count').querySelectorAll('[data-territory-only]')){option.hidden=!territory;option.disabled=!territory;}
-  $('#count-label').textContent=spiral?'Başlangıç top sayısı':territory?'Oyuncu sayısı (2–20)':'Yarışmacı sayısı';
+  const track=gameMode==='track';
+  $('#count-single').hidden=!(spiral||track);$('#count-single').disabled=!(spiral||track);
+  for(const option of $('#count').querySelectorAll('[data-extended-count]')){option.hidden=!(territory||track);option.disabled=!(territory||track);}
+  $('#count-label').textContent=spiral?'Başlangıç top sayısı':territory?'Oyuncu sayısı (2–20)':track?'Top sayısı (1–20)':'Yarışmacı sayısı';
   $('#track-preset').value=trackPreset;
   $('#track-preset option[value="saved"]').hidden=trackPreset!=='saved';
   $('#watch-title').textContent=spiral?'Spiral çoğalma':territory?'Alan Savaşı':arena?'Küre arenası':'Parkur yarışı';

@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import {mkdir,readFile,stat} from 'node:fs/promises';
+import path from 'node:path';
+import {randomUUID} from 'node:crypto';
+import {validateBatch} from '../src/factory-recipes.js';
+import {produce} from '../scripts/factory-worker.mjs';
+
+const origin=process.env.TEST_FACTORY_ORIGIN??'http://127.0.0.1:5174';
+const root=path.resolve('artifacts/duel-video-'+Date.now());
+await mkdir(root,{recursive:true});
+const ballImages=await Promise.all(['countries-3eb6578614','countries-23d8e01560'].map(async id=>'data:image/png;base64,'+(await readFile('public/catalog/'+id+'.png')).toString('base64')));
+const source={mode:'ball-duel',project:{seed:42,hp:10,playbackSpeed:2,theme:'aurora',ballImages,names:['Brazil','Argentina'],sound:true}};
+const job={id:randomUUID(),mode:source.mode,ordinal:0,options:validateBatch({source,strategy:'exact',resolution:720,fps:6,orientation:'portrait',audio:'effects',channel:'LastBallStand'})};
+let previous='';
+await produce(job,{root,origin,history:[],cancelled:()=>false,update:async patch=>{Object.assign(job,patch);if(job.stage!==previous){previous=job.stage;console.log('ball-duel',previous);}}});
+const metadata=JSON.parse(await readFile(path.join(root,job.id,'metadata.json'),'utf8'));
+assert.ok(metadata.analysis.complete);
+assert.ok(['Brazil','Argentina','Draw'].includes(metadata.analysis.winner));
+assert.equal(metadata.video.fps,6);
+assert.equal(metadata.video.speed,1);
+assert.equal(metadata.video.width,720);
+assert.equal(metadata.video.height,1280);
+assert.equal(metadata.video.duration,Math.ceil(metadata.analysis.simulationSeconds+2));
+for(const file of ['video.mp4','cover.jpg','metadata.json','upload.txt'])assert.ok((await stat(path.join(root,job.id,file))).size>0);
+console.log('PASS MP4 encode/decode and complete duel:',metadata.video.duration+'s',metadata.analysis.winner);
+console.log('Local artifacts:',root);

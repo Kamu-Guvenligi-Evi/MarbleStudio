@@ -1,8 +1,11 @@
 /* Quiet surfaces and one primary export action across the workspaces. */
 .app-header{min-height:64px;gap:18px;background:#12171b;border-bottom:1px solid #273039}
 .app-header .brand{font-size:19px}
-.app-header .view-tabs{background:transparent;border:0;padding:0;gap:4px}
-.app-header .view-tabs button{padding:10px 16px;border-radius:7px;font-size:13px}
+.app-header .view-tabs{display:flex;min-width:0;background:transparent;border:0;padding:0;gap:4px}
+.app-header .view-tabs :is(button,a){display:flex;align-items:center;justify-content:center;gap:7px;min-width:0;min-height:44px;margin:0;padding:10px 12px;border:0;border-radius:7px;background:transparent;color:#a1ada7;font:inherit;font-size:13px;font-weight:600;line-height:1.4;text-decoration:none;white-space:nowrap}
+.app-header .view-tabs :is(button,a) span{display:grid;place-items:center;flex:0 0 20px;width:20px;height:20px;border:0;border-radius:50%;font-size:15px;background:transparent;color:inherit}
+.app-header .view-tabs :is(button,a):hover{background:#202b30;color:#edf3ef}
+.app-header .view-tabs :is(button,a):focus-visible{outline:2px solid #c7ed99;outline-offset:2px}
 .app-header .view-tabs button[aria-pressed=true]{background:#26342c;color:#d3edbc}
 .studio-actions{position:relative;display:block;margin-left:auto;order:3}
 .studio-actions>summary{cursor:pointer;font-size:12px;color:#b4bec6;padding:12px;list-style-position:inside}
@@ -42,13 +45,17 @@
 .wb-card{background:transparent;border-color:#303e47;border-radius:10px}
 .wb-close{background:transparent;color:#b8c6cf}.wb-close:hover{background:#29363e}
 .workbench-dialog :focus-visible,.studio-actions>summary:focus-visible{outline:2px solid #c7ed99;outline-offset:3px}
+@media(max-width:1240px){
+ .app-header{padding:12px 22px;gap:12px;flex-wrap:wrap}
+ .studio-actions{order:0}
+ .app-header .view-tabs{order:4;flex-basis:100%;width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+ .app-header .view-tabs :is(button,a){background:#192127}
+}
 @media(max-width:760px){
  .app-header{padding:12px 16px;gap:10px}.app-header .brand{font-size:18px}
- .studio-actions{order:0}.view-tabs{order:4}
- .app-header .view-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%}
- .app-header .view-tabs button{padding:10px 4px;font-size:12px;min-width:0}.view-tabs button span{display:none}
- .studio-export-bar{padding:0 14px;margin-top:14px;flex-wrap:nowrap;gap:6px}
- .studio-export-bar>div{width:auto;flex:1;gap:0}
+ .app-header .view-tabs :is(button,a){padding:10px 6px;font-size:12px}
+ .studio-export-bar{padding:0 14px;margin-top:14px;flex-wrap:wrap;gap:6px}
+ .studio-export-bar>div{display:flex;width:auto;flex:1;gap:0}
  .studio-export-bar .button{width:auto;min-height:42px;font-size:11px;padding:10px}
  .studio-export-bar>div .button{padding:10px 8px}
  .race-workspace .watch-heading{flex-direction:row;gap:12px;margin-bottom:18px}
@@ -56,4 +63,9 @@
  .race-workspace .save-status{max-width:110px;text-align:right;font-size:10px}
  .race-setup-bar{padding:0 0 16px;margin-bottom:16px}
  .race-workspace .watch-sidebar{display:flex;gap:0}.workbench-dialog{padding:18px}
+}
+@media(max-width:620px){
+ .app-header .view-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .app-header .view-tabs :is(button,a){justify-content:flex-start;padding:10px 12px}
+ .studio-export-bar #automatic-back{flex-basis:100%;margin-right:0;text-align:left}
 }

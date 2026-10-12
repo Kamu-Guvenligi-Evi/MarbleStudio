@@ -1,0 +1,50 @@
+import {chromium} from 'playwright';
+import assert from 'node:assert/strict';
+import {mkdir} from 'node:fs/promises';
+const origin=process.env.TEST_STUDIO_ORIGIN??'http://127.0.0.1:5174';
+const browser=await chromium.launch({channel:'chrome',headless:true});
+try{
+  const page=await browser.newPage({viewport:{width:1280,height:900}}),errors=[];
+  page.on('pageerror',error=>errors.push(error.message));
+  await page.goto(origin+'/glass-breaker.html');await page.waitForFunction(()=>window.glassBreaker?.getState().time>.2);
+  const state=()=>page.evaluate(()=>window.glassBreaker.getState());
+  await page.locator('#pause').click();const frozen=await state();await page.waitForTimeout(140);assert.equal((await state()).time,frozen.time);assert.ok(await page.locator('#overlay').isVisible());
+  await page.locator('#resume').click();await page.locator('#auto-spawn').uncheck();assert.equal((await state()).automatic,false);
+  const before=(await state()).balls;await page.locator('#add-ball').click();assert.equal((await state()).balls,before+1);
+  const bounds=await page.locator('#game').boundingBox();await page.mouse.click(bounds.x+bounds.width*.5,bounds.y+bounds.height*440/960);assert.equal((await state()).balls,before+2);
+  await page.keyboard.press('Space');assert.equal((await state()).state,'paused');await page.keyboard.press('Space');
+  await page.keyboard.press('KeyA');assert.equal((await state()).balls,before+3);
+  await page.locator('#sound').click();assert.equal(await page.locator('#sound').getAttribute('aria-pressed'),'true');await page.locator('#sound').click();
+  const seed=(await state()).seed;await page.locator('#new-glass').click();assert.notEqual((await state()).seed,seed);
+  await page.locator('#auto-spawn').check();await page.locator('[data-speed="3"]').click();assert.equal((await state()).speed,3);
+  await page.waitForFunction(()=>window.glassBreaker.getState().broken>45);
+  await page.locator('#pause').click();const beforeTheme=await state(),images=new Set();
+  for(const theme of ['spectrum','gold','chrome','rose','emerald','sapphire']){
+    await page.locator(`[data-theme="${theme}"]`).click();
+    assert.deepEqual(await state(),{...beforeTheme,theme},'Changing appearance must preserve the paused simulation');
+    assert.equal(await page.locator('[data-theme][aria-pressed="true"]').count(),1);
+    images.add(await page.evaluate(()=>{const pixels=document.querySelector('#game').getContext('2d').getImageData(80,230,380,400).data;let hash=2166136261;for(let i=0;i<pixels.length;i++)hash=Math.imul(hash^pixels[i],16777619);return hash>>>0;}));
+  }
+  assert.equal(images.size,6,'Every material must visibly change the canvas');
+  await page.locator('#live-colors').check();
+  assert.deepEqual(await state(),{...beforeTheme,theme:'sapphire'},'Live colors must preserve paused simulation');
+  await page.locator('[data-theme="gold"]').focus();await page.keyboard.press('Enter');assert.equal((await state()).theme,'gold');
+  await page.locator('#resume').click();
+  await mkdir('artifacts/glass-breaker',{recursive:true});await page.screenshot({path:'artifacts/glass-breaker/desktop.jpg',type:'jpeg',quality:72});
+  await page.locator('[data-speed="10"]').click();await page.waitForFunction(()=>window.glassBreaker.getState().wave>=20,null,{timeout:20000});
+  assert.ok((await state()).progress>.1);assert.equal((await state()).state,'running');
+  await page.locator('[data-speed="1"]').click();await page.locator('#restart').click();assert.equal((await state()).broken,0);assert.equal((await state()).balls,1);assert.equal((await state()).wave,1);
+  await page.setViewportSize({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  await page.locator('#game').scrollIntoViewIfNeeded();const mobile=await page.locator('#game').boundingBox();const count=(await state()).balls;
+  await page.locator('#game').dispatchEvent('pointerdown',{clientX:mobile.x+mobile.width*.5,clientY:mobile.y+mobile.height*440/960,pointerType:'touch'});assert.equal((await state()).balls,count+1);
+  await page.screenshot({path:'artifacts/glass-breaker/mobile.jpg',type:'jpeg',quality:65});
+  await page.locator('[data-theme="chrome"]').click();await page.reload();await page.waitForFunction(()=>window.glassBreaker?.getState().theme==='chrome');
+  assert.equal(await page.locator('[data-theme="chrome"]').getAttribute('aria-pressed'),'true');
+  assert.ok(await page.locator('#live-colors').isChecked(),'Live color preference must survive reload');
+  await page.locator('#live-colors').uncheck();
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  await page.screenshot({path:'artifacts/glass-breaker/chrome-mobile.jpg',type:'jpeg',quality:65});
+  await page.goto(origin);await page.locator('.view-tabs a[href="/glass-breaker.html"]').click();await page.waitForURL('**/glass-breaker.html');
+  await page.goto(origin);await page.locator('#automatic-back').click();await page.locator('#automatic-start a[href="/glass-breaker.html"]').click();await page.waitForURL('**/glass-breaker.html');
+  assert.deepEqual(errors,[]);console.log('PASS: controls, batches, mobile layout; six distinct themes, preserved simulation, keyboard selection and persisted appearance.');
+}finally{await browser.close();}

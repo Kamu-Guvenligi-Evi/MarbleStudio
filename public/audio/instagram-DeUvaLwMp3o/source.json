@@ -1,0 +1,48 @@
+{
+  "source": "https://www.instagram.com/p/DeUvaLwMp3o/",
+  "method": "Clips cut at silence boundaries; overlapping sounds within a clip have not been isolated into stems.",
+  "clips": [
+    {
+      "id": "effect-1",
+      "file": "effect-1.wav",
+      "start": 2.925,
+      "end": 3.596,
+      "duration": 0.6710000000000003
+    },
+    {
+      "id": "effect-2",
+      "file": "effect-2.wav",
+      "start": 4.826,
+      "end": 5.922,
+      "duration": 1.096
+    },
+    {
+      "id": "effect-3",
+      "file": "effect-3.wav",
+      "start": 9.357,
+      "end": 10.524,
+      "duration": 1.1669999999999998
+    },
+    {
+      "id": "effect-4",
+      "file": "effect-4.wav",
+      "start": 13.353,
+      "end": 14.746,
+      "duration": 1.3930000000000007
+    },
+    {
+      "id": "effect-5",
+      "file": "effect-5.wav",
+      "start": 14.793,
+      "end": 15.997,
+      "duration": 1.2040000000000006
+    },
+    {
+      "id": "effect-6",
+      "file": "effect-6.wav",
+      "start": 51.16,
+      "end": 53.072,
+      "duration": 1.9120000000000061
+    }
+  ]
+}

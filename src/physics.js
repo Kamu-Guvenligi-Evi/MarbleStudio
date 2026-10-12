@@ -39,7 +39,7 @@ export class Race {
     this.sectionCount = this.course.sections.length;
     this.obstacles = this.course.obstacles; this.sections = this.course.sections; this.finishY = this.course.finishY;
     updateCourse(this.course, 0);
-    const ballCount = Math.max(6, Math.min(20, Math.floor(Number(count) || 12)));
+    const ballCount = Math.max(1, Math.min(20, Math.floor(Number(count) || 12)));
     const slots = Array.from({length:ballCount},(_,i)=>i);
     const startRng = random(this.seed ^ 0x37ab91);
     for(let i=slots.length-1;i>0;i--) {

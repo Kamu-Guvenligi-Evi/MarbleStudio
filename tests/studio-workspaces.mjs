@@ -13,6 +13,20 @@ try{
   assert.equal(await page.locator('#build-view, #library-dialog, #section-dialog, #projects-dialog').count(),0);
   assert.equal((await state()).workspace,'track');
   assert.equal(await page.locator('#track-view #race').isVisible(),true);
+  assert.deepEqual(await page.locator('#count option:not([disabled])').evaluateAll(options=>options.map(o=>Number(o.value))),Array.from({length:20},(_,i)=>i+1));
+  for(const count of ['1','3','19','20']){
+    await page.locator('#count').selectOption(count);
+    assert.equal((await state()).count,Number(count));
+  }
+  await page.locator('#count').selectOption('1');
+  await page.reload();await page.waitForFunction(()=>window.marbleStudio);
+  assert.equal((await state()).count,1);
+  await page.locator('#nav-arena').click();
+  await page.waitForFunction(()=>window.marbleStudio.getState().workspace==='arena');
+  assert.equal(await page.locator('#count-single').evaluate(option=>option.disabled&&option.hidden),true);
+  await page.locator('#nav-track').click();
+  await page.waitForFunction(()=>window.marbleStudio.getState().workspace==='track');
+  assert.equal((await state()).count,1);
   await page.locator('#track-preset').selectOption('pinball');
   const sections=(await state()).sections;
   await page.locator('#count').selectOption('8');

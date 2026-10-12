@@ -1,9 +1,11 @@
 import {normalizePi,PI_KEY} from './pi-collisions.js';
 import {normalizeProject} from './projects.js';
 import {parseStatistics} from './statistics-data.js';
+import {isBreaker,normalizeBreaker} from './breaker-video.js';
 
 export function normalizeSnapshot(raw) {
   if(!raw||typeof raw!=='object')throw new Error('Studio çalışması geçersiz.');
+  if(isBreaker(raw.mode))return normalizeBreaker(raw);
   if(raw.mode==='pi')return {mode:'pi',project:normalizePi(raw.project)};
   if(raw.mode==='statistics'){
     const s=raw.statistics;if(!s)throw new Error('İstatistik tablosu eksik.');parseStatistics(s.csv);

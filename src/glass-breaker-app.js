@@ -3,6 +3,9 @@ import './glass-breaker.css';
 import {GlassBreaker,WIDTH,HEIGHT,CX,CY,ARENA_RADIUS,BALL_LIMIT,WALL} from './glass-breaker.js';
 import {GlassPaneRenderer} from './glass-pane-renderer.js';
 import {GLASS_THEMES,themeColor} from './glass-themes.js';
+import {setupBreakerWorkbench,videoRenderMode} from './breaker-workbench.js';
+import {drawChannelWatermark} from './channel-branding.js';
+let videoChannel='';
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d');
 const pane=document.createElement('canvas');pane.width=WIDTH;pane.height=HEIGHT;const glass=pane.getContext('2d');
 const paneRenderer=new GlassPaneRenderer(glass);let speed=1,lastTime=0,lastUi=-1,muted=true,audio=null,lastSound=-1,impactBuffer=null;
@@ -62,7 +65,7 @@ function draw(){
   ctx.fillStyle=theme.background;ctx.fillRect(0,0,WIDTH,HEIGHT);
   const halo=ctx.createRadialGradient(CX,CY,80,CX,CY,350);halo.addColorStop(0,theme.halo+'33');halo.addColorStop(1,theme.halo+'00');ctx.fillStyle=halo;ctx.fillRect(0,100,WIDTH,700);
   ctx.textAlign='center';ctx.fillStyle='#91a8a0';ctx.font='10px Segoe UI';ctx.letterSpacing='3px';ctx.fillText('MARBLE STUDIO',CX,133);ctx.letterSpacing='0px';
-  ctx.fillStyle='#eff4f2';ctx.font='500 26px Segoe UI';ctx.fillText('Bütün camlar kırılacak mı?',CX,177);
+  ctx.fillStyle='#eff4f2';ctx.font='500 26px Segoe UI';ctx.fillText(videoRenderMode?'Will all the glass break?':'Bütün camlar kırılacak mı?',CX,177);
   paneRenderer.update(game.cells,game.revision);ctx.drawImage(pane,0,0);
   ctx.strokeStyle=theme.wall;ctx.lineWidth=1.3;ctx.beginPath();WALL.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();
   ctx.beginPath();ctx.arc(500,325,16,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#d5e3dd';ctx.font='10px Segoe UI';ctx.fillText(`${game.wave}×`,500,329);
@@ -75,9 +78,10 @@ function draw(){
     const sprite=ballSprite(b,colorShift);ctx.drawImage(sprite,b.x-sprite.width/2,b.y-sprite.height/2);
   }
   ctx.globalAlpha=1;
-  ctx.textAlign='center';ctx.fillStyle='#d5e3dd';ctx.font='15px Segoe UI';ctx.fillText('Kırılan cam',CX,728);ctx.font='500 39px Segoe UI';ctx.fillStyle=theme.accent;ctx.fillText(`${(game.progress*100).toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1})}%`,CX,779);
-  ctx.font='12px Segoe UI';ctx.fillStyle='#8da69b';ctx.fillText(`${game.wave} topluk grup   ·   ${game.balls.length} top kaldı   ·   ${speed}× hız`,CX,815);
-  ctx.fillStyle='#59756a';ctx.font='11px Segoe UI';ctx.fillText('DOKUN, BİR TOP DA SEN EKLE',CX,884);
+  ctx.textAlign='center';ctx.fillStyle='#d5e3dd';ctx.font='15px Segoe UI';ctx.fillText(videoRenderMode?'Glass broken':'Kırılan cam',CX,728);ctx.font='500 39px Segoe UI';ctx.fillStyle=theme.accent;ctx.fillText(`${(game.progress*100).toLocaleString(videoRenderMode?'en-US':'tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1})}%`,CX,779);
+  ctx.font='12px Segoe UI';ctx.fillStyle='#8da69b';ctx.fillText(videoRenderMode?`Wave ${game.wave}   ·   ${game.balls.length} marbles left   ·   ${speed}×`:`${game.wave} topluk grup   ·   ${game.balls.length} top kaldı   ·   ${speed}× hız`,CX,815);
+  ctx.fillStyle='#59756a';ctx.font='11px Segoe UI';ctx.fillText(videoRenderMode?'MARBLE STUDIO':'DOKUN, BİR TOP DA SEN EKLE',CX,884);
+  if(videoRenderMode)drawChannelWatermark(ctx,videoChannel);
   if(lastUi!==Math.floor(game.time*8)||game.state!=='running'){
     lastUi=Math.floor(game.time*8);$('broken').textContent=`${(game.progress*100).toLocaleString('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1})}%`;$('balls').textContent=game.balls.length;
     $('progress-fill').style.width=`${game.progress*100}%`;document.querySelector('.progress').setAttribute('aria-valuenow',(game.progress*100).toFixed(1));$('add-ball').disabled=game.balls.length>=BALL_LIMIT||game.state!=='running';
@@ -98,7 +102,9 @@ $('sound').onclick=async()=>{try{if(muted){audio??=new AudioContext();await audi
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.querySelector('.game-shell').requestFullscreen();}catch{$('status').textContent='Bu tarayıcı tam ekranı desteklemiyor.';}};
 canvas.addEventListener('pointerdown',event=>{canvas.focus({preventScroll:true});const r=canvas.getBoundingClientRect(),scale=Math.min(r.width/WIDTH,r.height/HEIGHT);const target={x:(event.clientX-r.left-(r.width-WIDTH*scale)/2)/scale,y:(event.clientY-r.top-(r.height-HEIGHT*scale)/2)/scale};if(Math.hypot(target.x-CX,target.y-CY)<ARENA_RADIUS)addBall();});
 window.addEventListener('keydown',event=>{if(event.target.closest('button,a,input,select,textarea')||event.repeat)return;if(event.code==='Space'){event.preventDefault();pause();}if(event.code==='KeyR')restart();if(event.code==='KeyA')addBall();});
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&game.state==='running'){game.state='paused';updateOverlay();}lastTime=0;});
+document.addEventListener('visibilitychange',()=>{if(!videoRenderMode&&document.hidden&&game.state==='running'){game.state='paused';updateOverlay();}lastTime=0;});
 function frame(time){const elapsed=lastTime?Math.min(.05,(time-lastTime)/1000):0;lastTime=time;const before=game.state;if(liveColors&&before==='running')colorTime+=elapsed;let remaining=elapsed*speed;while(remaining>0){const step=Math.min(.1,remaining);game.step(step);remaining-=step;}if(before!==game.state)updateOverlay();draw();requestAnimationFrame(frame);}
-draw();requestAnimationFrame(frame);
+draw();if(!videoRenderMode)requestAnimationFrame(frame);
+if(videoRenderMode)window.breakerVideo={reset(recipe,onImpact,channel){game.reset(recipe.seed);game.onImpact=onImpact;selectTheme(recipe.theme,false);liveColors=recipe.liveColors;colorTime=0;speed=recipe.playbackSpeed;videoChannel=channel;paneRenderer.reset();lastUi=-1;},step:dt=>game.step(dt),state:()=>game.state,draw(time){colorTime=time;draw();return canvas;}};
+setupBreakerWorkbench({canvas,capture:()=>({mode:'glass-breaker',project:{seed:game.seed,theme:themeId,liveColors,playbackSpeed:speed,sound:!muted,name:'Cam Kırıcı'}})});
 window.glassBreaker={getState:()=>({state:game.state,time:game.time,balls:game.balls.length,wave:game.wave,broken:game.broken,total:game.cells.length,progress:game.progress,shards:game.shards.length,automatic:game.automatic,speed,seed:game.seed,theme:themeId})};

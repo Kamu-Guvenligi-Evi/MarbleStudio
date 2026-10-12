@@ -8,6 +8,7 @@ export const REPEAT_DAYS=90,REPEAT_COUNT=300;
 const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().filter(k=>value[k]!==undefined).map(k=>[k,canonical(value[k])])):value;
 const hash=value=>createHash('sha256').update(JSON.stringify(canonical(value))).digest('hex');
 export function contentKeys(r){
+  if(['glass-breaker','spiral-breaker'].includes(r.mode)){const look={mode:r.mode,theme:r.theme,liveColors:r.liveColors,mapId:r.mapId,playbackSpeed:r.playbackSpeed,clipSeconds:r.clipSeconds};return {exact:hash({...look,seed:r.seed}),similar:hash(look)};}
   if(r.mode==='pi'){const auto=r.autoIncrease?{autoIncrease:true,maxDigits:PI_MAX_DIGITS}:{};return {exact:hash({mode:r.mode,digits:r.digits,speed:r.speed,...auto}),similar:hash({mode:r.mode,digits:r.digits,...auto})};}
   if(r.mode==='statistics'){
     const parsed=parseStatistics(r.statistics.csv);

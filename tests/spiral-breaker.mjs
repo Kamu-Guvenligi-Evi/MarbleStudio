@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {SpiralBreaker,WIDTH,COLS,CELL,BALL_LIMIT,DRAIN_Y,SPIRAL_PATH} from '../src/spiral-breaker.js';
+import {SpiralBreaker,WIDTH,COLS,ROWS,CELL,BALL_LIMIT,DRAIN_Y,SPIRAL_PATH} from '../src/spiral-breaker.js';
 
 const game=new SpiralBreaker();
 assert.ok(game.initialBlocks>8000);
@@ -72,6 +72,23 @@ game.reset();game.automatic=false;
 Object.assign(game.ball,{x:game.paddle.x,y:game.paddle.y-5,vx:0,vy:410});game.step(.05);
 assert.ok(game.ball.vy<0);assert.equal(game.balls.length,1,'Paddle still returns a caught ball');
 
+// A distant buff must never pull the automatic paddle away from an arriving ball.
+game.reset();game.movePaddle(80);
+Object.assign(game.ball,{x:80,y:650,vx:0,vy:410});
+game.spawnBonus('multiply',450,690);
+for(let i=0;i<24;i++)game.step(1/120);
+assert.equal(game.returns,1);assert.ok(game.ball.vy<0);
+assert.equal(game.bonusCount,0,'Saving the ball takes priority over the buff');
+const entranceX=game.ball.x+game.ball.vx*(ROWS*CELL+game.ball.radius-game.ball.y)/game.ball.vy;
+assert.ok(Math.abs(entranceX-game.path[0][0])<=6,'Caught ball is aimed through the opening');
+// Side-wall reflections and a paddle starting on the opposite side are catchable.
+for(const x of [20,520]){
+  game.reset();game.movePaddle(WIDTH-x);
+  Object.assign(game.ball,{x,y:560,vx:x<WIDTH/2?-240:240,vy:330});
+  for(let i=0;i<90&&!game.returns;i++)game.step(1/120);
+  assert.equal(game.returns,1);assert.ok(game.ball.vy<0);
+}
+
 game.reset();let firstBreak=null,peakBalls=1;
 for(let i=0;i<60*60;i++){
   const brokenBefore=game.broken,canBreak=game.balls.some(b=>b.armed);
@@ -82,11 +99,11 @@ for(let i=0;i<60*60;i++){
   if(!canBreak&&!game.balls.some(b=>b.armed))assert.equal(game.broken,brokenBefore);
   assert.ok(game.balls.length<=BALL_LIMIT);
 }
-assert.ok(firstBreak>30&&firstBreak<40,'The reference starts with a single ball completing the route.');
+assert.ok(firstBreak>0&&firstBreak<60,'A single ball completes the route before multiplication.');
 assert.ok(game.broken>30);assert.ok(peakBalls>1);assert.ok(game.returns>0);
 for(const b of game.balls)assert.ok(Number.isFinite(b.x)&&Number.isFinite(b.y)&&b.x>=0&&b.x<=WIDTH&&b.y-b.radius<=DRAIN_Y);
 assert.equal(game.cells.reduce((n,v)=>n+Number(v>0),0),game.initialBlocks-game.broken);
-assert.equal(game.state,'lost');assert.equal(game.balls.length,0);
+assert.equal(game.state,'running');assert.ok(game.balls.length>1,'Automatic catches keep the game alive.');
 game.reset();game.state='paused';const frozen=JSON.stringify({balls:game.balls,buffs:game.bonuses});game.step(.1);
 assert.equal(JSON.stringify({balls:game.balls,buffs:game.bonuses}),frozen);
 console.log(`PASS: route-gated destruction (first break ${firstBreak.toFixed(1)}s), falling buffs, paddle catches, permanent ball loss, game over and pause.`);

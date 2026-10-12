@@ -1,24 +1,24 @@
 import './breaker-layout.css';
 import {SpiralBreaker,WIDTH,HEIGHT,CELL,COLS,ROWS,BALL_LIMIT} from './spiral-breaker.js';
 import {BREAKER_MAPS} from './breaker-maps.js';
+import {BreakerAudio,setupBreakerAudio} from './breaker-audio.js';
+import './breaker-audio.css';
+import {setupBreakerWorkbench,videoRenderMode} from './breaker-workbench.js';
+import {drawChannelWatermark} from './channel-branding.js';
+let videoChannel='';
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d');
 const field=document.createElement('canvas');field.width=WIDTH;field.height=ROWS*CELL;
 const tiles=field.getContext('2d');
 let colors=BREAKER_MAPS[0].colors,speed=1,completionDelay=0;
-let audio,muted=true,lastSound=0,keys=new Set(),lastTime=0,shownBroken=-1,shownBalls=-1;
+const soundtrack=new BreakerAudio();
+let keys=new Set(),lastTime=0,shownBroken=-1,shownBalls=-1;
 const bonusStyles={multiply:{label:'×3',color:'#9564b3',name:'Toplar üçe katlandı'},add:{label:'+3',color:'#489d98',name:'Üç yeni top'},wide:{label:'↔',color:'#749e44',name:'Çubuk uzadı'},shrink:{label:'−',color:'#b78b2a',name:'Çubuk kısaldı'}};
 function playSound(kind){
   if(kind==='finish'&&!game.broken)$('status').textContent='Top hedefe ulaştı; şimdi blokları kırabilir.';
   if(kind==='lost')$('status').textContent='Bütün toplar düştü. Tekrar deneyebilirsin.';
-  if(muted||!audio||audio.state!=='running'||audio.currentTime-lastSound<.035)return;
-  lastSound=audio.currentTime;const oscillator=audio.createOscillator(),gain=audio.createGain();
-  oscillator.type='sine';oscillator.frequency.setValueAtTime(kind==='paddle'?410:kind==='lost'?160:740,audio.currentTime);
-  oscillator.frequency.exponentialRampToValueAtTime(180,audio.currentTime+.07);
-  gain.gain.setValueAtTime(.035,audio.currentTime);gain.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.08);
-  oscillator.connect(gain);gain.connect(audio.destination);oscillator.start();oscillator.stop(audio.currentTime+.09);
-  oscillator.onended=()=>{oscillator.disconnect();gain.disconnect();};
+  if(kind!=='bonus')soundtrack.play(kind);
 }
-const game=new SpiralBreaker({mapId:new URLSearchParams(location.search).get('map'),onBreak:index=>tiles.clearRect(index%COLS*CELL,Math.floor(index/COLS)*CELL,CELL,CELL),onHit:playSound,onBonus:(type,count)=>{$('status').textContent=count===BALL_LIMIT?`${BALL_LIMIT} top sahada · Top sınırına ulaşıldı`:`${bonusStyles[type].name} · ${count} top sahada`;}});
+const game=new SpiralBreaker({mapId:new URLSearchParams(location.search).get('map'),onBreak:index=>{tiles.clearRect(index%COLS*CELL,Math.floor(index/COLS)*CELL,CELL,CELL);soundtrack.play('break');},onHit:playSound,onBonus:(type,count)=>{soundtrack.play(type==='multiply'?'multiply':'bonus');$('status').textContent=count===BALL_LIMIT?`${BALL_LIMIT} top sahada · Top sınırına ulaşıldı`:`${bonusStyles[type].name} · ${count} top sahada`;}});
 function rebuildField(){
   colors=game.map.colors;
   tiles.clearRect(0,0,field.width,field.height);
@@ -64,20 +64,21 @@ function render(){
   drawMascots();
   const progress=game.broken/game.initialBlocks;
   ctx.fillStyle=colors[3];ctx.font='600 13px Segoe UI';ctx.fillText(`${String(BREAKER_MAPS.indexOf(game.map)+1).padStart(2,'0')} / 06`,24,863);
-  ctx.fillStyle='#f4f8f6';ctx.font='600 27px Segoe UI';ctx.fillText(game.map.name,24,900);
-  ctx.font='13px Segoe UI';ctx.fillStyle='#95aaa2';ctx.fillText(game.broken?'ZİNCİRLEME KIRILMA':'HEDEFE ULAŞ → BLOKLARI KIR',24,925);
+  ctx.fillStyle='#f4f8f6';ctx.font='600 27px Segoe UI';ctx.fillText(videoRenderMode?game.map.id.toUpperCase():game.map.name,24,900);
+  ctx.font='13px Segoe UI';ctx.fillStyle='#95aaa2';ctx.fillText(videoRenderMode?(game.broken?'CHAIN REACTION':'REACH THE TARGET → BREAK THE BLOCKS'):(game.broken?'ZİNCİRLEME KIRILMA':'HEDEFE ULAŞ → BLOKLARI KIR'),24,925);
   ctx.textAlign='right';ctx.fillStyle='#e2eee7';ctx.font='600 25px Segoe UI';ctx.fillText(`${Math.floor(progress*100)}%`,WIDTH-24,900);
   ctx.font='13px Segoe UI';ctx.fillStyle='#95aaa2';ctx.fillText(`${Math.floor(game.time/60)}:${String(Math.floor(game.time%60)).padStart(2,'0')} · ${speed}×`,WIDTH-24,925);ctx.textAlign='left';
   if(shownBroken!==game.broken){shownBroken=game.broken;$('broken').textContent=game.broken.toLocaleString('tr-TR');const progress=game.broken/game.initialBlocks*100;$('progress-fill').style.width=`${progress}%`;document.querySelector('.progress').setAttribute('aria-valuenow',String(Math.round(progress)));}
   if(shownBalls!==game.balls.length){shownBalls=game.balls.length;$('balls').textContent=game.balls.length.toLocaleString('tr-TR');}
+  if(videoRenderMode)drawChannelWatermark(ctx,videoChannel);
 }
 function updateOverlay(){
   const won=game.state==='won',lost=game.state==='lost',paused=game.state==='paused';$('overlay').hidden=!won&&!lost&&!paused;$('overlay-title').textContent=won?`${game.map.name} tamamlandı!`:lost?'Toplar bitti':'Duraklatıldı';$('resume').textContent=won||lost?'Tekrar oyna':'Devam et';$('pause').textContent=paused?'▶':'Ⅱ';$('pause').setAttribute('aria-label',paused?'Devam et':'Duraklat');
   $('next-countdown').textContent='';
   if(won)$('status').textContent='Haritadaki bütün bloklar temizlendi.';
 }
-function pause(){if(game.state!=='running'&&game.state!=='paused')return;game.state=game.state==='running'?'paused':'running';updateOverlay();}
-function restart(mapId=game.map.id){const automatic=game.automatic;game.reset(typeof mapId==='string'?mapId:game.map.id);game.automatic=automatic;completionDelay=0;shownBroken=-1;shownBalls=-1;lastTime=0;keys.clear();rebuildField();updateMapPicker();updateOverlay();$('status').textContent=`${game.map.name} başladı.`;render();}
+function pause(){if(game.state!=='running'&&game.state!=='paused')return;game.state=game.state==='running'?'paused':'running';if(game.state==='paused')soundtrack.stop();updateOverlay();}
+function restart(mapId=game.map.id){soundtrack.stop();const automatic=game.automatic;game.reset(typeof mapId==='string'?mapId:game.map.id);game.automatic=automatic;completionDelay=0;shownBroken=-1;shownBalls=-1;lastTime=0;keys.clear();rebuildField();updateMapPicker();updateOverlay();$('status').textContent=`${game.map.name} başladı.`;render();}
 function updateMapPicker(){
   for(const button of $('map-picker').children)button.setAttribute('aria-pressed',String(button.dataset.map===game.map.id));
   const url=new URL(location.href);url.searchParams.set('map',game.map.id);history.replaceState(null,'',url);
@@ -95,27 +96,43 @@ $('speed').onchange=()=>{speed=Number($('speed').value);};
 $('sequence').onchange=()=>{completionDelay=0;updateOverlay();};
 $('watch-tour').onclick=()=>{setAutomatic(true);speed=1.5;$('speed').value='1.5';$('sequence').checked=true;restart('stairs');canvas.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});};
 $('cinema').onclick=()=>{const active=document.body.classList.toggle('cinema-mode');$('cinema').setAttribute('aria-pressed',String(active));$('cinema').setAttribute('aria-label',active?'Haritaları göster':'Odak görünümü');};
-function setAutomatic(value){game.automatic=value;keys.clear();$('auto').setAttribute('aria-pressed',String(value));$('manual').setAttribute('aria-pressed',String(!value));$('control-hint').textContent=value?'Çubuk topu takip eder. Sen akışı izle.':'Çubuğu fareyle, parmağınla veya ← → tuşlarıyla hareket ettir.';}
-$('auto').onclick=()=>setAutomatic(true);$('manual').onclick=()=>setAutomatic(false);$('pause').onclick=pause;$('restart').onclick=restart;$('resume').onclick=()=>game.state==='won'||game.state==='lost'?restart():pause();
-$('sound').onclick=async()=>{muted=!muted;if(!muted){audio??=new AudioContext();await audio.resume();}$('sound').setAttribute('aria-pressed',String(!muted));$('sound').setAttribute('aria-label',muted?'Sesi aç':'Sesi kapat');};
+function setAutomatic(value){game.automatic=value;keys.clear();$('auto').setAttribute('aria-pressed',String(value));$('manual').setAttribute('aria-pressed',String(!value));$('control-hint').textContent=value?'Çubuk topu takip eder. Kontrolü almak için oyun alanına dokun.':'Çubuğu fareyle, parmağınla veya ← → tuşlarıyla hareket ettir.';}
+$('auto').onclick=()=>setAutomatic(true);$('manual').onclick=()=>{setAutomatic(false);canvas.focus({preventScroll:true});};$('pause').onclick=pause;$('restart').onclick=restart;$('resume').onclick=()=>game.state==='won'||game.state==='lost'?restart():pause();
+function updateSoundButton(){$('sound').setAttribute('aria-pressed',String(!soundtrack.muted));$('sound').setAttribute('aria-label',soundtrack.muted?'Sesi aç':'Sesi kapat');}
+function soundError(){soundtrack.mute();updateSoundButton();$('status').textContent='Ses dosyaları yüklenemedi. Sesi aç düğmesiyle tekrar deneyebilirsin.';}
+$('sound').onclick=async()=>{$('sound').disabled=true;try{if(soundtrack.muted)await soundtrack.enable();else soundtrack.mute();updateSoundButton();}catch{soundError();}finally{$('sound').disabled=false;}};
+setupBreakerAudio(soundtrack,{onChange:updateSoundButton,onError:soundError});
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.querySelector('.game-shell').requestFullscreen();}catch{$('status').textContent='Bu tarayıcı tam ekranı desteklemiyor.';}};
-function pointer(event){if(game.automatic)return;const rect=canvas.getBoundingClientRect();game.movePaddle((event.clientX-rect.left)/rect.width*WIDTH);}
-canvas.addEventListener('pointerdown',event=>{canvas.focus({preventScroll:true});canvas.setPointerCapture(event.pointerId);pointer(event);});canvas.addEventListener('pointermove',pointer);
+function pointer(event){
+  if(game.automatic||event.isPrimary===false)return;
+  const rect=canvas.getBoundingClientRect();
+  // Fullscreen keeps the image centered inside the canvas; exclude its side margins.
+  const width=getComputedStyle(canvas).objectFit==='contain'?Math.min(rect.width,rect.height*WIDTH/HEIGHT):rect.width;
+  game.movePaddle((event.clientX-rect.left-(rect.width-width)/2)/width*WIDTH);
+}
+canvas.addEventListener('pointerdown',event=>{
+  if(event.isPrimary===false||event.button!==0)return;
+  setAutomatic(false);canvas.focus({preventScroll:true});canvas.setPointerCapture(event.pointerId);pointer(event);
+});canvas.addEventListener('pointermove',pointer);
 window.addEventListener('keydown',event=>{
   if(event.target.closest('button,a,select,input'))return;
   if(['Space','ArrowLeft','ArrowRight'].includes(event.code))event.preventDefault();
+  if(game.automatic&&['ArrowLeft','ArrowRight'].includes(event.code))setAutomatic(false);
   if(event.code==='Space'&&!event.repeat)pause();if(event.code==='KeyR'&&!event.repeat)restart();keys.add(event.code);
 });window.addEventListener('keyup',event=>keys.delete(event.code));window.addEventListener('blur',()=>keys.clear());
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&game.state==='running'){game.state='paused';updateOverlay();}lastTime=0;});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)soundtrack.stop();if(!videoRenderMode&&document.hidden&&game.state==='running'){game.state='paused';updateOverlay();}lastTime=0;});
 function frame(time){const dt=lastTime?Math.min(.05,(time-lastTime)/1000):0;lastTime=time;
   if(!game.automatic&&game.state==='running')game.movePaddle(game.paddle.x+((keys.has('ArrowRight')?1:0)-(keys.has('ArrowLeft')?1:0))*480*dt);
-  const state=game.state;game.step(dt*speed);if(game.state!==state)updateOverlay();
+  const state=game.state;game.step(dt*speed);if(game.state!==state){if(game.state==='won')soundtrack.play('won');updateOverlay();}
   if(game.state==='won'&&game.automatic&&$('sequence').checked&&!document.hidden){
     completionDelay+=dt;$('next-countdown').textContent=`Sıradaki harita ${Math.max(1,Math.ceil(4-completionDelay))} saniye içinde`;
     if(completionDelay>=4)nextMap();
   }
   render();requestAnimationFrame(frame);
 }
-updateMapPicker();rebuildField();render();requestAnimationFrame(frame);
+updateMapPicker();rebuildField();render();if(!videoRenderMode)requestAnimationFrame(frame);
+if(videoRenderMode)window.breakerVideo={reset(recipe,onImpact,channel){game.reset(recipe.mapId);game.onHit=()=>onImpact({});speed=recipe.playbackSpeed;videoChannel=channel;shownBroken=-1;shownBalls=-1;rebuildField();},step:dt=>game.step(dt),state:()=>game.state,draw(){render();return canvas;}};
+setupBreakerWorkbench({canvas,capture:()=>({mode:'spiral-breaker',project:{mapId:game.map.id,playbackSpeed:speed,sound:!soundtrack.muted,name:'Spiral Kırıcı'}})});
 // Small read-only hook for local browser checks.
 window.spiralBreaker={getState:()=>({mapId:game.map.id,speed,sequence:$('sequence').checked,state:game.state,time:game.time,broken:game.broken,balls:game.balls.length,bonuses:game.bonusCount,armed:game.balls.filter(b=>b.armed).length,falling:game.bonuses.map(b=>({...b})),automatic:game.automatic,paddleX:game.paddle.x,paddleWidth:game.paddle.width,ball:{...game.ball}})};
+window.spiralBreaker.getAudioState=()=>soundtrack.getState();

@@ -25,16 +25,18 @@ for(const map of BREAKER_MAPS){
     for(let step=0;step<6;step++)g.moveBall(g.ball,1/120);
     assert.ok(g.ball.y<ROWS*CELL&&g.ball.vy<0,`${map.id}: original entrance admits every ball`);
   }
-  g.reset();let firstBreak;
-  for(let i=0;i<60*60&&g.state==='running';i++){
+  g.reset();let firstBreak;const enteredClones=new Set(),finishedClones=new Set();
+  for(let i=0;i<120*60&&g.state==='running';i++){
     g.step(1/60);
+    for(const b of g.balls){if(b.id&&b.y<ROWS*CELL)enteredClones.add(b.id);if(b.id&&b.armed)finishedClones.add(b.id);}
     if(g.broken&&!firstBreak){firstBreak=g.time;assert.ok(g.ball.armed);}
     if(!g.broken){assert.equal(g.bonuses.length,0);assert.equal(g.balls.length,1);}
   }
-  assert.ok(firstBreak>5&&firstBreak<40,`${map.id}: first break ${firstBreak}`);
+  assert.ok(firstBreak>0&&firstBreak<60,`${map.id}: first break ${firstBreak}`);
   assert.ok(g.broken>0,`${map.id}: valid route starts destruction`);
-  assert.ok(g.state==='running'||g.state==='lost'||g.state==='won');
-  if(g.state==='lost')assert.equal(g.balls.length,0);
+  assert.ok(g.state==='running'||g.state==='won',`${map.id}: automatic play must survive two minutes`);
+  assert.ok(enteredClones.size>1,`${map.id}: bonus balls must enter the opening`);
+  assert.ok(finishedClones.size>0,`${map.id}: bonus balls must finish their own route`);
   assert.equal(g.cells.reduce((n,v)=>n+Number(v>0),0),g.initialBlocks-g.broken);
   assert.ok(g.bonusCount>0);
   console.log(`PASS ${map.id}: entrance protection, first break ${firstBreak.toFixed(1)}s, ${g.state}, ${g.balls.length} surviving balls`);

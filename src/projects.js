@@ -16,7 +16,8 @@ export function normalizeProject(raw) {
   const seed = raw.seed ?? 2048, count = raw.count ?? 12;
   if(!Number.isInteger(seed)||seed<1||seed>999999) throw new Error('Yarış düzeni numarası geçersiz.');
   const territory=raw.mode==='arena'&&raw.arenaGame==='territory';
-  if(!Number.isInteger(count)||count>20||(territory?count<2:raw.mode==='spiral'?count!==1&&(count<6||count%2):count<6||count%2)) throw new Error('Top sayısı geçersiz.');
+  const track=raw.mode===undefined||raw.mode==='track';
+  if(!Number.isInteger(count)||count>20||(track?count<1:territory?count<2:raw.mode==='spiral'?count!==1&&(count<6||count%2):count<6||count%2)) throw new Error('Top sayısı geçersiz.');
   if(raw.sound !== undefined && typeof raw.sound !== 'boolean' || raw.trails !== undefined && typeof raw.trails !== 'boolean') throw new Error('Görüntü veya ses ayarı geçersiz.');
   if(raw.mode!==undefined&&!['track','arena','spiral'].includes(raw.mode))throw new Error('Oyun modu geçersiz.');
   if(raw.variant!==undefined&&!Object.hasOwn(SPIRAL_VARIANTS,raw.variant))throw new Error('Spiral davranışı geçersiz.');

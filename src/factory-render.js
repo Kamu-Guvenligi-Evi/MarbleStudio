@@ -15,6 +15,8 @@ import {loadBallImage} from './ball-images.js';
 import {createStatistics} from './statistics.js';
 import {parseStatistics,statisticsAt} from './statistics-data.js';
 import {qualityReport} from './production-quality.js';
+import {isBreaker,probeBreaker} from './breaker-video.js';
+import {beginBreaker,breakerFrame,breakerAudio,breakerResult} from './breaker-video-render.js';
 
 const canvas=document.querySelector('#render'),ctx=canvas.getContext('2d');
 const source=document.createElement('canvas');source.width=1080;source.height=1920;const sourceCtx=source.getContext('2d');
@@ -28,6 +30,7 @@ function statsResult(r){const data=parseStatistics(r.statistics.csv);return {com
 window.factoryRenderer={
   async prepareRoster(items){return Promise.all(items.map(prepareCatalogImage));},
   probe(recipe){
+    if(isBreaker(recipe.mode))return probeBreaker(recipe);
     if(recipe.mode==='pi')return analyzePi(recipe);
     if(recipe.mode==='statistics')return statsResult(recipe);
     const eventTimes=[];let clock=0,changes=0,last=null,previous=new Map(),viewY=0;
@@ -60,6 +63,7 @@ window.factoryRenderer={
   async begin(job){
     race?.dispose();race=null;config=job;steps=0;cameraY=0;previousCameraY=0;hits=[];lastHit=new Map();musicEvents=[];lastLeader=null;director=createCameraDirector();
     canvas.width=job.width??1080;canvas.height=job.height??1920;
+    if(isBreaker(job.recipe.mode)){await beginBreaker(job);return;}
     if(job.recipe.mode==='statistics'){statisticsView().loadSnapshot(job.recipe.statistics);return;}
     if(job.recipe.mode==='pi'){
       race=new PiSession({...job.recipe,onHit:event=>{const t=(job.intro??0)+event.time/job.recipe.speed/job.speed,previous=lastHit.get('impact')??-1;if(t-previous>.025){hits.push({time:t,strength:3,x:event.x,type:'impact'});lastHit.set('impact',t);}}});race.start();return;
@@ -71,7 +75,8 @@ window.factoryRenderer={
   frame(index){
     const elapsed=index/config.fps,mode=config.recipe.mode;
     let picture;
-    if(mode==='statistics')picture=statisticsView().renderFrame(elapsed/config.analysis.simulationSeconds,1/config.fps,config.channel);
+    if(isBreaker(mode))picture=breakerFrame(elapsed);
+    else if(mode==='statistics')picture=statisticsView().renderFrame(elapsed/config.analysis.simulationSeconds,1/config.fps,config.channel);
     else if(mode==='pi'){
       const target=Math.max(0,elapsed-(config.intro??0))*config.speed*config.recipe.speed;
       race.step(Math.max(0,target-race.time));renderPi(sourceCtx,race,{channel:config.channel});picture=source;
@@ -102,13 +107,13 @@ window.factoryRenderer={
     }
     if(config.template==='cinema'&&config.channel){ctx.fillStyle='#eee';ctx.font=`500 ${24*unit}px Segoe UI`;ctx.textAlign='center';ctx.fillText(config.channel,w/2,50*unit,w-pad*2);}
     if(elapsed>=(config.intro??0)+config.analysis.simulationSeconds/config.speed){
-      const name=mode==='pi'?'':mode==='statistics'?config.analysis.winner:race.finished[0]?.name??'';
-      const result=mode==='spiral'?'The center is clear!':'Winner: '+englishOutput(name);
+      const name=isBreaker(mode)?config.analysis.winner:mode==='pi'?'':mode==='statistics'?config.analysis.winner:race.finished[0]?.name??'';
+      const result=isBreaker(mode)?(name==='Cleared'?'All clear!':name==='In progress'?'To be continued…':'Out of marbles!'):mode==='spiral'?'The center is clear!':'Winner: '+englishOutput(name);
       if(!['statistics','pi'].includes(mode))band(result,h-180*unit);
       if(config.outro){ctx.fillStyle='#eff8ff';ctx.font=`500 ${26*unit}px Segoe UI`;ctx.textAlign='center';ctx.fillText(englishOutput(config.outro),w/2,h-35*unit,w-pad*2);}
     }
     return canvas.toDataURL('image/jpeg',.92).split(',')[1];
   },
-  audio(){return {effects:hits,leaders:musicEvents};},
-  result(){if(config.recipe.mode==='pi')return {complete:race.state==='finished',winner:null,collisions:race.collisions};return config.recipe.mode==='statistics'?{complete:true,winner:config.analysis.winner}:{complete:ended(race,config.recipe.mode,config.recipe.exact),winner:englishOutput(race.finished[0]?.name??null),...(race.episode?{episode:race.summary()}:{} )};},
+  audio(){return isBreaker(config.recipe.mode)?breakerAudio():{effects:hits,leaders:musicEvents};},
+  result(){if(isBreaker(config.recipe.mode))return breakerResult();if(config.recipe.mode==='pi')return {complete:race.state==='finished',winner:null,collisions:race.collisions};return config.recipe.mode==='statistics'?{complete:true,winner:config.analysis.winner}:{complete:ended(race,config.recipe.mode,config.recipe.exact),winner:englishOutput(race.finished[0]?.name??null),...(race.episode?{episode:race.summary()}:{} )};},
 };

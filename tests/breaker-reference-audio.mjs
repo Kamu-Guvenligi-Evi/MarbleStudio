@@ -1,0 +1,40 @@
+import {chromium} from 'playwright';
+import assert from 'node:assert/strict';
+const browser=await chromium.launch({channel:'chrome',headless:true});
+try{
+  const page=await browser.newPage({viewport:{width:390,height:844}}),errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.goto((process.env.TEST_STUDIO_ORIGIN??'http://127.0.0.1:5174')+'/spiral-breaker.html');
+  await page.waitForFunction(()=>window.spiralBreaker?.getAudioState);
+  await page.locator('#pause').click();
+  assert.equal(await page.evaluate(()=>window.spiralBreaker.getAudioState().loaded),0,'Do not download sounds before user interaction');
+  await page.locator('#sound').click();
+  await page.waitForFunction(()=>window.spiralBreaker.getAudioState().loaded===6&&!window.spiralBreaker.getAudioState().muted);
+  await page.locator('.breaker-sounds summary').click();
+  assert.equal(await page.locator('.sound-event').count(),8);
+  await page.locator('#sound-multiply').selectOption('effect-4');
+  await page.getByRole('button',{name:'×3 bonusu sesini dinle',exact:true}).click();
+  assert.equal(await page.evaluate(()=>window.spiralBreaker.getAudioState().active),1);
+  await page.locator('#sound').click();
+  assert.equal(await page.evaluate(()=>window.spiralBreaker.getAudioState().active),0,'Mute stops clips already playing');
+  const result=await page.evaluate(async()=>{
+    const {BreakerAudio}=await import('/src/breaker-audio.js');
+    const audio=new BreakerAudio();await audio.enable();
+    const clips=[...audio.buffers.values()].map(b=>({duration:b.duration,peak:Math.max(...b.getChannelData(0).map(Math.abs))}));
+    for(let i=0;i<1500;i++)audio.play('brick');
+    const crowd=audio.getState();audio.play('multiply');audio.play('finish');audio.play('bonus');audio.play('lost');
+    const priority=audio.getState();audio.mute();const stopped=audio.getState();await audio.context.close();
+    return {clips,crowd,priority,stopped};
+  });
+  assert.equal(result.clips.length,6);
+  assert.ok(result.clips.every(c=>c.duration>.6&&c.duration<2&&c.peak>.03&&c.peak<1),'All clips decode to non-silent, unclipped audio');
+  assert.equal(result.crowd.active,1);assert.equal(result.crowd.played,1,'1500 collisions share one sound');
+  assert.ok(result.priority.active<=3,'Bonus sounds respect the voice limit');
+  assert.equal(result.stopped.active,0);
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Sound controls fit a phone');
+  await page.reload();await page.locator('.breaker-sounds summary').click();
+  assert.equal(await page.locator('#sound-multiply').inputValue(),'effect-4','Assignments persist');
+  assert.equal(await page.evaluate(()=>window.spiralBreaker.getAudioState().muted),true,'Reload requires an audio gesture');
+  assert.deepEqual(errors,[]);
+  console.log(JSON.stringify({result:'PASS',clips:result.clips.length,crowdVoices:result.crowd.active,maxVoices:result.priority.active,mobile:true,persistence:true}));
+}finally{await browser.close();}

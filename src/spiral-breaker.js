@@ -39,6 +39,13 @@ export class SpiralBreaker {
   get ball(){return this.balls[0];}
   launch(){const vx=this.map.launchVx;this.balls.push({id:this.nextId++,x:this.path[0][0],y:650,radius:3.2,vx,vy:-Math.sqrt(410**2-vx**2),routeIndex:0,armed:false});}
   movePaddle(x){this.paddle.x=clamp(x,this.paddle.width/2+5,WIDTH-this.paddle.width/2-5);}
+  aimAtEntrance(ball){
+    // Small variations within the opening keep balls from repeating one vertical loop.
+    const offset=Math.sin(ball.id*2.39996+(ball.paddleHits??0)*1.4)*6;
+    const dx=this.path[0][0]+offset-ball.x,dy=ROWS*CELL+ball.radius-ball.y;
+    const length=Math.hypot(dx,dy);
+    ball.vx=dx/length*410;ball.vy=dy/length*410;
+  }
   breakCell(index){
     const type=this.cells[index];if(!type)return;
     this.cells[index]=0;this.broken++;this.onBreak(index,type);
@@ -65,8 +72,9 @@ export class SpiralBreaker {
     if(bonus.type==='multiply'||bonus.type==='add'){
       const amount=Math.min(BALL_LIMIT-this.balls.length,bonus.type==='multiply'?this.balls.length*2:3);
       for(let i=0;i<amount;i++){
-        const angle=-Math.PI/2+Math.sin(this.nextId*2.39996)*1.1;
-        this.balls.push({id:this.nextId++,x:this.paddle.x,y:this.paddle.y-5,radius:3.2,vx:Math.cos(angle)*410,vy:Math.sin(angle)*410,routeIndex:0,armed:false});
+        const x=this.paddle.x+Math.sin(this.nextId*2.39996)*Math.min(20,this.paddle.width/4);
+        const ball={id:this.nextId++,x,y:this.paddle.y-5,radius:3.2,vx:0,vy:-410,routeIndex:0,armed:false};
+        this.aimAtEntrance(ball);this.balls.push(ball);
       }
     }
     this.movePaddle(this.paddle.x);this.onBonus(bonus.type,this.balls.length);this.onHit('bonus');
@@ -79,18 +87,27 @@ export class SpiralBreaker {
   tick(dt){
     this.time+=dt;const p=this.paddle;
     if(this.automatic&&this.balls.length){
-      // Follow the next ball reaching the paddle; missed balls fall out of play.
-      let b=this.ball,soonest=Infinity;
-      for(const candidate of this.balls){if(candidate.vy<=0||candidate.y>=p.y)continue;const arrival=(p.y-candidate.y)/candidate.vy;if(arrival<soonest){soonest=arrival;b=candidate;}}
-      let aim=b.x;
-      if(b.vy>0&&b.y>552){
-        const projected=b.x+b.vx*(p.y-b.y)/b.vy;
-        const folded=((projected-b.radius)%(2*(WIDTH-2*b.radius))+2*(WIDTH-2*b.radius))%(2*(WIDTH-2*b.radius));
-        aim=b.radius+Math.min(folded,2*(WIDTH-2*b.radius)-folded)-Math.sin(this.returns*2.3)*20;
+      // Predict only balls below the field: maze walls still change those inside.
+      const speed=1600;let soonest=Infinity,aim=this.path[0][0];
+      for(const b of this.balls){
+        if(b.vy<=0||b.y<ROWS*CELL+b.radius||b.y+b.radius>p.y)continue;
+        const arrival=(p.y-b.radius-b.y)/b.vy;
+        if(arrival>=soonest)continue;
+        soonest=arrival;
+        const span=WIDTH-2*b.radius,projected=b.x+b.vx*arrival-b.radius;
+        const folded=((projected%(2*span))+2*span)%(2*span);
+        aim=b.radius+Math.min(folded,2*span-folded);
       }
-      const falling=this.bonuses.find(bonus=>!bonus.collected&&bonus.y<p.y&&bonus.y>p.y-160);
-      if(falling)aim=falling.x;
-      this.movePaddle(p.x+clamp(aim-p.x,-760*dt,760*dt));
+      // A buff is worth a detour only when there is time to return for the ball.
+      let buffTime=Infinity,buff=null;
+      for(const bonus of this.bonuses){
+        if(bonus.collected||bonus.y+16>p.y||bonus.y<p.y-160)continue;
+        const arrival=(p.y-16-bonus.y)/bonus.vy;
+        const catchX=clamp(bonus.x,p.width/2+5,WIDTH-p.width/2-5);
+        if(arrival<buffTime&&Math.abs(catchX-p.x)/speed<=arrival&&arrival+Math.abs(catchX-aim)/speed+.12<soonest){buffTime=arrival;buff=bonus;}
+      }
+      if(buff)aim=buff.x;
+      this.movePaddle(p.x+clamp(aim-p.x,-speed*dt,speed*dt));
     }
     for(const bonus of this.bonuses){
       const previousBottom=bonus.y+16;bonus.y+=bonus.vy*dt;
@@ -113,6 +130,7 @@ export class SpiralBreaker {
     if(b.vy>0&&previousY+b.radius<=p.y&&b.y+b.radius>=p.y&&Math.abs(b.x-p.x)<=p.width/2+b.radius){
       const angle=clamp((b.x-p.x)/(p.width/2),-.92,.92)*1.12;
       b.vx=Math.sin(angle)*410;b.vy=-Math.cos(angle)*410;b.y=p.y-b.radius-.01;this.returns++;this.onHit('paddle');
+      if(this.automatic){b.paddleHits=(b.paddleHits??0)+1;this.aimAtEntrance(b);}
     }
     if(!b.armed){
       if(b.y>560)b.routeIndex=0;

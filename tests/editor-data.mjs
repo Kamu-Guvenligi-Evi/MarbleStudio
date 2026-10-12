@@ -45,7 +45,12 @@ assert.deepEqual(parseProject(serializeProject(project)),project);
 assert.throws(()=>parseProject('{not json}'));
 assert.throws(()=>parseProject(JSON.stringify({format:'marble-studio-course',version:99,project})));
 assert.throws(()=>parseProject(serializeProject(project).replace('134','9999')));
-assert.throws(()=>normalizeProject({...project,count:15}));
+for(let count=1;count<=20;count++){
+  assert.equal(parseProject(serializeProject({...project,count})).count,count);
+  assert.equal(new Race({count,seed:8899}).balls.length,count);
+}
+for(const count of [0,21,1.5])assert.throws(()=>normalizeProject({...project,count}));
+assert.throws(()=>normalizeProject({...project,mode:'arena',count:3}));
 const map=new Map();const storage={getItem:key=>map.get(key)??null,setItem:(key,value)=>map.set(key,value)};
 map.set('marble-studio-course-v1',JSON.stringify(['funnel','pulse']));
 assert.equal(loadDraft(storage).sequence[0].settings.gap,112);

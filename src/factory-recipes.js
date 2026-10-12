@@ -7,6 +7,7 @@ import {SECTION_SETTINGS} from './section-settings.js';
 import {SPIRAL_THEMES} from './spiral-themes.js';
 import {SPIRAL_VARIANTS} from './spiral-variants.js';
 import {normalizeSnapshot} from './studio-transfer.js';
+import {isBreaker} from './breaker-video.js';
 
 export const COURSE_PROFILES={
   ...Object.fromEntries(Object.entries(COURSE_META).map(([id,c])=>[id,c.modules])),
@@ -25,7 +26,7 @@ export function validateBatch(raw={}){
   if(!Number.isInteger(duration)||duration<30||duration>180)throw new Error('Süre 30–180 saniye olmalı.');
   const source=raw.source?normalizeSnapshot(raw.source):null;
   const modes=source?[source.mode]:raw.modes??['track','spiral','arena'];
-  if(!Array.isArray(modes)||!modes.length||modes.some(x=>!['track','spiral','arena','statistics','pi'].includes(x))||(!source&&modes.some(mode=>['statistics','pi'].includes(mode))))throw new Error('En az bir geçerli format seç.');
+  if(!Array.isArray(modes)||!modes.length||modes.some(x=>!['track','spiral','arena','statistics','pi'].includes(x)&&!isBreaker(x))||(!source&&modes.some(mode=>['statistics','pi'].includes(mode)||isBreaker(mode))))throw new Error('En az bir geçerli format seç.');
   if(raw.language!=null&&!['en','tr'].includes(raw.language))throw new Error('Dil geçersiz.');
   const language=OUTPUT_LANGUAGE;
   const channel=String(raw.channel??'Marble Shorts').trim();
@@ -39,7 +40,7 @@ export function validateBatch(raw={}){
   const fps=Number(raw.fps??240);
   if(!Number.isSafeInteger(fps)||fps<1)throw new Error('Kare hızı pozitif tam sayı olmalı.');
   const strategy=source?choose('strategy',['exact','variations'],'exact'):'variations';
-  if(['statistics','pi'].includes(source?.mode)&&strategy!=='exact')throw new Error('Bu mod aynı çalışma olarak dışa aktarılır.');
+  if((['statistics','pi'].includes(source?.mode)||isBreaker(source?.mode))&&strategy!=='exact')throw new Error('Bu mod aynı çalışma olarak dışa aktarılır.');
   return {count:strategy==='exact'?1:count,duration,modes:[...new Set(modes)],language,channel,source,strategy,youtube,
     arenaGame:choose('arenaGame',['links','territory'],source?.project?.arenaGame??'links'),
     orientation:choose('orientation',['portrait','landscape','square'],source?.mode==='statistics'?'landscape':'portrait'),
@@ -47,6 +48,7 @@ export function validateBatch(raw={}){
     template:choose('template',['minimal','broadcast','cinema'],'minimal'),hook:String(raw.hook??'').trim().slice(0,100),outro:String(raw.outro??'').trim().slice(0,100)};
 }
 export function sourceRecipe(source,seed){
+  if(isBreaker(source.mode))return {...source.project,version:3,mode:source.mode,seed,presentation:{countdown:0,outro:2},music:{mode:'fixed',track:'',volume:0,roster:[]}};
   if(source.mode==='pi')return {...source.project,name:englishOutput(source.project.name),version:3,mode:'pi',seed,presentation:{countdown:0,outro:3},music:{mode:'fixed',track:'',volume:0,roster:[]}};
   if(source.mode==='statistics')return {version:3,mode:'statistics',seed,statistics:{...source.statistics,...Object.fromEntries(['heading','unit','source'].map(key=>[key,englishOutput(source.statistics[key])]))}};
   return {...source.project,version:3,mode:source.mode,ballNames:(source.project.ballNames??[]).map(englishRosterName),theme:source.project.spiralTheme,seed,music:source.music};
@@ -73,8 +75,9 @@ export function recipe(seed,mode,theme){
     ...(mode==='track'?{profile,rhythm}:mode==='spiral'?{variant:pick(Object.keys(SPIRAL_VARIANTS))}:{energy:pick([.85,1,1.15])})};
 }
 export function identity(r){return JSON.stringify(r);}
-export function structure(r){if(r.mode==='pi')return JSON.stringify([r.mode,r.digits,r.speed,...(r.autoIncrease?[true,PI_MAX_DIGITS]:[])]);if(r.episode)return JSON.stringify([r.mode,r.episode.format,r.episode.heats.map(h=>h.sequence.map(s=>s.type))]);return JSON.stringify([r.mode,r.mode==='statistics'?r.statistics.csv:r.mode==='track'?[r.profile,r.rhythm,(r.sequence??[]).map(s=>s.type)]:r.mode==='spiral'?[r.theme,r.variant]:[r.count,r.energy,r.arenaGame??'links',r.arenaShape??'triangle',r.territoryDuration??45]]);}
+export function structure(r){if(isBreaker(r.mode))return JSON.stringify([r.mode,r.theme,r.liveColors,r.mapId,r.playbackSpeed,r.clipSeconds]);if(r.mode==='pi')return JSON.stringify([r.mode,r.digits,r.speed,...(r.autoIncrease?[true,PI_MAX_DIGITS]:[])]);if(r.episode)return JSON.stringify([r.mode,r.episode.format,r.episode.heats.map(h=>h.sequence.map(s=>s.type))]);return JSON.stringify([r.mode,r.mode==='statistics'?r.statistics.csv:r.mode==='track'?[r.profile,r.rhythm,(r.sequence??[]).map(s=>s.type)]:r.mode==='spiral'?[r.theme,r.variant]:[r.count,r.energy,r.arenaGame??'links',r.arenaShape??'triangle',r.territoryDuration??45]]);}
 export function copyFor(r,language,ordinal=0){
+  if(isBreaker(r.mode)){const hook=r.mode==='glass-breaker'?'Will all the glass break?':'Can the marbles clear every block?';return {hook,title:hook,description:hook+'\nAn original physics simulation created with Marble Studio.',tags:['shorts','marbles','physics',r.mode],language:OUTPUT_LANGUAGE};}
   language=OUTPUT_LANGUAGE;
   if(r.mode==='pi')return {hook:'Count your way to π',title:englishOutput(r.name),description:'Galperin’s pi experiment with two blocks and a wall.',tags:['pi','physics','simulation'],language};
   if(r.episode)return episodeCopy(r,language);

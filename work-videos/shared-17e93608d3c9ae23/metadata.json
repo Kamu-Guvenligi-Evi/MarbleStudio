@@ -1,0 +1,15 @@
+{
+  "id": "shared-17e93608d3c9ae23",
+  "title": "My Course",
+  "mode": "track",
+  "description": "",
+  "recipe": {
+    "mode": "track"
+  },
+  "video": {
+    "format": "video/webm"
+  },
+  "musicCredits": [],
+  "sha256": "17e93608d3c9ae2322620c734c6de697c92a0c384e77be9931347c6ec5a01516",
+  "bytes": 9364301
+}

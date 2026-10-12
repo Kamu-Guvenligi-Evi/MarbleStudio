@@ -1,0 +1,15 @@
+{
+  "id": "shared-cb202c263b3a38f7",
+  "title": "Sphere Arena",
+  "mode": "arena",
+  "description": "",
+  "recipe": {
+    "mode": "arena"
+  },
+  "video": {
+    "format": "video/webm"
+  },
+  "musicCredits": [],
+  "sha256": "cb202c263b3a38f7bd41a1edda34a855520149e47af6d4a7f2ffc3671a5651ea",
+  "bytes": 18279265
+}

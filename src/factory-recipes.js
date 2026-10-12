@@ -73,7 +73,7 @@ export function recipe(seed,mode,theme){
     ...(mode==='track'?{profile,rhythm}:mode==='spiral'?{variant:pick(Object.keys(SPIRAL_VARIANTS))}:{energy:pick([.85,1,1.15])})};
 }
 export function identity(r){return JSON.stringify(r);}
-export function structure(r){if(r.mode==='pi')return JSON.stringify([r.mode,r.digits,r.speed,...(r.autoIncrease?[true,PI_MAX_DIGITS]:[])]);if(r.episode)return JSON.stringify([r.mode,r.episode.format,r.episode.heats.map(h=>h.sequence.map(s=>s.type))]);return JSON.stringify([r.mode,r.mode==='statistics'?r.statistics.csv:r.mode==='track'?[r.profile,r.rhythm,(r.sequence??[]).map(s=>s.type)]:r.mode==='spiral'?[r.theme,r.variant]:[r.count,r.energy,r.arenaGame??'links',r.arenaShape??'triangle',r.territoryDuration??45]]);}
+export function structure(r){if(r.mode==='pi')return JSON.stringify([r.mode,r.digits,r.speed,...(r.autoIncrease?[true,PI_MAX_DIGITS]:[])]);if(r.episode)return JSON.stringify([r.mode,r.episode.format,r.episode.heats.map(h=>h.sequence.map(s=>s.type))]);return JSON.stringify([r.mode,r.mode==='statistics'?r.statistics.csv:r.mode==='track'?[r.profile,r.rhythm,(r.sequence??[]).map(s=>s.type)]:r.mode==='spiral'?[r.theme,r.variant]:[r.count,r.energy,r.arenaGame??'links',r.arenaShape??'triangle',r.territoryDuration??45,...(r.arenaGame!=='territory'&&r.arenaLinkMode==='prelinked'?['prelinked',r.arenaInitialLinks??15]:[])]]);}
 export function copyFor(r,language,ordinal=0){
   language=OUTPUT_LANGUAGE;
   if(r.mode==='pi')return {hook:'Count your way to π',title:englishOutput(r.name),description:'Galperin’s pi experiment with two blocks and a wall.',tags:['pi','physics','simulation'],language};
@@ -89,7 +89,7 @@ export function copyFor(r,language,ordinal=0){
     arena:[`Who survives these ${r.count} contenders?`,'One link can change everything.','Does the most connected marble win?','Predict the final two.','Can your favorite land the last cut?']
   };
   if(r.rosterCategory&&r.rosterCategory!=='colors'){
-    const noun=({countries:'country',teams:'team',zodiac:'zodiac sign'})[r.rosterCategory];
+    const noun=({countries:'country',teams:'team',nba:'NBA team',nfl:'NFL team',zodiac:'zodiac sign'})[r.rosterCategory];
     if(noun){hooks[language][r.mode]=[`Which ${noun} will win?`,'Pick your favorite. Follow the finish.'];extra[r.mode]=[`${r.count} contenders. One winner.`,'Will the lead change at the end?'];}
   }
   const variants=[...hooks[language][r.mode],...extra[r.mode]],hook=variants[(ordinal+Math.floor(r.seed/7))%variants.length];

@@ -1,6 +1,7 @@
 import {drawChannelWatermark} from './channel-branding.js';
 import {drawSpace} from './space-art.js';
 import {drawMarble} from './marble-art.js';
+import {drawMarbleTrail} from './marble-trail.js';
 import {drawLeaders} from './race-leaders.js';
 import {raceName} from './race-copy.js';
 import {renderTerritory} from './territory-renderer.js';
@@ -19,7 +20,7 @@ export function renderArena(ctx,arena,{countdown=0,paused=false,trails=true,chan
   for(const r of [80,155,225]){ctx.beginPath();ctx.ellipse(270,510,r,238,0,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.ellipse(270,510,238,r,0,0,Math.PI*2);ctx.stroke();}
   drawChannelWatermark(ctx,channel);
   for(const link of arena.links){const ball=arena.balls[link.owner];ctx.strokeStyle=ball.color+'a0';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(link.x,link.y);ctx.lineTo(ball.body.position.x,ball.body.position.y);ctx.stroke();ctx.fillStyle=ball.color;ctx.beginPath();ctx.arc(link.x,link.y,4,0,Math.PI*2);ctx.fill();}
-  if(trails)for(const ball of arena.balls){if(ball.eliminatedAt!==null)continue;ctx.strokeStyle=ball.color+'45';ctx.lineWidth=5;ctx.beginPath();ball.trail.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();}
+  if(trails)for(const ball of arena.balls){if(ball.eliminatedAt!==null)continue;drawMarbleTrail(ctx,ball);}
   for(const p of arena.particles){ctx.globalAlpha=p.life;ctx.fillStyle=p.color;ctx.fillRect(p.x-2,p.y-2,4,4);}ctx.globalAlpha=1;
   for(const ball of arena.balls)if(ball.eliminatedAt===null)drawMarble(ctx,ball,ball.body.position.x,ball.body.position.y,ball.body.circleRadius);
   // Draw the accumulated gain after the marbles so other balls cannot cover the labels.
@@ -38,7 +39,7 @@ export function renderArena(ctx,arena,{countdown=0,paused=false,trails=true,chan
   text(`${arena.links.length} LINKS  ·  ${arena.totalCuts} CUTS  ·  ${arena.balls.filter(b=>b.eliminatedAt===null).length} BALLS`,270,786,14,'#a9c7dd');
   if(arena.events.length){const e=arena.events[0];text(`${raceName(arena,arena.balls[e.cutter])} cut ${raceName(arena,arena.balls[e.owner])}'s link`,270,821,13,'#c5d7e5');}
   text('EACH WALL HIT: +1% SPEED',270,875,12,'#bbed83');
-  text('TOUCH THE WALL. BUILD LINKS. CUT YOUR RIVALS.',270,904,11,'#819cb9');
+  text(arena.arenaLinkMode==='prelinked'?`START WITH ${arena.arenaInitialLinks} LINKS. BUILD MORE. CUT YOUR RIVALS.`:'TOUCH THE WALL. BUILD LINKS. CUT YOUR RIVALS.',270,904,11,'#819cb9');
   if(arena.state==='ready'&&!countdown)text('Pick your contender.',270,856,19);
   if(arena.state==='finished'){
     ctx.fillStyle='#080e20ef';ctx.beginPath();ctx.roundRect(55,354,430,280,22);ctx.fill();

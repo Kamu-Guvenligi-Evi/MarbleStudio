@@ -22,9 +22,11 @@ export function normalizeProject(raw) {
   if(raw.variant!==undefined&&!Object.hasOwn(SPIRAL_VARIANTS,raw.variant))throw new Error('Spiral davranışı geçersiz.');
   if(raw.energy!==undefined&&![.85,1,1.15].includes(raw.energy))throw new Error('Arena hareket seviyesi geçersiz.');
   if(raw.arenaGame!==undefined&&!['links','territory'].includes(raw.arenaGame))throw new Error('Arena oyunu geçersiz.');
+  if(raw.arenaLinkMode!==undefined&&!['wall','prelinked'].includes(raw.arenaLinkMode))throw new Error('Arena bağ modu geçersiz.');
+  if(raw.arenaInitialLinks!==undefined&&(!Number.isInteger(raw.arenaInitialLinks)||raw.arenaInitialLinks<1||raw.arenaInitialLinks>50))throw new Error('Başlangıç bağ sayısı 1–50 arasında bir tam sayı olmalı.');
   if(raw.arenaShape!==undefined&&!Object.hasOwn(TERRITORY_SHAPES,raw.arenaShape))throw new Error('Arena şekli geçersiz.');
   if(raw.territoryDuration!==undefined&&![30,45,60].includes(raw.territoryDuration))throw new Error('Alan savaşı süresi geçersiz.');
-  return {...(raw.mode==='arena'?{arenaGame:raw.arenaGame??'links',arenaShape:raw.arenaShape??'triangle',territoryDuration:raw.territoryDuration??45}:{}),variant:raw.variant??'classic',energy:raw.energy??1,...(['arena','spiral'].includes(raw.mode)?{mode:raw.mode}:{}),spiralTheme:normalizeSpiralTheme(raw.spiralTheme),name,seed,count,sound:raw.sound??false,collisionSound:normalizeCollisionSound(raw.collisionSound),visualStyle:'neon',trails:raw.trails??true,sequence:normalizeSequence(raw.sequence),ballImages:normalizeBallImages(raw.ballImages),ballNames:normalizeNames(raw.ballNames),presentation:normalizePresentation(raw.presentation)};
+  return {...(raw.mode==='arena'?{arenaGame:raw.arenaGame??'links',arenaLinkMode:raw.arenaLinkMode??'wall',arenaInitialLinks:raw.arenaInitialLinks??15,arenaShape:raw.arenaShape??'triangle',territoryDuration:raw.territoryDuration??45}:{}),variant:raw.variant??'classic',energy:raw.energy??1,...(['arena','spiral'].includes(raw.mode)?{mode:raw.mode}:{}),spiralTheme:normalizeSpiralTheme(raw.spiralTheme),name,seed,count,sound:raw.sound??false,collisionSound:normalizeCollisionSound(raw.collisionSound),visualStyle:'neon',trails:raw.trails??true,sequence:normalizeSequence(raw.sequence),ballImages:normalizeBallImages(raw.ballImages),ballNames:normalizeNames(raw.ballNames),presentation:normalizePresentation(raw.presentation)};
 }
 export function serializeProject(project) {
   return JSON.stringify({format:'marble-studio-course',version:2,project:normalizeProject(project)},null,2);

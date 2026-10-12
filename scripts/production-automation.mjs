@@ -41,7 +41,7 @@ export async function planAutomatic(options,history,project,guard=createRepetiti
   for(const track of manifest.filter(t=>['monkeys','cipher','weasel'].includes(t.id))){try{await access(path.join(project,'public',track.src.slice(1)));available.push(track.id);}catch{}}
   const track=leastRecent(available,recent.map(j=>recipeOf(j)?.music?.track));
   const catalog=JSON.parse(await readFile(path.join(project,'public/catalog/manifest.json'),'utf8'));
-  const category=mode==='spiral'?'colors':leastRecent(['countries','teams','zodiac'],recent.filter(j=>j.mode!=='spiral').map(j=>j.options?.automation?.rosterCategory));
+  const category=mode==='spiral'?'colors':leastRecent(['countries','teams','nba','nfl','zodiac'],recent.filter(j=>j.mode!=='spiral').map(j=>j.options?.automation?.rosterCategory));
   const items=catalog.items.filter(i=>i.category===category),used=recent.flatMap(j=>recipeOf(j)?.ballNames??[]).map(englishRosterName),members=[];
   while(members.length<Math.min(20,items.length)){
     const name=leastRecent(items.filter(i=>!members.includes(i)).map(i=>englishRosterName(i.name)),used);members.push(items.find(i=>englishRosterName(i.name)===name));

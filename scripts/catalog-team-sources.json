@@ -1,0 +1,752 @@
+{
+  "Atlanta Hawks": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/atl.png",
+    "source": "https://www.espn.com/nba/team/_/name/atl/atlanta-hawks",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Boston Celtics": {
+    "id": "teams-0cc9f599fe"
+  },
+  "Brooklyn Nets": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/bkn.png",
+    "source": "https://www.espn.com/nba/team/_/name/bkn/brooklyn-nets",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Charlotte Hornets": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/cha.png",
+    "source": "https://www.espn.com/nba/team/_/name/cha/charlotte-hornets",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Chicago Bulls": {
+    "id": "teams-552aff66fc"
+  },
+  "Cleveland Cavaliers": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/cle.png",
+    "source": "https://www.espn.com/nba/team/_/name/cle/cleveland-cavaliers",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Dallas Mavericks": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/dal.png",
+    "source": "https://www.espn.com/nba/team/_/name/dal/dallas-mavericks",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Denver Nuggets": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/den.png",
+    "source": "https://www.espn.com/nba/team/_/name/den/denver-nuggets",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Detroit Pistons": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/det.png",
+    "source": "https://www.espn.com/nba/team/_/name/det/detroit-pistons",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Golden State Warriors": {
+    "id": "teams-cb7ba6679e"
+  },
+  "Houston Rockets": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/hou.png",
+    "source": "https://www.espn.com/nba/team/_/name/hou/houston-rockets",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Indiana Pacers": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/ind.png",
+    "source": "https://www.espn.com/nba/team/_/name/ind/indiana-pacers",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "LA Clippers": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/lac.png",
+    "source": "https://www.espn.com/nba/team/_/name/lac/la-clippers",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Los Angeles Lakers": {
+    "id": "teams-23d693f63c"
+  },
+  "Memphis Grizzlies": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/mem.png",
+    "source": "https://www.espn.com/nba/team/_/name/mem/memphis-grizzlies",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Miami Heat": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/mia.png",
+    "source": "https://www.espn.com/nba/team/_/name/mia/miami-heat",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Milwaukee Bucks": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/mil.png",
+    "source": "https://www.espn.com/nba/team/_/name/mil/milwaukee-bucks",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Minnesota Timberwolves": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/min.png",
+    "source": "https://www.espn.com/nba/team/_/name/min/minnesota-timberwolves",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "New Orleans Pelicans": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/no.png",
+    "source": "https://www.espn.com/nba/team/_/name/no/new-orleans-pelicans",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "New York Knicks": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/ny.png",
+    "source": "https://www.espn.com/nba/team/_/name/ny/new-york-knicks",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Oklahoma City Thunder": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/okc.png",
+    "source": "https://www.espn.com/nba/team/_/name/okc/oklahoma-city-thunder",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Orlando Magic": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/orl.png",
+    "source": "https://www.espn.com/nba/team/_/name/orl/orlando-magic",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Philadelphia 76ers": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/phi.png",
+    "source": "https://www.espn.com/nba/team/_/name/phi/philadelphia-76ers",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Phoenix Suns": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/phx.png",
+    "source": "https://www.espn.com/nba/team/_/name/phx/phoenix-suns",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Portland Trail Blazers": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/por.png",
+    "source": "https://www.espn.com/nba/team/_/name/por/portland-trail-blazers",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Sacramento Kings": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/sac.png",
+    "source": "https://www.espn.com/nba/team/_/name/sac/sacramento-kings",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "San Antonio Spurs": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/sa.png",
+    "source": "https://www.espn.com/nba/team/_/name/sa/san-antonio-spurs",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Toronto Raptors": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/tor.png",
+    "source": "https://www.espn.com/nba/team/_/name/tor/toronto-raptors",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Utah Jazz": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/utah.png",
+    "source": "https://www.espn.com/nba/team/_/name/utah/utah-jazz",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Washington Wizards": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nba/500/wsh.png",
+    "source": "https://www.espn.com/nba/team/_/name/wsh/washington-wizards",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Arizona Cardinals": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/ari.png",
+    "source": "https://www.espn.com/nfl/team/_/name/ari/arizona-cardinals",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Atlanta Falcons": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/atl.png",
+    "source": "https://www.espn.com/nfl/team/_/name/atl/atlanta-falcons",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Baltimore Ravens": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/bal.png",
+    "source": "https://www.espn.com/nfl/team/_/name/bal/baltimore-ravens",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Buffalo Bills": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/buf.png",
+    "source": "https://www.espn.com/nfl/team/_/name/buf/buffalo-bills",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Carolina Panthers": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/car.png",
+    "source": "https://www.espn.com/nfl/team/_/name/car/carolina-panthers",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Chicago Bears": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/chi.png",
+    "source": "https://www.espn.com/nfl/team/_/name/chi/chicago-bears",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Cincinnati Bengals": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/cin.png",
+    "source": "https://www.espn.com/nfl/team/_/name/cin/cincinnati-bengals",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Cleveland Browns": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/cle.png",
+    "source": "https://www.espn.com/nfl/team/_/name/cle/cleveland-browns",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Dallas Cowboys": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/dal.png",
+    "source": "https://www.espn.com/nfl/team/_/name/dal/dallas-cowboys",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Denver Broncos": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/den.png",
+    "source": "https://www.espn.com/nfl/team/_/name/den/denver-broncos",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Detroit Lions": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/det.png",
+    "source": "https://www.espn.com/nfl/team/_/name/det/detroit-lions",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Green Bay Packers": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/gb.png",
+    "source": "https://www.espn.com/nfl/team/_/name/gb/green-bay-packers",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Houston Texans": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/hou.png",
+    "source": "https://www.espn.com/nfl/team/_/name/hou/houston-texans",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Indianapolis Colts": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/ind.png",
+    "source": "https://www.espn.com/nfl/team/_/name/ind/indianapolis-colts",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Jacksonville Jaguars": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/jax.png",
+    "source": "https://www.espn.com/nfl/team/_/name/jax/jacksonville-jaguars",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Kansas City Chiefs": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/kc.png",
+    "source": "https://www.espn.com/nfl/team/_/name/kc/kansas-city-chiefs",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Las Vegas Raiders": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/lv.png",
+    "source": "https://www.espn.com/nfl/team/_/name/lv/las-vegas-raiders",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Los Angeles Chargers": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/lac.png",
+    "source": "https://www.espn.com/nfl/team/_/name/lac/los-angeles-chargers",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Los Angeles Rams": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/lar.png",
+    "source": "https://www.espn.com/nfl/team/_/name/lar/los-angeles-rams",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Miami Dolphins": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/mia.png",
+    "source": "https://www.espn.com/nfl/team/_/name/mia/miami-dolphins",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Minnesota Vikings": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/min.png",
+    "source": "https://www.espn.com/nfl/team/_/name/min/minnesota-vikings",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "New England Patriots": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/ne.png",
+    "source": "https://www.espn.com/nfl/team/_/name/ne/new-england-patriots",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "New Orleans Saints": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/no.png",
+    "source": "https://www.espn.com/nfl/team/_/name/no/new-orleans-saints",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "New York Giants": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/nyg.png",
+    "source": "https://www.espn.com/nfl/team/_/name/nyg/new-york-giants",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "New York Jets": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/nyj.png",
+    "source": "https://www.espn.com/nfl/team/_/name/nyj/new-york-jets",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Philadelphia Eagles": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/phi.png",
+    "source": "https://www.espn.com/nfl/team/_/name/phi/philadelphia-eagles",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Pittsburgh Steelers": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/pit.png",
+    "source": "https://www.espn.com/nfl/team/_/name/pit/pittsburgh-steelers",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "San Francisco 49ers": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/sf.png",
+    "source": "https://www.espn.com/nfl/team/_/name/sf/san-francisco-49ers",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Seattle Seahawks": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/sea.png",
+    "source": "https://www.espn.com/nfl/team/_/name/sea/seattle-seahawks",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Tampa Bay Buccaneers": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/tb.png",
+    "source": "https://www.espn.com/nfl/team/_/name/tb/tampa-bay-buccaneers",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Tennessee Titans": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/ten.png",
+    "source": "https://www.espn.com/nfl/team/_/name/ten/tennessee-titans",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Washington Commanders": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/nfl/500/wsh.png",
+    "source": "https://www.espn.com/nfl/team/_/name/wsh/washington-commanders",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Goztepe": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/789.png",
+    "source": "https://www.espn.com/soccer/club/_/id/789/goztepe",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Samsunspor": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/11429.png",
+    "source": "https://www.espn.com/soccer/club/_/id/11429/samsunspor",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Konyaspor": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/7648.png",
+    "source": "https://www.espn.com/soccer/club/_/id/7648/konyaspor",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Caykur Rizespor": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/7656.png",
+    "source": "https://www.espn.com/soccer/club/_/id/7656/caykur-rizespor",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Kasimpasa": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/6870.png",
+    "source": "https://www.espn.com/soccer/club/_/id/6870/kasimpasa",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Gaziantep FK": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/20070.png",
+    "source": "https://www.espn.com/soccer/club/_/id/20070/gaziantep-fk",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Tottenham Hotspur": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/367.png",
+    "source": "https://www.espn.com/soccer/club/_/id/367/tottenham-hotspur",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Newcastle United": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/361.png",
+    "source": "https://www.espn.com/soccer/club/_/id/361/newcastle-united",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Aston Villa": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/362.png",
+    "source": "https://www.espn.com/soccer/club/_/id/362/aston-villa",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Sevilla": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/243.png",
+    "source": "https://www.espn.com/soccer/club/_/id/243/sevilla",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Valencia": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/94.png",
+    "source": "https://www.espn.com/soccer/club/_/id/94/valencia",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "AS Roma": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/104.png",
+    "source": "https://www.espn.com/soccer/club/_/id/104/as-roma",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Lazio": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/112.png",
+    "source": "https://www.espn.com/soccer/club/_/id/112/lazio",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Bayer Leverkusen": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/131.png",
+    "source": "https://www.espn.com/soccer/club/_/id/131/bayer-leverkusen",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "RB Leipzig": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/11420.png",
+    "source": "https://www.espn.com/soccer/club/_/id/11420/rb-leipzig",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Marseille": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/176.png",
+    "source": "https://www.espn.com/soccer/club/_/id/176/marseille",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Lyon": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/167.png",
+    "source": "https://www.espn.com/soccer/club/_/id/167/lyon",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Sporting CP": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/2250.png",
+    "source": "https://www.espn.com/soccer/club/_/id/2250/sporting-cp",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Flamengo": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/819.png",
+    "source": "https://www.espn.com/soccer/club/_/id/819/flamengo",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Palmeiras": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/2029.png",
+    "source": "https://www.espn.com/soccer/club/_/id/2029/palmeiras",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Corinthians": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/874.png",
+    "source": "https://www.espn.com/soccer/club/_/id/874/corinthians",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Santos": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/2674.png",
+    "source": "https://www.espn.com/soccer/club/_/id/2674/santos",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "Boca Juniors": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/5.png",
+    "source": "https://www.espn.com/soccer/club/_/id/5/boca-juniors",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  },
+  "River Plate": {
+    "provider": "espn",
+    "downloadUrl": "https://a.espncdn.com/i/teamlogos/soccer/500/16.png",
+    "source": "https://www.espn.com/soccer/club/_/id/16/river-plate",
+    "credit": "Team / league logo via ESPN",
+    "license": "Takım ve lig marka haklarına / kaynak koşullarına tabi",
+    "licenseUrl": "https://disneytermsofuse.com/english/",
+    "fit": "contain"
+  }
+}

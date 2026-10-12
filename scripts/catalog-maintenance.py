@@ -8,7 +8,7 @@ repair=[]
 for file in files:
     if not imp.re.fullmatch(r'[a-z]+-[a-f0-9]{10}\.json',file.name):continue
     item=json.loads(file.read_text(encoding='utf-8'))
-    if item.get('generated'):continue
+    if item.get('generated') or item.get('provider')=='espn':continue
     if item['category']=='countries':
         item['source']=item['downloadUrl'];file.write_text(json.dumps(item,ensure_ascii=False),encoding='utf-8')
     if item['category']!='countries' and not item.get('brandSlug'):
@@ -31,7 +31,7 @@ groups=json.loads((imp.ROOT/'scripts'/'catalog-seed.json').read_text(encoding='u
 items=[]
 for group in groups:
     for name,title in group['items']:
-        ident=group['id']+'-'+imp.hashlib.sha1(title.encode()).hexdigest()[:10]
+        ident=imp.catalog_id(group['id'],title)
         file=imp.DEST/(ident+'.json')
         if file.exists():items.append(json.loads(file.read_text(encoding='utf-8')))
 catalog=dict(categories=[dict(id=g['id'],name=g['name']) for g in groups],items=items)

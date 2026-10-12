@@ -15,6 +15,8 @@ import {build} from 'vite';
 import {validateBatch} from '../src/factory-recipes.js';
 import {produce} from './factory-worker.mjs';
 import {createYouTube} from './youtube-api.mjs';
+import {createMatchService} from './match-service.mjs';
+const getMatches=createMatchService();
 
 const project=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),root=path.resolve(process.env.FACTORY_OUTPUT||path.join(project,'output'));
 const port=Number(process.env.FACTORY_PORT||5180),origin='http://127.0.0.1:'+port;
@@ -88,6 +90,10 @@ const server=http.createServer(async(req,res)=>{
     if(req.headers.origin&&allowedOrigins.has(req.headers.origin)){res.setHeader('Access-Control-Allow-Origin',req.headers.origin);res.setHeader('Vary','Origin');}
     if(req.headers.host!==`127.0.0.1:${port}`||req.headers.origin&&!allowedOrigins.has(req.headers.origin))return json({error:'Yalnızca yerel üretim paneli erişebilir.'},403);
     if(req.method==='OPTIONS'){res.writeHead(204,{'Access-Control-Allow-Methods':'GET, HEAD, POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Range, X-Marble-Mode, X-Marble-Title','Access-Control-Max-Age':'600'});res.end();return;}
+    if(url.pathname==='/api/matches'&&req.method==='GET'){
+      try{return json(await getMatches(url.searchParams.get('league'),url.searchParams.get('date')));}
+      catch(error){return json({error:error.message},error.status??400);}
+    }
     if(url.pathname==='/api/youtube/connect'&&req.method==='GET'){res.writeHead(302,{Location:youtube.begin(),'Cache-Control':'no-store'});res.end();return;}
     if(url.pathname==='/api/youtube/callback'&&req.method==='GET'){
       const account=await youtube.callback(url.searchParams.get('code'),url.searchParams.get('state'));

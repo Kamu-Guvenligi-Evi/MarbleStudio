@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test:matches": "node tests/matches.mjs && node tests/matches-browser.mjs && node tests/match-banner-browser.mjs",
+    "test:teams": "node tests/team-catalog-browser.mjs",
     "test:output-language": "node tests/output-language.mjs",
     "test:output-language-browser": "node tests/output-language-browser.mjs",
     "test:branding": "node tests/channel-branding-browser.mjs",
@@ -20,7 +22,7 @@
     "test:visual": "node tests/render-quality.mjs",
     "test:images": "node tests/ball-images.mjs",
     "test:effects": "node tests/effect-colors.mjs",
-    "test:arena": "node tests/arena.mjs && node tests/arena-browser.mjs",
+    "test:arena": "node tests/arena.mjs && node tests/arena-browser.mjs && node tests/arena-links-browser.mjs",
     "test:catalog": "node tests/catalog-browser.mjs && node tests/catalog-fill.mjs",
     "test:presentation": "node tests/presentation.mjs && node tests/presentation-browser.mjs",
     "test:editor": "node tests/editor-data.mjs && node tests/new-sections.mjs",

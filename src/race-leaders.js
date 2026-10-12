@@ -12,7 +12,7 @@ export function drawLeaders(ctx,race) {
   ctx.fillStyle=wash;ctx.fillRect(0,0,540,181);
   ctx.fillStyle='#8affcd';ctx.beginPath();ctx.arc(29,19,3,0,Math.PI*2);ctx.fill();
   ctx.textAlign='left';ctx.font='700 10px "Segoe UI",sans-serif';ctx.fillStyle='#c5d4e6';ctx.fillText(territory?(tr?'ALAN LİDERLERİ':'TERRITORY LEADERS'):arena?(tr?'KALANLAR':'SURVIVORS'):(tr?'LİDERLER':'LIVE LEADERS'),39,23);
-  ctx.textAlign='right';ctx.fillStyle='#72869e';ctx.fillText(territory?`${race.balls.length} ${tr?'YARIŞMACI':'RACERS'}`:arena?`${race.balls.filter(b=>b.eliminatedAt===null).length} ${tr?'KALDI':'LEFT'}`:(tr?'İLK 3':'TOP 3'),514,23);
+  ctx.textAlign='right';ctx.fillStyle='#72869e';ctx.fillText(territory?`${race.balls.filter(b=>b.eliminatedAt===null).length}/${race.balls.length} ${tr?'KALDI':'LEFT'}`:arena?`${race.balls.filter(b=>b.eliminatedAt===null).length} ${tr?'KALDI':'LEFT'}`:(tr?'İLK 3':'TOP 3'),514,23);
   leaders.forEach((ball,i)=>{
     const x=22+i*168,center=x+80,color=i===0?'#ffe29a':'#91aac6';
     ctx.beginPath();ctx.roundRect(x,34,160,127,12);
@@ -29,7 +29,7 @@ export function drawLeaders(ctx,race) {
       while(ctx.measureText(line).width>142&&line.length>1)line=line.slice(0,-2)+'…';
       ctx.fillText(line,center,(lines.length>1?127+j*16:134)-(arena?8:0));
     });
-    if(arena){ctx.font='600 10px "Segoe UI",sans-serif';ctx.fillStyle='#bfd0df';ctx.fillText(territory?`${race.share(ball).toFixed(1)}% · ${ball.cuts} ${tr?'KESİŞ':'CUTS'}`:`${race.linkCount(ball)} ${tr?'BAĞ':'LINKS'} · ${ball.cuts} ${tr?'KESİŞ':'CUTS'}`,center,149);}
+    if(arena){ctx.font='600 10px "Segoe UI",sans-serif';ctx.fillStyle='#bfd0df';ctx.fillText(territory?`${race.share(ball).toFixed(1)}% · ${ball.cuts} ${tr?'ELEME':'ELIMINATIONS'}`:`${race.linkCount(ball)} ${tr?'BAĞ':'LINKS'} · ${ball.cuts} ${tr?'KESİŞ':'CUTS'}`,center,149);}
     ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(center-20,157,40,2,1);ctx.fill();
   });
   ctx.restore();

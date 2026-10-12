@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="tr">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111516"><title>Cam Kırıcı · Marble Studio</title></head>
+<body>
+  <main class="breaker-layout glass-layout">
+    <aside class="game-info">
+      <a class="back" href="/">← Marble Studio</a>
+      <span class="eyebrow">MARBLE STUDIO / FİZİK OYUNLARI</span>
+      <h1>Cam<br> <span>Kırıcı.</span></h1>
+      <p class="description">Toplar sağ üstten düşer, spiral kanalı dolaşıp soldan cama ulaşır. Her top çarptığı camı kırıp kaybolur; sonraki grup daha kalabalık gelir.</p>
+      <section class="appearance" aria-labelledby="appearance-label">
+        <div class="appearance-heading"><h2 id="appearance-label">Görünüm</h2><span id="theme-name">Spektrum</span></div>
+        <div id="theme-options" class="theme-options" role="group" aria-label="Cam ve top görünümü"></div>
+        <p id="theme-detail">Renkli kristal</p>
+        <label class="live-colors"><input type="checkbox" id="live-colors"> Canlı renkler <span>Yavaş ton değişimi</span></label>
+      </section>
+      <div class="stats"><div><span>Kırılan cam</span><strong id="broken">0,0%</strong></div><div><span>Top sayısı</span><strong id="balls">1</strong></div></div>
+      <button id="add-ball" class="restart primary-action">＋ Top ekle</button>
+      <label class="auto-spawn"><input type="checkbox" id="auto-spawn" checked> Sonraki grup otomatik bırakılsın</label>
+      <div class="speed-label">Simülasyon hızı <span id="speed-value">1×</span></div>
+      <div class="control-switch" role="group" aria-label="Simülasyon hızı"><button data-speed="1" aria-pressed="true">1×</button><button data-speed="3" aria-pressed="false">3×</button><button data-speed="10" aria-pressed="false">10×</button><button data-speed="25" aria-pressed="false">25×</button></div>
+      <p class="hint">Daireye dokunarak sağ üstten bir top daha bırak. Düşüşü ve camın kırılmasını 1× hızda izle.</p>
+      <div class="glass-actions"><button id="restart" class="restart">↻ Yeniden başlat</button><button id="new-glass" class="restart">Yeni cam</button></div>
+      <p class="keyboard">Boşluk: duraklat · R: yeniden başlat · A: top ekle</p>
+      <p id="status" role="status" aria-live="polite">İlk top sağ üstten düşüyor.</p>
+      <a class="reference-link" href="https://www.youtube.com/shorts/K-xjYapAV9M" target="_blank" rel="noopener noreferrer">Video referansı · CodeCraftedPhysics ↗</a>
+    </aside>
+    <section class="game-shell" aria-label="Cam Kırıcı oyun alanı">
+      <canvas id="game" width="540" height="960" tabindex="0" aria-label="Renkli cam kırma oyunu. Top eklemek için A, duraklatmak için boşluk tuşuna bas."></canvas>
+      <div class="game-toolbar"><button id="pause" aria-label="Duraklat">Ⅱ</button><button id="sound" aria-label="Sesi aç" aria-pressed="false">♪</button><span></span><button id="fullscreen" aria-label="Tam ekran">⛶</button></div>
+      <div id="overlay" class="overlay" hidden><strong id="overlay-title">Duraklatıldı</strong><span id="overlay-detail"></span><button id="resume">Devam et</button></div>
+      <div class="progress" role="progressbar" aria-label="Kırılan cam yüzdesi" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="progress-fill"></i></div>
+    </section>
+  </main>
+  <script type="module" src="/src/glass-breaker-app.js"></script>
+</body>
+</html>

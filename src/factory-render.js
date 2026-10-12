@@ -89,7 +89,7 @@ window.factoryRenderer={
     const band=(text,y,accent='#bbed83',compact=false)=>{
       ctx.fillStyle='#080d16ed';ctx.fillRect(pad,y,w-pad*2,(compact?70:100)*unit);ctx.fillStyle=accent;ctx.font=`600 ${compact?32*unit:font}px Segoe UI`;ctx.textAlign='center';ctx.fillText(text,w/2,y+(compact?45:63)*unit,w-pad*3);
     };
-    if(!['statistics','pi'].includes(mode)&&elapsed<3.5)band(config.copy.hook,330*unit,'#bbed83',true);
+    if(!['statistics','pi'].includes(mode)&&elapsed<3.5)band(config.copy.hook,(config.recipe.arenaGame==='territory'?480:330)*unit,'#bbed83',true);
     if(config.template==='broadcast'){
       ctx.fillStyle='#a7e2cc';ctx.fillRect(0,0,w,6*unit);ctx.fillStyle='#e9fff4';ctx.font=`600 ${25*unit}px Segoe UI`;ctx.textAlign='left';ctx.fillText(config.channel??'',pad,45*unit,w-pad*2);
     }

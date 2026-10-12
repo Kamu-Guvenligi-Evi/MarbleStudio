@@ -35,7 +35,7 @@ export function parseBackup(text){
   for(const [key,value] of Object.entries(b.entries)){
     if(!/^marble-studio-[a-z0-9-]+$/.test(key)||typeof value!=='string')throw new Error('Yedekte geçersiz kayıt var.');
     let data;try{data=JSON.parse(value);}catch{throw new Error('Yedekte okunamayan ayar: '+key);}
-    if(/^marble-studio-(track|arena|spiral)-v1$/.test(key))normalizeProject(data);
+    if(/^marble-studio-(track|arena|territory|spiral)-v1$/.test(key))normalizeProject(data);
     if(key===PI_KEY)normalizePi(data);
     if(key==='marble-studio-statistics-v1')normalizeSnapshot({mode:'statistics',statistics:data});
   }

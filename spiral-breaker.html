@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="tr">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111516"><title>Spiral Kırıcı · Marble Studio</title></head>
+<body>
+  <main class="breaker-layout">
+    <aside class="game-info">
+      <a class="back" href="/">← Marble Studio</a>
+      <span class="eyebrow">MARBLE STUDIO / 06</span>
+      <h1>Bir top.<br> <span>Altı dünya.</span></h1>
+      <p class="description">Yolu tamamla, zincirleme kırılmayı başlat.<br>Her top kendi yolunu bitirir. Düşen ×3 bonuslarını çubuk yakalar.</p>
+      <div class="map-heading"><h2>Haritanı seç</h2><span>6 farklı yol</span></div>
+      <div id="map-picker" class="map-picker" role="group" aria-label="Haritalar"></div>
+      <button id="watch-tour" class="watch-tour">▶ Harita turunu izle</button>
+      <div class="control-switch" role="group" aria-label="Kontrol biçimi"><button id="auto" aria-pressed="true">Otomatik izle</button><button id="manual" aria-pressed="false">Kendin oyna</button></div>
+      <p id="control-hint" class="hint">Çubuk topu takip eder. Sen akışı izle.</p>
+      <div class="watch-settings"><label for="speed">Akış hızı</label><select id="speed"><option value="1">1× Normal</option><option value="1.5">1,5× Akıcı</option><option value="2">2× Hızlı</option></select></div>
+      <label class="sequence-setting"><input id="sequence" type="checkbox" checked> Bitince sıradaki haritaya geç</label>
+      <div class="stats"><div><span>Kırılan blok</span><strong id="broken">0</strong></div><div><span>Top sayısı</span><strong id="balls">1</strong></div></div>
+      <div class="bonus-legend" aria-label="Bonuslar"><span><b class="purple">×3</b> Topları üçe katla</span><span><b class="teal">+3</b> Üç top ekle</span><span><b class="green">↔</b> Çubuğu uzat</span><span><b class="gold">−</b> Çubuğu kısalt</span></div>
+      <button id="restart" class="restart">↻ Yeniden başlat</button>
+      <p class="keyboard">Boşluk: duraklat · R: yeniden başlat<br>Elle kontrol: fare, dokunmatik veya ← →</p>
+      <p id="status" role="status" aria-live="polite">Spiral hazır.</p>
+    </aside>
+    <section class="game-shell" aria-label="Spiral Kırıcı oyun alanı">
+      <canvas id="game" width="540" height="960" tabindex="0" aria-label="Spiral blok kırma oyunu. Elle kontrol için sol ve sağ ok tuşlarını kullan."></canvas>
+      <div class="game-toolbar"><button id="pause" aria-label="Duraklat">Ⅱ</button><button id="sound" aria-label="Sesi aç" aria-pressed="false">♪</button><span></span><button id="next-map" aria-label="Sonraki harita" title="Sonraki harita">⇥</button><button id="cinema" aria-label="Odak görünümü" aria-pressed="false" title="Odak görünümü">◇</button><button id="fullscreen" aria-label="Tam ekran">⛶</button></div>
+      <div id="overlay" class="overlay" hidden><strong id="overlay-title">Duraklatıldı</strong><span id="next-countdown"></span><button id="resume">Devam et</button></div>
+      <div class="progress" role="progressbar" aria-label="Kırılan blok yüzdesi" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="progress-fill"></i></div>
+    </section>
+  </main>
+  <script type="module" src="/src/spiral-breaker-app.js"></script>
+</body>
+</html>

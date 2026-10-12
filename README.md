@@ -1,5 +1,11 @@
 # Marble Studio
 
+## Cam Kırıcı
+
+Ana ekrandaki **Cam Kırıcı** bağlantısı veya `/glass-breaker.html`, CodeCraftedPhysics'in [cam kırma videosundan](https://www.youtube.com/shorts/K-xjYapAV9M) uyarlanan bağımsız oyunu açar. Sağ üstten bırakılan toplar spiral kanalı dolaşır, soldan cama girer ve darbe sırasında tüketilir. Cam korunarak 1, 2, 5, 10, 15… 100 topluk gruplar denenir; hareket durulduğunda sonraki denemeye geçilir. Üçgen cam parçaları, darbe çatlakları, dönen ve yerçekimiyle düşen kırıklar ve çarpışma sesleri bulunur. Cam yüzdesi gerçekten kırılan yüzey alanını ölçer; videodaki yüzdeler veya bitiş süresi sabitlenmez.
+
+Toplar başlangıç hızı olmadan yerçekimiyle düşer. **Top ekle** düğmesi veya daireye dokunma aynı girişten yeni top bırakır. Otomatik gruplar kapatılabilir; hız 1×, 3×, 10× veya 25× seçilebilir. Oyun alanındaki × rozeti grubun top sayısını gösterir. Boşluk duraklatır, R aynı camı yeniden başlatır, A top ekler; **Yeni cam** farklı bir kırılma deseni oluşturur. Testler: `npm run test:glass` (tarayıcı testi için açık Studio adresi `TEST_STUDIO_ORIGIN` ile seçilebilir). Bu bağımsız oyun otomatik MP4 üretim kuyruğuna bağlı değildir.
+
 İçerik Atölyesi, OAuth ile bağlanan YouTube kanallarına üretim sonrası otomatik yükleme ve kanal başına günlük reçete destekler. Kurulum ve Google API sınırlamaları: [FACTORY.md](FACTORY.md#youtubea-otomatik-yükleme).
 
 ## Hızlı kullanım
@@ -118,11 +124,15 @@ Yeni taslaklar `marble-studio-track-v1` ve `marble-studio-arena-v1` anahtarları
 
 ## Alan Savaşı
 
-Ana ekrandaki **Alan Savaşı → Videomu oluştur** ile şekil, kadro ve müzik otomatik seçilir; 60 FPS MP4 üretilip ortak GitHub arşivine gönderilir. **Bana bırak** da Alan Savaşı'nı küre arenasından ayrı bir içerik olarak dönüşümlü seçer. **Kendim düzenleyeyim → Alan Savaşı** doğrudan editörü açar. Üçgen, kare, altıgen, yıldız veya daire seç; mevcut ülke, takım, burç veya özel görsel kadron yarışsın. Toplar kendi bölgelerinden çıkıp iz çizer; geri döndüklerinde çevreledikleri alanı ele geçirir. Rakibin açık izine dokunmak hamlesini iptal eder. Rakiplerin bölgeleri de el değiştirebilir. 30, 45 veya 60 saniye sonunda en çok alanı olan kazanır; eşit alan varsa beraberlik gösterilir.
+Ana ekrandaki **Alan Savaşı → Videomu oluştur** ile şekil, kadro ve müzik otomatik seçilir; 60 FPS MP4 üretilip ortak GitHub arşivine gönderilir. **Bana bırak** da Alan Savaşı'nı küre arenasından ayrı bir içerik olarak dönüşümlü seçer. **Kendim düzenleyeyim → Alan Savaşı** doğrudan editörü açar. Oyuncu sayısı 2–20 arasında seçilir; mevcut ülke, takım, burç veya özel görsel kadron yarışır. Üçgen, kare, altıgen, yıldız ve daireye ek olarak Türkiye, Almanya, Fransa, İtalya, İspanya ve Brezilya sahaları vardır.
+
+Toplar kendi bölgelerinden çıkıp iz çizer; geri döndüklerinde rakiplerin taralı bölgeleri dahil çevreledikleri alanı ele geçirir. Kendi alanı dışındaki rakibin gövdesine veya açık izine dokunmak onu eler ve bütün alanını saldırana geçirir. Elenen oyuncu geri doğmaz. Şimşek 2 saniye boyunca hızı 1,8 katına çıkarır; kalkan 1,5 saniye elemeyi önler. Kalkan bölgenin çalınmasını engellemez; bütün alanını kaybeden oyuncu koruma bitince elenir. Son kalan oyuncu kazanır; aksi halde 30, 45 veya 60 saniye sonunda en çok alanı olan kazanır, eşit alan beraberliktir.
+
+Ülke sınırları [Natural Earth 1:110m kamu malı verisinden](https://www.naturalearthdata.com/about/terms-of-use/) türetilmiştir ve oyun sırasında internetten indirilmez. Kesintisiz hareket için yalnız en büyük kara parçası kullanılır; adalar ve ayrı kara parçaları dahil değildir (Türkiye sahası Anadolu'dur). `src/territory-maps.js` bu küçük yerel veriyi içerir; `scripts/build-territory-maps.mjs` yerel GeoJSON'dan yeniden üretir.
 
 Şekil, süre ve kadro taslaklarda, kaydedilmiş çalışmalarda ve yedeklerde korunur. Alan Savaşı taslağı `marble-studio-territory-v1` altında küre arenasından ayrı saklanır; eski Arena içindeki Alan Savaşı taslağı ilk açılışta taşınır. **Video oluştur** aynı mücadeleyi 60 FPS MP4 olarak üretir. İçerik Atölyesi'nde Arena içeriğini **Alan Savaşı** seçerek seri veya günlük üretim yapılabilir. Çalışmalarım ve Videolarım listeleri bu içeriği Alan Savaşı adıyla gösterir. Görsel referans: [üçgen alan mücadelesi](https://www.youtube.com/shorts/1vDss0KwZgk). Referans video uygulamaya eklenmez; alan kapatma ve çizim uygulamanın kendi simülasyonudur.
 
-Kontroller: `node tests/territory.mjs`, yerel sunucu açıkken `node tests/territory-browser.mjs` ve `node tests/territory-integration.mjs`; gerçek otomatik 60 FPS MP4 için `node tests/territory-integration.mjs --export`. Deneme çıktıları `artifacts/` altındadır.
+Kontroller: `node tests/territory.mjs`, `node tests/territory-rules.mjs`, yerel sunucu açıkken `node tests/territory-browser.mjs` ve `node tests/territory-integration.mjs`; yerel MP4 için `node tests/territory-export.mjs`, gerçek otomatik 60 FPS MP4 için `node tests/territory-integration.mjs --export`. Deneme çıktıları `artifacts/` altındadır.
 
 ## Geliştirme ve kontrol
 

@@ -9,13 +9,15 @@
     <a class="brand" href="./" aria-label="Marble Studio ana sayfa"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>Marble <strong>Studio</strong></a>
     <a class="factory-link" hidden href="http://127.0.0.1:5180/factory.html" target="_blank" rel="noopener">İçerik Atölyesi ↗</a>
     <details class="studio-actions"><summary>Yedekler</summary><div class="backup-menu"><button id="studio-backup" class="button subtle">Yedek indir</button><button id="studio-restore" class="button subtle">Yedek yükle</button><input id="studio-backup-file" type="file" accept=".json" hidden></div></details>
-    <nav class="view-tabs" aria-label="Yarış türleri">
+    <nav class="view-tabs" aria-label="Oyunlar ve stüdyolar">
       <button id="nav-track" aria-pressed="true"><span aria-hidden="true">↘</span> Parkur</button>
       <button id="nav-arena" aria-pressed="false"><span aria-hidden="true">◉</span> Arena</button>
       <button id="nav-territory" aria-pressed="false"><span aria-hidden="true">⬡</span> Alan Savaşı</button>
       <button id="nav-pi" aria-pressed="false"><span aria-hidden="true">π</span> Pi Çarpışmaları</button>
       <button id="nav-statistics" aria-pressed="false"><span aria-hidden="true">▥</span> İstatistik</button>
       <button id="nav-spiral" aria-pressed="false"><span aria-hidden="true">◎</span> Spiral</button>
+      <a href="/spiral-breaker.html"><span aria-hidden="true">▧</span> Spiral Kırıcı</a>
+      <a href="/glass-breaker.html"><span aria-hidden="true">◇</span> Cam Kırıcı</a>
     </nav>
   </header>
 
@@ -36,7 +38,7 @@
       </div>
       <div id="arena-options" class="arena-options" hidden>
         <label>Arena oyunu <select id="arena-game"><option value="links">Küre · Bağ mücadelesi</option><option value="territory">Alan Savaşı</option></select></label>
-        <label id="arena-shape-field" hidden>Şekil <select id="arena-shape"><option value="triangle">Üçgen</option><option value="square">Kare</option><option value="hexagon">Altıgen</option><option value="star">Yıldız</option><option value="circle">Daire</option></select></label>
+        <label id="arena-shape-field" hidden>Harita / şekil <select id="arena-shape"><option value="triangle">Üçgen</option><option value="square">Kare</option><option value="hexagon">Altıgen</option><option value="star">Yıldız</option><option value="circle">Daire</option></select></label>
         <label id="territory-duration-field" hidden>Süre <select id="territory-duration"><option value="30">30 saniye</option><option value="45" selected>45 saniye</option><option value="60">60 saniye</option></select></label>
       </div>
       <p id="arena-rules" class="workspace-rules" hidden>Her top 3 bağla başlar. Duvara çarptıkça bağ kurar, rakiplerinin bağlarını keser. Bağı kalmayan elenir; son bağlı top kazanır.</p>

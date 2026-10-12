@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test:glass": "node tests/glass-breaker.mjs && node tests/glass-pane-renderer.mjs && node tests/glass-breaker-browser.mjs",
+    "test:breaker": "node tests/spiral-breaker.mjs && node tests/spiral-breaker-browser.mjs",
+    "test:breaker:maps": "node tests/breaker-maps.mjs && node tests/breaker-maps-browser.mjs",
     "test:spiral": "node tests/spiral.mjs && node tests/spiral-browser.mjs",
     "test:workspaces": "node tests/studio-workspaces.mjs",
     "test:stories": "python tests/statistics-stories.py && node tests/statistics-library.mjs && node tests/statistics-library-browser.mjs",

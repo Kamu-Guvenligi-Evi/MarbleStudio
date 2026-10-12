@@ -1,0 +1,40 @@
+import {chromium} from 'playwright';
+import assert from 'node:assert/strict';
+import {mkdir} from 'node:fs/promises';
+const browser=await chromium.launch({channel:'chrome',headless:true});
+const origin=process.env.TEST_STUDIO_ORIGIN??'http://127.0.0.1:5174';
+try{
+  const page=await browser.newPage({viewport:{width:1360,height:1000}}),errors=[];
+  page.on('pageerror',error=>errors.push(error.message));
+  await page.goto(origin+'/spiral-breaker.html');
+  await page.waitForFunction(()=>window.spiralBreaker?.getState().time>.2);
+  assert.equal((await page.evaluate(()=>window.spiralBreaker.getState())).broken,0);
+  const state=()=>page.evaluate(()=>window.spiralBreaker.getState());
+  await page.locator('#pause').click();const frozen=await state();
+  await page.waitForTimeout(150);assert.equal((await state()).time,frozen.time);assert.ok(await page.locator('#overlay').isVisible());
+  await page.locator('#resume').click();await page.locator('#manual').click();assert.equal((await state()).automatic,false);
+  const bounds=await page.locator('#game').boundingBox();
+  await page.mouse.move(bounds.x+bounds.width*.2,bounds.y+bounds.height*.8);assert.ok(Math.abs((await state()).paddleX-108)<2);
+  await page.locator('#game').focus();await page.keyboard.down('ArrowRight');await page.waitForTimeout(200);await page.keyboard.up('ArrowRight');assert.ok((await state()).paddleX>160);
+  await page.keyboard.press('Space');assert.equal((await state()).state,'paused');await page.keyboard.press('Space');
+  await page.locator('#sound').click();assert.equal(await page.locator('#sound').getAttribute('aria-pressed'),'true');await page.locator('#sound').click();
+  await page.locator('#auto').click();await page.locator('#restart').click();assert.equal((await state()).broken,0);
+  await mkdir('artifacts',{recursive:true});await page.screenshot({path:'artifacts/spiral-breaker-desktop.png'});
+  await page.setViewportSize({width:390,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  await page.locator('#manual').click();await page.locator('#game').dispatchEvent('pointermove',{clientX:100,clientY:350,pointerType:'touch'});assert.ok((await state()).paddleX<200);
+  await page.evaluate(()=>window.scrollTo(0,0));
+  await page.screenshot({path:'artifacts/spiral-breaker-mobile.png'});
+  // Deliberately miss the first ball; no floor or respawn may rescue it.
+  await page.clock.install();await page.locator('#restart').click();
+  await page.locator('#game').dispatchEvent('pointermove',{clientX:0,clientY:350,pointerType:'touch'});
+  await page.clock.runFor(5000);
+  assert.equal((await state()).state,'lost');assert.equal((await state()).balls,0);
+  assert.equal(await page.locator('#overlay-title').textContent(),'Toplar bitti');
+  assert.ok(await page.locator('#overlay').isVisible());
+  await page.locator('#game').focus();await page.keyboard.press('Space');await page.clock.runFor(1000);
+  assert.equal((await state()).state,'lost');assert.equal((await state()).balls,0);
+  await page.locator('#resume').click();
+  assert.equal((await state()).state,'running');assert.equal((await state()).balls,1);
+  await page.goto(origin);await page.locator('#automatic-start a[href="/spiral-breaker.html"]').click();await page.waitForURL('**/spiral-breaker.html');
+  assert.deepEqual(errors,[]);console.log('PASS: navigation, simulation, pause, restart, mouse, keyboard, touch, audio, mobile layout, permanent ball loss and game-over restart.');
+}finally{await browser.close();}

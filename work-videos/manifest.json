@@ -787,6 +787,27 @@
       },
       "sha256": "99d36e201a18eba822e5251e1b9383f08ae3b2d29857ad4461b113b469ec16ea",
       "bytes": 5931561
+    },
+    {
+      "id": "shared-c63ba453f7b114c2",
+      "mode": "track",
+      "contentKind": "track",
+      "copy": {
+        "title": "My Course"
+      },
+      "createdAt": "2026-10-12T21:02:22.064Z",
+      "completedAt": "2026-10-12T21:02:22.064Z",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "c63ba453f7b114c2b3cf2c06d4ebb0a5b6f8765807aba3793175c3a9f2f86836",
+      "bytes": 8980210
     }
   ]
 }

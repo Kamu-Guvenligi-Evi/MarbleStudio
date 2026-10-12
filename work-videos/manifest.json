@@ -892,6 +892,27 @@
       },
       "sha256": "cb202c263b3a38f7bd41a1edda34a855520149e47af6d4a7f2ffc3671a5651ea",
       "bytes": 18279265
+    },
+    {
+      "id": "shared-3d79782c058a2670",
+      "mode": "spiral",
+      "contentKind": "spiral",
+      "copy": {
+        "title": "Spiral Multiplication"
+      },
+      "createdAt": "2026-10-12T22:33:00.854Z",
+      "completedAt": "2026-10-12T22:33:00.854Z",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "3d79782c058a267033e6c2a4167db7c62b505f61aa89f67d3489c828925ae2d8",
+      "bytes": 4817398
     }
   ]
 }

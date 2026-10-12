@@ -5,7 +5,8 @@ import {createWorkStore} from './saved-works.js';
 import {isBreaker} from './breaker-video.js';
 
 const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const modeName={pi:'Pi Çarpışmaları',track:'Parkur yarışı',arena:'Küre arenası',territory:'Alan Savaşı',spiral:'Spiral çoğalma',statistics:'İstatistik yarışı','glass-breaker':'Cam Kırıcı','spiral-breaker':'Spiral Kırıcı'};
+const standalone=mode=>isBreaker(mode)||mode==='ball-duel';
+const modeName={'ball-duel':'Top Düellosu',pi:'Pi Çarpışmaları',track:'Parkur yarışı',arena:'Küre arenası',territory:'Alan Savaşı',spiral:'Spiral çoğalma',statistics:'İstatistik yarışı','glass-breaker':'Cam Kırıcı','spiral-breaker':'Spiral Kırıcı'};
 const kindOf=record=>record.contentKind??(record.mode==='arena'&&(record.project?.arenaGame??record.recipe?.arenaGame??record.options?.arenaGame)==='territory'?'territory':record.mode);
 export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isLocked}){
   const store=createWorkStore();let source=null,ready=false,submitting=false,offset=0,poll=null,refreshing=false,works=[],exportRevision=0;
@@ -47,7 +48,7 @@ export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isL
     let res;try{res=await fetch(origin()+'/api/'+route,{...(body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(15000)});}catch{throw new Error(failure);}
     const data=await res.json();if(!res.ok)throw new Error(data.error??'İşlem tamamlanamadı.');return data;
   }
-  async function checkService(){const data=await api('factory?limit=1');if(data.apiVersion<3||!data.capabilities?.includes('studio-workbench')||(isBreaker(source?.mode)&&!data.capabilities?.includes('breaker-production')))throw new Error('Video hizmeti eski sürümde. Açık hizmeti kapatıp Marble Studio kısayolunu yeniden aç.');return data;}
+  async function checkService(){const data=await api('factory?limit=1');if(data.apiVersion<3||!data.capabilities?.includes('studio-workbench')||(isBreaker(source?.mode)&&!data.capabilities?.includes('breaker-production'))||(source?.mode==='ball-duel'&&!data.capabilities?.includes('duel-production')))throw new Error('Video hizmeti eski sürümde. Açık hizmeti kapatıp Marble Studio kısayolunu yeniden aç.');return data;}
   function show(dialog){for(const d of root.querySelectorAll('dialog[open]'))d.close();dialog.showModal();}
   for(const dialog of root.querySelectorAll('dialog')){
     dialog.querySelector('[data-wb-close]').onclick=()=>dialog.close();
@@ -56,7 +57,7 @@ export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isL
   function updateForm(){
     const series=form.elements.strategy.value==='variations',clip=source?.mode==='spiral-breaker';$('video-series').hidden=!series&&!clip;form.elements.count.closest('label').hidden=!series;
     $('video-format-note').textContent=`${({portrait:'Dikey',landscape:'Yatay',square:'Kare'})[form.elements.orientation.value]} · ${form.elements.resolution.value}p · ${form.elements.fps.value} FPS · MP4. `+(clip?'Seçili harita baştan oynatılır; hedef süreye kapanış dahildir. Bölüm erken biterse video da biter.':series?'Kadro korunur, yarış düzenleri değişir.':'Aynı düzen ve özgün süre korunur.');
-    if(source)$('video-source-description').textContent=modeName[kindOf(source)]+(isBreaker(source.mode)?' · Seçili görünüm ve hızla baştan otomatik oynatılır':source.mode==='pi'?' · Kütle oranı ve çarpışma ayarlarıyla':source.mode==='statistics'?' · Tablo ve kaynak bilgileriyle':' · Kadro ve seçtiğin müzikle');
+    if(source)$('video-source-description').textContent=modeName[kindOf(source)]+(standalone(source.mode)?' · Seçili görünüm ve hızla baştan otomatik oynatılır':source.mode==='pi'?' · Kütle oranı ve çarpışma ayarlarıyla':source.mode==='statistics'?' · Tablo ve kaynak bilgileriyle':' · Kadro ve seçtiğin müzikle');
   }
   form.addEventListener('change',()=>{updateForm();if(source)try{localStorage.setItem('marble-studio-export-'+kindOf(source)+'-v1',JSON.stringify({...Object.fromEntries(new FormData(form)),fpsDefaultVersion:3}));}catch{}});
   async function openExport(snapshot,preview){
@@ -64,9 +65,9 @@ export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isL
     try{
       const captured=normalizeSnapshot(snapshot??await capture());if(revision!==exportRevision)return;source=captured;form.reset();form.elements.orientation.value=source.mode==='statistics'?'landscape':'portrait';form.elements.audio.value=source.mode==='pi'?(source.project.sound?'effects':'none'):source.mode==='statistics'?'none':source.project.sound?'all':'music';
       try{const saved=JSON.parse(localStorage.getItem('marble-studio-export-'+kindOf(source)+'-v1')??'{}');for(const key of ['orientation','resolution','fps','audio','template','language','channel','hook','outro','duration'])if(typeof saved[key]==='string'&&form.elements[key]){if(key==='fps'&&saved.fpsDefaultVersion!==3)continue;const input=form.elements[key];if(key==='fps'&&(!Number.isSafeInteger(Number(saved[key]))||Number(saved[key])<1))continue;if(input.tagName==='SELECT'&&![...input.options].some(o=>o.value===saved[key]))continue;if(key==='orientation'&&!['portrait','landscape','square'].includes(saved[key]))continue;input.value=saved[key];}}catch{}
-      form.elements.language.value='en';form.elements.strategy.value='exact';form.elements.strategy.querySelector('[value=variations]').disabled=['statistics','pi'].includes(source.mode)||isBreaker(source.mode);$('video-advanced').open=false;
-      for(const option of form.elements.audio.options)option.disabled=isBreaker(source.mode)&&['all','music'].includes(option.value);
-      if(isBreaker(source.mode)&&!['effects','none'].includes(form.elements.audio.value))form.elements.audio.value=source.project.sound?'effects':'none';
+      form.elements.language.value='en';form.elements.strategy.value='exact';form.elements.strategy.querySelector('[value=variations]').disabled=['statistics','pi'].includes(source.mode)||standalone(source.mode);$('video-advanced').open=false;
+      for(const option of form.elements.audio.options)option.disabled=standalone(source.mode)&&['all','music'].includes(option.value);
+      if(standalone(source.mode)&&!['effects','none'].includes(form.elements.audio.value))form.elements.audio.value=source.project.sound?'effects':'none';
       $('video-source-name').textContent=source.mode==='statistics'?source.statistics.heading:source.project.name;updateForm();
       await checkService();if(revision!==exportRevision)return;ready=true;$('video-message').textContent='Hazır olduğunda videonu bu pencereden izleyip indirebilirsin.';
     }catch(error){if(revision!==exportRevision)return;$('video-message').textContent=error.message;}

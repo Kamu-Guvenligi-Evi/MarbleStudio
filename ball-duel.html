@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="tr">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0a1019"><title>Top Düellosu · Marble Studio</title></head>
+<body>
+<header class="duel-header"><a class="brand" href="/">◉ <span>MARBLE <b>STUDIO</b></span></a><nav aria-label="Stüdyo"><a href="/">← Stüdyoya dön</a><button id="studio-videos" class="button secondary">Videolarım</button><button id="studio-export" class="button primary">Video oluştur ↗</button></nav></header>
+<main class="duel-layout">
+  <aside class="duel-controls">
+    <p class="eyebrow">ARENA / 02 OYUNCU</p><h1>Top Düellosu<span>Son ayakta kalan.</span></h1><p class="intro">Görsellerini seç. Toplar silahları toplasın, arenada kazanan belli olsun.</p>
+    <section class="control-section"><h2><span>01</span> Karşılaşma</h2>
+      <div class="entrant" data-player="0"><button class="portrait" id="image-0" aria-label="Birinci topun görselini seç"><img id="portrait-0" alt=""><span>＋</span></button><div><label for="name-0">BİRİNCİ TOP</label><input id="name-0" maxlength="32" value="Brazil" aria-label="Birinci topun adı"><button id="pick-0" class="text-button">Kütüphaneden seç ↗</button></div><input id="color-0" type="color" value="#8ce6aa" aria-label="Birinci topun vurgu rengi"></div>
+      <div class="versus"><span></span>VS<span></span></div>
+      <div class="entrant" data-player="1"><button class="portrait" id="image-1" aria-label="İkinci topun görselini seç"><img id="portrait-1" alt=""><span>＋</span></button><div><label for="name-1">İKİNCİ TOP</label><input id="name-1" maxlength="32" value="Argentina" aria-label="İkinci topun adı"><button id="pick-1" class="text-button">Kütüphaneden seç ↗</button></div><input id="color-1" type="color" value="#80caff" aria-label="İkinci topun vurgu rengi"></div>
+      <p class="helper">Stüdyodaki bayraklar, takımlar ve diğer görseller.</p>
+    </section>
+    <section class="control-section"><h2><span>02</span> Sahne ve tempo</h2>
+      <div id="themes" class="themes" role="group" aria-label="Arena teması"><button data-theme="midnight" aria-pressed="true"><i></i>Gece</button><button data-theme="gold" aria-pressed="false"><i></i>Gold</button><button data-theme="chrome" aria-pressed="false"><i></i>Krom</button><button data-theme="aurora" aria-pressed="false"><i></i>Aurora</button></div>
+      <div class="settings-row"><label>Başlangıç canı<select id="hp"><option value="10">10 kalp · Hızlı</option><option value="15" selected>15 kalp · Dengeli</option><option value="20">20 kalp · Uzun</option></select></label><label>Oynatma hızı<select id="speed"><option value="1">1× Normal</option><option value="1.5">1,5×</option><option value="2">2× Hızlı</option></select></label></div>
+    </section>
+    <button id="new-duel" class="button primary start-button">Yeni düello başlat <span>↗</span></button><button id="replay" class="button secondary replay-button">↻ Aynı düelloyu tekrar oynat</button>
+    <p id="status" class="helper status" role="status">Görseller hazırlanıyor…</p>
+    <details class="rules"><summary>Nasıl çalışır?</summary><p>Toplar serbestçe ilerler, duvarlardan ve birbirlerinden seker. Temasta hız aktarılır; isabetler canı azaltır, topun yönünü ve hızını değiştirir. Toplar yalnızca topladıkları silahlarla saldırır; kılıç yakın mesafede etkilidir. Silahın süresi dolunca tekrar silahsız kalırlar. Seyrek çıkan kalpler 1 can kazandırır; maç başına en fazla iki kalp çıkar. 90 saniyede sonuç çıkmazsa berabere biter.</p></details>
+  </aside>
+  <section class="duel-preview" aria-label="Düello önizlemesi"><div class="preview-heading"><span><i></i> CANLI ÖNİZLEME</span><span>9:16 · DİKEY SAHNE</span></div><div id="stage" class="duel-stage"><canvas id="duel-canvas" width="540" height="960" aria-label="Seçtiğin iki topun silahlı arena düellosu"></canvas></div><div class="playback"><button id="pause" aria-label="Düelloyu duraklat">Ⅱ Duraklat</button><span id="match-state">Düello sürüyor</span><button id="sound" aria-pressed="true">Ses açık</button><button id="fullscreen" aria-label="Tam ekran">⛶</button></div></section>
+</main>
+<dialog id="catalog-dialog" class="catalog-dialog" aria-labelledby="catalog-title">
+<div class="dialog-heading"><div><p class="eyebrow">EVRENİN YARIŞMACILARI</p><h2 id="catalog-title">Görsel kütüphanesi</h2><p id="catalog-total" class="catalog-subtitle">Kütüphane hazırlanıyor…</p></div><button class="close-dialog" data-close="catalog-dialog" aria-label="Görsel kütüphanesini kapat">×</button></div>
+<div id="catalog-roster" class="catalog-roster" aria-label="Top seçimi"></div>
+<div class="catalog-controls"><label for="catalog-search">Görsel ara<input id="catalog-search" type="search" placeholder="Türkiye, Galatasaray, Atatürk…" autocomplete="off"></label><label for="catalog-target">Görselin ekleneceği top<select id="catalog-target"></select></label></div>
+<div id="catalog-categories" class="catalog-categories" aria-label="Görsel kategorileri"></div>
+<div class="catalog-actions"><p id="catalog-count" role="status"></p><button id="catalog-fill" class="button secondary" disabled>Bu kategoriden kadro oluştur</button></div>
+<p id="catalog-status" role="status" aria-live="polite"></p><button id="catalog-retry" class="button secondary" hidden>Yeniden dene</button>
+<div id="catalog-grid" class="catalog-grid"></div>
+<footer class="catalog-footer"><span>Bir görsel seç: topa eklenir, sıradaki topa geçilir.</span><a href="/catalog/credits.html" target="_blank" rel="noopener">Görsel kaynakları ve kullanım bilgileri ↗</a></footer>
+</dialog>
+<script type="module" src="/src/ball-duel-app.js"></script>
+</body></html>

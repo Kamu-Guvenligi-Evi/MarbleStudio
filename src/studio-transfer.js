@@ -1,3 +1,4 @@
+import {normalizeDuel,DUEL_KEY} from './ball-duel.js';
 import {normalizePi,PI_KEY} from './pi-collisions.js';
 import {normalizeProject} from './projects.js';
 import {parseStatistics} from './statistics-data.js';
@@ -5,6 +6,7 @@ import {isBreaker,normalizeBreaker} from './breaker-video.js';
 
 export function normalizeSnapshot(raw) {
   if(!raw||typeof raw!=='object')throw new Error('Studio çalışması geçersiz.');
+  if(raw.mode==='ball-duel')return normalizeDuel(raw);
   if(isBreaker(raw.mode))return normalizeBreaker(raw);
   if(raw.mode==='pi')return {mode:'pi',project:normalizePi(raw.project)};
   if(raw.mode==='statistics'){
@@ -38,6 +40,7 @@ export function parseBackup(text){
     if(!/^marble-studio-[a-z0-9-]+$/.test(key)||typeof value!=='string')throw new Error('Yedekte geçersiz kayıt var.');
     let data;try{data=JSON.parse(value);}catch{throw new Error('Yedekte okunamayan ayar: '+key);}
     if(/^marble-studio-(track|arena|territory|spiral)-v1$/.test(key))normalizeProject(data);
+    if(key===DUEL_KEY)normalizeDuel(data);
     if(key===PI_KEY)normalizePi(data);
     if(key==='marble-studio-statistics-v1')normalizeSnapshot({mode:'statistics',statistics:data});
   }

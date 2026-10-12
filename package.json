@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test:duel": "node tests/ball-duel.mjs && node tests/ball-duel-browser.mjs",
+    "test:duel:video": "node tests/ball-duel-video.mjs",
     "test:glass": "node tests/glass-breaker.mjs && node tests/glass-pane-renderer.mjs && node tests/glass-breaker-browser.mjs",
     "test:breaker": "node tests/spiral-breaker.mjs && node tests/spiral-breaker-browser.mjs",
     "test:breaker:maps": "node tests/breaker-maps.mjs && node tests/breaker-maps-browser.mjs",

@@ -1,0 +1,61 @@
+{
+  "id": "shared-f76d1b2167c6e166",
+  "title": "France vs Germany | Ball Duel",
+  "mode": "ball-duel",
+  "description": "Who will be the last ball standing?\nA physics arena duel created with Marble Studio.",
+  "recipe": {
+    "name": "Top Düellosu",
+    "seed": 3393423264,
+    "hp": 15,
+    "playbackSpeed": 1.5,
+    "ballImages": [
+      "data:image/webp;base64,UklGRtACAABXRUJQVlA4WAoAAAAgAAAAfwAAfwAASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADZWUDgg4gAAALAKAJ0BKoAAgAA+MRaJQyIhIRRFXCADBLK3bq9o47+IHCAAOYwqmiSB90ypfpg6AT8sTkSbA+OYcq7CkK1mDy9pPfCw45iKVInqn7SmENyJJ+0peETMpjMRUzbVgsAA/v1EvP/5mi6xJpAf/8WeWML9g0owhvkxGUZP/uz2xT+qUY39xDFkf8+KvTmkd+qcQjo09bFmqvTX5L1676QfQZHgwvVK6NQnvy31z9384i/lvrn7v5l5IhDkAnYmgsgQWCN5lTDFPR2W0RxWtRIcFtX1i/uI0Z/baR5Ma4jRn9gAAAA=",
+      "data:image/webp;base64,UklGRsICAABXRUJQVlA4WAoAAAAgAAAAfwAAfwAASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADZWUDgg1AAAAFALAJ0BKoAAgAA+MRaJQ6IhIRRPhAAgAwSyt26v4pAPwA0wH4AfsBMM/4B+IGKAf0D2/wISuzc839w7M3BD5yaBESmxxlTZfl8qv3Ti3L/SIF++vTfJ1eyBEbmsSmAArX7ewAD+/qU2ABJ9m/9oElPrU4/eG0sCteGj0QUwRwmyllE6RSQFIAOiaErmA9UCRLojYhGQAADL+/2//qmfYl5Rz7tqdSp7s2p1KoWof/KfuM8RyZxqkHg40GwVl/xyavIZJ+0L7+akn381JRW+AAAAAAAA"
+    ],
+    "names": [
+      "France",
+      "Germany"
+    ],
+    "colors": [
+      "#fefdfd",
+      "#dd0000"
+    ],
+    "theme": "gold",
+    "sound": true,
+    "soundStyle": "original",
+    "soundOverrides": {
+      "bounce": "punch",
+      "hit": "original"
+    },
+    "version": 3,
+    "mode": "ball-duel",
+    "count": 2,
+    "presentation": {
+      "countdown": 0,
+      "outro": 2
+    },
+    "music": {
+      "mode": "fixed",
+      "track": "",
+      "volume": 0,
+      "roster": []
+    },
+    "exact": true
+  },
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 144,
+    "duration": 22,
+    "speed": 1,
+    "codec": "H.264",
+    "audio": "effects",
+    "template": "minimal",
+    "intro": 0,
+    "outroSeconds": 2,
+    "outro": ""
+  },
+  "musicCredits": [],
+  "sha256": "f76d1b2167c6e166bb598f6f2cd4985eac4327357d03fc99b8c0aedf573c0a55",
+  "bytes": 3463896
+}

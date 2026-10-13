@@ -1,0 +1,49 @@
+{
+  "id": "shared-5f37b73a89612e3f",
+  "title": "Will all the glass break?",
+  "mode": "glass-breaker",
+  "description": "Will all the glass break?\nAn original physics simulation created with Marble Studio.",
+  "recipe": {
+    "name": "Cam Kırıcı",
+    "seed": 42,
+    "playbackSpeed": 1,
+    "sound": true,
+    "soundStyle": "original",
+    "soundOverrides": {
+      "ice": "original",
+      "wave": "bubble-pop",
+      "won": "coin"
+    },
+    "theme": "sapphire",
+    "liveColors": true,
+    "version": 3,
+    "mode": "glass-breaker",
+    "presentation": {
+      "countdown": 0,
+      "outro": 2
+    },
+    "music": {
+      "mode": "fixed",
+      "track": "",
+      "volume": 0,
+      "roster": []
+    },
+    "exact": true
+  },
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 144,
+    "duration": 54,
+    "speed": 1,
+    "codec": "H.264",
+    "audio": "effects",
+    "template": "minimal",
+    "intro": 0,
+    "outroSeconds": 2,
+    "outro": ""
+  },
+  "musicCredits": [],
+  "sha256": "5f37b73a89612e3f7fdbe3620bd6eadcc61b7728acfed1cee9fc40cebc16e3be",
+  "bytes": 8344272
+}

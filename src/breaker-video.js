@@ -16,7 +16,8 @@ export function normalizeBreaker(raw){
 }
 export function probeBreaker(recipe){
   const game=recipe.mode==='glass-breaker'?new GlassBreaker({seed:recipe.seed}):new SpiralBreaker({mapId:recipe.mapId});
-  const timed=recipe.mode==='spiral-breaker',limit=Math.ceil(120*(timed?(recipe.clipSeconds??53)*recipe.playbackSpeed:600));
+  // This endless arcade mode records a preview; race exports run to completion.
+  const timed=recipe.mode==='spiral-breaker',limit=Math.ceil(120*(timed?53*recipe.playbackSpeed:600));
   let steps=0,first=null,last=0,quiet=0;
   const hit=()=>{const t=steps/120/recipe.playbackSpeed;first??=t;quiet=Math.max(quiet,t-last);last=t;};
   if(timed)game.onHit=hit;else game.onImpact=hit;

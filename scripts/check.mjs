@@ -18,7 +18,7 @@ async function serve(args,url,env={}){
 async function freePort(){const server=createServer();server.listen(0,'127.0.0.1');await once(server,'listening');const port=server.address().port;await new Promise(resolve=>server.close(resolve));return port;}
 try{
   await mkdir('artifacts',{recursive:true});
-  if(!from)for(const name of ['spiral-breaker','breaker-maps','glass-breaker','glass-pane-renderer','frame-interpolation','course-variety','track-duration','physics','arena','territory','territory-rules','territory-contact','territory-pickups','pi','output-language','shared-videos','video-github-sync','spiral','spiral-multipliers','spiral-hypnotic','statistics','statistics-library','statistics-scale','presentation','leader-music','generation-effects','collision-sounds','production-data','video-timing','automatic-diversity','repetition-guard','episode-formats','youtube-upload'])await command(['tests/'+name+'.mjs']);
+  if(!from)for(const name of ['spiral-breaker','breaker-maps','glass-breaker','glass-pane-renderer','frame-interpolation','course-variety','physics','arena','territory','territory-rules','territory-contact','territory-pickups','pi','output-language','shared-videos','video-github-sync','spiral','spiral-multipliers','spiral-hypnotic','statistics','statistics-library','statistics-scale','presentation','leader-music','generation-effects','collision-sounds','production-data','video-timing','automatic-diversity','repetition-guard','episode-formats','youtube-upload'])await command(['tests/'+name+'.mjs']);
   await command(['node_modules/vite/bin/vite.js','build']);
   if(browserTests){
     if(!await online('http://127.0.0.1:5173'))await serve(['node_modules/vite/bin/vite.js'],'http://127.0.0.1:5173');

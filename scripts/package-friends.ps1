@@ -5,6 +5,8 @@ if (-not $Destination) { $Destination = Join-Path $projectRoot ('MarbleStudio-Fr
 $Destination = [IO.Path]::GetFullPath($Destination)
 if (Test-Path -LiteralPath $Destination) { throw "Arşiv zaten var: $Destination" }
 $nodeBinary = (Get-Command node.exe -ErrorAction Stop).Source
+& $nodeBinary (Join-Path $PSScriptRoot 'verify-package.mjs')
+if ($LASTEXITCODE -ne 0) { throw 'Paket dosyalari eksik. Arsiv olusturulmadi.' }
 if (-not (Test-Path -LiteralPath (Join-Path $projectRoot 'node_modules/ffmpeg-static/ffmpeg.exe'))) { throw 'FFmpeg bağımlılığı eksik. Önce npm install çalıştır.' }
 if (-not $BrowserDirectory) {
     $browserCandidate = Get-ChildItem -LiteralPath (Join-Path $projectRoot 'artifacts/portable-browser-cache') -Filter 'chrome-headless-shell.exe' -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1
@@ -18,7 +20,8 @@ $archive = [IO.Compression.ZipFile]::Open($Destination,[IO.Compression.ZipArchiv
 try {
     $folders = @('src','public','scripts','node_modules')
     if (Test-Path -LiteralPath (Join-Path $projectRoot 'work-videos')) { $folders += 'work-videos' }
-    $files = @('index.html','factory.html','factory-render.html','vite.config.js','package.json','package-lock.json','Baslat.cmd','Start-Factory.cmd','Start-Studio.ps1','README.md','FACTORY.md')
+    $files = @('vite.config.js','package.json','package-lock.json','Baslat.cmd','Start-Factory.cmd','Start-Studio.ps1','README.md','FACTORY.md')
+    $files += @(Get-ChildItem -LiteralPath $projectRoot -Filter '*.html' -File | Select-Object -ExpandProperty Name)
     foreach ($folder in $folders) {
         $base = Join-Path $projectRoot $folder
         Get-ChildItem -LiteralPath $base -Recurse -File | ForEach-Object {

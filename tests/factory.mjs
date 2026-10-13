@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {recipe,identity,structure,copyFor,validateBatch} from '../src/factory-recipes.js';
 import {normalizeSequence} from '../src/section-settings.js';
 import {chromium} from 'playwright';
-assert.throws(()=>validateBatch({count:0}));assert.throws(()=>validateBatch({duration:Infinity}));assert.throws(()=>validateBatch({modes:[]}));assert.throws(()=>validateBatch({modes:['unknown']}));assert.throws(()=>validateBatch({language:'x'}));
+assert.throws(()=>validateBatch({count:0}));assert.equal(validateBatch({duration:55}).duration,undefined);assert.throws(()=>validateBatch({modes:[]}));assert.throws(()=>validateBatch({modes:['unknown']}));assert.throws(()=>validateBatch({language:'x'}));
 const seen=new Set(),shapes=new Set();
 for(let seed=1;seed<=100;seed++){
   const r=recipe(seed,'track');assert.deepEqual(r,recipe(seed,'track'));normalizeSequence(r.sequence);

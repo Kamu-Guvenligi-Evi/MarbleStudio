@@ -21,7 +21,7 @@ for(const source of sources){
   assert.throws(()=>validateBatch({modes:[source.mode]}));
   const r=sourceRecipe(validateBatch({source}).source,42);r.clipSeconds=28;
   const result=probeBreaker(r);assert.ok(result.complete&&result.finite);
-  if(source.mode==='spiral-breaker'){assert.equal(result.simulationSeconds,28);assert.equal(result.winner,'In progress');assert.equal(result.gameComplete,false);}
+  if(source.mode==='spiral-breaker'){assert.equal(result.simulationSeconds,53);assert.equal(result.winner,'In progress');assert.equal(result.gameComplete,false);}
 }
 const browser=await chromium.launch(productionBrowserOptions());
 try{
@@ -37,16 +37,16 @@ try{
     await page.locator('#studio-export').click();
     await page.waitForFunction(()=>document.querySelector('#video-submit').textContent==='Videoyu hazırla');
     assert.equal(await page.locator('#video-form [name=strategy] option[value=variations]').evaluate(o=>o.disabled),true);
-    assert.equal(await page.locator('#video-series').isVisible(),source.mode==='spiral-breaker');
+    assert.equal(await page.locator('#video-series').isVisible(),false);
     assert.equal(await page.locator('[name=count]').isVisible(),false);
-    if(source.mode==='spiral-breaker')await page.selectOption('[name=duration]','30');
+    assert.equal(await page.locator('[name=duration]').count(),0);
     await page.locator('#video-advanced summary').click();
     await page.selectOption('[name=resolution]','720');await page.locator('[name=fps]').fill('4');
     await page.selectOption('[name=audio]','effects');await page.locator('[name=orientation][value=square]').check();
     await page.locator('#video-submit').click();await page.waitForFunction(()=>document.querySelector('#videos-dialog').open);
     assert.equal(queued.source.mode,source.mode);assert.equal(queued.orientation,'square');assert.equal(queued.audio,'effects');
     if(source.mode==='glass-breaker'){assert.equal(queued.source.project.theme,'gold');assert.equal(queued.source.project.liveColors,true);}
-    else assert.equal(queued.duration,30);
+    else assert.equal(queued.duration,undefined);
     assert.deepEqual(errors,[]);await page.close();
   }
 }finally{await browser.close();}
@@ -57,7 +57,7 @@ for(const source of sources){
   const metadata=JSON.parse(await readFile(path.join(root,job.id,'metadata.json'),'utf8'));
   assert.ok(metadata.analysis.complete);assert.equal(metadata.video.fps,4);assert.equal(metadata.video.speed,1);
   assert.equal(metadata.video.height,720);assert.equal(metadata.video.width,source.mode==='glass-breaker'?720:1280);
-  if(source.mode==='spiral-breaker')assert.equal(metadata.video.duration,30);
+  if(source.mode==='spiral-breaker')assert.equal(metadata.video.duration,55);
   for(const file of ['video.mp4','cover.jpg','metadata.json','upload.txt'])assert.ok((await stat(path.join(root,job.id,file))).size>0);
   console.log('PASS MP4 encode/decode and matching simulation:',source.mode,metadata.video.duration+'s');
 }

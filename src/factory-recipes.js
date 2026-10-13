@@ -23,9 +23,8 @@ export const COURSE_PROFILES={
 
 export function validateBatch(raw={}){
   if(raw.automatic===true){const mode=raw.automaticMode??'auto';if(!['auto','track','arena','territory','spiral','statistics'].includes(mode))throw new Error('Otomatik tür geçersiz.');return {...validateBatch({...raw,automatic:false,source:null,strategy:'variations',modes:[['auto','statistics'].includes(mode)?'track':mode==='territory'?'arena':mode]}),arenaGame:mode==='territory'?'territory':'links',automatic:true,automaticMode:mode};}
-  const count=Number(raw.count??3),duration=Number(raw.duration??55);
+  const count=Number(raw.count??3);
   if(!Number.isInteger(count)||count<1||count>30)throw new Error('Video sayısı 1–30 olmalı.');
-  if(!Number.isInteger(duration)||duration<30||duration>180)throw new Error('Süre 30–180 saniye olmalı.');
   const source=raw.source?normalizeSnapshot(raw.source):null;
   const modes=source?[source.mode]:raw.modes??['track','spiral','arena'];
   if(!Array.isArray(modes)||!modes.length||modes.some(x=>!['track','spiral','arena','statistics','pi','ball-duel'].includes(x)&&!isBreaker(x))||(!source&&modes.some(mode=>['statistics','pi','ball-duel'].includes(mode)||isBreaker(mode))))throw new Error('En az bir geçerli format seç.');
@@ -43,7 +42,7 @@ export function validateBatch(raw={}){
   if(!Number.isSafeInteger(fps)||fps<1)throw new Error('Kare hızı pozitif tam sayı olmalı.');
   const strategy=source?choose('strategy',['exact','variations'],'exact'):'variations';
   if((['statistics','pi','ball-duel'].includes(source?.mode)||isBreaker(source?.mode))&&strategy!=='exact')throw new Error('Bu mod aynı çalışma olarak dışa aktarılır.');
-  return {count:strategy==='exact'?1:count,duration,modes:[...new Set(modes)],language,channel,source,strategy,youtube,
+  return {count:strategy==='exact'?1:count,modes:[...new Set(modes)],language,channel,source,strategy,youtube,
     arenaGame:choose('arenaGame',['links','territory'],source?.project?.arenaGame??'links'),
     orientation:choose('orientation',['portrait','landscape','square'],source?.mode==='statistics'?'landscape':'portrait'),
     resolution:choose('resolution',[720,1080],1080),fps,audio:choose('audio',['all','effects','music','none'],'all'),
@@ -78,7 +77,7 @@ export function recipe(seed,mode,theme){
     ...(mode==='track'?{profile,rhythm}:mode==='spiral'?{variant:pick(Object.keys(SPIRAL_VARIANTS))}:{energy:pick([.85,1,1.15])})};
 }
 export function identity(r){return JSON.stringify(r);}
-export function structure(r){if(r.mode==='ball-duel')return JSON.stringify([r.mode,r.hp,r.playbackSpeed,r.theme,r.names,r.colors,r.ballImages]);if(isBreaker(r.mode))return JSON.stringify([r.mode,r.theme,r.liveColors,r.mapId,r.playbackSpeed,r.clipSeconds]);if(r.mode==='pi')return JSON.stringify([r.mode,r.digits,r.speed,...(r.autoIncrease?[true,PI_MAX_DIGITS]:[])]);if(r.episode)return JSON.stringify([r.mode,r.episode.format,r.episode.heats.map(h=>h.sequence.map(s=>s.type))]);return JSON.stringify([r.mode,r.mode==='statistics'?r.statistics.csv:r.mode==='track'?[r.profile,r.rhythm,(r.sequence??[]).map(s=>s.type)]:r.mode==='spiral'?[r.theme,r.variant,spiralMultiplierLayout(r.seed).map(g=>[Math.round(g.distance),g.value])]:[r.count,r.energy,r.arenaGame??'links',r.arenaShape??'triangle',r.territoryDuration??45,...(r.arenaGame!=='territory'&&r.arenaLinkMode==='prelinked'?['prelinked',r.arenaInitialLinks??15]:[])]]);}
+export function structure(r){if(r.mode==='ball-duel')return JSON.stringify([r.mode,r.hp,r.playbackSpeed,r.theme,r.names,r.colors,r.ballImages]);if(isBreaker(r.mode))return JSON.stringify([r.mode,r.theme,r.liveColors,r.mapId,r.playbackSpeed]);if(r.mode==='pi')return JSON.stringify([r.mode,r.digits,r.speed,...(r.autoIncrease?[true,PI_MAX_DIGITS]:[])]);if(r.episode)return JSON.stringify([r.mode,r.episode.format,r.episode.heats.map(h=>h.sequence.map(s=>s.type))]);return JSON.stringify([r.mode,r.mode==='statistics'?r.statistics.csv:r.mode==='track'?[r.profile,r.rhythm,(r.sequence??[]).map(s=>s.type)]:r.mode==='spiral'?[r.theme,r.variant,spiralMultiplierLayout(r.seed).map(g=>[Math.round(g.distance),g.value])]:[r.count,r.energy,r.arenaGame??'links',r.arenaShape??'triangle',r.territoryDuration??45,...(r.arenaGame!=='territory'&&r.arenaLinkMode==='prelinked'?['prelinked',r.arenaInitialLinks??15]:[])]]);}
 export function copyFor(r,language,ordinal=0){
   if(r.mode==='ball-duel'){const hook='Who will be the last ball standing?';return {hook,title:r.names.join(' vs ')+' | Ball Duel',description:hook+'\nA physics arena duel created with Marble Studio.',tags:['shorts','marbles','physics','ball-duel'],language:OUTPUT_LANGUAGE};}
   if(isBreaker(r.mode)){const hook=r.mode==='glass-breaker'?'Will all the glass break?':'Can the marbles clear every block?';return {hook,title:hook,description:hook+'\nAn original physics simulation created with Marble Studio.',tags:['shorts','marbles','physics',r.mode],language:OUTPUT_LANGUAGE};}

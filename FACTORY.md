@@ -43,7 +43,7 @@ Spiral sesleri: düşüş, temas, buz kırılması, çoğalma ve merkeze ulaşma
 
 `Start-Factory.cmd` dosyasını aç ve [üretim paneline](http://127.0.0.1:5180) git. Alternatif: `npm run factory`. Node.js, kurulu Chrome ve `npm install` gerekir. FFmpeg bağımlılıkla gelir; harici hizmet anahtarı gerekmez.
 
-Panelde seri/kanal adı, adet, hedef süre, dil ve formatları seç. Sistem her video için adaylar üretir; tamamlanmayan, 30–180 saniye aralığı dışında kalan veya çok fazla kurtarma müdahalesi olan simülasyonları eler. Yarışlar 1× hızda kaydedilir; hedef süre aday seçiminde kullanılır. Hareket / lider değişimi puanı ve son 24 işteki görsel yapı benzerliği cezası ile aday seçer. Bu ölçümler izlenme garantisi değildir; üretici kurallı ve prosedüreldir, bir dil modeli kullanmaz.
+Panelde seri/kanal adı, adet, dil ve formatları seç. Sistem her video için adaylar üretir; tamamlanmayan veya çok fazla kurtarma müdahalesi olan simülasyonları eler. Yarışlar 1× hızda kaydedilir; hedef süreye göre parkur değiştirilmez veya aday elenmez. Hareket / lider değişimi puanı ve son 24 işteki görsel yapı benzerliği cezası ile aday seçer. Bu ölçümler izlenme garantisi değildir; üretici kurallı ve prosedüreldir, bir dil modeli kullanmaz.
 
 Parkur formatında bölüm sırası, engel ayarları, başlangıç düzeni ve yarışçı sayısı değişir. Spiral altı malzemeyi ve farklı başlangıç tohumlarını kullanır. Arena farklı yarışçı sayılarıyla eleme simülasyonu üretir. Parkur videosu ilk gerçek kazananı gösterir; spiral merkezin açılmasını, arena sonucun belli olmasını bekler. Otomatik seriler ilk 3,5 saniye kısa bir soru ve sonda 2 saniyelik sonuç içerir. Video süresi yarışın doğal akışına göre belirlenir.
 
@@ -55,4 +55,4 @@ YouTube bağlantısı/yayınlama bu sürümde yoktur; dosyalar yayınlanmaz. Gü
 
 Kontroller: `npm run test:factory`, `npm run build`. Gerçek kodlama duman testi: hizmet açıkken `node tests/factory-export.mjs`; 30 saniyelik bir arena videosu üretir ve çıktıların eksiksizliğini kontrol eder.
 
-Shorts süre referansı: [YouTube — üç dakikalık Shorts](https://support.google.com/youtube/answer/15424877?hl=en). Bu panel 30–180 saniyelik dikey videolar üretir.
+Shorts süre referansı: [YouTube — üç dakikalık Shorts](https://support.google.com/youtube/answer/15424877?hl=en). Videoların uzunluğu oyunun gerçek süresine bağlıdır.

@@ -163,8 +163,7 @@ const server=http.createServer(async(req,res)=>{
       if(job?.state!=='done'||!job.files?.includes(name)||url.pathname!==`/output/${id}/${name}`)return json({error:'Dosya bulunamadı.'},404);
       await serveOutput(req,res,path.join(job.shared?path.join(project,'work-videos'):root,id,name),{name,id,preview:url.searchParams.get('preview')==='1'});return;
     }
-    if(url.pathname==='/index.html'){res.writeHead(302,{Location:'http://127.0.0.1:5173/index.html'});res.end();return;}
-    if(url.pathname==='/'){res.writeHead(302,{Location:'/factory.html'});res.end();return;}
+    if(url.pathname==='/'){res.writeHead(302,{Location:'/index.html'});res.end();return;}
     const target=path.resolve(staticRoot,'.'+decodeURIComponent(url.pathname));
     if(!target.startsWith(staticRoot+path.sep))return json({error:'Dosya bulunamadı.'},404);
     let info;try{info=await stat(target);}catch{return json({error:'Dosya bulunamadı.'},404);}

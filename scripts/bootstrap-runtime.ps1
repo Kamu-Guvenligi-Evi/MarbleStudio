@@ -77,6 +77,7 @@ if (-not $SkipBrowser) {
     }
 }
 $revisionFiles = @((Get-ChildItem -LiteralPath (Join-Path $projectRoot 'src'),(Join-Path $projectRoot 'scripts') -Recurse -File | Where-Object { $_.Extension -in @('.js','.mjs','.ps1') -and $_.FullName -notmatch '[\\/]statistics-cache[\\/]' }) | Sort-Object FullName)
+$revisionFiles += @(Get-ChildItem -LiteralPath $projectRoot -File | Where-Object { $_.Extension -in @('.html','.js','.ps1') })
 $revisionText = $lockHash + (($revisionFiles | ForEach-Object { $_.FullName.Substring($projectRoot.Length) + ':' + (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash }) -join '|')
 $sha = [Security.Cryptography.SHA256]::Create()
 try { $env:MARBLE_RUNTIME_REVISION = [BitConverter]::ToString($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes($revisionText))).Replace('-','') } finally { $sha.Dispose() }

@@ -124,7 +124,7 @@ export function createImageCatalog({getImages,getNames,getCount,onRosterChange,o
       catalog=await response.json();if(!Array.isArray(catalog.items)||!catalog.items.length)throw new Error('Kütüphane boş.');
       $('catalog-total').textContent=`${catalog.items.length} görsel · ${catalog.categories.length} kategori · Cihazında hazır`;
       status('Kategoriyi seç, ardından bir görsele dokun.');renderCategories();
-    }catch(error){status(error.message);$('catalog-retry').hidden=false;}
+    }catch(error){catalog=null;$('catalog-total').textContent='Kütüphane yüklenemedi';status('Görsel kütüphanesi okunamadı. ZIP dosyasının tamamını yeni bir klasöre çıkartıp Baslat.cmd ile aç, ardından Yeniden dene düğmesine bas.');$('catalog-retry').hidden=false;}
     finally{loading=false;renderGrid();}
   }
   $('catalog-target').onchange=()=>{selected=Number($('catalog-target').value);renderRoster();};

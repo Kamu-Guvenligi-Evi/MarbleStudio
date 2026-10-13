@@ -10,9 +10,11 @@ export function pointSegmentDistance(p,a,b){
   return Math.hypot(p.x-a.x-dx*t,p.y-a.y-dy*t);
 }
 export class Arena {
-  constructor({seed=2048,count=12,energy=1,ballImages=[],ballNames=[],rule='elimination',duration=60,onHit=()=>{},arenaGame='links',arenaShape='triangle',territoryDuration=45}={}){
+  constructor({seed=2048,count=12,energy=1,ballImages=[],ballNames=[],rule='elimination',duration=60,onHit=()=>{},arenaGame='links',arenaLinkMode='wall',arenaInitialLinks=15,arenaShape='triangle',territoryDuration=45}={}){
     if(arenaGame==='territory')return new TerritoryBattle({seed,count,ballImages,ballNames,onHit,arenaShape,territoryDuration});
     this.mode='arena';this.seed=seed;this.rule=rule;this.duration=duration;this.onHit=onHit;
+    this.arenaLinkMode=arenaLinkMode==='prelinked'?'prelinked':'wall';
+    this.arenaInitialLinks=Number.isInteger(arenaInitialLinks)&&arenaInitialLinks>=1&&arenaInitialLinks<=50?arenaInitialLinks:15;
     this.time=0;this.state='ready';this.finished=[];this.particles=[];this.links=[];this.events=[];this.totalCuts=0;
     this.sectionCount=1;this.sections=[];this.sequence=[];this.finishY=960;this.isCustom=true;
     this.ballNames=normalizeNames(ballNames);this.ballImages=normalizeBallImages(ballImages);
@@ -23,7 +25,11 @@ export class Arena {
         body:{position:{x:270+Math.cos(angle)*150,y:510+Math.sin(angle)*150},velocity:{x:Math.cos(heading)*speed,y:Math.sin(heading)*speed},circleRadius:20},
         speed,initialSpeed:speed,trail:[],finishedAt:null,eliminatedAt:null,cuts:0,lastWall:-1};
     });
-    if(rule==='elimination')for(const ball of this.balls)for(let j=0;j<3;j++)this.addLink(ball,ball.id/count*Math.PI*2+(j-1)*.15);
+    const initialLinks=this.arenaLinkMode==='prelinked'?this.arenaInitialLinks:rule==='elimination'?3:0;
+    for(const ball of this.balls)for(let j=0;j<initialLinks;j++){
+      const offset=this.arenaLinkMode==='prelinked'?j/initialLinks*Math.PI*2:(j-1)*.15;
+      this.addLink(ball,ball.id/this.balls.length*Math.PI*2+offset);
+    }
   }
   addLink(ball,angle){this.links.push({owner:ball.id,x:270+Math.cos(angle)*238,y:510+Math.sin(angle)*238,born:this.time});}
   linkCount(ball){return this.links.reduce((n,l)=>n+(l.owner===ball.id),0);}

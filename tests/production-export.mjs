@@ -15,8 +15,8 @@ for(const [i,mode] of modes.entries()){
   let previous='';
   await produce(job,{root,origin,history,cancelled:()=>false,update:async patch=>{Object.assign(job,patch);const state=job.stage+' '+Math.floor((job.progress??0)/20)*20;if(previous!==state){console.log(mode,state);previous=state;}}});
   const metadata=JSON.parse(await readFile(path.join(root,job.id,'metadata.json'),'utf8'));
-  assert.ok(metadata.analysis.complete);assert.equal(metadata.video.speed,1);assert.equal(metadata.video.fps,240);
-  const probe=spawnSync(ffmpeg,['-hide_banner','-i',path.join(root,job.id,'video.mp4')],{windowsHide:true,encoding:'utf8'});assert.match(probe.stderr,/Video:.*\b240 fps\b/,'Encoded MP4 has 240 frames per second');
+  assert.ok(metadata.analysis.complete);assert.equal(metadata.video.speed,1);assert.equal(metadata.video.fps,144);
+  const probe=spawnSync(ffmpeg,['-hide_banner','-i',path.join(root,job.id,'video.mp4')],{windowsHide:true,encoding:'utf8'});assert.match(probe.stderr,/Video:.*\b144 fps\b/,'Encoded MP4 has 144 frames per second');
   assert.equal(metadata.video.width,mode==='statistics'?1280:720);assert.equal(metadata.video.height,['statistics','arena'].includes(mode)?720:1280);
   if(mode==='track'){assert.ok(metadata.musicCredits.length);assert.equal(metadata.recipe.ballNames[0],'Custom Racer');}
   if(mode==='statistics')assert.equal(metadata.analysis.winner,'Alfa');

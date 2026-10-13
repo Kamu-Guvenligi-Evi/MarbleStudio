@@ -1,6 +1,7 @@
 import {RingEscape,normalizeRing,THEMES,RING_KEY,FLOW_PRESETS} from './ring-escape.js';
 import {renderRingEscape} from './ring-escape-renderer.js';
 import {RingAudio} from './ring-escape-audio.js';
+import {DEFAULT_VIDEO_FPS} from './video-settings.js';
 import {mountSoundDirector} from './sound-director-panel.js';
 import {mountManualSoundControls} from './game-sound-panel.js';
 import './ring-escape.css';
@@ -93,7 +94,7 @@ async function startExport(){
   try{
     // Prepare music before time zero so the downloaded video and soundtrack start together.
     audio.stop();if(settings.sound)await audio.unlock();
-    exportCanvas=document.createElement('canvas');exportCanvas.width=1080;exportCanvas.height=1920;exportStream=exportCanvas.captureStream(30);
+    exportCanvas=document.createElement('canvas');exportCanvas.width=1080;exportCanvas.height=1920;exportStream=exportCanvas.captureStream(DEFAULT_VIDEO_FPS);
     if(settings.sound&&audio.capture)for(const track of audio.capture.stream.getAudioTracks())exportStream.addTrack(track.clone());
     recorder=new MediaRecorder(exportStream,{mimeType:type,videoBitsPerSecond:7000000,audioBitsPerSecond:128000});const chunks=[];
     recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};

@@ -295,7 +295,7 @@
   },
   {
     "id": "teams",
-    "name": "Takımlar",
+    "name": "Futbol Takımları",
     "items": [
       [
         "Galatasaray",
@@ -394,20 +394,360 @@
         "Atlético Madrid"
       ],
       [
-        "LA Lakers",
-        "Los Angeles Lakers"
+        "Göztepe",
+        "Goztepe"
       ],
       [
-        "Chicago Bulls",
-        "Chicago Bulls"
+        "Samsunspor",
+        "Samsunspor"
+      ],
+      [
+        "Konyaspor",
+        "Konyaspor"
+      ],
+      [
+        "Çaykur Rizespor",
+        "Caykur Rizespor"
+      ],
+      [
+        "Kasımpaşa",
+        "Kasimpasa"
+      ],
+      [
+        "Gaziantep FK",
+        "Gaziantep FK"
+      ],
+      [
+        "Tottenham Hotspur",
+        "Tottenham Hotspur"
+      ],
+      [
+        "Newcastle United",
+        "Newcastle United"
+      ],
+      [
+        "Aston Villa",
+        "Aston Villa"
+      ],
+      [
+        "Sevilla",
+        "Sevilla"
+      ],
+      [
+        "Valencia",
+        "Valencia"
+      ],
+      [
+        "Roma",
+        "AS Roma"
+      ],
+      [
+        "Lazio",
+        "Lazio"
+      ],
+      [
+        "Bayer Leverkusen",
+        "Bayer Leverkusen"
+      ],
+      [
+        "RB Leipzig",
+        "RB Leipzig"
+      ],
+      [
+        "Marseille",
+        "Marseille"
+      ],
+      [
+        "Lyon",
+        "Lyon"
+      ],
+      [
+        "Sporting CP",
+        "Sporting CP"
+      ],
+      [
+        "Flamengo",
+        "Flamengo"
+      ],
+      [
+        "Palmeiras",
+        "Palmeiras"
+      ],
+      [
+        "Corinthians",
+        "Corinthians"
+      ],
+      [
+        "Santos",
+        "Santos"
+      ],
+      [
+        "Boca Juniors",
+        "Boca Juniors"
+      ],
+      [
+        "River Plate",
+        "River Plate"
+      ]
+    ]
+  },
+  {
+    "id": "nba",
+    "name": "Basketbol · NBA",
+    "items": [
+      [
+        "Atlanta Hawks",
+        "Atlanta Hawks"
       ],
       [
         "Boston Celtics",
         "Boston Celtics"
       ],
       [
+        "Brooklyn Nets",
+        "Brooklyn Nets"
+      ],
+      [
+        "Charlotte Hornets",
+        "Charlotte Hornets"
+      ],
+      [
+        "Chicago Bulls",
+        "Chicago Bulls"
+      ],
+      [
+        "Cleveland Cavaliers",
+        "Cleveland Cavaliers"
+      ],
+      [
+        "Dallas Mavericks",
+        "Dallas Mavericks"
+      ],
+      [
+        "Denver Nuggets",
+        "Denver Nuggets"
+      ],
+      [
+        "Detroit Pistons",
+        "Detroit Pistons"
+      ],
+      [
         "Golden State Warriors",
         "Golden State Warriors"
+      ],
+      [
+        "Houston Rockets",
+        "Houston Rockets"
+      ],
+      [
+        "Indiana Pacers",
+        "Indiana Pacers"
+      ],
+      [
+        "LA Clippers",
+        "LA Clippers"
+      ],
+      [
+        "LA Lakers",
+        "Los Angeles Lakers"
+      ],
+      [
+        "Memphis Grizzlies",
+        "Memphis Grizzlies"
+      ],
+      [
+        "Miami Heat",
+        "Miami Heat"
+      ],
+      [
+        "Milwaukee Bucks",
+        "Milwaukee Bucks"
+      ],
+      [
+        "Minnesota Timberwolves",
+        "Minnesota Timberwolves"
+      ],
+      [
+        "New Orleans Pelicans",
+        "New Orleans Pelicans"
+      ],
+      [
+        "New York Knicks",
+        "New York Knicks"
+      ],
+      [
+        "Oklahoma City Thunder",
+        "Oklahoma City Thunder"
+      ],
+      [
+        "Orlando Magic",
+        "Orlando Magic"
+      ],
+      [
+        "Philadelphia 76ers",
+        "Philadelphia 76ers"
+      ],
+      [
+        "Phoenix Suns",
+        "Phoenix Suns"
+      ],
+      [
+        "Portland Trail Blazers",
+        "Portland Trail Blazers"
+      ],
+      [
+        "Sacramento Kings",
+        "Sacramento Kings"
+      ],
+      [
+        "San Antonio Spurs",
+        "San Antonio Spurs"
+      ],
+      [
+        "Toronto Raptors",
+        "Toronto Raptors"
+      ],
+      [
+        "Utah Jazz",
+        "Utah Jazz"
+      ],
+      [
+        "Washington Wizards",
+        "Washington Wizards"
+      ]
+    ]
+  },
+  {
+    "id": "nfl",
+    "name": "Amerikan Futbolu · NFL",
+    "items": [
+      [
+        "Arizona Cardinals",
+        "Arizona Cardinals"
+      ],
+      [
+        "Atlanta Falcons",
+        "Atlanta Falcons"
+      ],
+      [
+        "Baltimore Ravens",
+        "Baltimore Ravens"
+      ],
+      [
+        "Buffalo Bills",
+        "Buffalo Bills"
+      ],
+      [
+        "Carolina Panthers",
+        "Carolina Panthers"
+      ],
+      [
+        "Chicago Bears",
+        "Chicago Bears"
+      ],
+      [
+        "Cincinnati Bengals",
+        "Cincinnati Bengals"
+      ],
+      [
+        "Cleveland Browns",
+        "Cleveland Browns"
+      ],
+      [
+        "Dallas Cowboys",
+        "Dallas Cowboys"
+      ],
+      [
+        "Denver Broncos",
+        "Denver Broncos"
+      ],
+      [
+        "Detroit Lions",
+        "Detroit Lions"
+      ],
+      [
+        "Green Bay Packers",
+        "Green Bay Packers"
+      ],
+      [
+        "Houston Texans",
+        "Houston Texans"
+      ],
+      [
+        "Indianapolis Colts",
+        "Indianapolis Colts"
+      ],
+      [
+        "Jacksonville Jaguars",
+        "Jacksonville Jaguars"
+      ],
+      [
+        "Kansas City Chiefs",
+        "Kansas City Chiefs"
+      ],
+      [
+        "Las Vegas Raiders",
+        "Las Vegas Raiders"
+      ],
+      [
+        "Los Angeles Chargers",
+        "Los Angeles Chargers"
+      ],
+      [
+        "Los Angeles Rams",
+        "Los Angeles Rams"
+      ],
+      [
+        "Miami Dolphins",
+        "Miami Dolphins"
+      ],
+      [
+        "Minnesota Vikings",
+        "Minnesota Vikings"
+      ],
+      [
+        "New England Patriots",
+        "New England Patriots"
+      ],
+      [
+        "New Orleans Saints",
+        "New Orleans Saints"
+      ],
+      [
+        "New York Giants",
+        "New York Giants"
+      ],
+      [
+        "New York Jets",
+        "New York Jets"
+      ],
+      [
+        "Philadelphia Eagles",
+        "Philadelphia Eagles"
+      ],
+      [
+        "Pittsburgh Steelers",
+        "Pittsburgh Steelers"
+      ],
+      [
+        "San Francisco 49ers",
+        "San Francisco 49ers"
+      ],
+      [
+        "Seattle Seahawks",
+        "Seattle Seahawks"
+      ],
+      [
+        "Tampa Bay Buccaneers",
+        "Tampa Bay Buccaneers"
+      ],
+      [
+        "Tennessee Titans",
+        "Tennessee Titans"
+      ],
+      [
+        "Washington Commanders",
+        "Washington Commanders"
       ]
     ]
   },
@@ -1140,6 +1480,168 @@
       [
         "Pisces",
         "Pisces"
+      ]
+    ]
+  },
+  {
+    "id": "egyptian",
+    "name": "Mısır Mitolojisi",
+    "items": [
+      [
+        "Anubis",
+        "Anubis"
+      ],
+      [
+        "Ra",
+        "Ra"
+      ],
+      [
+        "Osiris",
+        "Osiris"
+      ],
+      [
+        "Isis",
+        "Isis"
+      ],
+      [
+        "Horus",
+        "Horus"
+      ],
+      [
+        "Bastet",
+        "Bastet"
+      ],
+      [
+        "Thoth",
+        "Thoth"
+      ],
+      [
+        "Sekhmet",
+        "Sekhmet"
+      ],
+      [
+        "Set",
+        "Set"
+      ],
+      [
+        "Hathor",
+        "Hathor"
+      ],
+      [
+        "Sobek",
+        "Sobek"
+      ],
+      [
+        "Nephthys",
+        "Nephthys"
+      ]
+    ]
+  },
+  {
+    "id": "greek",
+    "name": "Yunan Mitolojisi",
+    "items": [
+      [
+        "Zeus",
+        "Zeus"
+      ],
+      [
+        "Hera",
+        "Hera"
+      ],
+      [
+        "Poseidon",
+        "Poseidon"
+      ],
+      [
+        "Demeter",
+        "Demeter"
+      ],
+      [
+        "Athena",
+        "Athena"
+      ],
+      [
+        "Apollo",
+        "Apollo"
+      ],
+      [
+        "Artemis",
+        "Artemis"
+      ],
+      [
+        "Ares",
+        "Ares"
+      ],
+      [
+        "Aphrodite",
+        "Aphrodite"
+      ],
+      [
+        "Hephaestus",
+        "Hephaestus"
+      ],
+      [
+        "Hermes",
+        "Hermes"
+      ],
+      [
+        "Hades",
+        "Hades"
+      ]
+    ]
+  },
+  {
+    "id": "norse",
+    "name": "İskandinav Mitolojisi",
+    "items": [
+      [
+        "Odin",
+        "Odin"
+      ],
+      [
+        "Thor",
+        "Thor"
+      ],
+      [
+        "Loki",
+        "Loki"
+      ],
+      [
+        "Freyja",
+        "Freyja"
+      ],
+      [
+        "Freyr",
+        "Freyr"
+      ],
+      [
+        "Frigg",
+        "Frigg"
+      ],
+      [
+        "Tyr",
+        "Tyr"
+      ],
+      [
+        "Heimdall",
+        "Heimdall"
+      ],
+      [
+        "Baldr",
+        "Baldr"
+      ],
+      [
+        "Hel",
+        "Hel"
+      ],
+      [
+        "Skadi",
+        "Skadi"
+      ],
+      [
+        "Njord",
+        "Njord"
       ]
     ]
   }

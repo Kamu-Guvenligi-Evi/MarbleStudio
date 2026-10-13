@@ -7,6 +7,7 @@ import {isSoftSound,isSoftNote,createNoteClimb} from './soft-audio.js';
 import {EffectVoicePlayer} from './effect-voices.js';
 import {normalizeCollisionSound} from './collision-sound-settings.js';
 export {COLLISION_SOUNDS,normalizeCollisionSound} from './collision-sound-settings.js';
+import {RECORDED_SOUNDS,recordedSamples} from './recorded-sounds.js';
 export function collisionEvent(event={},sound='classic'){
   const collision=['impact','ice'].includes(event.type??'impact');
   return collision?{...event,collisionSound:normalizeCollisionSound(sound)}:event;
@@ -21,7 +22,7 @@ export function effectSamples(event={},rate=48000){
   if(event.type==='duel')return duelEffectSamples(event,rate);
   const type=event.type??'impact',sound=['impact','ice'].includes(type)?normalizeCollisionSound(event.collisionSound):'classic';
   if(isSoftSound(sound))return cueSamples({root:48,scale:'pentatonic'},{voice:sound,degree:event.noteDegree??0,gain:.42},rate);
-  const recorded=memeSamples(sound,rate);if(recorded)return recorded;
+  const recorded=memeSamples(sound,rate)??recordedSamples(sound,rate);if(recorded)return recorded;
   const duration=sound==='classic'?({ice:.24,multiply:.36,drop:.16,complete:.7,impact:.09})[type]??.09:({meow:.42,woof:.26,squeak:.22,pop:.1,laser:.2,bell:.48,wood:.08})[sound];
   const out=new Float32Array(Math.ceil(rate*duration));
   let noise=(event.seed??17)|0,previous=0;

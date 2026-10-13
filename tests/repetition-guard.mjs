@@ -33,9 +33,13 @@ await assert.rejects(openRepetitionLedger(root,[]),/hafızası/,'Never silently 
 const exhausted=[];
 for(const theme of ['ice','lava','aurora','gold','candy','cosmic'])for(const variant of ['classic','avalanche','precision','burst'])exhausted.push({id:theme+'-'+variant,recipe:{mode:'spiral',seed:1,count:1,theme,variant},completedAt:new Date().toISOString()});
 const guard=createRepetitionGuard(exhausted);
-await assert.rejects(planAutomatic(validateBatch({automatic:true,automaticMode:'spiral',count:1}),exhausted,path.resolve('.'),guard),e=>e.code==='REPETITION_LIMIT'&&e.nonRetryable);
+const spiralPlan=await planAutomatic(validateBatch({automatic:true,automaticMode:'spiral',count:1}),exhausted,path.resolve('.'),guard);
+assert.equal(spiralPlan.modes[0],'spiral','New multiplier layouts keep previously used themes available');
+assert.ok(guard.check(automaticCandidate(spiralPlan,42,exhausted,[],guard)).allowed);
+const blocked={...guard,check:()=>({allowed:false})};
+await assert.rejects(planAutomatic(validateBatch({automatic:true,automaticMode:'spiral',count:1}),exhausted,path.resolve('.'),blocked),e=>e.code==='REPETITION_LIMIT'&&e.nonRetryable);
 const planned=await planAutomatic(validateBatch({automatic:true,count:1}),exhausted,path.resolve('.'),guard);
-assert.notEqual(planned.modes[0],'spiral','Automatic choice skips exhausted spiral styles');
+assert.ok(['track','arena','spiral'].includes(planned.modes[0]));
 const candidate=automaticCandidate(planned,42,exhausted,[],guard);assert.ok(guard.check(candidate).allowed);
 assert.equal(createRepetitionGuard([original],[],now,'original').check(recipe).allowed,true,'A failed job can resume without blocking itself');
 console.log('PASS: permanent content identity, 90-day AND 300-video cooldown, cosmetic changes, updated statistics, archive/restart persistence, backup recovery, fail-closed corruption, exhausted styles and automatic fallback.');

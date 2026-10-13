@@ -6,6 +6,14 @@ import {effectSamples} from '../src/impact-audio.js';
 import {normalizeRing} from '../src/ring-escape.js';
 import {sourceRecipe,validateBatch} from '../src/factory-recipes.js';
 import {productionAudio} from '../scripts/factory-audio.mjs';
+import {RECORDED_SOUNDS,recordedSamples} from '../src/recorded-sounds.js';
+import {VOICES,VOICE_NAMES,cueSamples} from '../src/sound-plan.js';
+
+for(const [id,clip] of Object.entries(RECORDED_SOUNDS)){
+  assert.ok(VOICES.includes(id));assert.equal(VOICE_NAMES[id],clip.name);
+  assert.deepEqual(normalizeSoundOverrides('glass-breaker',{wave:id}),{wave:id});
+  assert.deepEqual(cueSamples({}, {voice:id,gain:.5},24000),recordedSamples(id,24000).map(sample=>sample*.5));
+}
 
 assert.deepEqual(normalizeSoundOverrides('glass-breaker',{ice:'off',wave:'bonk',won:'original',other:'bonk'}),{ice:'off',wave:'bonk',won:'original'});
 const original=createGameSoundDirector('glass-breaker','original',{wave:'anime-wow'});

@@ -3,6 +3,7 @@ import {renderRps,drawRpsIcon,drawRpsMapPreview} from './rock-paper-scissors-ren
 import {GameSoundPlayer,createGameSoundDirector,normalizeSoundStyle} from './game-sound-director.js';
 import {normalizeSoundOverrides} from './game-sound-settings.js';
 import {mountGameSoundPanel} from './game-sound-panel.js';
+import {DEFAULT_VIDEO_FPS} from './video-settings.js';
 import './rock-paper-scissors.css';
 
 const $=id=>document.getElementById(id),mode='rock-paper-scissors';
@@ -84,7 +85,7 @@ async function startExport(){
     }
     exportCanvas=document.createElement('canvas');exportCanvas.width=1080;exportCanvas.height=1920;
     restart();renderRps(exportCanvas.getContext('2d'),game,settings);
-    exportStream=exportCanvas.captureStream(30);
+    exportStream=exportCanvas.captureStream(DEFAULT_VIDEO_FPS);
     if(settings.sound)for(const track of audioCapture.stream.getAudioTracks())exportStream.addTrack(track.clone());
     const mimeType=['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(type=>MediaRecorder.isTypeSupported(type));
     if(!mimeType)throw new Error('WebM kaydı desteklenmiyor. Chrome veya Edge kullanabilirsin.');

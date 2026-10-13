@@ -4,6 +4,7 @@ import { drawFinale } from './finale.js';
 import { drawSpace } from './space-art.js';
 import { SECTION_LABELS } from './race-copy.js';
 import { drawLeaders } from './race-leaders.js';
+import { drawMarbleTrail } from './marble-trail.js';
 const W=540,H=960,BG='#080e20';
 
 export function renderRace(ctx,race,{cameraY,countdown,paused,trails=false,preview,suppressFinale=false,channel}) {
@@ -75,16 +76,9 @@ export function renderRace(ctx,race,{cameraY,countdown,paused,trails=false,previ
   }
   ctx.restore();
   for(const ball of race.balls) {
-    const {x,y}=ball.body.position,r=ball.body.circleRadius;
+    const {y}=ball.body.position;
     if(y<cameraY-80||y>cameraY+H+80)continue;
-    if(trails&&ball.trail.length>1) {
-      ctx.save();ctx.lineCap='round';const points=ball.trail;
-      for(let i=1;i<points.length;i++) {
-        ctx.globalAlpha=(i/points.length)*.4;ctx.strokeStyle=ball.color;ctx.lineWidth=(i/points.length)*r*.8;
-        ctx.beginPath();ctx.moveTo(points[i-1].x,points[i-1].y);ctx.lineTo(points[i].x,points[i].y);ctx.stroke();
-      }
-      ctx.restore();
-    }
+    if(trails)drawMarbleTrail(ctx,ball);
   }
   // Draw every trail before every marble so a following trail cannot cover a face.
   for(const ball of race.balls) {

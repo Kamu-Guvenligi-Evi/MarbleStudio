@@ -1,0 +1,15 @@
+{
+  "id": "shared-3d79782c058a2670",
+  "title": "Spiral Multiplication",
+  "mode": "spiral",
+  "description": "",
+  "recipe": {
+    "mode": "spiral"
+  },
+  "video": {
+    "format": "video/webm"
+  },
+  "musicCredits": [],
+  "sha256": "3d79782c058a267033e6c2a4167db7c62b505f61aa89f67d3489c828925ae2d8",
+  "bytes": 4817398
+}

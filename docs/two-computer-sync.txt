@@ -1,0 +1,23 @@
+Two-computer merge - 2026-10-13
+
+Sources: local work saved in ceb3c9d; origin/main at f3c6ed5.
+User decisions: retain both computers' features, combine the new sound
+management with recorded GitHub sounds, use 144 FPS as the default.
+
+Retained: local games, territory watchability/templates and studio navigation;
+remote match calendar, team catalog, spiral audio/settings and arena link modes.
+Recorded sounds are also available in the new games' event sound menus.
+Ring Escape and Rock Paper Scissors capture use the shared FPS default.
+Browser capture remains subject to browser/device frame delivery limits.
+
+Integration fixes: spiral audio panel visibility with the new sound menu;
+visible sound-toggle headings; unique random course module pool while keeping
+the explicit long-duel sequence; browser tests adapted to collapsible settings
+and mobile navigation. Test origins support the preview on port 5174.
+
+Validation: production build; physics/course and game simulation checks;
+territory integration/watchability; match and banner browser checks; arena
+links; spiral hypnotic audio; FPS migration/defaults; studio navigation;
+ring flow; manual game sounds; sound director; all 100 collision sounds,
+stereo rendering, preview, per-mode persistence and mute persistence.
+Local test logs: .cache/sync-*.log (not committed).

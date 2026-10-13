@@ -11,7 +11,7 @@ for(let seed=1;seed<=1000;seed++){
   for(let i=1;i<r.sequence.length;i++)assert.notEqual(r.sequence[i].type,r.sequence[i-1].type);
   spirals.add(structure(recipe(seed,'spiral')));arenas.add(structure(recipe(seed,'arena')));
 }
-assert.ok(unique.size>950);assert.equal(profiles.size,Object.keys(COURSE_PROFILES).length);assert.equal(rhythms.size,3);assert.deepEqual([...lengths].sort((a,b)=>a-b),[6,7,8,9,10,12,14,16]);assert.equal(spirals.size,24);assert.equal(arenas.size,24);
+assert.ok(unique.size>950);assert.equal(profiles.size,Object.keys(COURSE_PROFILES).length);assert.equal(rhythms.size,3);assert.deepEqual([...lengths].sort((a,b)=>a-b),[6,7,8,9,10,12,14,16]);assert.equal(spirals.size,1000);assert.equal(arenas.size,24);
 for(const variant of Object.keys(SPIRAL_VARIANTS)){
   const events=[],r=new Spiral({variant,onHit:(strength,x,effect)=>events.push(effect.type)});r.start();
   for(let t=0;t<240*120&&r.state==='running';t++)r.step();
@@ -25,4 +25,4 @@ for(const type of ['drop','impact','ice','multiply','complete']){
   assert.ok(Math.abs(samples.at(-1))<.01,type+' tail');
 }
 assert.notDeepEqual(effectSamples({type:'ice'}),effectSamples({type:'multiply'}));
-console.log(`PASS: ${unique.size}/1000 distinct track structures; 24 spiral and 24 arena configurations; all spiral variants finish and emit five sound events; deterministic bounded audio.`);
+console.log(`PASS: ${unique.size}/1000 distinct track structures; 1000 seeded spiral and 24 arena configurations; all spiral variants finish and emit five sound events; deterministic bounded audio.`);

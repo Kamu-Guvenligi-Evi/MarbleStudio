@@ -7,6 +7,7 @@ try{
   for(const [mode,event,api] of [['glass-breaker','wave','glassBreaker'],['spiral-breaker','multiply','spiralBreaker'],['ball-duel','heal','duelStudio'],['ring-escape','break','ringStudio']]){
     const context=await browser.newContext({viewport:{width:390,height:844}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.goto(origin+'/'+mode+'.html');await page.waitForFunction(api=>!!window[api],api);
+    await page.getByText('Ses ve müzik',{exact:true}).click();
     assert.ok(await page.getByRole('heading',{name:'Ses menüsü',exact:true}).isVisible());
     assert.equal(await page.locator('#all-game-sounds option[value="resolve"]').evaluate(el=>el.parentElement.label),'Ses efektleri ve müzikal sesler');
     assert.equal(await page.locator('#all-game-sounds option[value="bruh"]').evaluate(el=>el.parentElement.label),'Konuşma ve tepki sesleri');
@@ -16,6 +17,7 @@ try{
     await page.getByRole('button',{name:'Seçili efekti dinle',exact:true}).click();
     await page.waitForFunction(()=>document.querySelector('.sound-menu-status').textContent==='Ön dinleme');
     await page.reload();await page.waitForFunction(api=>!!window[api],api);
+    await page.getByText('Ses ve müzik',{exact:true}).click();
     assert.equal(await page.locator('#all-game-sounds').inputValue(),'bonk');
     await page.selectOption('#all-game-sounds','off');
     assert.ok(await page.locator('[data-sound-event]').evaluateAll(selects=>selects.every(select=>select.value==='off')));
@@ -31,7 +33,7 @@ try{
     await row.getByRole('button').click();
     await page.waitForFunction(()=>document.querySelector('.manual-sounds [role=status]').textContent==='Ön dinleme');
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Manual controls fit mobile');
-    await page.reload();await page.waitForFunction(api=>!!window[api],api);await page.locator('.manual-sounds summary').click();
+    await page.reload();await page.waitForFunction(api=>!!window[api],api);await page.getByText('Ses ve müzik',{exact:true}).click();await page.locator('.manual-sounds summary').click();
     assert.equal(await page.locator('#manual-sound-'+event).inputValue(),'bonk','Manual selection survives reload');
     if(mode!=='ring-escape'){
       assert.equal(await page.locator('#game-sound-style').inputValue(),'original');

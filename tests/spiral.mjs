@@ -67,6 +67,6 @@ assert.ok(motion.balls[0].velocity<bottomSpeed);assert.equal(motion.balls[0].hue
 assert.deepEqual(spiralPoint(-20),spiralPoint(0));
 assert.deepEqual(spiralPoint(spiralLength+20),spiralPoint(spiralLength));
 assert.equal(normalizeProject({mode:'spiral',count:1,sequence:[]}).count,1);
-assert.throws(()=>normalizeProject({mode:'track',count:1,sequence:[]}));
+assert.equal(normalizeProject({mode:'track',count:1,sequence:[]}).count,1);
 assert.throws(()=>normalizeProject({mode:'spiral',count:-1,sequence:[]}));
 console.log('PASS: consume-on-impact, empty interval, external respawn, multiplied groups, completion and deterministic replay.');

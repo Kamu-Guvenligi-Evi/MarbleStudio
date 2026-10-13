@@ -5,6 +5,7 @@ const { Bodies, Body, Composite } = Matter;
 export const SECTION_HEIGHT = 650;
 export const COURSE_START = 430;
 export const COURSE_META = {
+  longduel: {name:'Uzun düello · 2 top · 30+ sn',accent:'#daa5ff',count:2,maxSpeed:6,modules:['switchback','slalom','diamonds','rotorgates','fork','staircase','weave','switchback','funnel','sieve','slalom','wheels','switchback','pendulum','diamonds','fork','staircase','weave','slalom','rotorgates','switchback','funnel','sieve','slalom']},
   stairway: {name:'Basamak ekspresi',accent:'#82d9ff',modules:['staircase', 'crossramps', 'diamonds', 'fork', 'sieve', 'weave', 'shortcut', 'slalom']},
   gemrun: {name:'Elmas vadisi',accent:'#82d9ff',modules:['diamonds', 'sieve', 'fork', 'pegs', 'staircase', 'drift', 'funnel', 'rotorgates']},
   rotorfactory: {name:'Rotor fabrikası',accent:'#82d9ff',modules:['rotorgates', 'wheels', 'pulse', 'weave', 'pendulum', 'diamonds', 'fork', 'drift']},
@@ -82,7 +83,7 @@ export function buildCourse(world, rng, preset, sectionCount, customSequence = n
   rail(527, bottom / 2, bottom + 100, Math.PI / 2, 'wall', 26);
   rail(270, bottom, 540, 0, 'wall', 30);
   const startGate = rail(270, 300, 488, 0, 'gate', 12);
-  const base = COURSE_META[preset].modules;
+  const base = [...new Set(COURSE_META[preset].modules)];
   const pool = base.slice(1);
   for (let i = pool.length - 1; i > 0; i--) {
     const j = Math.floor(rng() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]];

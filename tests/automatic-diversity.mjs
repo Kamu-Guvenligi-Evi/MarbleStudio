@@ -10,7 +10,7 @@ for(const mode of ['arena','spiral']){
   const r=recipe(seed,mode),source=normalizeSnapshot({mode,project:{...r,sequence:[],spiralTheme:r.theme}});
   before.add(structure(r));after.add(structure(sourceRecipe(source,seed)));
  }
- assert.equal(before.size,24);assert.equal(after.size,24);
+ assert.equal(before.size,mode==='spiral'?1000:24);assert.equal(after.size,mode==='spiral'?1000:24);
 }
 assert.throws(()=>normalizeSnapshot({mode:'spiral',project:{variant:'bad'}}));
 assert.throws(()=>normalizeSnapshot({mode:'arena',project:{energy:99}}));
@@ -30,7 +30,7 @@ for(let i=0;i<18;i++){
  history.push({id:'auto-'+i,mode:options.modes[0],options,recipe:r});
 }
 assert.equal(new Set(history.map(j=>j.recipe.music.track)).size,3);
-assert.equal(new Set(history.map(j=>j.options.automation.rosterCategory)).size,4);
+assert.deepEqual([...new Set(history.map(j=>j.options.automation.rosterCategory))].sort(),['colors','countries','nba','nfl','teams','zodiac']);
 const stats=[];
 for(let i=0;i<11;i++){
  const options=await planAutomatic(validateBatch({automatic:true,automaticMode:'statistics',count:1}),stats,root);
@@ -43,4 +43,4 @@ assert.equal(new Set(stats.slice(0,11).map(j=>j.recipe.statistics.dataset.id)).s
 // Planning after a saved history roundtrip must retain repetition protection.
 const persisted=JSON.parse(JSON.stringify(history));const next=await planAutomatic(validateBatch({automatic:true,count:1}),persisted,root);
 assert.notEqual(next.arenaGame==='territory'?'territory':next.modes[0],automaticKind(persisted.at(-1)));
-console.log('PASS: 24/24 arena and spiral combinations preserved; 18 history-aware plans, three music tracks, four roster styles, five distinct candidates per job, 11 topics then repeat blocked, persisted history and quality gates.');
+console.log('PASS: 24 arena and 1000 spiral layouts preserved; 18 history-aware plans, three music tracks, six roster styles including NBA/NFL, five distinct candidates per job, 11 topics then repeat blocked, persisted history and quality gates.');

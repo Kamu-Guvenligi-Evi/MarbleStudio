@@ -871,6 +871,69 @@
       },
       "sha256": "c4a2e11d110b1813a78a71e4e6b14fd5789b13bc5cd31feeec8ffd0a2b5905bd",
       "bytes": 41035271
+    },
+    {
+      "id": "shared-cb202c263b3a38f7",
+      "mode": "arena",
+      "contentKind": "arena",
+      "copy": {
+        "title": "Sphere Arena"
+      },
+      "createdAt": "2026-10-12T22:22:38.157Z",
+      "completedAt": "2026-10-12T22:22:38.157Z",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "cb202c263b3a38f7bd41a1edda34a855520149e47af6d4a7f2ffc3671a5651ea",
+      "bytes": 18279265
+    },
+    {
+      "id": "shared-3d79782c058a2670",
+      "mode": "spiral",
+      "contentKind": "spiral",
+      "copy": {
+        "title": "Spiral Multiplication"
+      },
+      "createdAt": "2026-10-12T22:33:00.854Z",
+      "completedAt": "2026-10-12T22:33:00.854Z",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "3d79782c058a267033e6c2a4167db7c62b505f61aa89f67d3489c828925ae2d8",
+      "bytes": 4817398
+    },
+    {
+      "id": "shared-4557f7bad4b94336",
+      "mode": "track",
+      "contentKind": "track",
+      "copy": {
+        "title": "My Course"
+      },
+      "createdAt": "2026-10-12T23:10:03.701Z",
+      "completedAt": "2026-10-12T23:10:03.701Z",
+      "videoFile": "video.webm",
+      "files": [
+        "video.webm",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "4557f7bad4b94336b2bf8163145c3337ad584c5b2f487a36b8555ecd6c192ab1",
+      "bytes": 9978675
     }
   ]
 }

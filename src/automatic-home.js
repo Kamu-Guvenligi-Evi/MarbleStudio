@@ -1,9 +1,10 @@
 import './automatic-home.css';
+import {DEFAULT_VIDEO_FPS} from './video-settings.js';
 
 const labels={track:'Parkur',arena:'Küre Arenası',territory:'Alan Savaşı',spiral:'Spiral',statistics:'İstatistik'};
 export async function automaticOptions(choice){
   if(!['auto',...Object.keys(labels)].includes(choice))throw new Error('İçerik türü geçersiz.');
-  return {automatic:true,automaticMode:choice,count:1,duration:55,language:'en',channel:'Marble Studio',resolution:1080,fps:240,template:'minimal'};
+  return {automatic:true,automaticMode:choice,count:1,duration:55,language:'en',channel:'Marble Studio',resolution:1080,fps:DEFAULT_VIDEO_FPS,template:'minimal'};
 }
 
 export function createAutomaticHome({create,videos,works,busy,pause,youtubeAccounts,edit}){
@@ -32,7 +33,7 @@ export function createAutomaticHome({create,videos,works,busy,pause,youtubeAccou
   const library=document.createElement('button');library.textContent='Çalışmalarım';library.onclick=works;library.className='automatic-library';home.querySelector('.automatic-links').append(library);
   $('automatic-form').onchange=()=>{
     const kind=new FormData($('automatic-form')).get('kind');
-    $('automatic-note').textContent=kind==='statistics'?'Kaynaklı kütüphaneden bir konu seçilir. Tablo ve başlıkla 30 saniyelik yatay video hazırlanır.':kind==='territory'?'Dikey arena, üçgen, kare, altıgen veya dairede alan kapma mücadelesi. Şekil, kadro ve müzik otomatik seçilir; 240 FPS video hazırlanır.':(kind==='auto'?'Parkur, küre arenası, alan savaşı veya spiral seçilir. ':'')+'Düzen, kadro ve müzik otomatik seçilir. Yarışın akışına uygun, kısa bir dikey video hazırlanır.';
+    $('automatic-note').textContent=kind==='statistics'?'Kaynaklı kütüphaneden bir konu seçilir. Tablo ve başlıkla 30 saniyelik yatay video hazırlanır.':kind==='territory'?'Dikey arena, üçgen, kare, altıgen veya dairede alan kapma mücadelesi. Şekil, kadro ve müzik otomatik seçilir; 144 FPS video hazırlanır.':(kind==='auto'?'Parkur, küre arenası, alan savaşı veya spiral seçilir. ':'')+'Düzen, kadro ve müzik otomatik seçilir. Yarışın akışına uygun, kısa bir dikey video hazırlanır.';
   };
   $('automatic-form').onsubmit=async event=>{
     event.preventDefault();if(pending||busy())return;pending=true;

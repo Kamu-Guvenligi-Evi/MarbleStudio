@@ -42,7 +42,7 @@ body.studio-organized .race-workspace .race-stage canvas{height:min(65vh,680px)}
 .studio-setting-group>summary>span{display:block;font-size:11px;font-weight:400;color:#90a699;line-height:1.6;margin-top:3px}
 .studio-setting-content{padding:0 16px 16px;min-width:0}
 .studio-organized .studio-setting-content>.control-section,.studio-organized .studio-setting-content>.appearance{padding:0;margin:0;border:0}
-.studio-setting-content>.control-section>h2{display:none}
+.studio-setting-content>.control-section>h2:not(:has(button)){display:none}
 .studio-organized .studio-setting-content>.game-sound-director{margin:0;padding:14px 0;border:0;border-radius:0;background:none;box-shadow:none}
 .studio-setting-content>.game-sound-director>h2{font-size:12px}
 .studio-organized .studio-setting-content>.sound-director{margin-bottom:0}

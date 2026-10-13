@@ -24,7 +24,7 @@
     </nav>
   </header>
 
-  <div class="studio-export-bar"><button id="studio-export" class="button primary">Video oluştur</button><div><button id="studio-works" class="button secondary">Çalışmalarım</button><button id="studio-videos" class="button secondary">Videolarım</button></div></div>
+  <div class="studio-export-bar"><button id="studio-export" class="button primary">Video oluştur</button><div><button id="studio-matches" class="button secondary" aria-haspopup="dialog">Maçlar</button><button id="studio-works" class="button secondary">Çalışmalarım</button><button id="studio-videos" class="button secondary">Videolarım</button></div></div>
   <main>
     <section id="track-view" class="race-workspace" aria-label="Parkur yarışı"></section>
     <section id="arena-view" class="race-workspace" aria-label="Küre arenası" hidden></section>
@@ -34,6 +34,9 @@
       <div class="race-setup-bar">
         <label id="track-preset-field" for="track-preset">Hazır parkur<select id="track-preset"><option value="saved">Mevcut parkur</option><option value="cascade">Neon Cascade</option><option value="pinball">Pinball Garden</option><option value="velocity">Velocity</option><option value="clockwork">Clockwork</option></select></label>
         <label id="spiral-theme-field" for="spiral-theme" hidden>Spiral teması<select id="spiral-theme"></select></label>
+        <button id="spiral-randomize" class="button secondary" hidden>Çarpanları yenile</button>
+        <label id="spiral-hypnotic-field" class="switch-label" hidden><input id="spiral-hypnotic" type="checkbox" role="switch"><span>Hipnotik ses</span></label>
+        <button id="spiral-hypnotic-mute" class="button secondary" type="button" hidden aria-pressed="false">Sesi kapat · M</button>
         <label for="count"><span id="count-label">Yarışmacı sayısı</span><select id="count"><option id="count-single" value="1" hidden disabled>1</option><option>6</option><option>8</option><option>10</option><option selected>12</option><option>14</option><option>16</option><option>18</option><option>20</option></select></label>
         <button id="open-balls" class="button secondary">Kadroyu seç</button>
         <button id="open-settings" class="button subtle settings-button">⚙ Yarış ayarları</button>
@@ -41,11 +44,13 @@
       <div id="arena-options" class="arena-options" hidden>
         <label>Arena oyunu <select id="arena-game"><option value="links">Küre · Bağ mücadelesi</option><option value="territory">Alan Savaşı</option></select></label>
         <label id="territory-template-field" hidden>İzleme şablonu <select id="territory-template"><option value="portrait">Dikey fetih · 8 oyuncu</option><option value="crowd">Kalabalık arena · 12 oyuncu</option><option value="country">Türkiye kapışması · 6 oyuncu</option><option value="custom">Özel ayarlar</option></select></label>
+        <label id="arena-link-mode-field">Bağ modu <select id="arena-link-mode"><option value="wall">Çarpışarak bağ kur</option><option value="prelinked">Hazır bağlarla başla</option></select></label>
+        <label id="arena-initial-links-field" hidden>Top başına başlangıç bağı <input id="arena-initial-links" type="number" min="1" max="50" step="1" value="15"></label>
         <label id="arena-shape-field" hidden>Harita / şekil <select id="arena-shape"><option value="triangle">Üçgen</option><option value="square">Kare</option><option value="hexagon">Altıgen</option><option value="star">Yıldız</option><option value="circle">Daire</option></select></label>
         <label id="territory-duration-field" hidden>Süre <select id="territory-duration"><option value="30">30 saniye</option><option value="45" selected>45 saniye</option><option value="60">60 saniye</option></select></label>
       </div>
       <p id="arena-rules" class="workspace-rules" hidden>Her top 3 bağla başlar. Duvara çarptıkça bağ kurar, rakiplerinin bağlarını keser. Bağı kalmayan elenir; son bağlı top kazanır.</p>
-      <p id="spiral-rules" class="workspace-rules" hidden>Top sağ üstten düşer. Buza çarpan top bir parça kırıp kaybolur; toplar bitince dışarıdan yeni bir top gelir. ×2 noktasına ulaşan top çoğalır, sonraki grubun çarpanı artar. Buzun tamamı kırılınca kayıt tamamlanır.</p>
+      <p id="spiral-rules" class="workspace-rules" hidden>Buza çarpan top bir parça kırıp kaybolur; toplar bitince dışarıdan yeni bir top gelir. Girişteki çarpana ek olarak spiralde rastgele yerlerde 4–6 çarpan (×2–×5) bulunur. Geçen toplar çoğalır. Yeni yarış ve Çarpanları yenile yerleri ve değerleri değiştirir. Buzun tamamı kırılınca kayıt tamamlanır.</p>
       <div class="watch-layout">
         <section class="race-stage" aria-label="Yarış görüntüsü">
           <div class="stage-top"><span id="stage-state">Hazır</span><button id="cinema" title="Tam ekran aç">⛶ Tam ekran</button></div>

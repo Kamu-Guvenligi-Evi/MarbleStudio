@@ -1,0 +1,240 @@
+{
+  "tool": "OpenAI built-in imagegen",
+  "style": "Original fantasy character portraits for circular marble textures",
+  "groups": [
+    {
+      "id": "egyptian",
+      "name": "Mısır Mitolojisi",
+      "characters": [
+        {
+          "name": "Anubis",
+          "localName": "Anubis",
+          "src": "/catalog/egyptian-5a2b741f85.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nPrimary request: One original portrait of Anubis, the ancient Egyptian jackal-headed god: sleek black jackal head with tall pointed ears, luminous amber eyes, blue and gold striped nemes headdress, ornate gold and turquoise collar.\nStyle/medium: polished painterly fantasy game character illustration, richly detailed but strong readable silhouette, not a film or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, face large, eyes near center. All ears and headdress contained inside the central circular safe area (80% of square). Opaque deep teal gradient backdrop, gold rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor."
+        },
+        {
+          "name": "Ra",
+          "localName": "Ra",
+          "src": "/catalog/egyptian-7a6409fe45.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Ra, falcon-headed sun god with a round radiant solar disk and small cobra above his head, golden feathers, broad ornate collar.\nColor palette: burnished gold and sunset orange."
+        },
+        {
+          "name": "Osiris",
+          "localName": "Osiris",
+          "src": "/catalog/egyptian-da79395f33.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Osiris, regal green-skinned male deity, long ceremonial beard, white atef crown with side feathers, white and gold robes.\nColor palette: emerald and ivory."
+        },
+        {
+          "name": "Isis",
+          "localName": "İsis",
+          "src": "/catalog/egyptian-d0814a1d14.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Isis, regal Egyptian goddess with dark braided hair, small throne-shaped crown, gold wing-patterned ceremonial collar and robes.\nColor palette: royal blue and gold."
+        },
+        {
+          "name": "Horus",
+          "localName": "Horus",
+          "src": "/catalog/egyptian-b43fc25cf7.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Horus, majestic falcon-headed deity with brown and cream feathers, red-and-white double crown, gold collar.\nColor palette: cobalt and scarlet."
+        },
+        {
+          "name": "Bastet",
+          "localName": "Bastet",
+          "src": "/catalog/egyptian-e22919b647.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Bastet, elegant black cat-headed goddess, short pointed cat ears, vivid green eyes, gold earrings and turquoise ceremonial jewelry.\nColor palette: emerald and gold."
+        },
+        {
+          "name": "Thoth",
+          "localName": "Thot",
+          "src": "/catalog/egyptian-262f7bb047.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Thoth, ibis-headed deity with curved long slender black beak contained within the portrait, silver moon disk, blue and gold collar.\nColor palette: midnight blue and silver."
+        },
+        {
+          "name": "Sekhmet",
+          "localName": "Sekhmet",
+          "src": "/catalog/egyptian-aa113cbbfd.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Sekhmet, powerful lioness-headed goddess with amber eyes, sandy fur, small sun-disk crown, red and gold ceremonial armor.\nColor palette: crimson and gold."
+        },
+        {
+          "name": "Set",
+          "localName": "Set",
+          "src": "/catalog/egyptian-448ab73ba1.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Set, Egyptian Set-animal-headed deity with long downward-curving snout and upright rectangular-tipped ears, red and black ceremonial armor.\nColor palette: obsidian and copper."
+        },
+        {
+          "name": "Hathor",
+          "localName": "Hathor",
+          "src": "/catalog/egyptian-0c8785ecbd.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Hathor, warm regal Egyptian goddess with human face, dark hair, elegant cow-horn headdress surrounding a small sun disk, turquoise jewelry.\nColor palette: turquoise and warm gold."
+        },
+        {
+          "name": "Sobek",
+          "localName": "Sobek",
+          "src": "/catalog/egyptian-37201cd4c2.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Sobek, powerful crocodile-headed god with green scales, closed broad snout, compact ceremonial gold crown and broad gold collar.\nColor palette: jade and gold."
+        },
+        {
+          "name": "Nephthys",
+          "localName": "Neftis",
+          "src": "/catalog/egyptian-78be662d2e.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Nephthys, regal Egyptian goddess with dark hair and compact symbolic basket-over-house headdress, lapis jewelry, deep violet and gold robes.\nColor palette: violet and gold."
+        }
+      ]
+    },
+    {
+      "id": "greek",
+      "name": "Yunan Mitolojisi",
+      "characters": [
+        {
+          "name": "Zeus",
+          "localName": "Zeus",
+          "src": "/catalog/greek-0093edc3ab.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Zeus, mature powerful bearded sky god, flowing silver hair, gold laurel crown, white and gold robes, a small glowing lightning bolt near one shoulder.\nColor palette: storm blue and gold."
+        },
+        {
+          "name": "Hera",
+          "localName": "Hera",
+          "src": "/catalog/greek-31f2f540b9.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Hera, regal mature goddess with dark wavy hair, jeweled gold diadem, elegant purple robes, subtle peacock-feather ornament near shoulder.\nColor palette: plum and gold."
+        },
+        {
+          "name": "Poseidon",
+          "localName": "Poseidon",
+          "src": "/catalog/greek-8e27c6ced8.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Poseidon, rugged bearded sea god with dark wavy hair, sea-green armor, compact three-pronged trident head beside shoulder, sea spray.\nColor palette: deep ocean teal and silver."
+        },
+        {
+          "name": "Demeter",
+          "localName": "Demeter",
+          "src": "/catalog/greek-9cd3586bc4.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Demeter, warm mature goddess with chestnut hair, wheat-ear crown, green robes, golden harvest jewelry.\nColor palette: forest green and wheat gold."
+        },
+        {
+          "name": "Athena",
+          "localName": "Athena",
+          "src": "/catalog/greek-7f3342f30b.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Athena, focused Greek goddess with bronze crested helmet, visible human face, dark hair, ornate armored collar and small owl ornament.\nColor palette: bronze and slate blue."
+        },
+        {
+          "name": "Apollo",
+          "localName": "Apollon",
+          "src": "/catalog/greek-633a74f5d7.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Apollo, radiant youthful adult god, golden curly hair, laurel wreath, elegant gold robes, small lyre ornament beside shoulder.\nColor palette: warm gold and ivory."
+        },
+        {
+          "name": "Artemis",
+          "localName": "Artemis",
+          "src": "/catalog/greek-2a52519e20.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Artemis, confident adult goddess with chestnut hair, silver crescent diadem, forest-green cloak, compact silver bow along shoulder.\nColor palette: forest green and moon silver."
+        },
+        {
+          "name": "Ares",
+          "localName": "Ares",
+          "src": "/catalog/greek-4cab741571.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Ares, stern adult bearded war god, crimson-crested bronze helmet, visible face, dark red cloak and bronze armor.\nColor palette: crimson and gunmetal."
+        },
+        {
+          "name": "Aphrodite",
+          "localName": "Afrodit",
+          "src": "/catalog/greek-753d6dd7f6.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Aphrodite, elegant adult goddess with long golden rose-tinted hair, pearl and shell crown, fully clothed rose robes, soft ocean glow.\nColor palette: rose pink and pearl."
+        },
+        {
+          "name": "Hephaestus",
+          "localName": "Hephaistos",
+          "src": "/catalog/greek-c98c633b76.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Hephaestus, strong rugged smith god, dark curly hair and beard, bronze artisan circlet, soot marks on face, leather apron over robes, small hammer head beside shoulder.\nColor palette: ember orange and bronze."
+        },
+        {
+          "name": "Hermes",
+          "localName": "Hermes",
+          "src": "/catalog/greek-3e06620b9e.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Hermes, clever smiling youthful adult god, winged bronze cap with small wings, traveling cloak, gold caduceus ornament beside shoulder.\nColor palette: sky blue and gold."
+        },
+        {
+          "name": "Hades",
+          "localName": "Hades",
+          "src": "/catalog/greek-4a510f82b0.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Hades, solemn mature underworld god, black wavy hair and beard, dark crown, obsidian armor with amethyst accents.\nColor palette: black and violet."
+        }
+      ]
+    },
+    {
+      "id": "norse",
+      "name": "İskandinav Mitolojisi",
+      "characters": [
+        {
+          "name": "Odin",
+          "localName": "Odin",
+          "src": "/catalog/norse-b1a6fb7390.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Odin, wise elderly one-eyed god, leather eyepatch, long grey beard, dark travel hood, raven perched close to shoulder, runic gold brooch with no legible lettering.\nColor palette: midnight blue and weathered gold."
+        },
+        {
+          "name": "Thor",
+          "localName": "Thor",
+          "src": "/catalog/norse-b750bf91c2.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Thor, powerful red-bearded thunder god, long red hair, iron scale armor, fur collar, compact stone hammer head beside shoulder, electric blue glow.\nColor palette: electric blue and iron."
+        },
+        {
+          "name": "Loki",
+          "localName": "Loki",
+          "src": "/catalog/norse-479c52ab9e.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Loki, cunning adult shapeshifter with swept-back auburn hair, sly smile, dark green embroidered robes, bronze clasp; original folkloric design, no horned comic-book helmet.\nColor palette: emerald and copper."
+        },
+        {
+          "name": "Freyja",
+          "localName": "Freyja",
+          "src": "/catalog/norse-4fc26a40be.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Freyja, confident adult goddess with golden braided hair, ornate amber necklace, feather-trimmed mantle, gold circlet.\nColor palette: amber and wine red."
+        },
+        {
+          "name": "Freyr",
+          "localName": "Freyr",
+          "src": "/catalog/norse-189592fb59.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Freyr, warm adult god with honey-brown hair, short beard, gold circlet, green embroidered ceremonial armor, golden boar brooch.\nColor palette: forest green and gold."
+        },
+        {
+          "name": "Frigg",
+          "localName": "Frigg",
+          "src": "/catalog/norse-563fb1ac8d.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Frigg, wise regal mature goddess with silver-streaked braided brown hair, blue veil, delicate gold crown, elegant woven blue robes.\nColor palette: royal blue and ivory."
+        },
+        {
+          "name": "Tyr",
+          "localName": "Tyr",
+          "src": "/catalog/norse-b116e5143c.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Tyr, stern adult warrior god with brown hair and close beard, iron circlet, rugged blue steel armor, small sword pommel beside shoulder.\nColor palette: steel blue and silver."
+        },
+        {
+          "name": "Heimdall",
+          "localName": "Heimdall",
+          "src": "/catalog/norse-cfb9a5cb56.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Heimdall, alert golden-haired watchman god, gold-trimmed silver armor, small curved drinking horn beside shoulder, subtle rainbow glow.\nColor palette: ivory and gold."
+        },
+        {
+          "name": "Baldr",
+          "localName": "Balder",
+          "src": "/catalog/norse-612eb81eb9.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Baldr, serene luminous adult god with fair golden hair, white cloak, silver clasp, soft radiant light.\nColor palette: white and pale gold."
+        },
+        {
+          "name": "Hel",
+          "localName": "Hel",
+          "src": "/catalog/norse-dbc2d1fed0.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Hel, solemn adult underworld goddess, face split into one warm living half and one cool grey deathly half, dark hair, black crown and cloak, tasteful non-gory depiction.\nColor palette: charcoal and icy violet."
+        },
+        {
+          "name": "Skadi",
+          "localName": "Skadi",
+          "src": "/catalog/norse-834a4944f2.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Skadi, fierce adult winter goddess with pale braided hair, fur-lined hood, blue leather armor, snow crystals.\nColor palette: icy cyan and silver."
+        },
+        {
+          "name": "Njord",
+          "localName": "Njord",
+          "src": "/catalog/norse-c69d92412d.webp",
+          "prompt": "Use case: stylized-concept\nAsset type: square character portrait for Marble Studio's local image library and circular marble textures.\nStyle/medium: original polished painterly fantasy game character illustration, richly detailed but strong readable silhouette; not a film, comic or existing game likeness.\nComposition/framing: square canvas, centered close-up head and shoulders, large face, eyes near center. Entire head and distinctive attributes inside the central circular safe area (80% of square), opaque dark gradient backdrop, luminous rim lighting, restrained atmospheric glow. Crisp face readable at 128px.\nConstraints: only one character, no text, letters, labels, frame, collage, watermark or logo; fully clothed ceremonial armor or robes.\nPrimary request: One original portrait of Njord, weathered older sea god with sandy grey hair and beard, sea-green mantle, gold shell clasp and ocean mist.\nColor palette: sea green and bronze."
+        }
+      ]
+    }
+  ]
+}

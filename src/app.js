@@ -5,6 +5,7 @@ import {FrameInterpolation} from './frame-interpolation.js';
 import {createPiStudio} from './pi-studio.js';
 import {createAutomaticHome} from './automatic-home.js';
 import {createWorkbench} from './workbench.js';
+import {createMatches} from './matches.js';
 import {normalizeSnapshot,createBackup,parseBackup,restoreBackup,downloadJSON} from './studio-transfer.js';
 import {playEffect,stopEffects,COLLISION_SOUNDS,normalizeCollisionSound,collisionEvent,effectInterval,createCollisionNotes} from './impact-audio.js';
 import {appendSoundOptions} from './sound-menu-options.js';
@@ -17,7 +18,8 @@ import './music.css';
 import './game-sound-panel.css';
 import { createMusic } from './music.js';
 import { createStatistics } from './statistics.js';
-import { Spiral } from './spiral.js';
+import { Spiral,spiralLength } from './spiral.js';
+import {SpiralHypnoticAudio} from './spiral-hypnotic-audio.js';
 import { renderSpiral } from './spiral-renderer.js';
 import { Arena } from './arena.js';
 import { TERRITORY_SHAPES, TERRITORY_BUFFS } from './territory.js';
@@ -36,6 +38,7 @@ import { normalizeNames, normalizePresentation, createCameraDirector } from './p
 import './studio-light.css';
 
 const $ = s => document.querySelector(s);
+const matches=createMatches();$('#studio-matches').onclick=()=>matches.open();
 appendSoundOptions($('#collision-sound'),COLLISION_SOUNDS);
 $('#track-preset').add(new Option('Rastgele parkur','random'));
 for(const [id,course] of Object.entries(COURSE_META))if(!$('#track-preset').querySelector(`option[value="${id}"]`))$('#track-preset').add(new Option(course.name,id));
@@ -55,8 +58,9 @@ if(modeDrafts.arena?.arenaGame==='territory'){if(!modeDrafts.territory)modeDraft
 await Promise.all(Object.values(modeDrafts).map(async saved=>{saved.ballImages=await upgradeCatalogImages(normalizeBallImages(saved.ballImages));}));
 const draft=modeDrafts.track;
 let trackPreset=draft?.preset??'saved';
+let trackMaxSpeed=draft?.maxSpeed??18;
 let gameMode='track';
-let spiralTheme='ice',spiralBehavior='classic',arenaEnergy=1,arenaGame='links',arenaShape='triangle',territoryDuration=45;
+let spiralTheme='ice',spiralBehavior='classic',arenaEnergy=1,arenaGame='links',arenaLinkMode='wall',arenaInitialLinks=15,arenaShape='triangle',territoryDuration=45;
 for(const [id,theme] of Object.entries(SPIRAL_THEMES))$('#spiral-theme').add(new Option(theme.name,id));
 let sequence = draft?.sequence ?? null, projectName = draft?.name ?? 'Parkurum';
 let ballImages=await upgradeCatalogImages(normalizeBallImages(draft?.ballImages));
@@ -79,6 +83,7 @@ let raceStarting = false;
 let exportPreparing = false;
 let raceStartRevision = 0;
 let audioCtx, audioBus, audioDestination, lastTone = 0;
+let spiralAudio=null,spiralHypnotic=false,spiralHypnoticMuted=false,hasAudioGesture=false;
 const H = 960;
 const isRecording = () => recorder?.state === 'recording';
 
@@ -101,7 +106,7 @@ const statistics = createStatistics({notify:toast,onVideoRecorded:archiveBrowser
 const pi=createPiStudio({notify:toast,onExport:()=>workbench.openExport()});
 
 createBallEditor({getImages:()=>ballImages,getNames:()=>ballNames,getCount:()=>Number($('#count').value),notify:toast,onRosterChange:(images,names)=>{if(isRecording())throw new Error('Kadroyu kayıt bittikten sonra değiştir.');ballImages=normalizeBallImages(images);ballNames=normalizeNames(names);resetRace();},onChange:next=>{if(isRecording())throw new Error('Görseli kayıt bittikten sonra ekle.');ballImages=next;resetRace();},onNamesChange:next=>{if(isRecording())throw new Error('İsmi kayıt bittikten sonra değiştir.');ballNames=normalizeNames(next);resetRace();}});
-function getProject(){return {mode:gameMode,spiralTheme,variant:spiralBehavior,energy:arenaEnergy,arenaGame,arenaShape,territoryDuration,spiralSfxVersion:1,preset:trackPreset,speed:$('#speed').value,name:projectName,sequence:structuredClone(sequence??[]),seed:Number($('#seed').value),count:Number($('#count').value),sound:$('#sound').checked,collisionSound:$('#collision-sound').value,visualStyle:'neon',trails:$('#trails').checked,ballImages:[...ballImages],ballNames:[...ballNames],presentation:{...presentation}};}
+function getProject(){return {spiralHypnotic,spiralHypnoticMuted,maxSpeed:trackMaxSpeed,mode:gameMode,spiralTheme,variant:spiralBehavior,energy:arenaEnergy,arenaGame,arenaLinkMode,arenaInitialLinks,arenaShape,territoryDuration,spiralSfxVersion:1,preset:trackPreset,speed:$('#speed').value,name:projectName,sequence:structuredClone(sequence??[]),seed:Number($('#seed').value),count:Number($('#count').value),sound:$('#sound').checked,collisionSound:$('#collision-sound').value,visualStyle:'neon',trails:$('#trails').checked,ballImages:[...ballImages],ballNames:[...ballNames],presentation:{...presentation}};}
 function persistDraft(){
   const key=gameMode==='arena'&&arenaGame==='territory'?'territory':gameMode;modeDrafts[key]=getProject();
   try{localStorage.setItem('marble-studio-'+key+'-v1',JSON.stringify(modeDrafts[key]));$('#save-status').textContent='✓ Bu yarışın ayarları kaydedildi';}
@@ -115,8 +120,10 @@ function switchRaceMode(mode,force=false){
     const saved=modeDrafts[key];
     sequence=saved?.sequence?.length?structuredClone(saved.sequence):null;
     projectName=saved?.name??(territory?'Alan Savaşı':mode==='spiral'?'Spiral çoğalma':mode==='arena'?'Küre arenası':'Parkur yarışı');
-    trackPreset=saved?.preset??'saved';
+    trackPreset=saved?.preset??'saved';trackMaxSpeed=saved?.maxSpeed??18;
     spiralTheme=normalizeSpiralTheme(saved?.spiralTheme);spiralBehavior=saved?.variant??'classic';arenaEnergy=saved?.energy??1;arenaGame=territory?'territory':'links';arenaShape=saved?.arenaShape??(territory?'portrait':'triangle');territoryDuration=saved?.territoryDuration??45;
+    spiralHypnotic=saved?.spiralHypnotic??false;spiralHypnoticMuted=saved?.spiralHypnoticMuted??false;
+    arenaLinkMode=saved?.arenaLinkMode??'wall';arenaInitialLinks=saved?.arenaInitialLinks??15;
     ballImages=normalizeBallImages(saved?.ballImages);ballImages.forEach(loadBallImage);
     ballNames=normalizeNames(saved?.ballNames);presentation=normalizePresentation(saved?.presentation);syncPresentation();
     $('#seed').value=saved?.seed??2048;$('#count').value=saved?.count??(mode==='spiral'?1:territory?8:12);
@@ -137,7 +144,48 @@ function initAudio() {
 }
 const effectTimes=new Map();
 let collisionNotes=createCollisionNotes();
+function ensureSpiralAudio(){
+  if(!hasAudioGesture||view!=='watch'||gameMode!=='spiral'||!spiralHypnotic)return;
+  initAudio();
+  spiralAudio??=new SpiralHypnoticAudio(audioCtx,{destinations:[audioCtx.destination,audioDestination]});
+  syncSpiralAudio();
+}
+function syncSpiralAudio(){
+  if(!spiralAudio)return;
+  spiralAudio.setEnabled(gameMode==='spiral'&&spiralHypnotic&&!spiralHypnoticMuted);
+  spiralAudio.setActive(view==='watch'&&!paused&&!document.hidden&&(countdown>0||race?.state==='running'));
+}
+function syncSpiralAudioUI(){
+  const spiral=gameMode==='spiral',hypnotic=spiral&&spiralHypnotic;
+  $('#spiral-hypnotic-field').hidden=!spiral;$('#spiral-hypnotic').checked=spiralHypnotic;
+  $('#spiral-hypnotic-mute').hidden=!hypnotic;$('#spiral-hypnotic-mute').textContent=spiralHypnoticMuted?'Sesi aç · M':'Sesi kapat · M';
+  $('#spiral-hypnotic-mute').setAttribute('aria-pressed',String(spiralHypnoticMuted));
+  $('#sound').closest('.game-sound-director').hidden=hypnotic;
+  $('.music-panel').hidden=hypnotic;
+  if(audioBus)audioBus.gain.setTargetAtTime(hypnotic?0:.22,audioCtx.currentTime,.025);
+  syncSpiralAudio();
+}
+function muteSpiralAudio(){
+  spiralHypnoticMuted=!spiralHypnoticMuted;ensureSpiralAudio();syncSpiralAudioUI();persistDraft();
+}
+$('#spiral-hypnotic').onchange=()=>{
+  spiralHypnotic=$('#spiral-hypnotic').checked;spiralHypnoticMuted=false;
+  if(spiralHypnotic)music.suspend();ensureSpiralAudio();syncSpiralAudioUI();persistDraft();updateUI();
+};
+$('#spiral-hypnotic-mute').onclick=muteSpiralAudio;
+// No AudioContext/oscillator is created for this option until a trusted gesture.
+const audioGesture=event=>{if(event.isTrusted){hasAudioGesture=true;ensureSpiralAudio();}};
+document.addEventListener('pointerdown',audioGesture,{capture:true});
+document.addEventListener('keydown',event=>{
+  audioGesture(event);
+  if(event.code!=='KeyM'||event.repeat||event.ctrlKey||event.metaKey||event.altKey||view!=='watch'||gameMode!=='spiral'||!spiralHypnotic)return;
+  if(event.target.closest('input:not([type="checkbox"]),textarea,select,[contenteditable="true"]'))return;
+  event.preventDefault();muteSpiralAudio();
+});
 function tone(strength, x, effect) {
+  if(gameMode==='spiral'&&spiralHypnotic){
+    spiralAudio?.hit({type:effect?.type??'impact',x,progress:race.cleared/spiralLength});return;
+  }
   if (!$('#sound').checked || !audioCtx || audioCtx.state !== 'running') return;
   if(effect||$('#collision-sound').value!=='classic'){
     const event=collisionEvent({...effect,type:effect?.type??'impact',x,strength},$('#collision-sound').value);
@@ -155,11 +203,11 @@ function tone(strength, x, effect) {
 function resetRace() {
   if (isRecording()) return;
   stopEffects(audioBus);effectTimes.clear();lastTone=-Infinity;collisionNotes=createCollisionNotes();
-  music.reset();
+  music.reset();spiralAudio?.reset();
   music.setGameMode(gameMode);
   race?.dispose();
   const seed = Math.min(999999,Math.max(1,Math.floor(Number($('#seed').value)||2048))); $('#seed').value=seed;
-  race=gameMode==='spiral'?new Spiral({variant:spiralBehavior,theme:spiralTheme,seed,count:Number($('#count').value),ballImages,ballNames,onHit:tone}):gameMode==='arena'?new Arena({energy:arenaEnergy,arenaGame,arenaShape,territoryDuration,seed,count:Number($('#count').value),ballImages,ballNames,onHit:tone}):new Race({seed,sequence:sequence?.length?sequence:null,sections:4,count:Number($('#count').value),ballImages,ballNames,onHit:tone});
+  race=gameMode==='spiral'?new Spiral({variant:spiralBehavior,theme:spiralTheme,seed,count:Number($('#count').value),ballImages,ballNames,onHit:tone}):gameMode==='arena'?new Arena({energy:arenaEnergy,arenaGame,arenaLinkMode,arenaInitialLinks,arenaShape,territoryDuration,seed,count:Number($('#count').value),ballImages,ballNames,onHit:tone}):new Race({maxSpeed:trackMaxSpeed,seed,sequence:sequence?.length?sequence:null,sections:4,count:Number($('#count').value),ballImages,ballNames,onHit:tone});
   director=createCameraDirector();resultElapsed=0;winnerElapsed=null;
   // Freeze the initial starter course too: settings never reshuffle the user's order.
   if(gameMode==='track')sequence=structuredClone(race.sequence);
@@ -172,10 +220,14 @@ function syncModeUI(){
   const arena=gameMode==='arena',spiral=gameMode==='spiral',territory=arena&&arenaGame==='territory';
   $('#territory-template-field').hidden=!territory;$('#territory-template').value=arenaShape==='portrait'&&territoryDuration===45&&Number($('#count').value)===8?'portrait':arenaShape==='portrait'&&territoryDuration===45&&Number($('#count').value)===12?'crowd':arenaShape==='turkey'&&territoryDuration===30&&Number($('#count').value)===6?'country':'custom';
   $('#arena-options').hidden=!arena;$('#arena-game').value=arenaGame;$('#arena-shape').value=arenaShape;$('#territory-duration').value=territoryDuration;$('#arena-shape-field').hidden=!territory;$('#territory-duration-field').hidden=!territory;
+  $('#arena-link-mode-field').hidden=territory;$('#arena-link-mode').value=arenaLinkMode;
+  $('#arena-initial-links-field').hidden=territory||arenaLinkMode!=='prelinked';$('#arena-initial-links').value=arenaInitialLinks;
   $('#arena-rules').textContent=territory?`İlk 2,5 saniye başlangıç koruması. Kapalı iz çizerek alan kazan; açık izini koru. Kendi alanı dışındaki rakibe veya açık izine dokun: elenir, tüm alanı sana geçer. ⚡ Hız: ${TERRITORY_BUFFS.speed.duration} saniye ×1,8. 🛡 Dokunulmazlık: ${String(TERRITORY_BUFFS.shield.duration).replace('.',',')} saniye. Son kalan veya süre sonunda en çok alanı olan kazanır.`+(COUNTRY_MAPS[arenaShape]?' Ülke sahası ana kara sınırlarından sadeleştirilmiştir; ayrı adalar ve kara parçaları dahil değildir.':''):'Her top 3 bağla başlar. Duvara çarptıkça bağ kurar, rakiplerinin bağlarını keser. Bağı kalmayan elenir; son bağlı top kazanır.';
   $('#track-preset-field').hidden=gameMode!=='track';$('#arena-rules').hidden=!arena;$('#camera').closest('label').hidden=gameMode!=='track';
+  if(arena&&!territory&&arenaLinkMode==='prelinked')$('#arena-rules').textContent=`Her top ${arenaInitialLinks} bağla başlar. Bağlar arena duvarına dağılır; duvara çarptıkça yeni bağ kurulur. Rakiplerinin bağlarını kes; bağı kalmayan elenir, son bağlı top kazanır.`;
   $('#spiral-rules').hidden=!spiral;
-  $('#spiral-theme-field').hidden=!spiral;$('#spiral-theme').value=spiralTheme;
+  syncSpiralAudioUI();
+  $('#spiral-theme-field').hidden=!spiral;$('#spiral-theme').value=spiralTheme;$('#spiral-randomize').hidden=!spiral;
   $('#trails').closest('.settings-toggle').hidden=spiral;
   const track=gameMode==='track';
   $('#count-single').hidden=!(spiral||track);$('#count-single').disabled=!(spiral||track);
@@ -222,7 +274,7 @@ async function startRace(fresh = false) {
   const startingRevision=++raceStartRevision;
   raceStarting=true;music.lock(true);updateUI();
   try {
-    await music.prepare({mode:gameMode,balls:race.balls});
+    if(!(gameMode==='spiral'&&spiralHypnotic))await music.prepare({mode:gameMode,balls:race.balls});
     if(race!==startingRace||startingRevision!==raceStartRevision)return;
     beginRace();setView('watch');
   }catch(error){toast(error.message||'Müzik hazırlanamadı. Müziğini kontrol edip tekrar dene.');}
@@ -256,7 +308,8 @@ function updateUI() {
   $('#pause').disabled=empty || raceStarting || recordStarting || exportPreparing || (isRecording() && race.state==='finished');
   $('#record').disabled=empty||recordStarting||raceStarting||exportPreparing;
   for(const mode of ['track','arena','territory','statistics','spiral','pi'])$('#nav-'+mode).disabled=locked;
-  for(const selector of ['#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#territory-template','#collision-sound','#preview-collision-sound','#sound','#open-settings'])$(selector).disabled=locked;
+  for(const selector of ['#count','#open-balls','#track-preset','#spiral-theme','#spiral-randomize','#spiral-hypnotic','#arena-game','#arena-link-mode','#arena-initial-links','#arena-shape','#territory-duration','#territory-template','#collision-sound','#preview-collision-sound','#sound','#open-settings'])$(selector).disabled=locked;
+  if(gameMode==='spiral'&&spiralHypnotic){$('#collision-sound').disabled=true;$('#preview-collision-sound').disabled=true;}
   $('#ranking-title').textContent=gameMode==='spiral'?'Spiraldeki toplar':race.finished.length?'Sonuçlar':race.state==='ready'?'Yarışmacılar':'Canlı sıralama';
   const spiral=gameMode==='spiral',arena=gameMode==='arena',territory=arena&&race.arenaGame==='territory',active=arena?race.balls.filter(b=>b.eliminatedAt===null).length:0;
   $('#finish-count').textContent=spiral?`${race.balls.length} top · ${race.totalBreaks} kırılma`:territory?`${active}/${race.balls.length} oyuncu · ${race.state==='finished'?'Bitti':Math.ceil(race.duration-race.time)+' sn'}`:arena?`${active} / ${race.balls.length} top kaldı`:race.finished.length?`${race.finished.length} / ${race.balls.length} finish`:`${race.balls.length} top`;
@@ -283,7 +336,8 @@ function frame(now) {
     if(race.state==='finished')resultElapsed+=elapsed;
   }
   draw();if(race.state==='finished'&&isRecording()&&resultElapsed>=Math.max(race.arenaGame==='territory'?3:0,presentation.outro))stopRecord();
-  music.sync(view==='watch'&&!paused&&(countdown>0||race.state==='running'||(race.state==='finished'&&resultElapsed<Math.max(race.arenaGame==='territory'?3:0,presentation.outro))),gameMode==='track'?race.ranking()[0]:null,race.state==='running'||countdown>0);
+  syncSpiralAudio();
+  music.sync(!(gameMode==='spiral'&&spiralHypnotic)&&view==='watch'&&!paused&&(countdown>0||race.state==='running'||(race.state==='finished'&&resultElapsed<Math.max(race.arenaGame==='territory'?3:0,presentation.outro))),gameMode==='track'?race.ranking()[0]:null,race.state==='running'||countdown>0);
   uiTick+=elapsed;if(uiTick>.12){if(view==='watch')updateUI();uiTick=0;}requestAnimationFrame(frame);
 }
 
@@ -292,7 +346,7 @@ function recordingUI(active) {
   $('#record').classList.toggle('recording',active);
   $('#record').innerHTML=active?'■ Kaydı bitir ve indir':'<span aria-hidden="true">●</span> Videoya kaydet';
   $('#record-help').textContent=active?'Kayıt sürüyor. Bu sekmeyi açık tut; finişte videon otomatik indirilecek.':'Yarış baştan oynatılır ve kaydedilir. Bittiğinde dikey videon otomatik iner.';
-  for(const selector of ['#nav-track','#nav-arena','#nav-territory','#nav-statistics','#nav-pi','#nav-spiral','#open-settings','#reset','#speed','#new-race','#camera','#count','#open-balls','#track-preset','#spiral-theme','#arena-game','#arena-shape','#territory-duration','#territory-template','#collision-sound','#preview-collision-sound','#sound'])$(selector).disabled=active;
+  for(const selector of ['#nav-track','#nav-arena','#nav-territory','#nav-statistics','#nav-pi','#nav-spiral','#open-settings','#reset','#speed','#new-race','#camera','#count','#open-balls','#track-preset','#spiral-theme','#spiral-randomize','#spiral-hypnotic','#arena-game','#arena-link-mode','#arena-initial-links','#arena-shape','#territory-duration','#territory-template','#collision-sound','#preview-collision-sound','#sound'])$(selector).disabled=active;
 }
 async function startRecord() {
   if(recordStarting||raceStarting||exportPreparing)return;
@@ -309,9 +363,9 @@ async function startRecord() {
     recordingUI(true);updateUI();
     await Promise.all(ballImages.map(loadBallImage));
     initAudio();resetRace();$('#speed').value='1';
-    await music.prepare({mode:gameMode,balls:race.balls});
+    if(!(gameMode==='spiral'&&spiralHypnotic))await music.prepare({mode:gameMode,balls:race.balls});
     stream=canvas.captureStream();
-    if($('#sound').checked||music.enabled())audioDestination.stream.getAudioTracks().forEach(t=>stream.addTrack(t.clone()));
+    if((gameMode==='spiral'&&spiralHypnotic)||$('#sound').checked||music.enabled())audioDestination.stream.getAudioTracks().forEach(t=>stream.addTrack(t.clone()));
     const session=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:10_000_000});
     const chunks=[];
     const filename=gameMode==='spiral'?`marble-spiral-${race.seed}.webm`:gameMode==='arena'?`marble-orbit-${race.seed}.webm`:`marble-${race.sectionCount}-sections-${race.seed}.webm`;
@@ -348,8 +402,15 @@ $('#nav-spiral').onclick=()=>switchRaceMode('spiral');
 $('#nav-pi').onclick=()=>setView('pi');
 $('#nav-statistics').onclick=()=>setView('statistics');
 $('#count').onchange=resetRace;
+$('#spiral-randomize').onclick=()=>{freshSeed();resetRace();};
 $('#arena-game').onchange=()=>switchRaceMode($('#arena-game').value==='territory'?'territory':'arena');
 $('#territory-template').onchange=()=>{const preset={portrait:['portrait',8,45],crowd:['portrait',12,45],country:['turkey',6,30]}[$('#territory-template').value];if(!preset)return;[arenaShape,,territoryDuration]=preset;$('#count').value=preset[1];resetRace();};
+$('#arena-link-mode').onchange=()=>{arenaLinkMode=$('#arena-link-mode').value;resetRace();};
+$('#arena-initial-links').onchange=()=>{
+  const value=Number($('#arena-initial-links').value);
+  if(!Number.isInteger(value)||value<1||value>50){toast('Başlangıç bağ sayısı 1–50 arasında bir tam sayı olmalı.');$('#arena-initial-links').value=arenaInitialLinks;return;}
+  arenaInitialLinks=value;resetRace();
+};
 $('#arena-shape').onchange=()=>{arenaShape=$('#arena-shape').value;resetRace();};
 $('#territory-duration').onchange=()=>{territoryDuration=Number($('#territory-duration').value);resetRace();};
 $('#speed').onchange=persistDraft;
@@ -360,8 +421,12 @@ $('#spiral-theme').onchange=()=>{
 $('#track-preset').onchange=()=>{
   trackPreset=$('#track-preset').value;
   if(trackPreset==='saved')return;
+  trackMaxSpeed=COURSE_META[trackPreset]?.maxSpeed??18;
   if(trackPreset==='random'){freshSeed();projectName='Rastgele parkur';resetRace();return;}
-  const presetRace=new Race({preset:trackPreset,seed:Number($('#seed').value),sections:4});
+  const meta=COURSE_META[trackPreset];
+  if(meta.count)$('#count').value=meta.count;
+  if(meta.maxSpeed){$('#speed').value='1';presentation={...presentation,countdown:3,outro:2};syncPresentation();}
+  const presetRace=new Race({preset:trackPreset,seed:Number($('#seed').value),sections:4,sequence:meta.maxSpeed?meta.modules:null,maxSpeed:trackMaxSpeed});
   sequence=structuredClone(presetRace.sequence);presetRace.dispose();projectName=$('#track-preset').selectedOptions[0].textContent;resetRace();
 };
 $('#sound').onchange=()=>{if($('#sound').checked)initAudio();else stopEffects(audioBus);persistDraft();};
@@ -389,9 +454,9 @@ document.addEventListener('keydown',e=>{
     e.preventDefault();togglePause();
   }
 });
-document.addEventListener('visibilitychange',()=>{last=performance.now();});
+document.addEventListener('visibilitychange',()=>{last=performance.now();syncSpiralAudio();});
 resetRace();setView('watch',false);requestAnimationFrame(frame);
-window.marbleStudio={getPiState:()=>pi.state(),getStatisticsState:()=>statistics.state(),getState:()=>({music:music.state(),leader:race.ranking()[0]?.name,mode:gameMode,spiralTheme,spiralProgress:race.progress,spiralRound:race.round,spiralMultiplier:race.multiplier,consumed:race.totalConsumed,totalBreaks:race.totalBreaks,links:race.links?.length,active:race.balls.filter(b=>b.eliminatedAt===null).length,cuts:race.totalCuts,name:projectName,state:race.state,view,workspace:['statistics','pi'].includes(view)?view:gameMode,time:race.time,count:race.balls.length,finished:race.finished.length,custom:race.isCustom,paused,cameraY,finishY:race.finishY,sections:race.sections.map(s=>({type:s.type,y:s.y,settings:s.settings})),seed:race.seed,recording:isRecording(),positions:race.balls.map(b=>({x:b.body.position.x,y:b.body.position.y})),names:race.balls.map(b=>b.name),podium:race.finished.slice(0,3).map(b=>({id:b.id,name:b.name,time:b.finishedAt})),countdown,resultElapsed,presentation:{...presentation}})};
+window.marbleStudio={getPiState:()=>pi.state(),getStatisticsState:()=>statistics.state(),getState:()=>({music:music.state(),leader:race.ranking()[0]?.name,mode:gameMode,spiralTheme,spiralHypnotic,spiralHypnoticMuted,spiralAudio:spiralAudio?.state()??null,spiralProgress:race.progress,spiralRound:race.round,spiralMultiplier:race.multiplier,spiralGates:race.multipliers?.map(g=>({id:g.id,value:g.value,distance:g.distance,point:{...g.point},hits:g.hits})),consumed:race.totalConsumed,totalBreaks:race.totalBreaks,links:race.links?.length,active:race.balls.filter(b=>b.eliminatedAt===null).length,cuts:race.totalCuts,name:projectName,state:race.state,view,workspace:['statistics','pi'].includes(view)?view:gameMode,time:race.time,count:race.balls.length,finished:race.finished.length,custom:race.isCustom,paused,cameraY,finishY:race.finishY,sections:race.sections.map(s=>({type:s.type,y:s.y,settings:s.settings})),seed:race.seed,recording:isRecording(),positions:race.balls.map(b=>({x:b.body.position.x,y:b.body.position.y})),names:race.balls.map(b=>b.name),podium:race.finished.slice(0,3).map(b=>({id:b.id,name:b.name,time:b.finishedAt})),countdown,resultElapsed,presentation:{...presentation}})};
 
 
 const busy=()=>isRecording()||recordStarting||raceStarting||exportPreparing||statistics.isRecording();
@@ -439,3 +504,8 @@ $('#studio-backup-file').onchange=async e=>{
 
 createAutomaticHome({create:options=>workbench.createAutomatic(options),videos:()=>workbench.openVideos(),works:()=>workbench.openWorks(),youtubeAccounts:()=>workbench.youtubeAccounts(),edit:kind=>{if(kind==='pi')setView('pi');else if(kind==='statistics')setView('statistics');else if(kind!=='auto')switchRaceMode(kind);},busy,pause:()=>{paused=true;pi.pause();statistics.pause();music.suspend();updateUI();}});
 mountStudioNavigation();
+
+if(new URLSearchParams(location.search).get('course')==='longduel'){
+  $('#track-preset').value='longduel';$('#track-preset').onchange();
+  history.replaceState(null,'',location.pathname+'?edit=1');
+}

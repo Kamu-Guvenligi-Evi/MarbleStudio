@@ -7,10 +7,12 @@ try{
   await page.goto((process.env.TEST_FACTORY_ORIGIN??'http://127.0.0.1:5174')+'?edit=1');await page.waitForFunction(()=>window.marbleStudio);
   assert.equal(await page.locator('#collision-sound option').count(),Object.keys(COLLISION_SOUNDS).length);
   assert.equal(await page.locator('#collision-sound option[value="bruh"]').evaluate(el=>el.parentElement.label),'Konuşma ve tepki sesleri');
+  await page.getByText('Ses ve müzik',{exact:true}).click();
   await page.locator('#collision-sound').selectOption('meme-meow');
   assert.ok(await page.locator('#sound').isChecked());
   await page.locator('#preview-collision-sound').click();
   await page.reload();await page.waitForFunction(()=>window.marbleStudio);
+  await page.getByText('Ses ve müzik',{exact:true}).click();
   assert.equal(await page.locator('#collision-sound').inputValue(),'meme-meow');
   await page.locator('#nav-arena').click();await page.locator('#collision-sound').selectOption('bonk');
   await page.locator('#nav-track').click();assert.equal(await page.locator('#collision-sound').inputValue(),'meme-meow');
@@ -20,6 +22,7 @@ try{
     assert.ok(await page.locator('#watch-view').getByRole('heading',{name:'Ses menüsü',exact:true}).isVisible());
     await page.locator('#collision-sound').selectOption(sound);await page.locator('#preview-collision-sound').click();
     await page.reload();await page.waitForFunction(()=>window.marbleStudio);await page.locator('#nav-'+mode).click();
+    await page.getByText('Ses ve müzik',{exact:true}).click();
     assert.equal(await page.locator('#collision-sound').inputValue(),sound);
   }
   await page.locator('#nav-pi').click();await page.locator('#pi-collision-sound').selectOption('bonk');
@@ -30,6 +33,7 @@ try{
   assert.equal(await page.evaluate(()=>window.marbleStudio.getPiState().collisionSound),'bonk');
   await page.setViewportSize({width:390,height:844});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Pi sound menu fits mobile');
+  await page.getByRole('button',{name:/Oyun seç/}).click();
   await page.locator('#nav-arena').click();
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Core sound menu fits mobile');
   const energies=await page.evaluate(async()=>{
@@ -44,8 +48,18 @@ try{
     return energies;
   });
   for(const [left,right] of energies){assert.ok(left>0);assert.ok(right>left);}
+  await page.setViewportSize({width:1280,height:900});
+  await page.getByText('Ses ve müzik',{exact:true}).click();
   await page.locator('#sound').uncheck();await page.reload();await page.waitForFunction(()=>window.marbleStudio);
+  await page.getByText('Ses ve müzik',{exact:true}).click();
   await page.locator('#nav-arena').click();assert.equal(await page.locator('#sound').isChecked(),false);
+  for(const sound of ['cash-register','minecraft-villager']){
+    await page.locator('#collision-sound').selectOption(sound);await page.locator('#preview-collision-sound').click();
+    assert.ok(await page.locator('#sound').isChecked());
+    await page.reload();await page.waitForFunction(()=>window.marbleStudio);await page.locator('#nav-arena').click();
+    await page.getByText('Ses ve müzik',{exact:true}).click();
+    assert.equal(await page.locator('#collision-sound').inputValue(),sound);
+  }
   assert.deepEqual(errors,[]);
   console.log(`PASS: sound selector, preview, per-mode persistence, mute persistence and ${Object.keys(COLLISION_SOUNDS).length} stereo Web Audio effects.`);
 }finally{await browser.close();}

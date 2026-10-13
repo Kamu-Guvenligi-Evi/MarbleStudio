@@ -30,6 +30,16 @@ export const gatePoint={x:200,y:697};
 const GRAVITY=650,ENTRY_SPEED=Math.sqrt(650*650+2*GRAVITY*(480-276));
 const BALL_HUES=[336,28,54,134,170,214,258,286];
 
+export function spiralMultiplierLayout(seed=2048){
+  const rng=random(seed^0x47ac921),count=4+Math.floor(rng()*3),start=gateDistance+180,end=length*.93;
+  const gates=[];
+  for(let id=0;id<count;id++){
+    const distance=start+(id+.2+rng()*.6)*(end-start)/count;
+    gates.push({id,distance,value:2+Math.floor(rng()*4),point:spiralPoint(distance)});
+  }
+  return gates;
+}
+
 export class Spiral{
   constructor({variant='classic',theme='ice',seed=2048,count=1,ballImages=[],ballNames=[],onHit=()=>{}}={}){
     this.variant=spiralVariant(variant);this.dynamics=SPIRAL_VARIANTS[this.variant];this.theme=normalizeSpiralTheme(theme);this.palette=SPIRAL_THEMES[this.theme].hues||BALL_HUES;this.mode='spiral';this.seed=seed;this.rng=random(seed);this.onHit=onHit;
@@ -38,6 +48,7 @@ export class Spiral{
     this.cleared=initialFront;this.lastSpawn=-10;this.totalBreaks=0;
     this.ice=new SpiralIce();
     this.nextMultiplier=2;this.nextBallId=0;this.totalConsumed=0;this.round=1;this.respawnAt=null;
+    this.multipliers=spiralMultiplierLayout(seed).map(gate=>({...gate,hits:0,activatedAt:null}));
     this.images=ballImages;this.names=ballNames;
     for(let i=0;i<Math.max(1,Math.min(20,count));i++)this.addBall(1/60+i*.18);
   }
@@ -47,6 +58,7 @@ export class Spiral{
     const ball={id,name:this.names[id%Math.max(1,this.names.length)]||NAMES[id%NAMES.length],
       imageSrc:this.images[id%Math.max(1,this.images.length)],hue:this.palette[id%this.palette.length],color:'hsl('+this.palette[id%this.palette.length]+' 95% 60%)',
       distance:0,velocity:650,entrySpeed:ENTRY_SPEED,airborne:true,multiplied:false,release:this.time+delay,
+      passedMultipliers:new Set(),
       trail:[],finishedAt:null,body:{position:{x:515,y:276},circleRadius:10}};
     this.balls.push(ball);return ball;
   }
@@ -73,6 +85,16 @@ export class Spiral{
     }
     this.sound('ice',5,p.x,this.totalBreaks*31+1);
   }
+  multiply(ball,value,point){
+    ball.entrySpeed=this.dynamics.speed;
+    const extra=Math.max(0,Math.min(value-1,SPIRAL.limit-this.balls.length));
+    for(let i=0;i<extra;i++){
+      const copy=this.addBall((i+1)*this.dynamics.gap);copy.airborne=false;copy.multiplied=ball.multiplied;copy.entrySpeed=this.dynamics.speed;
+      copy.passedMultipliers=new Set(ball.passedMultipliers);
+      copy.distance=ball.distance;copy.velocity=ball.velocity;copy.body.position=spiralPoint(ball.distance);
+    }
+    this.lastSpawn=this.time;this.sound('multiply',7,point.x,ball.id+value);
+  }
   tick(dt){
     this.time+=dt;
     if(this.respawnAt!==null&&this.time>=this.respawnAt){
@@ -87,7 +109,7 @@ export class Spiral{
         continue;
       }
       b.velocity=Math.sqrt(Math.max(10000,b.entrySpeed**2+2*GRAVITY*(b.body.position.y-480)));
-      b.distance+=b.velocity*dt;
+      const previousDistance=b.distance;b.distance+=b.velocity*dt;
       b.distance=Math.min(length,b.distance);b.body.position=spiralPoint(b.distance);
       const contact=this.ice.contact(b.body.position.x,b.body.position.y,b.body.circleRadius);
       if(contact){
@@ -98,16 +120,17 @@ export class Spiral{
       }
       if(!b.multiplied&&Math.hypot(b.body.position.x-gatePoint.x,b.body.position.y-gatePoint.y)<26){
         b.multiplied=true;b.entrySpeed=this.dynamics.speed;
-        const extra=Math.min(this.multiplier-1,SPIRAL.limit-this.balls.length);
         // Release the multiplied group from the gate in a spaced stream.
         // Reserved balls stay in the group until their release time, so a new
         // outside ball cannot arrive while part of this group is still pending.
-        for(let i=0;i<extra;i++){
-          const copy=this.addBall((i+1)*this.dynamics.gap);copy.airborne=false;copy.multiplied=true;copy.entrySpeed=this.dynamics.speed;
-          copy.distance=b.distance;copy.velocity=b.velocity;copy.body.position=spiralPoint(b.distance);
-        }
+        this.multiply(b,this.multiplier,gatePoint);
         this.nextMultiplier=Math.min(SPIRAL.limit,this.nextMultiplier+1);
-        this.lastSpawn=this.time;this.sound('multiply',7,gatePoint.x,this.nextMultiplier);
+      }
+      for(const gate of this.multipliers){
+        if(previousDistance<=gate.distance&&b.distance>=gate.distance&&!b.passedMultipliers.has(gate.id)){
+          b.passedMultipliers.add(gate.id);gate.hits++;gate.activatedAt=this.time;
+          this.multiply(b,gate.value,gate.point);
+        }
       }
     }
     this.balls=this.balls.filter(b=>!consumed.has(b.id));

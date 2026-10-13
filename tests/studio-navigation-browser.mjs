@@ -14,7 +14,8 @@ try {
     await page.setViewportSize({width:1440,height:900});
     await page.goto(origin+path);
     await page.waitForFunction(api=>!!window[api]&&!!document.querySelector('.studio-navigation'),api);
-    assert.equal(await page.locator('.studio-game-list [data-studio-game]').count(),10);
+    assert.equal(await page.locator('.studio-game-list [data-studio-game]').count(),11);
+    assert.equal(await page.locator('.studio-game-list [data-studio-game="rock-paper-scissors"]').count(),1);
     assert.equal(await page.locator('.studio-game-list [aria-current=page]').count(),1,path+' active game');
     assert.equal(await page.locator('.studio-toolbar #studio-export,.studio-toolbar #export').count(),1,path+' single export');
     const groups=page.locator('.studio-setting-group');assert.ok(await groups.count()>=2);

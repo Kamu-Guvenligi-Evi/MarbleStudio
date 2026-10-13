@@ -12,6 +12,7 @@ HEADERS = {'User-Agent': 'MarbleStudio/0.3 (local curated image library)'}
 FILE_OVERRIDES={'Seljuk Empire':'Map of the Seljuk Empire (1092).png','Minecraft':'Minecraft game logo 2023.png','Fortnite':'FortniteLogo.svg','Dark Souls':'Dark Souls logo black.svg','Fall Guys':'Fall Guys cover.jpg'}
 FILE_OVERRIDES.update(json.loads((ROOT/'scripts'/'catalog-files.json').read_text(encoding='utf-8')))
 BRAND_OVERRIDES={'Porsche':'porsche','Turkish Airlines':'turkishairlines'}
+TEAM_SOURCES=json.loads((ROOT/'scripts'/'catalog-team-sources.json').read_text(encoding='utf-8'))
 sys.stdout.reconfigure(encoding='utf-8')
 request_lock=threading.Lock()
 last_request=0
@@ -33,16 +34,26 @@ def fetch(url, binary=False):
 def clean(value):
     return html.unescape(re.sub('<[^>]+>', '', value or '')).strip()
 
+def catalog_id(category,title):
+    return TEAM_SOURCES.get(title,{}).get('id') or category + '-' + hashlib.sha1(title.encode()).hexdigest()[:10]
+
 def download(spec):
     category, name, title = spec
-    ident = category + '-' + hashlib.sha1(title.encode()).hexdigest()[:10]
+    ident = catalog_id(category,title)
     cached = DEST / (ident + '.json')
     if cached.exists():
         item = json.loads(cached.read_text(encoding='utf-8'))
-        if (ROOT / 'public' / item['src'].lstrip('/')).exists() and item.get('fileOverride')==FILE_OVERRIDES.get(title) and item.get('brandSlug')==BRAND_OVERRIDES.get(title): return item
+        if (ROOT / 'public' / item['src'].lstrip('/')).exists() and item.get('fileOverride')==FILE_OVERRIDES.get(title) and item.get('brandSlug')==BRAND_OVERRIDES.get(title):
+            if item['category']!=category or item['name']!=name:
+                item.update(category=category,name=name)
+                cached.write_text(json.dumps(item,ensure_ascii=False),encoding='utf-8')
+            return item
     try:
         item = dict(id=ident, category=category, name=name)
-        if category == 'countries':
+        if TEAM_SOURCES.get(title,{}).get('downloadUrl'):
+            item.update({k:v for k,v in TEAM_SOURCES[title].items() if k!='id'})
+            url=item['downloadUrl']
+        elif category == 'countries':
             url = 'https://flagcdn.com/w160/' + title + '.png'
             item.update(source='https://flagpedia.net/' + title, credit='Flagpedia / Flagcdn', license='Ülke bayrağı', licenseUrl='https://flagcdn.com/', fit='contain')
         elif title in BRAND_OVERRIDES:

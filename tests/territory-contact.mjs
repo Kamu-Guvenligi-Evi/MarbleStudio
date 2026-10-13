@@ -5,7 +5,7 @@ function separated(race){
   const live=race.balls.filter(b=>b.eliminatedAt===null);
   for(let i=0;i<live.length;i++)for(let j=i+1;j<live.length;j++){
     const a=live[i].body.position,b=live[j].body.position;
-    assert.ok(Math.hypot(a.x-b.x,a.y-b.y)>=live[i].body.circleRadius+live[j].body.circleRadius+2-1e-7,`${race.arenaShape}: players ${live[i].id}/${live[j].id} overlap at ${race.time}`);
+    assert.ok(Math.hypot(a.x-b.x,a.y-b.y)>=live[i].body.circleRadius+live[j].body.circleRadius+4-1e-7,`${race.arenaShape}: players ${live[i].id}/${live[j].id} overlap at ${race.time}`);
   }
 }
 function place(race,b,cell){b.cell=cell;b.body.position=race.position(cell);b.phase=0;b.route=[];}
@@ -48,4 +48,4 @@ for(const arenaShape of Object.keys(TERRITORY_SHAPES)){
   separated(race);race.start();
   while(race.state==='running'){race.step();separated(race);}
 }
-console.log('PASS: protected obstacle detours, head-on passage, continuous movement and no overlapping survivors on all 11 arenas with 20 players.');
+console.log(`PASS: protected obstacle detours, head-on passage, continuous movement and no overlapping survivors on all ${Object.keys(TERRITORY_SHAPES).length} arenas with 20 players.`);

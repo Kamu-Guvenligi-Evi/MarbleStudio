@@ -16,6 +16,10 @@ assert.throws(()=>normalizeSnapshot({mode:'spiral',project:{variant:'bad'}}));
 assert.throws(()=>normalizeSnapshot({mode:'arena',project:{energy:99}}));
 assert.equal(leastRecent(['a','b'],['a'],()=>0),'b');
 assert.equal(outputQuality({hits:10,firstEventSeconds:8,longestQuietSeconds:20,visibleRatio:.2,idleRatio:.8},1).accepted,false);
+const protectedOpening={hits:10,firstEventSeconds:3.2,longestQuietSeconds:3.2,visibleRatio:1,idleRatio:0,openingSeconds:2.5};
+assert.equal(outputQuality(protectedOpening,1).accepted,true);
+assert.equal(outputQuality({...protectedOpening,firstEventSeconds:6},1).accepted,false);
+assert.equal(outputQuality({...protectedOpening,openingSeconds:0},1).accepted,false);
 const history=[];
 for(let i=0;i<18;i++){
  const options=await planAutomatic(validateBatch({automatic:true,automaticMode:'auto',count:1}),history,root);

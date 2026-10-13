@@ -57,7 +57,7 @@ export async function upgradeCatalogImages(images) {
 
 export function createImageCatalog({getImages,getNames,getCount,onRosterChange,onApplied,notify}) {
   const $=id=>document.getElementById(id),dialog=$('catalog-dialog');
-  let catalog=null,category='countries',selected=0,busy=false,loading=false;
+  let catalog=null,category='countries',selected=0,busy=false,loading=false,loadError='',previewObserver=null;
   const status=message=>{$('catalog-status').textContent=message;};
   const filtered=()=>{
     const query=fold($('catalog-search').value.trim());
@@ -84,15 +84,32 @@ export function createImageCatalog({getImages,getNames,getCount,onRosterChange,o
     }
   }
   function renderGrid() {
+    previewObserver?.disconnect();
+    previewObserver=new IntersectionObserver(entries=>{
+      for(const entry of entries){
+        if(!entry.isIntersecting)continue;
+        previewObserver.unobserve(entry.target);
+        entry.target.loadPreview();
+      }
+    },{root:dialog,rootMargin:'100px'});
     const items=filtered();$('catalog-grid').replaceChildren();$('catalog-count').textContent=`${items.length} görsel`;
     $('catalog-fill').disabled=busy||!items.length;
     $('catalog-fill').textContent=`${Math.min(items.length,getCount())} top için kadro oluştur`;
-    if(!items.length&&!loading){const empty=document.createElement('p');empty.className='catalog-empty';empty.textContent='Bu aramada görsel bulunamadı. Tümü kategorisini veya başka bir isim dene.';$('catalog-grid').append(empty);}
+    if(!items.length&&!loading){const empty=document.createElement('p');empty.className='catalog-empty';empty.textContent=loadError||'Bu aramada görsel bulunamadı. Tümü kategorisini veya başka bir isim dene.';$('catalog-grid').append(empty);}
     for(const item of items) {
       const card=document.createElement('article');card.className='catalog-card';
       const button=document.createElement('button');button.type='button';button.dataset.catalogItem=item.id;button.disabled=busy;button.setAttribute('aria-label',`${item.name} görselini topa ekle`);
-      const img=document.createElement('img');img.src=item.src;img.alt='';img.loading='lazy';img.decoding='async';img.className=item.fit==='contain'?'catalog-contain':'';
-      prepareCatalogImage(item).then(src=>{img.src=src;img.className='';img.style.objectPosition='center';}).catch(()=>{});
+      const img=document.createElement('img');img.alt='';img.decoding='async';
+      // Decode/crop only cards near the visible part of the dialog. Eagerly
+      // preparing every card defeats lazy loading and stalls slower computers.
+      button.loadPreview=()=>prepareCatalogImage(item).then(src=>{
+        if(button.isConnected){img.src=src;img.style.objectPosition='center';}
+      }).catch(()=>{
+        if(!button.isConnected)return;
+        button.disabled=true;img.alt='Görsel dosyası eksik';
+        status('Bazı görsel dosyaları okunamadı. Uygulamanın public/catalog klasörünü eksiksiz kopyalayın.');
+      });
+      previewObserver.observe(button);
       img.onerror=()=>{button.disabled=true;img.alt='Görsel yüklenemedi';};
       const label=document.createElement('span');label.textContent=item.localName?`${item.localName} · ${item.name}`:item.name;button.append(img,label);button.onclick=()=>apply([item],false);
       const source=document.createElement('a');source.href=item.source;source.target='_blank';source.rel='noopener';source.textContent='Kaynak ↗';source.title=`${item.credit} · ${item.license}`;source.setAttribute('aria-label',`${item.name}: kaynak ve kullanım bilgisi`);
@@ -118,16 +135,20 @@ export function createImageCatalog({getImages,getNames,getCount,onRosterChange,o
     }
   }
   async function load() {
-    if(loading)return;loading=true;$('catalog-retry').hidden=true;status('Yerel görsel kütüphanesi açılıyor…');
+    if(loading)return;loading=true;loadError='';$('catalog-retry').hidden=true;status('Yerel görsel kütüphanesi açılıyor…');
     try {
-      const response=await fetch('/catalog/manifest.json');if(!response.ok)throw new Error('Kütüphane dosyası okunamadı.');
-      catalog=await response.json();if(!Array.isArray(catalog.items)||!catalog.items.length)throw new Error('Kütüphane boş.');
+      const response=await fetch('/catalog/manifest.json',{cache:'no-cache',signal:AbortSignal.timeout(10000)});if(!response.ok)throw new Error('Kütüphane dosyası okunamadı.');
+      const next=await response.json();
+      if(!Array.isArray(next.items)||!next.items.length||!Array.isArray(next.categories)||next.items.some(item=>!item||typeof item.id!=='string'||typeof item.name!=='string'||typeof item.src!=='string'||!item.src.startsWith('/catalog/'))||next.categories.some(group=>!group||typeof group.id!=='string'||typeof group.name!=='string'))throw new Error('Kütüphane dosyası eksik veya geçersiz.');
+      catalog=next;
+      if(!catalog.items.some(item=>item.category===category))category='all';
       $('catalog-total').textContent=`${catalog.items.length} görsel · ${catalog.categories.length} kategori · Cihazında hazır`;
       status('Kategoriyi seç, ardından bir görsele dokun.');renderCategories();
-    }catch(error){catalog=null;$('catalog-total').textContent='Kütüphane yüklenemedi';status('Görsel kütüphanesi okunamadı. ZIP dosyasının tamamını yeni bir klasöre çıkartıp Baslat.cmd ile aç, ardından Yeniden dene düğmesine bas.');$('catalog-retry').hidden=false;}
+    }catch(error){catalog=null;loadError='Görsel kütüphanesi yüklenemedi. Uygulamayı ZIP içinden değil, tüm dosyalarını çıkardığın klasördeki Baslat.cmd ile açıp yeniden dene.';status(loadError);$('catalog-total').textContent='Kütüphane yüklenemedi';$('catalog-categories').replaceChildren();$('catalog-retry').hidden=false;}
     finally{loading=false;renderGrid();}
   }
   $('catalog-target').onchange=()=>{selected=Number($('catalog-target').value);renderRoster();};
+  dialog.addEventListener('close',()=>previewObserver?.disconnect());
   $('catalog-search').oninput=renderGrid;$('catalog-retry').onclick=load;
   $('catalog-fill').onclick=()=>{
     const items=[...filtered()];for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]];}

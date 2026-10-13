@@ -1,0 +1,135 @@
+ALAN SAVASI — IZLENEBILIRLIK ANALIZI
+Tarih: 2026-10-13
+Kapsam: Products/MarbleStudio, mevcut TerritoryBattle ve renderTerritory.
+Ilk bolum degisiklik oncesi analizidir. Uygulama ve sonuclar dosyanin sonunda.
+Olcum, gorsel inceleme ve video dogrulamasi yerelde yapildi.
+
+YONTEM
+Ucgen, kare ve Turkiye haritalari; 6/12 oyuncu; 2048/42 seed;
+45 saniye sure siniri; 60 fps adimlarla 12 deterministik mac simule edildi.
+Mobil boyutta dort oyun goruntusu incelendi. Bu bir izleyici deneyi degildir;
+bulgular mevcut oyun akisinin ve sunumunun teknik/gorsel incelemesidir.
+Sonuc dagilimi tum seed'lere genellenmemelidir.
+
+OLCULEN SORUNLAR
+1. Acilis oyuncuyu secmeye firsat vermiyor.
+   Varsayilan ucgen / 12 / seed 2048: ilk eleme 0.42 sn; 5. saniyede
+   4 kisi, 10. saniyede 2 kisi; bitis 14.02 sn. Ilk 1.75 sn'de 6 eleme.
+   Sure ayari ust sinir; 45 sn secmek 45 sn'lik maci garanti etmiyor.
+   Turkiye'de dort ornek 5.43, 6.71, 7.22 ve 10.58 sn'de bitti.
+   Kare / 6 / seed 42 ise 45 sn'ye kadar surdu. Tempo harita ve seed'e
+   bagli olarak cok degisiyor. Oyuncu sayisini azaltmak tek basina cozum degil.
+
+2. Eleme neden-sonucu okunamiyor.
+   eliminate() topu hemen kaldiriyor, tum araziyi ayni adimda devrediyor.
+   Renderer yalniz events[0]'i gosteriyor; siradan bir claim, elemeyi siliyor.
+   Varsayilan ornekte finalden once gorunebilen eleme mesajlari 0.02–0.38 sn
+   araliginda kaldi; bazi olaylar ayni karede baska olayla ortulebiliyor.
+   Mesaj suresi, simule edilen mac akisindaki gorunurluktur; final ekraninin
+   bitis sonrasi bekleme suresi bu olcume dahil degildir.
+
+3. Dikey video alani verimsiz kullaniliyor.
+   Liderler ustte buyuk kartlarla, altta tekrar yuzdelerle gosteriliyor.
+   Gecerli oyun hucreleri 540x960 karenin ucgende %21'ini, karede %38'ini,
+   Turkiye'de %11.2'sini kapliyor (sinir kutusu degil, oynanabilir alan).
+   Turkiye'nin sinir kutusu 444x189; yatay harita dikey kadrajda kucuk kaliyor.
+   360 px genislikte toplar yaklasik 15 px, acik izler 1.7 px genislikte.
+   Ust lider kartlarindaki toplar sahadaki toplardan birkac kat daha buyuk.
+
+4. Buyuk el degisimleri gorsel olarak siradan kazanimlarla ayni.
+   Varsayilan macta 5.72 sn'deki eleme ile haritanin %39.4'u aktariliyor;
+   buyuk devri aciklayan saha animasyonu veya oncelikli olay sunumu yok.
+   Yonetilen hareketler esas olarak rastgele adaylar arasindan secilen
+   dikdortgen kapatma rotalari. Rakip avlama/geri cekilme hikayesi belirgin degil.
+   Lider sayisi degistikce ust kartlarin konumu da degisiyor.
+
+5. Final sunumu ani.
+   Son oyuncu kalinca oyun hemen bitiyor ve sonuc karti sahayi ortuyor.
+   Son eleme/alan devri icin ayri bir sunum asamasi yok. Son iki oyuncu icin
+   belirgin bir final sunumu veya geri sayim vurgusu da bulunmuyor.
+
+ONCELIKLI GELISTIRME
+P0 — Eleme okunurlugu:
+  Kesilen iz/temas noktasini kaydet. Sahada kisa kesilme ve silinme etkisi,
+  kazanan renge dogru alan devri animasyonu kullan. Fizik sonucunu degistirme.
+  Eleme mesajina 1.2–1.8 sn okunabilirlik ve normal claim'lerden yuksek oncelik
+  ver. Hemen arka arkaya elemeleri kisa bir olay listesinde biriktir.
+
+P0 — Acilis ve yogunluk:
+  Ilk yaklasik 2 sn icin gorunur baslangic korumasi; haritanin oynanabilir
+  alanina gore baslangic araligi, rota buyuklugu ve hiz ayari dene.
+  6–8 oyunculu okunabilir bir varsayilan hazirla; 12–20 oyuncuyu ayri
+  kalabalik mod olarak tut. Daha genis seed setiyle erken yigilmayi denetle.
+  Sonucu veya kazanani sunum ugruna zorla belirleme.
+
+P1 — Dikey sunum:
+  Tek kompakt skor alani, buyuk sure/kalan oyuncu ve net saha kimlikleri.
+  Dikey video icin uzun bir arena tasarla; mevcut kare izgara ve koordinatlar
+  nedeniyle yalniz CSS veya ust bosluklari silmek yeterli olmayacak.
+  Ulke haritalarinin oranini bozma. Yatay cikti veya genel haritayi koruyan
+  kontrollu yakin plan secenegini ayri sunum olarak degerlendir.
+
+P1 — Tatmin ve final:
+  Alan kapatmada dolum animasyonu ve +alan yuzdesi; elemede farkli ses/vurgu.
+  Son iki kisiye geciste belirgin final sunumu; son elemeden sonra kisa gorsel
+  tamamlama, ardindan sonuc. Ses ve goruntu video disa aktariminda ayni anda.
+
+P2 — Hazir akislari ayir:
+  Bolge Kapmaca: 6–8 oyuncu, genis dikey saha, buyuk okunabilir alanlar.
+  Kalabalik Savas: 12–20 oyuncu, yogunluga gore olceklenmis saha, olay listesi.
+  Ulke Fethi: haritaya uygun kadraj ve daha seyrek baslangiclar.
+
+KABUL HEDEFLERI (HENUZ UYGULANMADI/DOGRULANMADI)
+- 360–390 px genislikte kim kimi eledi, lider kim, kac kisi kaldi okunabilsin.
+- Siradan claim olayi eleme mesajini hemen silemesin.
+- Secilen normal akislarda ilk 2 sn'de toplu eleme olmasin.
+- Yeni akislarda farkli harita/seed'lerle sure ve eleme yogunlugu raporlansin.
+- Determinizm, alan korunumu, temas/iz kesme, guclendirme ve video cikisi
+  mevcut testlerle korunsun. Sunum animasyonu simulasyon sonucunu degistirmesin.
+
+KANIT VE TEKRAR CALISTIRMA
+Ham sonuc: artifacts/territory-watchability-audit.json
+Gorsel: artifacts/territory-watchability-contact.jpg (103602 bayt yerel JPEG)
+Araclar: .cache/territory-watchability-audit.mjs,
+         .cache/territory-watchability-visual.mjs
+Node: tools/node-runtime/node-v24.21.0-win-x64/node.exe
+Gorsel arac mevcut yerel Vite http://127.0.0.1:5174 adresini kullanir.
+Kod odaklari: src/territory.js (plan, eliminate, capture, step),
+              src/territory-renderer.js, src/race-leaders.js.
+
+UYGULANAN GELISTIRME — 2026-10-13
+- Yeni varsayilan: Dikey fetih, 8 oyuncu, 45 sn. Ayrica 12 oyunculu dikey
+  ve 6 oyunculu Turkiye sablonlari. Kayitli kullanici ayarlari korunur;
+  mevcut taslakta yeni gorunum icin Izleme sablonu > Dikey fetih secilir.
+- Dikey saha 80x108 izgara; oynanabilir hucreler video alaninin %50'sinden
+  fazlasini kaplar. Tek kompakt skor alani, daha buyuk toplar ve kalin izler.
+- Ilk 2.5 sn gorunur koruma, ev alanlarinin korunmasi, yogun maclarda daha
+  okunabilir hareket hizi. Daha buyuk toplar icin guclendirme dolanma rotasi.
+- Eleme olayi kesilen izi, temas konumunu ve devralinan hucreleri saklar.
+  Alan dolum parlamasi, +yuzde, kesilme/dagilma, eleme oncelikli mesaj ve
+  kisa olay listesi. Siradan alan kazanimi eleme mesajini silemez.
+- Son iki oyuncuda final vurgusu; sonuc kartindan once 1.4 sn son hamle.
+  Editor ve MP4 en az 3 sn final suresi kullanir. Video ust yazilari arenayi
+  kapatmaz. Otomatik kalite kontrolu ilk olay icin koruma suresini hesaba katar.
+
+OLCUM: artifacts/territory-tempo-after.json
+40 mac: portrait 8/12, triangle 12, turkey 6; her biri 10 seed, 45 sn sinir.
+  Dikey 8: 34–45 sn, 10. saniyede 5–8 oyuncu, 27–55 alan kazanimi.
+  Dikey 12: 31.27–45 sn, 10. saniyede 5–8 oyuncu, 29–54 alan kazanimi.
+  Yeni varsayilan seed 2048: ilk eleme 3.05 sn, 10. saniyede 7 oyuncu,
+  45 sn bitis, 45 alan kazanimi. Eski varsayilan ucgen/12 idi; bu karsilastirma
+  hem sablon hem tempo degisikligini kapsar. Tum seed'ler icin garanti degildir.
+  Ulke haritalarinin oranlari korunur; Turkiye ornekleri 9.31–41.49 sn.
+
+DOGRULAMA
+Gecti: territory, territory-rules, territory-pickups, territory-contact,
+territory-watchability, territory-watchability-browser, territory-browser,
+territory-integration ve automatic-diversity testleri. Vite build basarili
+(mevcut buyuk JS paketi uyarisi var). Kapsamli diff bosluk kontrolu temiz.
+Mobil/sablon/final gorseli: artifacts/territory-watchability-after.jpg.
+Gercek MP4: artifacts/territory-export-1791888102763/territory-portrait/video.mp4
+8 takim, 720x1280, 30 fps, 1x, efekt sesi; tum dosya FFmpeg ile cozuldu;
+kaydedilen kazanan on simulasyonla eslesti. Export testi TERRITORY_TEST_SHAPE=portrait
+ve TEST_STUDIO_ORIGIN=http://127.0.0.1:5174 ile calistirildi.
+Izleyici memnuniyeti/izlenme suresi olculmedi; bunlar teknik ve gorsel kontroller.
+Kalan zorunlu is yok. Calisan ana proje: http://127.0.0.1:5174.

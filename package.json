@@ -4,6 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test:rps": "node tests/rock-paper-scissors.mjs && node tests/rock-paper-scissors-browser.mjs",
+    "test:manual-sounds": "node tests/manual-game-sounds.mjs && node tests/manual-game-sounds-browser.mjs",
+    "test:sound-director": "node tests/sound-director.mjs && node tests/game-sound-director.mjs && node tests/sound-director-browser.mjs && node tests/game-sound-director-browser.mjs",
+    "test:ring": "node tests/ring-escape.mjs && node tests/ring-escape-browser.mjs && node tests/ring-flow-browser.mjs",
     "test:matches": "node tests/matches.mjs && node tests/matches-browser.mjs && node tests/match-banner-browser.mjs",
     "test:teams": "node tests/team-catalog-browser.mjs",
     "test:duel": "node tests/ball-duel.mjs && node tests/ball-duel-browser.mjs",

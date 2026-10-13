@@ -1,3 +1,5 @@
+import {drawChannelTitle} from './channel-branding.js';
+import {englishOutput} from './output-language.js';
 import {ballImage} from './ball-images.js';
 import {WEAPONS} from './ball-duel.js';
 
@@ -7,33 +9,38 @@ function heart(c,x,y,size,fill){c.save();c.translate(x,y);c.scale(size/20,size/2
 export function weaponIcon(c,type,x,y,angle=0,scale=1){
   c.save();c.translate(x,y);c.rotate(angle);c.scale(scale,scale);c.lineJoin='round';c.lineCap='round';c.lineWidth=2;c.strokeStyle='#f3f6ff';c.fillStyle=WEAPONS[type].color;
   if(type==='blade'){c.beginPath();c.moveTo(-9,3);c.lineTo(19,-3);c.lineTo(29,-9);c.lineTo(17,-10);c.lineTo(-10,-3);c.closePath();c.fill();c.stroke();c.strokeStyle='#b9a1ff';c.beginPath();c.moveTo(-9,-10);c.lineTo(-5,10);c.moveTo(-8,0);c.lineTo(-21,4);c.stroke();}
+  else if(type==='laser'){c.fillRect(-14,-7,24,14);c.strokeRect(-14,-7,24,14);c.fillStyle='#eaffff';c.fillRect(10,-3,16,6);c.strokeStyle=WEAPONS.laser.color;c.beginPath();c.moveTo(29,-5);c.lineTo(29,5);c.moveTo(-7,-10);c.lineTo(-7,10);c.stroke();}
   else if(type==='rocket'){c.beginPath();c.moveTo(23,0);c.lineTo(12,-7);c.lineTo(-12,-7);c.lineTo(-18,-11);c.lineTo(-15,0);c.lineTo(-18,11);c.lineTo(-12,7);c.lineTo(12,7);c.closePath();c.fill();c.stroke();}
   else{c.fillRect(-12,-5,26,10);c.strokeRect(-12,-5,26,10);c.fillStyle='#ced8ec';c.fillRect(12,-3,type==='burst'?17:10,6);c.fillRect(-9,5,6,9);if(type==='scatter')c.fillRect(12,3,10,4);}
   c.restore();
 }
-export function renderDuel(c,game,{english=false,paused=false}={}){
+export function renderDuel(c,game,{english=true,paused=false,channel}={}){
   const p=game.settings,t=game.time,{x:cx,y:cy,r}=game.arena,w=c.canvas.width,h=c.canvas.height;
   c.save();c.scale(w/600,h/(600*16/9));
   const themes={midnight:['#111b30','#070b14','#6b9cb9'],gold:['#241c15','#0d0b0c','#eec680'],chrome:['#242c38','#090e17','#d2e8f5'],aurora:[`hsl(${(t*10+240)%360} 38% 16%)`,'#080d18',`hsl(${(t*10+150)%360} 75% 75%)`]};
   const [top,bottom,accent]=themes[p.theme],bg=c.createLinearGradient(0,0,600,1067);bg.addColorStop(0,top);bg.addColorStop(1,bottom);c.fillStyle=bg;c.fillRect(0,0,600,1067);c.translate(0,(600*16/9-960)/2);
-  c.fillStyle='#93a6bf';c.font='600 11px "Segoe UI", sans-serif';c.textAlign='center';c.fillText(english?'MARBLE STUDIO  /  BALL DUEL':'MARBLE STUDIO  /  TOP DÜELLOSU',300,39);
+  c.fillStyle='#93a6bf';c.font='600 11px "Segoe UI", sans-serif';c.textAlign='center';drawChannelTitle(c,channel,300,39);
   for(let i=0;i<2;i++){
     const left=i===0?38:322,ball=game.balls[i],color=readableColor(p.colors[i]);
-    c.fillStyle=color;c.fillRect(left,64,3,22);c.font='700 21px "Segoe UI", sans-serif';c.textAlign='left';c.fillText(p.names[i],left+13,83,224);
+    c.fillStyle=color;c.fillRect(left,64,3,22);c.font='700 21px "Segoe UI", sans-serif';c.textAlign='left';c.fillText(englishOutput(p.names[i]),left+13,83,224);
     for(let k=0;k<p.hp;k++){const row=Math.floor(k/10),col=k%10;heart(c,left+9+col*22,112+row*22,12,k<ball.hp?color:'#ffffff15');}
     c.font='600 12px "Segoe UI", sans-serif';c.fillStyle='#95a5bc';c.fillText(`${ball.hp} / ${p.hp}`,left,169);
-    const weapon=WEAPONS[ball.weapon];c.fillStyle=weapon?.color??'#95a5bc';c.textAlign='right';const labels={blaster:'Blaster',burst:'Rapid fire',scatter:'Scatter',rocket:'Rocket',blade:'Sword'};c.fillText(weapon?(english?labels[ball.weapon]:weapon.name):(english?'Unarmed':'Silahsız'),left+238,169);
+    const weapon=WEAPONS[ball.weapon];c.fillStyle=weapon?.color??'#95a5bc';c.textAlign='right';const labels={blaster:'Blaster',burst:'Rapid fire',scatter:'Scatter',rocket:'Rocket',blade:'Sword',laser:'Laser'};c.fillText(weapon?(english?labels[ball.weapon]:weapon.name):(english?'Unarmed':'Silahsız'),left+238,169);
   }
   c.textAlign='center';c.fillStyle='#ffffff35';c.font='800 13px "Segoe UI", sans-serif';c.fillText('VS',300,95);
   c.strokeStyle='#ffffff10';c.lineWidth=1;c.beginPath();c.moveTo(38,188);c.lineTo(562,188);c.stroke();
-  c.fillStyle='#93a6bf';c.font='600 11px "Segoe UI", sans-serif';c.fillText(english?'LAST ONE STANDING':'SON AYAKTA KALAN KAZANIR',300,223);
   // Quiet arena texture and a bright, clean boundary; impacts never shake the camera.
   circle(c,cx,cy,r);c.fillStyle='#04091175';c.fill();c.save();c.clip();c.fillStyle='#b4ceee12';
-  for(let y=270;y<770;y+=28)for(let x=50;x<555;x+=28){circle(c,x,y,.8);c.fill();}c.restore();
+  c.beginPath();for(let y=270;y<770;y+=28)for(let x=50;x<555;x+=28){c.moveTo(x+.8,y);c.arc(x,y,.8,0,Math.PI*2);}c.fill();c.restore();
   circle(c,cx,cy,r+7);c.strokeStyle=p.theme==='aurora'?'#b8bcff22':accent+'22';c.lineWidth=1;c.stroke();
   circle(c,cx,cy,r);c.strokeStyle=accent;c.lineWidth=3;c.stroke();
-  for(const pickup of game.pickups){const col=WEAPONS[pickup.weapon].color,pulse=1+Math.sin(t*3)*.06;c.save();c.translate(pickup.x,pickup.y);c.scale(pulse,pulse);circle(c,0,0,22);c.fillStyle='#172238';c.fill();c.strokeStyle=col;c.lineWidth=1.5;c.stroke();weaponIcon(c,pickup.weapon,0,0,-.55,.62);c.restore();}
-  if(game.heart){const item=game.heart;c.save();c.globalAlpha=Math.min(1,(item.until-t)*2);circle(c,item.x,item.y,21);c.fillStyle='#261727';c.fill();c.strokeStyle='#ff92b0';c.lineWidth=1.5;c.stroke();heart(c,item.x,item.y+3,17+Math.sin(t*3)*.8,'#ff739b');c.restore();}
+  for(const pickup of game.pickups){const col=WEAPONS[pickup.weapon].color,pulse=1+Math.sin(t*3)*.06;c.save();c.translate(pickup.x,pickup.y);c.scale(pulse,pulse);circle(c,0,0,26);c.fillStyle='#172238';c.fill();c.strokeStyle=col;c.lineWidth=1.5;c.stroke();weaponIcon(c,pickup.weapon,0,0,-.55,.74);c.restore();}
+  if(game.heart){const item=game.heart;c.save();c.globalAlpha=Math.min(1,(item.until-t)*2);circle(c,item.x,item.y,25);c.fillStyle='#261727';c.fill();c.strokeStyle='#ff92b0';c.lineWidth=1.5;c.stroke();heart(c,item.x,item.y+3,20+Math.sin(t*3),'#ff739b');c.restore();}
+  for(const beam of game.beams){
+    c.save();circle(c,cx,cy,r);c.clip();c.globalAlpha=Math.min(1,beam.life/.08);c.lineJoin='round';c.lineCap='round';c.beginPath();
+    beam.points.forEach((point,i)=>i?c.lineTo(point.x,point.y):c.moveTo(point.x,point.y));
+    c.strokeStyle='#7df9ff35';c.lineWidth=WEAPONS.laser.width+10;c.stroke();c.strokeStyle=WEAPONS.laser.color;c.lineWidth=WEAPONS.laser.width;c.stroke();c.strokeStyle='#efffff';c.lineWidth=6;c.stroke();c.restore();
+  }
   for(const ball of game.balls){
     if(ball.hp<=0)continue;
     for(let i=0;i<ball.trail.length;i+=3){const point=ball.trail[i];circle(c,point.x,point.y,ball.r*(.4+i/ball.trail.length*.4));c.globalAlpha=i/ball.trail.length*.09;c.fillStyle=p.colors[ball.id];c.fill();}c.globalAlpha=1;
@@ -54,13 +61,11 @@ export function renderDuel(c,game,{english=false,paused=false}={}){
   }
   for(const part of game.particles){c.globalAlpha=Math.min(1,part.life*3);c.fillStyle=p.colors[part.owner];c.fillRect(part.x-1.5,part.y-1.5,3,3);}c.globalAlpha=1;
   c.textAlign='center';c.font='600 14px "Segoe UI", sans-serif';c.fillStyle='#d1deef';c.fillText(`${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t%60)).padStart(2,'0')}`,300,819);
-  c.fillStyle='#8191a9';c.font='12px "Segoe UI", sans-serif';c.fillText(english?'Collect weapons. Dodge. Survive.':'Silahı topla. Atıştan kaç. Hayatta kal.',300,848);
-  for(let i=0;i<5;i++)weaponIcon(c,Object.keys(WEAPONS)[i],204+i*48,886,-.4,.5);
-  c.font='10px "Segoe UI", sans-serif';c.fillStyle='#65758e';c.fillText('MARBLE STUDIO',300,930);
+  Object.keys(WEAPONS).forEach((weapon,i,kinds)=>weaponIcon(c,weapon,300+(i-(kinds.length-1)/2)*48,886,-.4,.5));
   if(game.state==='finished'||paused){
     c.fillStyle='#080d18b8';c.fillRect(35,cy-78,530,157);c.strokeStyle='#ffffff25';c.strokeRect(35.5,cy-77.5,529,156);
     c.font='600 12px "Segoe UI", sans-serif';c.fillStyle='#a0b1c9';c.fillText(paused?(english?'PAUSED':'DURAKLATILDI'):(english?'DUEL COMPLETE':'DÜELLO TAMAMLANDI'),300,cy-35);
-    c.font='800 32px "Segoe UI", sans-serif';c.fillStyle=game.winner===null?'#edf5ff':p.colors[game.winner];c.fillText(paused?(english?'Ready when you are':'Hazır olduğunda devam et'):game.winner===null?(english?'Draw':'Berabere'):p.names[game.winner],300,cy+9,480);
+    c.font='800 32px "Segoe UI", sans-serif';c.fillStyle=game.winner===null?'#edf5ff':p.colors[game.winner];c.fillText(paused?'':game.winner===null?(english?'Draw':'Berabere'):englishOutput(p.names[game.winner]),300,cy+9,480);
     c.font='14px "Segoe UI", sans-serif';c.fillStyle='#b3c1d5';c.fillText(paused?'▶':game.winner===null?(english?'Both survived the time limit':'İki top da süre sonuna kadar hayatta kaldı'):(english?'Last one standing':'Son ayakta kalan'),300,cy+43);
   }
   c.restore();

@@ -1,3 +1,4 @@
+const origin=process.env.TEST_STUDIO_ORIGIN??'http://127.0.0.1:5173';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {writeFile,mkdir} from 'node:fs/promises';
@@ -20,8 +21,9 @@ try{
   });
   await page.route('**/api/matches?**',route=>route.fulfill({json:{events:[],updatedAt:new Date().toISOString(),stale:false}}));
   await page.route('**/api/import-video',route=>route.fulfill({json:{ok:true}}));
-  await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
+  await page.goto((origin+'?edit=1'));await page.waitForFunction(()=>window.marbleStudio);
   await page.evaluate(()=>document.querySelector('#nav-spiral').onclick());
+  await page.getByText('Ses ve müzik',{exact:true}).click();
   assert.equal(await page.locator('#spiral-hypnotic').isChecked(),false);assert.equal(await page.evaluate(()=>window.audioContextCount),0);
   await page.locator('#spiral-hypnotic').check();assert.equal(await page.evaluate(()=>window.audioContextCount),1);
   assert.ok(await page.locator('#collision-sound').isHidden());assert.ok(await page.locator('.music-panel').isHidden());
@@ -54,6 +56,7 @@ try{
   // The synthesized soundtrack is recorded even with legacy sound/music off.
   await page.evaluate(()=>{document.querySelector('#sound').checked=false;document.querySelector('#music-track').value='';document.querySelector('#music-track').dispatchEvent(new Event('change'));});
   const playedBeforeRecording=await page.evaluate(()=>window.marbleStudio.getState().spiralAudio.played);
+  await page.getByText('İzleme ve kayıt',{exact:true}).click();
   await page.locator('#webm-options').evaluate(el=>el.open=true);await page.locator('#record').click();
   await page.locator('#race').scrollIntoViewIfNeeded();
   await page.waitForFunction(played=>{const s=window.marbleStudio.getState();return s.recording&&s.time>2.1&&s.spiralAudio?.played>played;},playedBeforeRecording);
@@ -85,7 +88,7 @@ try{
   assert.equal(generated.buffer.readUInt16LE(22),2);assert.equal(generated.buffer.readUInt32LE(24),48000);
   await writeFile('artifacts/spiral-hypnotic-preview.wav',generated.buffer);
   // A real spiral export captures spatial progress without changing the game.
-  await page.goto('http://127.0.0.1:5173/factory-render.html');await page.waitForFunction(()=>window.factoryRenderer);
+  await page.goto((origin+'/factory-render.html'));await page.waitForFunction(()=>window.factoryRenderer);
   const exported=await page.evaluate(async()=>{
     const recipe={mode:'spiral',seed:2048,count:1,spiralHypnotic:true},analysis=window.factoryRenderer.probe(recipe);
     await window.factoryRenderer.begin({recipe,analysis,fps:30,speed:1,copy:{hook:'Test'}});

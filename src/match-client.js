@@ -1,5 +1,6 @@
+import {factoryOrigin} from './service-origin.js';
 export async function fetchMatches(league,date,signal){
-  const origin=new URL(document.querySelector('.factory-link').href).origin;
+  const origin=factoryOrigin();
   const response=await fetch(origin+'/api/matches?'+new URLSearchParams({league,date}),{signal});
   if(!response.ok){
     let message='Maç hizmetine ulaşılamadı. Marble Studio kısayolunu yeniden açıp tekrar dene.';

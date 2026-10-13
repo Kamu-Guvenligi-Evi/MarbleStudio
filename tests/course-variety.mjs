@@ -5,7 +5,10 @@ import {SECTION_SETTINGS} from '../src/section-settings.js';
 import {recipe,structure,validateBatch} from '../src/factory-recipes.js';
 import {withEpisode,EPISODE_FORMATS} from '../src/episode-plan.js';
 
-assert.equal(Object.keys(COURSE_META).length,16);
+assert.equal(Object.keys(COURSE_META).length,17);
+assert.equal(COURSE_META.longduel.count,2);
+assert.equal(COURSE_META.longduel.maxSpeed,6);
+assert.ok(COURSE_META.longduel.modules.length>=20);
 assert.equal(Object.keys(SECTION_SETTINGS).length,16);
 for(const duration of [30,120,150,180])assert.equal(validateBatch({duration}).duration,duration);
 for(const duration of [29,181])assert.throws(()=>validateBatch({duration}));
@@ -23,7 +26,7 @@ for(let seed=1;seed<=300;seed++){
 }
 assert.equal(seen.size,300);assert.equal(types.size,16);
 let runs=0;
-for(const type of ['staircase','diamonds','rotorgates','weave','switchback','sieve']){
+for(const type of ['staircase','diamonds','rotorgates','weave','switchback','sieve','pegs','pendulum','pulse']){
   for(const seed of [1,17,2048,89271])for(const count of [6,20])for(const edge of ['min','max']){
     const settings=Object.fromEntries(SECTION_SETTINGS[type].map(s=>[s.key,s.options?s.options.at(edge==='min'?0:-1)[0]:s[edge]]));
     const race=new Race({seed,count,sequence:[{type,settings}]});race.start();

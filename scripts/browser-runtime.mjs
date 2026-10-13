@@ -7,5 +7,7 @@ export function productionBrowserOptions(){
   const revision=manifest.browsers.find(b=>b.name==='chromium-headless-shell').revision;
   const cached=fileURLToPath(new URL(`../tools/playwright/chromium_headless_shell-${revision}/chrome-headless-shell-win64/chrome-headless-shell.exe`,import.meta.url));
   const executable=[cached,bundled].find(existsSync);
-  return {headless:true,args:['--disable-background-timer-throttling'],...(executable?{executablePath:executable}:{channel:'chrome'})};
+  // Headless shell otherwise disables GPU canvas rendering even on this machine.
+  // Chromium retains its normal software fallback if no usable GPU is present.
+  return {headless:true,args:['--disable-background-timer-throttling','--enable-gpu'],...(executable?{executablePath:executable}:{channel:'chrome'})};
 }

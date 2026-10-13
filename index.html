@@ -19,6 +19,8 @@
       <a href="/spiral-breaker.html"><span aria-hidden="true">▧</span> Spiral Kırıcı</a>
       <a href="/glass-breaker.html"><span aria-hidden="true">◇</span> Cam Kırıcı</a>
       <a href="/ball-duel.html"><span aria-hidden="true">⚔</span> Top Düellosu</a>
+      <a href="/ring-escape.html"><span aria-hidden="true">◌</span> Halka Kaçışı</a>
+      <a href="/rock-paper-scissors.html"><span aria-hidden="true">✂</span> Taş Kâğıt Makas</a>
     </nav>
   </header>
 
@@ -30,6 +32,7 @@
     <section id="watch-view" class="watch-view" aria-labelledby="watch-title" hidden>
       <div class="watch-heading"><div><p id="race-eyebrow" class="eyebrow">PARKUR YARIŞI</p><h1 id="watch-title" tabindex="-1">Parkur yarışı</h1><p id="race-description" class="workspace-description">Hazır parkurunu seç, kadronu kur ve yarışı başlat.</p></div><span id="save-status" class="save-status" role="status">Taslak kaydediliyor</span></div>
       <div class="race-setup-bar">
+        <label id="race-title-field" for="race-title">Başlık<input id="race-title" type="text" maxlength="80" placeholder="Örn. Galatasaray vs Barcelona"></label>
         <label id="track-preset-field" for="track-preset">Hazır parkur<select id="track-preset"><option value="saved">Mevcut parkur</option><option value="cascade">Neon Cascade</option><option value="pinball">Pinball Garden</option><option value="velocity">Velocity</option><option value="clockwork">Clockwork</option></select></label>
         <label id="spiral-theme-field" for="spiral-theme" hidden>Spiral teması<select id="spiral-theme"></select></label>
         <button id="spiral-randomize" class="button secondary" hidden>Çarpanları yenile</button>
@@ -37,15 +40,14 @@
         <button id="spiral-hypnotic-mute" class="button secondary" type="button" hidden aria-pressed="false">Sesi kapat · M</button>
         <label for="count"><span id="count-label">Yarışmacı sayısı</span><select id="count"><option id="count-single" value="1" hidden disabled>1</option><option>6</option><option>8</option><option>10</option><option selected>12</option><option>14</option><option>16</option><option>18</option><option>20</option></select></label>
         <button id="open-balls" class="button secondary">Kadroyu seç</button>
-        <label class="switch-label" for="sound"><input id="sound" type="checkbox" role="switch"><span>Çarpışma sesi</span></label>
-        <label for="collision-sound">Ses efekti<select id="collision-sound"></select></label>
-        <button id="preview-collision-sound" class="button secondary" type="button" aria-label="Seçili çarpışma sesini dinle">♫ Dinle</button>
         <button id="open-settings" class="button subtle settings-button">⚙ Yarış ayarları</button>
       </div>
       <div id="arena-options" class="arena-options" hidden>
         <label>Arena oyunu <select id="arena-game"><option value="links">Küre · Bağ mücadelesi</option><option value="territory">Alan Savaşı</option></select></label>
-        <label id="arena-link-mode-field">Bağ modu <select id="arena-link-mode"><option value="wall">Çarpışarak bağ kur</option><option value="prelinked">Hazır bağlarla başla</option></select></label>
-        <label id="arena-initial-links-field" hidden>Top başına başlangıç bağı <input id="arena-initial-links" type="number" min="1" max="50" step="1" value="15"></label>
+        <label id="territory-template-field" hidden>İzleme şablonu <select id="territory-template"><option value="portrait">Dikey fetih · 8 oyuncu</option><option value="crowd">Kalabalık arena · 12 oyuncu</option><option value="country">Türkiye kapışması · 6 oyuncu</option><option value="custom">Özel ayarlar</option></select></label>
+        <label id="arena-link-mode-field">Bağ modu <select id="arena-link-mode"><option value="wall">Çarpışarak bağ kur</option><option value="prelinked">Yelpaze iplerle başla</option></select></label>
+        <label id="arena-initial-links-field" hidden>Top başına başlangıç bağı <input id="arena-initial-links" type="number" min="1" max="150" step="1" value="15"></label>
+        <button id="arena-fan-preset" type="button">Üçlü ip yelpazesi</button>
         <label id="arena-shape-field" hidden>Harita / şekil <select id="arena-shape"><option value="triangle">Üçgen</option><option value="square">Kare</option><option value="hexagon">Altıgen</option><option value="star">Yıldız</option><option value="circle">Daire</option></select></label>
         <label id="territory-duration-field" hidden>Süre <select id="territory-duration"><option value="30">30 saniye</option><option value="45" selected>45 saniye</option><option value="60">60 saniye</option></select></label>
       </div>
@@ -58,19 +60,25 @@
           <div class="transport"><button id="pause" class="button stage-play">▶ Başlat</button><span id="clock">00:00.00</span><button id="reset" class="stage-reset" title="Aynı yarışı başa al">↺ Başa al</button><button id="new-race" class="stage-reset" title="Aynı parkurda yeni diziliş ve hareketlerle yarış">⚄ Yeni yarış</button></div>
         </section>
         <aside class="watch-sidebar">
+          <section class="game-sound-director" aria-label="Ses menüsü">
+            <h2>Ses menüsü</h2>
+            <label class="switch-label" for="sound"><input id="sound" type="checkbox" role="switch"><span>Oyun seslerini aç</span></label>
+            <div class="manual-sound-row"><label for="collision-sound">Çarpışma efekti</label><select id="collision-sound"></select><button id="preview-collision-sound" class="button secondary" type="button" aria-label="Seçili çarpışma sesini dinle">▶</button></div>
+            <p>Ses seçimini bu oyun için hatırlar ve videoya da ekler. Müzik ayarları ayrıdır.</p>
+          </section>
           <section class="race-info"><div class="panel-title"><h2 id="ranking-title">Yarışmacılar</h2><span id="finish-count">12 top</span></div><div id="ranking"></div><div class="progress-heading"><span>Parkur ilerlemesi</span><span id="progress-label">0%</span></div><div class="progress-track"><div id="progress-bar"></div></div></section>
           <section class="video-panel"><details id="webm-options"><summary>Tarayıcı kaydı · WebM</summary><p id="record-help">Yarış baştan oynatılır ve kaydedilir. Bittiğinde dikey videon otomatik iner.</p><button id="record" class="button primary"><span aria-hidden="true">●</span> Videoya kaydet</button><span class="video-format">Dikey video · 1080 × 1920 · WebM</span></details></section>
           <details class="music-panel" aria-labelledby="music-title">
             <summary id="music-title">Yarış müziği</summary><p>Müzik yarışta çalar ve videoya eklenir.</p>
-            <label for="music-mode">Müzik düzeni</label><select id="music-mode"><option value="leader">Öndeki ülke veya kişiye göre · Parkur</option><option value="fixed">Tek müzik</option></select>
+            <label for="music-mode">Müzik düzeni</label><select id="music-mode"><option value="leader">Öndeki ülke, takım veya kişiye göre · Parkur</option><option value="fixed">Tek müzik</option></select>
             <div id="music-countries">
-              <p>Lider değişince müzik anında değişir. Yeniden öne geçen ülke veya kişi kaldığı yerden devam eder. Yeni yarışta tüm parçalar başa döner.</p>
-              <details><summary>Ülke ve kişi müziklerini seç</summary>
-                <label for="music-country">Ülke veya kişi</label><select id="music-country"></select>
-                <label for="music-country-track">Bu ülkenin müziği</label><select id="music-country-track"><option value="">Müzik seçilmedi</option></select>
-                <audio id="country-music-preview" controls preload="none" aria-label="Seçili ülkenin müziğini ön dinle"></audio>
+              <p>Lider değişince müzik anında değişir. Yeniden öne geçen ülke, takım veya kişi kaldığı yerden devam eder. Yeni yarışta tüm parçalar başa döner.</p>
+              <details><summary>Ülke, takım ve kişi müziklerini seç</summary>
+                <label for="music-country">Ülke, takım veya kişi</label><select id="music-country"></select>
+                <label for="music-country-track">Liderin müziği</label><select id="music-country-track"><option value="">Müzik seçilmedi</option></select>
+                <audio id="country-music-preview" controls preload="none" aria-label="Seçili liderin müziğini ön dinle"></audio>
               </details>
-              <p id="music-leader-status" role="status">Ülke–müzik eşleştirmelerini seç.</p>
+              <p id="music-leader-status" role="status">Lider–müzik eşleştirmelerini seç.</p>
               <a href="/music/LICENSES.txt" target="_blank" rel="noopener noreferrer">Hazır müziklerin kaynak ve atıf bilgileri</a>
             </div>
             <div id="music-fixed">
@@ -110,7 +118,7 @@
     <div class="dialog-heading"><div><p class="eyebrow">İSTEĞİNE GÖRE</p><h2 id="settings-title">Yarış ayarları</h2></div><button class="close-dialog" data-close="settings-dialog" aria-label="Ayarları kapat">×</button></div>
     <label class="switch-label settings-toggle" for="trails"><span><b>Topların arkasında iz bırak</b><small>Renkli ışık izleriyle topların hareketini takip et.</small></span><input id="trails" type="checkbox" role="switch" checked></label>
     <div class="setting-field"><label for="seed">Aynı yarışı tekrar kullan</label><p>Yeni yarışta otomatik değişir; topların yerleri ve engellerin başlangıç düzeni yenilenir. Başa al ve video kaydı aynı yarışı tekrarlar.</p><div class="seed-field"><input id="seed" type="number" min="1" max="999999" value="2048"><button id="shuffle" class="button secondary">Yeni düzen</button></div></div>
-    <div class="video-timing-fields"><label for="countdown-seconds">Geri sayım <span><input id="countdown-seconds" type="number" min="0" max="5" step="1" value="3"> sn</span><small>0 seçersen yarış hemen başlar.</small></label><label for="outro-seconds">Video sonunda sonuçlar <span><input id="outro-seconds" type="number" min="1" max="10" step="1" value="4"> sn</span><small>Tüm toplar bitirdikten sonra gösterilir.</small></label></div>
+    <div class="video-timing-fields"><label for="countdown-seconds">Geri sayım <span><input id="countdown-seconds" type="number" min="0" max="5" step="1" value="3"> sn</span><small>0 seçersen yarış hemen başlar.</small></label><label for="outro-seconds">Video sonunda sonuçlar <span><input id="outro-seconds" type="number" min="1" max="10" step="1" value="4"> sn</span><small>Oyun bitince gösterilir. Alan Savaşı finali en az 3 sn sürer.</small></label></div>
     <p class="settings-hint">Yeni düzen yeni bir yarış oluşturur; Başa al aynı yarışı korur. Süreler bir sonraki yarış ve kayıtta kullanılır.</p><button id="settings-done" class="button primary">Tamam</button>
   </dialog>
 

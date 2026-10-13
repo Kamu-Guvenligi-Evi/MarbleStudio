@@ -1,0 +1,19 @@
+.game-sound-director{border:1px solid #ffffff20;border-radius:12px;background:#12241f;padding:14px;margin:14px 0;color:#e0f3eb;min-width:0}
+.game-sound-director h2{margin:0 0 14px;font-size:16px}.game-sound-director .switch-label{display:flex;align-items:center;gap:8px}.game-sound-director .switch-label input{width:34px}.game-sound-director .sound-menu-status:empty{display:none}.sound-menu-bulk button{min-height:38px}.game-sound-director button{cursor:pointer}.game-sound-director button:disabled{cursor:default;opacity:.55}
+.game-sound-director label{display:grid;gap:9px;font-size:13px;font-weight:600}
+.game-sound-director select{width:100%;min-width:0;max-width:100%;padding:9px;border-radius:8px;border:1px solid #ffffff30;background:#172e26;color:#e0f3eb;font:inherit}
+.game-sound-director p{margin:10px 0 0;font-size:12px;line-height:1.6;color:#abc1b7}
+.manual-sounds{margin-top:12px;min-width:0}.manual-sounds summary{cursor:pointer;font-weight:700}.manual-sound-row{display:grid;grid-template-columns:minmax(0,1fr) 38px;gap:6px;margin:12px 0}.manual-sound-row label{grid-column:1/-1}.manual-sound-row select{width:100%;min-width:0}.manual-sound-row button{padding:6px}.manual-sounds [role=status]:empty{display:none}
+.game-sound-director{padding:18px;background:linear-gradient(145deg,#172c25,#101f1b);box-shadow:0 8px 24px #0001}
+.game-sound-director>label{margin-bottom:12px}
+.game-sound-director button{border:1px solid #ffffff25;border-radius:8px;background:#243b31;color:#e0f3eb;font:inherit;font-size:12px;min-height:40px;padding:9px 12px}
+.game-sound-director button:hover{background:#304d40}
+.game-sound-director :is(button,select,summary):focus-visible{outline:2px solid #8aebc5;outline-offset:3px}
+.manual-sound-row{grid-template-columns:minmax(0,1fr) 72px;gap:8px}
+.sound-menu-bulk{padding:14px 0;border-block:1px solid #ffffff14}
+.manual-sounds summary{padding:12px 0;font-size:13px}
+.game-sound-director .sound-event-group{display:block;min-width:0;margin:18px 0 0;padding:0 12px 4px;border:1px solid #ffffff18;border-radius:10px}
+.sound-event-group legend{padding:0 6px;font-size:11px;letter-spacing:.3px;color:#9ed6ba}
+.sound-event-group .manual-sound-row{margin:12px 0}
+.game-sound-director .sound-menu-status{color:#a6e8c8}
+.game-sound-director p{overflow-wrap:anywhere}

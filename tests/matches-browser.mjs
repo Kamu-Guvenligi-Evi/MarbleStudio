@@ -1,3 +1,4 @@
+const origin=process.env.TEST_STUDIO_ORIGIN??'http://127.0.0.1:5173';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import {matchDay} from '../src/match-data.js';
@@ -18,7 +19,7 @@ try{
       away:{name:soccer?'Fenerbahçe':league==='nba'?'Chicago Bulls':'Buffalo Bills',score:score===null?null:soccer?'1':'17',abbreviation:soccer?'FB':'BUF',logo:null},venue:'Test Stadium',sourceUrl:'javascript:alert(1)'});
     return route.fulfill({contentType:'application/json',body:JSON.stringify({league,date,updatedAt:date+'T12:00:00Z',source:'ESPN',stale:false,events:empty?[]:[fixture('live','live','2. çeyrek · 04:32','21'),fixture('next','scheduled','Başlamadı',null),fixture('final','final','Maç bitti','28'),fixture('postponed','postponed','Ertelendi',null)]})});
   });
-  await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
+  await page.goto((origin+'?edit=1'));await page.waitForFunction(()=>window.marbleStudio);
   const before=await page.evaluate(()=>localStorage.getItem('marble-studio-track-v1'));
   await page.waitForFunction(()=>!document.querySelector('#match-banner-refresh').disabled);
   assert.ok(requests.some(r=>r.league==='nfl')&&requests.some(r=>r.league==='tur.1'),'Opening Studio automatically loads the football and NFL banner');

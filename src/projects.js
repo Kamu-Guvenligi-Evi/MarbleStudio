@@ -15,9 +15,8 @@ export function normalizeProject(raw) {
   if(!name || name.length > 80) throw new Error('Parkur adı 1–80 karakter olmalı.');
   const seed = raw.seed ?? 2048, count = raw.count ?? 12;
   if(!Number.isInteger(seed)||seed<1||seed>999999) throw new Error('Yarış düzeni numarası geçersiz.');
-  const territory=raw.mode==='arena'&&raw.arenaGame==='territory';
   const track=raw.mode===undefined||raw.mode==='track';
-  if(!Number.isInteger(count)||count>20||(track?count<1:territory?count<2:raw.mode==='spiral'?count!==1&&(count<6||count%2):count<6||count%2)) throw new Error('Top sayısı geçersiz.');
+  if(!Number.isInteger(count)||count>20||(track?count<1:raw.mode==='arena'?count<2:raw.mode==='spiral'?count!==1&&(count<6||count%2):count<6||count%2)) throw new Error('Top sayısı geçersiz.');
   if(raw.sound !== undefined && typeof raw.sound !== 'boolean' || raw.trails !== undefined && typeof raw.trails !== 'boolean') throw new Error('Görüntü veya ses ayarı geçersiz.');
   for(const key of ['spiralHypnotic','spiralHypnoticMuted'])if(raw[key]!==undefined&&typeof raw[key]!=='boolean')throw new Error('Hipnotik ses ayarı geçersiz.');
   if(raw.mode!==undefined&&!['track','arena','spiral'].includes(raw.mode))throw new Error('Oyun modu geçersiz.');
@@ -26,7 +25,7 @@ export function normalizeProject(raw) {
   if(raw.maxSpeed!==undefined&&(!Number.isFinite(raw.maxSpeed)||raw.maxSpeed<1||raw.maxSpeed>18))throw new Error('Parkur hız sınırı 1–18 arasında olmalı.');
   if(raw.arenaGame!==undefined&&!['links','territory'].includes(raw.arenaGame))throw new Error('Arena oyunu geçersiz.');
   if(raw.arenaLinkMode!==undefined&&!['wall','prelinked'].includes(raw.arenaLinkMode))throw new Error('Arena bağ modu geçersiz.');
-  if(raw.arenaInitialLinks!==undefined&&(!Number.isInteger(raw.arenaInitialLinks)||raw.arenaInitialLinks<1||raw.arenaInitialLinks>50))throw new Error('Başlangıç bağ sayısı 1–50 arasında bir tam sayı olmalı.');
+  if(raw.arenaInitialLinks!==undefined&&(!Number.isInteger(raw.arenaInitialLinks)||raw.arenaInitialLinks<1||raw.arenaInitialLinks>150))throw new Error('Başlangıç bağ sayısı 1–150 arasında bir tam sayı olmalı.');
   if(raw.arenaShape!==undefined&&!Object.hasOwn(TERRITORY_SHAPES,raw.arenaShape))throw new Error('Arena şekli geçersiz.');
   if(raw.territoryDuration!==undefined&&![30,45,60].includes(raw.territoryDuration))throw new Error('Alan savaşı süresi geçersiz.');
   return {spiralHypnotic:raw.spiralHypnotic??false,spiralHypnoticMuted:raw.spiralHypnoticMuted??false,maxSpeed:raw.maxSpeed??18,...(raw.mode==='arena'?{arenaGame:raw.arenaGame??'links',arenaLinkMode:raw.arenaLinkMode??'wall',arenaInitialLinks:raw.arenaInitialLinks??15,arenaShape:raw.arenaShape??'triangle',territoryDuration:raw.territoryDuration??45}:{}),variant:raw.variant??'classic',energy:raw.energy??1,...(['arena','spiral'].includes(raw.mode)?{mode:raw.mode}:{}),spiralTheme:normalizeSpiralTheme(raw.spiralTheme),name,seed,count,sound:raw.sound??false,collisionSound:normalizeCollisionSound(raw.collisionSound),visualStyle:'neon',trails:raw.trails??true,sequence:normalizeSequence(raw.sequence),ballImages:normalizeBallImages(raw.ballImages),ballNames:normalizeNames(raw.ballNames),presentation:normalizePresentation(raw.presentation)};

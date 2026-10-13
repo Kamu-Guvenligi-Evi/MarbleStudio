@@ -1,4 +1,4 @@
-import {drawChannelWatermark} from './channel-branding.js';
+import {drawChannelTitle,drawChannelWatermark} from './channel-branding.js';
 ﻿import { drawMarble } from './marble-art.js';
 import { drawFinale } from './finale.js';
 import { drawSpace } from './space-art.js';
@@ -7,7 +7,7 @@ import { drawLeaders } from './race-leaders.js';
 import { drawMarbleTrail } from './marble-trail.js';
 const W=540,H=960,BG='#080e20';
 
-export function renderRace(ctx,race,{cameraY,countdown,paused,trails=false,preview,suppressFinale=false,channel}) {
+export function renderRace(ctx,race,{cameraY,countdown,paused,trails=false,preview,suppressFinale=false,channel,title=''}) {
   const text=(str,x,y,size,color='#edf7ff',align='center')=>{
     ctx.fillStyle=color;ctx.font=`600 ${size}px "Segoe UI",sans-serif`;ctx.textAlign=align;ctx.fillText(str,x,y,440);
   };
@@ -17,7 +17,7 @@ export function renderRace(ctx,race,{cameraY,countdown,paused,trails=false,previ
     if(body.circleRadius)ctx.arc(body.position.x,body.position.y,body.circleRadius,0,Math.PI*2);
     else {body.vertices.forEach((v,i)=>i?ctx.lineTo(v.x,v.y):ctx.moveTo(v.x,v.y));ctx.closePath();}
   };
-  ctx.setTransform(2,0,0,2,0,0);ctx.fillStyle=BG;ctx.fillRect(0,0,W,H);
+  ctx.setTransform(ctx.canvas.width/540,0,0,ctx.canvas.height/960,0,0);ctx.fillStyle=BG;ctx.fillRect(0,0,W,H);
   drawSpace(ctx,cameraY,race.time);
   drawChannelWatermark(ctx,channel);
   ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
@@ -87,15 +87,23 @@ export function renderRace(ctx,race,{cameraY,countdown,paused,trails=false,previ
   }
   ctx.restore();
   if(race.state!=='ready'&&!race.finished.length&&preview===null) {
-    drawLeaders(ctx,race);
+    ctx.save();ctx.translate(0,title?64:0);drawLeaders(ctx,race);ctx.restore();
   }
   if(countdown>0) {
     ctx.fillStyle='#080e2070';ctx.fillRect(0,0,W,H);
     ctx.beginPath();ctx.arc(270,460,80,-Math.PI/2,-Math.PI/2+Math.PI*2*(countdown%1));ctx.strokeStyle='#76eeff';ctx.lineWidth=5;ctx.stroke();
     text(String(Math.ceil(countdown)),270,490,100);
-  }else if(race.state==='ready'&&preview===null)text('Pick your racer.',270,125,18,'#a8cce5');
+  }
   if(race.finished.length&&preview===null&&!suppressFinale)drawFinale(ctx,race);
   if(paused&&preview===null) {
     ctx.fillStyle='#080e20ee';ctx.fillRect(165,433,210,64);text('Paused',270,473,18);
   }
+  if(title){
+    ctx.save();
+    const shade=ctx.createLinearGradient(0,0,0,76);shade.addColorStop(0,'#080e20');shade.addColorStop(1,'#080e2000');
+    ctx.fillStyle=shade;ctx.fillRect(0,0,W,76);
+    ctx.textBaseline='middle';text(title,270,34,26);
+    ctx.restore();
+  }
+  drawChannelTitle(ctx,channel,270,925);
 }

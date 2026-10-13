@@ -20,7 +20,13 @@ const getMatches=createMatchService();
 
 const project=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),root=path.resolve(process.env.FACTORY_OUTPUT||path.join(project,'output'));
 const port=Number(process.env.FACTORY_PORT||5180),origin='http://127.0.0.1:'+port;
-const loadShared=()=>sharedVideos(project,{enabled:process.env.FACTORY_SHARED_VIDEOS==='1'||(!process.env.FACTORY_OUTPUT&&process.env.FACTORY_SHARED_VIDEOS!=='0')});
+async function loadShared(){
+  let unavailable=0;
+  try{
+    const jobs=await sharedVideos(project,{enabled:process.env.FACTORY_SHARED_VIDEOS==='1'||(!process.env.FACTORY_OUTPUT&&process.env.FACTORY_SHARED_VIDEOS!=='0'),onUnavailable:()=>unavailable++});
+    return {jobs,warning:unavailable?`${unavailable} ortak video bu bilgisayara indirilmemiş. Hazır videoları kullanabilir ve yeni video üretebilirsin.`:null};
+  }catch(error){return {jobs:[],warning:'Ortak arşiv okunamadı: '+error.message+' Yerel video üretimi kullanılabilir.'};}
+}
 await mkdir(root,{recursive:true});
 const lockFile=path.join(root,'.factory.lock');
 try{await writeFile(lockFile,String(process.pid),{flag:'wx'});}catch(error){
@@ -50,9 +56,10 @@ async function work(){
   busy=true;active=job;
   try{job.state='running';job.error=null;job.attempts=(job.attempts??0)+1;await save();await produce(job,{root,origin,novelty,history:state.jobs.filter(j=>j.state==='done'),cancelled:()=>job.cancelRequested||closing,update:async patch=>{Object.assign(job,patch);await save();}});if(job.options.youtube){job.youtube={state:'queued',channelId:job.options.youtube.channelId};await save();}}
   catch(e){
-    job.state=job.cancelRequested?'cancelled':closing?'queued':!e.nonRetryable&&job.attempts<3?'queued':'failed';
+    // Export failures must not silently throw away progress and start over.
+    job.state=job.cancelRequested?'cancelled':closing?'queued':'failed';
     if(closing&&!job.cancelRequested)job.attempts=Math.max(0,job.attempts-1);
-    job.stage=job.cancelRequested?'İptal edildi':job.state==='queued'?'Otomatik yeniden deneme bekleniyor':'Üretim başarısız';
+    job.stage=job.cancelRequested?'İptal edildi':job.state==='queued'?'Hizmet açılınca yeniden başlatılacak':'Üretim durdu';
     if(e.code==='REPETITION_LIMIT')job.stage='Tekrar önlendi';
     job.retryAt=Date.now()+15000;job.error=e.message;try{await save();}catch(storage){console.error('Kuyruk kaydedilemedi:',storage.message);}console.error(job.id,e.message);
   }
@@ -102,10 +109,10 @@ const server=http.createServer(async(req,res)=>{
     if(url.pathname==='/api/youtube/accounts'&&req.method==='GET')return json({configured:youtube.configured,accounts:youtube.list()});
     if(url.pathname==='/api/factory'&&req.method==='GET'){
       const offset=Math.max(0,Math.floor(Number(url.searchParams.get('offset'))||0)),limit=Math.max(1,Math.min(50,Math.floor(Number(url.searchParams.get('limit'))||12))),filter=url.searchParams.get('state')??'all';
-      const shared=(await loadShared()).filter(j=>!state.jobs.some(local=>local.github?.sharedId===j.id)),allJobs=[...shared,...state.jobs];
+      const archive=await loadShared(),shared=archive.jobs.filter(j=>!state.jobs.some(local=>local.github?.sharedId===j.id)),allJobs=[...shared,...state.jobs];
       const jobs=allJobs.filter(j=>filter==='all'||j.state===filter).slice().reverse();
       const summary={done:allJobs.filter(j=>j.state==='done').length,pending:state.jobs.filter(j=>['running','queued'].includes(j.state)).length};
-      return json({githubSharing:githubSync.enabled,apiVersion:4,capabilities:['studio-workbench','automatic-diversity','long-term-repetition','episode-formats','youtube-upload','territory-production','breaker-production','duel-production'],jobs:jobs.slice(offset,offset+limit).map(({recipe,analysis,structure,similarity,selectionScore,candidateReview,outputQuality,...job})=>({...job,contentKind:job.contentKind??(job.mode==='arena'&&(recipe?.arenaGame??job.options?.source?.project?.arenaGame??job.options?.arenaGame)==='territory'?'territory':job.mode),youtube:job.youtube?{state:job.youtube.state,channelId:job.youtube.channelId,url:job.youtube.url,error:job.youtube.error}:null,options:{channel:job.options.channel,duration:job.options.duration,language:job.options.language}})),summary,total:jobs.length,schedule:state.schedule?{enabled:state.schedule.enabled,lastDay:state.schedule.lastDay,options:{channel:state.schedule.options?.channel,count:state.schedule.options?.count}}:null,schedules:state.schedules.map(s=>({id:s.id,enabled:s.enabled,lastDay:s.lastDay,channel:s.options.channel,count:s.options.count,youtubeChannelId:s.options.youtube?.channelId,privacyStatus:s.options.youtube?.privacyStatus})),output:root,storageError});
+      return json({sharedWarning:archive.warning,githubSharing:githubSync.enabled,apiVersion:4,capabilities:['studio-workbench','automatic-diversity','long-term-repetition','episode-formats','youtube-upload','territory-production','breaker-production','duel-production','rps-production'],jobs:jobs.slice(offset,offset+limit).map(({recipe,analysis,structure,similarity,selectionScore,candidateReview,outputQuality,...job})=>({...job,contentKind:job.contentKind??(job.mode==='arena'&&(recipe?.arenaGame??job.options?.source?.project?.arenaGame??job.options?.arenaGame)==='territory'?'territory':job.mode),youtube:job.youtube?{state:job.youtube.state,channelId:job.youtube.channelId,url:job.youtube.url,error:job.youtube.error}:null,options:{channel:job.options?.channel??'Marble Studio',duration:job.options?.duration??job.duration,language:job.options?.language??'en'}})),summary,total:jobs.length,schedule:state.schedule?{enabled:state.schedule.enabled,lastDay:state.schedule.lastDay,options:{channel:state.schedule.options?.channel,count:state.schedule.options?.count}}:null,schedules:state.schedules.map(s=>({id:s.id,enabled:s.enabled,lastDay:s.lastDay,channel:s.options.channel,count:s.options.count,youtubeChannelId:s.options.youtube?.channelId,privacyStatus:s.options.youtube?.privacyStatus})),output:root,storageError});
     }
     if(url.pathname==='/api/import-video'&&req.method==='POST'){
       if(!allowedOrigins.has(req.headers.origin))return json({error:'Geçersiz istek kaynağı.'},403);
@@ -116,7 +123,7 @@ const server=http.createServer(async(req,res)=>{
       if(!allowedOrigins.has(req.headers.origin)||req.headers['content-type']!=='application/json')return json({error:'Geçersiz istek kaynağı.'},403);
       const input=await body(req);
       if(url.pathname==='/api/reveal'){
-        const job=state.jobs.find(j=>j.id===input.id)??(await loadShared()).find(j=>j.id===input.id);if(job?.state!=='done'||!/^[-a-zA-Z0-9]+$/.test(job.id))throw new Error('Hazır video bulunamadı.');
+        const job=state.jobs.find(j=>j.id===input.id)??(await loadShared()).jobs.find(j=>j.id===input.id);if(job?.state!=='done'||!/^[-a-zA-Z0-9]+$/.test(job.id))throw new Error('Hazır video bulunamadı.');
         const target=path.join(job.shared?path.join(project,'work-videos'):root,job.id);if(!(await stat(target)).isDirectory())throw new Error('Video klasörü bulunamadı.');
         if(process.env.FACTORY_DISABLE_REVEAL==='1')return json({ok:true});
         const command=process.platform==='win32'?'explorer.exe':process.platform==='darwin'?'open':'xdg-open';
@@ -159,7 +166,7 @@ const server=http.createServer(async(req,res)=>{
       return json({error:'Adres bulunamadı.'},404);
     }
     if(url.pathname.startsWith('/output/')){
-      const [, ,id,name]=url.pathname.split('/'),job=state.jobs.find(j=>j.id===id)??(await loadShared()).find(j=>j.id===id);
+      const [, ,id,name]=url.pathname.split('/'),job=state.jobs.find(j=>j.id===id)??(await loadShared()).jobs.find(j=>j.id===id);
       if(job?.state!=='done'||!job.files?.includes(name)||url.pathname!==`/output/${id}/${name}`)return json({error:'Dosya bulunamadı.'},404);
       await serveOutput(req,res,path.join(job.shared?path.join(project,'work-videos'):root,id,name),{name,id,preview:url.searchParams.get('preview')==='1'});return;
     }

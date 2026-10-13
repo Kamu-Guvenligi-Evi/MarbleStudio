@@ -1,0 +1,60 @@
+2026-10-13 — Video production progress resets
+
+Observed: job a5a41b6c-9f9a-4d5d-90d7-09116733472d (Who will take the lead?),
+1080p / 144 FPS, 41-second output, 5904 frames. The local factory error log
+contains three browser-closed errors for this job. The service process remained
+running; the elapsed retry window was consistent with three 20-minute limits.
+
+Cause: factory-worker imposed an absolute 20-minute deadline, closing Chromium
+even when frames were advancing. The resulting generic browser error was
+retryable, so factory-server restarted the export from frame zero (up to three
+attempts). This explains the progress reset; it is not a UI progress animation.
+
+Change: production-watchdog measures inactivity instead of total duration.
+Successful work renews its 20-minute timeout. A stall reports PRODUCTION_STALLED
+with nonRetryable=true, preventing the server's automatic retry loop.
+
+The server now leaves ordinary export errors failed rather than automatically
+retrying them from frame zero. Manual retry remains available.
+
+Performance: headless shell was using SwiftShader with GPU canvas disabled.
+Adding --enable-gpu selects the RTX 3050 and enables canvas/raster acceleration.
+Two 60-frame measurements at 1080p / 144 FPS took 18.746 / 11.300 seconds in
+software versus 3.659 / 2.088 seconds with GPU rendering. These are local short
+render measurements, not a guarantee of total export duration. Evidence:
+artifacts/export-gpu-comparison.json. FPS defaults and job settings remain 144.
+
+Validation: watchdog simulated-clock regression, frame interpolation/physics,
+server/worker syntax, and production-failure.mjs passed. The failure regression
+waits beyond the former retry interval and verifies attempts remain at one.
+production-service.mjs passed real API queue-to-MP4 and decode checks both before
+and after enabling GPU. The older production-export.mjs track fixture failed
+before encoding because its one-section course violates the 30-second minimum;
+it does not establish a GPU rendering failure. The full user export is pending; see activation status below.
+
+Earlier activation history: the user started job e9a1c7d4-a8f8-4d75-b482-ec88ccab93cb
+while the prior job was cancelled. To preserve this NEW export's progress,
+the service (PID 11572, UTC start ticks 639274943407352707) was not restarted.
+Via a temporary LOCAL Node inspector connection, precisely one live 1200000ms
+timer was identified by its exact callback source and cleared:
+()=>{controller.abort();encoder?.child.kill();void browser.close();}
+Inspector was then closed. This removes the hard deadline for the current
+export only, without cancelling its browser or encoder or changing its FPS.
+The current export still uses the existing software-rendering browser and does
+not gain the new idle watchdog or the new generic-error retry policy mid-run.
+
+An attempted automatic restart-after-idle helper was rejected by tool policy
+(no detailed reason supplied). It was NOT launched and its temporary scripts
+were removed. Permanent fixes load on the NEXT NORMAL factory restart using
+Baslat.cmd after the current export completes. Reloading the page is insufficient.
+
+Actual activation 2026-10-13 17:33 UTC: prior export e9a1c7d4 completed.
+A new export 4bc2c941-530b-4d2d-98b4-e46e4eed7f5f retried on the old
+service. It was cancelled early and normal start-factory.ps1 activated
+all permanent fixes (factory PID 26552, revision F303CAE872EB0C14CFDE179D2BA305F39DA645E334C4C7E136C71A801E3F0C98).
+Chromium PID 19748 was verified to launch with --enable-gpu. The same job
+was manually retried at 1080p, 144 FPS, 43 seconds; attempts=1, progressing.
+User requested full application restart AFTER this export finishes.
+
+Full user export completed at 2026-10-13 17:39:59 UTC, done100, attempts1, no error. video.mp4=39190330 bytes. No extra tests run per user request. Combined force-stop/restart was rejected by automatic policy without detailed reason; normal Start-Studio.ps1 completed successfully and opened the app. Factory remains the fixed service activated earlier.
+Restart confirmation: normal launcher detected runtime revision change and restarted BOTH services safely (studio PID 22388, factory PID 11444). App opened; completed video folder opened. The preceding statement that factory remains at its earlier PID is superseded.

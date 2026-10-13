@@ -1,0 +1,45 @@
+13 October 2026 — MarbleStudio preview performance
+
+Scope: all 11 modes reviewed. Existing unrelated working-tree edits preserved.
+
+Changes
+- src/preview-canvas.js: shared display/DPR sizing, minimum 540 portrait or 960
+  landscape pixels wide; resizing is applied with the next draw, not mid-capture.
+- app.js, renderer.js, territory-renderer.js, pi-studio.js, statistics.js:
+  adaptive previews for track, arena, territory, spiral, Pi and statistics.
+  At 1366x1000 most portrait previews are 540x960 instead of 1080x1920
+  (75% fewer pixels). Pi uses 576x1024; statistics uses 960x540.
+- Portrait recording stays 1080x1920; statistics capture/export stays 1920x1080.
+  Statistics explicitly captures at 60 fps and restores preview after stopping
+  or a start failure. Offline renderFrame explicitly requests full resolution.
+- canvas-layer.js: one cached static layer per output context, invalidated by
+  theme/key or size. Ring background, glass background and spiral-breaker
+  mascots use this cache. Existing 540x960 native previews retain their size.
+- Ball duel batches background dots into one fill; RPS caches title fitting;
+  Pi throttles DOM updates; ring counters update only when their text changes.
+- Earlier arena swept-cut fixes are retained and regression-tested.
+
+Validation
+PASS: Vite production build (existing >500 kB chunk warning).
+PASS: tests/canvas-layer.mjs, tests/glass-pane-renderer.mjs, tests/arena-cuts.mjs.
+PASS: tests/preview-canvas-browser.mjs — six modes, mobile/desktop resizing,
+      paused image preservation, actual statistics recording, capture-size lock
+      during resize, ended tracks and preview restoration.
+PASS: tests/arena-preview-browser.mjs — adaptive modes, DPR, real portrait capture.
+PASS: tests/statistics-browser.mjs — playback, CSV, mobile, automatic recording,
+      decoded 1920x1080 video, mocked archive queue, failure unlock, early stop.
+PASS: tests/all-game-branding-browser.mjs — all 11 modes and export render checks.
+Two older UI suites could not finish with the current interface:
+  spiral-breaker-browser.mjs expects 'Toplar bitti'; current overlay is
+  'No marbles left'. glass-breaker-browser.mjs clicks a hidden theme control.
+  Those expectations were not changed in this performance task.
+
+Final local benchmark: artifacts/preview-final-all.json, Chrome headless,
+1366x1000 viewport, 2.5-second RAF samples after warm-up, zero page errors.
+Track 134; arena 125; territory 126; spiral 139; Pi 144; statistics 144;
+ball duel 144; ring escape 138; RPS 144; glass breaker 142; spiral breaker 144 FPS.
+These are short local samples, not guaranteed FPS or a controlled speedup ratio.
+Earlier runs varied with machine load; the initial statistics sample was idle,
+and one intermediate run was interrupted by development-server reload.
+Use the final JSON for current results; do not present earlier comparisons as
+controlled before/after performance. No packages/assets were downloaded.

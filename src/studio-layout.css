@@ -6,6 +6,9 @@
 .race-workspace h1{font-size:32px;letter-spacing:-1px}
 .workspace-description{font-size:13px;color:#a6b2bf;line-height:1.7;margin-top:10px}
 .race-setup-bar{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;padding:18px 20px;margin-bottom:22px;border:1px solid #2b3743;background:#171e26;border-radius:12px}
+.race-setup-bar #race-title-field{flex:1 1 240px;grid-column:1/-1}
+.race-setup-bar #race-title-field[hidden]{display:none}
+#race-title{width:100%;min-width:0;min-height:42px;padding:11px 12px;border:1px solid #34404c;border-radius:7px;background:#10171f;color:#e1e9f1;font:inherit;font-size:14px}
 .race-setup-bar>label:not(.switch-label){display:grid;gap:8px;color:#abbac8;font-size:11px;min-width:130px}
 .race-setup-bar select{color:#e1e9f1;background:#10171f;border:1px solid #34404c;border-radius:7px;padding:11px 32px 11px 12px;min-height:42px}
 .race-setup-bar .switch-label{align-self:center;margin:18px 0 0;color:#abbac8;font-size:12px}

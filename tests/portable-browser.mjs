@@ -43,9 +43,9 @@ try{
   await page.selectOption('[name=strategy]','variations');assert.equal(await page.locator('[name=duration]').count(),0);
   await page.locator('#video-dialog [data-wb-close]').click();
   await page.unroute('**/music/**');
-  for(const game of ['spiral-breaker','glass-breaker','ball-duel']){
+  for(const game of ['spiral-breaker','glass-breaker','ball-duel','rock-paper-scissors']){
     console.log('Opening '+game);
-    await page.goto(origin);await page.locator(`a[href="/${game}.html"]`).click();
+    await page.goto(origin);await page.locator(`[data-studio-game="${game}"]`).click();
     await page.waitForURL(`**/${game}.html`);
     await page.locator('#video-dialog').waitFor({state:'attached'});
     assert.equal(new URL(page.url()).origin,origin);
@@ -53,11 +53,14 @@ try{
     await page.waitForFunction(()=>document.querySelector('#video-submit')?.textContent==='Videoyu hazırla');
     assert.equal(await page.locator('[name=duration]').count(),0);
   }
+  await page.goto(origin);await page.locator('[data-studio-game="ring-escape"]').click();
+  await page.waitForFunction(()=>window.ringStudio);
+  assert.equal(new URL(page.url()).origin,origin);
   await page.goto(origin+'/factory.html');
   await page.waitForFunction(()=>document.querySelector('#output').textContent.startsWith('Çıktı klasörü:'));
   assert.equal(await page.locator('[name=duration]').count(),0);
   await page.locator('header a').click();await page.waitForFunction(()=>window.marbleStudio);
   assert.equal(new URL(page.url()).origin,origin);
   assert.deepEqual(errors,[]);
-  console.log(`PASS: ${assets.count}-item catalog, ${assets.checked} decoded category samples, catalog retry, video retry without browser audio downloads, all three game links, workshop return, no target duration (${origin}).`);
+  console.log(`PASS: ${assets.count}-item catalog, ${assets.checked} decoded category samples, catalog retry, video retry without browser audio downloads, all five game links, workshop return, no target duration (${origin}).`);
 }finally{await browser.close();}

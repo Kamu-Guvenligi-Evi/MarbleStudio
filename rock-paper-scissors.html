@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#100d19"><title>Taş Kâğıt Makas · Marble Studio</title></head>
+<body>
+<header class="rps-header"><a class="brand" href="/index.html">◉ <span>MARBLE <b>STUDIO</b></span></a><nav><a href="/index.html">← Stüdyoya dön</a><button id="export" class="button">↓ WebM indir</button></nav></header>
+<main class="rps-layout">
+<aside class="rps-controls"><p class="eyebrow">ÜÇ TÜR. TEK KAZANAN.</p><h1>Taş. Kâğıt.<br><span>Makas.</span></h1><p class="intro">Bir temas, yeni bir taraf. Son parçan bile bütün arenayı geri alabilir.</p>
+<div class="start-actions video-actions"><button id="studio-export" class="button primary">Video oluştur</button><button id="studio-videos" class="button">Videolarım</button></div>
+<fieldset id="settings"><legend class="sr-only">Oyun ayarları</legend>
+<section class="control-section"><h2><span>01</span> Arena ayarları</h2>
+<label>Video başlığı<input id="title" maxlength="70" value="Who will win: Rock, Paper, or Scissors?"></label>
+<label class="map-control">Harita<select id="map" aria-describedby="map-description"></select></label>
+<p id="map-description" class="map-description"></p>
+<details class="map-gallery"><summary>Haritaları gör <span>10 arena</span></summary><div id="map-cards"></div></details>
+<div class="settings-row"><label>Her türün başlangıç sayısı<select id="count"><option value="10">10 · Toplam 30</option><option value="20" selected>20 · Toplam 60</option><option value="30">30 · Toplam 90</option></select></label><label>Oynatma hızı<select id="speed"><option value="1">1× Normal</option><option value="1.5">1,5×</option><option value="2">2× Hızlı</option></select></label></div>
+<div class="settings-row"><label>Arka plan<select id="background"><option value="nebula">Mor bulutsu</option><option value="minimal">Saf siyah</option></select></label><label>Başlangıç numarası<input id="seed" type="number" min="0" max="4294967295" step="1" value="42"></label></div>
+</section>
+<section class="rules-card"><h2>Dönüşüm döngüsü</h2><div class="rule"><canvas data-icon="rock" width="64" height="64"></canvas><span>Taş, makası yener</span><b>→ Taş</b></div><div class="rule"><canvas data-icon="scissors" width="64" height="64"></canvas><span>Makas, kâğıdı yener</span><b>→ Makas</b></div><div class="rule"><canvas data-icon="paper" width="64" height="64"></canvas><span>Kâğıt, taşı yener</span><b>→ Kâğıt</b></div><p>Kaybeden, kazananın türüne dönüşür. Toplam parça sayısı değişmez. Tek tür kaldığında oyun biter.</p></section>
+<div class="start-actions"><button id="new-game" class="button primary">Yeni oyun ↗</button><button id="replay" class="button secondary">↻ Aynı oyunu oynat</button></div>
+<p id="status" class="helper" role="status">Arena hazır. Bir taraf seç.</p>
+</fieldset>
+<p class="footnote">Aynı başlangıç numarası aynı karşılaşmayı üretir. Üç dakikada tek tür kalmazsa oyun berabere biter.</p>
+</aside>
+<section class="rps-preview" aria-label="Taş kâğıt makas önizlemesi"><div class="preview-heading"><span><i></i> CANLI ARENA</span><span>9:16 · 1080P ÇIKTI</span></div><div id="stage" class="rps-stage"><canvas id="rps-canvas" width="540" height="960" aria-label="Taş, kâğıt ve makasların birbirini dönüştürdüğü arena"></canvas></div><div class="playback"><button id="pause" aria-label="Oyunu duraklat">Ⅱ Duraklat</button><span id="match-state" role="status">60 parça · Oyun sürüyor</span><button id="sound" aria-pressed="true">Ses açık</button><button id="fullscreen" aria-label="Tam ekran">⛶</button></div></section>
+</main><script type="module" src="/src/rock-paper-scissors-app.js"></script>
+</body></html>

@@ -1,4 +1,4 @@
-import {drawChannelWatermark} from './channel-branding.js';
+import {drawChannelTitle,drawChannelWatermark} from './channel-branding.js';
 import { SPIRAL_THEMES } from './spiral-themes.js';
 import { gatePoint } from './spiral.js';
 import { ballImage } from './ball-images.js';
@@ -81,7 +81,7 @@ export function renderSpiral(ctx,race,{countdown=0,paused=false,channel}={}){
   spiralRail.forEach((point,i)=>i?ctx.lineTo(point.x,point.y):ctx.moveTo(point.x,point.y));
   ctx.strokeStyle=theme.rail;ctx.lineWidth=3;ctx.lineCap='round';ctx.stroke();
   drawSpiralGuide(ctx,race.time);
-  drawChannelWatermark(ctx,channel,540,960,theme===SPIRAL_THEMES.ice?'#526781':'#ffffff');
+  drawChannelWatermark(ctx,channel,540,960,theme===SPIRAL_THEMES.ice?'#526781':'#ffffff');drawChannelTitle(ctx,channel,270,43);
   for(const b of race.balls){
     if(race.time<b.release&&!b.airborne)continue;
     const {x,y}=b.body.position,r=b.body.circleRadius,bh=b.hue;

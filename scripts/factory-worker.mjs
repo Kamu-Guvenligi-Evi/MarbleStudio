@@ -12,6 +12,7 @@ import path from 'node:path';
 import ffmpeg from 'ffmpeg-static';
 import {chromium} from 'playwright';
 import {productionBrowserOptions} from './browser-runtime.mjs';
+import {createProductionWatchdog} from './production-watchdog.mjs';
 import {recipe,sourceRecipe,identity,structure,copyFor} from '../src/factory-recipes.js';
 import {SPIRAL_THEMES} from '../src/spiral-themes.js';
 import {DEFAULT_VIDEO_FPS} from '../src/video-settings.js';
@@ -29,8 +30,8 @@ export async function produce(job,{root,origin,history,update,cancelled,novelty}
   const dir=path.join(root,job.id);await mkdir(dir,{recursive:true});
   const browser=await chromium.launch(productionBrowserOptions());
   let encoder;const controller=new AbortController();
-  const deadline=setTimeout(()=>{controller.abort();encoder?.child.kill();void browser.close();},20*60*1000);
-  const check=()=>{if(cancelled())throw new Error('Üretim iptal edildi.');};
+  const watchdog=createProductionWatchdog(error=>{controller.abort(error);encoder?.child.kill();void browser.close().catch(()=>{});});
+  const check=()=>{if(watchdog.error)throw watchdog.error;if(cancelled())throw new Error('Üretim iptal edildi.');watchdog.progress();};
   try{
     const page=await browser.newPage();await page.goto(origin+'/factory-render.html');await page.waitForFunction(()=>window.factoryRenderer);
     if(job.options.automation?.catalogItems?.length&&!job.options.automation.ballImages.length){job.options.automation.ballImages=await page.evaluate(items=>window.factoryRenderer.prepareRoster(items),job.options.automation.catalogItems);await update({options:job.options});}
@@ -42,9 +43,9 @@ export async function produce(job,{root,origin,history,update,cancelled,novelty}
       const themes=Object.keys(SPIRAL_THEMES),theme=themes[(job.ordinal+attempt)%themes.length];
       const seed=exact?(job.options.source.project?.seed??1):randomInt(1,1000000);
       let r;try{r=automatic&&job.mode!=='statistics'?automaticCandidate(job.options,seed,history,attempted,guard):job.options.source?sourceRecipe(job.options.source,seed):recipe(seed,job.mode,theme);}catch(error){if(error.code==='REPETITION_LIMIT'&&candidates.length)break;throw error;}r.exact=exact;attempted.push(r);
-      if(!exact&&!automatic&&!job.options.source&&r.mode==='arena')Object.assign(r,{arenaGame:job.options.arenaGame??'links',arenaShape:['triangle','square','hexagon','star','circle'][attempt%5],territoryDuration:45});
+      if(!exact&&!automatic&&!job.options.source&&r.mode==='arena')Object.assign(r,{arenaGame:job.options.arenaGame??'links',arenaShape:['portrait','square','hexagon','triangle','circle'][attempt%5],territoryDuration:45});
       const intro=exact&&r.mode!=='statistics'?(r.presentation?.countdown??0):0;
-      const outroSeconds=exact&&r.mode!=='statistics'?(r.presentation?.outro??2):2;
+      const outroSeconds=Math.max(r.arenaGame==='territory'?3:0,exact&&r.mode!=='statistics'?(r.presentation?.outro??2):2);
       const fingerprint=createHash('sha256').update(identity(r)).digest('hex'),shape=structure(r);
       if(!exact&&seen.has(fingerprint))continue;
       if(automatic&&!guard.check(r).allowed){if(exact)throw repetitionError(guard.check(r).reason);continue;}
@@ -99,5 +100,6 @@ export async function produce(job,{root,origin,history,update,cancelled,novelty}
     await update({state:'done',stage:'Hazır',progress:100,completedAt:metadata.createdAt,files:['video.mp4','cover.jpg','metadata.json','upload.txt'],...best,copy});
     // Intermediate files are scoped to this job, never to user-selected paths.
     const {unlink}=await import('node:fs/promises');await Promise.allSettled([unlink(silent),unlink(audio)]);
-  }finally{controller.abort();clearTimeout(deadline);encoder?.child.kill();await browser.close();}
+  }catch(error){throw watchdog.error??error;}
+  finally{controller.abort();watchdog.close();encoder?.child.kill();await browser.close();}
 }

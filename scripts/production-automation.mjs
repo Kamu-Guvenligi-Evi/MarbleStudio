@@ -61,7 +61,7 @@ export function automaticCandidate(options,seed,history=[],attempted=[],guard=cr
     }
     if(mode==='arena'){
       r.count=6+2*(i%8);r.energy=[.85,1,1.15][Math.floor(i/8)%3];
-      if(options.arenaGame==='territory')Object.assign(r,{arenaGame:'territory',arenaShape:['triangle','square','hexagon','star','circle'][i%5],territoryDuration:[30,45,60][Math.floor(i/5)%3]});
+      if(options.arenaGame==='territory')Object.assign(r,{arenaGame:'territory',count:[8,12,6,8,10,8][i%6],arenaShape:['portrait','portrait','square','hexagon','triangle','circle'][i%6],territoryDuration:[45,60,30][Math.floor(i/6)%3]});
       else r.arenaGame='links';
     }
     if(mode!=='spiral'&&auto.ballNames.length)r.count=Math.min(r.count,Math.floor(auto.ballNames.length/2)*2);
@@ -79,7 +79,9 @@ export function automaticCandidate(options,seed,history=[],attempted=[],guard=cr
 export function outputQuality(analysis,speed){
   if(analysis.hits===0)return {accepted:true,reasons:[],firstEventSeconds:0,longestQuietSeconds:0};
   const first=analysis.firstEventSeconds/speed,quiet=analysis.longestQuietSeconds/speed,reasons=[];
-  if(first>3)reasons.push('İlk olay üç saniyeden geç');
+  // Territory's visible opening shields give viewers time to choose a player.
+  const opening=Math.max(0,analysis.openingSeconds??0)/speed;
+  if(first>3+opening)reasons.push(opening?'Başlangıç korumasından sonra ilk olay üç saniyeden geç':'İlk olay üç saniyeden geç');
   if(quiet>8)reasons.push('Sekiz saniyeden uzun olaysız bölüm');
   if(analysis.visibleRatio<.35)reasons.push('Yarışmacılar yeterince görünür değil');
   if(analysis.idleRatio>.65)reasons.push('Durağan bölüm oranı yüksek');

@@ -25,11 +25,11 @@
       <p id="status" role="status" aria-live="polite">İlk top sağ üstten düşüyor.</p>
       <a class="reference-link" href="https://www.youtube.com/shorts/K-xjYapAV9M" target="_blank" rel="noopener noreferrer">Video referansı · CodeCraftedPhysics ↗</a>
     </aside>
-    <section class="game-shell" aria-label="Cam Kırıcı oyun alanı">
-      <canvas id="game" width="540" height="960" tabindex="0" aria-label="Renkli cam kırma oyunu. Top eklemek için A, duraklatmak için boşluk tuşuna bas."></canvas>
-      <div class="game-toolbar"><button id="pause" aria-label="Duraklat">Ⅱ</button><button id="sound" aria-label="Sesi aç" aria-pressed="false">♪</button><span></span><button id="fullscreen" aria-label="Tam ekran">⛶</button></div>
-      <div id="overlay" class="overlay" hidden><strong id="overlay-title">Duraklatıldı</strong><span id="overlay-detail"></span><button id="resume">Devam et</button></div>
-      <div class="progress" role="progressbar" aria-label="Kırılan cam yüzdesi" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="progress-fill"></i></div>
+    <section class="game-shell" lang="en" aria-label="Glass Breaker game">
+      <canvas id="game" width="540" height="960" tabindex="0" aria-label="Glass Breaker. Press A to add a marble or Space to pause."></canvas>
+      <div class="game-toolbar"><button id="pause" aria-label="Pause">Ⅱ</button><button id="sound" aria-label="Unmute" aria-pressed="false">♪</button><span></span><button id="fullscreen" aria-label="Fullscreen">⛶</button></div>
+      <div id="overlay" class="overlay" hidden><strong id="overlay-title">Paused</strong><span id="overlay-detail"></span><button id="resume">Resume</button></div>
+      <div class="progress" role="progressbar" aria-label="Glass broken percentage" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="progress-fill"></i></div>
     </section>
   </main>
   <script type="module" src="/src/glass-breaker-app.js"></script>

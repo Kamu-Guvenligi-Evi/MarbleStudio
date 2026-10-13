@@ -1,3 +1,5 @@
+import {probeRps} from './rock-paper-scissors-video.js';
+import {beginRps,rpsFrame,rpsAudio,rpsResult} from './rock-paper-scissors-video-render.js';
 import {probeDuel} from './ball-duel.js';
 import {beginDuel,duelFrame,duelAudio,duelResult} from './ball-duel-video.js';
 import {englishOutput} from './output-language.js';
@@ -33,6 +35,7 @@ function statsResult(r){const data=parseStatistics(r.statistics.csv);return {com
 window.factoryRenderer={
   async prepareRoster(items){return Promise.all(items.map(prepareCatalogImage));},
   probe(recipe){
+    if(recipe.mode==='rock-paper-scissors')return probeRps(recipe);
     if(recipe.mode==='ball-duel')return probeDuel(recipe);
     if(isBreaker(recipe.mode))return probeBreaker(recipe);
     if(recipe.mode==='pi')return analyzePi(recipe);
@@ -61,12 +64,13 @@ window.factoryRenderer={
     const coverScore=s=>Math.min(20,s.events)+Math.min(20,s.motion)+s.visible*20+(s.close?10:0);
     coverSamples.sort((a,b)=>coverScore(b)-coverScore(a));
     const report=qualityReport({mode:recipe.mode,seconds:r.time,eventTimes,samples,leadChanges:changes,coverTime:coverSamples[0]?.time??r.time*.5});
-    const result={complete,simulationSeconds:r.time,hits:eventTimes.length,rescues:r.rescues??0,winner:englishOutput(r.finished[0]?.name??null),finite,...report,...(r.episode?{episode:r.summary()}:{} )};
+    const result={complete,simulationSeconds:r.time,hits:eventTimes.length,rescues:r.rescues??0,winner:englishOutput(r.finished[0]?.name??null),finite,...report,...(r.arenaGame==='territory'?{openingSeconds:r.openingDuration}:{}),...(r.episode?{episode:r.summary()}:{} )};
     r.dispose();return result;
   },
   async begin(job){
     race?.dispose();race=null;config=job;steps=0;cameraY=0;previousCameraY=0;hits=[];lastHit=new Map();musicEvents=[];lastLeader=null;director=createCameraDirector();
     canvas.width=job.width??1080;canvas.height=job.height??1920;
+    if(job.recipe.mode==='rock-paper-scissors'){beginRps(job);return;}
     if(job.recipe.mode==='ball-duel'){await beginDuel(job);return;}
     if(isBreaker(job.recipe.mode)){await beginBreaker(job);return;}
     if(job.recipe.mode==='statistics'){statisticsView().loadSnapshot(job.recipe.statistics);return;}
@@ -80,7 +84,8 @@ window.factoryRenderer={
   frame(index){
     const elapsed=index/config.fps,mode=config.recipe.mode;
     let picture;
-    if(mode==='ball-duel')picture=duelFrame(elapsed);
+    if(mode==='rock-paper-scissors')picture=rpsFrame(elapsed);
+    else if(mode==='ball-duel')picture=duelFrame(elapsed);
     else if(isBreaker(mode))picture=breakerFrame(elapsed);
     else if(mode==='statistics')picture=statisticsView().renderFrame(elapsed/config.analysis.simulationSeconds,1/config.fps,config.channel);
     else if(mode==='pi'){
@@ -98,7 +103,7 @@ window.factoryRenderer={
       }
       const simulationTime=Math.min(Math.max(0,elapsed-(config.intro??0))*config.speed,config.analysis.simulationSeconds);
       const alpha=ended(race,mode,config.recipe.exact)?1:Math.max(0,Math.min(1,simulationTime*120-(steps-1)));
-      interpolation.draw(race.current??race,alpha,()=>({track:renderRace,spiral:renderSpiral,arena:renderArena}[mode])(sourceCtx,race.current??race,{cameraY:previousCameraY+(cameraY-previousCameraY)*alpha,countdown:Math.max(0,(config.intro??0)-elapsed),paused:false,trails:config.recipe.trails??true,preview:null,suppressFinale:!!race.episode,channel:config.channel}));if(race.episode)drawEpisode(sourceCtx,race);picture=source;
+      interpolation.draw(race.current??race,alpha,()=>({track:renderRace,spiral:renderSpiral,arena:renderArena}[mode])(sourceCtx,race.current??race,{cameraY:previousCameraY+(cameraY-previousCameraY)*alpha,countdown:Math.max(0,(config.intro??0)-elapsed),paused:false,resultElapsed:Math.max(0,elapsed-(config.intro??0)-config.analysis.simulationSeconds/config.speed),trails:config.recipe.trails??true,preview:null,suppressFinale:!!race.episode,channel:config.channel,title:config.recipe.presentation?.title}));if(race.episode)drawEpisode(sourceCtx,race);picture=source;
     }
     const w=canvas.width,h=canvas.height,scale=Math.min(w/picture.width,h/picture.height);
     ctx.fillStyle=config.template==='cinema'?'#030507':'#0b1018';ctx.fillRect(0,0,w,h);
@@ -107,23 +112,24 @@ window.factoryRenderer={
     const band=(text,y,accent='#bbed83',compact=false)=>{
       ctx.fillStyle='#080d16ed';ctx.fillRect(pad,y,w-pad*2,(compact?70:100)*unit);ctx.fillStyle=accent;ctx.font=`600 ${compact?32*unit:font}px Segoe UI`;ctx.textAlign='center';ctx.fillText(englishOutput(text),w/2,y+(compact?45:63)*unit,w-pad*3);
     };
-    if(!['statistics','pi'].includes(mode)&&elapsed<3.5)band(config.copy.hook,(config.recipe.arenaGame==='territory'?480:330)*unit,'#bbed83',true);
+    if(!['statistics','pi','rock-paper-scissors'].includes(mode)&&config.recipe.arenaGame!=='territory'&&elapsed<3.5)band(config.copy.hook,330*unit,'#bbed83',true);
     if(config.template==='broadcast'){
-      ctx.fillStyle='#a7e2cc';ctx.fillRect(0,0,w,6*unit);ctx.fillStyle='#e9fff4';ctx.font=`600 ${25*unit}px Segoe UI`;ctx.textAlign='left';ctx.fillText(config.channel??'',pad,45*unit,w-pad*2);
+      ctx.fillStyle='#a7e2cc';ctx.fillRect(0,0,w,6*unit);ctx.fillStyle='#e9fff4';ctx.font=`600 ${25*unit}px Segoe UI`;ctx.textAlign='left';ctx.fillText(config.channel?channelHandle(config.channel):'',pad,45*unit,w-pad*2);
     }
-    if(config.template==='cinema'&&config.channel){ctx.fillStyle='#eee';ctx.font=`500 ${24*unit}px Segoe UI`;ctx.textAlign='center';ctx.fillText(config.channel,w/2,50*unit,w-pad*2);}
+    if(config.template==='cinema'&&config.channel){ctx.fillStyle='#eee';ctx.font=`500 ${24*unit}px Segoe UI`;ctx.textAlign='center';ctx.fillText(channelHandle(config.channel),w/2,50*unit,w-pad*2);}
     if(elapsed>=(config.intro??0)+config.analysis.simulationSeconds/config.speed){
-      const name=mode==='ball-duel'?config.analysis.winner:isBreaker(mode)?config.analysis.winner:mode==='pi'?'':mode==='statistics'?config.analysis.winner:race.finished[0]?.name??'';
+      const name=['ball-duel','rock-paper-scissors'].includes(mode)?config.analysis.winner:isBreaker(mode)?config.analysis.winner:mode==='pi'?'':mode==='statistics'?config.analysis.winner:race.finished[0]?.name??'';
       const result=mode==='ball-duel'&&name==='Draw'?'Draw':isBreaker(mode)?(name==='Cleared'?'All clear!':name==='In progress'?'To be continued…':'Out of marbles!'):mode==='spiral'?'The center is clear!':'Winner: '+englishOutput(name);
-      if(!['statistics','pi'].includes(mode))band(result,h-180*unit);
+      if(!['statistics','pi','rock-paper-scissors'].includes(mode)&&config.recipe.arenaGame!=='territory')band(result,h-180*unit);
       if(config.outro){ctx.fillStyle='#eff8ff';ctx.font=`500 ${26*unit}px Segoe UI`;ctx.textAlign='center';ctx.fillText(englishOutput(config.outro),w/2,h-35*unit,w-pad*2);}
     }
     return canvas.toDataURL('image/jpeg',.92).split(',')[1];
   },
-  audio(){if(config.recipe.mode==='ball-duel')return duelAudio();return isBreaker(config.recipe.mode)?breakerAudio():{effects:hits,leaders:musicEvents};},
+  audio(){if(config.recipe.mode==='rock-paper-scissors')return rpsAudio();if(config.recipe.mode==='ball-duel')return duelAudio();return isBreaker(config.recipe.mode)?breakerAudio():{effects:hits,leaders:musicEvents};},
   async hypnoticAudio(duration,audio='all'){
     if(config.recipe.mode!=='spiral'||!config.recipe.spiralHypnotic||config.recipe.spiralHypnoticMuted||audio==='none')return null;
     return renderHypnoticWav(hits,duration,{effects:audio!=='music'});
   },
-  result(){if(config.recipe.mode==='ball-duel')return duelResult();if(isBreaker(config.recipe.mode))return breakerResult();if(config.recipe.mode==='pi')return {complete:race.state==='finished',winner:null,collisions:race.collisions};return config.recipe.mode==='statistics'?{complete:true,winner:config.analysis.winner}:{complete:ended(race,config.recipe.mode,config.recipe.exact),winner:englishOutput(race.finished[0]?.name??null),...(race.episode?{episode:race.summary()}:{} )};},
+  result(){if(config.recipe.mode==='rock-paper-scissors')return rpsResult();if(config.recipe.mode==='ball-duel')return duelResult();if(isBreaker(config.recipe.mode))return breakerResult();if(config.recipe.mode==='pi')return {complete:race.state==='finished',winner:null,collisions:race.collisions};return config.recipe.mode==='statistics'?{complete:true,winner:config.analysis.winner}:{complete:ended(race,config.recipe.mode,config.recipe.exact),winner:englishOutput(race.finished[0]?.name??null),...(race.episode?{episode:race.summary()}:{} )};},
 };
+import {channelHandle} from './channel-branding.js';

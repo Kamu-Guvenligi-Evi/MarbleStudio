@@ -2,7 +2,7 @@ import {drawMarble} from './marble-art.js';
 import {raceName} from './race-copy.js';
 
 // Fixed broadcast overlay; the arena keeps its original scale.
-export function drawLeaders(ctx,race) {
+export function drawLeaders(ctx,race,drawBall=drawMarble) {
   const tr=false;
   const arena=race.mode==='arena',territory=race.arenaGame==='territory',leaders=race.ranking().filter(b=>!arena||b.eliminatedAt===null).slice(0,3);
   if(!leaders.length)return;
@@ -19,7 +19,7 @@ export function drawLeaders(ctx,race) {
     const fill=ctx.createLinearGradient(x,34,x+160,161);
     fill.addColorStop(0,i===0?'#2d2931':'#172236');fill.addColorStop(1,'#0c1525');
     ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=i===0?'#d4ae6480':'#8eaac329';ctx.lineWidth=1;ctx.stroke();
-    drawMarble(ctx,ball,center,77,i===0?32:29);
+    drawBall(ctx,ball,center,77,i===0?32:29);
     ctx.beginPath();ctx.arc(center+25,98,11,0,Math.PI*2);ctx.fillStyle=i===0?'#ffe29a':'#263a51';ctx.fill();
     ctx.textAlign='center';ctx.font='800 12px "Segoe UI",sans-serif';ctx.fillStyle=i===0?'#1a1b26':'#e6f0ff';ctx.fillText(String(i+1),center+25,102);
     ctx.font='600 13px "Segoe UI",sans-serif';ctx.fillStyle='#f1f5ff';

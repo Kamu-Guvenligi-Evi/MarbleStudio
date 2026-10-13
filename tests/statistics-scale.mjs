@@ -21,7 +21,7 @@ const browser=await chromium.launch({channel:'chrome',headless:true});
 try{
   const page=await browser.newPage(),errors=[];
   page.on('pageerror',error=>errors.push(error.message));
-  await page.goto('http://127.0.0.1:5173?edit=1');
+  await page.goto((process.env.TEST_STUDIO_ORIGIN??'http://127.0.0.1:5173')+'?edit=1');
   await page.locator('#nav-statistics').click();
   await page.locator('#statistics-csv').fill('Year,A,B\n2000,90,45\n2001,100,50\n2002,300,150\n2003,30,15');
   await page.locator('#statistics-apply').click();

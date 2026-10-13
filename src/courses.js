@@ -4,6 +4,7 @@ import { normalizeSection } from './section-settings.js';
 const { Bodies, Body, Composite } = Matter;
 export const SECTION_HEIGHT = 650;
 export const COURSE_START = 430;
+export const STUDIO_COURSE_SECTIONS = 18;
 export const COURSE_META = {
   longduel: {name:'Uzun düello · 2 top · 30+ sn',accent:'#daa5ff',count:2,maxSpeed:6,modules:['switchback','slalom','diamonds','rotorgates','fork','staircase','weave','switchback','funnel','sieve','slalom','wheels','switchback','pendulum','diamonds','fork','staircase','weave','slalom','rotorgates','switchback','funnel','sieve','slalom']},
   stairway: {name:'Basamak ekspresi',accent:'#82d9ff',modules:['staircase', 'crossramps', 'diamonds', 'fork', 'sieve', 'weave', 'shortcut', 'slalom']},
@@ -24,6 +25,20 @@ export const COURSE_META = {
   velocity: { name: 'Velocity', accent: '#ffb587', modules: ['slalom', 'fork', 'drift', 'funnel', 'pendulum', 'wheels', 'pulse', 'pegs'] },
   clockwork: { name: 'Clockwork', accent: '#72dedb', modules: ['pulse', 'pendulum', 'wheels', 'drift', 'fork', 'pegs', 'funnel', 'slalom'] },
 };
+
+// Migrate the previous 20-section studio length, retaining obstacle settings.
+// Longer special courses and manually saved layouts keep their length.
+export function extendStudioCourse(sequence = [], preset = 'cascade') {
+  const result = sequence.map(normalizeSection);
+  if(result.length===20&&(COURSE_META[preset]||preset==='random'))result.length=STUDIO_COURSE_SECTIONS;
+  const modules = (COURSE_META[preset] ?? COURSE_META.cascade).modules;
+  let next = 0;
+  while (result.length < STUDIO_COURSE_SECTIONS) {
+    const type = modules[next++ % modules.length];
+    if (result.at(-1)?.type !== type) result.push(normalizeSection(type));
+  }
+  return result;
+}
 
 export const MODULES = {
   staircase: {name:'Basamak yarışı',subtitle:'Kısa basamaklardan sekerek ilerle.',icon:'≋',color:'#ffcb89'},
@@ -54,10 +69,10 @@ export function buildCourse(world, rng, preset, sectionCount, customSequence = n
     if (included()) { obstacles.push(body); Composite.add(world, body); } return body;
   };
   const rail = (x, y, width, angle = 0, kind = 'rail', height = 14) => add(Bodies.rectangle(x, y, width, height, {
-    isStatic: true, angle, chamfer: { radius: Math.min(6, height / 2) }, friction: 0, frictionStatic: 0, restitution: .35,
+    isStatic: true, angle, chamfer: { radius: Math.min(6, height / 2) }, friction: 0, frictionStatic: 0, restitution: .3,
   }), kind);
   const line = (x1, y1, x2, y2, kind = 'rail') => rail((x1 + x2) / 2, (y1 + y2) / 2, Math.hypot(x2 - x1, y2 - y1), Math.atan2(y2 - y1, x2 - x1), kind);
-  const circle = (x, y, radius, kind = 'bumper') => add(Bodies.circle(x, y, radius, { isStatic: true, restitution: .72, friction: 0, frictionStatic: 0 }), kind);
+  const circle = (x, y, radius, kind = 'bumper') => add(Bodies.circle(x, y, radius, { isStatic: true, restitution: .6, friction: 0, frictionStatic: 0 }), kind);
   const spin = (x, y, width, speed, angle = 0) => {
     const body = rail(x, y, width, angle, 'rotor', 16);
     if(included()) movers.push({ type: 'spin', body, speed: speed * (currentSection.settings.speed ?? 1), phase: angle, x, y, radius: width / 2 });
@@ -83,7 +98,7 @@ export function buildCourse(world, rng, preset, sectionCount, customSequence = n
   rail(527, bottom / 2, bottom + 100, Math.PI / 2, 'wall', 26);
   rail(270, bottom, 540, 0, 'wall', 30);
   const startGate = rail(270, 300, 488, 0, 'gate', 12);
-  const base = COURSE_META[preset].modules;
+  const base = [...new Set(COURSE_META[preset].modules)];
   const pool = base.slice(1);
   for (let i = pool.length - 1; i > 0; i--) {
     const j = Math.floor(rng() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]];
@@ -110,7 +125,7 @@ export function buildCourse(world, rng, preset, sectionCount, customSequence = n
       }
       case 'diamonds': {
         for(const [x,dy] of [[155,135],[385,135],[270,315],[125,485],[415,485]]) {
-          const body=Bodies.polygon(x,y+dy,4,38*settings.size,{isStatic:true,restitution:.5,friction:0,frictionStatic:0});
+          const body=Bodies.polygon(x,y+dy,4,38*settings.size,{isStatic:true,restitution:.38,friction:0,frictionStatic:0});
           Body.rotate(body,Math.PI/4);add(body,'splitter');
         }
         break;
@@ -132,7 +147,8 @@ export function buildCourse(world, rng, preset, sectionCount, customSequence = n
         break;
       }
       case 'sieve': {
-        for(let row=0;row<3;row++)for(let col=0;col<4;col++)circle(90+col*110+(row%2)*15,y+135+row*165,22*settings.size,'peg');
+        // Leave room for full-size marbles along both walls and between pegs.
+        for(let row=0;row<3;row++)for(let col=0;col<4;col++)circle(110+col*106+(row%2?4:-4),y+135+row*165,22*settings.size,'peg');
         break;
       }
       case 'shortcut': {
@@ -160,7 +176,7 @@ export function buildCourse(world, rng, preset, sectionCount, customSequence = n
         spin(center, y + 465, 250, direction * .68, phase); break;
       }
       case 'fork': {
-        const diamond = Bodies.polygon(270, y + 170, 4, 61, { isStatic: true, restitution: .38, friction: 0, frictionStatic: 0 });
+        const diamond = Bodies.polygon(270, y + 170, 4, 61, { isStatic: true, restitution: .32, friction: 0, frictionStatic: 0 });
         Body.rotate(diamond, Math.PI / 4); add(diamond, 'splitter');
         line(270, y + 225, 270, y + 440, 'divider');
         line(27, y + 300, 170, y + 370); line(513, y + 235, 370, y + 305);
@@ -177,7 +193,8 @@ export function buildCourse(world, rng, preset, sectionCount, customSequence = n
         line(x(26), y + 455, x(290), y + 455 + 90 * settings.slope); break;
       }
       case 'pulse': {
-        line(26, y + 85, 182, y + 175); line(514, y + 85, 358, y + 175);
+        // Keep the entry beside the divider wide enough for less-bouncy packs.
+        line(26, y + 85, 160, y + 175); line(514, y + 85, 380, y + 175);
         line(270, y + 110, 270, y + 405, 'divider');
         const period = settings.openFor + settings.closedFor;
         pulse(146, y + 315, 238, phase / (2 * Math.PI) * period);
@@ -190,15 +207,15 @@ export function buildCourse(world, rng, preset, sectionCount, customSequence = n
         line(26, y + 420, 163, y + 490); line(514, y + 420, 377, y + 490); break;
       }
       case 'pegs': {
-        for (let row = 0; row < 4; row++) for (let col = 0; col < 5; col++) {
-          circle(90 + col * 82 + (row % 2) * 24, y + 130 + row * 94, (12 + rng() * 5) * settings.size, 'peg');
+        for (let row = 0; row < 4; row++) for (let col = 0; col < 4; col++) {
+          circle(110 + col * 106 + (row % 2 ? 8 : -8), y + 130 + row * 94, (12 + rng() * 5) * settings.size, 'peg');
         }
         swing(270, y + 535, 190, phase, 1.1, .5); break;
       }
       case 'pendulum': {
         // Preserve a ball-width exit beside each paddle even at low amplitudes.
-        swing(167, y + 180, 200, phase, 1.15, .7);
-        swing(373, y + 355, 200, phase + Math.PI, 1, .7);
+        swing(167, y + 180, 168, phase, 1.15, .7);
+        swing(373, y + 355, 168, phase + Math.PI, 1, .7);
         circle(185, y + 510, 21); circle(355, y + 510, 21); break;
       }
     }

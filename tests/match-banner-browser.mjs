@@ -1,3 +1,4 @@
+const origin=process.env.TEST_STUDIO_ORIGIN??'http://127.0.0.1:5173';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 
@@ -16,7 +17,7 @@ try{
       away:{name:league==='nfl'?'Buffalo Bills':'Fenerbahçe',abbreviation:'FB',score:league==='nfl'?null:'1'},
     }]})});
   });
-  await page.goto('http://127.0.0.1:5173');await page.waitForFunction(()=>window.marbleStudio&&!document.querySelector('#match-banner-refresh').disabled);
+  await page.goto((origin+''));await page.waitForFunction(()=>window.marbleStudio&&!document.querySelector('#match-banner-refresh').disabled);
   assert.equal(requests.length,10);assert.equal(new Set(requests.map(r=>r.league)).size,10);
   assert.equal(await page.locator('[data-banner-sport="soccer"] .banner-match').count(),9);
   assert.equal(await page.locator('[data-banner-sport="nfl"] .banner-match').count(),1);

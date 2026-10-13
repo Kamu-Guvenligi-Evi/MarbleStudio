@@ -51,7 +51,7 @@ if (-not $studioOnline) { throw 'Marble Studio could not start. See server-error
 # Do not open a partly working application when files are missing after extraction.
 $catalog = Invoke-RestMethod "$studioAddress/catalog/manifest.json" -TimeoutSec 10
 if (-not $catalog.items.Count) { throw 'Gorsel kutuphanesi eksik. ZIP dosyasinin tamamini yeni bir klasore cikartin ve Baslat.cmd ile acin.' }
-foreach ($page in @('spiral-breaker.html','glass-breaker.html','ball-duel.html')) {
+foreach ($page in @('spiral-breaker.html','glass-breaker.html','ball-duel.html','ring-escape.html','rock-paper-scissors.html')) {
     $reply = Invoke-WebRequest "$studioAddress/$page" -UseBasicParsing -TimeoutSec 10
     if (-not $reply.Content.Contains('/src/' + $page.Replace('.html','-app.js'))) { throw "Oyun dosyasi eksik: $page. Paketin tamamini yeni bir klasore cikartin." }
 }

@@ -2,6 +2,8 @@ import {GLASS_THEMES} from './glass-themes.js';
 import {BREAKER_MAPS} from './breaker-maps.js';
 import {GlassBreaker} from './glass-breaker.js';
 import {SpiralBreaker} from './spiral-breaker.js';
+import {normalizeSoundStyle} from './game-sound-director.js';
+import {normalizeSoundOverrides,normalizeReferenceMapping} from './game-sound-settings.js';
 
 export const isBreaker=mode=>['glass-breaker','spiral-breaker'].includes(mode);
 export function normalizeBreaker(raw){
@@ -12,7 +14,7 @@ export function normalizeBreaker(raw){
   const theme=p.theme??'spectrum',mapId=p.mapId??'spiral';
   if(glass&&!Object.hasOwn(GLASS_THEMES,theme))throw new Error('Cam teması geçersiz.');
   if(!glass&&!BREAKER_MAPS.some(m=>m.id===mapId))throw new Error('Kırıcı haritası geçersiz.');
-  return {mode:raw.mode,project:{name:glass?'Cam Kırıcı':'Spiral Kırıcı',seed,playbackSpeed:speed,sound:p.sound===true,...(glass?{theme,liveColors:p.liveColors===true}:{mapId})}};
+  return {mode:raw.mode,project:{name:glass?'Cam Kırıcı':'Spiral Kırıcı',seed,playbackSpeed:speed,sound:p.sound===true,soundStyle:!glass&&p.soundStyle==='reference'?'reference':normalizeSoundStyle(p.soundStyle),soundOverrides:normalizeSoundOverrides(raw.mode,p.soundOverrides),...(glass?{theme,liveColors:p.liveColors===true}:{mapId,referenceMapping:normalizeReferenceMapping(p.referenceMapping)})}};
 }
 export function probeBreaker(recipe){
   const game=recipe.mode==='glass-breaker'?new GlassBreaker({seed:recipe.seed}):new SpiralBreaker({mapId:recipe.mapId});

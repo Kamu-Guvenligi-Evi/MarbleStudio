@@ -1,0 +1,40 @@
+Taş Kâğıt Makas — 2026-10-13
+
+Page: /rock-paper-scissors.html (main studio navigation and Vite build registered).
+Files: src/rock-paper-scissors{,-app,-renderer}.js, src/rock-paper-scissors.css.
+
+Reference: https://www.instagram.com/p/DcTizRGRkZX/
+Local reference: .cache/rps-reference.mp4 (4,845,312 bytes; local file size, not measured network traffic).
+Do not download again. Contact sheets: .cache/rps-motion.jpg and .cache/rps-contact.jpg.
+Observed: 20 of each type; rock/scissors/paper counters; purple square arena; three starting groups.
+Contacts CONVERT the losing type. Population stays constant, even when a type returns from one remaining piece.
+Rules: rock beats scissors, scissors beats paper, paper beats rock. Victory requires a single surviving type.
+
+Seeded simulation at 120 Hz; 10/20/30 per type; speed 1/1.5/2. A 180-second simulation limit yields a draw.
+Ten maps: classic, orbit (central circle), pillars (four circles), gates (two regions with a passage),
+rotor (rotating capsule), binary (two orbiting satellites), pulse (opening/closing gate),
+pinball (seven glowing bumpers), chicane (staggered capsule barriers), pendulum (swinging capsule).
+Obstacles reflect velocity relative to the moving contact surface, including angular velocity.
+Capsule contacts resolve against the nearest point on their central segment. Population is unchanged.
+Movement follows simulation time, so pause, replay, playback speed and export remain synchronized.
+Map selection uses one catalog with a collapsible thumbnail gallery and descriptions outside the video.
+Contact flashes, orbit guides and pivot details distinguish dynamic obstacles without canvas captions.
+Canvas art: faceted rock, folded paper, metal scissors, procedural violet nebula, conversion rings.
+User correction: preserve the editable video title. Remove the upper “TAŞ → MAKAS → KÂĞIT → TAŞ” line and all lower explanatory text/statistics. Counters remain.
+Shared manual sound controls; no AI sound selection. Settings saved under marble-studio-rock-paper-scissors-v1.
+Video: 1080×1920 WebM, optional sound, manual stop or automatic finalization after victory/draw.
+Page hides pause simulation and recording together; export locks settings until finalization.
+
+Validation completed:
+- tests/rock-paper-scissors.mjs: conversion directions, bounce, comeback, deterministic replay, victory/draw;
+  90 full matches across ten maps, constant population, clear spawns, finite state, arena/obstacle bounds.
+  All passed; all 90 reached a winner. Moving-map replay is deterministic.
+  New-map duration ranges in the nine seeded cases each: rotor 14–55s, binary 12–54s, pulse 8–39s,
+  pinball 11–29s, chicane 9–38s, pendulum 10–73s (rounded simulation time).
+- tests/rock-paper-scissors-browser.mjs: ten map selections, gallery selection, moving obstacles freeze
+  on pause, settings persistence, title preserved,
+  requested text removed, sound, mobile 390/320 widths, 1080×1920 audio export and automatic completed export.
+- Existing manual-game-sounds and game-sound-director unit tests passed.
+- Vite production build passed (existing large chunk warning). New-map checks rerun on 2026-10-13.
+Local test artifacts: artifacts/rps-desktop.jpg, rps-mobile.jpg, rps-export.webm, rps-complete-silent.webm.
+Run via npm run test:rps with the configured local Node runtime from tools/setup-state.json.

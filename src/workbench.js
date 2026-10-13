@@ -1,4 +1,5 @@
 import {brandVideoOptions} from './channel-branding.js';
+import {factoryOrigin} from './service-origin.js';
 import './workbench.css';
 import {normalizeSnapshot} from './studio-transfer.js';
 import {createWorkStore} from './saved-works.js';
@@ -6,10 +7,10 @@ import {isBreaker} from './breaker-video.js';
 import {DEFAULT_VIDEO_FPS,VIDEO_FPS_DEFAULT_VERSION,preferredVideoFps} from './video-settings.js';
 
 const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const standalone=mode=>isBreaker(mode)||mode==='ball-duel';
-const modeName={'ball-duel':'Top Düellosu',pi:'Pi Çarpışmaları',track:'Parkur yarışı',arena:'Küre arenası',territory:'Alan Savaşı',spiral:'Spiral çoğalma',statistics:'İstatistik yarışı','glass-breaker':'Cam Kırıcı','spiral-breaker':'Spiral Kırıcı'};
+const standalone=mode=>isBreaker(mode)||['ball-duel','rock-paper-scissors'].includes(mode);
+const modeName={'rock-paper-scissors':'Taş Kâğıt Makas','ball-duel':'Top Düellosu',pi:'Pi Çarpışmaları',track:'Parkur yarışı',arena:'Küre arenası',territory:'Alan Savaşı',spiral:'Spiral çoğalma',statistics:'İstatistik yarışı','glass-breaker':'Cam Kırıcı','spiral-breaker':'Spiral Kırıcı'};
 const kindOf=record=>record.contentKind??(record.mode==='arena'&&(record.project?.arenaGame??record.recipe?.arenaGame??record.options?.arenaGame)==='territory'?'territory':record.mode);
-export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isLocked}){
+export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isLocked,getChannel}){
   const store=createWorkStore();let source=null,ready=false,submitting=false,offset=0,poll=null,refreshing=false,works=[],exportRevision=0,retryExport=null;
   const root=document.createElement('div');root.innerHTML=`
   <dialog id="video-dialog" class="workbench-dialog" aria-labelledby="video-title">
@@ -36,7 +37,7 @@ export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isL
   const uploadButton=document.createElement('button');uploadButton.className='button secondary';uploadButton.textContent='Video yükle';uploadButton.id='videos-upload';
   const uploadInput=document.createElement('input');uploadInput.type='file';uploadInput.accept='.mp4,.webm,video/mp4,video/webm';uploadInput.hidden=true;uploadInput.id='videos-upload-file';
   document.querySelector('.wb-archive-controls').append(uploadButton,uploadInput);uploadButton.onclick=()=>uploadInput.click();
-  const origin=()=>new URL(document.querySelector('.factory-link')?.href??location.origin).origin;
+  const origin=factoryOrigin;
   const failure='Video hizmetine bağlanılamadı. ZIP dosyasının tamamını bir klasöre çıkart, o klasördeki Baslat.cmd dosyasını aç ve Tekrar dene düğmesine bas.';
   async function uploadVideo(blob,{name='Video',mode='track'}={}){
     if(!blob.size||blob.size>1024**3)throw new Error('Video boş olamaz; en fazla 1 GB olabilir.');
@@ -49,7 +50,7 @@ export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isL
     let res;try{res=await fetch(origin()+'/api/'+route,{...(body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(15000)});}catch{throw new Error(failure);}
     let data;try{data=await res.json();}catch{throw new Error(failure);}if(!res.ok)throw new Error(data.error??'İşlem tamamlanamadı.');return data;
   }
-  async function checkService(){const data=await api('factory?limit=1');if(data.apiVersion<3||!data.capabilities?.includes('studio-workbench')||(isBreaker(source?.mode)&&!data.capabilities?.includes('breaker-production'))||(source?.mode==='ball-duel'&&!data.capabilities?.includes('duel-production')))throw new Error('Video hizmeti eski sürümde. Açık hizmeti kapatıp Marble Studio kısayolunu yeniden aç.');return data;}
+  async function checkService(){const data=await api('factory?limit=1');if(data.apiVersion<3||!data.capabilities?.includes('studio-workbench')||(isBreaker(source?.mode)&&!data.capabilities?.includes('breaker-production'))||(source?.mode==='rock-paper-scissors'&&!data.capabilities?.includes('rps-production'))||(source?.mode==='ball-duel'&&!data.capabilities?.includes('duel-production')))throw new Error('Video hizmeti eski sürümde. Açık hizmeti kapatıp Marble Studio kısayolunu yeniden aç.');return data;}
   function show(dialog){for(const d of root.querySelectorAll('dialog[open]'))d.close();dialog.showModal();}
   for(const dialog of root.querySelectorAll('dialog')){
     dialog.querySelector('[data-wb-close]').onclick=()=>dialog.close();
@@ -78,7 +79,7 @@ export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isL
     e.preventDefault();if(submitting)return;if(!source){await retryExport?.();return;}submitting=true;$('video-submit').disabled=true;
     try{
       if(!ready){await checkService();ready=true;$('video-submit').textContent='Videoyu hazırla';$('video-message').textContent='Bağlantı hazır. Videoyu hazırlayabilirsin.';return;}
-      const fields=Object.fromEntries(new FormData(form));const options=await brandVideoOptions({...fields,count:fields.strategy==='exact'?1:Number(fields.count),resolution:Number(fields.resolution),fps:Number(fields.fps),source});if(!options)return;await api('queue',options);
+      const fields=Object.fromEntries(new FormData(form));const options=await brandVideoOptions({...fields,channel:getChannel?.(),count:fields.strategy==='exact'?1:Number(fields.count),resolution:Number(fields.resolution),fps:Number(fields.fps),source});if(!options)return;await api('queue',options);
       notify('Video hazırlanmaya başladı.');await openVideos();
     }catch(error){$('video-message').textContent=error instanceof TypeError?failure:error.message;}finally{submitting=false;$('video-submit').disabled=false;}
   };
@@ -91,7 +92,7 @@ export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isL
   async function refreshVideos(){
     if(refreshing)return;refreshing=true;try{
       const data=await api('factory?limit=12&offset='+offset+'&state='+$('videos-filter').value);if(data.apiVersion<3)throw new Error('Video hizmetini yeni sürümle yeniden aç.');
-      $('videos-message').textContent=data.storageError?'Kayıt sorunu: '+data.storageError:'';
+      $('videos-message').textContent=data.storageError?'Kayıt sorunu: '+data.storageError:data.sharedWarning??'';
       $('videos-summary').textContent=`${data.summary.done} hazır · ${data.summary.pending} hazırlanıyor`;$('videos-previous').disabled=offset===0;$('videos-next').disabled=offset+12>=data.total;
       const list=$('videos-list'),ids=new Set(data.jobs.map(j=>j.id));for(const card of [...list.children])if(!ids.has(card.dataset.job))card.remove();
       for(const [index,job] of data.jobs.entries()){

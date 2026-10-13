@@ -5,7 +5,7 @@ import { normalizeBallImages, ballImageColor } from './ball-images.js';
 import { normalizeNames } from './presentation.js';
 const { Engine, Bodies, Body, Composite, Events } = Matter;
 export const WIDTH = 540;
-export const BALL_RADIUS = 18;
+export const BALL_RADIUS = 26;
 export const COLORS = ['#d8fa77','#b6a0ff','#ff997d','#71d8f2','#f4c65b','#f080b4','#66dbb5','#86aaff','#f26d70','#cbdadf','#e3a96e','#b9e57d','#d48cf2','#5fd2d0','#ffe79b','#ffb4c8','#88b5bd','#dcbdff','#ffbe73','#95e8c8'];
 export const NAMES = ['Lime','Lavanta','Mercan','Buz','Altın','Sakura','Nane','Mavi','Alev','İnci','Bakır','Fıstık','Orkide','Turkuaz','Limon','Pembe','Okyanus','Leylak','Mango','Yeşim'];
 export function random(seed) {
@@ -48,8 +48,8 @@ export class Race {
     }
     this.balls = Array.from({ length: ballCount }, (_, id) => {
       const slot=slots[id];
-      const body = Bodies.circle(88 + (slot % 8) * 52 + (this.rng() - .5) * 8, 260 - Math.floor(slot / 8) * 44, BALL_RADIUS, {
-        restitution: .5, friction: 0, frictionStatic: 0, frictionAir: .0001, density: .003, slop: .03,
+      const body = Bodies.circle(78 + (slot % 7) * 64 + (this.rng() - .5) * 8, 260 - Math.floor(slot / 7) * 60, BALL_RADIUS, {
+        restitution: .46, friction: 0, frictionStatic: 0, frictionAir: .0001, density: .003, slop: .03,
       });
       body.plugin.ball = id; Composite.add(this.engine.world, body);
       return { id, name: this.ballNames[id]??NAMES[id], get color(){return ballImageColor(this.imageSrc,COLORS[id]);}, imageSrc:this.ballImages[id], body, trail: [], finishedAt: null, lastY: body.position.y, stuckFor: 0 };

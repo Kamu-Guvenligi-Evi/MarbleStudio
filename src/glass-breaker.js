@@ -61,7 +61,7 @@ function contact(ball,cell){
   return {x:point.x,y:point.y,nx:nx/length,ny:ny/length};
 }
 export class GlassBreaker {
-  constructor({seed=42,onImpact=()=>{}}={}){this.onImpact=onImpact;this.reset(seed);}
+  constructor({seed=42,onImpact=()=>{},onWave=()=>{}}={}){this.onImpact=onImpact;this.onWave=onWave;this.reset(seed);}
   reset(seed=this.seed){
     this.seed=seed>>>0;this.random=randomSeed(this.seed);this.cells=makeGlass(this.random);this.balls=[];this.shards=[];
     this.totalArea=this.cells.reduce((n,c)=>n+c.area,0);this.brokenArea=0;this.broken=0;this.hits=0;this.time=0;this.accumulator=0;
@@ -107,6 +107,7 @@ export class GlassBreaker {
     // Keep the glass between attempts. Give a batch time to reach the glass;
     // do not delete its leading balls halfway through their approach.
     this.waveStarted=this.time;this.lastImpact=this.time;this.nextWaveAt=Infinity;
+    this.onWave();
   }
   breakCell(cell,ball){
     if(cell.broken)return;

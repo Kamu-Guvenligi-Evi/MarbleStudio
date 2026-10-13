@@ -4,8 +4,8 @@ import {drawMarble} from './marble-art.js';
 import {drawLeaders} from './race-leaders.js';
 import {raceName} from './race-copy.js';
 import {renderTerritory} from './territory-renderer.js';
-export function renderArena(ctx,arena,{countdown=0,paused=false,trails=true,channel}={}){
-  if(arena.arenaGame==='territory')return renderTerritory(ctx,arena,{countdown,paused,trails,channel});
+export function renderArena(ctx,arena,{countdown=0,paused=false,trails=true,channel,resultElapsed=0}={}){
+  if(arena.arenaGame==='territory')return renderTerritory(ctx,arena,{countdown,paused,trails,channel,resultElapsed});
   const tr=false;
   const speedGain=ball=>`+${Math.max(0,Math.round((ball.speed/ball.initialSpeed-1)*100))}%`;
   ctx.setTransform(2,0,0,2,0,0);ctx.fillStyle='#080e20';ctx.fillRect(0,0,540,960);drawSpace(ctx,0,arena.time);

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="tr">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101816"><title>Halka Kaçışı · Marble Studio</title></head>
+<body>
+<header class="ring-header"><a class="brand" href="/">◉ <span>Marble <b>Studio</b></span></a><nav><a href="/">← Stüdyoya dön</a><button id="export" class="button primary">↓ Video indir <small>WebM</small></button></nav></header>
+<main class="ring-layout">
+  <aside class="controls">
+    <div class="eyebrow"><span class="live-dot"></span> YENİ OYUN</div>
+    <h1>Halka Kaçışı<span>Merkezden sek. Açıklıktan kaç.</span></h1>
+    <p class="intro">Dönen açıklığı yakala. Halkaları zincirleme kır.<br>Son halkaya kadar gözünü ayırma.</p>
+    <fieldset id="settings">
+      <section class="control-section"><h2><span>01</span> Görünümünü seç</h2>
+        <div id="themes" class="themes" role="group" aria-label="Renk teması">
+          <button type="button" data-theme="studio" aria-pressed="true"><i></i>Studio</button><button type="button" data-theme="rose" aria-pressed="false"><i></i>Referans</button><button type="button" data-theme="aurora" aria-pressed="false"><i></i>Aurora</button><button type="button" data-theme="ember" aria-pressed="false"><i></i>Gün batımı</button>
+        </div>
+        <div class="color-row"><label><input type="color" id="ring-color" value="#79e9bb">Halka</label><label><input type="color" id="ball-color" value="#f4fff8">Top</label><label><input type="color" id="accent-color" value="#e4bd74">Efekt</label><label><input type="color" id="background-color" value="#081512">Zemin</label></div>
+        <label class="field">Sahne başlığı<input id="title" maxlength="44" value="SON HALKADAN KAÇ"></label>
+        <div class="settings-row"><label class="field">Top görünümü<select id="shape"><option value="comet">Kuyruklu yıldız</option><option value="marble">Işıklı bilye</option><option value="diamond">Kristal</option></select></label><label class="field">Top görseli<input id="image-upload" type="file" accept="image/png,image/jpeg,image/webp" hidden><button id="upload" class="button secondary" type="button">Görsel yükle ↗</button></label></div>
+        <button id="remove-image" class="text-button" hidden>Top görselini kaldır</button>
+        <div class="toggles"><label><input type="checkbox" id="trail" checked> Topun izi</label><label><input type="checkbox" id="particles" checked> Kırılma parçacıkları</label></div>
+      </section>
+      <section class="control-section"><h2><span>02</span> Akış ve ritim</h2>
+        <div class="flow-presets" role="group" aria-label="Hazır akışlar">
+          <button type="button" data-flow="vortex" aria-pressed="true"><canvas width="180" height="180" aria-hidden="true"></canvas><b>Sonsuz Spiral</b><span>1.200 halka · dönen tünel</span></button>
+          <button type="button" data-flow="pulse" aria-pressed="false"><canvas width="180" height="180" aria-hidden="true"></canvas><b>Dalga Tüneli</b><span>1.800 halka · akan geçitler</span></button>
+          <button type="button" data-flow="rush" aria-pressed="false"><canvas width="180" height="180" aria-hidden="true"></canvas><b>Zincir Yağmuru</b><span>2.400 halka · uzun seriler</span></button>
+        </div>
+        <p class="helper">Binlerce halka, tek bir tünel. Halkalar kırıldıkça yenileri içeri akar; sahne final yaklaşana kadar dolu kalır.</p>
+        <label class="field">Halka düzeni<select id="layout"><option value="vortex">Sonsuz Spiral · dönen tünel</option><option value="pulse">Dalga Tüneli · akan geçitler</option><option value="rush">Zincir Yağmuru · uzun seriler</option><option value="aligned">Referans · aynı yönde açıklıklar</option><option value="twist">Sarmal · kademeli açıklıklar</option><option value="alternating">Karşı akış · zıt dönüşler</option></select></label>
+        <div class="settings-row"><label class="field">Halka sayısı<select id="count"><option value="18">18 · Sade</option><option value="28">28 · Referans</option><option value="80">80</option><option value="320">320</option><option value="640">640</option><option value="800">800</option><option value="1200" selected>1.200 · Sonsuz Spiral</option><option value="1800">1.800 · Dalga Tüneli</option><option value="2400">2.400 · Zincir Yağmuru</option><option value="3600">3.600 · Uzun akış</option><option value="5000">5.000 · Maksimum</option></select></label><label class="field">Süre<select id="duration"><option value="30">30 saniye</option><option value="35">35 saniye</option><option value="40">40 saniye</option><option value="45" selected>45 saniye</option><option value="60">60 saniye</option><option value="90">90 saniye</option></select></label></div>
+        <div class="settings-row"><label class="field">Oynatma hızı<select id="speed"><option value="0.75">0,75× Sakin</option><option value="1" selected>1× Normal</option><option value="1.5">1,5× Hızlı</option><option value="2">2× Hızlı</option></select></label><label class="field">Akış numarası<input id="seed" type="number" min="1" max="4294967295" value="24"></label></div>
+      </section>
+      <section class="control-section"><h2><span>03</span> Müzik ve efektler <button id="sound" class="sound-button" type="button" aria-pressed="false">Sesleri aç ♫</button></h2>
+        <label class="field">Müzik<select id="music"><option value="reference">Videonun özgün sesi</option><option value="ambient">Studio · yumuşak arpej</option><option value="adaptive">Hazır düzenin müziği</option><option value="off">Müzik kapalı</option></select></label>
+        <label class="range-label" for="music-volume"><span>Müzik <output id="music-value">55%</output></span><input id="music-volume" type="range" min="0" max="100" value="55"></label>
+        <label class="range-label" for="effects-volume"><span>Çarpışma ve kırılma <output id="effects-value">28%</output></span><input id="effects-volume" type="range" min="0" max="100" value="28"></label>
+        <p class="helper">Özgün kayıt, videodaki müzik ve efektleri birlikte içerir. Çarpışma ve kırılma sesleri yeni oyuna bağlı, ayrı ayarlanabilir efektlerdir.</p>
+      </section>
+      <section id="sound-director" class="sound-director" aria-label="Hazır ses düzenleri"></section>
+      <div class="start-row"><button id="new-flow" class="button primary" type="button">Yeni akış oluştur ↗</button><button id="replay" class="button secondary" type="button" aria-label="Aynı akışı tekrar oynat">↻ Tekrar</button></div>
+    </fieldset>
+    <p id="status" role="status">Dönen açıklığı izle. Son halka kaçışa açılıyor.</p>
+    <details class="rules"><summary>Nasıl çalışır?</summary><p>Top küçük merkezden başlayıp kapalı kenarlardan seker. Hazır akışlarda topun merkezi açıklığı geçtiği anda o halka kırılır. Geçitler kesintisiz bir spiral oluşturur; kırılınca başa dönmez veya daralmaz. Dış halkalar boşalan alana yavaşça ilerler. Topun yönünü sekmeler ve yerçekimi belirler. Ses seçimlerin temas ve kırılmalara uygulanır. Tüm halkalar kırılırsa kaçış tamamlanır. Süre dolarsa akış biter.</p></details>
+  </aside>
+  <section class="preview" aria-label="Halka Kaçışı önizlemesi"><div class="preview-heading"><span><i class="live-dot"></i> CANLI ÖNİZLEME</span><span>9:16 · DİKEY SAHNE</span></div><div id="stage" class="stage"><canvas id="ring-canvas" width="540" height="960" aria-label="Dönen halkalardan kaçmaya çalışan top"></canvas></div><div class="playback"><button id="pause" aria-label="Oyunu duraklat">Ⅱ Duraklat</button><span id="progress">1.200 halka kaldı</span><button id="fullscreen" aria-label="Tam ekran">⛶</button></div><p class="preview-note">Her akış farklı. Aynı numara, aynı kaçış.</p></section>
+</main>
+<script type="module" src="/src/ring-escape-app.js"></script>
+</body></html>

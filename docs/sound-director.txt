@@ -1,0 +1,106 @@
+MarbleStudio — Yapay zekâ ses yönetmeni
+13 Ekim 2026
+
+Kullanım
+Halka Kaçışı sayfasındaki “Ses yönetmeni” panelini aç.
+“Sesleri otomatik düzenle” düğmesi anahtar gerektirmeden yerel kurallarla
+temas, kırılma ve final efektlerini yerleştirir. Bu mod bir OpenAI çıktısı değildir.
+Stüdyoda API anahtarı isteyen alan veya zorunlu bağlantı adımı yoktur.
+Sunucuda önceden OpenAI yapılandırılmışsa yönlendirme alanı ve yapay zekâ
+planlama seçeneği görünür. Plan gelince akış
+baştan oynar. “Efekt kararları” listesinde zaman, tını ve gerekçe görünür.
+Müzik ve efekt seviyeleri ayrı ayarlanır. Video indir aynı miksin WebM kaydını alır.
+“Hazır düzeni dene” çevrimdışı bir önayardır; yapay zekâ çıktısı değildir.
+
+İsteğe bağlı sunucu OpenAI kurulumu (otomatik düzen için gerekli değil)
+Proje kökündeki .env.local dosyasına şu iki değişkeni ekle:
+OPENAI_API_KEY=yerel_anahtarın
+MARBLE_SOUND_MODEL=gpt-4o-mini
+Stüdyonun sunucusunu yeniden başlat. Anahtarı sohbete veya kaynak koduna koyma.
+.env.local Git tarafından dışlanır. Anahtar sunucuda kalır; VITE_ öneki kullanma.
+Model değişkeni isteğe bağlıdır. “Anahtar tanımlı” durumu anahtarın sağlayıcı
+tarafından doğrulandığı anlamına gelmez; ilk plan isteği bunu sınar.
+Vite geliştirme/önizleme, portable-server ve factory-server API'yi sunar.
+Yalnız statik dosya barındıran bir sunucu OpenAI uç noktasını çalıştırmaz.
+
+Karar ve oynatma
+Önce aynı oyun 1/120 saniyelik adımlarla yerelde simüle edilir. OpenAI'ye yalnız
+olay türleri, zamanları, konumları, akış imzası ve kullanıcının yönlendirmesi gider.
+Video, görsel ve ses dosyaları yüklenmez. Responses API store:false kullanılır.
+OpenAI hangi olaylarda ses olacağını, yedi sentez tınısından hangisini kullanacağını,
+notayı, şiddeti, müziğin kısılmasını ve müzik bölümlerinin gelişimini seçer.
+Müzik motif, tempo, ton ve enerji planından yerelde sentezlenir; API bir ses dosyası
+üretmez. Sesler gerçek fizik olayında tetiklenir; atlanan temaslar sessiz kalır.
+Şema ve olay doğrulaması başarısızsa mevcut plan korunur. Final sesi zorunludur.
+Duraklama/sessiz mod aktif ve zamanlanmış sesleri durdurur. Ses sayısı sınırlıdır;
+final ve kırılmalar müzikten önceliklidir. Müzik efektlerde kısılır; ortak kompresör
+canlı çıkışta ve kayıt çıkışında aynı şekilde çalışır.
+
+Saklama ve kapsam
+Plan tarayıcıda marble-studio-ring-sound-score-v1 anahtarında saklanır.
+Tohum, halka sayısı, süre, düzen veya hız değişirse eski plan kapatılır.
+Görsel tema değiştirmek planı bozmaz. Aynı model/olay/yönlendirme isteğinin sunucu
+önbelleği artifacts/sound-plans altındadır; bu klasör Git'e eklenmez.
+Yeni model çağrısı yalnız kullanıcının planlama düğmesiyle yapılır.
+Halka Kaçışı kendi müzik/efekt planı panelini kullanır. Spiral Kırıcı, Cam Kırıcı ve
+Top Düellosu da ortak efekt sentezine ve yerel olay yönetmenine bağlıdır.
+Bu üç oyunda Ses yönetmeni menüsü: Otomatik · dengeli, Meme efektleri, Sözlü tepkiler.
+Kararlar yerel kurallarla verilir; API anahtarı gerekmez ve OpenAI çağrısı yapılmaz.
+Spiral: temas, çubuk, kırılma, yol sonu, bonuslar ve final.
+Cam: kırılma, yeni top dalgası ve final. Düello: temas, hasar, ödül ve final;
+silahların kendine özgü sesleri, manuel olarak değiştirilmedikçe korunur.
+Yoğun temaslar seyrekleştirilir, uzun tepkiler aralıklı çalınır. En fazla 8 etkin
+ses vardır; final önceki sesleri keser. Duraklatma, sessiz mod ve yeniden başlatma
+etkin sesleri durdurur. Seçilen düzen her oyun için tarayıcıda saklanır.
+Otomatik düzen üretim kuyruğunda saklanır; video adaptörleri aynı olay seçiciyi ve
+PCM örneklerini kullanır, intro ve hız zamanlamaya uygulanır. Canlı ses stereo ve
+kompresörlü, üretim sesi mevcut mono miks hattındadır; birebir aynı miks değildir.
+Bu üç oyuna yeni arka plan müziği eklenmedi. Halka Kaçışı müzik planı korunur.
+Spiral'deki Videodan seçtiğim sesler seçeneği eski 6 kliplik eşlemeyi korur;
+video çıktısı da seçilen yerel WAV kliplerini kullanır.
+
+Manuel olay sesleri
+Spiral Kırıcı, Cam Kırıcı, Top Düellosu ve Halka Kaçışı panellerinde bulunur.
+Orijinal seslerle başla, tüm olayları oyunun özgün ses düzenine döndürür.
+Olaylara göre ses seç bölümünde her olay için Düzeni kullan, Orijinal ses,
+Kapalı veya belirli bir efekt seçilebilir ve önceden dinlenebilir.
+Manuel seçimler otomatik düzenden önceliklidir; düzen değişimi bunları silmez.
+Orijinalinde ses olmayan olaylar Orijinal ses seçildiğinde sessiz kalır.
+Seçimler oyun başına saklanır; üç oyunun üretim kuyruğuna ve Halka Kaçışı'nın
+WebM kaydına uygulanır. Ön dinleme canlı oyunun olay sırasını tüketmez.
+Müzik ayarı değişmez. Müzik kaydının içine gömülü efektler bu olay ayarlarıyla
+ayrıştırılmaz. Bu kontroller yerelde çalışır, API anahtarı istemez.
+
+Doğrulama
+npm run test:sound-director (tarayıcı testi için stüdyo varsayılan 5174 portunda)
+npm run test:manual-sounds (aynı yerel stüdyo bağlantısını kullanır)
+npm run test:ring
+npm run build
+13 Ekim 2026: tests/game-sound-director.mjs üç oyun × üç düzen, yoğunluk sınırı,
+ödül/final önceliği, silah kimliği, kuyruk ayarı ve gerçek WAV örneklerini doğrular.
+tests/game-sound-director-browser.mjs canlı oynatma, sessiz mod, duraklama,
+yeniden başlatma, ayar saklama, mobil genişlik ve gerçek video adaptörlerini sınar.
+Testler: olay/zaman doğrulaması, deterministik sentez, OpenAI istek sözleşmesi,
+önbellek, bozuk yanıtlar, yerel erişim, duraklama/sessize alma, modelin seçtiği
+efektler, harita değişimi, mobil genişlik ve WebM'deki gerçek ses örnekleri.
+OpenAI yanıtları testlerde taklit edilir; API anahtarı olmadan gerçek servis
+çağrısı ve modelin sanatsal kararlarının kalitesi doğrulanmış sayılmaz.
+
+API sözleşmesi kaynağı
+https://developers.openai.com/api/docs/guides/structured-outputs?api-mode=responses
+
+Kayıtlı meme efektleri ve sözlü tepkiler
+Halka Kaçışı > Ses yönetmeni panelinde 59 yeni sesi dinle bölümü vardır.
+Meme efektlerini uygula ve Sözlü tepkileri uygula düğmeleri yerel hazır düzen kurar.
+Kısa temaslar sık; konuşmalar seyrek kaçışlara ve finale yerleştirilir.
+Ana stüdyonun Çarpışma sesi menüsü aynı 59 kaydı içerir (eski 8 ses korunur).
+23 sözlü tepki ve 36 ses efekti bulunur. Üçüncü pakette 24 yeni kayıt eklendi.
+Hazır düzen kaçışlarda Sonic Ring, Mario Jump, coin, koşu ve rizz; sözlü
+düzende Yoink, Nani, Nice, Sheesh ve diğer tepkileri dönüşümlü kullanır.
+Uzun tepkiler aralıklı çalar.
+Önizleme, WebM kaydı ve üretim sesi aynı PCM örneklerini kullanır.
+Kayıtlar uygulamayla gelir; dinlerken harici ses indirilmez.
+Kaynaklar public/audio/memes/sources.json içinde listelenir. Bunlar Myinstants
+soundboard varyantlarıdır; araştırılan YouTube videolarından çıkarılmamıştır.
+Kaynak sayfaları yeniden dağıtım veya ticari kullanım lisansı sağlamaz.
+Yerel MP3 önbelleğinden yeniden üretim: node scripts/import-meme-sounds.mjs

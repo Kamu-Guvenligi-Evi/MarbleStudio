@@ -8,12 +8,13 @@ try{
   await page.waitForFunction(()=>window.spiralBreaker?.getAudioState);
   await page.locator('#pause').click();
   assert.equal(await page.evaluate(()=>window.spiralBreaker.getAudioState().loaded),0,'Do not download sounds before user interaction');
+  await page.locator('#game-sound-style').selectOption('reference');
   await page.locator('#sound').click();
   await page.waitForFunction(()=>window.spiralBreaker.getAudioState().loaded===6&&!window.spiralBreaker.getAudioState().muted);
   await page.locator('.breaker-sounds summary').click();
   assert.equal(await page.locator('.sound-event').count(),8);
   await page.locator('#sound-multiply').selectOption('effect-4');
-  await page.getByRole('button',{name:'×3 bonusu sesini dinle',exact:true}).click();
+  await page.locator('.breaker-sounds').getByRole('button',{name:'×3 bonusu sesini dinle',exact:true}).click();
   assert.equal(await page.evaluate(()=>window.spiralBreaker.getAudioState().active),1);
   await page.locator('#sound').click();
   assert.equal(await page.evaluate(()=>window.spiralBreaker.getAudioState().active),0,'Mute stops clips already playing');

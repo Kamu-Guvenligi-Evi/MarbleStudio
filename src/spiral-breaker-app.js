@@ -10,7 +10,7 @@ const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('
 const field=document.createElement('canvas');field.width=WIDTH;field.height=ROWS*CELL;
 const tiles=field.getContext('2d');
 let colors=BREAKER_MAPS[0].colors,speed=1,completionDelay=0;
-const soundtrack=new BreakerAudio();
+const soundtrack=new BreakerAudio({automatic:true});
 let keys=new Set(),lastTime=0,shownBroken=-1,shownBalls=-1;
 const bonusStyles={multiply:{label:'×3',color:'#9564b3',name:'Toplar üçe katlandı'},add:{label:'+3',color:'#489d98',name:'Üç yeni top'},wide:{label:'↔',color:'#749e44',name:'Çubuk uzadı'},shrink:{label:'−',color:'#b78b2a',name:'Çubuk kısaldı'}};
 function playSound(kind){
@@ -18,7 +18,7 @@ function playSound(kind){
   if(kind==='lost')$('status').textContent='Bütün toplar düştü. Tekrar deneyebilirsin.';
   if(kind!=='bonus')soundtrack.play(kind);
 }
-const game=new SpiralBreaker({mapId:new URLSearchParams(location.search).get('map'),onBreak:index=>{tiles.clearRect(index%COLS*CELL,Math.floor(index/COLS)*CELL,CELL,CELL);soundtrack.play('break');},onHit:playSound,onBonus:(type,count)=>{soundtrack.play(type==='multiply'?'multiply':'bonus');$('status').textContent=count===BALL_LIMIT?`${BALL_LIMIT} top sahada · Top sınırına ulaşıldı`:`${bonusStyles[type].name} · ${count} top sahada`;}});
+const game=new SpiralBreaker({mapId:new URLSearchParams(location.search).get('map'),onBreak:index=>{tiles.clearRect(index%COLS*CELL,Math.floor(index/COLS)*CELL,CELL,CELL);soundtrack.play('break',{x:(index%COLS+.5)*CELL});},onHit:playSound,onBonus:(type,count)=>{soundtrack.play(type==='multiply'?'multiply':'bonus');$('status').textContent=count===BALL_LIMIT?`${BALL_LIMIT} top sahada · Top sınırına ulaşıldı`:`${bonusStyles[type].name} · ${count} top sahada`;}});
 function rebuildField(){
   colors=game.map.colors;
   tiles.clearRect(0,0,field.width,field.height);
@@ -78,7 +78,7 @@ function updateOverlay(){
   if(won)$('status').textContent='Haritadaki bütün bloklar temizlendi.';
 }
 function pause(){if(game.state!=='running'&&game.state!=='paused')return;game.state=game.state==='running'?'paused':'running';if(game.state==='paused')soundtrack.stop();updateOverlay();}
-function restart(mapId=game.map.id){soundtrack.stop();const automatic=game.automatic;game.reset(typeof mapId==='string'?mapId:game.map.id);game.automatic=automatic;completionDelay=0;shownBroken=-1;shownBalls=-1;lastTime=0;keys.clear();rebuildField();updateMapPicker();updateOverlay();$('status').textContent=`${game.map.name} başladı.`;render();}
+function restart(mapId=game.map.id){soundtrack.reset();const automatic=game.automatic;game.reset(typeof mapId==='string'?mapId:game.map.id);game.automatic=automatic;completionDelay=0;shownBroken=-1;shownBalls=-1;lastTime=0;keys.clear();rebuildField();updateMapPicker();updateOverlay();$('status').textContent=`${game.map.name} başladı.`;render();}
 function updateMapPicker(){
   for(const button of $('map-picker').children)button.setAttribute('aria-pressed',String(button.dataset.map===game.map.id));
   const url=new URL(location.href);url.searchParams.set('map',game.map.id);history.replaceState(null,'',url);
@@ -131,8 +131,12 @@ function frame(time){const dt=lastTime?Math.min(.05,(time-lastTime)/1000):0;last
   render();requestAnimationFrame(frame);
 }
 updateMapPicker();rebuildField();render();if(!videoRenderMode)requestAnimationFrame(frame);
-if(videoRenderMode)window.breakerVideo={reset(recipe,onImpact,channel){game.reset(recipe.mapId);game.onHit=()=>onImpact({});speed=recipe.playbackSpeed;videoChannel=channel;shownBroken=-1;shownBalls=-1;rebuildField();},step:dt=>game.step(dt),state:()=>game.state,draw(){render();return canvas;}};
-setupBreakerWorkbench({canvas,capture:()=>({mode:'spiral-breaker',project:{mapId:game.map.id,playbackSpeed:speed,sound:!soundtrack.muted,name:'Spiral Kırıcı'}})});
+if(videoRenderMode)window.breakerVideo={reset(recipe,onImpact,channel){game.reset(recipe.mapId);game.onHit=type=>{if(type!=='bonus')onImpact({type});};game.onBreak=index=>{tiles.clearRect(index%COLS*CELL,Math.floor(index/COLS)*CELL,CELL,CELL);onImpact({type:'break',x:(index%COLS+.5)*CELL});};game.onBonus=type=>onImpact({type:type==='multiply'?'multiply':'bonus'});speed=recipe.playbackSpeed;videoChannel=channel;shownBroken=-1;shownBalls=-1;rebuildField();},step:dt=>game.step(dt),state:()=>game.state,draw(){render();return canvas;}};
+setupBreakerWorkbench({canvas,capture:()=>({mode:'spiral-breaker',project:{mapId:game.map.id,playbackSpeed:speed,sound:!soundtrack.muted,soundStyle:soundtrack.soundStyle,soundOverrides:{...soundtrack.overrides},referenceMapping:{...soundtrack.mapping},name:'Spiral Kırıcı'}})});
 // Small read-only hook for local browser checks.
 window.spiralBreaker={getState:()=>({mapId:game.map.id,speed,sequence:$('sequence').checked,state:game.state,time:game.time,broken:game.broken,balls:game.balls.length,bonuses:game.bonusCount,armed:game.balls.filter(b=>b.armed).length,falling:game.bonuses.map(b=>({...b})),automatic:game.automatic,paddleX:game.paddle.x,paddleWidth:game.paddle.width,ball:{...game.ball}})};
 window.spiralBreaker.getAudioState=()=>soundtrack.getState();
+
+import './studio-workspace-layout.css';
+import {mountStudioNavigation} from './studio-navigation.js';
+mountStudioNavigation('spiral-breaker');

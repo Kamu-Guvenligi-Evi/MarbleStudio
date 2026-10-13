@@ -1,0 +1,96 @@
+/* Shared navigation and settings hierarchy for every interactive game. */
+body.studio-organized{padding-left:216px;background:#10161b;color:#e7eeeb}
+.studio-navigation{position:fixed;inset:0 auto 0 0;z-index:40;width:216px;box-sizing:border-box;padding:25px 16px 18px;background:#141c21;border-right:1px solid #2b363c;overflow-y:auto;font-family:inherit}
+.studio-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#eef4f0;font-size:18px;letter-spacing:-.5px;margin:0 7px 34px}
+.studio-brand>span:first-child{display:grid;place-items:center;width:32px;height:36px;border-radius:10px;background:#2d4032;color:#c8edaa;font-size:24px}
+.studio-brand small{display:block;margin-top:6px;font-size:9px;letter-spacing:1.7px;color:#84968e;font-weight:500}
+.studio-navigation .studio-game-list{display:block;padding:0;margin:0;border:0;background:none;border-radius:0}
+.studio-nav-group{margin:0 0 25px}
+.studio-nav-group h2{font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#879b91;margin:0 12px 9px}
+.studio-navigation .studio-game-list :is(button,a){display:flex;align-items:center;justify-content:flex-start;gap:11px;width:100%;box-sizing:border-box;margin:3px 0;padding:11px 12px;min-height:42px;border:1px solid transparent;border-radius:8px;background:transparent;color:#b7c4bd;text-decoration:none;text-align:left;font-family:inherit;font-size:13px;font-weight:500;line-height:1.4;white-space:normal;cursor:pointer}
+.studio-navigation .studio-game-list :is(button,a)>span{background:none;border:0;border-radius:0;width:auto;height:auto;color:inherit;font-size:inherit}
+.studio-navigation .studio-game-list :is(button,a)>span:first-child{width:18px;flex:0 0 18px;font-size:17px;text-align:center;color:#849e90}
+.studio-navigation .studio-game-list :is(button,a):hover{background:#202e28;color:#f1f7f2}
+#studio-game-menu .studio-game-list [aria-current=page]{background:#2a3e30;border-color:#425b43;color:#daf1c8}
+#studio-game-menu .studio-game-list [aria-current=page]>span:first-child{color:#c5e5a5}
+.studio-navigation :focus-visible,.studio-setting-group>summary:focus-visible{outline:2px solid #c4e99e;outline-offset:3px}
+.studio-navigation button:disabled{opacity:.45;cursor:wait}
+.studio-nav-tools{padding-top:16px;border-top:1px solid #2b3931}
+.studio-nav-tools #automatic-back{width:100%;text-align:left;background:none;border:0;color:#acbeb4;padding:12px;font-size:12px}
+.studio-nav-tools .studio-actions{margin:0;position:relative}
+.studio-nav-tools .studio-actions>summary{padding:12px;color:#acbeb4;font-size:12px;cursor:pointer}
+.studio-nav-tools .backup-menu{position:static;min-width:0;box-shadow:none;margin-top:3px}
+.studio-menu-toggle{display:none}
+body.studio-organized .studio-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px;height:auto;padding:16px 28px;box-sizing:border-box;border-bottom:1px solid #2b363c;background:#10181d;flex-wrap:wrap}
+.studio-context{font-size:14px;font-weight:600;color:#c8d8cd;white-space:nowrap}
+.studio-toolbar nav,.studio-toolbar .studio-export-bar,.studio-toolbar .studio-export-bar>div{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.studio-toolbar .studio-export-bar{width:auto;max-width:none;margin:0;padding:0;flex-direction:row-reverse}
+.studio-toolbar :is(.button,.restart){width:auto;min-height:40px;margin:0;padding:10px 14px;border:1px solid #35463e;border-radius:7px;background:#1b2a23;color:#d6e5db;font-family:inherit;font-size:12px;line-height:1.4;white-space:nowrap}
+.studio-toolbar :is(.primary,.primary-action){background:#c6eda3;color:#1d3020;border-color:#c6eda3;font-weight:600}
+.studio-toolbar .studio-export-bar>div .button{padding:10px 12px;color:#c1cfc6}
+body.studio-organized .race-workspace .watch-view{max-width:1440px;width:100%;box-sizing:border-box;padding:28px}
+body.studio-organized .race-workspace .watch-layout{grid-template-columns:minmax(0,1fr) 300px;gap:24px}
+body.studio-organized .race-workspace .watch-heading{margin-bottom:20px}
+body.studio-organized .race-workspace .race-stage canvas{height:min(65vh,680px)}
+.studio-settings{width:100%;min-width:0;display:grid;gap:10px;margin:0 0 18px}
+.studio-setting-group{min-width:0;border:1px solid #34433b;border-radius:10px;background:#17221d;overflow:hidden}
+.studio-setting-group>summary{position:relative;display:block;list-style:none;cursor:pointer;padding:16px 36px 16px 16px;color:#e0ebdf}
+.studio-setting-group>summary::-webkit-details-marker{display:none}
+.studio-setting-group>summary:after{content:'+';position:absolute;right:16px;top:18px;color:#a6c4a5;font-size:18px;line-height:1}
+.studio-setting-group[open]>summary:after{content:'−'}
+.studio-setting-group>summary strong{display:block;font-size:13px;font-weight:600;line-height:1.5}
+.studio-setting-group>summary>span{display:block;font-size:11px;font-weight:400;color:#90a699;line-height:1.6;margin-top:3px}
+.studio-setting-content{padding:0 16px 16px;min-width:0}
+.studio-organized .studio-setting-content>.control-section,.studio-organized .studio-setting-content>.appearance{padding:0;margin:0;border:0}
+.studio-setting-content>.control-section>h2{display:none}
+.studio-organized .studio-setting-content>.game-sound-director{margin:0;padding:14px 0;border:0;border-radius:0;background:none;box-shadow:none}
+.studio-setting-content>.game-sound-director>h2{font-size:12px}
+.studio-organized .studio-setting-content>.sound-director{margin-bottom:0}
+.studio-organized .watch-sidebar{display:flex;flex-direction:column}
+.studio-organized .watch-sidebar>.race-info{order:-1;width:100%;margin-bottom:20px}
+.studio-organized .watch-sidebar>.studio-settings{order:0}
+.studio-organized :is(.ring-layout,.duel-layout){grid-template-columns:minmax(280px,350px) minmax(0,1fr);gap:32px;padding:28px;max-width:1280px;box-sizing:border-box}
+.studio-organized .breaker-layout{gap:32px;padding:28px;box-sizing:border-box}
+.studio-organized .breaker-layout .game-info{width:330px;flex-shrink:0}
+.studio-organized :is(.controls,.duel-controls,.game-info)>h1{font-size:30px;line-height:1.2;letter-spacing:-1px;margin:0 0 12px}
+.studio-organized :is(.controls,.duel-controls)>h1>span{font-size:14px;line-height:1.6;letter-spacing:0;margin-top:8px;color:#a4baab}
+.studio-organized :is(.controls,.duel-controls,.game-info)>.eyebrow{display:none}
+.studio-organized :is(.controls,.duel-controls,.game-info)>:is(.intro,.description){font-size:12px;line-height:1.7;margin:0 0 24px;color:#9fb2a6}
+.studio-organized .breaker-layout .game-shell:not(:fullscreen){height:min(920px,calc(100dvh - 132px))}
+body.studio-organized.automatic-home .studio-toolbar .studio-export-bar{display:none}
+body.studio-organized.automatic-home .studio-toolbar{padding:16px 28px;border-bottom:1px solid #2b363c}
+@media(max-width:1200px) and (min-width:1051px){
+ .studio-organized .breaker-layout .game-info{width:290px}
+ body.studio-organized .race-workspace .watch-layout{grid-template-columns:minmax(0,1fr) 270px;gap:16px}
+}
+@media(max-width:1050px){
+ body.studio-organized{padding-left:0}
+ .studio-navigation{position:relative;inset:auto;width:100%;padding:14px 20px;border-right:0;border-bottom:1px solid #2b363c;overflow:visible;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+ .studio-brand{margin:0;font-size:16px}.studio-brand small{font-size:8px}
+ .studio-menu-toggle{display:block;border:1px solid #3c5244;border-radius:8px;background:#23352a;color:#d4e6d3;font-family:inherit;font-size:12px;padding:12px;cursor:pointer}
+ #studio-game-menu{display:none;flex-basis:100%;min-width:0}
+ .studio-navigation.menu-open #studio-game-menu{display:block}
+ .studio-navigation .studio-game-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding-top:14px}
+ .studio-nav-group{margin-bottom:8px}.studio-nav-tools{display:flex;align-items:center;gap:12px}.studio-nav-tools #automatic-back{width:auto}
+ .studio-nav-tools .backup-menu{position:absolute;left:0;right:auto;z-index:50;min-width:160px}
+}
+@media(max-width:800px){
+ body.studio-organized .studio-toolbar{padding:12px 16px;gap:10px}
+ .studio-context{font-size:12px}
+ .studio-toolbar :is(.button,.restart){font-size:11px;padding:10px}
+ body.studio-organized .race-workspace .watch-view{padding:20px 16px}
+ body.studio-organized .race-workspace .watch-layout{display:flex;flex-direction:column}
+ .studio-organized .watch-sidebar,.studio-organized .race-stage{width:100%}
+ .studio-organized :is(.ring-layout,.duel-layout,.breaker-layout){padding:20px 16px;gap:24px}
+ .studio-organized .breaker-layout .game-info{width:100%}
+ .studio-organized .breaker-layout .game-shell:not(:fullscreen){height:auto}
+}
+@media(max-width:520px){
+ .studio-navigation{padding:12px;gap:10px}.studio-brand{font-size:14px;gap:8px}.studio-brand>span:first-child{width:26px;height:32px;font-size:20px}
+ .studio-menu-toggle{max-width:185px;font-size:11px;padding:10px}
+ .studio-navigation .studio-game-list{grid-template-columns:1fr 1fr;gap:6px}
+ .studio-nav-group:last-child{grid-column:1 / -1;display:grid;grid-template-columns:1fr 1fr;gap:0 6px}.studio-nav-group:last-child h2{grid-column:1 / -1}
+ .studio-nav-group h2{font-size:9px;margin-left:8px}.studio-navigation .studio-game-list :is(button,a){padding:10px 8px;font-size:12px;gap:8px}
+ .studio-toolbar .studio-export-bar{gap:6px}.studio-toolbar .studio-export-bar>div{gap:0}
+ .studio-toolbar .studio-export-bar>div .button{padding:10px 8px;font-size:11px}
+}

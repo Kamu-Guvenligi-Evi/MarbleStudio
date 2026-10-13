@@ -2,7 +2,8 @@ import {spawn} from 'node:child_process';
 import {readFile} from 'node:fs/promises';
 import path from 'node:path';
 import ffmpeg from 'ffmpeg-static';
-import {effectSamples,collisionEvent,effectInterval} from '../src/impact-audio.js';
+import {effectSamples,collisionEvent,effectInterval,createCollisionNotes} from '../src/impact-audio.js';
+import {effectVoiceKey,effectVoiceUpdates,effectLevelAt,rampEffectVoice} from '../src/effect-voices.js';
 
 export function musicSegments(music,leaders,duration){
   if(!music)return [];
@@ -19,15 +20,35 @@ async function decode(file,signal){
 }
 export async function productionAudio({events,recipe,duration,audio,project,signal}){
   const rate=48000,samples=new Float32Array(Math.ceil(duration*rate)),credits=[];
-  const lastEffects=new Map();
-  if(audio==='all'||audio==='effects')for(const e of events.effects){
-    const event=collisionEvent(e,recipe.collisionSound),key=event.type+'|'+event.collisionSound;
+  const lastEffects=new Map(),referenceCache=new Map(),voices=new Set(),mix=[];
+  const collisionNotes=createCollisionNotes();
+  async function samplesFor(event){
+    if(event.type!=='reference')return effectSamples(event,rate);
+    if(!/^effect-[1-6]$/.test(event.clip??''))throw new Error('Geçersiz referans ses klibi.');
+    if(!referenceCache.has(event.clip))referenceCache.set(event.clip,await decode(path.join(project,'public/audio/instagram-DeUvaLwMp3o',event.clip+'.wav'),signal));
+    return referenceCache.get(event.clip).map(value=>value*(event.gain??.4));
+  }
+  if(audio==='all'||audio==='effects')for(const e of [...events.effects].sort((a,b)=>a.time-b.time)){
+    let event=collisionEvent(e,recipe.collisionSound);const key=event.type+'|'+event.collisionSound;
     if(event.collisionSound&&event.collisionSound!=='classic'){
-      if(e.time-(lastEffects.get(key)??-1)<effectInterval(event))continue;
+      if(e.time-(lastEffects.get(key)??-Infinity)<effectInterval(event))continue;
       lastEffects.set(key,e.time);
     }
-    const start=Math.max(0,Math.floor(e.time*rate)),effect=effectSamples(event,rate);
-    for(let i=0;i<effect.length&&start+i<samples.length;i++)samples[start+i]+=effect[i]*.35;
+    event=collisionNotes(event,e.time);
+    for(const voice of voices)if(voice.endsAt<=e.time)voices.delete(voice);
+    if(event.priority===3){for(const voice of mix)voice.endsAt=Math.min(voice.endsAt,e.time);voices.clear();}
+    for(const {voice,level} of effectVoiceUpdates(voices,event)){
+      rampEffectVoice(voice,level,e.time);if(level===0)voices.delete(voice);
+    }
+    const length=(await samplesFor(event)).length;
+    const voice={event,key:effectVoiceKey(event),priority:event.priority??1,ramps:[],endsAt:e.time+length/rate};
+    voices.add(voice);mix.push(voice);
+  }
+  // Store envelopes, not a full PCM copy per collision, even for long games.
+  for(const voice of mix){
+    const effect=await samplesFor(voice.event),start=Math.max(0,Math.floor(voice.event.time*rate));
+    const end=Math.min(samples.length,Math.floor(voice.endsAt*rate));
+    for(let i=0;i<effect.length&&start+i<end;i++)samples[start+i]+=effect[i]*effectLevelAt(voice,voice.event.time+i/rate)*.35;
   }
   if(audio==='all'||audio==='music'){
     const segments=musicSegments(recipe.music,events.leaders,duration),manifest=JSON.parse(await readFile(path.join(project,'public/music/manifest.json'),'utf8'));

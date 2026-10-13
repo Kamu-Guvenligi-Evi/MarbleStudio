@@ -1,5 +1,6 @@
 // Galperin's elastic collisions: a heavy block, a 1 kg block and a fixed wall.
 // Advance to each exact collision time, so fast blocks cannot tunnel at high mass ratios.
+import {normalizeCollisionSound} from './collision-sound-settings.js';
 export const PI_MAX_DIGITS=6;
 export const PI_KEY='marble-studio-pi-v1';
 export function normalizePi(raw={}){
@@ -7,7 +8,7 @@ export function normalizePi(raw={}){
   const digits=Number(raw.digits??3),speed=Number(raw.speed??1);
   if(!Number.isInteger(digits)||digits<1||digits>PI_MAX_DIGITS)throw new Error(`Pi basamak sayısı 1–${PI_MAX_DIGITS} olmalı.`);
   if(![.25,.5,1,2,3].includes(speed))throw new Error('Pi oynatma hızı geçersiz.');
-  return {name:String(raw.name??'Pi Çarpışmaları').trim().slice(0,80)||'Pi Çarpışmaları',digits,speed,sound:raw.sound!==false,autoIncrease:raw.autoIncrease===true};
+  return {name:String(raw.name??'Pi Çarpışmaları').trim().slice(0,80)||'Pi Çarpışmaları',digits,speed,sound:raw.sound!==false,collisionSound:normalizeCollisionSound(raw.collisionSound),autoIncrease:raw.autoIncrease===true};
 }
 
 export class PiCollisions{

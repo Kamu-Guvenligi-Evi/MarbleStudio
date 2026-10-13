@@ -3,6 +3,10 @@ import {renderDuel} from './ball-duel-renderer.js';
 import {createImageCatalog,prepareCatalogImage} from './image-catalog.js';
 import {loadBallImage,ballImageColor} from './ball-images.js';
 import {createWorkbench} from './workbench.js';
+import {createDuelSoundEvents} from './ball-duel-audio.js';
+import {effectSamples} from './impact-audio.js';
+import {GameSoundPlayer} from './game-sound-director.js';
+import {mountGameSoundPanel} from './game-sound-panel.js';
 import './catalog.css';
 import './workbench.css';
 import './ball-duel.css';
@@ -10,7 +14,8 @@ import './ball-duel.css';
 const $=id=>document.getElementById(id),canvas=$('duel-canvas'),ctx=canvas.getContext('2d');
 let saved;try{saved=JSON.parse(localStorage.getItem(DUEL_KEY));}catch{}
 let settings;try{settings=normalizeDuel(saved??{}).project;}catch{saved=null;settings=normalizeDuel({}).project;}
-let game,paused=false,accumulator=0,last=0,audio,lastSound=0,ready=false;
+let game,paused=false,accumulator=0,last=0,ready=false,soundEvent=createDuelSoundEvents(settings.soundStyle,settings.soundOverrides);
+const soundtrack=new GameSoundPlayer('ball-duel',settings.soundStyle,settings.soundOverrides);
 const notify=message=>{$('status').textContent=message;};
 function save(){try{localStorage.setItem(DUEL_KEY,JSON.stringify(settings));}catch{notify('Ayarlar kaydedilemedi; tarayıcı depolama alanı dolu olabilir.');}}
 function updateControls(){
@@ -19,16 +24,17 @@ function updateControls(){
   document.querySelectorAll('[data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===settings.theme)));
   $('sound').setAttribute('aria-pressed',String(settings.sound));$('sound').textContent=settings.sound?'Ses açık':'Ses kapalı';
 }
-function unlockSound(){if(!settings.sound)return;try{audio??=new AudioContext();if(audio.state==='suspended')audio.resume().catch(()=>{});}catch{}}
+function unlockSound(){
+  if(!settings.sound)return;
+  soundtrack.unlock().catch(()=>{});
+}
 function sound(e){
-  if(!settings.sound||audio?.state!=='running'||!['hit','pickup','shot','heal'].includes(e.type))return;
-  const now=audio.currentTime;if(now-lastSound<.045)return;lastSound=now;
-  const reward=e.type==='pickup'||e.type==='heal',osc=audio.createOscillator(),gain=audio.createGain(),duration=reward?.13:.055;
-  osc.type=e.type==='shot'?'triangle':'sine';osc.frequency.setValueAtTime(reward?660:e.type==='hit'?190:420,now);osc.frequency.exponentialRampToValueAtTime(reward?990:75,now+duration);
-  gain.gain.setValueAtTime(e.type==='shot'?.018:.06,now);gain.gain.exponentialRampToValueAtTime(.001,now+duration);osc.connect(gain);gain.connect(audio.destination);osc.start(now);osc.stop(now+duration+.01);osc.onended=()=>{osc.disconnect();gain.disconnect();};
+  if(!settings.sound||soundtrack.context?.state!=='running')return;
+  const event=soundEvent(e,game,soundtrack.context.currentTime);
+  if(event)soundtrack.play(event,effectSamples(event,soundtrack.context.sampleRate));
 }
 function reset(message='Düello başladı. Silahları topla, son ayakta kalan ol.'){
-  game=new BallDuel(settings);game.onEvent=sound;paused=false;accumulator=0;last=0;updatePause();save();notify(message);renderDuel(ctx,game);
+  soundtrack.reset();game=new BallDuel(settings);soundEvent=createDuelSoundEvents(settings.soundStyle,settings.soundOverrides);game.onEvent=sound;paused=false;accumulator=0;last=0;updatePause();save();notify(message);renderDuel(ctx,game);
 }
 function updatePause(){$('pause').textContent=paused?'▶ Devam et':'Ⅱ Duraklat';$('pause').setAttribute('aria-label',paused?'Düelloya devam et':'Düelloyu duraklat');}
 const catalog=createImageCatalog({getImages:()=>settings.ballImages,getNames:()=>settings.names,getCount:()=>2,onRosterChange:(images,names)=>{settings.ballImages=images.slice(0,2);settings.names=names.slice(0,2);settings.colors=settings.ballImages.map((src,i)=>ballImageColor(src,settings.colors[i]));},onApplied:()=>{updateControls();reset('Görseller güncellendi. Yeni karşılaşma hazır.');},notify});
@@ -43,15 +49,20 @@ $('hp').onchange=e=>{settings.hp=Number(e.target.value);reset('Can sayısı gün
 $('speed').onchange=e=>{settings.playbackSpeed=Number(e.target.value);save();};
 $('new-duel').onclick=()=>{unlockSound();settings.seed=crypto.getRandomValues(new Uint32Array(1))[0];reset();};
 $('replay').onclick=()=>{unlockSound();reset('Aynı başlangıç ve aynı ayarlarla tekrar oynatılıyor.');};
-$('pause').onclick=()=>{unlockSound();if(!game)return;if(game.state==='finished'){reset();return;}paused=!paused;accumulator=0;updatePause();};
-$('sound').onclick=()=>{settings.sound=!settings.sound;unlockSound();updateControls();save();};
+$('pause').onclick=()=>{unlockSound();if(!game)return;if(game.state==='finished'){reset();return;}paused=!paused;if(paused)soundtrack.stop();accumulator=0;updatePause();};
+$('sound').onclick=()=>{settings.sound=!settings.sound;if(settings.sound)unlockSound();else soundtrack.stop();updateControls();save();};
+mountGameSoundPanel({mode:'ball-duel',style:settings.soundStyle,onChange:style=>{settings.soundStyle=style;soundtrack.setStyle(style);soundEvent=createDuelSoundEvents(style,settings.soundOverrides);save();notify('Ses düzeni güncellendi.');},overrides:settings.soundOverrides,onOverrides:choices=>{settings.soundOverrides=choices;soundtrack.setOverrides(choices);soundEvent=createDuelSoundEvents(settings.soundStyle,choices);save();},onPreview:async type=>{
+  const event=createDuelSoundEvents(settings.soundStyle,settings.soundOverrides)({type,time:0,x:300,owner:0},game,0);
+  if(!event)return false;await soundtrack.unlock();soundtrack.stop();return soundtrack.play(event,effectSamples(event,soundtrack.context.sampleRate));
+}});
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await $('stage').requestFullscreen();}catch{notify('Bu tarayıcı tam ekranı desteklemiyor.');}};
 const workbench=createWorkbench({capture:()=>({mode:'ball-duel',project:structuredClone(settings)}),thumbnail:()=>canvas.toDataURL('image/jpeg',.7),title:()=>settings.names.join(' vs '),notify,isLocked:()=>!ready,openSnapshot:()=>{}});
 $('studio-export').onclick=()=>workbench.openExport();$('studio-videos').onclick=()=>workbench.openVideos();
-document.addEventListener('visibilitychange',()=>{last=0;accumulator=0;});
-document.addEventListener('pointerdown',unlockSound,{once:true});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)soundtrack.stop();last=0;accumulator=0;});
+document.addEventListener('pointerdown',unlockSound);
+document.addEventListener('keydown',unlockSound);
 function frame(now){
-  if(game){const modal=!!document.querySelector('dialog[open]');if(last&&!paused&&!modal&&!document.hidden){accumulator+=Math.min((now-last)/1000,.06)*settings.playbackSpeed;let steps=0;while(accumulator>=1/120&&steps<16){game.step(1/120);accumulator-=1/120;steps++;}}else accumulator=0;
+  if(game){const modal=!!document.querySelector('dialog[open]');if(modal)soundtrack.stop();if(last&&!paused&&!modal&&!document.hidden){accumulator+=Math.min((now-last)/1000,.06)*settings.playbackSpeed;let steps=0;while(accumulator>=1/120&&steps<16){game.step(1/120);accumulator-=1/120;steps++;}}else accumulator=0;
     renderDuel(ctx,game,{paused:paused&&game.state==='running'});
     const label=game.state==='finished'?(game.winner===null?'Berabere':`${settings.names[game.winner]} kazandı`):paused?'Duraklatıldı':'Düello sürüyor';if($('match-state').textContent!==label)$('match-state').textContent=label;
     if(game.state==='finished')$('pause').textContent='↻ Tekrar';
@@ -68,5 +79,9 @@ async function init(){
   ready=true;updateControls();reset(warning);for(const id of ['new-duel','replay','hp','studio-export'])$(id).disabled=false;requestAnimationFrame(frame);
 }
 // Read-only diagnostics for local validation; no separate simulation path.
-window.duelStudio={snapshot:()=>structuredClone(settings),state:()=>({state:game?.state,time:game?.time,hp:game?.balls.map(b=>b.hp),winner:game?.winner,paused}),restart:()=>reset()};
+window.duelStudio={snapshot:()=>structuredClone(settings),state:()=>({state:game?.state,time:game?.time,hp:game?.balls.map(b=>b.hp),winner:game?.winner,paused}),getAudioState:()=>soundtrack.state(),restart:()=>reset()};
 init();
+
+import './studio-workspace-layout.css';
+import {mountStudioNavigation} from './studio-navigation.js';
+mountStudioNavigation('ball-duel');

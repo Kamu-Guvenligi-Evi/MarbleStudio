@@ -60,7 +60,7 @@ window.factoryRenderer={
     const coverScore=s=>Math.min(20,s.events)+Math.min(20,s.motion)+s.visible*20+(s.close?10:0);
     coverSamples.sort((a,b)=>coverScore(b)-coverScore(a));
     const report=qualityReport({mode:recipe.mode,seconds:r.time,eventTimes,samples,leadChanges:changes,coverTime:coverSamples[0]?.time??r.time*.5});
-    const result={complete,simulationSeconds:r.time,hits:eventTimes.length,rescues:r.rescues??0,winner:englishOutput(r.finished[0]?.name??null),finite,...report,...(r.episode?{episode:r.summary()}:{} )};
+    const result={complete,simulationSeconds:r.time,hits:eventTimes.length,rescues:r.rescues??0,winner:englishOutput(r.finished[0]?.name??null),finite,...report,...(r.arenaGame==='territory'?{openingSeconds:r.openingDuration}:{}),...(r.episode?{episode:r.summary()}:{} )};
     r.dispose();return result;
   },
   async begin(job){
@@ -97,7 +97,7 @@ window.factoryRenderer={
       }
       const simulationTime=Math.min(Math.max(0,elapsed-(config.intro??0))*config.speed,config.analysis.simulationSeconds);
       const alpha=ended(race,mode,config.recipe.exact)?1:Math.max(0,Math.min(1,simulationTime*120-(steps-1)));
-      interpolation.draw(race.current??race,alpha,()=>({track:renderRace,spiral:renderSpiral,arena:renderArena}[mode])(sourceCtx,race.current??race,{cameraY:previousCameraY+(cameraY-previousCameraY)*alpha,countdown:Math.max(0,(config.intro??0)-elapsed),paused:false,trails:config.recipe.trails??true,preview:null,suppressFinale:!!race.episode,channel:config.channel}));if(race.episode)drawEpisode(sourceCtx,race);picture=source;
+      interpolation.draw(race.current??race,alpha,()=>({track:renderRace,spiral:renderSpiral,arena:renderArena}[mode])(sourceCtx,race.current??race,{cameraY:previousCameraY+(cameraY-previousCameraY)*alpha,countdown:Math.max(0,(config.intro??0)-elapsed),paused:false,resultElapsed:Math.max(0,elapsed-(config.intro??0)-config.analysis.simulationSeconds/config.speed),trails:config.recipe.trails??true,preview:null,suppressFinale:!!race.episode,channel:config.channel}));if(race.episode)drawEpisode(sourceCtx,race);picture=source;
     }
     const w=canvas.width,h=canvas.height,scale=Math.min(w/picture.width,h/picture.height);
     ctx.fillStyle=config.template==='cinema'?'#030507':'#0b1018';ctx.fillRect(0,0,w,h);
@@ -106,7 +106,7 @@ window.factoryRenderer={
     const band=(text,y,accent='#bbed83',compact=false)=>{
       ctx.fillStyle='#080d16ed';ctx.fillRect(pad,y,w-pad*2,(compact?70:100)*unit);ctx.fillStyle=accent;ctx.font=`600 ${compact?32*unit:font}px Segoe UI`;ctx.textAlign='center';ctx.fillText(englishOutput(text),w/2,y+(compact?45:63)*unit,w-pad*3);
     };
-    if(!['statistics','pi'].includes(mode)&&elapsed<3.5)band(config.copy.hook,(config.recipe.arenaGame==='territory'?480:330)*unit,'#bbed83',true);
+    if(!['statistics','pi'].includes(mode)&&config.recipe.arenaGame!=='territory'&&elapsed<3.5)band(config.copy.hook,330*unit,'#bbed83',true);
     if(config.template==='broadcast'){
       ctx.fillStyle='#a7e2cc';ctx.fillRect(0,0,w,6*unit);ctx.fillStyle='#e9fff4';ctx.font=`600 ${25*unit}px Segoe UI`;ctx.textAlign='left';ctx.fillText(config.channel??'',pad,45*unit,w-pad*2);
     }
@@ -114,7 +114,7 @@ window.factoryRenderer={
     if(elapsed>=(config.intro??0)+config.analysis.simulationSeconds/config.speed){
       const name=mode==='ball-duel'?config.analysis.winner:isBreaker(mode)?config.analysis.winner:mode==='pi'?'':mode==='statistics'?config.analysis.winner:race.finished[0]?.name??'';
       const result=mode==='ball-duel'&&name==='Draw'?'Draw':isBreaker(mode)?(name==='Cleared'?'All clear!':name==='In progress'?'To be continued…':'Out of marbles!'):mode==='spiral'?'The center is clear!':'Winner: '+englishOutput(name);
-      if(!['statistics','pi'].includes(mode))band(result,h-180*unit);
+      if(!['statistics','pi'].includes(mode)&&config.recipe.arenaGame!=='territory')band(result,h-180*unit);
       if(config.outro){ctx.fillStyle='#eff8ff';ctx.font=`500 ${26*unit}px Segoe UI`;ctx.textAlign='center';ctx.fillText(englishOutput(config.outro),w/2,h-35*unit,w-pad*2);}
     }
     return canvas.toDataURL('image/jpeg',.92).split(',')[1];

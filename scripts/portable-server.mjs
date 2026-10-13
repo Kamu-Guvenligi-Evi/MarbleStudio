@@ -17,7 +17,7 @@ const mimeTypes = {
   '.woff2': 'font/woff2',
 };
 
-createServer((request, response) => {
+createServer(async(request, response) => {
   let pathname;
   try {
     pathname = decodeURIComponent(new URL(request.url, 'http://127.0.0.1').pathname);
@@ -45,4 +45,4 @@ createServer((request, response) => {
     'X-Content-Type-Options': 'nosniff',
   });
   createReadStream(file).pipe(response);
-}).listen(5173, '127.0.0.1');
+}).listen(Number(process.env.MARBLE_STUDIO_PORT||5173), '127.0.0.1');

@@ -1,0 +1,29 @@
+﻿Halka Kaçışı — 13 Ekim 2026, sürüm 8
+
+Sonsuz Spiral: 1.200 halka, akış 24; 29,15 saniyede kaçış.
+Dalga Tüneli: 1.800 halka, akış 10; 40,74 saniyede kaçış.
+Zincir Yağmuru: 2.400 halka, akış 3; 31,95 saniyede kaçış.
+Süreler 1× hız içindir. İlk kırılmalar 1,64 / 0,51 / 1,32 saniye;
+en uzun duraklamalar 3,72 / 3,18 / 3,21 saniye.
+
+Başlangıç iç yarıçapı 100 yerine 48 piksel. Açıklıklar kesintisiz spiral
+oluşturur; gruplar arasında ani açı değişimi yoktur. Açıklık genişliği
+sabittir, kırılınca daralmaz. Halkalar en fazla 24 piksel/saniye hızla,
+yalnız topun boşalttığı alana akar; top radyal olarak taşınmaz.
+
+Dinamik şablonlarda topun merkezi açıklığı geçtiği fizik adımında halka
+silinir ve kırılma olayı üretilir. Topun arka ucunun çıkması beklenmez.
+Kapalı duvar temasları sekme üretir. Klasik düzenlerin kuralları korunur.
+Yoğun halkalar çizimde örneklenir; aktif halka her zaman çizilir.
+
+Sürüm 8 / ring-physics-8 eski ses planını yeniler. Eski dinamik ayarlar
+hazır akışlara geçirilir; yüksek özel halka sayısı, görünüm ve ses
+seçimleri korunur. Üst sınır 5.000 halka.
+
+Başarılı kontroller: tests/ring-escape.mjs (aynı adımda kırılma,
+açıklık ve hareket sürekliliği, küçük merkez, üç akış, klasik regresyon,
+5.000 halka), tests/ring-flow-browser.mjs, tests/sound-director.mjs,
+tests/ring-escape-browser.mjs (mobil ve sesli WebM) ve Vite build.
+Yerel görsel: artifacts/ring-flow-presets.jpg.
+Önizleme: http://127.0.0.1:5174/ring-escape.html
+Bu kontroller izlenme oranı veya izleyici memnuniyeti ölçümü değildir.

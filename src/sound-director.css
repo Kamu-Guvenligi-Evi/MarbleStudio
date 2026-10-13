@@ -1,0 +1,10 @@
+.sound-director{margin-top:24px;padding:22px 0;border-top:1px solid var(--border)}
+.sound-director [hidden]{display:none!important}
+.director-heading{display:flex;align-items:center;gap:12px}.director-icon{display:grid;place-items:center;width:38px;height:38px;border:1px solid #b3e9cd44;border-radius:12px;background:#b3e9cd0b;color:var(--mint);font-size:22px}
+.director-heading h2{margin:0 0 5px!important;font-size:16px!important}.director-heading>div>span{font-size:8px;letter-spacing:1.2px;color:var(--muted)}
+.director-intro,#director-status,#sound-rationale,.director-footnote{font-size:12px;line-height:1.65;color:var(--muted)}
+.director-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.director-actions button{font-size:11px;min-height:40px;flex:1;padding:8px}
+.sound-library{margin:16px 0}.sound-library summary{cursor:pointer;font-size:12px}.sound-library p{font-size:11px;color:var(--muted)}.sound-preview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.sound-preview-grid button{padding:9px;text-align:left;background:#b3e9cd0b;border:1px solid var(--border);border-radius:7px;color:var(--mint);font:inherit;font-size:11px;cursor:pointer}.sound-preview-grid button:hover{background:#b3e9cd18}.sound-preview-grid small{display:block;color:var(--muted);font-size:9px;margin-top:4px}
+#director-status{color:var(--mint);min-height:38px}.score-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px}.score-meta button{border:0;color:var(--muted);background:none;font-size:11px;white-space:nowrap}
+.sound-sections{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}.sound-sections span{padding:6px 8px;background:#b3e9cd0b;border:1px solid #b3e9cd19;border-radius:5px;font-size:10px;color:var(--mint)}
+#sound-score summary{cursor:pointer;font-size:12px}#sound-cues{max-height:230px;overflow:auto;padding-left:20px;font-size:11px;line-height:1.8;color:var(--muted)}#sound-cues li{padding:5px 0;border-bottom:1px solid var(--border)}.director-footnote{font-size:10px}

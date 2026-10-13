@@ -1,5 +1,7 @@
 import {breakerOutcome} from './breaker-video.js';
-let frame,view,job,steps=0,effects=[],lastEffect=-1;
+import {createGameSoundDirector} from './game-sound-director.js';
+import {normalizeReferenceMapping} from './game-sound-settings.js';
+let frame,view,job,steps=0,effects=[],lastEffect=-1,capture;
 export async function beginBreaker(config){
   frame?.remove();job=config;steps=0;effects=[];lastEffect=-1;
   frame=document.createElement('iframe');frame.hidden=true;
@@ -7,16 +9,22 @@ export async function beginBreaker(config){
   frame.src=`/${config.recipe.mode}.html?video-render=1`;document.body.append(frame);await loaded;
   view=frame.contentWindow.breakerVideo;
   if(!view)throw new Error('Kırıcı video görüntüsü hazır değil.');
-  view.reset(config.recipe,event=>{
+  const direct=createGameSoundDirector(job.recipe.mode,job.recipe.soundStyle==='reference'?'original':job.recipe.soundStyle,job.recipe.soundOverrides);
+  const mapping=normalizeReferenceMapping(job.recipe.referenceMapping);
+  capture=event=>{
     const time=(job.intro??0)+steps/120/job.recipe.playbackSpeed/job.speed;
-    if(time-lastEffect<.035)return;lastEffect=time;
-    effects.push({time,type:job.recipe.mode==='glass-breaker'?'ice':'impact',strength:Math.min(5,event?.energy/100||2),x:event?.x??270});
-  },config.channel);
+    const effect=direct(event,time);if(!effect)return;
+    if(effect.type==='original'&&job.recipe.mode==='spiral-breaker'){
+      const clip=mapping[event.type];if(!clip||clip==='off')return;
+      effects.push({...effect,type:'reference',clip,gain:effect.priority>1?.7:event.type==='brick'?.24:.4});
+    }else effects.push(effect);
+  };
+  view.reset(config.recipe,capture,config.channel);
 }
 export function breakerFrame(elapsed){
   const time=Math.min(Math.max(0,elapsed-(job.intro??0))*job.speed,job.analysis.simulationSeconds);
   const target=Math.ceil(time*job.recipe.playbackSpeed*120);
-  while(steps<target&&view.state()==='running'){view.step(1/120);steps++;}
+  while(steps<target&&view.state()==='running'){view.step(1/120);steps++;if(['won','lost'].includes(view.state()))capture({type:view.state()});}
   return view.draw(time);
 }
 export const breakerAudio=()=>({effects,leaders:[]});

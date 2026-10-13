@@ -1,0 +1,538 @@
+{
+  "version": 1,
+  "format": "PCM16 mono 24000 Hz; bundled in src/meme-audio-data.js",
+  "note": "Soundboard variants, not extractions from the researched YouTube videos. Source pages do not establish a redistribution license.",
+  "sources": [
+    {
+      "id": "meme-meow",
+      "page": "https://www.myinstants.com/en/instant/cat-meowing-meme-15683/",
+      "url": "https://www.myinstants.com/media/sounds/cat-meowing-meme.mp3",
+      "sourceBytes": 14592,
+      "sha256": "f0da3cc2cd68688d6e02289aeb7b85f3f38ba6a1944d4e3dd6067bcb8fad7e9a",
+      "trimStart": 0.09645833333333333,
+      "duration": 0.7920833333333334
+    },
+    {
+      "id": "rubber-duck",
+      "page": "https://www.myinstants.com/en/instant/rubber-duck-sound-effect-93576/",
+      "url": "https://www.myinstants.com/media/sounds/tmp_4h7ltsu.mp3",
+      "sourceBytes": 67945,
+      "sha256": "725ba102806bed72dbd54d949d6fd1f22074b6194d9b82d364b66ff9a8bdafd9",
+      "trimStart": 1.2991666666666666,
+      "duration": 0.4734583333333333
+    },
+    {
+      "id": "bonk",
+      "page": "https://www.myinstants.com/en/instant/doge-bonk-84044/",
+      "url": "https://www.myinstants.com/media/sounds/bonk_BEtiM8g.mp3",
+      "sourceBytes": 17456,
+      "sha256": "9f5433b549e790d65f4446fcbcf982036b705e23e56f3111f08988eb99d4b8f8",
+      "trimStart": 1.1289166666666666,
+      "duration": 0.4095
+    },
+    {
+      "id": "bubble-pop",
+      "page": "https://www.myinstants.com/en/instant/instant-bubble-pop-81077/",
+      "url": "https://www.myinstants.com/media/sounds/instant-bubble-pop.mp3",
+      "sourceBytes": 909,
+      "sha256": "64749de2a1b3edd75c42dbd3aeac4fa782d5ae017daca0d769b0f40e06a518f1",
+      "trimStart": 0,
+      "duration": 0.09795833333333333
+    },
+    {
+      "id": "vine-boom",
+      "page": "https://www.myinstants.com/en/instant/vine-boom-sound-70972/",
+      "url": "https://www.myinstants.com/media/sounds/vine-boom.mp3",
+      "sourceBytes": 21230,
+      "sha256": "c4dadbc0b9cd21b1313ec11845a00d9401bc208ae0f59f54a0282b8cb89d56c2",
+      "trimStart": 0.07008333333333333,
+      "duration": 1.1809166666666666
+    },
+    {
+      "id": "huh",
+      "page": "https://www.myinstants.com/en/instant/huh-cat-meme-88154/",
+      "url": "https://www.myinstants.com/media/sounds/huh-cat-meme.mp3",
+      "sourceBytes": 11064,
+      "sha256": "f260f5ec4a2f9931556eb05ce61b4c49f0b6bf950a0cb9df5034c421947dfaba",
+      "trimStart": 0,
+      "duration": 0.302125
+    },
+    {
+      "id": "bruh",
+      "page": "https://www.myinstants.com/en/instant/bruh/",
+      "url": "https://www.myinstants.com/media/sounds/movie_1.mp3",
+      "sourceBytes": 14061,
+      "sha256": "6a04c34422d17b5ad0a62baaf5810dab7e19aa06baf5cbe2002fc750486ff170",
+      "trimStart": 0.015041666666666667,
+      "duration": 0.558875
+    },
+    {
+      "id": "anime-wow",
+      "page": "https://www.myinstants.com/en/instant/anime-wow/",
+      "url": "https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3",
+      "sourceBytes": 67637,
+      "sha256": "5118c619f0ab62e181f32d9eacd490441b49aaa7bb8e1be1b6b51e7a3c25debc",
+      "trimStart": 0.16608333333333333,
+      "duration": 3.700875
+    },
+    {
+      "id": "oh-no",
+      "page": "https://www.myinstants.com/en/instant/knuckles-oh-no/",
+      "url": "https://www.myinstants.com/media/sounds/oh_no_1.mp3",
+      "sourceBytes": 11630,
+      "sha256": "c71b931d44a22116c2eb7ec0d5175f7cb65ef5d9348e82d7b8383ae1a691cda7",
+      "trimStart": 0.036166666666666666,
+      "duration": 0.5974583333333333
+    },
+    {
+      "id": "yippee",
+      "page": "https://www.myinstants.com/en/instant/yippee-meme-sound-effect-9727/",
+      "url": "https://www.myinstants.com/media/sounds/yippee-meme-sound-effect.mp3",
+      "sourceBytes": 32236,
+      "sha256": "e6cf278bb935976e61c30cc6a0dc7703425d6225b54a1acefefe838408ff201f",
+      "trimStart": 0.007583333333333333,
+      "duration": 1.3602083333333332
+    },
+    {
+      "id": "emotional-damage",
+      "page": "https://www.myinstants.com/en/instant/emotional-damage-meme-74555/",
+      "url": "https://www.myinstants.com/media/sounds/emotional-damage-meme.mp3",
+      "sourceBytes": 54262,
+      "sha256": "e1668d57edc60539f3e218fbc51c5c97fbe5cb56d63b7b2c85608afbdecbf4d8",
+      "trimStart": 0.06125,
+      "duration": 3.2592083333333335
+    },
+    {
+      "id": "boing",
+      "page": "https://www.myinstants.com/en/instant/cartoon-boing-sfx-15600/",
+      "url": "https://www.myinstants.com/media/sounds/cartoon-boing_7vRWDlc.mp3",
+      "sourceBytes": 13183,
+      "sha256": "e9c1e9850a6590f2b939b066757a897f3fe2fb61098ad0653dd137ef34170534",
+      "trimStart": 0,
+      "duration": 1.507625
+    },
+    {
+      "id": "record-scratch",
+      "page": "https://www.myinstants.com/en/instant/record-scratch/",
+      "url": "https://www.myinstants.com/media/sounds/record-scratch.mp3",
+      "sourceBytes": 7959,
+      "sha256": "6f460b5121a26b4cf3c5e0474fe3c576dc16fc0c3145087cb8deda872477f65d",
+      "trimStart": 0.03879166666666667,
+      "duration": 0.6995833333333333
+    },
+    {
+      "id": "metal-pipe",
+      "page": "https://www.myinstants.com/en/instant/metal-pipe-clang-80894/",
+      "url": "https://www.myinstants.com/media/sounds/metal-pipe-clang.mp3",
+      "sourceBytes": 45694,
+      "sha256": "69f185a65580059bd279faf3efca8bc66dca0a984473cd5a97be3a3b5b3dd797",
+      "trimStart": 0.16533333333333333,
+      "duration": 2.6210833333333334
+    },
+    {
+      "id": "sad-trombone",
+      "page": "https://www.myinstants.com/en/instant/sad-trombone/",
+      "url": "https://www.myinstants.com/media/sounds/sadtrombone.swf.mp3",
+      "sourceBytes": 29484,
+      "sha256": "9fcf29d267bb09288eb368d20b27cb8885e4713cf0beef46e856bb0c02614fd2",
+      "trimStart": 0.12654166666666666,
+      "duration": 3.1559166666666667
+    },
+    {
+      "id": "let-him-cook",
+      "page": "https://www.myinstants.com/en/instant/let-him-cook-80585/",
+      "url": "https://www.myinstants.com/media/sounds/let-him-cook.mp3",
+      "sourceBytes": 96811,
+      "sha256": "c0b87ebfef6ec528796dcbef1b170f4d8e707a7d0207c110660b0457f8ae1557",
+      "trimStart": 0,
+      "duration": 4.410333333333333
+    },
+    {
+      "id": "wait-a-minute",
+      "page": "https://www.myinstants.com/en/instant/hold-up-wait-a-minute-7848/",
+      "url": "https://www.myinstants.com/media/sounds/hold-up-wait-a-minute-sound-effect.mp3",
+      "sourceBytes": 54262,
+      "sha256": "0d2154a6dcffd2e80a10536203193f7a4300b4c0a34d7e450db2c2e124e5e69d",
+      "trimStart": 0.07416666666666667,
+      "duration": 3.232291666666667
+    },
+    {
+      "id": "lets-go",
+      "page": "https://www.myinstants.com/en/instant/okay-lets-go-23519/",
+      "url": "https://www.myinstants.com/media/sounds/okay-lets-go_buBmJye.mp3",
+      "sourceBytes": 25457,
+      "sha256": "e01c2c1a08fe5638b18db95d82455a754817b88a304c6078ecee551a8eec1274",
+      "trimStart": 0,
+      "duration": 1.5269583333333334
+    },
+    {
+      "id": "nope",
+      "page": "https://www.myinstants.com/en/instant/engineer-nope/",
+      "url": "https://www.myinstants.com/media/sounds/nope_4.mp3",
+      "sourceBytes": 2526,
+      "sha256": "681474b2086f40caefe961a5125a331463b25a2025a01c3c5bf61457f674e600",
+      "trimStart": 0,
+      "duration": 0.2946666666666667
+    },
+    {
+      "id": "nice",
+      "page": "https://www.myinstants.com/en/instant/michael-rosen-nice/",
+      "url": "https://www.myinstants.com/media/sounds/michael-rosen-nice.mp3",
+      "sourceBytes": 137698,
+      "sha256": "b8d6fcc348c5dc3d64f05ecfe70fec5e4cfd7af2cda01de3542490fff9b66369",
+      "trimStart": 0.171625,
+      "duration": 2.36225
+    },
+    {
+      "id": "oh-my-god",
+      "page": "https://www.myinstants.com/en/instant/oh-my-god-meme-88573/",
+      "url": "https://www.myinstants.com/media/sounds/oh-my-god-meme.mp3",
+      "sourceBytes": 27002,
+      "sha256": "a7644c29ba16e100b3d57d171539691e302545ca098ff18c77cc8748178ae0df",
+      "trimStart": 0,
+      "duration": 1.637
+    },
+    {
+      "id": "hello-there",
+      "page": "https://www.myinstants.com/en/instant/hello-there-92082/",
+      "url": "https://www.myinstants.com/media/sounds/hellothere_uIgLvnP.mp3",
+      "sourceBytes": 15998,
+      "sha256": "fb72600fb79e5413c93504b7aac52d690154079b8f8c03d5e5452fe15f67baa9",
+      "trimStart": 0.020541666666666666,
+      "duration": 0.9116666666666666
+    },
+    {
+      "id": "what-dog",
+      "page": "https://www.myinstants.com/en/instant/what-da-dog-doin-35890/",
+      "url": "https://www.myinstants.com/media/sounds/yt1s_wU4BGgD.mp3",
+      "sourceBytes": 20826,
+      "sha256": "48f19e81a3d9caae64833fab24786628ff28011ef3d7e85f3c1c98f276708df1",
+      "trimStart": 0.11204166666666666,
+      "duration": 1.118625
+    },
+    {
+      "id": "windows-error",
+      "page": "https://www.myinstants.com/en/instant/windows-xp-error/",
+      "url": "https://www.myinstants.com/media/sounds/erro.mp3",
+      "sourceBytes": 8377,
+      "sha256": "e5c633eda2370c0e08b4289dbf990d5aa180c00a4cc27de46d9d45b0df3795e8",
+      "trimStart": 0.073375,
+      "duration": 0.8233333333333334
+    },
+    {
+      "id": "roblox-oof",
+      "page": "https://www.myinstants.com/en/instant/roblox-oof/",
+      "url": "https://www.myinstants.com/media/sounds/roblox-death-sound_1.mp3",
+      "sourceBytes": 16971,
+      "sha256": "fd51f1f5b2d1293cf1466a5f5a912c05db77fde5c511a743da76211c98c0db8b",
+      "trimStart": 0.5107916666666666,
+      "duration": 0.337625
+    },
+    {
+      "id": "among-us",
+      "page": "https://www.myinstants.com/en/instant/among-us-role-reveal-sound-34956/",
+      "url": "https://www.myinstants.com/media/sounds/among-us-role-reveal-sound.mp3",
+      "sourceBytes": 99894,
+      "sha256": "2a1a36e036c776bc030bf79ef69e312e6bbe0bc96b9ee0f30956ff4aad30ae4b",
+      "trimStart": 0.19383333333333333,
+      "duration": 3.963
+    },
+    {
+      "id": "coin",
+      "page": "https://www.myinstants.com/en/instant/coin-mario/",
+      "url": "https://www.myinstants.com/media/sounds/super-mario-coin-sound.mp3",
+      "sourceBytes": 12893,
+      "sha256": "3f9493985235ee5ed4d3b9223e2fd35c59de1506b320786e2676d7cbfa84b5bc",
+      "trimStart": 0.06158333333333333,
+      "duration": 0.6824166666666667
+    },
+    {
+      "id": "cartoon-run",
+      "page": "https://www.myinstants.com/en/instant/cartoon-run-take-off-4751/",
+      "url": "https://www.myinstants.com/media/sounds/take-off_2YqCEjc.mp3",
+      "sourceBytes": 41630,
+      "sha256": "529b067c3590e7b867744d717f54d3f3b3d66b9cd17a553827fbc6266ddfbf69",
+      "trimStart": 0.06845833333333333,
+      "duration": 2.10875
+    },
+    {
+      "id": "cartoon-slip",
+      "page": "https://www.myinstants.com/en/instant/cartoon-slip-89839/",
+      "url": "https://www.myinstants.com/media/sounds/cartoonslip.mp3",
+      "sourceBytes": 4155,
+      "sha256": "384f2df40a20946e79487adedd564f830f2e44ac4621c0be1f6165f5851d3094",
+      "trimStart": 0,
+      "duration": 0.19829166666666667
+    },
+    {
+      "id": "punch",
+      "page": "https://www.myinstants.com/en/instant/punch-sound-86161/",
+      "url": "https://www.myinstants.com/media/sounds/punch-gaming-sound-effect-hd_RzlG1GE.mp3",
+      "sourceBytes": 25423,
+      "sha256": "ac37eec2d00a9be2613c0ec1bf334775cc6df286b555e1ff4074d448b9b4260c",
+      "trimStart": 0.35075,
+      "duration": 0.5552916666666666
+    },
+    {
+      "id": "taco-bell",
+      "page": "https://www.myinstants.com/en/instant/taco-bell-bong-42481/",
+      "url": "https://www.myinstants.com/media/sounds/taco-bell-bong-sfx.mp3",
+      "sourceBytes": 31599,
+      "sha256": "e403f313cf8f7e2c89bebd220b3a534b483818d4edb04488b8c4022d3667690a",
+      "trimStart": 0.072,
+      "duration": 1.747
+    },
+    {
+      "id": "rizz",
+      "page": "https://www.myinstants.com/en/instant/rizz-sound-effect-54189/",
+      "url": "https://www.myinstants.com/media/sounds/rizz-sound-effect.mp3",
+      "sourceBytes": 77462,
+      "sha256": "dbbde7a7920b680ab42a6b8cab49dbd59e24841878bb622fb889669f9fae286f",
+      "trimStart": 0.18575,
+      "duration": 1.4532916666666666
+    },
+    {
+      "id": "correct-ding",
+      "page": "https://www.myinstants.com/en/instant/correct-ding/",
+      "url": "https://www.myinstants.com/media/sounds/ding-sound-effect_1.mp3",
+      "sourceBytes": 47993,
+      "sha256": "bf9c08a6b942f6c875b07e35de5ebbc3a009c7567a0e9d1a69ff79c0c79e9e81",
+      "trimStart": 0.12495833333333334,
+      "duration": 1.335
+    },
+    {
+      "id": "wrong-buzzer",
+      "page": "https://www.myinstants.com/en/instant/wrong-answer-buzzer-6983/",
+      "url": "https://www.myinstants.com/media/sounds/wrong-answer-buzzer.mp3",
+      "sourceBytes": 17934,
+      "sha256": "5aa31331affb5756e0e7ba2b20e500834cbec9011013e8282b01fe498cdffc11",
+      "trimStart": 0,
+      "duration": 1.0630833333333334
+    },
+    {
+      "id": "camera-shutter",
+      "page": "https://www.myinstants.com/en/instant/camera-shutter-181/",
+      "url": "https://www.myinstants.com/media/sounds/camera_zLdd1zp.mp3",
+      "sourceBytes": 14829,
+      "sha256": "6c48ad3fcf1f7d4fda1842bd3e8501d312d3dbb57ee9f9c395ad2302a9eb197b",
+      "trimStart": 0.054125,
+      "duration": 0.3383333333333333
+    },
+    {
+      "id": "sike",
+      "page": "https://www.myinstants.com/en/instant/sike-short-98831/",
+      "url": "https://www.myinstants.com/media/sounds/sike-1.mp3",
+      "sourceBytes": 12909,
+      "sha256": "27693dc9d2194fe9bba3d9e7bcfe4bb58d04429b68456daa3f63caf0ee918408",
+      "trimStart": 0.04225,
+      "duration": 0.72575
+    },
+    {
+      "id": "easy-peasy",
+      "page": "https://www.myinstants.com/en/instant/easy-peasy-lemon-squeezy-csgo-73385/",
+      "url": "https://www.myinstants.com/media/sounds/easy-peasy-lemon-squeezy-csgo.mp3",
+      "sourceBytes": 76832,
+      "sha256": "343f7ddd63c98cd9e185ee31a18176a989b667c437acc56818c6d18e8e5da983",
+      "trimStart": 0.14820833333333333,
+      "duration": 2.6262083333333335
+    },
+    {
+      "id": "gotcha",
+      "page": "https://www.myinstants.com/en/instant/gotcha-apollo-justice/",
+      "url": "https://www.myinstants.com/media/sounds/apollo_gotcha.mp3",
+      "sourceBytes": 5869,
+      "sha256": "58bea185ef7eff52a140a23787c43c9a00d518b76790c3c081a3403fe852fb6f",
+      "trimStart": 0,
+      "duration": 1.3344166666666666
+    },
+    {
+      "id": "ayo",
+      "page": "https://www.myinstants.com/en/instant/ayo-5055/",
+      "url": "https://www.myinstants.com/media/sounds/ayo_ngawHKc.mp3",
+      "sourceBytes": 24912,
+      "sha256": "f673c302ce679aa7c45da0974507680015e7b4ed651206fd10688605139055d0",
+      "trimStart": 0,
+      "duration": 1.4977083333333334
+    },
+    {
+      "id": "sheesh",
+      "page": "https://www.myinstants.com/en/instant/sheesh/",
+      "url": "https://www.myinstants.com/media/sounds/klaysheesh.mp3",
+      "sourceBytes": 26584,
+      "sha256": "7d6b22a3bce9b0c6393a51831d33746f8d40f7223146819075ed5b828955a163",
+      "trimStart": 0.009333333333333334,
+      "duration": 1.61025
+    },
+    {
+      "id": "yoink",
+      "page": "https://www.myinstants.com/en/instant/guy-saying-yoink-93272/",
+      "url": "https://www.myinstants.com/media/sounds/yt1s_oEzCu1U.mp3",
+      "sourceBytes": 37126,
+      "sha256": "27eb39a722d7a3f0979cd4becf1e0f11877a93f42f201232df12508217dfabba",
+      "trimStart": 0.7587916666666666,
+      "duration": 0.5750416666666667
+    },
+    {
+      "id": "oops",
+      "page": "https://www.myinstants.com/en/instant/oops-3685/",
+      "url": "https://www.myinstants.com/media/sounds/oops_0HuD11q.mp3",
+      "sourceBytes": 11093,
+      "sha256": "8b42e267ea496d53a6d6e4a11f331c88782e2941b77b40992e98cc0562d4e3c9",
+      "trimStart": 0.005833333333333334,
+      "duration": 1.027
+    },
+    {
+      "id": "toasty",
+      "page": "https://www.myinstants.com/en/instant/toasty/",
+      "url": "https://www.myinstants.com/media/sounds/mktoasty.mp3",
+      "sourceBytes": 151934,
+      "sha256": "9b0628779988d1d4281e834abd07935c9cf91ac360701ffd1a882f8eb1d02383",
+      "trimStart": 0.25254166666666666,
+      "duration": 0.6284166666666666
+    },
+    {
+      "id": "nani",
+      "page": "https://www.myinstants.com/en/instant/nani-only-42829/",
+      "url": "https://www.myinstants.com/media/sounds/nani_mkANQUf.mp3",
+      "sourceBytes": 19320,
+      "sha256": "beebde61f3c7612603dacb86524deafed21ba6df96cd7f9ca213c13422d44de4",
+      "trimStart": 0.175375,
+      "duration": 0.7529583333333333
+    },
+    {
+      "id": "cartoon-gulp",
+      "page": "https://www.myinstants.com/en/instant/cartoon-chew-gulp-scream-swipe-22062/",
+      "url": "https://www.myinstants.com/media/sounds/cartoon-chew-gulp-scream-swipe.mp3",
+      "sourceBytes": 73043,
+      "sha256": "9d09647866c3108b48fd68efb505e6c77793993fdcbf5e7ae175ac272a478d32",
+      "trimStart": 0,
+      "duration": 3.73325
+    },
+    {
+      "id": "squeaky-feet",
+      "page": "https://www.myinstants.com/en/instant/squeaky-running-feet-65612/",
+      "url": "https://www.myinstants.com/media/sounds/squeaky-running-feet.mp3",
+      "sourceBytes": 43121,
+      "sha256": "e1752f03ac7b138d3986017c956f49184c47b57cff458c65336d5cf8682241d1",
+      "trimStart": 0.20220833333333332,
+      "duration": 1.5959583333333334
+    },
+    {
+      "id": "ricochet",
+      "page": "https://www.myinstants.com/en/instant/9-3-cartoon-gun-ricochet-21537/",
+      "url": "https://www.myinstants.com/media/sounds/9-3-cartoon-gun-ricochet.mp3",
+      "sourceBytes": 56539,
+      "sha256": "501f1749fb735565d5fa580f6b0de770b0bf7a50908ea14074521108ab45628e",
+      "trimStart": 0.05516666666666667,
+      "duration": 2.1215
+    },
+    {
+      "id": "sword-clash",
+      "page": "https://www.myinstants.com/en/instant/sword-clashing-3015/",
+      "url": "https://www.myinstants.com/media/sounds/sword-clash.mp3",
+      "sourceBytes": 49573,
+      "sha256": "30bd1d7dfbd6ae42c5905cd419b8b6e29a93e592ae2360b3089f7089c8a569ec",
+      "trimStart": 0.022083333333333333,
+      "duration": 1.9620416666666667
+    },
+    {
+      "id": "glass-shatter",
+      "page": "https://www.myinstants.com/en/instant/glass-shattering-40011/",
+      "url": "https://www.myinstants.com/media/sounds/glass-shattering.mp3",
+      "sourceBytes": 45485,
+      "sha256": "7ce5778d23284d35ef043a9cf124dd9f1929f040bbd0e9c59d27bb2276e08057",
+      "trimStart": 0.06954166666666667,
+      "duration": 1.710375
+    },
+    {
+      "id": "bowling-strike",
+      "page": "https://www.myinstants.com/en/instant/bowling-pins-strike-sound-79917/",
+      "url": "https://www.myinstants.com/media/sounds/bowling-pins-strike-sound.mp3",
+      "sourceBytes": 159868,
+      "sha256": "2a60466dce501ce0ef3031c9c2f4539297cc647f93795a20a170356a33a6c70d",
+      "trimStart": 0.04108333333333333,
+      "duration": 2.464958333333333
+    },
+    {
+      "id": "whip-crack",
+      "page": "https://www.myinstants.com/en/instant/johnny-test-whip-crack/",
+      "url": "https://www.myinstants.com/media/sounds/johnny-test-whip-crack.mp3",
+      "sourceBytes": 31692,
+      "sha256": "a8e1f9b66c44f16dea06f50db9673e78cda06411593d1478f3d9e95fc305e1e5",
+      "trimStart": 0.40408333333333335,
+      "duration": 0.784125
+    },
+    {
+      "id": "whoosh",
+      "page": "https://www.myinstants.com/en/instant/whoosh-sfx-32736/",
+      "url": "https://www.myinstants.com/media/sounds/whoosh-sfx.mp3",
+      "sourceBytes": 25214,
+      "sha256": "6b8d0a36a6458d8db2a27e706d5f204e54519ade7075812ba844a59bd5a183f8",
+      "trimStart": 0.18416666666666667,
+      "duration": 0.298625
+    },
+    {
+      "id": "crickets",
+      "page": "https://www.myinstants.com/en/instant/awkward-crickets-18144/",
+      "url": "https://www.myinstants.com/media/sounds/awkward-cricket-sound-effect_YK6dDJG.mp3",
+      "sourceBytes": 71817,
+      "sha256": "b703d6f8c9b9979660bd05f4c779903eebb9624725dd5660d81938c646ca85be",
+      "trimStart": 0.42995833333333333,
+      "duration": 3.875583333333333
+    },
+    {
+      "id": "sad-violin",
+      "page": "https://www.myinstants.com/en/instant/sad-violin-the-meme-one/",
+      "url": "https://www.myinstants.com/media/sounds/tf_nemesis.mp3",
+      "sourceBytes": 73813,
+      "sha256": "6aa0f62297c2154fbf715e1f43b435c0a468b4083bbdc91200531ba96fce5324",
+      "trimStart": 0,
+      "duration": 4.464541666666666
+    },
+    {
+      "id": "air-horn",
+      "page": "https://www.myinstants.com/en/instant/mlg-air-horn/",
+      "url": "https://www.myinstants.com/media/sounds/mlg-airhorn.mp3",
+      "sourceBytes": 48318,
+      "sha256": "95beb8827452fab91d38535bbfd359b5e59547e2f98a937cb01032d3dced930c",
+      "trimStart": 0,
+      "duration": 2.9183333333333334
+    },
+    {
+      "id": "mario-jump",
+      "page": "https://www.myinstants.com/en/instant/mario-jump/",
+      "url": "https://www.myinstants.com/media/sounds/maro-jump-sound-effect_1.mp3",
+      "sourceBytes": 14556,
+      "sha256": "e716190b8bc08df9b9133fe2215a99be8bb79b6d1fbcf22e6ea1350f104c957b",
+      "trimStart": 0.13008333333333333,
+      "duration": 0.6277083333333333
+    },
+    {
+      "id": "level-up",
+      "page": "https://www.myinstants.com/en/instant/minecraft-level-up-sound/",
+      "url": "https://www.myinstants.com/media/sounds/levelup.mp3",
+      "sourceBytes": 30529,
+      "sha256": "cdc2187c5979d8bedab9dedddc32f07505a246204704599b84bb244d4101d45d",
+      "trimStart": 0,
+      "duration": 3.248625
+    },
+    {
+      "id": "cartoon-spring",
+      "page": "https://www.myinstants.com/en/instant/cartoon-spring-94662/",
+      "url": "https://www.myinstants.com/media/sounds/cartoon-spring.mp3",
+      "sourceBytes": 26584,
+      "sha256": "e01b923c22a45129f01606b776eaa659fc2e65c1c1a901e586de3a91f49753e1",
+      "trimStart": 0,
+      "duration": 1.4705833333333334
+    },
+    {
+      "id": "sonic-ring",
+      "page": "https://www.myinstants.com/en/instant/sonic-ring/",
+      "url": "https://www.myinstants.com/media/sounds/26f8b9_sonic_ring_sound_effect.mp3",
+      "sourceBytes": 14480,
+      "sha256": "a14950ea08bc39df57d73c26f79faf36aac47da162f5dfa5d0112289f7a7ccf5",
+      "trimStart": 0.013583333333333333,
+      "duration": 0.8435833333333334
+    }
+  ]
+}

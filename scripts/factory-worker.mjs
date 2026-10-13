@@ -42,9 +42,9 @@ export async function produce(job,{root,origin,history,update,cancelled,novelty}
       const themes=Object.keys(SPIRAL_THEMES),theme=themes[(job.ordinal+attempt)%themes.length];
       const seed=exact?(job.options.source.project?.seed??1):randomInt(1,1000000);
       let r;try{r=automatic&&job.mode!=='statistics'?automaticCandidate(job.options,seed,history,attempted,guard):job.options.source?sourceRecipe(job.options.source,seed):recipe(seed,job.mode,theme);}catch(error){if(error.code==='REPETITION_LIMIT'&&candidates.length)break;throw error;}r.exact=exact;attempted.push(r);
-      if(!exact&&!automatic&&r.mode==='arena')Object.assign(r,{arenaGame:job.options.arenaGame??'links',arenaShape:['triangle','square','hexagon','star','circle'][attempt%5],territoryDuration:job.options.duration<=37?30:job.options.duration<=52?45:60});
+      if(!exact&&!automatic&&r.mode==='arena')Object.assign(r,{arenaGame:job.options.arenaGame??'links',arenaShape:['portrait','square','hexagon','triangle','circle'][attempt%5],territoryDuration:job.options.duration<=37?30:job.options.duration<=52?45:60});
       const intro=exact&&r.mode!=='statistics'?(r.presentation?.countdown??0):0;
-      const outroSeconds=exact&&r.mode!=='statistics'?(r.presentation?.outro??2):2;
+      const outroSeconds=Math.max(r.arenaGame==='territory'?3:0,exact&&r.mode!=='statistics'?(r.presentation?.outro??2):2);
       if(r.mode==='spiral-breaker')r.clipSeconds=job.options.duration-intro-outroSeconds;
       let fitted;
       if(r.mode==='track'&&!exact&&!job.options.source){

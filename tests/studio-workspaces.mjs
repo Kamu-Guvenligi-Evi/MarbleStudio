@@ -9,7 +9,7 @@ try{
   await page.goto((process.env.TEST_ORIGIN??'http://127.0.0.1:5173')+'?edit=1');
   await page.waitForFunction(()=>window.marbleStudio);
   const state=()=>page.evaluate(()=>window.marbleStudio.getState());
-  assert.equal(await page.locator('.view-tabs button').count(),6);
+  assert.equal(await page.locator('.studio-game-list button').count(),6);
   assert.equal(await page.locator('#build-view, #library-dialog, #section-dialog, #projects-dialog').count(),0);
   assert.equal((await state()).workspace,'track');
   assert.equal(await page.locator('#track-view #race').isVisible(),true);
@@ -30,7 +30,7 @@ try{
   await page.locator('#track-preset').selectOption('pinball');
   const sections=(await state()).sections;
   await page.locator('#count').selectOption('8');
-  await page.locator('#music-title').click();
+  await page.locator('.studio-setting-group > summary').filter({hasText:'Ses ve müzik'}).click();
   await page.locator('#music-volume').fill('20');
   await page.locator('#open-balls').click();
   await page.locator('[data-name="0"]').fill('Track Racer');
@@ -68,6 +68,7 @@ try{
   await page.reload();await page.waitForFunction(()=>window.marbleStudio);
   assert.equal((await state()).count,8);
   await page.locator('#nav-arena').click();assert.equal((await state()).count,6);
+  await page.locator('.studio-setting-group > summary').filter({hasText:'İzleme ve kayıt'}).click();
   await page.locator('#webm-options').evaluate(el=>el.open=true);await page.locator('#record').click();
   await page.waitForFunction(()=>window.marbleStudio.getState().recording);
   await page.waitForFunction(()=>window.marbleStudio.getState().time>.2);
@@ -77,6 +78,7 @@ try{
   await page.waitForFunction(()=>!document.querySelector('#nav-track').disabled);
   await page.setViewportSize({width:390,height:844});
   for(const mode of ['track','arena','territory','statistics','spiral']){
+    await page.locator('.studio-menu-toggle').click();
     await page.locator('#nav-'+mode).click();
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,mode+' mobile overflow');
     await page.screenshot({path:'artifacts/studio-'+mode+'-mobile.png',fullPage:true});

@@ -1,4 +1,5 @@
 import './automatic-home.css';
+import {factoryOrigin} from './service-origin.js';
 import {DEFAULT_VIDEO_FPS} from './video-settings.js';
 
 const labels={track:'Parkur',arena:'Küre Arenası',territory:'Alan Savaşı',spiral:'Spiral',statistics:'İstatistik'};
@@ -14,7 +15,7 @@ export function createAutomaticHome({create,videos,works,busy,pause,youtubeAccou
     <label><input type="radio" name="kind" value="auto" checked><span>Bana bırak</span></label>
     ${Object.entries(labels).map(([key,label])=>`<label><input type="radio" name="kind" value="${key}"><span>${label}</span></label>`).join('')}
     </div></fieldset><p id="automatic-note">Parkur, küre arenası, alan savaşı veya spiral seçilir. Düzen, kadro, müzik ve video ayarları otomatik hazırlanır.</p>
-    <p>Tamamlanan videolar GitHub’daki ortak arşive otomatik eklenir.</p><div class="automatic-youtube"><label>YouTube kanalı<select id="automatic-youtube-channel"><option value="">YouTube kapalı</option></select></label><label>Görünürlük<select id="automatic-youtube-privacy"><option value="private">Gizli</option><option value="unlisted">Liste dışı</option><option value="public">Herkese açık</option></select></label><p><span id="automatic-youtube-note">Kanal bağlamak için İçerik Atölyesi'ni aç.</span> <a href="http://127.0.0.1:5180/factory.html#youtube" target="_blank" rel="noopener noreferrer">İçerik Atölyesi ↗</a></p></div>
+    <p>Tamamlanan videolar GitHub’daki ortak arşive otomatik eklenir.</p><div class="automatic-youtube"><label>YouTube kanalı<select id="automatic-youtube-channel"><option value="">YouTube kapalı</option></select></label><label>Görünürlük<select id="automatic-youtube-privacy"><option value="private">Gizli</option><option value="unlisted">Liste dışı</option><option value="public">Herkese açık</option></select></label><p><span id="automatic-youtube-note">Kanal bağlamak için İçerik Atölyesi'ni aç.</span> <a href="${factoryOrigin()}/factory.html#youtube" target="_blank" rel="noopener noreferrer">İçerik Atölyesi ↗</a></p></div>
     <button id="automatic-create" class="button primary" type="submit">Videomu oluştur</button><p id="automatic-status" role="status"></p></form>
     <div class="automatic-links"><a href="/glass-breaker.html" class="button secondary" style="text-decoration:none">◇ Cam Kırıcı</a><a href="/spiral-breaker.html" class="button secondary" style="text-decoration:none">▧ Spiral Kırıcı</a><button id="automatic-pi">π Pi Çarpışmaları</button><button id="automatic-videos">Videolarım</button><button id="automatic-edit">Kendim düzenleyeyim</button></div>`;
   document.querySelector('main').before(home);

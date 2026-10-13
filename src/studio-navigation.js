@@ -68,7 +68,7 @@ export function mountStudioNavigation(mode = 'main') {
   const main = mode === 'main';
   document.body.classList.add('studio-organized');
   const rail = document.createElement('aside');rail.className = 'studio-navigation';rail.setAttribute('aria-label','Stüdyo menüsü');
-  const brand = document.createElement('a');brand.className = 'studio-brand';brand.href = '/';
+  const brand = document.createElement('a');brand.className = 'studio-brand';brand.href = '/index.html';
   brand.innerHTML = '<span aria-hidden="true">◉</span><span>Marble <b>Studio</b><small>OYUN STÜDYOSU</small></span>';
   const toggle = document.createElement('button');toggle.type = 'button';toggle.className = 'studio-menu-toggle';toggle.setAttribute('aria-controls','studio-game-menu');
   const menu = document.createElement('div');menu.id = 'studio-game-menu';
@@ -79,7 +79,7 @@ export function mountStudioNavigation(mode = 'main') {
     for (const [id, name, icon] of games) {
       const existing = main && document.getElementById('nav-'+id);
       const item = existing || document.createElement('a');
-      if (!existing) item.href = standalone.has(id) ? `/${id}.html` : `/?mode=${id}`;
+      if (!existing) item.href = standalone.has(id) ? `/${id}.html` : `/index.html?mode=${id}`;
       item.dataset.studioGame = id;
       item.innerHTML = `<span aria-hidden="true">${icon}</span><span>${name}</span>`;
       if(id === mode)item.setAttribute('aria-current','page');

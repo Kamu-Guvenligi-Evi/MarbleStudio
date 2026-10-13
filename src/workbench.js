@@ -1,4 +1,5 @@
 import {brandVideoOptions} from './channel-branding.js';
+import {factoryOrigin} from './service-origin.js';
 import './workbench.css';
 import {normalizeSnapshot} from './studio-transfer.js';
 import {createWorkStore} from './saved-works.js';
@@ -36,7 +37,7 @@ export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isL
   const uploadButton=document.createElement('button');uploadButton.className='button secondary';uploadButton.textContent='Video yükle';uploadButton.id='videos-upload';
   const uploadInput=document.createElement('input');uploadInput.type='file';uploadInput.accept='.mp4,.webm,video/mp4,video/webm';uploadInput.hidden=true;uploadInput.id='videos-upload-file';
   document.querySelector('.wb-archive-controls').append(uploadButton,uploadInput);uploadButton.onclick=()=>uploadInput.click();
-  const origin=()=>new URL(import.meta.env.VITE_FACTORY_ORIGIN??document.querySelector('.factory-link')?.href??(import.meta.env.DEV?'http://127.0.0.1:5180':location.origin)).origin;
+  const origin=factoryOrigin;
   const failure='Video hizmetine bağlanılamadı. Masaüstündeki Marble Studio kısayolunu yeniden açıp Tekrar dene düğmesine bas.';
   async function uploadVideo(blob,{name='Video',mode='track'}={}){
     if(!blob.size||blob.size>1024**3)throw new Error('Video boş olamaz; en fazla 1 GB olabilir.');
@@ -91,7 +92,7 @@ export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isL
   async function refreshVideos(){
     if(refreshing)return;refreshing=true;try{
       const data=await api('factory?limit=12&offset='+offset+'&state='+$('videos-filter').value);if(data.apiVersion<3)throw new Error('Video hizmetini yeni sürümle yeniden aç.');
-      $('videos-message').textContent=data.storageError?'Kayıt sorunu: '+data.storageError:'';
+      $('videos-message').textContent=data.storageError?'Kayıt sorunu: '+data.storageError:data.sharedWarning??'';
       $('videos-summary').textContent=`${data.summary.done} hazır · ${data.summary.pending} hazırlanıyor`;$('videos-previous').disabled=offset===0;$('videos-next').disabled=offset+12>=data.total;
       const list=$('videos-list'),ids=new Set(data.jobs.map(j=>j.id));for(const card of [...list.children])if(!ids.has(card.dataset.job))card.remove();
       for(const [index,job] of data.jobs.entries()){

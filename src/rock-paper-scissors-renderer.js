@@ -1,4 +1,5 @@
-import {ARENA,TYPES,NAMES,randomFrom} from './rock-paper-scissors.js';
+import {drawChannelTitle} from './channel-branding.js';
+import {ARENA,TYPES,randomFrom} from './rock-paper-scissors.js';
 export const COLORS={rock:'#9d8aff',scissors:'#f281ce',paper:'#e5deff'};
 function path(ctx,points){ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();}
 // Drawn locally at export resolution: no platform emoji or remote image dependency.
@@ -89,16 +90,18 @@ export function drawRpsMapPreview(ctx,game){
   for(const [type,x,y] of [['rock',125,350],['scissors',410,350],['paper',270,666]])icon(ctx,type,x,y,40);
   ctx.restore();
 }
-export function renderRps(ctx,game,settings,{paused=false}={}){
+let fittedTitle, fittedTitleSize=25;
+export function renderRps(ctx,game,settings,{paused=false,channel}={}){
   const {width,height}=ctx.canvas;ctx.save();ctx.scale(width/540,height/960);ctx.drawImage(background(settings.background),0,0);ctx.textAlign='center';ctx.textBaseline='middle';
-  text(ctx,'M A R B L E  /  S T U D I O',270,58,9,'#c2add982',600);
+  drawChannelTitle(ctx,channel,270,58);
   const counts=game.counts(),total=game.pieces.length;
   TYPES.forEach((type,i)=>{
     const x=95+i*175;ctx.globalAlpha=counts[type]===0?.28:1;
     ctx.fillStyle='#191220bf';ctx.strokeStyle=COLORS[type]+'32';ctx.lineWidth=1;ctx.beginPath();ctx.roundRect(x-68,111,136,65,13);ctx.fill();ctx.stroke();
-    icon(ctx,type,x-33,143,30);text(ctx,String(counts[type]).padStart(2,'0'),x+20,138,27,COLORS[type],650);text(ctx,NAMES[type].toLocaleUpperCase('tr'),x+20,161,8,'#aaa0b9',600);ctx.globalAlpha=1;
+    icon(ctx,type,x-33,143,30);text(ctx,String(counts[type]).padStart(2,'0'),x+20,138,27,COLORS[type],650);text(ctx,type.toUpperCase(),x+20,161,8,'#aaa0b9',600);ctx.globalAlpha=1;
   });
-  let fontSize=25;ctx.font=`600 ${fontSize}px "Segoe UI", Arial, sans-serif`;while(ctx.measureText(settings.title).width>490&&fontSize>12){fontSize--;ctx.font=`600 ${fontSize}px "Segoe UI", Arial, sans-serif`;}
+  if(fittedTitle!==settings.title){let fontSize=25;ctx.font=`600 ${fontSize}px "Segoe UI", Arial, sans-serif`;while(ctx.measureText(settings.title).width>490&&fontSize>12){fontSize--;ctx.font=`600 ${fontSize}px "Segoe UI", Arial, sans-serif`;} fittedTitle=settings.title;fittedTitleSize=fontSize;}
+  const fontSize=fittedTitleSize;
   text(ctx,settings.title,270,220,fontSize,'#f7f1ff',600);
   const {x,y,size}=ARENA;
   ctx.fillStyle='#04030769';ctx.fillRect(x,y,size,size);ctx.strokeStyle='#b9a1ff';ctx.lineWidth=1.8;ctx.shadowColor='#9871ff';ctx.shadowBlur=13;ctx.strokeRect(x,y,size,size);ctx.shadowBlur=0;
@@ -111,8 +114,8 @@ export function renderRps(ctx,game,settings,{paused=false}={}){
   let barX=x;TYPES.forEach(type=>{const w=size*counts[type]/total;ctx.fillStyle=COLORS[type];ctx.fillRect(barX,y+24+size,w,3);barX+=w;});
   if(game.state!=='running'){
     ctx.fillStyle='#08050deb';ctx.beginPath();ctx.roundRect(98,405,344,194,20);ctx.fill();ctx.strokeStyle='#cfb5ff64';ctx.lineWidth=1;ctx.stroke();
-    if(game.winner){icon(ctx,game.winner,270,452,52);text(ctx,`${NAMES[game.winner].toLocaleUpperCase('tr')} KAZANDI`,270,510,28,COLORS[game.winner],700);text(ctx,'Bütün arena aynı tarafta.',270,553,15,'#c7bad9');}
-    else{text(ctx,'DENGE BOZULMADI',270,475,25,'#eee4ff',650);text(ctx,'Süre doldu · Berabere',270,526,15,'#c7bad9');}
-  }else if(paused){ctx.fillStyle='#0d071bd9';ctx.beginPath();ctx.roundRect(191,487,158,42,12);ctx.fill();text(ctx,'Ⅱ DURAKLATILDI',270,508,12,'#e9ddff',600);}
+    if(game.winner){icon(ctx,game.winner,270,452,52);text(ctx,`${game.winner.toUpperCase()} WINS`,270,510,28,COLORS[game.winner],700);}
+    else{text(ctx,'DRAW',270,475,25,'#eee4ff',650);text(ctx,'Time limit reached',270,526,15,'#c7bad9');}
+  }else if(paused){ctx.fillStyle='#0d071bd9';ctx.beginPath();ctx.roundRect(191,487,158,42,12);ctx.fill();text(ctx,'Ⅱ PAUSED',270,508,12,'#e9ddff',600);}
   ctx.restore();
 }

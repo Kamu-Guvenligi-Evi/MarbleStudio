@@ -8,9 +8,10 @@ export function normalizeNames(raw = []) {
 }
 export function normalizePresentation(raw = {}) {
   if(!raw||typeof raw!=='object'||Array.isArray(raw))throw new Error('Video ayarları geçersiz.');
-  const {countdown=3,outro=4,camera='smart'}=raw;
+  const {countdown=3,outro=4,camera='smart',title=''}=raw;
   if(!Number.isInteger(countdown)||countdown<0||countdown>5||!Number.isInteger(outro)||outro<1||outro>10||!['smart','leader','pack'].includes(camera))throw new Error('Video süresi veya kamera ayarı geçersiz.');
-  return {countdown,outro,camera};
+  if(typeof title!=='string'||title.length>80)throw new Error('Başlık en fazla 80 karakter olabilir.');
+  return {countdown,outro,camera,...(title.trim()?{title}: {})};
 }
 
 // Keep a group for a short interval to avoid cutting on every overtake.

@@ -1,5 +1,6 @@
+import {createPreviewCanvas} from './preview-canvas.js';
 import {englishOutput} from './output-language.js';
-import {drawChannelWatermark,chooseVideoChannel} from './channel-branding.js';
+import {channelHandle,getSelectedChannel,drawChannelWatermark,chooseVideoChannel} from './channel-branding.js';
 import './statistics.css';
 import {DEMO_CSV,STATISTICS_KEY,parseStatistics,statisticsAt} from './statistics-data.js';
 import {createStatisticsLibrary} from './statistics-library.js';
@@ -79,7 +80,11 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
   function text(value,x,y,size,color,weight=400,align='left',width){
     ctx.fillStyle=color;ctx.font=`${weight} ${size}px "Segoe UI", sans-serif`;ctx.textAlign=align;ctx.fillText(englishOutput(value),x,y,width);
   }
-  function draw(dt=0,channel=watermarkChannel){
+  window.addEventListener('studio-channel-change',()=>draw());
+  const previewCanvas=createPreviewCanvas(canvas,{onResize:()=>draw()});
+  function draw(dt=0,channel=watermarkChannel,fullResolution=recordBusy){
+    previewCanvas.apply(fullResolution);
+    ctx.setTransform(canvas.width/1920,0,0,canvas.height/1080,0,0);
     const rows=ranking(),count=top(),gap=690/count,barHeight=Math.min(52,gap*.72);
     const left=370,width=1280,startY=245,peak=rows[0].value;
     const scale=statisticsScale(peak||1);
@@ -88,7 +93,7 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
     ctx.fillStyle='#111820';ctx.fillRect(0,0,1920,1080);
     drawChannelWatermark(ctx,channel,1920,1080);
     ctx.fillStyle='#bbef83';ctx.fillRect(70,70,5,75);
-    text('MARBLE STUDIO / STATISTICS RACE',96,83,18,'#a6bdaf',600);
+    text(channelHandle(channel||getSelectedChannel()),96,83,18,'#a6bdaf',600);
     text($('heading').value.trim()||'Yıllara göre sıralama',94,137,44,'#f2f6f0',650,'left',1450);
     const demo=csv.trim()===DEMO_CSV.trim();
     text(demo?'ÖRNEK VERİ':snapshot()?'SABİT KARŞILAŞTIRMA':`${data.frames[0].year} — ${data.frames.at(-1).year}`,1835,84,19,demo?'#bbef83':'#9faeb7',600,'right');
@@ -140,13 +145,13 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
     if(!watermarkChannel)return;
     let stream;
     try {
-      reset();lock(true);stream=canvas.captureStream();recordStream=stream;
+      lock(true);reset();stream=canvas.captureStream(60);recordStream=stream;
       const session=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:8_000_000}),chunks=[];
       let failed=false;recorder=session;
       session.ondataavailable=event=>{if(event.data.size)chunks.push(event.data);};
       session.onerror=()=>{failed=true;stopRecording();};
       session.onstop=()=>{
-        stream.getTracks().forEach(track=>track.stop());recorder=null;recordStream=null;watermarkChannel=null;lock(false);$('record').disabled=false;ui();
+        stream.getTracks().forEach(track=>track.stop());recorder=null;recordStream=null;watermarkChannel=null;lock(false);$('record').disabled=false;ui();draw();
         if(failed||!chunks.length){notify('Video oluşturulamadı. Tekrar deneyebilirsin.');return;}
         if(downloadURL)URL.revokeObjectURL(downloadURL);
         const videoBlob=new Blob(chunks,{type:'video/webm'});downloadURL=URL.createObjectURL(videoBlob);
@@ -154,7 +159,7 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
         onVideoRecorded?.(videoBlob,{name:englishOutput($('heading').value),mode:'statistics'});
       };
       session.start(250);playing=true;last=performance.now();ui();canvas.scrollIntoView({block:'center',behavior:'instant'});
-    }catch{stream?.getTracks().forEach(track=>track.stop());recorder=null;recordStream=null;watermarkChannel=null;playing=false;lock(false);$('record').disabled=false;ui();notify('Video kaydı başlatılamadı. Tekrar deneyebilirsin.');}
+    }catch{stream?.getTracks().forEach(track=>track.stop());recorder=null;recordStream=null;watermarkChannel=null;playing=false;lock(false);$('record').disabled=false;ui();draw();notify('Video kaydı başlatılamadı. Tekrar deneyebilirsin.');}
   }
   function applyCSV(value,item=null){
     const parsed=parseStatistics(value); // Validate everything before replacing the current project.
@@ -208,7 +213,7 @@ export function createStatistics({notify,onRecordingChange,onVideoRecorded}) {
       for(const key of settings)if(value[key]!==undefined)$(key).value=String(value[key]);
       reset();
     },
-    renderFrame(value,dt,channel){progress=Math.max(0,Math.min(1,value));draw(dt,channel);return canvas;},
+    renderFrame(value,dt,channel){progress=Math.max(0,Math.min(1,value));draw(dt,channel,true);return canvas;},
     isRecording:()=>recordBusy,
     setActive(value){active=value;if(!active){playing=false;syncPositions();}last=performance.now();if(active){draw();ui();}},
     state:()=>({progress,year:year(),playing,recording:recordBusy,names:[...data.names],ranking:ranking(),duration:duration(),datasetId:dataset?.id??null,snapshot:snapshot(),interpolation:$('interpolation').value,axisMax}),

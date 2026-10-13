@@ -1,8 +1,12 @@
+import {mountChannelPicker,getSelectedChannel} from './channel-branding.js';
+import './channel-picker.css';
+mountChannelPicker(document.querySelector('.rps-header'));
 import {RPS_KEY,RPS_MAPS,RockPaperScissors,normalizeRps,NAMES} from './rock-paper-scissors.js';
 import {renderRps,drawRpsIcon,drawRpsMapPreview} from './rock-paper-scissors-renderer.js';
 import {GameSoundPlayer,createGameSoundDirector,normalizeSoundStyle} from './game-sound-director.js';
 import {normalizeSoundOverrides} from './game-sound-settings.js';
 import {mountGameSoundPanel} from './game-sound-panel.js';
+import {createWorkbench} from './workbench.js';
 import {DEFAULT_VIDEO_FPS} from './video-settings.js';
 import './rock-paper-scissors.css';
 
@@ -13,9 +17,12 @@ settings.soundStyle=normalizeSoundStyle(settings.soundStyle);
 settings.soundOverrides=normalizeSoundOverrides(mode,settings.soundOverrides);
 const sound=new GameSoundPlayer(mode,settings.soundStyle,settings.soundOverrides);
 const ctx=$('rps-canvas').getContext('2d');
-let game,paused=false,last=0,accumulator=0,recorder=null,exportStarting=false,exportStream=null,exportCanvas=null,audioCapture=null,endTail=0,exportFailed=false;
+let exportChannel,game,paused=false,last=0,accumulator=0,recorder=null,exportStarting=false,exportStream=null,exportCanvas=null,audioCapture=null,endTail=0,exportFailed=false;
 const save=()=>{try{localStorage.setItem(RPS_KEY,JSON.stringify(settings));}catch{}};
 const status=message=>{$('status').textContent=message;};
+const workbench=createWorkbench({capture:()=>({mode,project:structuredClone(settings)}),thumbnail:()=>$('rps-canvas').toDataURL('image/jpeg',.7),title:()=>settings.title||'Rock, Paper, Scissors',notify:status,isLocked:()=>!!recorder||exportStarting,getChannel:getSelectedChannel,openSnapshot:()=>{}});
+$('studio-export').onclick=()=>workbench.openExport();
+$('studio-videos').onclick=()=>workbench.openVideos();
 for(const [key,map] of Object.entries(RPS_MAPS)){
   const option=document.createElement('option');option.value=key;option.textContent=map.name+(map.moving?' · Hareketli':'');$('map').append(option);
   const button=document.createElement('button');button.type='button';button.dataset.map=key;button.className='map-card';
@@ -67,7 +74,8 @@ mountGameSoundPanel({mode,style:settings.soundStyle,overrides:settings.soundOver
 });
 for(const c of document.querySelectorAll('[data-icon]'))drawRpsIcon(c.getContext('2d'),c.dataset.icon,32,32,51);
 
-function lockExport(locked){$('settings').disabled=locked;$('pause').disabled=locked;$('sound').disabled=locked;$('export').textContent=locked?'■ Kaydı bitir':'↓ Video indir';}
+function lockExport(locked){
+  $('studio-export').disabled=locked;$('settings').disabled=locked;$('pause').disabled=locked;$('sound').disabled=locked;$('export').textContent=locked?'■ Kaydı bitir':'↓ WebM indir';}
 function releaseExport(){
   for(const track of exportStream?.getTracks()??[])track.stop();
   exportStream=null;exportCanvas=null;recorder=null;exportStarting=false;lockExport(false);
@@ -76,7 +84,7 @@ function stopExport(){if(recorder&&recorder.state!=='inactive'){recorder.stop();
 async function startExport(){
   if(exportStarting)return;
   if(recorder){stopExport();return;}
-  exportStarting=true;lockExport(true);$('export').disabled=true;exportFailed=false;
+  exportChannel=getSelectedChannel();exportStarting=true;lockExport(true);$('export').disabled=true;exportFailed=false;
   try{
     if(!window.MediaRecorder||!HTMLCanvasElement.prototype.captureStream)throw new Error('Bu tarayıcı video kaydını desteklemiyor. Chrome veya Edge kullanabilirsin.');
     if(settings.sound){
@@ -84,7 +92,7 @@ async function startExport(){
       if(!audioCapture){audioCapture=sound.context.createMediaStreamDestination();sound.compressor.connect(audioCapture);}
     }
     exportCanvas=document.createElement('canvas');exportCanvas.width=1080;exportCanvas.height=1920;
-    restart();renderRps(exportCanvas.getContext('2d'),game,settings);
+    restart();renderRps(exportCanvas.getContext('2d'),game,settings,{channel:exportChannel});
     exportStream=exportCanvas.captureStream(DEFAULT_VIDEO_FPS);
     if(settings.sound)for(const track of audioCapture.stream.getAudioTracks())exportStream.addTrack(track.clone());
     const mimeType=['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(type=>MediaRecorder.isTypeSupported(type));
@@ -121,7 +129,7 @@ function frame(now){
     if(recorder?.state==='recording'&&game.state!=='running'){endTail+=dt;if(endTail>=1.6)stopExport();}
   }
   renderRps(ctx,game,settings,{paused});
-  if(exportCanvas&&recorder?.state==='recording')renderRps(exportCanvas.getContext('2d'),game,settings);
+  if(exportCanvas&&recorder?.state==='recording')renderRps(exportCanvas.getContext('2d'),game,settings,{channel:exportChannel});
   const label=game.state==='won'?`${NAMES[game.winner]} kazandı`:game.state==='timeout'?'Berabere':paused?'Duraklatıldı':`${game.pieces.length} parça · Oyun sürüyor`;
   if($('match-state').textContent!==label)$('match-state').textContent=label;
   requestAnimationFrame(frame);

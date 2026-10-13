@@ -1,4 +1,6 @@
+import './channel-picker.css';
 import './studio-navigation.css';
+import {mountChannelPicker} from './channel-branding.js';
 
 const groups = [
   ['Yarış ve mücadele', [['track','Parkur','↘'],['arena','Küre Arenası','◉'],['territory','Alan Savaşı','⬡'],['ball-duel','Top Düellosu','⚔'],['rock-paper-scissors','Taş Kâğıt Makas','✂']]],
@@ -94,6 +96,7 @@ export function mountStudioNavigation(mode = 'main') {
   let header = document.querySelector('.app-header,.ring-header,.duel-header');
   if (!header) {header = document.createElement('header');rail.after(header);}
   header.classList.add('studio-toolbar');
+  mountChannelPicker(header);
   header.querySelector('.brand')?.remove();
   header.querySelector('nav > a[href="/"]')?.remove();
   document.querySelector('.game-info > .back')?.remove();

@@ -1,5 +1,23 @@
 import { ballImage } from './ball-images.js';
 
+// Clean arena discs, also used in its leaderboard and winner overlay.
+export function drawArenaMarble(ctx,ball,x,y,r) {
+  ctx.save();ctx.shadowBlur=0;ctx.globalAlpha=1;
+  ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);
+  ctx.fillStyle=ball.color;ctx.fill();
+  const portrait=ballImage(ball.imageSrc);
+  if(portrait){
+    ctx.save();ctx.clip();ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+    const s=Math.min(portrait.naturalWidth,portrait.naturalHeight);
+    ctx.drawImage(portrait,(portrait.naturalWidth-s)/2,(portrait.naturalHeight-s)/2,s,s,x-r,y-r,r*2,r*2);ctx.restore();
+  }else{
+    ctx.font=`800 ${r*.9}px "Segoe UI",sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillStyle='#08111e';ctx.fillText(String((ball.entrantId??ball.id)+1),x,y+r*.04);
+  }
+  ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.strokeStyle='#ffffff';ctx.lineWidth=1.5;ctx.stroke();
+  ctx.restore();
+}
+
 // Shared by the race and podium. The marble keeps its physical radius.
 export function drawMarble(ctx,ball,x,y,r) {
   ctx.save();

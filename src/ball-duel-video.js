@@ -16,7 +16,7 @@ export async function beginDuel(config){
 export function duelFrame(elapsed){
   const time=Math.min(Math.max(0,elapsed-(job.intro??0))*job.speed,job.analysis.simulationSeconds),target=Math.ceil(time*game.settings.playbackSpeed*120);
   while(steps<target&&game.state==='running'){game.step(1/120);steps++;}
-  renderDuel(ctx,game,{english:true});return canvas;
+  renderDuel(ctx,game,{english:true,channel:job.channel});return canvas;
 }
 export const duelAudio=()=>({effects,leaders:[]});
 export const duelResult=()=>({complete:game.state==='finished',winner:game.winner===null?'Draw':englishOutput(game.settings.names[game.winner])});

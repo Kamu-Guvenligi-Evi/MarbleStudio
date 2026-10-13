@@ -32,6 +32,7 @@
     <section id="watch-view" class="watch-view" aria-labelledby="watch-title" hidden>
       <div class="watch-heading"><div><p id="race-eyebrow" class="eyebrow">PARKUR YARIŞI</p><h1 id="watch-title" tabindex="-1">Parkur yarışı</h1><p id="race-description" class="workspace-description">Hazır parkurunu seç, kadronu kur ve yarışı başlat.</p></div><span id="save-status" class="save-status" role="status">Taslak kaydediliyor</span></div>
       <div class="race-setup-bar">
+        <label id="race-title-field" for="race-title">Başlık<input id="race-title" type="text" maxlength="80" placeholder="Örn. Galatasaray vs Barcelona"></label>
         <label id="track-preset-field" for="track-preset">Hazır parkur<select id="track-preset"><option value="saved">Mevcut parkur</option><option value="cascade">Neon Cascade</option><option value="pinball">Pinball Garden</option><option value="velocity">Velocity</option><option value="clockwork">Clockwork</option></select></label>
         <label id="spiral-theme-field" for="spiral-theme" hidden>Spiral teması<select id="spiral-theme"></select></label>
         <button id="spiral-randomize" class="button secondary" hidden>Çarpanları yenile</button>
@@ -44,8 +45,9 @@
       <div id="arena-options" class="arena-options" hidden>
         <label>Arena oyunu <select id="arena-game"><option value="links">Küre · Bağ mücadelesi</option><option value="territory">Alan Savaşı</option></select></label>
         <label id="territory-template-field" hidden>İzleme şablonu <select id="territory-template"><option value="portrait">Dikey fetih · 8 oyuncu</option><option value="crowd">Kalabalık arena · 12 oyuncu</option><option value="country">Türkiye kapışması · 6 oyuncu</option><option value="custom">Özel ayarlar</option></select></label>
-        <label id="arena-link-mode-field">Bağ modu <select id="arena-link-mode"><option value="wall">Çarpışarak bağ kur</option><option value="prelinked">Hazır bağlarla başla</option></select></label>
-        <label id="arena-initial-links-field" hidden>Top başına başlangıç bağı <input id="arena-initial-links" type="number" min="1" max="50" step="1" value="15"></label>
+        <label id="arena-link-mode-field">Bağ modu <select id="arena-link-mode"><option value="wall">Çarpışarak bağ kur</option><option value="prelinked">Yelpaze iplerle başla</option></select></label>
+        <label id="arena-initial-links-field" hidden>Top başına başlangıç bağı <input id="arena-initial-links" type="number" min="1" max="150" step="1" value="15"></label>
+        <button id="arena-fan-preset" type="button">Üçlü ip yelpazesi</button>
         <label id="arena-shape-field" hidden>Harita / şekil <select id="arena-shape"><option value="triangle">Üçgen</option><option value="square">Kare</option><option value="hexagon">Altıgen</option><option value="star">Yıldız</option><option value="circle">Daire</option></select></label>
         <label id="territory-duration-field" hidden>Süre <select id="territory-duration"><option value="30">30 saniye</option><option value="45" selected>45 saniye</option><option value="60">60 saniye</option></select></label>
       </div>
@@ -68,15 +70,15 @@
           <section class="video-panel"><details id="webm-options"><summary>Tarayıcı kaydı · WebM</summary><p id="record-help">Yarış baştan oynatılır ve kaydedilir. Bittiğinde dikey videon otomatik iner.</p><button id="record" class="button primary"><span aria-hidden="true">●</span> Videoya kaydet</button><span class="video-format">Dikey video · 1080 × 1920 · WebM</span></details></section>
           <details class="music-panel" aria-labelledby="music-title">
             <summary id="music-title">Yarış müziği</summary><p>Müzik yarışta çalar ve videoya eklenir.</p>
-            <label for="music-mode">Müzik düzeni</label><select id="music-mode"><option value="leader">Öndeki ülke veya kişiye göre · Parkur</option><option value="fixed">Tek müzik</option></select>
+            <label for="music-mode">Müzik düzeni</label><select id="music-mode"><option value="leader">Öndeki ülke, takım veya kişiye göre · Parkur</option><option value="fixed">Tek müzik</option></select>
             <div id="music-countries">
-              <p>Lider değişince müzik anında değişir. Yeniden öne geçen ülke veya kişi kaldığı yerden devam eder. Yeni yarışta tüm parçalar başa döner.</p>
-              <details><summary>Ülke ve kişi müziklerini seç</summary>
-                <label for="music-country">Ülke veya kişi</label><select id="music-country"></select>
-                <label for="music-country-track">Bu ülkenin müziği</label><select id="music-country-track"><option value="">Müzik seçilmedi</option></select>
-                <audio id="country-music-preview" controls preload="none" aria-label="Seçili ülkenin müziğini ön dinle"></audio>
+              <p>Lider değişince müzik anında değişir. Yeniden öne geçen ülke, takım veya kişi kaldığı yerden devam eder. Yeni yarışta tüm parçalar başa döner.</p>
+              <details><summary>Ülke, takım ve kişi müziklerini seç</summary>
+                <label for="music-country">Ülke, takım veya kişi</label><select id="music-country"></select>
+                <label for="music-country-track">Liderin müziği</label><select id="music-country-track"><option value="">Müzik seçilmedi</option></select>
+                <audio id="country-music-preview" controls preload="none" aria-label="Seçili liderin müziğini ön dinle"></audio>
               </details>
-              <p id="music-leader-status" role="status">Ülke–müzik eşleştirmelerini seç.</p>
+              <p id="music-leader-status" role="status">Lider–müzik eşleştirmelerini seç.</p>
               <a href="/music/LICENSES.txt" target="_blank" rel="noopener noreferrer">Hazır müziklerin kaynak ve atıf bilgileri</a>
             </div>
             <div id="music-fixed">

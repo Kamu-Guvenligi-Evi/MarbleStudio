@@ -1,0 +1,10 @@
+2026-10-13
+Parkur Yarışı: Başlık input (80 characters), optional presentation.title persists
+in drafts/snapshots. Live canvas and factory video renderer display the title;
+leader cards shift down when it is present. Clearing the field hides it.
+Title input is locked during recording/export preparation.
+Standard studio courses reduced from 20 to 18 sections. Previous generated
+20-section presets migrate to 18 on load; longer special courses retain length.
+Checks: presentation tests passed; browser verified canvas text, reload,
+preset/settings retention, export recipe, mobile width and clearing.
+34 simulated races completed. Vite production build passed (existing chunk-size warning).

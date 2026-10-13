@@ -1,3 +1,4 @@
+import {normalizeRpsSnapshot} from './rock-paper-scissors-video.js';
 import {normalizeDuel,DUEL_KEY} from './ball-duel.js';
 import {normalizePi,PI_KEY} from './pi-collisions.js';
 import {normalizeProject} from './projects.js';
@@ -6,6 +7,7 @@ import {isBreaker,normalizeBreaker} from './breaker-video.js';
 
 export function normalizeSnapshot(raw) {
   if(!raw||typeof raw!=='object')throw new Error('Studio çalışması geçersiz.');
+  if(raw.mode==='rock-paper-scissors')return normalizeRpsSnapshot(raw);
   if(raw.mode==='ball-duel')return normalizeDuel(raw);
   if(isBreaker(raw.mode))return normalizeBreaker(raw);
   if(raw.mode==='pi')return {mode:'pi',project:normalizePi(raw.project)};

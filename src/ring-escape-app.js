@@ -90,7 +90,7 @@ async function startExport(){
   if(recorder){stopExport();return;}if(exportStarting)return;
   if(!globalThis.MediaRecorder||!canvas.captureStream){notify('Video indirmek için güncel Chrome veya Edge kullan.');return;}
   const type=['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(t=>MediaRecorder.isTypeSupported(t));if(!type){notify('Bu tarayıcı WebM kaydını desteklemiyor.');return;}
-  exportLock(true);
+  exportChannel=getSelectedChannel();exportLock(true);
   try{
     // Prepare music before time zero so the downloaded video and soundtrack start together.
     audio.stop();if(settings.sound)await audio.unlock();
@@ -102,7 +102,7 @@ async function startExport(){
     recorder.onstop=()=>{
       const blob=new Blob(chunks,{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`halka-kacisi-${settings.seed}.webm`;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);releaseExport();notify('Ses ayarlarınla 1080 × 1920 dikey video indirildi.');
     };
-    reset('Video kaydediliyor. Akış tamamlanınca otomatik indirilecek.');renderRingEscape(exportCanvas.getContext('2d'),game,{image:ballImage});recorder.start(500);exportStarting=false;
+    reset('Video kaydediliyor. Akış tamamlanınca otomatik indirilecek.');renderRingEscape(exportCanvas.getContext('2d'),game,{image:ballImage,channel:exportChannel});recorder.start(500);exportStarting=false;
   }catch{releaseExport();notify('Kayıt başlatılamadı. Tarayıcı ses ve video desteğini kontrol et.');}
 }
 $('export').onclick=startExport;
@@ -113,9 +113,10 @@ document.addEventListener('visibilitychange',()=>{
 });
 function frame(now){
   if(last&&!paused&&!document.hidden&&!exportStarting){accumulator+=Math.min(.1,(now-last)/1000)*settings.speed;while(accumulator>=1/120){game.step(1/120);accumulator-=1/120;}if(game.state==='running')audio.tick(game.time);}else accumulator=0;
-  last=now;renderRingEscape(ctx,game,{paused,image:ballImage});if(exportCanvas)renderRingEscape(exportCanvas.getContext('2d'),game,{image:ballImage});
-  $('progress').textContent=game.state==='won'?'Kaçış tamamlandı':game.state==='timeout'?`${game.remaining} halka kaldı · Süre doldu`:`${game.remaining} halka kaldı · ${Math.ceil(game.secondsLeft)} sn`;
-  if(game.state!=='running'){$('pause').textContent='↻ Tekrar';$('pause').setAttribute('aria-label','Akışı tekrar oynat');}
+  last=now;renderRingEscape(ctx,game,{paused,image:ballImage});if(exportCanvas)renderRingEscape(exportCanvas.getContext('2d'),game,{image:ballImage,channel:exportChannel});
+  const progressLabel=game.state==='won'?'Kaçış tamamlandı':game.state==='timeout'?`${game.remaining} halka kaldı · Süre doldu`:`${game.remaining} halka kaldı · ${Math.ceil(game.secondsLeft)} sn`;
+  if($('progress').textContent!==progressLabel)$('progress').textContent=progressLabel;
+  if(game.state!=='running'&&$('pause').textContent!=='↻ Tekrar'){$('pause').textContent='↻ Tekrar';$('pause').setAttribute('aria-label','Akışı tekrar oynat');}
   requestAnimationFrame(frame);
 }
 window.ringStudio={snapshot:()=>structuredClone(settings),state:()=>({time:game.time,state:game.state,remaining:game.remaining,broken:game.broken,hits:game.hits,paused,recording:!!recorder,audio:audio.context?.state??'locked',musicPlaying:!!audio.source,soundDirector:{source:audio.director.score?.source??null,played:audio.director.played,skipped:audio.director.skipped,voices:audio.director.voices.size}}),restart:()=>reset()};
@@ -135,3 +136,5 @@ renderPresetCards();loadImage();reset('Dönen açıklığı izle. Son halka kaç
 import './studio-workspace-layout.css';
 import {mountStudioNavigation} from './studio-navigation.js';
 mountStudioNavigation('ring-escape');
+import {getSelectedChannel} from './channel-branding.js';
+let exportChannel;

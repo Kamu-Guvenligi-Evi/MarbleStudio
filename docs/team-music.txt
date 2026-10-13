@@ -1,0 +1,16 @@
+2026-10-13 — Parkur lider marşları
+
+Galatasaray (teams-92b733230f): team-galatasaray, GS Tribune Choir / Galatasaray Marşı.
+Apple Music ön dinleme kaydından yaklaşık 30 saniye; kaynak manifestte kayıtlı.
+Barcelona (teams-75ef55e357): team-barcelona, Cant del Barça.
+Kulübün resmî indirilebilir marş kaydından 40 saniye.
+
+Dosyalar public/music/team-*.mp3; varsayılanlar countries.json; kaynak/atıflar manifest.json ve LICENSES.txt.
+Mevcut lider motoru kullanılıyor; kullanıcı eşleştirmeleri değiştirilmedi.
+Menü metinleri takım seçimini kapsıyor.
+
+Doğrulama: artifacts/check-team-music.mjs geçti (gerçek ses decode, varsayılan atamalar,
+logo/isim tanıma, lider değişimi, kaldığı yerden devam, duraklatma).
+tests/music-catalog.mjs ve tests/leader-music.mjs geçti; Vite build geçti.
+Testler ayrı geçici tarayıcı profilinde çalıştı; kullanıcının kadrosu değiştirilmedi.
+İki MP3 toplam 1.121.890 yerel bayt; internet tüketimi ölçülmedi.

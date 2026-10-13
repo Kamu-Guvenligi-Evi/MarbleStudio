@@ -1,0 +1,74 @@
+Küre arenası — başlangıç ipleri (2026-10-13)
+
+Referans: Ekran görüntüsü 2026-10-13 141411.png.
+Hazır ip modunda her top, çemberin kendine ait kesintisiz yayına bağlanır.
+Yay sınırlarında ortak bağlantı noktası yoktur; toplar başlangıçta çakışmaz.
+Yeni arena: 3 top, top başına 100 ip. Mevcut taslak ayarları korunur.
+“Üçlü ip yelpazesi” düğmesi mevcut taslağa bu başlangıcı uygular.
+Top sayısı 3–20; ip sayısı 1–150. İp kesme ve duvar çarpışması kuralları korunur.
+Yelpaze toplarının yarıçapı 20'den 30'a çıkarıldı. Başlangıç konumları,
+20 top için de çakışmayacak ve çember içinde kalacak şekilde hesaplanır.
+İp kesme başlangıcı topun gerçek yarıçapını kullanır.
+Arena zemini düz siyah; ızgara ve uzay deseni kaldırıldı.
+Arena topları, sıralama ve kazanan kartında sade renkli ve beyaz kenarlıdır.
+Yüklenen top görselleri korunur; diğer oyunların top çizimi değişmez.
+İpler 1.15 birim kalınlıkta; topa yakın sıkışan çizgilerin opaklığı azaltılarak
+küçük önizlemedeki dalgalanma hafifletildi. Çemberin bulanık parlaması kaldırıldı.
+
+Kasma ve kesme düzeltmesi (2026-10-13):
+- Aynı topun ipleri tek stroke ile çizilir; 3000 ayrı çizim yerine 20 çizim.
+- Kesme, topun ve ip sahibinin fizik adımı boyunca hareketini birlikte kontrol eder.
+  Hızlı geçişler ve hareket eden ipler yakalanır; farklı anlarda kesişen yollar kesmez.
+  İlk düzeltmede korunan kesme gecikmeleri aşağıdaki ikinci düzeltmede kaldırıldı.
+- Bir adımda aynı rakibin çok sayıda ipi kesilirse tek parçacık grubu üretilir;
+  adım başına tek kesme sesi vardır. Kesilen bütün ipler sayaca eklenir.
+- tests/arena-cuts.mjs, arena.mjs üzerinden de çalışır. İki fizik testi,
+  arena-links-browser.mjs ve Vite build geçti (mevcut büyük paket uyarısı).
+- 1080x1920 Chrome çizim+getImageData karşılaştırması, 40 ölçüm medyanı:
+  3 top/450 ip: 488.1 -> 38.1 ms; 20 top/3000 ip: 868.3 -> 65.9 ms.
+  Bu zorlayıcı okuma testi kullanıcı FPS ölçümü değildir.
+- Gerçek arayüzde 3 top/100'er ip, 5 saniyelik rAF örneği: 238 kare,
+  medyan 20.8 ms, p95 34.8 ms. 265 kesme; duraklat/devam et geçti,
+  sayfa hatası yok. Sonuçlar bu bilgisayardaki başsız Chrome'a aittir.
+- Ölçümler: artifacts/arena-performance-before.json,
+  artifacts/arena-performance-after.json, artifacts/arena-live-check.json.
+
+İkinci kesme/FPS düzeltmesi (2026-10-13):
+- İlk 1.5 saniye ve yeni iplerin ilk 0.2 saniyesindeki kesme engeli kaldırıldı.
+  Yeni ip, doğduğu adımda mevcut temasla kesilebilir; oluşmadan önceki hareket
+  yolu yeni ipi kesmez. Elemenin başlangıç süresi değişmedi.
+- Kesilebilir bölüm topun gerçek kenarından başlar; ipin çizim kalınlığı da
+  temas hesabına dahildir. Sıralama, ip sayılarını tek taramada hesaplar.
+- Küre önizlemesinin çizim çözünürlüğü görünür alan ve ekran yoğunluğuna göre
+  540–1080 genişlikte ayarlanır; 1.25 örnekleme payı ve 9:16 oranı korunur.
+  Kayıt hazırlığında 1080x1920 geri yüklenir ve kayıt boyunca sabit kalır.
+  Diğer oyunların ve üretim videolarının çözünürlüğü korunur.
+- Aynı yerel Chrome önizleme akışında, 1366x1000 pencere ve 3x100 ip ile
+  5 saniyelik rAF ölçümü: 242 -> 522 kare (yaklaşık 48 -> 104 FPS).
+  Medyan 20.8 -> 7 ms; p95 34.8 -> 14 ms; çizim 1080x1920 -> 540x960.
+  Kesme davranışı da değiştiği için sahneler zamanla farklılaşır; bu sonuç
+  yalnızca bu bilgisayardaki uçtan uca ölçümdür, sabit sahne karşılaştırması
+  veya tüm cihazlarda FPS garantisi değildir.
+  artifacts/arena-fps-before-v2.json, artifacts/arena-fps-after-v2.json.
+- arena.mjs (arena-cuts dahil), arena-preview-browser.mjs ve
+  arena-links-browser.mjs geçti. Gerçek kayıt akışında 1080x1920, kayıt
+  sırasında pencere küçültme, kayıt sonrası önizleme, yüksek yoğunluklu
+  mobil ekran, oyun geçişleri, üretim çizimi ve akış temizliği doğrulandı.
+- Vite build ve hedefli git diff --check geçti; mevcut büyük paket uyarısı
+  sürüyor. Güncel artifacts/arena-fan-start.png görsel olarak kontrol edildi.
+
+Dosyalar: src/arena.js, src/arena-renderer.js, src/app.js,
+src/projects.js, src/marble-art.js, src/race-leaders.js, index.html,
+tests/arena.mjs, tests/arena-links-browser.mjs.
+Kontroller: arena.mjs ve arena-links-browser.mjs geçti; Vite build geçti.
+Güncel doğrulama: 1, 15, 50, 100 ve 150 ip; 30 yarıçaplı topların yerleşimi.
+Derlemede mevcut büyük paket uyarısı var; derleme başarılı.
+Tarayıcı testi: taslak/kayıt geri yükleme, mobil düzen, video kuyruğu ve
+üretim simülasyonu/çizimi. Geometri: 3, 4, 6, 12, 20 top; ayrı yaylar,
+çakışmasız başlangıç, aynı ayarlarda tekrarlanabilir tamamlanan maçlar.
+Önizleme: artifacts/arena-fan-start.png.
+Eski arena-browser.mjs, görünmeyen #record düğmesine tıklamada duruyor;
+bu testin arayüz akışı güncel değil.
+Önceki 50 ipli sürümde ayrı Chrome kontrolü geçti: 3 toplu maç, ip kesme, duraklat/devam et,
+tek kazanan ve gerçek WebM indirmesi. Kayıt mevcut onclick üzerinden
+başlatıldı; ayarlar normal arayüzden değiştirildi. Sayfa hatası yok.

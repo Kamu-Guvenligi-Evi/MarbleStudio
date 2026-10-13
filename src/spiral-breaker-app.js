@@ -1,10 +1,11 @@
+import {canvasLayer} from './canvas-layer.js';
 import './breaker-layout.css';
 import {SpiralBreaker,WIDTH,HEIGHT,CELL,COLS,ROWS,BALL_LIMIT} from './spiral-breaker.js';
 import {BREAKER_MAPS} from './breaker-maps.js';
 import {BreakerAudio,setupBreakerAudio} from './breaker-audio.js';
 import './breaker-audio.css';
 import {setupBreakerWorkbench,videoRenderMode} from './breaker-workbench.js';
-import {drawChannelWatermark} from './channel-branding.js';
+import {drawChannelTitle,drawChannelWatermark} from './channel-branding.js';
 let videoChannel='';
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d');
 const field=document.createElement('canvas');field.width=WIDTH;field.height=ROWS*CELL;
@@ -29,18 +30,18 @@ function rebuildField(){
     tiles.fillStyle='#ffffff20';tiles.fillRect(x+1,y+CELL-1,CELL-1,.5);
   });
 }
-function rounded(x,y,w,h,r,fill,stroke){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke();}}
-function drawMascots(){
+function rounded(x,y,w,h,r,fill,stroke,context=ctx){const ctx=context;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke();}}
+function drawMascots(ctx){
   ctx.save();ctx.translate(76,742);ctx.rotate(-.06);
   ctx.shadowColor='#0008';ctx.shadowBlur=8;ctx.shadowOffsetY=5;
   ctx.beginPath();ctx.moveTo(20,18);ctx.bezierCurveTo(-2,18,-13,86,3,96);ctx.bezierCurveTo(17,109,32,91,38,89);ctx.lineTo(78,89);ctx.bezierCurveTo(91,102,107,107,112,92);ctx.bezierCurveTo(121,75,109,21,91,18);ctx.closePath();ctx.fillStyle='#363e51';ctx.fill();ctx.strokeStyle='#e1e7e5';ctx.lineWidth=2.5;ctx.stroke();ctx.shadowBlur=0;ctx.shadowOffsetY=0;
-  rounded(38,11,36,10,4,'#2e3340','#d4dad7');
+  rounded(38,11,36,10,4,'#2e3340','#d4dad7',ctx);
   ctx.strokeStyle='#151923';ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(15,54);ctx.lineTo(35,54);ctx.moveTo(25,44);ctx.lineTo(25,64);ctx.stroke();
   ctx.strokeStyle='#727b90';ctx.lineWidth=4;ctx.stroke();
   for(const [x,y,color] of [[88,45,'#54c966'],[97,54,'#f27768'],[79,54,'#70afed'],[88,63,'#e6c755']]){ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();}
   for(const x of [48,65]){ctx.beginPath();ctx.ellipse(x,53,5,6,0,0,Math.PI*2);ctx.fillStyle='#f4f5f1';ctx.fill();ctx.beginPath();ctx.arc(x+1,52,2.8,0,Math.PI*2);ctx.fillStyle='#1d202a';ctx.fill();}
   ctx.beginPath();ctx.arc(57,62,7,.15,Math.PI-.15);ctx.strokeStyle='#0f1720';ctx.lineWidth=2;ctx.stroke();
-  ctx.restore();ctx.save();ctx.translate(370,750);ctx.rotate(-.035);rounded(0,0,73,63,5,'#797f89','#a3a8ae');rounded(4,4,65,53,3,'#949aa3');
+  ctx.restore();ctx.save();ctx.translate(370,750);ctx.rotate(-.035);rounded(0,0,73,63,5,'#797f89','#a3a8ae',ctx);rounded(4,4,65,53,3,'#949aa3',undefined,ctx);
   ctx.strokeStyle='#242831';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(12,18);ctx.lineTo(31,22);ctx.moveTo(46,18);ctx.quadraticCurveTo(54,10,61,14);ctx.stroke();
   for(const x of [24,51]){ctx.beginPath();ctx.ellipse(x,28,6,3,0,0,Math.PI*2);ctx.fillStyle='#e9eeed';ctx.fill();ctx.beginPath();ctx.arc(x+1,28,2.4,0,Math.PI*2);ctx.fillStyle='#20252c';ctx.fill();}
   ctx.beginPath();ctx.moveTo(26,43);ctx.quadraticCurveTo(38,53,51,39);ctx.stroke();ctx.restore();
@@ -60,20 +61,20 @@ function render(){
   }
   const p=game.paddle;ctx.shadowColor='#edb92555';ctx.shadowBlur=9;rounded(p.x-p.width/2,p.y,p.width,p.height,5,'#e5ad25','#f7d966');ctx.shadowBlur=0;
   ctx.fillStyle='#f9ffff';ctx.beginPath();for(const b of game.balls){ctx.moveTo(b.x+b.radius,b.y);ctx.arc(b.x,b.y,b.radius,0,Math.PI*2);}ctx.fill();
-  rounded(18,561,game.balls.length>99?91:64,27,8,'#090d0ec9');ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(31,574,5.4,0,Math.PI*2);ctx.fill();ctx.font='18px Segoe UI';ctx.fillText(game.balls.length.toLocaleString('tr-TR'),44,580);
-  drawMascots();
+  rounded(18,561,game.balls.length>99?91:64,27,8,'#090d0ec9');ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(31,574,5.4,0,Math.PI*2);ctx.fill();ctx.font='18px Segoe UI';ctx.fillText(game.balls.length.toLocaleString('en-US'),44,580);
+  ctx.drawImage(canvasLayer(ctx,'mascots',WIDTH,160,layer=>{layer.translate(0,-720);drawMascots(layer);}),0,720,WIDTH,160);
   const progress=game.broken/game.initialBlocks;
   ctx.fillStyle=colors[3];ctx.font='600 13px Segoe UI';ctx.fillText(`${String(BREAKER_MAPS.indexOf(game.map)+1).padStart(2,'0')} / 06`,24,863);
-  ctx.fillStyle='#f4f8f6';ctx.font='600 27px Segoe UI';ctx.fillText(videoRenderMode?game.map.id.toUpperCase():game.map.name,24,900);
-  ctx.font='13px Segoe UI';ctx.fillStyle='#95aaa2';ctx.fillText(videoRenderMode?(game.broken?'CHAIN REACTION':'REACH THE TARGET → BREAK THE BLOCKS'):(game.broken?'ZİNCİRLEME KIRILMA':'HEDEFE ULAŞ → BLOKLARI KIR'),24,925);
+  ctx.fillStyle='#f4f8f6';ctx.font='600 27px Segoe UI';ctx.fillText(game.map.id.replaceAll('-',' ').toUpperCase(),24,900);
   ctx.textAlign='right';ctx.fillStyle='#e2eee7';ctx.font='600 25px Segoe UI';ctx.fillText(`${Math.floor(progress*100)}%`,WIDTH-24,900);
   ctx.font='13px Segoe UI';ctx.fillStyle='#95aaa2';ctx.fillText(`${Math.floor(game.time/60)}:${String(Math.floor(game.time%60)).padStart(2,'0')} · ${speed}×`,WIDTH-24,925);ctx.textAlign='left';
   if(shownBroken!==game.broken){shownBroken=game.broken;$('broken').textContent=game.broken.toLocaleString('tr-TR');const progress=game.broken/game.initialBlocks*100;$('progress-fill').style.width=`${progress}%`;document.querySelector('.progress').setAttribute('aria-valuenow',String(Math.round(progress)));}
   if(shownBalls!==game.balls.length){shownBalls=game.balls.length;$('balls').textContent=game.balls.length.toLocaleString('tr-TR');}
+  drawChannelTitle(ctx,videoChannel,WIDTH/2,660);
   if(videoRenderMode)drawChannelWatermark(ctx,videoChannel);
 }
 function updateOverlay(){
-  const won=game.state==='won',lost=game.state==='lost',paused=game.state==='paused';$('overlay').hidden=!won&&!lost&&!paused;$('overlay-title').textContent=won?`${game.map.name} tamamlandı!`:lost?'Toplar bitti':'Duraklatıldı';$('resume').textContent=won||lost?'Tekrar oyna':'Devam et';$('pause').textContent=paused?'▶':'Ⅱ';$('pause').setAttribute('aria-label',paused?'Devam et':'Duraklat');
+  const won=game.state==='won',lost=game.state==='lost',paused=game.state==='paused';$('overlay').hidden=!won&&!lost&&!paused;$('overlay-title').textContent=won?'Map complete!':lost?'No marbles left':'Paused';$('resume').textContent=won||lost?'Play again':'Resume';$('pause').textContent=paused?'▶':'Ⅱ';$('pause').setAttribute('aria-label',paused?'Resume':'Duraklat');
   $('next-countdown').textContent='';
   if(won)$('status').textContent='Haritadaki bütün bloklar temizlendi.';
 }
@@ -125,7 +126,7 @@ function frame(time){const dt=lastTime?Math.min(.05,(time-lastTime)/1000):0;last
   if(!game.automatic&&game.state==='running')game.movePaddle(game.paddle.x+((keys.has('ArrowRight')?1:0)-(keys.has('ArrowLeft')?1:0))*480*dt);
   const state=game.state;game.step(dt*speed);if(game.state!==state){if(game.state==='won')soundtrack.play('won');updateOverlay();}
   if(game.state==='won'&&game.automatic&&$('sequence').checked&&!document.hidden){
-    completionDelay+=dt;$('next-countdown').textContent=`Sıradaki harita ${Math.max(1,Math.ceil(4-completionDelay))} saniye içinde`;
+    completionDelay+=dt;$('next-countdown').textContent=`Next map in ${Math.max(1,Math.ceil(4-completionDelay))}s`;
     if(completionDelay>=4)nextMap();
   }
   render();requestAnimationFrame(frame);

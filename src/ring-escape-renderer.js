@@ -1,20 +1,19 @@
-import {FLOW_PRESETS} from './ring-escape.js';
+import {canvasLayer} from './canvas-layer.js';
+import {drawChannelTitle} from './channel-branding.js';
 const TAU=Math.PI*2;
 function arc(c,x,y,r,start,end,color,width){c.beginPath();c.arc(x,y,Math.max(1,r),start,end);c.strokeStyle=color;c.lineWidth=width;c.stroke();}
 function text(c,value,x,y,size,color,weight=600){c.fillStyle=color;c.font=`${weight} ${size}px "Segoe UI",sans-serif`;c.fillText(value,x,y);}
 function blend(a,b,t){return '#'+[1,3,5].map(i=>Math.round(parseInt(a.slice(i,i+2),16)*(1-t)+parseInt(b.slice(i,i+2),16)*t).toString(16).padStart(2,'0')).join('');}
-export function renderRingEscape(c,g,{paused=false,image=null}={}){
+export function renderRingEscape(c,g,{paused=false,image=null,channel}={}){
   const p=g.settings,w=c.canvas.width,h=c.canvas.height,progress=g.broken/p.count;
-  c.save();c.scale(w/540,h/960);c.fillStyle=p.background;c.fillRect(0,0,540,960);c.textAlign='center';
+  c.save();c.scale(w/540,h/960);c.drawImage(canvasLayer(c,[p.background,p.ring,g.cx,g.cy].join('|'),540,960,c=>{c.fillStyle=p.background;c.fillRect(0,0,540,960);
   const halo=c.createRadialGradient(g.cx,g.cy,25,g.cx,g.cy,340);halo.addColorStop(0,p.ring+'1c');halo.addColorStop(.65,p.ring+'09');halo.addColorStop(1,p.ring+'00');c.fillStyle=halo;c.fillRect(0,150,540,630);
   // Quiet, stationary texture keeps attention on the moving gates.
   c.fillStyle=p.ring+'13';for(let y=210;y<740;y+=24)for(let x=18;x<540;x+=24)c.fillRect(x,y,1,1);
-  c.letterSpacing='3px';text(c,'M A R B L E  /  S T U D I O',270,49,9,p.ring,500);c.letterSpacing='0px';
-  c.save();c.font='800 29px "Segoe UI",sans-serif';c.fillStyle='#f4fff8';c.fillText(p.title||'SON HALKADAN KAÇ',270,99,480);c.restore();
-  const label=g.state==='won'?'MÜKEMMEL KAÇIŞ':g.state==='timeout'?'BİR TUR DAHA?':g.remaining<=10?'SON HALKALAR. GÖZÜNÜ AYIRMA.':progress>.45?'AKIŞ HIZLANIYOR':`${p.count} HALKA. TEK BİR ÇIKIŞ.`;
-  text(c,label,270,129,11,p.accent,600);
-  c.textAlign='left';text(c,FLOW_PRESETS[p.layout]?.name.toLocaleUpperCase('tr')??'KLASİK AKIŞ',31,175,10,p.ring,700);
-  c.textAlign='right';text(c,`${Math.ceil(g.secondsLeft).toString().padStart(2,'0')} sn`,509,175,15,g.secondsLeft<=5?p.accent:'#eef8f0',700);c.textAlign='center';
+}),0,0,540,960);c.textAlign='center';
+  drawChannelTitle(c,channel,270,49);
+  c.save();c.font='800 29px "Segoe UI",sans-serif';c.fillStyle='#f4fff8';c.fillText(p.title&&p.title!=='SON HALKADAN KAÇ'?p.title:'RING ESCAPE',270,99,480);c.restore();
+  c.textAlign='right';text(c,`${Math.ceil(g.secondsLeft).toString().padStart(2,'0')} s`,509,175,15,g.secondsLeft<=5?p.accent:'#eef8f0',700);c.textAlign='center';
   arc(c,g.cx,g.cy,253,-Math.PI/2,TAU-Math.PI/2,'#ffffff0d',2);
   if(progress>0)arc(c,g.cx,g.cy,253,-Math.PI/2,TAU*progress-Math.PI/2,p.accent,2.5);
   // Offscreen rings remain in the simulation. Only the camera window is drawn.
@@ -51,18 +50,17 @@ export function renderRingEscape(c,g,{paused=false,image=null}={}){
   }
   if(g.state==='won'){
     arc(c,g.cx,g.cy,102,0,TAU,p.ring+'30',1);arc(c,g.cx,g.cy,112,0,TAU,p.accent+'70',1);
-    text(c,'KAÇTI!',g.cx,g.cy+4,49,'#f4fff8',800);text(c,`${p.count} HALKANIN HEPSİ`,g.cx,g.cy+38,12,p.accent,600);
+    text(c,'ESCAPED!',g.cx,g.cy+4,49,'#f4fff8',800);text(c,`${p.count} RINGS CLEARED`,g.cx,g.cy+38,12,p.accent,600);
   }
   const chain=g.combo>=3&&g.time-g.lastBreak<1.25;
-  const headline=g.state==='won'?'TAMAMLANDI':g.remaining.toLocaleString('tr-TR');
+  const headline=g.state==='won'?'COMPLETE':g.remaining.toLocaleString('en-US');
   // A brief size lift celebrates a break without screen shake or full-screen flashes.
   const lift=chain?g.flash/.32*5:0;
   text(c,headline,270,779,g.state==='won'?32:48,p.accent,800);
-  text(c,g.state==='won'?`${p.count.toLocaleString('tr-TR')} HALKANIN HEPSİ`:g.state==='timeout'?'SÜRE DOLDU':'HALKA KALDI',270,805,10,p.ring,600);
-  if(chain&&g.state==='running')text(c,`×${g.combo} SERİ`,270,713,15+lift*.2,p.accent,700);
+  text(c,g.state==='won'?`${p.count.toLocaleString('en-US')} RINGS CLEARED`:g.state==='timeout'?'TIME UP':'RINGS LEFT',270,805,10,p.ring,600);
+  if(chain&&g.state==='running')text(c,`×${g.combo} COMBO`,270,713,15+lift*.2,p.accent,700);
   c.fillStyle='#ffffff12';c.fillRect(70,836,400,4);c.fillStyle=p.ring;c.fillRect(70,836,400*progress,4);
-  c.textAlign='left';text(c,`${g.broken} / ${p.count} GEÇİLDİ`,70,864,10,p.ring,600);c.textAlign='right';text(c,`EN İYİ SERİ  ×${g.bestCombo}`,470,864,10,p.accent,600);c.textAlign='center';
-  text(c,g.state==='won'?'AÇIKLIĞI BUL. AKIŞA KAPIL.':'BİR SONRAKİ AÇIKLIĞI YAKALAYABİLİR Mİ?',270,917,9,p.ring+'88',500);
-  if(paused){c.fillStyle='#020807ba';c.fillRect(0,0,540,960);text(c,'DURAKLATILDI',270,456,22,'#f4fff8');}
+  c.textAlign='left';text(c,`${g.broken} / ${p.count} CLEARED`,70,864,10,p.ring,600);c.textAlign='right';text(c,`BEST COMBO  ×${g.bestCombo}`,470,864,10,p.accent,600);c.textAlign='center';
+  if(paused){c.fillStyle='#020807ba';c.fillRect(0,0,540,960);text(c,'PAUSED',270,456,22,'#f4fff8');}
   c.restore();
 }

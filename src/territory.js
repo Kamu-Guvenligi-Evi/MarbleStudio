@@ -165,7 +165,7 @@ export class TerritoryBattle{
       if(other===b||other.eliminatedAt!==null)continue;
       const q=other.body.position;
       // Include the visible outline. Resolve contact before two bodies overlap.
-      if(Math.hypot(p.x-q.x,p.y-q.y)>=b.body.circleRadius+other.body.circleRadius+2-1e-8)continue;
+      if(Math.hypot(p.x-q.x,p.y-q.y)>=b.body.circleRadius+other.body.circleRadius+4-1e-8)continue;
       if(this.exposed(other)&&this.eliminate(other,b))continue;
       if(this.exposed(b))this.eliminate(b,other);
       return false;
@@ -175,25 +175,45 @@ export class TerritoryBattle{
   detour(b){
     if(this.time<(b.nextDetourAt??0))return;
     b.nextDetourAt=this.time+.15;
-    const obstacles=this.balls.filter(other=>other!==b&&other.eliminatedAt===null).map(other=>({...other.body.position,id:other.id,spacing:b.body.circleRadius+other.body.circleRadius+2}));
+    const obstacles=this.balls.filter(other=>other!==b&&other.eliminatedAt===null).map(other=>({...other.body.position,id:other.id,spacing:b.body.circleRadius+other.body.circleRadius+4}));
     const p=this.position(b.cell),nearest=obstacles.reduce((best,o)=>!best||Math.hypot(o.x-p.x,o.y-p.y)<Math.hypot(best.x-p.x,best.y-p.y)?o:best,null);
     const clear=(from,to)=>{
       const p=this.position(from),q=this.position(to),dx=q.x-p.x,dy=q.y-p.y;
-      return obstacles.every(o=>{const t=Math.max(0,Math.min(1,((o.x-p.x)*dx+(o.y-p.y)*dy)/(dx*dx+dy*dy)));return Math.hypot(p.x+dx*t-o.x,p.y+dy*t-o.y)>=o.spacing-1e-8;});
+      return obstacles.every(o=>{
+        const t=Math.max(0,Math.min(1,((o.x-p.x)*dx+(o.y-p.y)*dy)/(dx*dx+dy*dy)));
+        // Leave a cell of room for moving rivals; allow stepping away from a
+        // close neighbour instead of repeatedly rejoining a blocked segment.
+        const margin=Math.min(o.spacing+this.cellSize,Math.hypot(p.x-o.x,p.y-o.y));
+        return Math.hypot(p.x+dx*t-o.x,p.y+dy*t-o.y)>=Math.max(o.spacing,margin)-1e-8;
+      });
     };
     // Rejoin the existing route around a blocking body, without choosing new land.
     const targets=new Map();b.route.forEach((cell,i)=>{if(cell!==b.cell&&!targets.has(cell))targets.set(cell,i);});
-    const parent=new Int16Array(this.rows*80).fill(-1),queue=[b.cell];parent[b.cell]=b.cell;
+    const parent=new Int16Array(this.rows*80).fill(-1),depth=new Uint8Array(this.rows*80),queue=[b.cell];parent[b.cell]=b.cell;
+    const pathTo=cell=>{const path=[];for(let i=cell;i!==b.cell;i=parent[i])path.push(i);return path.reverse();};
+    let escape=b.cell,escapeScore=-Infinity;
     for(let head=0;head<queue.length;head++){
       const cell=queue[head];
       if(targets.has(cell)){
-        const path=[];for(let i=cell;i!==b.cell;i=parent[i])path.push(i);
-        b.route=path.reverse().concat(b.route.slice(targets.get(cell)+1));return;
+        b.route=pathTo(cell).concat(b.route.slice(targets.get(cell)+1));return;
       }
+      const q=this.position(cell),distance=Math.hypot(q.x-p.x,q.y-p.y);
+      if(distance>=12){
+        const clearance=Math.min(...obstacles.map(o=>Math.hypot(q.x-o.x,q.y-o.y)-o.spacing));
+        // Prefer yielding sideways: backing straight away sends head-on
+        // players back into the same collision when they resume their routes.
+        const lateral=nearest?Math.abs((q.x-p.x)*(nearest.y-p.y)-(q.y-p.y)*(nearest.x-p.x))/Math.max(1,Math.hypot(nearest.x-p.x,nearest.y-p.y)):0;
+        const score=Math.min(clearance,24)+Math.min(lateral,36)*.5-depth[cell]*.5;
+        if(score>escapeScore){escape=cell;escapeScore=score;}
+      }
+      if(depth[cell]>=24)continue;
       // Alternate passing sides so head-on players do not mirror every detour.
       const adjacent=this.neighbors(cell);if(nearest&&b.id>nearest.id)adjacent.reverse();
-      for(const n of adjacent)if(parent[n]===-1&&clear(cell,n)){parent[n]=cell;queue.push(n);}
+      for(const n of adjacent)if(parent[n]===-1&&!(n===b.blockedCell&&this.time<b.blockedUntil)&&clear(cell,n)){parent[n]=cell;depth[n]=depth[cell]+1;queue.push(n);}
     }
+    // A crowded pocket can make every old waypoint unreachable. Yield into
+    // nearby free space and plan again instead of retrying the same wall.
+    if(escape!==b.cell){b.detourResumeRoute??=[...b.route];b.route=pathTo(escape);b.pickupTarget=null;b.launchReady=false;}
   }
   move(b,dt){
     if(b.eliminatedAt!==null)return;
@@ -204,12 +224,19 @@ export class TerritoryBattle{
         if(b.pickupTarget&&(!this.pickups.includes(b.pickupTarget.item)||b.pickupTarget.item.expiresAt<=this.time))this.resumeAfterPickup(b);
         if(this.tryCloseTrail(b))b.pickupTarget=null;else this.seekPickup(b);
       }
+      if(!b.route.length&&b.detourResumeRoute){
+        const targets=new Map();b.detourResumeRoute.forEach((cell,i)=>targets.set(cell,i));
+        const join=this.localRoute(b,cell=>targets.has(cell));
+        if(join)b.route=join.path.concat(b.detourResumeRoute.slice(targets.get(join.cell)+1));
+        b.detourResumeRoute=null;
+      }
       if(!b.route.length)this.plan(b);if(!b.route.length)break;
       const p=this.position(b.cell),q=this.position(b.route[0]);
       const amount=Math.min(budget,b.retreating?b.phase:1-b.phase);
       const phase=b.phase+(b.retreating?-amount:amount),next={x:p.x+(q.x-p.x)*phase,y:p.y+(q.y-p.y)*phase};
       if(!this.contact(b,next)){
         if(b.eliminatedAt!==null)break;
+        if(!b.retreating){b.blockedCell=b.route[0];b.blockedUntil=this.time+.75;}
         if(b.phase>0)b.retreating=true;else this.detour(b);
         break;
       }

@@ -1,4 +1,4 @@
-import {drawChannelWatermark} from './channel-branding.js';
+import {drawChannelTitle,drawChannelWatermark} from './channel-branding.js';
 export function renderPi(ctx,session,{paused=false,channel}={}){
   const race=session.current??session,w=ctx.canvas.width,h=ctx.canvas.height;
   const auto=session.options.autoIncrease,finished=race.state==='finished',digits=race.options.digits;
@@ -11,11 +11,9 @@ export function renderPi(ctx,session,{paused=false,channel}={}){
   const text=(value,x,y,size,color='#eaf5fa',weight=500,align='center')=>{ctx.font=weight+' '+size+'px "Segoe UI", sans-serif';ctx.textAlign=align;ctx.fillStyle=color;ctx.fillText(String(value),x,y,480);};
   const box=(x,y,width,height,radius,fill,stroke)=>{ctx.beginPath();ctx.roundRect(x,y,width,height,radius);ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1;ctx.stroke();}};
   const accent=ctx.createLinearGradient(80,0,455,0);accent.addColorStop(0,'#5be8ff');accent.addColorStop(1,'#9bffb1');
-  text('MARBLE / STUDIO',32,43,12,'#9fb1c2',650,'left');
-  text('PHYSICS LAB  ·  01',508,43,11,'#6f869b',600,'right');
+  drawChannelTitle(ctx,channel);
   ctx.fillStyle='#233446';ctx.fillRect(32,62,476,1);
   text('Count your way to π',270,127,38,accent,750);
-  text('Two blocks. One wall. An infinite number.',270,160,16,'#93a8bb');
   const levels=['1 kg','100 kg','10,000 kg','1M kg','100M kg','10B kg'];
   for(let i=0;i<levels.length;i++){
     const active=digits===i+1,done=(session.rounds??[]).some(round=>round.digits===i+1),x=34+(i%3)*160,y=185+Math.floor(i/3)*37;
@@ -53,9 +51,8 @@ export function renderPi(ctx,session,{paused=false,channel}={}){
     for(let i=0;i<8;i++){const a=i/8*Math.PI*2;ctx.beginPath();ctx.moveTo(x+Math.cos(a)*7,y+Math.sin(a)*7);ctx.lineTo(x+Math.cos(a)*23,y+Math.sin(a)*23);ctx.stroke();}
   }
   box(32,714,476,133,18,'#111f2d','#2d4050');
-  text(finished?('ANOTHER DIGIT REVEALED'):('THE PATTERN BEHIND THE NUMBERS'),270,747,11,'#94afbd',650);
   text(finished?'π ≈ '+race.approximation:'π = 3.14159265358…',270,791,finished?37:30,accent,650);
-  text(finished?race.collisions+(' collisions · ')+mass+' kg':('Every collision brings us one step closer.'),270,821,13,'#a2b8c9');
+  if(finished)text(race.collisions+' collisions · '+mass+' kg',270,821,13,'#a2b8c9');
   const status=paused?('PAUSED'):session.transitioning?('MASS ×100 · NEXT ROUND'):session.state==='finished'?('EXPERIMENT COMPLETE'):auto?('AUTOMATIC MASS INCREASE'):('PERFECTLY ELASTIC COLLISIONS');
   text(status,270,891,12,'#82c8b5',650);
   if(session.transitioning){const progress=1-session.holdRemaining/2;box(170,908,200,3,1,'#243d46');if(progress>0)box(170,908,200*progress,3,1,'#79e8c5');}

@@ -1,0 +1,25 @@
+2026-10-13 - Crowded Territory Battle movement
+
+Reported: balls get stuck or appear to overlap with many players.
+Reproduced: repeated blocked-route retries, including 28 seconds in a
+12px neighbourhood in the original Italy / 20 players / seed 42 audit.
+
+src/territory.js:
+- Collision and detour clearance includes both visible 2px outlines.
+- Avoid the last blocked cell briefly and leave clearance for moving rivals.
+- Limit local detour search to 24 grid steps.
+- When the original route cannot be reached, yield into nearby free space,
+  favour sideways movement, and rejoin the saved route when possible.
+
+Validation (local; no downloads):
+- tests/territory-crowds.mjs: 72 matches, all 12 maps, 12/20 players,
+  seeds 2048/42/7, 30 seconds, every 120Hz tick checked. No overlapping
+  visible bodies or teleports; longest stay within 12px was 3.02 seconds.
+- territory-contact: stationary protected obstacle and opposing players
+  reach their goals without overlapping; all 12 maps with 20 players.
+- territory-rules, territory, territory-pickups, territory-watchability pass.
+- territory-watchability-browser passes against local port 5174.
+- Combined node --test run: 7 files passed, 0 failed.
+
+These checks cover the listed deterministic scenarios, not every possible seed.
+Unrelated existing working-tree changes were preserved.

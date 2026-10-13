@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import './arena-cuts.mjs';
 import {Arena,ARENA} from '../src/arena.js';
 import {serializeProject,parseProject} from '../src/projects.js';
 import {normalizeSnapshot,createBackup,parseBackup} from '../src/studio-transfer.js';
@@ -31,7 +32,7 @@ for(const seed of [1,2,3,5,12,2048]){
 }
 const project=parseProject(serializeProject({mode:'arena',sequence:['funnel'],seed:100,count:12}));assert.equal(project.mode,'arena');assert.equal(project.sequence.length,1);
 assert.equal(project.arenaLinkMode,'wall');assert.equal(project.arenaInitialLinks,15);
-for(const initialLinks of [1,15,50]){
+for(const initialLinks of [1,15,50,100,150]){
  const ready=new Arena({count:6,arenaLinkMode:'prelinked',arenaInitialLinks:initialLinks});
  assert.ok(ready.balls.every(b=>ready.linkCount(b)===initialLinks));
  const anchors=ready.links.filter(l=>l.owner===0);
@@ -55,6 +56,27 @@ for(const initialLinks of [1,15,50]){
  assert.equal(sim.state,'finished');assert.ok(sim.totalCuts>0);
  assert.deepEqual(sim.balls.map(b=>b.body.position),replay.balls.map(b=>b.body.position));
 }
-for(const arenaInitialLinks of [0,51,1.5,'15',null])assert.throws(()=>normalizeSnapshot({mode:'arena',project:{sequence:[],arenaInitialLinks}}),/Başlangıç bağ sayısı/);
+for(const count of [2,3,4,6,12,20]){
+ const fan=new Arena({count,arenaLinkMode:'prelinked',arenaInitialLinks:100});
+ assert.equal(fan.balls.length,count);
+ assert.ok(fan.balls.every(b=>b.body.circleRadius===30));
+ assert.ok(fan.balls.every(b=>Math.hypot(b.body.position.x-ARENA.x,b.body.position.y-ARENA.y)+b.body.circleRadius<ARENA.radius));
+ assert.equal(new Set(fan.links.map(l=>`${l.x},${l.y}`)).size,count*100,'Fans never share wall anchors');
+ for(const ball of fan.balls){
+  const p=ball.body.position,center=Math.atan2(p.y-ARENA.y,p.x-ARENA.x);
+  for(const link of fan.links.filter(l=>l.owner===ball.id)){
+   const angle=Math.atan2(link.y-ARENA.y,link.x-ARENA.x)-center;
+   assert.ok(Math.abs(Math.atan2(Math.sin(angle),Math.cos(angle)))<Math.PI/count,'Initial strings stay within their owner’s sector');
+  }
+  for(const other of fan.balls)if(other.id!==ball.id)assert.ok(Math.hypot(p.x-other.body.position.x,p.y-other.body.position.y)>=ball.body.circleRadius+other.body.circleRadius,'Starting balls do not overlap');
+ }
+ const source=normalizeSnapshot({mode:'arena',project:{sequence:[],count,arenaLinkMode:'prelinked',arenaInitialLinks:100}});
+ assert.equal(parseProject(serializeProject(source.project)).count,count);
+ const replay=new Arena(sourceRecipe(source,2048));assert.equal(replay.balls.length,count);
+ fan.start();replay.start();while(fan.state==='running'&&fan.time<180){fan.step();replay.step();}
+ assert.equal(fan.state,'finished');assert.ok(fan.totalCuts>0);
+ assert.deepEqual(fan.balls.map(b=>b.body.position),replay.balls.map(b=>b.body.position));
+}
+for(const arenaInitialLinks of [0,151,1.5,'15',null])assert.throws(()=>normalizeSnapshot({mode:'arena',project:{sequence:[],arenaInitialLinks}}),/Başlangıç bağ sayısı/);
 assert.throws(()=>normalizeSnapshot({mode:'arena',project:{sequence:[],arenaLinkMode:'bad'}}),/Arena bağ modu/);
 console.log('PASS: wall anchors, reflection, rival cuts, elimination, last survivor, frozen results, deterministic bounded physics and mode backup roundtrip.');

@@ -9,6 +9,11 @@ for (const preset of Object.keys(COURSE_META)) {
     for (const [index, seed] of [1, 2048, 89271].entries()) {
       const count = [6, 12, 20][index];
       const r = new Race({ preset, seed, sections, count });
+      for(const [i,ball] of r.balls.entries()) {
+        const {x,y}=ball.body.position,radius=ball.body.circleRadius;
+        assert.ok(x-radius>=26&&x+radius<=514&&y+radius<294,'Starting marbles must clear walls and gate');
+        for(const other of r.balls.slice(i+1))assert.ok(Math.hypot(x-other.body.position.x,y-other.body.position.y)>=radius+other.body.circleRadius,'Starting marbles must not overlap');
+      }
       assert.equal(r.sections.length, sections);
       assert.equal(new Set(r.sections.map(s => s.type)).size, sections, 'No repeated modules');
       r.start();
@@ -28,7 +33,7 @@ for (const preset of Object.keys(COURSE_META)) {
 const lineups=new Set(),winners=new Set();
 for(let seed=1;seed<=12;seed++) {
   const r=new Race({seed,count:12,sequence:['shortcut','wheels','crossramps']});
-  lineups.add(r.balls.map(b=>`${Math.round((b.body.position.x-88)/52)},${b.body.position.y}`).join('|'));
+  lineups.add(r.balls.map(b=>`${Math.round(b.body.position.x)},${b.body.position.y}`).join('|'));
   r.start();while(r.time<30&&r.state!=='finished')r.step();
   assert.equal(r.finished.length,12);winners.add(r.finished[0].id);r.dispose();
 }

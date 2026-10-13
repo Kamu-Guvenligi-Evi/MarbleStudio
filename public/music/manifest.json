@@ -2197,5 +2197,39 @@
     "clipEndSeconds": 71.4,
     "sourceDurationSeconds": 242,
     "excerptLabel": ""
+  },
+  {
+    "id": "team-galatasaray",
+    "title": "Galatasaray — Galatasaray Marşı (Re Re Re, Ra Ra Ra)",
+    "artist": "GS Tribune Choir",
+    "src": "/music/team-galatasaray.mp3",
+    "duration": "00:00:30",
+    "durationSeconds": 30,
+    "source": "https://bfan.link/galatasaray-marsi",
+    "downloadUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/f6/38/bf/f638bf99-bacf-a149-543f-29ceba53f0e1/mzaf_15040378574788588913.plus.aac.p.m4a",
+    "license": "Tüm hakları saklıdır — Artvizyon; Apple Music ön dinleme kesiti",
+    "licenseUrl": "",
+    "selectionType": "team",
+    "entityId": "teams-92b733230f",
+    "trimStartSeconds": 0,
+    "clipEndSeconds": 30,
+    "excerptLabel": "Ön dinleme kaynağının ilk 30 saniyesi"
+  },
+  {
+    "id": "team-barcelona",
+    "title": "Barcelona — Cant del Barça",
+    "artist": "FC Barcelona",
+    "src": "/music/team-barcelona.mp3",
+    "duration": "00:00:40",
+    "durationSeconds": 40,
+    "source": "https://www.fcbarcelona.com/en/culers/downloads/ringtones",
+    "downloadUrl": "https://s3.amazonaws.com/fcbarcelona-static-files/ringtones/Official-Anthem.wav",
+    "license": "Tüm hakları saklıdır — FC Barcelona; resmî indirme kaynağı",
+    "licenseUrl": "",
+    "selectionType": "team",
+    "entityId": "teams-75ef55e357",
+    "trimStartSeconds": 0,
+    "clipEndSeconds": 40,
+    "excerptLabel": "Resmî marş kaydının ilk 40 saniyesi"
   }
 ]

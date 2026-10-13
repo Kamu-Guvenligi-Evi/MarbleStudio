@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
+const origin=process.env.STUDIO_ORIGIN||'http://127.0.0.1:5174';
 
 const browser=await chromium.launch({channel:'chrome',headless:true});
 try{
@@ -10,7 +11,7 @@ try{
   const fillText=CanvasRenderingContext2D.prototype.fillText;
   CanvasRenderingContext2D.prototype.fillText=function(value,...args){window.outputTexts.push(String(value));return fillText.call(this,value,...args);};
  });
- await page.goto('http://127.0.0.1:5173/factory-render.html');
+ await page.goto(origin+'/factory-render.html');
  await page.waitForFunction(()=>window.factoryRenderer);
  const results=await page.evaluate(async()=>{
   const {Race}=await import('/src/physics.js'),{Arena}=await import('/src/arena.js');
@@ -31,7 +32,7 @@ try{
   arenaTexts.push(...capture(()=>renderArena(ctx,arena)));arena.dispose();
   const territory=new Arena({arenaGame:'territory',ballNames:['Almanya','Türkiye']});territory.language='tr';territory.start();territory.step(1000);
   const territoryTexts=capture(()=>renderArena(ctx,territory));territory.state='finished';territory.winners=[territory.balls[0]];
-  territoryTexts.push(...capture(()=>renderArena(ctx,territory)));territory.dispose();
+  territoryTexts.push(...capture(()=>renderArena(ctx,territory,{resultElapsed:2})));territory.dispose();
   const spiral=new Spiral({});
   const spiralTexts=capture(()=>renderSpiral(ctx,spiral,{paused:true,countdown:0}));spiral.dispose();
   const episode=new EpisodeRace(withEpisode({...recipe(123,'track'),language:'tr',ballNames:['Türkiye']},'teams'));
@@ -43,7 +44,7 @@ try{
   if(englishOutput(spawned.winner)!==spawned.winner)throw new Error('Spawned marble winner must be English');
   for(const item of (await (await fetch('/statistics/manifest.json')).json()).items){
    const csv=await (await fetch(item.csv)).text(),r={mode:'statistics',statistics:{csv,dataset:item,heading:item.title,source:item.source,unit:item.unit,duration:'30',top:'10'}};
-   await window.factoryRenderer.begin({recipe:r,analysis:window.factoryRenderer.probe(r),speed:1,fps:30,copy:copyFor(r,'tr')});
+   await window.factoryRenderer.begin({recipe:r,analysis:window.factoryRenderer.probe(r),speed:1,fps:30,copy:copyFor(r,'tr'),channel:'Clipverseuni'});
    const texts=capture(()=>window.factoryRenderer.frame(899));
    const winner=window.factoryRenderer.result().winner;
    if(englishOutput(winner)!==winner)throw new Error(item.id+': winner metadata must be English');
@@ -61,13 +62,14 @@ try{
  assert.ok(results.spiralTexts.includes('Paused'));
  assert.ok(results.episodeTexts.some(s=>s.includes('Team challenge · Round')));
  assert.ok(results.piTexts.includes('Count your way to π'));
- assert.ok(results.piTexts.includes('LastBallStand™'));
- for(const item of results.stats){assert.ok(item.texts.includes('MARBLE STUDIO / STATISTICS RACE'));assert.ok(!item.texts.includes(item.title),item.id);assert.ok(!item.texts.includes(item.unit),item.id);assert.ok(!item.texts.includes('Almanya'));}
+ assert.ok(results.piTexts.includes('@LastBallStand™'));
+ assert.ok(results.piTexts.includes('@LastBallStand'));
+ for(const item of results.stats){assert.ok(item.texts.includes('@Clipverseuni'));assert.ok(!item.texts.includes('MARBLE STUDIO / STATISTICS RACE'));assert.ok(!item.texts.includes(item.title),item.id);assert.ok(!item.texts.includes(item.unit),item.id);assert.ok(!item.texts.includes('Almanya'));}
  assert.doesNotMatch(JSON.stringify(results),/KAZANAN|ALAN LİDERLERİ|İLK \d|Duraklatıldı|EN ÇOK BAĞ/);
- await page.goto('http://127.0.0.1:5173?edit=1');await page.waitForFunction(()=>window.marbleStudio);
+ await page.goto(origin+'/?edit=1');await page.waitForFunction(()=>window.marbleStudio);
  assert.match(await page.locator('#nav-track').textContent(),/Parkur/);
  assert.equal(await page.locator('select[name="language"] option[value="tr"]').count(),0);
- await page.goto('http://127.0.0.1:5173/factory.html');
+ await page.goto(origin+'/factory.html');
  assert.equal(await page.locator('select[name="language"]').inputValue(),'en');
  assert.equal(await page.locator('select[name="language"] option[value="tr"]').count(),0);
  assert.deepEqual(errors,[]);

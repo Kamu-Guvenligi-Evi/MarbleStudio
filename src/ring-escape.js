@@ -17,7 +17,7 @@ export function normalizeRing(raw={}){
   const theme=Object.hasOwn(THEMES,raw.theme)?raw.theme:'studio',p=THEMES[theme];
   const color=(v,d)=>/^#[\da-f]{6}$/i.test(v)?v:d;
   return {theme,background:color(raw.background,p.background),ring:color(raw.ring,p.ring),accent:color(raw.accent,p.accent),ball:color(raw.ball,p.ball),
-    title:typeof raw.title==='string'?raw.title.slice(0,44):'SON HALKADAN KAÇ',
+    title:typeof raw.title==='string'?raw.title.slice(0,44):'RING ESCAPE',
     experienceVersion:8,seed:number(raw.seed,24,1,4294967295)>>>0,count:Math.round(number(raw.count,1200,8,5000)),duration:number(raw.duration,45,15,90),speed:number(raw.speed,1,.5,2),
     layout:['vortex','pulse','rush','aligned','twist','alternating'].includes(raw.layout)?raw.layout:'vortex',
     shape:['marble','comet','diamond'].includes(raw.shape)?raw.shape:'comet',trail:raw.trail!==false,particles:raw.particles!==false,

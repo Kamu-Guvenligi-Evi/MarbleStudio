@@ -1,0 +1,21 @@
+2026-10-13 — Yarış başlangıcı ve uzun parkurlar
+
+src/app.js: geri sayım müzik oynatma koşulundan çıkarıldı; ayar kilidi geri sayım boyunca sürüyor.
+Hazırlık/geri sayım sessiz, yarış başlayınca lider müziği devreye giriyor.
+Sabit müzik de aynı başlangıç koşulunu kullanıyor; sonuç ekranının mevcut müziği korunuyor.
+
+src/courses.js: extendStudioCourse mevcut bölümleri ve ayarları koruyup en az 20 bölüme tamamlıyor.
+Başlangıç taslağı, hazır parkur seçimi ve rastgele parkur yenileme bunu kullanıyor.
+Hazır parkurların ilk sekiz bölümü mevcut tohumla oluşturuluyor; 24 bölümlük uzun düello korunuyor.
+
+Doğrulama:
+- tests/race-start-music-browser.mjs geçti: gerçek Web Audio start / HTML audio play çağrıları,
+  sessiz bekleme ve geri sayım, lider değişimi, duraklat/devam, sabit müzik, sıfır geri sayım,
+  kısa taslağın uzatılması ve 18 parkur seçeneği.
+- tests/studio-long-courses.mjs geçti: 17 parkur x 2 tohum, ikişer top; tüm toplar bitirdi.
+  İlk bitişler 32,91–76,37 simülasyon saniyesi. Her kadro/tohum için süre garantisi değildir.
+- tests/leader-music.mjs geçti.
+- Vite build geçti; mevcut büyük çıktı parçası uyarısı devam ediyor.
+- git diff --check geçti.
+
+Yeni ses indirilmedi. Tarayıcı testleri ayrı geçici profilde; kullanıcının takımları değiştirilmedi.

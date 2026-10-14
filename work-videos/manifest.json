@@ -1102,6 +1102,27 @@
       },
       "sha256": "6c795a2973d18c43fa60fc2a9e7457980cd6b9e83217115461bb699739c9a742",
       "bytes": 38883823
+    },
+    {
+      "id": "shared-7456dbeede7bb20f",
+      "mode": "ball-duel",
+      "contentKind": "ball-duel",
+      "copy": {
+        "title": "Israel vs Turkey | Ball Duel"
+      },
+      "createdAt": "2026-10-14T07:22:30.352Z",
+      "completedAt": "2026-10-14T07:26:40.061Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "7456dbeede7bb20fd8637ee0bd0b8bd1b8934a24c129e0af33974871fcef9021",
+      "bytes": 3597030
     }
   ]
 }

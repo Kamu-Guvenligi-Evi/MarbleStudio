@@ -1123,6 +1123,27 @@
       },
       "sha256": "7456dbeede7bb20fd8637ee0bd0b8bd1b8934a24c129e0af33974871fcef9021",
       "bytes": 3597030
+    },
+    {
+      "id": "shared-d18d4604d81427f9",
+      "mode": "glass-breaker",
+      "contentKind": "glass-breaker",
+      "copy": {
+        "title": "Will all the glass break?"
+      },
+      "createdAt": "2026-10-14T07:48:28.032Z",
+      "completedAt": "2026-10-14T07:55:09.062Z",
+      "videoFile": "video.mp4",
+      "files": [
+        "video.mp4",
+        "cover.jpg",
+        "metadata.json"
+      ],
+      "options": {
+        "channel": "Ortak çalışma videoları"
+      },
+      "sha256": "d18d4604d81427f961dd414f0180d9513f36cbbdffcbce316046b978341a04e2",
+      "bytes": 10839608
     }
   ]
 }

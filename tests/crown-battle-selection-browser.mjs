@@ -1,0 +1,56 @@
+import assert from 'node:assert/strict';
+import { chromium } from 'playwright';
+import { populateClassic } from './crown-battle-fixture.mjs';
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+try {
+  for (const width of [1366, 390]) {
+    const page = await browser.newPage({ viewport: { width, height: 844 }, isMobile: width < 900, hasTouch: width < 900 });
+    const errors = []; page.on('pageerror', e => errors.push(e.message));
+    await page.goto('http://127.0.0.1:5173/crown-battle.html?mode=classic');
+    await populateClassic(page);
+    await page.locator('#menu-command').click();
+    await page.locator('#unit-search').fill('mizrak');
+    assert.equal(await page.locator('[data-unit]:visible').count(), 1);
+    await page.locator('[data-unit=pike]').click();
+    assert.match(await page.locator('#selection-note').textContent(), /48 asker seçili/);
+    await page.locator('[data-unit=pike]').click();
+    assert.equal(await page.locator('#charge').isDisabled(), true);
+    await page.locator('#unit-search').fill('');
+    await page.locator('[data-unit=sword]').click();
+    await page.locator('#multi-select').click();
+    await page.locator('[data-unit=pike]').click();
+    assert.match(await page.locator('#selection-note').textContent(), /112 asker seçili/);
+    await page.locator('[data-unit=sword]').click();
+    assert.match(await page.locator('#selection-note').textContent(), /48 asker seçili/);
+    await page.locator('#clear-selection').click();
+    assert.equal(await page.locator('#stop').isDisabled(), true);
+    await page.locator('#menu-setup').click();
+    await page.locator('#roster-search').fill('suvari');
+    assert.equal(await page.locator('.roster-row:visible').count(), 1);
+    const north = page.locator('#north-cavalry').locator('..');
+    await north.locator('[data-roster-action="10"]').click();
+    assert.equal(await page.locator('#north-cavalry').inputValue(), '26');
+    await north.locator('[data-roster-action="0"]').click();
+    assert.equal(await page.locator('#north-cavalry').inputValue(), '0');
+    assert.equal(await page.locator('#red-cavalry').inputValue(), '16');
+    await page.locator('#apply').click();
+    assert.equal(await page.locator('#north-count').textContent(), '144');
+    assert.equal(await page.locator('#red-count').textContent(), '160');
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+    await page.goto('http://127.0.0.1:5173/crown-battle.html?historical=demo');
+    await page.locator('#menu-setup').click();
+    await page.locator('#roster-search').fill('tufek');
+    const results = await page.locator('.roster-row:visible').count();
+    assert.ok(results > 0, 'ASCII equipment search finds historical gunpowder units');
+    await page.locator('#roster-search').fill('zzzzzzz');
+    assert.equal(await page.locator('.roster-row:visible').count(), 0);
+    await page.getByRole('button', { name: 'Aramayı temizle', exact: true }).click();
+    assert.ok(await page.locator('.roster-row:visible').count() > results);
+    await page.locator('#roster-active-only').check();
+    assert.ok(await page.locator('.roster-row:visible').count() > 0);
+    await page.screenshot({ path: `artifacts/crown-battle/selection-${width}.jpg`, type: 'jpeg', quality: 65 });
+    assert.deepEqual(errors, []);
+    await page.close();
+    console.log(`PASS ${width}px: search, toggle, multi-select, clear, independent army removal, apply, historical equipment search`);
+  }
+} finally { await browser.close(); }

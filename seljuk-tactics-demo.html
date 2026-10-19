@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="tr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selçuklu sahte ricat — Taç Muharebesi</title>
+<style>
+  *{box-sizing:border-box}body{margin:0;background:#111c20;color:#edf3ed;font:15px system-ui}main{height:100dvh;display:flex;flex-direction:column}header{padding:14px 20px;background:#192a30;border-bottom:1px solid #405250}h1{font-size:21px;margin:0 0 5px}p{margin:5px 0;color:#c2d0cc}nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}button,a,select{font:inherit;background:#263d44;color:#eef4f1;border:1px solid #637c79;border-radius:6px;padding:8px 12px}button,a{cursor:pointer}button:hover,button[aria-pressed=true]{background:#3d645c}a{text-decoration:none}#field{flex:1;position:relative;min-height:220px;overflow:hidden}canvas{display:block;width:100%;height:100%}footer{padding:12px 20px;background:#192a30;min-height:94px}#phase{color:#f4d28c;font-weight:700}#error{color:#ffb0a0}label{display:flex;align-items:center;gap:6px}@media(max-width:600px){header{padding:10px}h1{font-size:18px}button,a,select{padding:6px}footer{padding:8px 12px}}
+</style>
+<main>
+  <header>
+    <h1>Selçuklu — sahte ricat</h1>
+    <p>Alp Arslan ve 24 Hassa süvarisi · Karşı taraf: 24 Roma piyadesi · Taktik deneme sahası</p>
+    <nav aria-label="Gösterim kontrolleri">
+      <button id="play">Devam et</button>
+      <button data-stage="assemble">1. Kanatları aç</button>
+      <button data-stage="retreat">2. Sahte ricat</button>
+      <button data-stage="envelop">3. Kanatları kapat</button>
+      <button data-stage="charge">4. Hücuma hazırlan</button>
+      <label>Hız <select id="speed"><option value="0.5" selected>½×</option><option value="1">1×</option><option value="2">2×</option></select></label>
+      <a href="/crown-battle.html">Oyuna dön</a>
+    </nav>
+  </header>
+  <div id="field"><canvas id="battle" aria-label="Selçuklu sahte ricat canlı savaş gösterimi"></canvas></div>
+  <footer aria-live="polite"><div id="phase"></div><p id="explanation"></p><small id="clock"></small><p id="error" role="alert"></p></footer>
+</main>
+<script type="module" src="/src/seljuk-tactics-demo.js"></script>
+</html>

@@ -1,0 +1,598 @@
+[
+  {
+    "id": "jan_iii_sobieski",
+    "name": "III. Jan Sobieski",
+    "cultureId": "polish",
+    "cultureName": "Lehler / Litvanlar",
+    "faction": "Polonya-Litvanya",
+    "civilizations": ["Polonya-Litvanya"],
+    "doctrineIds": [],
+    "life": "1629–1696",
+    "rule": "1674–1696",
+    "role": "Lehistan kralı ve Litvanya büyük dükü",
+    "historicalNote": "Hetman olarak 1672 seferini ve 1673 Hotin zaferini yönetti. 1674’te kral seçildi; 1683 Viyana kuşatmasını kaldıran müttefik ordunun komutanıydı. Hazır ordu Leh kuvvetlerinin temsili karışımıdır, Viyana’daki bütün müttefikleri kapsamaz.",
+    "portrait": "game",
+    "sources": [{ "title": "Wilanów Saray Müzesi — Jan III Sobieski", "url": "https://wilanow-palac.pl/pasaz-wiedzy/jan-iii-sobieski-herbu-janina" }],
+    "credit": "Marble Studio — yerel oyun çizimi",
+    "visualNote": "Kürk kenarlı başlık, bıyık, göğüs zırhı, pelerin ve eğri kılıçla dönemden esinlenen atlı oyun tasviri. Yüz, kıyafet ve renkler özgün yorumdur; doğrulanmış portre değildir.",
+    "license": "Proje içinde üretilen özgün Canvas çizimi; dış görsel kullanılmadı."
+  },
+  {
+    "id": "harald_hardrada",
+    "name": "Harald Hardrada",
+    "cultureId": "norse",
+    "cultureName": "İskandinavlar / Vikingler",
+    "faction": "Norveç Krallığı (Vikingler)",
+    "civilizations": ["İskandinavya"],
+    "doctrineIds": [],
+    "life": "Yaklaşık 1015–1066",
+    "rule": "1046–1066; 1047’den itibaren tek kral",
+    "role": "Norveç kralı ve Viking komutanı",
+    "historicalNote": "Harald Sigurdsson, Hardrada adıyla tanınır. Doğudaki askerî hizmetinden sonra Norveç kralı oldu. 1066 İngiltere seferinde Stamford Bridge Savaşı’nda öldü. İngiliz kralı Harold Godwinson ile farklı kişilerdir.",
+    "portrait": "game",
+    "sources": [{
+      "title": "English Heritage — Fulford and Stamford Bridge: The Northern Battles of 1066",
+      "url": "https://www.english-heritage.org.uk/learn/histories/1066-and-the-norman-conquest/northern-battles-1066/"
+    }],
+    "credit": "Marble Studio — yerel oyun çizimi",
+    "visualNote": "Boynuzsuz burunluklu miğfer, zincir zırh, yuvarlak kalkan ve pelerinle dönemden esinlenen oyun tasviri. Yüzü ve renkleri sanatsal yorumdur; doğrulanmış portre değildir. Atlı gösterim ortak komutan sınıfının oyun tercihidir.",
+    "license": "Proje içinde üretilen özgün Canvas çizimi; dış görsel kullanılmadı."
+  },
+  {
+    "id": "mehmed_ii",
+    "civilizations": [
+      "Osmanlı Devleti"
+    ],
+    "doctrineIds": [
+      "TR_OTTOMAN"
+    ],
+    "name": "Fatih Sultan Mehmed",
+    "faction": "Osmanlı Devleti",
+    "life": "1432–1481",
+    "rule": "1444–1446; 1451–1481",
+    "role": "Padişah ve komutan",
+    "historicalNote": "1453'te İstanbul'u fethetti. İkinci saltanatında Balkanlar ve Anadolu'da Osmanlı hâkimiyetini genişletti. Ordusunda kuşatma topçusu da bulunduğundan yalnız kılıç ve yay kullanan bir dönem lideri olarak tanımlanmamalıdır.",
+    "gameplaySuggestion": "Tasarım önerisi: Kuşatma hazırlığı ve düzenli ilerleyiş. Yakındaki piyadenin düzenini koruyan, hazırlık gerektiren bir komuta yeteneği; tarihsel bir güç puanı değildir.",
+    "sources": [
+      {
+        "title": "TDV İslâm Ansiklopedisi — Mehmed II",
+        "url": "https://islamansiklopedisi.org.tr/mehmed-ii"
+      }
+    ],
+    "image": "/warrior-references/commander-mehmed-ii.jpg",
+    "credit": "Gentile Bellini'ye atfedilen II. Mehmed portresi, 1480; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Bellini,_Gentile_-_Sultan_Mehmet_II.jpg",
+    "visualNote": "Hükümdarın yaşamı sırasında yapılmış portre. Eserin sonraki onarım ve boyamaları görünüşünü etkilemiştir; birebir yüz veya savaş donanımı kaydı değildir.",
+    "license": "Kamu malı (PD-Art). Wikimedia Commons'taki önizleme, yalnız boyutlandırılmıştır.",
+    "cultureId": "turkic",
+    "cultureName": "Türkler"
+  },
+  {
+    "id": "timur",
+    "name": "Timur",
+    "faction": "Timurlu Devleti",
+    "life": "1336–1405",
+    "rule": "1370–1405",
+    "role": "Emîr ve komutan",
+    "historicalNote": "Semerkant merkezli Timurlu iktidarını kurdu. Orta Asya, İran ve çevresine seferler düzenledi; 1402 Ankara Savaşı'nda Osmanlı ordusunu yendi. Hükümdarlık unvanı emîrdi.",
+    "gameplaySuggestion": "Tasarım önerisi: Süvari kanatlarını ve ihtiyatı eşgüdümle kullanma. Belirlenen bir noktada yeniden toplanan süvariye kısa süreli düzen desteği; tarihsel bir güç puanı değildir.",
+    "sources": [
+      {
+        "title": "TDV İslâm Ansiklopedisi — Timur",
+        "url": "https://islamansiklopedisi.org.tr/timur"
+      }
+    ],
+    "image": "/warrior-references/commander-timur.jpg",
+    "credit": "Anonim sanatçı, Timurlu şeceresindeki Timur tasviri, 1405–1409; Topkapı Sarayı Müzesi Kütüphanesi H.2152",
+    "source": "https://commons.wikimedia.org/wiki/File:Timur_(earliest_known_portrait),_Timurid_genealogy,_1405-1409,_Samarkand_(TSMK,_H2152).jpg",
+    "visualNote": "Timur'un ölümünü izleyen erken döneme tarihlenen tasvir. Yaşarken yapılmış kesin bir portre olarak sunulmamalıdır.",
+    "license": "Kamu malı (PD-Art). Wikimedia Commons'taki önizleme, yalnız boyutlandırılmıştır.",
+    "cultureId": "turkic",
+    "cultureName": "Türkler",
+    "civilizations": [
+      "Timurlular"
+    ],
+    "doctrineIds": []
+  },
+  {
+    "id": "attila",
+    "name": "Attila",
+    "faction": "Avrupa Hun Devleti",
+    "life": "Doğum tarihi bilinmiyor–453",
+    "rule": "434–453",
+    "role": "Hun hükümdarı ve komutan",
+    "historicalNote": "İlk yıllarda kardeşi Bleda ile ortak hükümdardı, daha sonra tek başına hüküm sürdü. Doğu ve Batı Roma ile savaşlar yürüttü ve diplomatik ilişkiler kurdu. Ordusu yalnız atlı okçulardan oluşmuyordu.",
+    "gameplaySuggestion": "Tasarım önerisi: Hareketli süvari baskısı ve yeniden toplanma. Süvari birliklerinin hedef değiştirirken düzen kazanması; tarihsel bir güç puanı değildir.",
+    "sources": [
+      {
+        "title": "World History Encyclopedia — Attila the Hun",
+        "url": "https://www.worldhistory.org/Attila_the_Hun/"
+      }
+    ],
+    "image": "/warrior-references/commander-attila.jpg",
+    "credit": "Paolo Giovio'nun Elogia virorum bellica virtute illustrium eserinin 1575 baskısındaki hayalî Attila portresi",
+    "source": "https://commons.wikimedia.org/wiki/File:Attila_portrait_(imaginary),_by_Giovio_Paolo,_1483-1552,_published_1575.jpg",
+    "visualNote": "Attila'dan yaklaşık on bir yüzyıl sonra yapılmış hayalî gravür. Yüzü veya 5. yüzyıl Hun zırhını doğrulayan bir belge değildir.",
+    "license": "Kamu malı (PD-Art). Wikimedia Commons'taki önizleme, yalnız boyutlandırılmıştır.",
+    "cultureId": "hun",
+    "cultureName": "Hunlar",
+    "civilizations": [
+      "Avrupa Hun Devleti"
+    ],
+    "doctrineIds": []
+  },
+  {
+    "id": "genghis_khan",
+    "name": "Cengiz Han",
+    "faction": "Moğol İmparatorluğu",
+    "life": "Yaklaşık 1162–1227",
+    "rule": "1206–1227",
+    "role": "Büyük han ve komutan",
+    "historicalNote": "Temuçin, 1206'da Cengiz Han unvanını aldı ve Moğol boylarını birleştiren imparatorluk düzenini kurdu. Büyük seferlerde süvari hareketliliği ve askerî teşkilât önemliydi. Doğum yılı kesin değildir.",
+    "gameplaySuggestion": "Tasarım önerisi: Atlı okçuların eşgüdümü. Geri çekilip yeniden birleşen birliklerin komutlara daha çabuk yanıt vermesi; tarihsel bir güç puanı değildir.",
+    "sources": [
+      {
+        "title": "World History Encyclopedia — Genghis Khan",
+        "url": "https://www.worldhistory.org/Genghis_Khan/"
+      }
+    ],
+    "image": "/warrior-references/commander-genghis.jpg",
+    "credit": "Anonim sanatçı, Yuan imparatorları albümündeki Cengiz Han portresi, 14. yüzyıl; National Palace Museum, Taipei",
+    "source": "https://commons.wikimedia.org/wiki/File:YuanEmperorAlbumGenghisPortrait.jpg",
+    "visualNote": "Ölümünden sonra hazırlanmış Yuan dönemi portresi. Yaşamı sırasında çizilmiş kesin yüz kaydı değildir.",
+    "license": "Kamu malı (PD-Art). Wikimedia Commons'taki önizleme, yalnız boyutlandırılmıştır.",
+    "cultureId": "mongol",
+    "cultureName": "Moğollar",
+    "civilizations": [
+      "Moğol İmparatorluğu"
+    ],
+    "doctrineIds": []
+  },
+  {
+    "id": "alexander_great",
+    "name": "Büyük İskender",
+    "faction": "Makedonya Krallığı",
+    "life": "MÖ 356–323",
+    "rule": "MÖ 336–323",
+    "role": "Kral ve komutan",
+    "historicalNote": "II. Philippos'un ardından Makedonya kralı oldu. Ahameniş İmparatorluğu'na karşı seferler yürüttü ve ordusunu Hindistan'a kadar götürdü. Ordusunda falanks piyadesi ile Hetairoi gibi süvari birlikleri birlikte kullanılıyordu.",
+    "gameplaySuggestion": "Tasarım önerisi: Piyade ve süvarinin birlikte hücumu. Piyade düşmanı tutarken kanattan gelen süvariye kısa süreli komuta desteği; tarihsel bir güç puanı değildir.",
+    "sources": [
+      {
+        "title": "World History Encyclopedia — Alexander the Great",
+        "url": "https://www.worldhistory.org/Alexander_the_Great/"
+      }
+    ],
+    "image": "/warrior-references/commander-alexander.jpg",
+    "credit": "Anonim Roma çağı mozaik sanatçısı; Pompeii, Faun Evi'ndeki İskender Mozaiği, yaklaşık MÖ 100; Commons ayrıntısı",
+    "source": "https://commons.wikimedia.org/wiki/File:Alexander_Mosaic_detail_of_Alexander_the_Great.jpg",
+    "visualNote": "Antik mozaikteki İskender figürünün ayrıntısı. İskender'in ölümünden yaklaşık iki yüzyıl sonradır; yaşamından doğrudan portre değildir. Commons'taki kırpılmış ve renkleri düzenlenmiş sürüm kullanıldı.",
+    "license": "Kamu malı (PD-Art). Commons'taki ayrıntının boyutlandırılmış önizlemesi.",
+    "cultureId": "greek",
+    "cultureName": "Yunanlar / Bizans",
+    "civilizations": [
+      "Makedonya Krallığı"
+    ],
+    "doctrineIds": []
+  },
+  {
+    "id": "julius_caesar",
+    "name": "Jül Sezar",
+    "faction": "Roma Cumhuriyeti",
+    "life": "MÖ 100–44",
+    "rule": "Diktatörlük görevleri: MÖ 49–44, kesintili",
+    "role": "General ve diktatör",
+    "historicalNote": "Galya seferlerini ve Roma iç savaşındaki ordularını yönetti. Cumhuriyet döneminde diktatörlük yaptı; Roma imparatoru veya kralı değildi. MÖ 44'te öldürüldü.",
+    "gameplaySuggestion": "Tasarım önerisi: Lejyon düzeni ve ihtiyat desteği. Yıpranan piyadenin komutan çevresinde toparlanmasına yardım eden bir yetenek; tarihsel bir güç puanı değildir.",
+    "sources": [
+      {
+        "title": "World History Encyclopedia — Julius Caesar",
+        "url": "https://www.worldhistory.org/Julius_Caesar/"
+      }
+    ],
+    "image": "/warrior-references/commander-caesar.jpg",
+    "credit": "Peter Paul Rubens, Julius Caesar, yaklaşık 1625–1626; The Leiden Collection",
+    "source": "https://commons.wikimedia.org/wiki/File:Caesar_by_Rubens.jpg",
+    "visualNote": "17. yüzyıl sanatçısının antik kişiyi yorumladığı portre; Sezar'ın yaşamına ait değildir. Miğfer ve kıyafet kesin Roma askerî donanım belgesi olarak alınmamalıdır.",
+    "license": "Kamu malı (PD-Art). Wikimedia Commons'taki önizleme, yalnız boyutlandırılmıştır.",
+    "cultureId": "italian",
+    "cultureName": "İtalyanlar / Roma",
+    "civilizations": [
+      "Roma Cumhuriyeti"
+    ],
+    "doctrineIds": []
+  },
+  {
+    "id": "alp_arslan",
+    "civilizations": [
+      "Büyük Selçuklu Devleti"
+    ],
+    "doctrineIds": [
+      "TR_SELJUK"
+    ],
+    "name": "Alp Arslan",
+    "faction": "Büyük Selçuklu Devleti",
+    "life": "1029–1072; doğum yılı kaynaklarda farklı verilir",
+    "rule": "1063–1072",
+    "role": "Sultan ve komutan",
+    "historicalNote": "Tuğrul Bey'in ardından Büyük Selçuklu sultanı oldu. 1071 Malazgirt Savaşı'nda IV. Romanos'un Bizans ordusunu yendi. 1029 doğum tarihi TDV maddesinin tercih ettiği tarihtir; kesin gün bilgisi tartışmasız kabul edilmemelidir.",
+    "gameplaySuggestion": "Tasarım önerisi: Hareketli kanatlar. Atlı okçular geri çekilip yeniden birleştiğinde yakın süvarinin düzenini güçlendiren komuta desteği; tarihsel bir güç puanı değildir.",
+    "sources": [
+      {
+        "title": "TDV İslâm Ansiklopedisi — Alparslan",
+        "url": "https://islamansiklopedisi.org.tr/alparslan"
+      }
+    ],
+    "image": "/warrior-references/commander-alp-arslan.png",
+    "credit": "Anonim nakkaş; Hâfız-ı Ebrû'nun Mecmau't-tevârîh eserindeki Alp Arslan tasviri, yaklaşık 1425",
+    "source": "https://commons.wikimedia.org/wiki/File:Alp_Arslan_on_throne_Majma_al-Tawarikh_by_Hafiz_Abru_(cropped).png",
+    "visualNote": "Hükümdarı tahtta gösteren 15. yüzyıl minyatürü. Alp Arslan'ın yaşamından üç yüzyıldan fazla sonradır; Selçuklu savaş zırhının doğrudan belgesi değildir. Eserin yazarı ile minyatürün ressamı aynı kişi olarak varsayılmadı.",
+    "license": "Kamu malı; Commons Public Domain Mark 1.0. Kaynaktaki kırpılmış sürümün 330 piksel önizlemesi.",
+    "cultureId": "turkic",
+    "cultureName": "Türkler"
+  },
+  {
+    "id": "saladin",
+    "name": "Selahaddin Eyyubi",
+    "faction": "Eyyubi Devleti",
+    "life": "1138–1193",
+    "rule": "1171–1193",
+    "role": "Sultan ve komutan",
+    "historicalNote": "Eyyubi hanedanının kurucusuydu. Mısır ve Suriye'de hâkimiyet kurdu; 1187 Hıttin zaferinin ardından Kudüs'ü aldı. Mısır'daki yönetimi ile Suriye'deki hâkimiyetinin başlangıçları aynı tarih değildir.",
+    "gameplaySuggestion": "Tasarım önerisi: Orduyu bir arada tutma. Farklı birlik sınıfları komutan çevresinde toplandığında yorgunluk toparlanmasına destek; tarihsel bir güç puanı değildir.",
+    "sources": [
+      {
+        "title": "TDV İslâm Ansiklopedisi — Selâhaddîn-i Eyyûbî",
+        "url": "https://islamansiklopedisi.org.tr/selahaddin-i-eyyubi"
+      }
+    ],
+    "image": "/warrior-references/commander-saladin.jpg",
+    "credit": "Cristofano dell'Altissimo, Selahaddin portresi, 1568 öncesi; fotoğraf: Sailko; kırpma: Amandajm / Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Cristofano_dell'altissimo,_saladino,_ante_1568_crop.JPG",
+    "visualNote": "Selahaddin'in ölümünden yüzyıllar sonra yapılmış hayalî portre. Başlık ve kıyafet 12. yüzyıl Eyyubi donanımının doğrulanmış temsili değildir.",
+    "license": "Fotoğraf: CC BY-SA 3.0 — https://creativecommons.org/licenses/by-sa/3.0/ — Kaynaktaki kırpılmış sürüm yalnız 330 piksele boyutlandırıldı.",
+    "cultureId": "ayyubid",
+    "cultureName": "Eyyûbîler",
+    "civilizations": [
+      "Eyyûbîler"
+    ],
+    "doctrineIds": []
+  },
+  {
+    "id": "hannibal_barca",
+    "name": "Hannibal Barca",
+    "faction": "Kartaca",
+    "life": "MÖ 247–yaklaşık 183",
+    "rule": "İberya ordusunun komutanlığı: MÖ 221'den itibaren",
+    "role": "General",
+    "historicalNote": "İkinci Pön Savaşı'nda Kartaca ordularına komuta etti. Alpleri geçerek İtalya'ya girdi; MÖ 216 Cannae zaferiyle tanınır. Kartaca kralı değildi; son yıllarında başka hükümdarların hizmetinde de bulundu.",
+    "gameplaySuggestion": "Tasarım önerisi: İki kanattan kuşatma. Merkezde düşmanı tutan piyade ile iki yandaki süvarinin zamanlamasını ödüllendiren komuta desteği; tarihsel bir güç puanı değildir.",
+    "sources": [
+      {
+        "title": "World History Encyclopedia — Hannibal",
+        "url": "https://www.worldhistory.org/hannibal/"
+      }
+    ],
+    "image": "/warrior-references/commander-hannibal.jpg",
+    "imageType": "historical_scene",
+    "credit": "John Clark Ridpath, Universal History, 1897 baskısındaki Hannibal'ın Alp geçişi çizimi; University of Pittsburgh Library System / Internet Archive",
+    "source": "https://commons.wikimedia.org/wiki/File:Ridpath's_Universal_history_-_an_account_of_the_origin,_primitive_condition_and_ethnic_development_of_the_great_races_of_mankind,_and_of_the_principal_events_in_the_evolution_and_progress_of_the_(14596323889)_(cropped).jpg",
+    "visualNote": "Portre yerine Hannibal'ın Alp geçişini anlatan 19. yüzyıl kitap çizimi kullanıldı. Yüzü veya Kartaca savaş fili donanımı için çağdaş kanıt değildir; sahnedeki herhangi bir figürün kesin kimliği bu küçük görselden çıkarılmamalıdır.",
+    "license": "1897 tarihli kitap çizimi; Commons kaydı: Flickr Commons, No known copyright restrictions — https://www.flickr.com/commons/usage/ — Kaynaktaki kırpılmış sürümün 330 piksel önizlemesi.",
+    "cultureId": "carthaginian",
+    "cultureName": "Kartacalılar",
+    "civilizations": [
+      "Kartaca"
+    ],
+    "doctrineIds": []
+  },
+  {
+    "id": "georg_frundsberg",
+    "name": "Georg von Frundsberg",
+    "cultureId": "german",
+    "cultureName": "Almanlar",
+    "faction": "Kutsal Roma İmparatorluğu",
+    "civilizations": [
+      "Kutsal Roma İmparatorluğu"
+    ],
+    "doctrineIds": [
+      "DE_PIKE"
+    ],
+    "life": "1473–1528",
+    "rule": "16. yüzyıl başları",
+    "role": "Landsknecht komutanı",
+    "historicalNote": "İmparatorluk hizmetinde Alman paralı piyadelerine komuta etti. İtalya savaşlarındaki Landsknecht birlikleriyle tanınır.",
+    "portrait": "game",
+    "sources": [
+      {
+        "title": "Deutsche Biographie — Georg von Frundsberg",
+        "url": "https://www.deutsche-biographie.de/gnd118536524.html?language=en"
+      }
+    ],
+    "credit": "Marble Studio — yerel oyun çizimi",
+    "visualNote": "Dönem donanımından esinlenen stilize oyun tasviri; doğrulanmış yüz portresi değildir. Atlı gösterim ortak komutan sınıfının oyun tercihidir.",
+    "license": "Proje içinde üretilen özgün Canvas çizimi; dış görsel kullanılmadı."
+  },
+  {
+    "id": "harold_godwinson",
+    "name": "Harold Godwinson",
+    "cultureId": "english",
+    "cultureName": "İngilizler",
+    "faction": "Anglosakson İngiltere",
+    "civilizations": [
+      "Anglosakson İngiltere"
+    ],
+    "doctrineIds": [
+      "EN_SHIELDWALL"
+    ],
+    "life": "Yaklaşık 1022–1066",
+    "rule": "1066",
+    "role": "İngiltere kralı",
+    "historicalNote": "1066 yılında taç giydi. Hastings Muharebesi sırasında öldü; İngiltere’nin son Anglosakson kralı olarak anılır.",
+    "portrait": "game",
+    "sources": [
+      {
+        "title": "English Heritage — Harold Godwinson",
+        "url": "https://production.english-heritage.org.uk/learn/teaching-resources/story-of-1066/collectible-1/"
+      }
+    ],
+    "credit": "Marble Studio — yerel oyun çizimi",
+    "visualNote": "Dönem donanımından esinlenen stilize oyun tasviri; doğrulanmış yüz portresi değildir. Atlı gösterim ortak komutan sınıfının oyun tercihidir.",
+    "license": "Proje içinde üretilen özgün Canvas çizimi; dış görsel kullanılmadı."
+  },
+  {
+    "id": "charles_vii",
+    "name": "VII. Charles",
+    "cultureId": "french",
+    "cultureName": "Fransızlar",
+    "faction": "Fransa Krallığı",
+    "civilizations": [
+      "Fransa Krallığı"
+    ],
+    "doctrineIds": [
+      "FR_OPPORTUNITY"
+    ],
+    "life": "1403–1461",
+    "rule": "1422–1461",
+    "role": "Fransa kralı",
+    "historicalNote": "1445 tarihli ordonnance ile düzenli süvari bölüklerinin kuruluşunu başlattı. Karttaki taktik, dönem ordusunun oyun uyarlamasıdır; kralın Patay’da şahsen komuta ettiği anlamına gelmez.",
+    "portrait": "game",
+    "sources": [
+      {
+        "title": "Musée de l’Armée — Le temps des réformes",
+        "url": "https://www.musee-armee.fr/ExpoChevaliersBombardes/temps-des-reformes.html"
+      }
+    ],
+    "credit": "Marble Studio — yerel oyun çizimi",
+    "visualNote": "Dönem donanımından esinlenen stilize oyun tasviri; doğrulanmış yüz portresi değildir. Atlı gösterim ortak komutan sınıfının oyun tercihidir.",
+    "license": "Proje içinde üretilen özgün Canvas çizimi; dış görsel kullanılmadı."
+  },
+  {
+    "id": "francesco_sforza",
+    "name": "Francesco Sforza",
+    "cultureId": "italian",
+    "cultureName": "İtalyanlar / Roma",
+    "faction": "Milano Dükalığı",
+    "civilizations": [
+      "Milano Dükalığı"
+    ],
+    "doctrineIds": [
+      "IT_CONDOTTA"
+    ],
+    "life": "1401–1466",
+    "rule": "1450–1466",
+    "role": "Condottiere ve Milano dükü",
+    "historicalNote": "Paralı asker komutanlığı yaptı; 1450’de Milano dükü oldu. Condotta düzenini temsil eden bir oyun lideridir.",
+    "portrait": "game",
+    "sources": [
+      {
+        "title": "The Metropolitan Museum — Francesco Sforza",
+        "url": "https://www.metmuseum.org/art/collection/search/191818"
+      }
+    ],
+    "credit": "Marble Studio — yerel oyun çizimi",
+    "visualNote": "Dönem donanımından esinlenen stilize oyun tasviri; doğrulanmış yüz portresi değildir. Atlı gösterim ortak komutan sınıfının oyun tercihidir.",
+    "license": "Proje içinde üretilen özgün Canvas çizimi; dış görsel kullanılmadı."
+  },
+  {
+    "id": "leonidas",
+    "name": "Leonidas",
+    "cultureId": "greek",
+    "cultureName": "Yunanlar / Bizans",
+    "faction": "Sparta",
+    "civilizations": [
+      "Sparta"
+    ],
+    "doctrineIds": [
+      "GR_HOPLITE"
+    ],
+    "life": "Doğum tarihi kesin değil; ö. MÖ 480",
+    "rule": "Sparta kralı; MÖ 480",
+    "role": "Sparta kralı ve komutan",
+    "historicalNote": "MÖ 480’de Thermopylai’de savaşan Yunan kuvvetlerinin başındaydı. Kendisine atfedilen heykelin kimliği kesin değildir.",
+    "portrait": "game",
+    "sources": [
+      {
+        "title": "Cambridge Museum of Classical Archaeology — Leonidas",
+        "url": "https://museum.classics.cam.ac.uk/collections/casts/leonidas"
+      }
+    ],
+    "credit": "Marble Studio — yerel oyun çizimi",
+    "visualNote": "Dönem donanımından esinlenen stilize oyun tasviri; doğrulanmış yüz portresi değildir. Atlı gösterim ortak komutan sınıfının oyun tercihidir.",
+    "license": "Proje içinde üretilen özgün Canvas çizimi; dış görsel kullanılmadı."
+  },
+  {
+    "id": "darius_i",
+    "name": "I. Darius",
+    "cultureId": "persian",
+    "cultureName": "Farslar",
+    "faction": "Ahameniş İmparatorluğu",
+    "civilizations": [
+      "Ahameniş İmparatorluğu"
+    ],
+    "doctrineIds": [
+      "PE_ACHAEMENID"
+    ],
+    "life": "Ö. MÖ 486",
+    "rule": "MÖ 522–486",
+    "role": "Ahameniş hükümdarı",
+    "historicalNote": "Ahameniş İmparatorluğu’nun yönetim yapısını pekiştirdi. Okçu ve mızraklı düzeni, dönem ordusundan esinlenen bir oyun uyarlamasıdır.",
+    "portrait": "game",
+    "sources": [
+      {
+        "title": "The Metropolitan Museum — The Achaemenid Persian Empire",
+        "url": "https://www.metmuseum.org/es/essays/the-achaemenid-persian-empire-550-330-b-c"
+      }
+    ],
+    "credit": "Marble Studio — yerel oyun çizimi",
+    "visualNote": "Dönem donanımından esinlenen stilize oyun tasviri; doğrulanmış yüz portresi değildir. Atlı gösterim ortak komutan sınıfının oyun tercihidir.",
+    "license": "Proje içinde üretilen özgün Canvas çizimi; dış görsel kullanılmadı."
+  },
+  {
+    "id": "takeda_shingen",
+    "name": "Takeda Shingen",
+    "cultureId": "japanese",
+    "cultureName": "Japonlar",
+    "faction": "Japonya",
+    "civilizations": [
+      "Japonya"
+    ],
+    "doctrineIds": [
+      "JP_INFANTRY"
+    ],
+    "life": "1521–1573",
+    "rule": "16. yüzyıl, Sengoku dönemi",
+    "role": "Daimyō ve komutan",
+    "historicalNote": "Kai bölgesinin Sengoku dönemi savaş beyidir. Oyundaki yari ve yumi düzeni dönem uyumlu bir eşleştirmedir; bütün Japon piyade taktiklerinin ona ait olduğu iddia edilmez.",
+    "portrait": "game",
+    "sources": [
+      {
+        "title": "Kōfu Belediyesi — Takeda Shingen",
+        "url": "https://www.city.kofu.yamanashi.jp/mobile/kanko/kanko/spot/shingenko.html"
+      }
+    ],
+    "credit": "Marble Studio — yerel oyun çizimi",
+    "visualNote": "Dönem donanımından esinlenen stilize oyun tasviri; doğrulanmış yüz portresi değildir. Atlı gösterim ortak komutan sınıfının oyun tercihidir.",
+    "license": "Proje içinde üretilen özgün Canvas çizimi; dış görsel kullanılmadı."
+  },
+  {
+    "id": "qin_shi_huang",
+    "name": "Qin Shi Huang",
+    "cultureId": "chinese",
+    "cultureName": "Çinliler",
+    "faction": "Qin Hanedanı",
+    "civilizations": [
+      "Qin Hanedanı"
+    ],
+    "doctrineIds": [
+      "CN_QIN"
+    ],
+    "life": "MÖ 259–210",
+    "rule": "MÖ 221–210",
+    "role": "Qin imparatoru",
+    "historicalNote": "Rakip devletlerin birleşmesinden sonra Çin’in ilk imparatoru unvanını aldı. Mezar kompleksindeki terrakotta ordu, dönem donanımı için önemli bir kaynaktır.",
+    "portrait": "game",
+    "sources": [
+      {
+        "title": "The Metropolitan Museum — Qin Dynasty",
+        "url": "https://www.metmuseum.org/essays/qin-dynasty-221-206-b-c"
+      }
+    ],
+    "credit": "Marble Studio — yerel oyun çizimi",
+    "visualNote": "Dönem donanımından esinlenen stilize oyun tasviri; doğrulanmış yüz portresi değildir. Atlı gösterim ortak komutan sınıfının oyun tercihidir.",
+    "license": "Proje içinde üretilen özgün Canvas çizimi; dış görsel kullanılmadı."
+  },
+  {
+    "id": "qi_jiguang",
+    "name": "Qi Jiguang",
+    "cultureId": "chinese",
+    "cultureName": "Çinliler",
+    "faction": "Ming Hanedanı",
+    "civilizations": [
+      "Ming Hanedanı"
+    ],
+    "doctrineIds": [
+      "CN_MING"
+    ],
+    "life": "1528–1588",
+    "rule": "16. yüzyıl",
+    "role": "Ming generali ve askerî yazar",
+    "historicalNote": "Kıyı savunması ve birlik eğitimiyle tanınır. Jixiao Xinshu adlı askerî eserindeki küçük birlik düzenleri, oyunun Ming taktiğine kaynaklık eder.",
+    "portrait": "game",
+    "sources": [
+      {
+        "title": "Jixiao Xinshu — birinci bölüm",
+        "url": "https://zh.wikisource.org/zh/紀效新書/卷一"
+      }
+    ],
+    "credit": "Marble Studio — yerel oyun çizimi",
+    "visualNote": "Dönem donanımından esinlenen stilize oyun tasviri; doğrulanmış yüz portresi değildir. Atlı gösterim ortak komutan sınıfının oyun tercihidir.",
+    "license": "Proje içinde üretilen özgün Canvas çizimi; dış görsel kullanılmadı."
+  },
+  {
+    "id": "nikephoros_ii_phokas",
+    "name": "II. Nikephoros Phokas",
+    "cultureId": "greek",
+    "cultureName": "Yunanlar / Bizans",
+    "faction": "Bizans İmparatorluğu",
+    "civilizations": [
+      "Bizans İmparatorluğu"
+    ],
+    "doctrineIds": [],
+    "life": "Yaklaşık 912–969",
+    "rule": "963–969",
+    "role": "Bizans imparatoru ve komutan",
+    "historicalNote": "10. yüzyılda komutanlık yaptı ve 963’te imparator oldu. Bu kart, oyundaki Orta Bizans birlikleriyle aynı dönemi temsil eder.",
+    "portrait": "game",
+    "sources": [
+      {
+        "title": "John Skylitzes — Nikephoros II Phokas, 963–969",
+        "url": "https://www.cambridge.org/core/books/abs/john-skylitzes-a-synopsis-of-byzantine-history-8111057/nikephoros-ii-phokas-963969/A10D19D2B1355F11D9E9D6D87C568CA8"
+      }
+    ],
+    "credit": "Marble Studio — yerel oyun çizimi",
+    "visualNote": "Dönem donanımından esinlenen stilize oyun tasviri; doğrulanmış yüz portresi değildir. Atlı gösterim ortak komutan sınıfının oyun tercihidir.",
+    "license": "Proje içinde üretilen özgün Canvas çizimi; dış görsel kullanılmadı."
+  },
+  {
+    "id": "ramesses_ii",
+    "name": "II. Ramses",
+    "cultureId": "egyptian",
+    "cultureName": "Antik Mısır",
+    "faction": "Yeni Krallık Mısır",
+    "civilizations": ["Yeni Krallık Mısır"],
+    "doctrineIds": [],
+    "life": "MÖ 13. yüzyıl; ö. MÖ 1213",
+    "rule": "MÖ 1279–1213",
+    "role": "19. Hanedan firavunu ve komutan",
+    "historicalNote": "Yeni Krallık hükümdarı; Hititlere karşı Kadeş seferini yönetti. Hazır ordu mevcut Yeni Krallık piyadelerini kapsar; savaş arabaları henüz dahil değildir.",
+    "portrait": "game",
+    "sources": [
+      { "title": "UCL Digital Egypt — Ramesses II", "url": "https://www.ucl.ac.uk/museums-static/digitalegypt/chronology/ramsesii.html" },
+      { "title": "British Museum — Kadeş anlatısı, Papyrus Sallier III", "url": "https://www.britishmuseum.org/collection/object/Y_EA10181-3" }
+    ],
+    "credit": "Marble Studio — yerel oyun çizimi",
+    "visualNote": "Mavi khepresh ve keten giysi dönem tasvirlerinden esinlenir; doğrulanmış yüz portresi değildir. Ortak komutan sınıfının atlı gösterimi oyun tercihidir; Ramses'in savaş arabasını temsil etmez.",
+    "license": "Proje içinde üretilen özgün Canvas çizimi; dış görsel kullanılmadı."
+  },
+  {
+    "id": "alexander_nevsky",
+    "name": "Aleksandr Nevski",
+    "cultureId": "rus",
+    "cultureName": "Ruslar",
+    "faction": "Kiev Rus ve Rus Prenslikleri",
+    "civilizations": ["Kiev Rus ve Rus Prenslikleri"],
+    "doctrineIds": [],
+    "life": "13. yüzyıl; ö. 1263",
+    "rule": "13. yüzyıl, Novgorod ve Vladimir",
+    "role": "Novgorod knezi ve Vladimir büyük knezi",
+    "historicalNote": "1242'de Peipus Gölü çevresinde Töton kuvvetlerini yendi. Hazır ordu, katalogdaki 13. yüzyılla uyumlu Rus maiyet süvarisi ve piyadelerinden oluşur; kesin muharebe kadrosu değildir.",
+    "portrait": "game",
+    "sources": [
+      { "title": "Encyclopaedia Britannica 1911 — Alexander Nevsky", "url": "https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Alexander_Nevsky%2C_Saint" }
+    ],
+    "credit": "Marble Studio — yerel oyun çizimi",
+    "visualNote": "Konik miğfer, zincir zırh ve uzun kalkan dönem donanımından esinlenir; doğrulanmış yüz portresi veya kişisel zırhının kopyası değildir.",
+    "license": "Proje içinde üretilen özgün Canvas çizimi; dış görsel kullanılmadı."
+  }
+]

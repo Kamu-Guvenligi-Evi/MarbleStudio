@@ -1,0 +1,35 @@
+// Original fantasy interpretations. Balance values are game design, not historical claims.
+const creature = (id, name, faction, kind, role, color, note, combat) => ({
+  id: `myth_${id}`, name, faction: `${faction} Mitolojisi`, kind, role, color,
+  fictional: true, artFamily: 'mythology', note: `${note} Fantastik oyun yorumu.`, combat,
+});
+export const MYTHOLOGICAL_UNITS = [
+  creature('minotaur', 'Minotor', 'Yunan', 'sword', 'Baltalı yakın dövüş yaratığı', '#a66d43',
+    'Geniş balta savuruşuyla yakındaki düşmanları vurur.',
+    { hp: 290, speed: 25, damage: 34, reach: 24, cooldown: 1.6, armor: .12, splash: 15 }),
+  creature('centaur', 'Kentaur', 'Yunan', 'cavalry', 'Hareketli yaylı yaratık', '#a98a58',
+    'Hareket ederek ok atar; yaklaşan düşmandan sınırlı uzaklaşır.',
+    { hp: 155, speed: 43, damage: 18, reach: 165, cooldown: 1.6, armor: .04, ranged: true, skirmish: true, chargeDamage: 0 }),
+  creature('cyclops', 'Kiklop', 'Yunan', 'elephant', 'Tek gözlü ağır dev', '#ad8e70',
+    'Yavaş döner; ağır sopasıyla birden fazla hedefi sarsar.',
+    { hp: 620, speed: 17, damage: 48, reach: 34, cooldown: 2.5, armor: .1, splash: 25, chargeDamage: 0 }),
+  creature('fenrir', 'Fenrir', 'İskandinav', 'cavalry', 'Hızlı kurt hücumcusu', '#70858e',
+    'Koşu mesafesi kazandığında güçlü hücum yapar.',
+    { hp: 235, speed: 46, damage: 27, reach: 22, cooldown: 1.1, armor: .06, chargeDamage: 58 }),
+  creature('jotun', 'Jotun', 'İskandinav', 'elephant', 'Buz devi', '#83b4c2',
+    'Buz tokmağıyla alan saldırısı yapar; saldırıları arasında uzun bekler.',
+    { hp: 700, speed: 16, damage: 42, reach: 35, cooldown: 2.4, armor: .18, splash: 29, chargeDamage: 0 }),
+  creature('nidhogg', 'Nidhogg', 'İskandinav', 'elephant', 'Ağır ejderha', '#60765b',
+    'Yerde ilerler; pençe ve çene saldırıları yakınındaki düşmanları etkiler.',
+    { hp: 760, speed: 18, damage: 39, reach: 35, cooldown: 2.2, armor: .2, splash: 23, chargeDamage: 0 }),
+  creature('sphinx', 'Sfenks', 'Mısır', 'cavalry', 'Aslan gövdeli muhafız', '#c7a264',
+    'Dayanıklı yakın dövüş muhafızı; koşarak hücum eder.',
+    { hp: 330, speed: 32, damage: 30, reach: 23, cooldown: 1.4, armor: .22, chargeDamage: 44 }),
+  creature('ammit', 'Ammit', 'Mısır', 'elephant', 'Ağır çeneli yaratık', '#879963',
+    'Geniş çene saldırısı yakındaki birkaç düşmanı vurur.',
+    { hp: 550, speed: 20, damage: 37, reach: 31, cooldown: 1.9, armor: .16, splash: 19, chargeDamage: 0 }),
+  creature('uraeus', 'Uraeus', 'Mısır', 'sword', 'Kobra muhafızı', '#d2b55f',
+    'Hızlı yakın dövüş ısırıkları kullanır; zehir ve menzilli saldırısı yoktur.',
+    { hp: 140, speed: 30, damage: 23, reach: 25, cooldown: .85, armor: .04 }),
+];
+export const MYTHOLOGICAL_BY_ID = Object.fromEntries(MYTHOLOGICAL_UNITS.map(unit => [unit.id, unit]));

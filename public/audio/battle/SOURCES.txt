@@ -1,0 +1,103 @@
+Battle sound sources - revised 2026-10-15
+All listed assets are used under Creative Commons Zero (CC0):
+https://creativecommons.org/publicdomain/zero/1.0/
+
+sword-clash-01.ogg through sword-clash-06.ogg:
+StarNinjas, "20 Sword Sound Effects (attacks and clashes)".
+https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes
+Source: sword_clash_-_starninjas_0.zip, sword_clash.1.ogg through .6.ogg.
+Original audio unchanged, filenames changed. Author describes recording two
+knives against each other, edited in Audacity. These are Foley recordings,
+not a historical battlefield recording.
+
+bow-release.wav:
+artisticdude, "Battle sound effects", submitted by Ogrebane.
+https://opengameart.org/content/battle-sound-effects
+Source: battle_sound_effects_0.zip / battle_sound_effects/Bow.wav.
+Original file unchanged, filename changed. CC0 option selected from offered
+licenses. Source describes a bow effect for SummoningWars; it does not
+establish that this is a recording of a real bow.
+
+black-powder-01.wav through black-powder-03.wav:
+kurt, "Gunshots".
+https://opengameart.org/node/70780
+Source: Black Powder.wav, author describes actual gunshot recordings.
+First three individual shots extracted, downmixed to mono, resampled to
+24000 Hz, saved as 16-bit PCM WAV. No synthetic gun body added.
+
+Kenney, Impact Sounds 1.0, Creative Commons Zero (CC0).
+https://kenney.nl/assets/impact-sounds
+https://creativecommons.org/publicdomain/zero/1.0/
+Original license included as KENNEY-LICENSE.txt.
+
+Original OGG files, unchanged:
+impactMetal_medium_000/001/002.ogg: legacy files, no longer selected
+impactPunch_medium_000/001/002.ogg: dry body/projectile impact
+impactWood_heavy_000/001/002.ogg: heavy contact
+
+Runtime: mono, leading-silence trim, light filtering/DC removal, edge fades,
+bounded attack loudness. Natural recorded decay retained; no synthesized
+overlay on loaded clips. Pitch, level and contact spacing vary slightly.
+Dense armored melee adds a stereo texture rendered once from these same
+blade/body clips. It activates only from nearby clash events and fades
+within 0.65 seconds after renewal stops. One voice, included in the total
+eight-voice cap, stopped on pause/mute. No perpetual battlefield loop.
+Camera-relative panning and distance gain apply to foreground contacts.
+Procedural samples are used only if an entire weapon bank fails to load.
+No external audio requests at runtime, no microphone access.
+
+Movement additions, 2026-10-15:
+footstep00.ogg, footstep01.ogg, footstep02.ogg:
+Kenney Vleugels, RPG Audio, CC0. Original files unchanged.
+https://kenney.nl/assets/rpg-audio
+Original license included as KENNEY-RPG-LICENSE.txt.
+
+horse-grass.mp3 and horse-ground.mp3:
+congusbongus, "Horse gallop on different surfaces".
+https://opengameart.org/content/horse-gallop-on-different-surfaces
+Source: archive_2.zip / grass.mp3 and ground.mp3, unchanged, renamed.
+The pack has mixed licences; ONLY the following CC0 entries are used:
+grass: derived from SRS_Foley_Horse_Galloping.wav by StephenSaldanha
+https://freesound.org/people/StephenSaldanha/sounds/165532/
+ground: derived from Single Horse Galopp by D4XX
+https://freesound.org/people/D4XX/sounds/564628/
+Both explicitly marked CC0 in the archive's credits.txt, retained in
+artifacts/battle-audio-recordings/horse-credits.txt. No CC-BY entries used.
+These are gallop effects/Foley; no claim that all are live horse recordings.
+
+Movement uses at most two voices within the same eight-voice budget.
+Only moving, living nearby units initiate short steps; horse archers included.
+Giant creatures, elephants and non-horse fantasy mounts are excluded until
+matching recordings exist. Missing movement clips remain silent.
+Runtime movement trim caps: feet 0.32s, hoof cycles 0.6s; otherwise the same
+edge fades and bounded loudness treatment as weapons. Distant contacts and
+movement use a shared 2200 Hz low-pass bus, with camera-relative level/pan.
+
+Contact additions, 2026-10-15:
+impactMetal_light_000.ogg through _002.ogg and
+impactSoft_medium_000.ogg through _002.ogg:
+Kenney, Impact Sounds, CC0; unchanged originals from the already-local
+artifacts/battle-audio/impact.zip. See KENNEY-LICENSE.txt.
+https://kenney.nl/assets/impact-sounds
+Generic Foley effects used to distinguish projectile hits on armor from soft
+targets; these are not claimed to be actual arrow/armor recordings.
+Prepared once: metal max 0.22s, soft max 0.25s. One voice per accepted contact,
+sharing the existing hit cooldown and eight-voice limit. Missing variants fall
+back to the existing hit bank. Projectile hits do not start the melee crowd bed.
+
+Arrow revision, 2026-10-16:
+Original assets unchanged. Bow.wav now uses a 0.16s dry release profile with
+reduced low-frequency body, softened high frequencies and a damped tail.
+Arrow/bolt contacts use six separately prepared variants derived from
+impactSoft_heavy_000.ogg through _002.ogg: armor <=0.18s, soft <=0.20s.
+These three unchanged originals are Kenney Impact Sounds, CC0, extracted
+from the already-local artifacts/battle-audio/impact.zip; see KENNEY-LICENSE.txt.
+They replace the earlier metal-light/soft-medium arrow profiles. A softened
+4-5ms attack and damped high frequencies reduce the bead-like click.
+Arrow contacts never use metal-light or the generic hit fallback; if their
+dedicated assets are missing, those contacts remain silent.
+These remain designed Foley effects, not recordings of real arrows hitting
+armor or people. No new downloads. Preparation happens once at unlock in
+the existing worker. Each accepted impact still consumes one voice and the
+shared hit cooldown. Bullets and melee retain their existing contact banks.
+The sound preview starts with bow, soft arrow contact, armored arrow contact.

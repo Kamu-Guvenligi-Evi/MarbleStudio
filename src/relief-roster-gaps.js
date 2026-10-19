@@ -1,0 +1,40 @@
+// Equipment reconstructions; these names do not invent historical elite regiments.
+const make = (id, name, faction, period, kind, role, source, note, visualNote, combat) => ({
+  id, name, faction, period, kind, role, source, note: `${period} · ${note}`, visualNote, combat,
+  color: '#927959', credit: 'Kaynak donanımından özgün oyun çizimi; renk ve eksik kıyafet ayrıntıları temsili',
+  sources: [{ title: `${name} — tarihî dayanak`, url: source }],
+});
+export const RELIEF_ROSTER_GAPS = [
+  make('assyrian_shield_spearman', 'Asur kalkanlı mızraklısı', 'Yeni Asur', 'MÖ 8. yy', 'spear', 'Yuvarlak kalkanlı mızrak piyadesi',
+    'https://artsandculture.google.com/asset/stone-panel-from-the-central-palace-of-king-tiglath-pileser-iii/2AEOxWIGCRYsAg?hl=en',
+    'British Museum kaynaklı III. Tiglatpileser kabartması açıklamasındaki sorguçlu miğfer, yuvarlak kalkan ve çapraz göğüs kayışlı mızraklıları temsil eder. Ayrı bir seçkin alay adı değildir.',
+    'Kısa sorguçlu miğfer, çapraz kayış, kısa etek, yuvarlak kalkan ve uzun mızrak. Kabartma renk vermediğinden renkler temsili.',
+    { hp: 117, damage: 24, reach: 35, cooldown: 1.45, speed: 24, armor: .16 }),
+  make('assyrian_mounted_archer', 'Asur atlı okçusu', 'Yeni Asur', 'MÖ 7. yy', 'cavalry', 'Yaylı süvari — atlı okçu',
+    'https://www.museobarracco.it/en/opera/soldati-e-cavalli-alta-bardatura?tema=1',
+    'Museo Barracco, Asurbanipal döneminden atlı kabartmasını açıklarken Asur atlı okçu birliklerini ele alır. Buradaki yaylı süvari dönem donanımından bir rekonstrüksiyondur; kabartmadaki her figürün okçu olduğu iddia edilmez.',
+    'Sivri miğfer, pul zırh, kısa yay, okluk ve üzengisiz binici. At örtüsünün rengi ve küçük süsler temsili; erken dönem iki kişilik dizgin düzeni uygulanmadı.',
+    { hp: 127, damage: 18, reach: 169, cooldown: 1.8, speed: 42, armor: .16, chargeDamage: 0 }),
+  make('khmer_shield_spearman', 'Khmer kalkanlı mızraklısı', 'Khmer İmparatorluğu', '12–13. yy', 'spear', 'Mızrak ve kalkanlı yaya savaşçı',
+    'https://cdn.angkordatabase.asia/libs/docs/publications/angkor-society-and-state/l-a-sedov-angkor-society-and-state-in-The-Early-State-Claessen-Skalnik-Mouton-1978_2024-06-12-041610_puuo.pdf',
+    'L. A. Sedov, Angkor Society and State bölümünde kabartmalar ve Zhou Daguan aktarımı üzerinden mızrak ve kalkanı ele alır. Komutan veya muhafız unvanı verilmemiş genel bir donanım rolüdür.',
+    'Çıplak üst gövde, bağlanmış saç, katlı sampot, sade kalkan ve mızrak. Kalkan biçimi ve renkler temsili; Çam düşman askerlerinin miğferleri Khmer üniforması diye kullanılmadı.',
+    { hp: 107, damage: 24, reach: 34, cooldown: 1.4, speed: 27, armor: .06 }),
+  make('maya_shield_spearman', 'Maya kalkanlı mızraklısı', 'Maya şehir devletleri', 'MS 600–800', 'spear', 'Kapitone korumalı mızrak piyadesi',
+    'https://www.metmuseum.org/art/collection/search/313151',
+    'Met Jaina figüründe mavi dokulu giysi, konik başlık ve dikdörtgen kalkan görülür. Müze açıklaması benzer Cleveland figürünün ellerinin mızrak ve kalkan tutmuş olabileceğini belirtir. Mızrak eklemesi yorumdur; figürün ritüel kimliği ve giysinin niteliği kesin değildir.',
+    'Mavi kapitone görünümlü gövde, kırmızı bel örtüsü, konik başlık, kulak halkaları ve tüylü kenarlı dikdörtgen kalkan. Taş uçlu mızrak temsili tamamlandı; bütün Maya askerleri için standart üniforma sayılmaz.',
+    { hp: 117, damage: 25, reach: 34, cooldown: 1.45, speed: 25, armor: .14 }),
+  make('inca_axeman', 'İnka bronz baltalı piyadesi', 'İnka İmparatorluğu', '15–16. yy', 'sword', 'Bronz baltalı yakın dövüş piyadesi',
+    'https://www.metmuseum.org/art/collection/search/315476',
+    'Met 1987.394.401 numaralı İnka bronz baltasının biçiminden hazırlanmıştır. Tek müze nesnesi, standart baltacı alayı veya seçkin birlik teşkilatının kanıtı değildir.',
+    'Müze örneğindeki tek taraflı kavisli ağız ve bağ sargısını andıran kabartmalı bronz sap; sade unku, baş bağı ve sandaletler. Kıyafet temsili rekonstrüksiyon, bronzun savaşta kullanılan rengi temsili.',
+    { hp: 119, damage: 29, reach: 22, cooldown: 1.45, speed: 26, armor: .1 }),
+];
+export const RELIEF_ROSTER_GAP_PROFILES = {
+  assyrian_shield_spearman: { head: 'rrgCrestHelmet', armor: 'rrgCrossStraps', shield: 'rrgAssyrianRound', weapon: 'rrgAssyrianSpear', cloth: '#d1bc88', skin: '#b88c64', bareLegs: true, beard: true },
+  assyrian_mounted_archer: { head: 'rrgPointedHelmet', armor: 'rrgScaleCoat', weapon: 'bow', cloth: '#a66b4a', skin: '#b88c64', horse: 'bay', noStirrups: true, quiver: true, beard: true },
+  khmer_shield_spearman: { head: 'rrgTiedHair', armor: 'rrgSampot', shield: 'rrgKhmerShield', weapon: 'rrgKhmerSpear', cloth: '#b58749', skin: '#a87b53', bareLegs: true, bareFeet: true },
+  maya_shield_spearman: { head: 'rrgConicalCap', armor: 'rrgQuiltedSuit', shield: 'rrgFeatherShield', weapon: 'rrgStoneSpear', cloth: '#59949b', skin: '#ad8059', bareLegs: true },
+  inca_axeman: { head: 'rrgHeadband', armor: 'rrgUnku', weapon: 'rrgBronzeAxe', cloth: '#b09a70', skin: '#a67b58', bareLegs: true },
+};

@@ -1,0 +1,2147 @@
+{
+  "title": "Taç Muharebesi — Tarihî seçkin birlik araştırma kataloğu",
+  "date": "2026-10-14",
+  "schemaVersion": 1,
+  "scope": {
+    "userRequest": "Gerçek devletlerin seçkin birlikleri; kılıç, mızrak ve yay ağırlıklı dönemler; atlılar dahil.",
+    "purpose": "Diğer sekmedeki uygulama yapay zekâsına araştırma devri. Oyuna otomatik aktarım dosyası değildir.",
+    "completeness": "Geniş başlangıç kataloğu; bütün dünya devletleri ve bütün alt birlikler tamamlanmış değildir.",
+    "periodPolicy": "Ana seçki antikçağ ve ortaçağdır. Ateşli silahların yaygın olduğu çağların geleneksel silahlı birlikleri gecis_donemi durumunda ayrı tutulmuştur.",
+    "evidencePolicy": "Kaynaklar birlik kimliğini destekler. equipmentDraft tarihî rekonstrüksiyon ön taslağıdır; kaynak silah/giysi ayrıntısını açıkça belgelemiyorsa kesin bilgi sayılmaz. Kesin kuruluş/dağılma tarihi yerine seçilen temsil dönemi verilmiştir.",
+    "mountPolicy": "horse=atlı temsil; foot=yaya temsil; mixed=birliğin tamamı yalnız atlı/yaya sayılmıyor. Temsil tercihi, bütün mensupların her zaman aynı şekilde savaştığı iddiası değildir.",
+    "visualPolicy": "Tam figür insan veya at+binici çizimi hedeflenir. Müze nesnesi fotoğrafı teçhizat kanıtıdır, hazır savaşçı illüstrasyonu değildir. Bağlantılar kullanım lisansı vermez. İndirilen ve oyuna bağlanan görsellerin güncel kaydı src/historical-unit-visuals.json dosyasındadır; kaynak, lisans ve tarihsel sınırlamalar her kayıtta belirtilir. Teslim notu: docs/historical-visual-handoff-2026-10-14.txt.",
+    "statusLegend": {
+      "ana": "Kimliği kaynaklı ana aday; görsel ve teçhizat kontrolü yine gerekir.",
+      "donanim_dogrulamasi": "Kimliği kaynaklı; doğru dönem, görev veya teçhizat seçimi yapılmadan üretime alınmamalı.",
+      "gecis_donemi": "16.–17. yy gibi ateşli silahlarla iç içe çağ; dar dönem tercihi için ayrı ek."
+    }
+  },
+  "sources": {
+    "ottoman6": {
+      "title": "TDV — Altı Bölük",
+      "url": "https://islamansiklopedisi.org.tr/alti-boluk",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "janissary": {
+      "title": "TDV — Yeniçeri",
+      "url": "https://islamansiklopedisi.org.tr/yeniceri",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "solak": {
+      "title": "TDV — Solak",
+      "url": "https://islamansiklopedisi.org.tr/solak",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "gulam": {
+      "title": "TDV — Gulâm",
+      "url": "https://islamansiklopedisi.org.tr/gulam",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "army2": {
+      "title": "C. E. Bosworth — ARMY ii, Encyclopaedia Iranica",
+      "url": "https://www.iranicaonline.org/articles/army-ii/",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "army3": {
+      "title": "Encyclopaedia Iranica — ARMY iii, Safavid Period",
+      "url": "https://www.iranicaonline.org/articles/army-iii/",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "bahri": {
+      "title": "TDV — Bahriyye",
+      "url": "https://islamansiklopedisi.org.tr/bahriyye",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "burji": {
+      "title": "TDV — Burciyye",
+      "url": "https://islamansiklopedisi.org.tr/burciyye",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "mamluklance": {
+      "title": "Metropolitan Museum — Lance Head",
+      "url": "https://www.metmuseum.org/art/collection/search/22212",
+      "kind": "müze nesnesi",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "keshig": {
+      "title": "Cambridge History of the Mongol Empire — The Rise of Chinggis Khan and the United Empire, 1206–1260",
+      "url": "https://www.cambridge.org/core/books/abs/cambridge-history-of-the-mongol-empire/rise-of-chinggis-khan-and-the-united-empire-12061260/40F64848E13817221B45FB39EA4EC88E",
+      "kind": "akademik",
+      "access": "bibliyografik sayfa/arama özeti; bölümün tamamı okunmadı"
+    },
+    "ilkhan": {
+      "title": "JRAS — The Pillars of State: Qarachu Begs and Kešikten in the Ilkhanate, 1256–1335",
+      "url": "https://www.cambridge.org/core/journals/journal-of-the-royal-asiatic-society/article/abs/pillars-of-state-some-notes-on-the-qarachu-begs-and-the-kesikten-in-the-ilkhanate-12561335/08A3E8E1DD11E8E48383497656FC439E",
+      "kind": "akademik",
+      "access": "bibliyografik sayfa/arama özeti; makalenin tamamı okunmadı"
+    },
+    "immortals": {
+      "title": "Rüdiger Schmitt — Immortals, Encyclopaedia Iranica",
+      "url": "https://www.iranicaonline.org/articles/immortals/",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "iranarmor": {
+      "title": "Encyclopaedia Iranica — Armor",
+      "url": "https://www.iranicaonline.org/articles/armor/",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "iranarmy": {
+      "title": "A. Sh. Shahbazi — ARMY i, Pre-Islamic Iran",
+      "url": "https://www.iranicaonline.org/articles/army-i/",
+      "kind": "akademik",
+      "access": "ilk erişim ve arama dizini; sonraki erişimde zaman aşımı"
+    },
+    "macedonia": {
+      "title": "Donald L. Wasson — The Army of Alexander the Great",
+      "url": "https://www.worldhistory.org/article/676/the-army-of-alexander-the-great/",
+      "kind": "ikincil tarih anlatımı",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "hypaspist": {
+      "title": "Donald L. Wasson — Hypaspist",
+      "url": "https://www.worldhistory.org/Hypaspist/",
+      "kind": "ikincil tarih anlatımı",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "sparta": {
+      "title": "Ktema/Persée — Xénophon et la sélection des hippeis",
+      "url": "https://www.persee.fr/doc/ktema_0221-5896_2007_num_32_1_1065?pageId=T35_328",
+      "kind": "akademik",
+      "access": "bibliyografik kayıt/arama dizini"
+    },
+    "hippeis": {
+      "title": "Oxford Classical Dictionary — hippeis",
+      "url": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548936128",
+      "kind": "akademik",
+      "access": "özet/arama dizini"
+    },
+    "thebes": {
+      "title": "Plutarkhos — Pelopidas 18, Perrin çevirisi",
+      "url": "https://lexundria.com/plut_pel/18/prr",
+      "kind": "antik anlatı",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "seleucid": {
+      "title": "Rolf Strootman — Seleucid Empire, Encyclopaedia Iranica",
+      "url": "https://www.iranicaonline.org/articles/seleucid-empire/",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "praetorian": {
+      "title": "Vatikan Müzeleri — Terhis edilen Praetorianların listesi",
+      "url": "https://www.museivaticani.va/content/museivaticani/en/collezioni/musei/galleria-lapidaria/sezione-v--struttura-e-organizzazione-dellesercito/lastra-con-elenco-di-pretoriani-congedati.html",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "equites": {
+      "title": "Vatikan Müzeleri — Stele di un cavalleggero scelto pannonico",
+      "url": "https://www.museivaticani.va/content/museivaticani/it/collezioni/musei/galleria-lapidaria/sezione-v--struttura-e-organizzazione-dellesercito/stele-di-un-cavalleggero-scelto-pannonico.html",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "varangian": {
+      "title": "Mark Cartwright — Varangian Guard",
+      "url": "https://www.worldhistory.org/Varangian_Guard/",
+      "kind": "ikincil tarih anlatımı",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "tagmata": {
+      "title": "D. Gjalevski — The Tagmata and the Byzantine Balkan Reconquista",
+      "url": "https://www.zirm.mk/wp-content/uploads/2022/02/IST-2012.1-2.07-Gjalevski-D.-The-Tagmata-and-the-Byzantine-Balkan-Reconquista-Middle-of-Eight-middle-of-Ninth-Century.pdf",
+      "kind": "akademik",
+      "access": "PDF indirilmedi; arama dizinindeki ilgili metin"
+    },
+    "treadgold": {
+      "title": "Warren Treadgold — Notes on the Numbers and Organization of the Ninth-Century Byzantine Army",
+      "url": "https://deremilitari.org/wp-content/uploads/2014/07/treadgold.pdf",
+      "kind": "akademik",
+      "access": "PDF indirilmedi; arama dizinindeki ilgili metin"
+    },
+    "housecarl": {
+      "title": "English Heritage — Battle of Hastings tarihi",
+      "url": "https://www.english-heritage.org.uk/visit/places/1066-battle-of-hastings-abbey-and-battlefield/history-and-stories/history/",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "templar": {
+      "title": "English Heritage — Knights Templar Church, Dover tarihi",
+      "url": "https://www.english-heritage.org.uk/visit/places/knights-templar-church-dover/history/",
+      "kind": "kurumsal/akademik",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "hospital": {
+      "title": "Malta Tarikatı — Del siglo XI a nuestros días",
+      "url": "https://www.orderofmalta.int/es/historia/de-siglo-xi-a-nuestros-dias/",
+      "kind": "kurumun kendi tarihçesi",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "teuton": {
+      "title": "Deutscher Orden — Liste der Hochmeister",
+      "url": "https://deutscher-orden.com/liste-der-hochmeister/",
+      "kind": "kurumun kendi tarihçesi",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "teutonart": {
+      "title": "Malbork Castle Museum — Teutonic Knight pretty as a picture",
+      "url": "https://zamek.malbork.pl/en/news/temporary-exhibition-teutonic-knight-pretty-as-a-picture/",
+      "kind": "müze sergisi",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "hussarart": {
+      "title": "Metropolitan Museum — Stefano della Bella, Polish hussar in profile facing right",
+      "url": "https://www.metmuseum.org/art/collection/search/374059",
+      "kind": "tarihî tam figür baskı",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "hussar": {
+      "title": "Badisches Landesmuseum — Kaiser und Sultan videoguide",
+      "url": "https://www.landesmuseum.de/videoguide-kaiser-und-sultan",
+      "kind": "müze açıklaması",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "ii": {
+      "title": "Japonya MLIT / Hikone Castle Museum — Ii family collection",
+      "url": "https://www.mlit.go.jp/tagengo-db/R1-01543.html",
+      "kind": "resmî müze tanıtım metni",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "samuraiarmor": {
+      "title": "Metropolitan Museum — Art of the Samurai photo gallery",
+      "url": "https://www.metmuseum.org/exhibitions/listings/2009/art-of-the-samurai/photo-gallery",
+      "kind": "müze zırh kataloğu",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "eagle": {
+      "title": "British Museum — Eagle warrior statuette Am1856,0422.93",
+      "url": "https://www.britishmuseum.org/collection/object/E_Am1856-0422-93",
+      "kind": "müze nesnesi",
+      "access": "arama dizinindeki müze açıklaması; doğrudan sayfada erişim engeli"
+    },
+    "iirava": {
+      "title": "Giuseppe Rava — The Ii Naomasa’s Red Devils charge at Sekigahara",
+      "url": "https://www.g-rava.it/product/med0022-the-ii-naomasas-red-devils-charge-at-sekigahara/",
+      "kind": "modern sanatçı çizimi",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "praetorianart": {
+      "title": "Louvre — Cinq gardes prétoriens, Étienne I Parrocel",
+      "url": "https://arts-graphiques.louvre.fr/detail/oeuvres/1/18117-Cinq-gardes-pretoriens",
+      "kind": "antik kabartma sonrası yapılmış çizim",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "janissaryart": {
+      "title": "British Museum — Janissary on campaign, album painting",
+      "url": "https://www.britishmuseum.org/collection/object/W_1974-0617-0-13-28",
+      "kind": "tarihî albüm resmi",
+      "access": "metin veya arama dizini incelendi"
+    },
+    "rus_druzhyna_ieu": {
+      "title": "Internet Encyclopedia of Ukraine — Druzhyna",
+      "url": "https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CD%5CR%5CDruzhynaIT.htm",
+      "access": "Madde metni incelendi; prens maiyeti, ordunun çekirdeği ve muhafızlık işlevi."
+    },
+    "met_armour_faq": {
+      "title": "The Metropolitan Museum of Art — Arms and Armor: Common Misconceptions",
+      "url": "https://www.metmuseum.org/essays/arms-and-armor-common-misconceptions-and-frequently-asked-questions",
+      "access": "Zırhı yalnız şövalyelerin giymediğini açıklayan 1. bölüm incelendi."
+    },
+    "talhoffer_1459": {
+      "title": "Hans Talhoffer — Alte Armatur und Ringkunst, 1459, yaprak görseli 076",
+      "url": "https://commons.wikimedia.org/wiki/File:De_Alte_Armatur_und_Ringkunst_Talhofer_076.jpg",
+      "access": "Danimarka Kraliyet Kütüphanesi kaynaklı dönem çizimi ve kamu malı lisansı incelendi; zırhlı yaya düellosu."
+    },
+    "jaguar_bm": {
+      "title": "British Museum — Aztec eagle warrior; Eagle and Jaguar orders",
+      "url": "https://www.britishmuseum.org/collection/object/E_Am1856-0422-93",
+      "kind": "müze / tarihsel metin / akademik araştırma",
+      "access": "2026-10-14"
+    },
+    "carthage_diodorus": {
+      "title": "Diodorus Siculus, Bibliotheca historica 16.80.4 — Kartaca Kutsal Birliği",
+      "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Diodorus_Siculus/16D%2A.html",
+      "kind": "müze / tarihsel metin / akademik araştırma",
+      "access": "2026-10-14"
+    },
+    "sherden_getty": {
+      "title": "Jorrit M. Kelder — From Thutmose III to Homer to Blackadder, Getty",
+      "url": "https://www.getty.edu/publications/egypt-classical-world/01/",
+      "kind": "müze / tarihsel metin / akademik araştırma",
+      "access": "2026-10-14"
+    },
+    "gallowglass_mcinerney": {
+      "title": "Luke McInerney — Gallóglaigh Thuadhmhumhain / The Gallowglass of Thomond",
+      "url": "https://www.clarelibrary.ie/eolas/coclare/history/gallowglass_of_thomond.pdf",
+      "kind": "müze / tarihsel metin / akademik araştırma",
+      "access": "2026-10-14"
+    },
+    "jaguar_codex": {
+      "title": "Anonim, Codex Magliabechiano, 16. yüzyıl, yaprak 30r; Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Jaguar_warrior.jpg",
+      "kind": "görsel — kamu malı",
+      "access": "2026-10-14"
+    },
+    "carthage_dodge": {
+      "title": "Theodore Ayrault Dodge, Hannibal (1891), Sacred Band footman; Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Sacred_band_footman.PNG",
+      "kind": "görsel — kamu malı",
+      "access": "2026-10-14"
+    },
+    "sherden_breasted": {
+      "title": "Abu Simbel kabartması; Ippolito Rosellini çizimi, James Henry Breasted yayını (1908), fig. 2; Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Relief_Sherden_Breasted_2.jpg",
+      "kind": "görsel — kamu malı",
+      "access": "2026-10-14"
+    },
+    "gallowglass_durer": {
+      "title": "Albrecht Dürer, Irish Soldiers and Peasants (1521); Wikimedia Commons kopyası",
+      "url": "https://commons.wikimedia.org/wiki/File:Galloglass-circa-1521.jpg",
+      "kind": "görsel — kamu malı",
+      "access": "2026-10-14"
+    },
+    "kipchak_helmets": {
+      "title": "Samet İkibeş — Kuman/Kıpçak Miğferleri (2025)",
+      "url": "https://dergipark.org.tr/en/pub/turkiyat/article/1598769",
+      "kind": "akademik araştırma",
+      "access": "2026-10-14"
+    },
+    "kipchak_weapons": {
+      "title": "Yazgı Tuğçe Kurt Öteleş — Codex Cumanicus askerî terminolojisi (2023)",
+      "url": "https://dergipark.org.tr/tr/pub/turklad/article/1366953",
+      "kind": "akademik araştırma",
+      "access": "2026-10-14"
+    },
+    "kipchak_mask_photo": {
+      "title": "Jim Kelly — Mysterious Mask, Saint Petersburg Museum (2009)",
+      "url": "https://commons.wikimedia.org/wiki/File:Mysterious_Mask,_Saint_Petersburg_Museum.jpg",
+      "kind": "müze nesnesi fotoğrafı; CC BY 2.0",
+      "access": "2026-10-14"
+    },
+    "tang_zizhi_188": {
+      "title": "Sima Guang — Zizhi Tongjian, cilt 188, 621 yılı kaydı",
+      "url": "https://zh.wikisource.org/wiki/資治通鑑/卷188",
+      "kind": "tarihî anlatı, dijital metin",
+      "access": "Li Shimin'in seçtiği bini aşkın kara giysili ve kara zırhlı atlılar hakkındaki pasaj incelendi; eser olaylardan yüzyıllar sonra derlenmiştir"
+    },
+    "tang_met_45865": {
+      "title": "The Met — Warrior, 7.–8. yy, 10.221.6",
+      "url": "https://www.metmuseum.org/art/collection/search/45865",
+      "kind": "müze nesnesi ve kamu malı fotoğraf",
+      "access": "Nesne kaydı ve indirilen görsel incelendi; Xuanjia teşhisi bulunmuyor"
+    },
+    "tang_saluzi_penn": {
+      "title": "Penn Museum — Saluzi, C395",
+      "url": "https://www.pennmuseum.org/collections/object/167942",
+      "kind": "müze nesnesi",
+      "access": "621 Luoyang seferiyle ilişkili at kabartmasının müze açıklaması incelendi"
+    },
+    "tang_saluzi_photo": {
+      "title": "Mary Harrsch — The Horses of Emperor Taizong, 2005",
+      "url": "https://commons.wikimedia.org/wiki/File:The_Horses_of_Emperor_Taizong_Tang_Dynasty_Limestone_(305761810).jpg",
+      "kind": "müze nesnesinin fotoğrafı",
+      "access": "CC BY 2.0 lisansı ve indirilen görsel incelendi"
+    },
+    "sogdian_cakar_iranica": {
+      "title": "Étienne de la Vaissière — ČĀKAR, Encyclopaedia Iranica",
+      "url": "https://www.iranicaonline.org/articles/cakar/",
+      "kind": "akademik",
+      "access": "Soğd hükümdar ve soylularının kişisel askerleri hakkındaki açıklama incelendi"
+    },
+    "sogdian_art_iranica": {
+      "title": "Encyclopaedia Iranica — SOGDIANA iv. SOGDIAN ART",
+      "url": "https://www.iranicaonline.org/articles/sogdiana-vi-sogdian-art/",
+      "kind": "akademik",
+      "access": "Mugh kalkanındaki atlı kahraman tasviri doğrulandı; fotoğraf lisansı ve ayrıntılı donanım incelemesi tamamlanmadı"
+    },
+    "han_hanshu70": {
+      "title": "Han Shu 70 — Gan Yanshou biyografisi",
+      "url": "https://zh.wikisource.org/wiki/漢書/卷070",
+      "kind": "tarihî anlatı, dijital metin",
+      "access": "İyi biniciliği ve okçuluğu sayesinde Yulin mensubu olması hakkındaki pasaj incelendi"
+    },
+    "han_yulin_office": {
+      "title": "Taiping Yulan 242 — Han Shu görevliler tablosundan Yulin kaydı",
+      "url": "https://zh.wikisource.org/wiki/太平御覽/0242",
+      "kind": "erken metinden alıntı yapan tarihî derleme",
+      "access": "İmparatorluk refakati ve muhafızlık görevine ilişkin kayıt incelendi"
+    },
+    "han_met62843": {
+      "title": "The Met — Horse and rider, 16.149.2",
+      "url": "https://www.metmuseum.org/art/collection/search/62843",
+      "kind": "müze nesnesi ve kamu malı fotoğraf",
+      "access": "MS 1.–2. yy Doğu Han heykelciği ve fotoğraf incelendi; Yulin teşhisi yok"
+    },
+    "inca_met751901": {
+      "title": "The Met — Tunic, 2017.674",
+      "url": "https://www.metmuseum.org/art/collection/search/751901",
+      "kind": "müze nesnesi ve kamu malı fotoğraf",
+      "access": "Dama tunik, savaşta öne çıkanlara verilmesi ve diplomatik hediye kullanımı incelendi"
+    },
+    "inca_met315294": {
+      "title": "The Met — Mace Head, 1987.394.234",
+      "url": "https://www.metmuseum.org/art/collection/search/315294",
+      "kind": "müze nesnesi ve kamu malı fotoğraf",
+      "access": "15.–16. yy gümüş altı uçlu başlık ve fotoğraf incelendi; tüm askerlerin standart silahı sayılmaz"
+    },
+    "assyria_bm": {
+      "title": "British Museum — Introducing the Assyrians",
+      "url": "https://www.britishmuseum.org/blog/introducing-assyrians",
+      "kind": "müze açıklaması",
+      "access": "Arama dizininde kralın seçkin kişisel muhafızları doğrulandı; doğrudan sayfa 403"
+    },
+    "assyria_relief": {
+      "title": "British Museum — Royal bodyguards, W_1851-0902-24",
+      "url": "https://www.britishmuseum.org/collection/object/W_1851-0902-24",
+      "kind": "müze nesnesi",
+      "access": "Arama dizinindeki nesne tanımı incelendi; doğrudan sayfa 403; yerel fotoğraf yok"
+    },
+    "goryeo_guard": {
+      "title": "Academy of Korean Studies — Eungyanggun",
+      "url": "https://encykorea.aks.ac.kr/Article/E0043087",
+      "kind": "akademik ansiklopedi",
+      "access": "Eungyanggun ve Yonghogun saray muhafızlığı; ilk kayıtlar 1017–1018; kesin kuruluş tarihi verilmez"
+    },
+    "goryeo_byolmuban": {
+      "title": "Academy of Korean Studies — Byeolmuban",
+      "url": "https://encykorea.aks.ac.kr/Article/E0023022",
+      "kind": "akademik ansiklopedi",
+      "access": "1104 tarihli geniş askerî teşkilat; bütününü seçkin muhafız saymak uygun değil"
+    },
+    "vela_inscription": {
+      "title": "Siddham — IN03103 Polonnaruwa Velaikkarar yazıtı",
+      "url": "https://siddham.network/inscription/in03103/",
+      "kind": "yazıt veritabanı",
+      "access": "Diş kutsal emanetinin korunmasına ilişkin yazıt kaydı; tam edisyon ve görsel eşleme bekliyor"
+    },
+    "song_beiwei": {
+      "title": "Song Shi 365 — Yue Fei biyografisi",
+      "url": "https://zh.wikisource.org/zh/宋史/卷365",
+      "kind": "tarihî anlatı, dijital metin",
+      "access": "Beş yüz Beiwei atlısı hakkındaki ifade; anlatıdaki zafer sayıları bağımsız doğrulanmış veri değildir"
+    },
+    "mughal_ahadi": {
+      "title": "Abul Fazl — Ain-i-Akbari I, The Ahadis",
+      "url": "https://persian.packhum.org/text/000702051/5",
+      "kind": "birincil metnin İngilizce çevirisi",
+      "access": "Arama dizinindeki at getirme ve teftiş düzeni incelendi; tüm bölümün ayrıntılı incelemesi bekliyor"
+    },
+    "mali_battuta": {
+      "title": "Ibn Battuta — Mali saray ziyareti, Fordham çevirisi",
+      "url": "https://sourcebooks.web.fordham.edu/source/1354-ibnbattuta.asp",
+      "kind": "birincil seyahat anlatısı çevirisi",
+      "access": "Mansa Sulayman arkasındaki 300 silahlı köle mensup maiyet pasajı incelendi; kıyafet ve silah türü bu pasajdan çıkarılmadı"
+    },
+    "ethiopia_chewa": {
+      "title": "Deresse Ayenachew — Evolution and Organisation of the Čäwa Military Regiments, 2014",
+      "url": "https://www.persee.fr/doc/ethio_0066-2127_2014_num_29_1_1559",
+      "kind": "akademik makale",
+      "access": "Giriş ve araştırma kapsamı incelendi; ayrı birliklerin faaliyetleri için kaynak kıtlığı belirtiliyor"
+    },
+    "khmer_reliefs": {
+      "title": "Les Armées khmères au XIIe siècle d’après les bas-reliefs angkoriens, 1979",
+      "url": "https://www.persee.fr/doc/rharm_0035-3299_1979_num_6_1_7563",
+      "kind": "akademik makale",
+      "access": "Bibliyografya ve araştırma konusu doğrulandı; seçkin birlik teşhisi henüz yapılmadı"
+    },
+    "maya_walters": {
+      "title": "Walters Art Museum — Warrior Figurine, 2009.20.38",
+      "url": "https://art.thewalters.org/object/2009.20.38/",
+      "kind": "müze nesnesi",
+      "access": "550–850; dikdörtgen esnek kalkan ve kapitone zırh müze açıklamasında doğrulandı; seçkin birlik teşhisi yok"
+    },
+    "maya_cleveland": {
+      "title": "Cleveland Museum of Art — Warrior Figurine with Shield, 1990.178",
+      "url": "https://www.clevelandart.org/art/1990.178",
+      "kind": "müze nesnesi",
+      "access": "Jaina tarzı Klasik Maya figürü; görsel inceleme ve birlik statüsü bekliyor"
+    },
+    "benin_bm": {
+      "title": "British Museum — Benin plaque, Af1898,0115.73",
+      "url": "https://www.britishmuseum.org/collection/object/E_Af1898-0115-73",
+      "kind": "müze nesnesi",
+      "access": "Leopar yüzlü gövde zırhı, çanlar ve eben kılıcı nesne açıklamasında; standart er üniforması olarak genellenmez"
+    },
+    "sasanian_army": {
+      "title": "A. Shapur Shahbazi — ARMY i, Encyclopaedia Iranica",
+      "url": "https://www.iranicaonline.org/articles/army-i/",
+      "kind": "akademik ansiklopedi",
+      "access": "Pushtigban muhafız teşkilatı; mevcut Aswaran kartından donanım ayrımı bekliyor"
+    },
+    "mamluk_axe": {
+      "title": "The Met — Axe, 69.156",
+      "url": "https://www.metmuseum.org/art/collection/search/24857",
+      "kind": "müze nesnesi",
+      "access": "1450–1500 Suriye; özel balta taşıyıcılarına ilişkin müze açıklaması; tüm kıyafet doğrulanmadı"
+    },
+    "persian_apple": {
+      "title": "British Museum — Susa guards frieze, W_Loan-78",
+      "url": "https://www.britishmuseum.org/collection/object/W_Loan-78",
+      "kind": "müze nesnesi",
+      "access": "Küre biçimli altın mızrak dipleri ve melophoroi adı nesne açıklamasında; Ölümsüzlerle olası örtüşme araştırılmalı"
+    },
+    "tudor_guard": {
+      "title": "The Royal Family — Gentlemen at Arms",
+      "url": "https://www.royal.uk/gentlemen-arms?page=9",
+      "kind": "kurum tarihi",
+      "access": "1509 kuruluş kaydı doğrulandı; erken dönem donanımı henüz incelenmedi"
+    },
+    "silla_hwarang": {
+      "title": "Academy of Korean Studies — Hwarangdo",
+      "url": "https://encykorea.aks.ac.kr/Article/E0064589",
+      "kind": "uzman ansiklopedi maddesi",
+      "access": "Dizindeki ayrıntılı metin incelendi: aristokrat önderler, farklı toplumsal kesimlerden üyeler, askerî ve toplumsal/dinî işlevler. Sadece bir savaş alayı diye sunulamaz."
+    },
+    "tibet_met35942": {
+      "title": "The Met — Armored Cavalryman",
+      "url": "https://www.metmuseum.org/art/collection/search/35942",
+      "kind": "müze nesnesi",
+      "access": "Nesne açıklaması incelendi. 18.–19. yy birleşik teşhir, 1930–40 fotoğraflarına göre düzenlenmiş; tüfek de taşıyan tören süvarisi. Erken Tibet İmparatorluğu görüntüsü olarak kullanılamaz."
+    },
+    "maori_taiaha": {
+      "title": "Te Papa — Fighting figure",
+      "url": "https://collections.tepapa.govt.nz/topic/3128",
+      "kind": "müze açıklaması",
+      "access": "Taiaha biçimi, iki yüzlü oyma baş, dil ve düz vurucu uç; rütbe ve otorite bağlantısı incelendi. Kurumsal seçkin birlik adı yok."
+    },
+    "niue_toa": {
+      "title": "Te Papa — The Ultimate Niuean Warrior!",
+      "url": "https://blog.tepapa.govt.nz/2013/10/18/the-ultimate-niuean-warrior-niuean-language-week-2013/",
+      "kind": "müze koleksiyonu yazısı",
+      "access": "Arama dizinindeki özet incelendi: 19.–20. yy savaşçı donanımı ve katoua. Erken döneme taşınmamalı; alay veya muhafız birliği olduğu doğrulanmadı."
+    },
+    "goryeo_xujing11": {
+      "title": "Xu Jing — Goryeo Tujing, cilt 11 (1123)",
+      "url": "https://zh.wikisource.org/zh/宣和奉使髙麗圖經_(四庫全書本)/卷11",
+      "kind": "birincil seyahat kaydı",
+      "access": "Metin/nesne kaydı ve sınırlılıkları incelendi"
+    },
+    "maya_sajal_cma": {
+      "title": "Cleveland Museum of Art — Seated Warrior, 1990.178",
+      "url": "https://www.clevelandart.org/art/1990.178",
+      "kind": "müze nesnesi; CC0",
+      "access": "Metin/nesne kaydı ve sınırlılıkları incelendi"
+    },
+    "assyria_royal_guard_visual": {
+      "title": "Zunkir",
+      "url": "https://commons.wikimedia.org/wiki/File:Campaign_in_southern_Iraq_of_Ashurbanipal_-_carriying_and_couting_booty_in_a_palm_grove.jpg",
+      "kind": "görsel referans; tarihleme ve teşhis sınırları kartta",
+      "access": "Metin/nesne kaydı ve sınırlılıkları incelendi"
+    },
+    "goryeo_yongho_guard_visual": {
+      "title": "蒙古襲来絵詞 -Mōko Shūrai Ekotoba",
+      "url": "https://commons.wikimedia.org/wiki/File:A_Goryeo_Soldier_wearing_a_durumagi.jpg",
+      "kind": "görsel referans; tarihleme ve teşhis sınırları kartta",
+      "access": "Metin/nesne kaydı ve sınırlılıkları incelendi"
+    },
+    "song_beiwei_visual": {
+      "title": "Unknown authorUnknown author",
+      "url": "https://commons.wikimedia.org/wiki/File:SONG_guards.jpg",
+      "kind": "görsel referans; tarihleme ve teşhis sınırları kartta",
+      "access": "Metin/nesne kaydı ve sınırlılıkları incelendi"
+    },
+    "mughal_ahadi_visual": {
+      "title": "by Bryce, James, 1838-1922; Petrie, W. M. Flinders (William Matthew Flinders), Sir, 1853-1942",
+      "url": "https://commons.wikimedia.org/wiki/File:Cavalry_soldier_of_Mughal_Empire.jpg",
+      "kind": "görsel referans; tarihleme ve teşhis sınırları kartta",
+      "access": "Metin/nesne kaydı ve sınırlılıkları incelendi"
+    },
+    "khmer_ranked_cavalry_visual": {
+      "title": "Michael Gunther",
+      "url": "https://commons.wikimedia.org/wiki/File:Procession_of_Suryavarman_II_Angkor_Wat_0873.jpg",
+      "kind": "görsel referans; tarihleme ve teşhis sınırları kartta",
+      "access": "Metin/nesne kaydı ve sınırlılıkları incelendi"
+    },
+    "maya_sajal_visual": {
+      "title": "Cleveland Museum of Art — Seated Warrior, 1990.178",
+      "url": "https://www.clevelandart.org/art/1990.178",
+      "kind": "görsel referans; tarihleme ve teşhis sınırları kartta",
+      "access": "Metin/nesne kaydı ve sınırlılıkları incelendi"
+    },
+    "benin_warrior_chief_visual": {
+      "title": "Fotoğraf: Andreas Franzkowiak / Bullenwächter; eser: Igun Eronmwon",
+      "url": "https://commons.wikimedia.org/wiki/File:MARKK_C2384_Warrior_Chief_with_Shield_and_Spear_DSC-1076.jpg",
+      "kind": "görsel referans; tarihleme ve teşhis sınırları kartta",
+      "access": "Metin/nesne kaydı ve sınırlılıkları incelendi"
+    },
+    "mamluk_axebearer_visual": {
+      "title": "The Metropolitan Museum of Art — Axe, 69.156",
+      "url": "https://www.metmuseum.org/art/collection/search/24857",
+      "kind": "görsel referans; tarihleme ve teşhis sınırları kartta",
+      "access": "Metin/nesne kaydı ve sınırlılıkları incelendi"
+    },
+    "norse_weapons": {
+      "title": "National Museum of Denmark — Viking weapons",
+      "url": "https://en.natmus.dk/historical-knowledge/denmark/prehistoric-period-until-1050-ad/the-viking-age/weapons/",
+      "kind": "müze araştırması"
+    },
+    "norse_axes": {
+      "title": "National Museum of Denmark — Viking axes",
+      "url": "https://en.natmus.dk/historical-knowledge/denmark/prehistoric-period-until-1050-ad/the-viking-age/weapons/axes/",
+      "kind": "müze araştırması"
+    },
+    "norse_bows": {
+      "title": "Viking Ship Museum — Viking Age bows and arrows",
+      "url": "https://www.vikingeskibsmuseet.dk/frontend/Dokumenter/Arrow_2_EN_02.pdf",
+      "kind": "müze yayını; Haithabu yay buluntusu"
+    },
+    "norse_hird": {
+      "title": "Håkon Haugland, Aust-Agder museum og arkiv — Hird, Store norske leksikon",
+      "url": "https://snl.no/hird",
+      "kind": "uzman tarih ansiklopedisi"
+    },
+    "norse_gjermundbu": {
+      "title": "Historical Museum Oslo — VÍKINGR, Gjermundbu grave",
+      "url": "https://www.historiskmuseum.no/english/exhibitions/undermappe-utstillinger/handout-vikingr-web-engelsk.pdf",
+      "kind": "müze sergi rehberi"
+    },
+    "norse_hird_swordsman_visual": {
+      "title": "Arild Finne Nybø — Viking swords. No. 7 found in Eid, Western Norway. Exhibited at Bergen museum.",
+      "url": "https://commons.wikimedia.org/wiki/File:Viking_swords_01.jpg",
+      "kind": "lisanslı arkeolojik donanım referansı"
+    },
+    "norse_spearman_visual": {
+      "title": "Thomas Quine — Royal Ontario Museum, Toronto, Canada, 2017",
+      "url": "https://commons.wikimedia.org/wiki/File:Viking_spearhead_(29078140247).jpg",
+      "kind": "lisanslı arkeolojik donanım referansı"
+    },
+    "norse_dane_axeman_visual": {
+      "title": "EricMcHugh — Example of a typical 11th century \"Dane Axe\" style battle axe.",
+      "url": "https://commons.wikimedia.org/wiki/File:DaneAxe.jpg",
+      "kind": "lisanslı arkeolojik donanım referansı"
+    },
+    "norse_longbowman_visual": {
+      "title": "The Swedish History Museum, Stockholm from Sweden — Arrowheads Iron Grave find, Björkö, Adelsö, Uppland, Sweden. SHM 34000:Bj 644",
+      "url": "https://commons.wikimedia.org/wiki/File:Object_from_the_exhibition_We_call_them_Vikings_produced_by_The_Swedish_History_Museum_(13618316875).jpg",
+      "kind": "lisanslı arkeolojik donanım referansı"
+    }
+  },
+  "units": [
+    {
+      "id": "ottoman_sipah",
+      "faction": "Osmanlı Devleti",
+      "name": "Sipah bölüğü",
+      "period": "15.–16. yy seçkisi",
+      "kind": "muhafız bölüğü",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Altı Bölük içindeki kapıkulu süvarisi.",
+      "equipmentDraft": "Yay / mızrak / kılıç taslağı.",
+      "sourceIds": [
+        "ottoman6"
+      ],
+      "visualSourceIds": [],
+      "caution": "Altı bölüğe farklı silah veya üniforma ataması ayrıca belgelenmeli."
+    },
+    {
+      "id": "ottoman_silahdar",
+      "faction": "Osmanlı Devleti",
+      "name": "Silâhdar bölüğü",
+      "period": "15.–16. yy seçkisi",
+      "kind": "muhafız bölüğü",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Altı Bölük içindeki kapıkulu süvarisi.",
+      "equipmentDraft": "Yay / mızrak / kılıç taslağı.",
+      "sourceIds": [
+        "ottoman6"
+      ],
+      "visualSourceIds": [],
+      "caution": "Altı bölüğe farklı silah veya üniforma ataması ayrıca belgelenmeli."
+    },
+    {
+      "id": "ottoman_ulufeci_right",
+      "faction": "Osmanlı Devleti",
+      "name": "Ulûfeciyân-ı yemîn — sağ ulûfeciler",
+      "period": "15.–16. yy seçkisi",
+      "kind": "muhafız bölüğü",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Altı Bölük içindeki kapıkulu süvarisi.",
+      "equipmentDraft": "Yay / mızrak / kılıç taslağı.",
+      "sourceIds": [
+        "ottoman6"
+      ],
+      "visualSourceIds": [],
+      "caution": "Altı bölüğe farklı silah veya üniforma ataması ayrıca belgelenmeli."
+    },
+    {
+      "id": "ottoman_ulufeci_left",
+      "faction": "Osmanlı Devleti",
+      "name": "Ulûfeciyân-ı yesâr — sol ulûfeciler",
+      "period": "15.–16. yy seçkisi",
+      "kind": "muhafız bölüğü",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Altı Bölük içindeki kapıkulu süvarisi.",
+      "equipmentDraft": "Yay / mızrak / kılıç taslağı.",
+      "sourceIds": [
+        "ottoman6"
+      ],
+      "visualSourceIds": [],
+      "caution": "Altı bölüğe farklı silah veya üniforma ataması ayrıca belgelenmeli."
+    },
+    {
+      "id": "ottoman_gureba_right",
+      "faction": "Osmanlı Devleti",
+      "name": "Gurebâ-yi yemîn — sağ garipler",
+      "period": "15.–16. yy seçkisi",
+      "kind": "muhafız bölüğü",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Altı Bölük içindeki kapıkulu süvarisi.",
+      "equipmentDraft": "Yay / mızrak / kılıç taslağı.",
+      "sourceIds": [
+        "ottoman6"
+      ],
+      "visualSourceIds": [],
+      "caution": "Altı bölüğe farklı silah veya üniforma ataması ayrıca belgelenmeli."
+    },
+    {
+      "id": "ottoman_gureba_left",
+      "faction": "Osmanlı Devleti",
+      "name": "Gurebâ-yi yesâr — sol garipler",
+      "period": "15.–16. yy seçkisi",
+      "kind": "muhafız bölüğü",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Altı Bölük içindeki kapıkulu süvarisi.",
+      "equipmentDraft": "Yay / mızrak / kılıç taslağı.",
+      "sourceIds": [
+        "ottoman6"
+      ],
+      "visualSourceIds": [],
+      "caution": "Altı bölüğe farklı silah veya üniforma ataması ayrıca belgelenmeli."
+    },
+    {
+      "id": "ottoman_solak",
+      "faction": "Osmanlı Devleti",
+      "name": "Solak muhafızları",
+      "period": "15.–16. yy seçkisi",
+      "kind": "muhafız birliği",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Yeniçeriler arasından seçilen padişah muhafızları.",
+      "equipmentDraft": "Yay, ok ve yan silah.",
+      "sourceIds": [
+        "solak"
+      ],
+      "visualSourceIds": [],
+      "caution": "Yeniçerilerin alt grubudur; ayrı millet veya bağımsız ordu değildir."
+    },
+    {
+      "id": "ottoman_early_janissary",
+      "faction": "Osmanlı Devleti",
+      "name": "Erken dönem yeniçerisi",
+      "period": "14. yy sonu–15. yy başı seçkisi",
+      "kind": "daimî ocak",
+      "mount": "foot",
+      "status": "donanim_dogrulamasi",
+      "historicalNote": "Merkezî hükümdar ordusunun eğitimli piyade ocağı.",
+      "equipmentDraft": "Yay ve yakın dövüş silahı; erken dönem doğrulaması gerekli.",
+      "sourceIds": [
+        "janissary"
+      ],
+      "visualSourceIds": [
+        "janissaryart"
+      ],
+      "caution": "Sonraki tüfekli yeniçeri görünüşü erken döneme taşınmamalı; kuruluş tarihi kesin gün/yıl olarak verilmemeli."
+    },
+    {
+      "id": "abbasid_ghulam",
+      "faction": "Abbâsî Halifeliği",
+      "name": "Türk gulâm muhafızları",
+      "period": "9. yy",
+      "kind": "muhafız askerî topluluğu",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Halife ordusunda Türk askerlerden oluşan muhafız çekirdeği.",
+      "equipmentDraft": "At, yay ve yakın dövüş silahı taslağı.",
+      "sourceIds": [
+        "gulam",
+        "army2"
+      ],
+      "visualSourceIds": [],
+      "caution": "Gulâm, tek bir alayın özel adı değil; asker yetiştirme ve bağlılık sistemidir."
+    },
+    {
+      "id": "ghaznavid_guard",
+      "faction": "Gazneli Devleti",
+      "name": "Gulâmân-ı saray",
+      "period": "10.–11. yy",
+      "kind": "saray muhafızları",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Gazneli ordusunda hükümdara bağlı seçkin muhafızlar.",
+      "equipmentDraft": "Yay, kısa mızrak, gürz; tasvirlerde süslü kıyafet.",
+      "sourceIds": [
+        "army2"
+      ],
+      "visualSourceIds": [],
+      "caution": "Laşker-i Bâzâr tasvirleri tüm askerler için tek savaş üniforması sayılmamalı."
+    },
+    {
+      "id": "ghaznavid_daylami",
+      "faction": "Gazneli Devleti",
+      "name": "Deylemli seçkin piyadeler",
+      "period": "10.–11. yy",
+      "kind": "seçkin asker topluluğu",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Gazneli hizmetinde kullanılan seçkin Deylemli piyadeler.",
+      "equipmentDraft": "Kalkan ve mızrak taslağı.",
+      "sourceIds": [
+        "army2"
+      ],
+      "visualSourceIds": [],
+      "caution": "Birlik numarası veya özel alay adı doğrulanmış değil."
+    },
+    {
+      "id": "seljuk_hassa",
+      "faction": "Büyük Selçuklu Devleti",
+      "name": "Hassa gulâm süvarileri",
+      "period": "11.–12. yy",
+      "kind": "hükümdara bağlı askerî çekirdek",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Sultana bağlı eğitimli gulâmlar merkez kuvvetlerde yer alır.",
+      "equipmentDraft": "Yay, mızrak ve kılıç taslağı.",
+      "sourceIds": [
+        "gulam"
+      ],
+      "visualSourceIds": [],
+      "caution": "Bütün Türkmen atlılarıyla eş tutulmamalı."
+    },
+    {
+      "id": "rum_hassa",
+      "faction": "Anadolu Selçuklu Devleti",
+      "name": "Sultan gulâmları / hassa kuvvetleri",
+      "period": "12.–13. yy",
+      "kind": "hükümdara bağlı askerî çekirdek",
+      "mount": "horse",
+      "status": "donanim_dogrulamasi",
+      "historicalNote": "Sultanın hizmetindeki gulâmlar askerî teşkilâtın bir parçasıdır.",
+      "equipmentDraft": "Atlı yakın dövüş ve yay taslağı.",
+      "sourceIds": [
+        "gulam"
+      ],
+      "visualSourceIds": [],
+      "caution": "Tam birlik adı, alt bölükler ve dönem kıyafeti için ek doğrulama gerekli."
+    },
+    {
+      "id": "safavid_qurchi",
+      "faction": "Safevî Devleti",
+      "name": "Korçular / Qurchi",
+      "period": "16. yy",
+      "kind": "hükümdar muhafızları",
+      "mount": "horse",
+      "status": "gecis_donemi",
+      "historicalNote": "Kızılbaş aşiretlerinden hükümdarın muhafız süvarileri.",
+      "equipmentDraft": "Kılıç, mızrak ve yay.",
+      "sourceIds": [
+        "army3"
+      ],
+      "visualSourceIds": [],
+      "caution": "Ateşli silahların da kullanıldığı çağ; geleneksel silahlı varyant."
+    },
+    {
+      "id": "safavid_ghulam",
+      "faction": "Safevî Devleti",
+      "name": "Şah gulâmları / Qollar",
+      "period": "16. yy sonu–17. yy başı",
+      "kind": "hükümdara bağlı süvari",
+      "mount": "horse",
+      "status": "gecis_donemi",
+      "historicalNote": "Şah Abbas döneminde genişletilen hükümdara bağlı askerî kuvvet.",
+      "equipmentDraft": "Kılıç ve mızrak taslağı; birlik bazında silah doğrulanmalı.",
+      "sourceIds": [
+        "army3"
+      ],
+      "visualSourceIds": [],
+      "caution": "Kurumun ateşli silahlarla ilişkisi ayrıca incelenmeli; ana listeye otomatik alınmamalı."
+    },
+    {
+      "id": "mamluk_bahri",
+      "faction": "Eyyûbîler / Memlük Sultanlığı",
+      "name": "Bahriyye Memlükleri",
+      "period": "13.–14. yy",
+      "kind": "hükümdar memlükleri / askerî grup",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Ravza adasında yetiştirilen gruptan gelişen askerî güç.",
+      "equipmentDraft": "Mızrak merkezli atlı savaşçı; yay ve kılıç taslağı.",
+      "sourceIds": [
+        "bahri",
+        "mamluklance"
+      ],
+      "visualSourceIds": [],
+      "caution": "Bahri yalnız 1250'de başlayan bir birlik değildir; kökeni Eyyûbî dönemindedir."
+    },
+    {
+      "id": "mamluk_burji",
+      "faction": "Memlük Sultanlığı",
+      "name": "Burciyye Memlükleri",
+      "period": "13. yy sonu–15. yy seçkisi",
+      "kind": "hükümdar memlükleri / askerî grup",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Kalavun döneminde oluşturulan memlük grubundan gelişmiştir.",
+      "equipmentDraft": "Mızrak merkezli atlı savaşçı; yay ve kılıç taslağı.",
+      "sourceIds": [
+        "burji",
+        "mamluklance"
+      ],
+      "visualSourceIds": [],
+      "caution": "1382 hanedan dönemi başlangıcıdır; birliğin ilk kuruluş tarihi değildir. Bahriyye'den farklı silah sınıfı uydurulmamalı."
+    },
+    {
+      "id": "mongol_keshig",
+      "faction": "Moğol İmparatorluğu",
+      "name": "Keşik / Keshig",
+      "period": "13. yy",
+      "kind": "hükümdar muhafız teşkilâtı",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Kağana bağlı muhafız teşkilâtı.",
+      "equipmentDraft": "At, kompozit yay ve yan silah taslağı.",
+      "sourceIds": [
+        "keshig"
+      ],
+      "visualSourceIds": [],
+      "caution": "Gece/gündüz muhafızı ve okçu alt gruplarının adları ikinci doğrulamadan sonra ayrı kayda dönüşmeli."
+    },
+    {
+      "id": "ilkhan_keshikten",
+      "faction": "İlhanlı Devleti",
+      "name": "Keşikten / Kešikten",
+      "period": "1256–1335",
+      "kind": "hükümdar muhafız teşkilâtı",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "İlhanlı siyaseti ve sarayında muhafız kurumunun devamı.",
+      "equipmentDraft": "At, yay ve yakın dövüş silahı taslağı.",
+      "sourceIds": [
+        "ilkhan"
+      ],
+      "visualSourceIds": [],
+      "caution": "Moğol keşiğiyle tarihî bağ bulunur; yalnız yeniden adlandırılmış bağımsız bir icat değildir."
+    },
+    {
+      "id": "achaemenid_immortals",
+      "faction": "Ahameniş İmparatorluğu",
+      "name": "Ölümsüzler",
+      "period": "MÖ 5. yy seçkisi",
+      "kind": "seçkin muhafız piyadesi",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Herodotos'un on bin kişilik seçkin Pers kuvveti olarak anlattığı birlik.",
+      "equipmentDraft": "Mızrak, yay ve kalkan taslağı.",
+      "sourceIds": [
+        "immortals"
+      ],
+      "visualSourceIds": [],
+      "caution": "Adlandırma ve kaynak yorumu tartışmalıdır; sinema maskeleri tarihî kanıt değildir."
+    },
+    {
+      "id": "parthian_cataphract",
+      "faction": "Part / Arsak İmparatorluğu",
+      "name": "Zırhlı aristokrat süvariler / katafraktlar",
+      "period": "MÖ 1.–MS 2. yy seçkisi",
+      "kind": "askerî seçkin sınıf / asker türü",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Soylu süvari çekirdeği ağır zırhlı atlı savaş geleneğine bağlıdır.",
+      "equipmentDraft": "Uzun mızrak, zırhlı binici; at zırhı dönemsel.",
+      "sourceIds": [
+        "iranarmy",
+        "iranarmor"
+      ],
+      "visualSourceIds": [],
+      "caution": "Katafrakt tek bir özel muhafız alayının adı değildir."
+    },
+    {
+      "id": "sasanian_aswaran",
+      "faction": "Sâsânî İmparatorluğu",
+      "name": "Asvârân / Savârân",
+      "period": "4.–7. yy seçkisi",
+      "kind": "askerî seçkin süvari sınıfı",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Ordunun merkezindeki zırhlı süvari geleneği.",
+      "equipmentDraft": "Mızrak, yay, kılıç; at ve binici zırhı dönemsel.",
+      "sourceIds": [
+        "iranarmy",
+        "iranarmor"
+      ],
+      "visualSourceIds": [],
+      "caution": "Hepsini tek üniformalı bir alay veya aynı derecede zırhlı sayma."
+    },
+    {
+      "id": "macedon_companions",
+      "faction": "Makedonya Krallığı",
+      "name": "Hetairoi — Yoldaş Süvarileri",
+      "period": "MÖ 4. yy",
+      "kind": "seçkin süvari",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "İskender'in ordusunun önemli saldırı süvarisi.",
+      "equipmentDraft": "Uzun süvari mızrağı ve yan silah.",
+      "sourceIds": [
+        "macedonia"
+      ],
+      "visualSourceIds": [],
+      "caution": "Kraliyet filosu alt gruptur; ana birliğe ek bağımsız aynı nüfus gibi sayılmamalı."
+    },
+    {
+      "id": "macedon_hypaspists",
+      "faction": "Makedonya Krallığı",
+      "name": "Hypaspistler",
+      "period": "MÖ 4. yy",
+      "kind": "seçkin muhafız piyadesi",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Kralın korunmasında ve ordunun esnek görevlerinde kullanılan seçkin piyade.",
+      "equipmentDraft": "Kalkan, mızrak ve kılıç taslağı.",
+      "sourceIds": [
+        "hypaspist",
+        "macedonia"
+      ],
+      "visualSourceIds": [],
+      "caution": "Kesin teçhizat ve sonraki Gümüş Kalkanlarla devamlılık tartışmalıdır."
+    },
+    {
+      "id": "sparta_hippeis",
+      "faction": "Sparta",
+      "name": "Hippeis — seçilmiş muhafızlar",
+      "period": "MÖ 5.–4. yy",
+      "kind": "seçilmiş muhafız piyadesi",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Sparta'nın üç yüz kişilik seçilmiş savaşçı grubu.",
+      "equipmentDraft": "Hoplite kalkanı ve mızrak taslağı.",
+      "sourceIds": [
+        "sparta",
+        "hippeis"
+      ],
+      "visualSourceIds": [],
+      "caution": "Adı atlı çağrışımı yapsa da Sparta kaydı süvari kartına çevrilmemeli."
+    },
+    {
+      "id": "thebes_sacred_band",
+      "faction": "Thebai",
+      "name": "Kutsal Birlik / Hieros Lochos",
+      "period": "MÖ 4. yy",
+      "kind": "seçilmiş piyade birliği",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Plutarkhos'un üç yüz seçilmiş askerle ilişkilendirdiği Thebai birliği.",
+      "equipmentDraft": "Hoplite kalkanı ve mızrak taslağı.",
+      "sourceIds": [
+        "thebes"
+      ],
+      "visualSourceIds": [],
+      "caution": "Antik anlatı olaylardan sonra yazılmıştır; ayrıntıları tartışmasız çağdaş kayıt gibi sunma."
+    },
+    {
+      "id": "seleucid_silver_shields",
+      "faction": "Seleukos İmparatorluğu",
+      "name": "Argyraspides — Gümüş Kalkanlar",
+      "period": "MÖ 3.–2. yy seçkisi",
+      "kind": "seçkin daimî piyade",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Makedon tarzı daimî piyade çekirdeği.",
+      "equipmentDraft": "Sarissa ve kalkan taslağı.",
+      "sourceIds": [
+        "seleucid"
+      ],
+      "visualSourceIds": [],
+      "caution": "İskender/Diadokh birlikleriyle yalnız isimden hareketle birebir özdeşleştirme."
+    },
+    {
+      "id": "rome_praetorian",
+      "faction": "Roma İmparatorluğu",
+      "name": "Praetorian Muhafızları",
+      "period": "MS 1.–3. yy seçkisi",
+      "kind": "imparator muhafızları",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "İmparatorun muhafız teşkilâtı.",
+      "equipmentDraft": "Kılıç, kalkan ve mızrak/cirit taslağı.",
+      "sourceIds": [
+        "praetorian"
+      ],
+      "visualSourceIds": [
+        "praetorianart"
+      ],
+      "caution": "Erken imparatorluk görünüşü geç Roma ekipmanıyla karıştırılmamalı."
+    },
+    {
+      "id": "rome_equites",
+      "faction": "Roma İmparatorluğu",
+      "name": "Equites singulares Augusti",
+      "period": "MS 2.–3. yy seçkisi",
+      "kind": "imparatorun atlı muhafızları",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Vatikan'daki asker steli, Roma'da konuşlu atlıların imparatora muhafızlık görevini belgeler.",
+      "equipmentDraft": "Atlı mızrak ve kılıç taslağı.",
+      "sourceIds": [
+        "equites"
+      ],
+      "visualSourceIds": [],
+      "caution": "Atlı muhafız kartı; genel lejyoner kartının sadece ata bindirilmiş hâli olmamalı."
+    },
+    {
+      "id": "byzantine_scholai",
+      "faction": "Bizans İmparatorluğu",
+      "name": "Scholai",
+      "period": "8.–10. yy seçkisi",
+      "kind": "merkezî tagma",
+      "mount": "horse",
+      "status": "donanim_dogrulamasi",
+      "historicalNote": "Merkez ordusunun adı belgelenmiş tagmalarından biri.",
+      "equipmentDraft": "Zırhlı süvari teçhizatı taslağı.",
+      "sourceIds": [
+        "tagmata",
+        "treadgold"
+      ],
+      "visualSourceIds": [],
+      "caution": "Belirli yüzyıl, görev ve teçhizat doğrulanmalı; ayrı renk/özel güç tarihî gerçek diye uydurulmamalı."
+    },
+    {
+      "id": "byzantine_excubitors",
+      "faction": "Bizans İmparatorluğu",
+      "name": "Exkoubitoi / Excubitors",
+      "period": "8.–10. yy seçkisi",
+      "kind": "merkezî tagma",
+      "mount": "horse",
+      "status": "donanim_dogrulamasi",
+      "historicalNote": "Merkez ordusunun adı belgelenmiş tagmalarından biri.",
+      "equipmentDraft": "Zırhlı süvari teçhizatı taslağı.",
+      "sourceIds": [
+        "tagmata",
+        "treadgold"
+      ],
+      "visualSourceIds": [],
+      "caution": "Belirli yüzyıl, görev ve teçhizat doğrulanmalı; ayrı renk/özel güç tarihî gerçek diye uydurulmamalı."
+    },
+    {
+      "id": "byzantine_vigla",
+      "faction": "Bizans İmparatorluğu",
+      "name": "Vigla / Arithmos",
+      "period": "8.–10. yy seçkisi",
+      "kind": "merkezî tagma",
+      "mount": "horse",
+      "status": "donanim_dogrulamasi",
+      "historicalNote": "Merkez ordusunun adı belgelenmiş tagmalarından biri.",
+      "equipmentDraft": "Zırhlı süvari teçhizatı taslağı.",
+      "sourceIds": [
+        "tagmata",
+        "treadgold"
+      ],
+      "visualSourceIds": [],
+      "caution": "Belirli yüzyıl, görev ve teçhizat doğrulanmalı; ayrı renk/özel güç tarihî gerçek diye uydurulmamalı."
+    },
+    {
+      "id": "byzantine_hikanatoi",
+      "faction": "Bizans İmparatorluğu",
+      "name": "Hikanatoi",
+      "period": "9.–10. yy seçkisi",
+      "kind": "merkezî tagma",
+      "mount": "horse",
+      "status": "donanim_dogrulamasi",
+      "historicalNote": "Merkez ordusunun adı belgelenmiş tagmalarından biri.",
+      "equipmentDraft": "Zırhlı süvari teçhizatı taslağı.",
+      "sourceIds": [
+        "tagmata",
+        "treadgold"
+      ],
+      "visualSourceIds": [],
+      "caution": "Belirli yüzyıl, görev ve teçhizat doğrulanmalı; ayrı renk/özel güç tarihî gerçek diye uydurulmamalı."
+    },
+    {
+      "id": "byzantine_varangian",
+      "faction": "Bizans İmparatorluğu",
+      "name": "Varang Muhafızları",
+      "period": "10. yy sonu–12. yy seçkisi",
+      "kind": "imparator muhafızları",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Bizans imparatoruna bağlı yabancı kökenli seçkin muhafızlar.",
+      "equipmentDraft": "Uzun saplı balta, kalkan ve dönemsel zırh.",
+      "sourceIds": [
+        "varangian"
+      ],
+      "visualSourceIds": [],
+      "caution": "Bütün dönemlerde yalnız İskandinavlardan oluştuğu veya hepsinin aynı kıyafeti giydiği varsayılmamalı."
+    },
+    {
+      "id": "england_housecarl",
+      "faction": "Anglosakson İngiltere",
+      "name": "Housecarl / Huscarl",
+      "period": "11. yy",
+      "kind": "hükümdar ve ileri gelenlerin maiyet savaşçıları",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "1066'da Harold'ın ordusunda seçkin maiyet savaşçıları.",
+      "equipmentDraft": "Uzun saplı savaş baltası; kalkan ve zırh.",
+      "sourceIds": [
+        "housecarl"
+      ],
+      "visualSourceIds": [],
+      "caution": "Danimarka ve diğer İskandinav maiyetleriyle aynı devlet altında birleştirme."
+    },
+    {
+      "id": "templar_knight",
+      "faction": "Tapınak Tarikatı",
+      "name": "Tapınakçı şövalye kardeşler",
+      "period": "12.–13. yy",
+      "kind": "askerî dinî tarikat",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Haçlı coğrafyasında görev yapan askerî tarikatın şövalyeleri.",
+      "equipmentDraft": "Mızrak, kılıç, kalkan; döneme uygun zırh taslağı.",
+      "sourceIds": [
+        "templar"
+      ],
+      "visualSourceIds": [],
+      "caution": "Modern bir ülkenin millî birliği değildir; yaya hizmetliler ve diğer kardeşlerle aynı sınıf sayılmamalı."
+    },
+    {
+      "id": "hospitaller_knight",
+      "faction": "Hospitalier / Aziz Yuhanna Tarikatı",
+      "name": "Hospitalier şövalye kardeşler",
+      "period": "12.–14. yy seçkisi",
+      "kind": "askerî dinî tarikat",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Hastane ve hacı koruma işlevlerine askerî görev ekleyen tarikat.",
+      "equipmentDraft": "Mızrak, kılıç, kalkan; dönemsel zırh taslağı.",
+      "sourceIds": [
+        "hospital"
+      ],
+      "visualSourceIds": [],
+      "caution": "Sonraki Malta döneminin ateşli silahları ve geç sembol biçimleri erken döneme taşınmamalı."
+    },
+    {
+      "id": "teutonic_knight",
+      "faction": "Töton Tarikatı / Tarikat Devleti",
+      "name": "Töton şövalye kardeşler",
+      "period": "13.–14. yy seçkisi",
+      "kind": "askerî dinî tarikat",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "1198'de askerî tarikat statüsü kazanan kurumun şövalyeleri.",
+      "equipmentDraft": "Mızrak, kılıç, kalkan; dönemsel zırh taslağı.",
+      "sourceIds": [
+        "teuton"
+      ],
+      "visualSourceIds": [
+        "teutonart"
+      ],
+      "caution": "Bütün Töton ordusu şövalye kardeşlerden oluşmaz; modern Almanya ordusu diye etiketleme."
+    },
+    {
+      "id": "polish_hussar",
+      "faction": "Polonya-Litvanya Birliği",
+      "name": "Kanatlı hüsarlar / Husaria",
+      "period": "16. yy sonu–17. yy seçkisi",
+      "kind": "seçkin süvari",
+      "mount": "horse",
+      "status": "gecis_donemi",
+      "historicalNote": "Mızraklı süvari geleneği; tarihî baskıda atlı ve kanatlı tasvir bulunur.",
+      "equipmentDraft": "Uzun süvari mızrağı, kılıç ve zırh taslağı.",
+      "sourceIds": [
+        "hussar",
+        "hussarart"
+      ],
+      "visualSourceIds": [
+        "hussarart"
+      ],
+      "caution": "Ateşli silahlar çağındadır. Kanatlar her savaşçıda sabit standart değil; ürkütücü ses iddiası eklenmemeli."
+    },
+    {
+      "id": "japan_mounted_samurai",
+      "faction": "Ortaçağ Japonya'sı",
+      "name": "Atlı samuray — yaylı yoroi varyantı",
+      "period": "12.–14. yy",
+      "kind": "askerî seçkin sınıf",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Yoroi zırhı yüksek statülü atlı savaşçılarla ilişkilidir.",
+      "equipmentDraft": "At, yay, yan kılıç ve yoroi zırhı.",
+      "sourceIds": [
+        "samuraiarmor"
+      ],
+      "visualSourceIds": [],
+      "caution": "Samuray tek bir alayın adı değildir; bir devlet kartı istenirse belirli şogunluk ve tarih seçilmeli."
+    },
+    {
+      "id": "japan_ii_red",
+      "faction": "Ii Hanesi / Tokugawa kuvvetleri",
+      "name": "Ii Akazonae — Kırmızı Birlik",
+      "period": "1582–1600 seçkisi",
+      "kind": "haneye bağlı seçkin kuvvet",
+      "mount": "mixed",
+      "status": "gecis_donemi",
+      "historicalNote": "Ii Naomasa'nın kırmızı lakeli zırhlı askerleri Tokugawa'nın seçkin hücum gücüydü.",
+      "equipmentDraft": "Kırmızı lakeli zırh; mızrak/kılıç varyantı taslağı.",
+      "sourceIds": [
+        "ii"
+      ],
+      "visualSourceIds": [
+        "iirava"
+      ],
+      "caution": "Ateşli silahlar çağındadır; tamamı süvari değildir. Hanenin sonraki süslü miğferleri her askere verilmemeli."
+    },
+    {
+      "id": "mexica_eagle",
+      "faction": "Meksika / Mexica (Aztek)",
+      "name": "Kartal savaşçıları",
+      "period": "15.–16. yy başı",
+      "kind": "seçkin savaşçı topluluğu",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Kartal ve Jaguar savaşçıları, müze açıklamasında itibarlı askerî topluluklar olarak tanımlanır.",
+      "equipmentDraft": "Kartal gagasından görünen yüz / kartal başlığı; silah ayrıntısı ayrıca doğrulanmalı.",
+      "sourceIds": [
+        "eagle"
+      ],
+      "visualSourceIds": [],
+      "caution": "Fetih öncesi varyanta at veya çelik Avrupa kılıcı ekleme."
+    },
+    {
+      "id": "mexica_jaguar",
+      "faction": "Meksika / Mexica (Aztek)",
+      "name": "Jaguar savaşçıları",
+      "period": "15.–erken 16. yy",
+      "kind": "seçkin savaşçı sınıfı",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Mexica ordusunda Kartal savaşçılarıyla birlikte anılan prestijli savaşçı sınıfı. Modern anlamda tek bir alay olarak düşünülmemelidir.",
+      "equipmentDraft": "Macuahuitl ve kalkan; jaguarı temsil eden savaşçı kıyafeti. Kıyafetin gerçek jaguar postundan yapıldığı varsayılmaz.",
+      "sourceIds": [
+        "jaguar_bm"
+      ],
+      "visualSourceIds": [
+        "jaguar_codex"
+      ]
+    },
+    {
+      "id": "rus_druzhina",
+      "faction": "Kiev Rus ve Rus Prenslikleri",
+      "name": "Drujina — prensin savaşçı maiyeti",
+      "period": "10.–13. yy seçkisi",
+      "kind": "prens maiyeti",
+      "mount": "mixed",
+      "status": "ana",
+      "historicalNote": "Prensin yakın hizmetindeki savaşçı maiyeti; seferlerde ordunun çekirdeğini oluştururdu. Oyunda atlı mızraklı temsil kullanılır.",
+      "equipmentDraft": "Atlı mızrak ve kılıç temsili; bütün drujina mensupları için tek tip teçhizat iddiası değildir.",
+      "sourceIds": [
+        "rus_druzhyna_ieu"
+      ],
+      "visualSourceIds": [],
+      "caution": "Bizans Varang Muhafızı ile aynı kurum değildir. Ekran görüntüsündeki mavi savaşçıyla eşleşmesi doğrulanmadı."
+    },
+    {
+      "id": "german_armoured_foot",
+      "faction": "Kutsal Roma İmparatorluğu",
+      "name": "Zırhlı yaya savaşçı — Alman toprakları",
+      "period": "15. yy seçkisi",
+      "kind": "zırhlı savaşçı temsili",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Alman topraklarından dönem düello çizimine dayanan zırhlı yaya savaşçı temsili. Adı belgelenmiş tek bir alay veya muhafız birliği değildir.",
+      "equipmentDraft": "Levha zırh ve yakın dövüş kılıcı; dönem çizimindeki düello teçhizatı bütün ordulara genellenmez.",
+      "sourceIds": [
+        "talhoffer_1459",
+        "met_armour_faq"
+      ],
+      "visualSourceIds": [
+        "talhoffer_1459"
+      ],
+      "caution": "Her zırhlı asker şövalye değildir. Görseldeki sarı kartal arması veya yeşil kıyafet bu kaydın kesin kimlik kanıtı sayılmadı."
+    },
+    {
+      "id": "carthage_sacred_band",
+      "faction": "Kartaca",
+      "name": "Kutsal Birlik — Kartaca",
+      "period": "MÖ 4. yy",
+      "kind": "seçkin yurttaş piyadesi",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Diodoros, Krimisos savaşında seçkin Kartacalı yurttaşlardan oluşan Kutsal Birliği anlatır. Thebai Kutsal Birliği ile aynı teşkilat değildir; Hannibal dönemine kesintisiz devam ettiği varsayılmaz.",
+      "equipmentDraft": "Mızrak ve büyük kalkanlı ağır piyade temsili; oyun teçhizatı tarihsel metnin verdiğinden daha ayrıntılıdır.",
+      "sourceIds": [
+        "carthage_diodorus"
+      ],
+      "visualSourceIds": [
+        "carthage_dodge"
+      ]
+    },
+    {
+      "id": "egypt_sherden",
+      "faction": "Yeni Krallık Mısır",
+      "name": "Şerden muhafızları",
+      "period": "MÖ 13. yy — II. Ramses",
+      "kind": "hükümdar muhafızı",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Mısır hizmetine alınan Şerden savaşçılarından II. Ramsesin muhafızları olarak Kadeşte bulunanlar. Bütün Şerden toplulukları Mısırlı veya muhafız sayılmaz; kökenleri tartışmalıdır.",
+      "equipmentDraft": "Uzun kılıç, yuvarlak kalkan, boynuzlu miğfer; kabartmalara dayalı yakın dövüş piyadesi.",
+      "sourceIds": [
+        "sherden_getty"
+      ],
+      "visualSourceIds": [
+        "sherden_breasted"
+      ]
+    },
+    {
+      "id": "gaelic_gallowglass",
+      "faction": "İrlanda Gal lordlukları",
+      "name": "Gallowglass ağır piyadesi",
+      "period": "13.–15. yy seçkisi",
+      "kind": "profesyonel ağır piyade",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "İskoçya ve Adalardan gelen, İrlanda lordlarının hizmetinde yerleşen profesyonel savaşçı aileleri. Tek bir devletin veya tek bir alayın adı değildir.",
+      "equipmentDraft": "Uzun saplı savaş baltası, kılıç, miğfer ve zırh; oyunda yakın dövüş sınıfı.",
+      "sourceIds": [
+        "gallowglass_mcinerney"
+      ],
+      "visualSourceIds": [
+        "gallowglass_durer"
+      ]
+    },
+    {
+      "id": "kipchak_masked_swordsman",
+      "faction": "Kıpçak / Kuman",
+      "name": "Maskeli Kıpçak kılıçlısı",
+      "period": "12.–14. yy; buluntu atıfları tartışmalı",
+      "kind": "zırhlı süvarinin oyun temsili",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Kıpçak soylularının ağır süvarileri ve yüz maskeli miğfer buluntularından esinlenen yakın dövüş temsili. Bu adla belgelenmiş müstakil bir alay değildir. Maskelerin Kıpçak veya Altın Orda atfı, tarihlemesi ve savaşta mı törende mi kullanıldığı tartışmalıdır.",
+      "equipmentDraft": "Konik miğfer, insan yüzlü bıyıklı metal maske, zincir zırh, eğri kılıç, yuvarlak kalkan; atlı yakın dövüş. Birleştirilen donanım bir rekonstrüksiyon yorumudur.",
+      "sourceIds": [
+        "kipchak_helmets",
+        "kipchak_weapons"
+      ],
+      "visualSourceIds": [
+        "kipchak_mask_photo"
+      ]
+    },
+    {
+      "id": "tang_xuanjia",
+      "faction": "Tang Hanedanı",
+      "name": "Kara zırhlı süvariler · Xuanjia",
+      "period": "621; erken Tang dönemi",
+      "kind": "seçilmiş öncü süvari",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Zizhi Tongjian, Li Shimin'in kara giysili ve kara zırhlı bini aşkın seçilmiş atlıya öncülük ettiğini anlatır. Xuanjia burada betimleyici addır; sürekli ve değişmez bir alay teşkilatı varsayılmaz.",
+      "equipmentDraft": "Koyu giysi ve zırh metinle desteklenir. Miğfer, gövde ve etek zırhı The Met 10.221.6 dönem heykelinden; eyer ve koşum Saluzi kabartmasından esinlenir. Mızrak seçimi oyun rekonstrüksiyonudur; bu pasajda silah türü belirtilmez. Tam at zırhı, kanat, maske veya samuray miğferi eklenmez.",
+      "sourceIds": [
+        "tang_zizhi_188",
+        "tang_met_45865",
+        "tang_saluzi_penn",
+        "tang_saluzi_photo"
+      ],
+      "visualSourceIds": [
+        "tang_met_45865",
+        "tang_saluzi_photo"
+      ]
+    },
+    {
+      "id": "sogdian_cakar",
+      "faction": "Soğd şehir devletleri",
+      "name": "Çakar maiyet savaşçıları",
+      "period": "7.–8. yy temsil hedefi",
+      "kind": "hükümdar ve soylu maiyeti",
+      "mount": "mixed",
+      "status": "donanim_dogrulamasi",
+      "historicalNote": "Çakarlar, İslam öncesi Soğd hükümdar ve soylularının kişisel askerleridir. Tek bir birleşik Soğd imparatorluğunun standart alayı olarak sunulmamalıdır.",
+      "equipmentDraft": "Atlı temsil araştırılıyor. Mugh kalkanı üzerindeki atlı kahraman dönem sanatı referansıdır; doğrudan çakar üniforması teşhisi değildir. Görsel inceleme ve yeniden kullanım hakkı tamamlanmadan oyuna eklenmez.",
+      "sourceIds": [
+        "sogdian_cakar_iranica"
+      ],
+      "visualSourceIds": [
+        "sogdian_art_iranica"
+      ]
+    },
+    {
+      "id": "han_yulin",
+      "faction": "Han Hanedanı",
+      "name": "Yulin muhafızları · Atlı okçu",
+      "period": "Han dönemi; görsel temsil MS 1.–2. yy",
+      "kind": "imparatorluk muhafızı, atlı okçu temsili",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Han Shu, Gan Yanshou’nun iyi biniciliği ve okçuluğu sayesinde Yulin’e katıldığını anlatır. Bu kart muhafız teşkilatının atlı okçu temsilidir; bütün mensupların tek tip donanım taşıdığı iddia edilmez.",
+      "equipmentDraft": "Başlık, çapraz yaka ve giysi kıvrımları Met 16.149.2 heykelciğinden esinlenir. Heykel Yulin mensubu olarak tanımlanmamıştır. Yay metindeki okçulukla desteklenir; sadak yerleşimi, kahverengi giysi ve koşum ayrıntıları rekonstrüksiyondur. Seramiğin yeşil sırrı üniforma rengi sayılmaz. Üzengi çizilmez.",
+      "sourceIds": [
+        "han_hanshu70",
+        "han_yulin_office",
+        "han_met62843"
+      ],
+      "visualSourceIds": [
+        "han_met62843"
+      ]
+    },
+    {
+      "id": "inca_decorated_warrior",
+      "faction": "İnka İmparatorluğu",
+      "name": "Onurlandırılmış savaşçı · Dama tunikli",
+      "period": "15.–erken 16. yy",
+      "kind": "seçkin savaşçı temsili; özel alay adı değil",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Met, bu tür ince dokuma dama tuniklerin savaşta öne çıkan kişilere verildiğini; diplomatik hediye de olabildiğini belirtir. Kart onurlandırılmış bir savaşçıyı temsil eder. Unku bir giysi adıdır; ayrı bir alay veya tüm tunik sahiplerinin asker olduğu ileri sürülmez.",
+      "equipmentDraft": "Tuniğin siyah-beyaz damaları ve kırmızı basamaklı yakası Met 2017.674’e dayanır. Altı uçlu topuzun biçimi Met 1987.394.234’ten; ahşap sap, baş bağı, saç ve sandaletler rekonstrüksiyondur. Gümüş müze nesnesi bütün savaşçıların standart savaş silahı olarak genellenmez.",
+      "sourceIds": [
+        "inca_met751901",
+        "inca_met315294"
+      ],
+      "visualSourceIds": [
+        "inca_met751901",
+        "inca_met315294"
+      ]
+    },
+    {
+      "id": "assyria_royal_guard",
+      "faction": "Yeni Asur",
+      "name": "Kraliyet muhafızı",
+      "period": "MÖ 7. yy",
+      "kind": "seçkin yaya temsili",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Ninova kabartmasındaki kraliyet muhafızları temel alınır; bütün Asur piyadeleri seçkin sayılmaz.",
+      "equipmentDraft": "Sivri miğfer, sakal, saç, kısa püsküllü giysi ve mızrak kabartmadan; renkler ve hareketler oyun yorumu.",
+      "sourceIds": [
+        "assyria_bm",
+        "assyria_relief",
+        "assyria_royal_guard_visual"
+      ],
+      "visualSourceIds": [
+        "assyria_royal_guard_visual"
+      ]
+    },
+    {
+      "id": "goryeo_yongho_guard",
+      "faction": "Goryeo Kore",
+      "name": "Yongho muhafızı",
+      "period": "1123",
+      "kind": "seçkin yaya temsili",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Xu Jing’in 1123 tarihli anlatısındaki Yongho Jungmaeng askerinin temsili. Eungyang ve Yongho tek bir birlik gibi sunulmaz.",
+      "equipmentDraft": "Mavi dar giysi, beyaz pantolon, omuzluksuz zırh ve küçük beyaz bayraklı kısa mızrak Xu Jing’den. Katalog resmi daha geç Moğol istilası tomarından karşılaştırmadır; aynı muhafızın portresi değildir.",
+      "sourceIds": [
+        "goryeo_xujing11",
+        "goryeo_guard",
+        "goryeo_yongho_guard_visual"
+      ],
+      "visualSourceIds": [
+        "goryeo_yongho_guard_visual"
+      ]
+    },
+    {
+      "id": "song_beiwei",
+      "faction": "Song Hanedanı",
+      "name": "Beiwei süvarisi",
+      "period": "12. yy",
+      "kind": "seçkin süvari temsili",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Song Shi 365, Yue Fei’nin Beiwei süvarilerini kaydeder. Kart bu birliklerin atlı yakın dövüş temsilidir.",
+      "equipmentDraft": "Lamelli gövde ve uzun zırh eteği, geniş boyun koruması, kılıç. Tören alayı resmi Beiwei teşhisi taşımaz; Song/Yuan tarihlemesi belirsizdir. Birliğe özgü üniforma iddiası yoktur.",
+      "sourceIds": [
+        "song_beiwei",
+        "song_beiwei_visual"
+      ],
+      "visualSourceIds": [
+        "song_beiwei_visual"
+      ]
+    },
+    {
+      "id": "mughal_ahadi",
+      "faction": "Babür İmparatorluğu",
+      "name": "Ahadi süvarisi",
+      "period": "16.–17. yy",
+      "kind": "seçkin süvari temsili",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Ain-i Akbari’de hükümdara doğrudan bağlı ve atları denetlenen Ahadiler. Bütün Babür süvarilerinin adı değildir.",
+      "equipmentDraft": "Sarık, çapraz kapanan etekli giysi, yuvarlak kalkan ve mızrak. 1915 tarihli genel Babür süvarisi illüstrasyonu kullanıldı; çağdaş Ahadi üniforması belgesi değildir.",
+      "sourceIds": [
+        "mughal_ahadi",
+        "mughal_ahadi_visual"
+      ],
+      "visualSourceIds": [
+        "mughal_ahadi_visual"
+      ]
+    },
+    {
+      "id": "khmer_ranked_cavalry",
+      "faction": "Khmer İmparatorluğu",
+      "name": "Rütbeli Khmer süvarisi",
+      "period": "12. yy",
+      "kind": "seçkin süvari temsili",
+      "mount": "horse",
+      "status": "ana",
+      "historicalNote": "Angkor Wat, II. Suryavarman alayı kabartmasındaki rütbeli süvarinin temsili; kaynaksız bir muhafız alayı adı kullanılmaz.",
+      "equipmentDraft": "Hayvan başlı başlık, desenli dolgulu giysi ve açılı ağızlı uzun phkak. At ve donanım kabartmaya dayanır; renkler yorumdur.",
+      "sourceIds": [
+        "khmer_reliefs",
+        "khmer_ranked_cavalry_visual"
+      ],
+      "visualSourceIds": [
+        "khmer_ranked_cavalry_visual"
+      ]
+    },
+    {
+      "id": "maya_sajal",
+      "faction": "Maya şehir devletleri",
+      "name": "Sajal · Soylu savaşçı",
+      "period": "MS 600–900",
+      "kind": "seçkin yaya temsili",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Cleveland 1990.178 heykelciğindeki ikinci kademeden soylu sajal. Soyluluk rütbesidir; bütün Maya kentlerinde tek bir alay değildir.",
+      "equipmentDraft": "Büyük kulak süsleri, kabuk kolye, yüksek saç süsü ve dikdörtgen kalkan heykelcikten. Dik duruş ve mızrak oyun rekonstrüksiyonudur; eserde mızrak korunmamıştır.",
+      "sourceIds": [
+        "maya_sajal_cma",
+        "maya_walters",
+        "maya_cleveland",
+        "maya_sajal_visual"
+      ],
+      "visualSourceIds": [
+        "maya_sajal_visual"
+      ]
+    },
+    {
+      "id": "benin_warrior_chief",
+      "faction": "Benin Krallığı",
+      "name": "Savaşçı şef",
+      "period": "16.–17. yy",
+      "kind": "seçkin yaya temsili",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "MARKK C2384 kabartmasındaki kalkanlı ve mızraklı savaşçı şef. Özel bir alay adı değildir.",
+      "equipmentDraft": "Çanlı deri gömlek, leopar dişli kolye, başlık, geniş kalkan ve mızrak kabartmadan. Bronz eserin rengi gerçek kıyafet rengi sayılmaz.",
+      "sourceIds": [
+        "benin_bm",
+        "benin_warrior_chief_visual"
+      ],
+      "visualSourceIds": [
+        "benin_warrior_chief_visual"
+      ]
+    },
+    {
+      "id": "mamluk_axebearer",
+      "faction": "Memlük Sultanlığı",
+      "name": "Baltalı maiyet askeri",
+      "period": "1450–1500",
+      "kind": "seçkin yaya temsili",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Met 69.156 kaydı, Memlük sultan ve emirlerinin özel baltacı maiyetinden söz eder. Yaya balta kullanımı oyun temsilidir.",
+      "equipmentDraft": "Geniş kıvrımlı balta ağzı ve madalyonlu soket Met nesnesinden; sarık ve giysi yaklaşık 1500 tarihli furusiyye yaprağından dönem karşılaştırmasıdır. Tek tip baltacı üniforması iddiası yoktur.",
+      "sourceIds": [
+        "mamluk_axe",
+        "mamluk_axebearer_visual"
+      ],
+      "visualSourceIds": [
+        "mamluk_axebearer_visual"
+      ]
+    },
+    {
+      "id": "norse_hird_swordsman",
+      "faction": "İskandinavya",
+      "name": "Hird kılıçlısı",
+      "period": "10.–11. yy",
+      "kind": "maiyet savaşçısı temsili",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Hükümdar veya şef maiyetinin kılıçlı savaşçı temsili. Hird yalnız kılıç kullanan bir alay değildi; 13. yy hird teşkilatı Viking dönemine aynen taşınmaz.",
+      "equipmentDraft": "Çift ağızlı düz kılıç ve loblu kabza başı Bergen buluntularından; gözlüklü miğfer ve zincir zırh Gjermundbu mezarıyla karşılaştırıldı. Yuvarlak kalkan, pelerin ve renkler birleştirilmiş oyun yorumudur.",
+      "sourceIds": [
+        "norse_hird",
+        "norse_gjermundbu",
+        "norse_weapons",
+        "norse_hird_swordsman_visual"
+      ],
+      "visualSourceIds": [
+        "norse_hird_swordsman_visual"
+      ]
+    },
+    {
+      "id": "norse_spearman",
+      "faction": "İskandinavya",
+      "name": "Viking mızraklısı",
+      "period": "9.–11. yy",
+      "kind": "donanım türü temsili",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Mızrak ve yuvarlak kalkan taşıyan İskandinav piyade temsili. Ayrı bir seçkin alay adı değildir; yaygın bir donanım türüdür.",
+      "equipmentDraft": "Uzun soketli, yaprak biçimli mızrak ucu müze fotoğrafından; ahşap sap, yuvarlak tahta kalkan, yün tunik ve bacak sargıları dönem karşılaştırmasıdır. Fotoğraf bütün kıyafeti belgelemiyor.",
+      "sourceIds": [
+        "norse_weapons",
+        "norse_spearman_visual"
+      ],
+      "visualSourceIds": [
+        "norse_spearman_visual"
+      ]
+    },
+    {
+      "id": "norse_dane_axeman",
+      "faction": "İskandinavya",
+      "name": "Dan baltacısı",
+      "period": "10.–11. yy",
+      "kind": "donanım türü temsili",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Geç Viking döneminin uzun saplı, iki elle kullanılan geniş ağızlı baltasına göre tasarlandı. Dan baltası bir silah türüdür; tek bir muhafız alayının adı değildir.",
+      "equipmentDraft": "İnce ve geniş balta ağzı ile uzun iki elli sap referans alınır. Önde kalkan yok; burun korumalı miğfer ve zincir zırh var. Renkler ve birleşik kıyafet oyun yorumudur.",
+      "sourceIds": [
+        "norse_axes",
+        "norse_weapons",
+        "norse_dane_axeman_visual"
+      ],
+      "visualSourceIds": [
+        "norse_dane_axeman_visual"
+      ]
+    },
+    {
+      "id": "norse_longbowman",
+      "faction": "İskandinavya",
+      "name": "Viking uzun yaylısı",
+      "period": "9.–11. yy",
+      "kind": "donanım türü temsili",
+      "mount": "foot",
+      "status": "ana",
+      "historicalNote": "Haithabu’da bulunan yaklaşık 191,5 cm porsuk ağacı yayı ve İskandinav ok buluntuları temel alınır. Ayrı bir seçkin okçu alayı iddiası yoktur.",
+      "equipmentDraft": "Uzun tek parça ahşap yay, sadak, yün tunik ve sade başlık. Kart fotoğrafı Birka Bj 644 mezarındaki demir ok uçlarıdır; bütün bir okçu veya yay fotoğrafı değildir. Yay biçimi Viking Ship Museum yayınına dayanır.",
+      "sourceIds": [
+        "norse_bows",
+        "norse_weapons",
+        "norse_longbowman_visual"
+      ],
+      "visualSourceIds": [
+        "norse_longbowman_visual"
+      ]
+    }
+  ],
+  "sharedNotes": [
+    "Osmanlı altı bölüğü aynı kapıkulu süvari teşkilâtının farklı bölükleridir. Sipah bölüğünü timarlı sipahilerle karıştırma.",
+    "Solaklar yeniçeri teşkilâtının alt grubudur. Katalog sayısı, birbirinden bütünüyle bağımsız tarihî kurumların sayısı değildir.",
+    "Bahriyye/Burciyye, dar anlamda numaralı iki modern alay değildir; aynı zamanda siyasî ve toplumsal gruplardır.",
+    "Gulâm/memlük sistemini farklı devletlerin aynı üniformalı evrensel alayı gibi çizme.",
+    "Bizans tagmalarının benzer ekipmanla ayrı kimlikler taşıması mümkündür; sırf oyun çeşitliliği için tarihî üniforma farkı uydurulmaz.",
+    "Atlı okçu, zırhlı mızraklı ve atlı muhafız rolleri ayrılmalı. Her atlıya tam at zırhı verilmemeli.",
+    "Kanatlı hüsar, Safevî korçusu ve Ii birliği dar antik/ortaçağ seçkisinin dışında ayrı dönem ekidir.",
+    "Askerî tarikatlar modern ülke adı altında gösterilmemeli. Tarihî devlet, hanedan, hane ve tarikat alanları arayüzde ayrılabilir."
+  ],
+  "gameplayProposals": {
+    "disclaimer": "Aşağıdakiler yalnız oyun tasarımı önerisidir; tarihî performans ölçümü değildir.",
+    "foot_spear": "Yakın duran birliklere karşı hat tutma; yanlardan saldırıya daha açık.",
+    "foot_guard": "Komutan çevresinde savunma; kısa menzilde güçlü, ok ateşine otomatik bağışıklık yok.",
+    "foot_axe": "Yakın dövüşte yüksek darbe; saldırılar arasında daha uzun bekleme.",
+    "horse_lance": "İlk temasta hücum avantajı; sıkışınca ve durunca avantaj azalır.",
+    "horse_bow": "Mesafe koruyan atlı okçuluk; yaklaşan düşmandan uzaklaşma ve sınırlı atış temposu.",
+    "horse_guard": "Daha dayanıklı çok amaçlı atlı; yay ve mızrak aynı karede eşzamanlı kullanılmaz.",
+    "note": "Can, hasar, hız ve bedel sayıları araştırma dosyasından tarihî gerçek diye türetilmemeli; uygulama aşamasında dengelenmeli."
+  },
+  "existingCatalogReview": [
+    {
+      "existingId": "samurai",
+      "action": "Genel askerî sınıf olarak koru veya mevcut Ii Naomasa çizimini Ii Akazonae kimliğiyle eşleştir; dönem etiketi ekle."
+    },
+    {
+      "existingId": "janissary",
+      "action": "Erken yaylı mı, geç tüfekli mi belirle; bu araştırmanın ana kapsamına tüfekli varyant girmez."
+    },
+    {
+      "existingId": "kipchak",
+      "action": "Kıpçak/Kuman atlı okçu gerçek asker türüdür; mevcut maskeli çizim tek başına adlandırılmış seçkin birlik kanıtı değildir."
+    },
+    {
+      "existingId": "hussar",
+      "action": "Geçiş dönemi ekine yerleştir."
+    },
+    {
+      "existingId": "timur",
+      "action": "Savaş fili bir silah platformudur; kendi başına seçkin insan birliği değildir. Mevcut genel fil çizimi Timurlu teçhizat kanıtı sayılmaz."
+    },
+    {
+      "existingId": "spartan",
+      "action": "Genel hoplit ile hippeis muhafız grubunu ayır."
+    },
+    {
+      "existingId": "mongol",
+      "action": "Genel Moğol atlı okçusu ile Keşik muhafızlarını ayır."
+    },
+    {
+      "existingId": "mamluk",
+      "action": "Geniş askerî sınıf etiketi olarak koru; Bahriyye/Burciyye tarihî alt bağlamlarını ayrıca göster."
+    },
+    {
+      "existingId": "viking",
+      "action": "Genel Viking savaşçısı tek bir devletin adlı seçkin birliği değildir; berserker adını kaynaksız özel kuvvet alayı yapma."
+    },
+    {
+      "existingId": "roman",
+      "action": "Lejyoner genel asker türüdür; Praetorian ve atlı imparator muhafızları ayrı adaylardır."
+    },
+    {
+      "existingId": "persian",
+      "action": "Ölümsüzlerin Ahameniş dönemiyle sınırını belirle; Sâsânî süvarisiyle karıştırma."
+    },
+    {
+      "existingId": "knight",
+      "action": "Genel şövalye sınıfı ile belirli hane/tarikat birliklerini ayır."
+    },
+    {
+      "existingId": "varangian",
+      "action": "Bizans'a bağla; balta kullanan varyantı ayrı silah mantığıyla temsil et."
+    },
+    {
+      "existingId": "landsknecht",
+      "action": "Bütün Landsknechtleri seçkin muhafız ilan etme; erken modern ücretli piyade olarak ayrı dönem ve kategori kullan."
+    }
+  ],
+  "pendingResearch": [
+    {
+      "faction": "Gürcistan Krallığı",
+      "candidate": "Monaspa",
+      "needed": "IV. Davit döneminin muhafız süvarisi için akademik metin ve teçhizat kaynaklarının birlikte doğrulanması."
+    },
+    {
+      "faction": "Delhi Sultanlığı",
+      "candidate": "Sultan hassa süvarileri",
+      "needed": "Belirli hanedan ve tarihî birlik adı; genel gulâm sisteminden ayrı kimlik."
+    },
+    {
+      "faction": "Moğol İmparatorluğu",
+      "candidate": "Keşiğin gece/gündüz muhafızları ve okçu alt grupları",
+      "needed": "Kebteul, turqaud ve qorchi adlarının doğru dönemdeki yazımı, görevleri ve iç içe sayımın önlenmesi."
+    },
+    {
+      "faction": "Ahameniş İmparatorluğu",
+      "candidate": "Elma taşıyan mızraklı muhafızlar / Melophoroi",
+      "needed": "Ölümsüzler ve kralın muhafız gruplarıyla ilişkisi; aynı birlik iki kere sayılmamalı."
+    },
+    {
+      "faction": "Sâsânî İmparatorluğu",
+      "candidate": "Pushtigban / hükümdar muhafızları",
+      "needed": "Kaynaklarda ad ve teşkilâtın doğrulanması; Savârân sınıfıyla ilişki."
+    },
+    {
+      "faction": "Kartaca",
+      "candidate": "Kutsal Birlik",
+      "needed": "Birliğin yapısı ve sürekliliği üzerine modern tartışmalar var; Thebai örneği kopyalanmamalı."
+    },
+    {
+      "faction": "Fransa Krallığı",
+      "candidate": "Garde Écossaise ve erken gendarmes",
+      "needed": "Adlı muhafız bölüğü, kuruluş ve ateşli silah öncesi/sonrası ekipman ayrımı."
+    },
+    {
+      "faction": "Macaristan Krallığı",
+      "candidate": "Kara Ordu içindeki seçkin birlikler",
+      "needed": "Kara Ordu bütününün tek seçkin birlik gibi sunulmaması; alt birlik ve ateşli silah ağırlığı."
+    },
+    {
+      "faction": "Nubya / Makuria",
+      "candidate": "Seçkin okçular",
+      "needed": "Ünlü okçuluk geleneğinden ayrı, seçkin statüsü belgeli teşkilât adı."
+    },
+    {
+      "faction": "Etiyopya",
+      "candidate": "Hükümdar muhafız süvarileri",
+      "needed": "Belirli hükümdar, dönem ve yerel birlik adının akademik doğrulanması."
+    },
+    {
+      "faction": "Timurlu Devleti",
+      "candidate": "Hükümdar muhafızları ve savaş fili birlikleri",
+      "needed": "Muhafızın tarihî adı ve statüsü; filler için belirli sefer, mürettebat ve teçhizat. Mevcut genel fil görseli yeterli değil."
+    },
+    {
+      "faction": "Chola / Sri Lanka",
+      "candidate": "Velaikkarar",
+      "needed": "Polonnaruwa yazıtının akademik edisyonu, farklı hizmet bağlamlarının ayrılması ve dönem savaşçı görseli gerekiyor; şimdilik oyuna eklenmedi."
+    }
+  ],
+  "visualResearchQueue": [
+    {
+      "sourceId": "hussarart",
+      "use": "At ve biniciyi birlikte gösteren tarihî baskı; dönem eki için en somut tam figür bağlantılarından.",
+      "check": "Eser tarihi, açık erişim ve kullanım şartları kayıt sayfasından teyit edilmeli."
+    },
+    {
+      "sourceId": "iirava",
+      "use": "Mevcut samuray referansının özgün sanatçı sayfası; Ii birliği.",
+      "check": "Modern telifli çizim. Referans bulmak, oyun içinde çoğaltma izni almak değildir."
+    },
+    {
+      "sourceId": "praetorianart",
+      "use": "Beş tam figür muhafız çizimi.",
+      "check": "Antik kabartmadan sonraki sanatçı yorumu; tüm renk ve zırh ayrıntıları bağımsız kanıt değil."
+    },
+    {
+      "sourceId": "janissaryart",
+      "use": "Tam figür seferde yeniçeri resmi.",
+      "check": "Tarihi erken yeniçeri yaylı varyantıyla eşleşmeden üretimde kullanılmamalı."
+    },
+    {
+      "sourceId": "teutonart",
+      "use": "Müze sergisindeki şövalye ikonografisine başlangıç.",
+      "check": "Sergi sayfası tek başına hazır, indirilebilir ve lisanslı bir karakter görseli değildir."
+    },
+    {
+      "sourceId": "eagle",
+      "use": "Kartal başlığı için doğrudan maddî kültür kanıtı.",
+      "check": "Küçük heykelcik savaşçı çizimi yerine konulmamalı; Jaguar giysisi için kodeks gerekir."
+    },
+    {
+      "sourceId": "mamluklance",
+      "use": "Memlük mızrak teçhizatı.",
+      "check": "Tek nesne fotoğrafı tam figür savaşçı çizimi değildir."
+    }
+  ],
+  "completedCandidateReviews": [
+    {
+      "faction": "Güney Song Çin'i",
+      "candidate": "Beiwei",
+      "needed": "Yue Fei bağlamındaki teşkilât, süvari/piyade ayrımı ve kaynak terminolojisi; popüler anlatıyla kesinlik kurulmadı.",
+      "status": "oyuna_eklendi",
+      "integratedId": "song_beiwei",
+      "resolution": "Song Shi 365, Yue Fei’nin Beiwei süvarilerini kaydeder. Kart bu birliklerin atlı yakın dövüş temsilidir."
+    },
+    {
+      "faction": "Babür İmparatorluğu",
+      "candidate": "Ahadiler",
+      "needed": "İmparatora doğrudan bağlı süvari statüsü ve belirli yüzyıl silahları; ateşli silah kullanımı sınırı.",
+      "status": "oyuna_eklendi",
+      "integratedId": "mughal_ahadi",
+      "resolution": "Ain-i Akbari’de hükümdara doğrudan bağlı ve atları denetlenen Ahadiler. Bütün Babür süvarilerinin adı değildir."
+    },
+    {
+      "faction": "Yeni Asur",
+      "candidate": "Kral muhafızları",
+      "needed": "Muhafız teşkilatı doğrulandı; eser fotoğrafı indirmesi 429 ile engellendi. Miğfer, kalkan ve kıyafet yakından incelenmeden çizim yapılmamalı.",
+      "sourceIds": [
+        "assyria_bm",
+        "assyria_relief"
+      ],
+      "researchId": "assyria_royal_guard",
+      "status": "oyuna_eklendi",
+      "integratedId": "assyria_royal_guard",
+      "resolution": "Ninova kabartmasındaki kraliyet muhafızları temel alınır; bütün Asur piyadeleri seçkin sayılmaz."
+    },
+    {
+      "faction": "Goryeo Kore",
+      "candidate": "Eungyanggun ve Yonghogun",
+      "needed": "İki saray muhafız birliği; dönem zırhı ve başlığına ait görsel gerekiyor. Farkları doğrulanmadan iki renk kopyası yapılmamalı.",
+      "sourceIds": [
+        "goryeo_guard"
+      ],
+      "researchId": "goryeo_eungyanggun",
+      "status": "oyuna_eklendi",
+      "integratedId": "goryeo_yongho_guard",
+      "resolution": "Xu Jing’in 1123 tarihli anlatısındaki Yongho Jungmaeng askerinin temsili. Eungyang ve Yongho tek bir birlik gibi sunulmaz."
+    },
+    {
+      "faction": "Song Hanedanı",
+      "candidate": "Beiwei atlıları",
+      "needed": "Metin atlıları doğruluyor. Four Generals of Song tablosundaki maiyet figürleri aday dönem referansı; doğrudan Beiwei üniforması değil.",
+      "sourceIds": [
+        "song_beiwei"
+      ],
+      "researchId": "song_beiwei",
+      "status": "oyuna_eklendi",
+      "integratedId": "song_beiwei",
+      "resolution": "Song Shi 365, Yue Fei’nin Beiwei süvarilerini kaydeder. Kart bu birliklerin atlı yakın dövüş temsilidir."
+    },
+    {
+      "faction": "Polonnaruwa Sri Lanka",
+      "candidate": "Velaikkarar muhafızları",
+      "needed": "Kutsal emanet koruma görevi belgeli; Chola hizmeti ile Sri Lanka hizmeti ayrı ele alınmalı. Yazıt edisyonu ve dönem donanım görseli eksik.",
+      "sourceIds": [
+        "vela_inscription"
+      ],
+      "researchId": "srilanka_velaikkarar",
+      "status": "bu_secide_elenen",
+      "resolution": "Yazıt muhafız görevini doğruluyor; uygun lisanslı dönem donanımı görseli bulunamadı."
+    },
+    {
+      "faction": "Babür İmparatorluğu",
+      "candidate": "Ahadi süvarileri",
+      "needed": "Kurumsal kayıt bulundu; binicinin dönem minyatürü ve silah eşlemesi gerekiyor. Ateşli silahsız süvari temsili hedefleniyor.",
+      "sourceIds": [
+        "mughal_ahadi"
+      ],
+      "researchId": "mughal_ahadi",
+      "status": "oyuna_eklendi",
+      "integratedId": "mughal_ahadi",
+      "resolution": "Ain-i Akbari’de hükümdara doğrudan bağlı ve atları denetlenen Ahadiler. Bütün Babür süvarilerinin adı değildir."
+    },
+    {
+      "faction": "Mali İmparatorluğu",
+      "candidate": "Mansa’nın silahlı maiyeti",
+      "needed": "Seyahatname 300 silahlı köle mensuptan söz ediyor; özel alay adı ve tümünün süvari olduğu çıkarılamaz. Dönem görseli yok.",
+      "sourceIds": [
+        "mali_battuta"
+      ],
+      "researchId": "mali_royal_retinue",
+      "status": "bu_secide_elenen",
+      "resolution": "İbn Battuta silahlı maiyeti kaydeder; belirli üniforma ve güvenilir dönem görseli eksik."
+    },
+    {
+      "faction": "Ortaçağ Etiyopyası",
+      "candidate": "Čäwa saray alayları araştırması",
+      "needed": "Makale bulundu. Tüm Čäwa birliklerini seçkin saymadan belirli saray alayı ve donanımı saptanmalı.",
+      "sourceIds": [
+        "ethiopia_chewa"
+      ],
+      "researchId": "ethiopia_chewa",
+      "status": "bu_secide_elenen",
+      "resolution": "Chewa geniş askerî kurumdur; her mensubu seçkin saymak ve tek kıyafet atamak desteklenmiyor."
+    },
+    {
+      "faction": "Khmer İmparatorluğu",
+      "candidate": "Angkor kabartmalarındaki maiyet",
+      "needed": "Askerî kabartmalar hakkında akademik yayın bulundu; muhafız ile genel piyade ayrımı henüz doğrulanmadı.",
+      "sourceIds": [
+        "khmer_reliefs"
+      ],
+      "researchId": "khmer_guard_review",
+      "status": "oyuna_eklendi",
+      "integratedId": "khmer_ranked_cavalry",
+      "resolution": "Angkor Wat, II. Suryavarman alayı kabartmasındaki rütbeli süvarinin temsili; kaynaksız bir muhafız alayı adı kullanılmaz."
+    },
+    {
+      "faction": "Maya şehir devletleri",
+      "candidate": "Kalkanlı zırhlı savaşçı araştırması",
+      "needed": "Kapitone giysi ve dikdörtgen kalkan belgeli. Seçkin statü/birlik adı henüz desteklenmiyor; yalnız kıyafetten seçkin alay uydurulmamalı.",
+      "sourceIds": [
+        "maya_walters",
+        "maya_cleveland"
+      ],
+      "researchId": "maya_elite_review",
+      "status": "oyuna_eklendi",
+      "integratedId": "maya_sajal",
+      "resolution": "Cleveland 1990.178 heykelciğindeki ikinci kademeden soylu sajal. Soyluluk rütbesidir; bütün Maya kentlerinde tek bir alay değildir."
+    },
+    {
+      "faction": "Benin Krallığı",
+      "candidate": "Savaşçı şef / saray maiyeti araştırması",
+      "needed": "Leopar yüzlü zırh, çan ve eben kılıcı belgeli. Rütbe, tarih, görsel lisansı ve oyun rolü doğrulanmalı; tören kılıcı otomatik savaş kılıcı sayılmaz.",
+      "sourceIds": [
+        "benin_bm"
+      ],
+      "researchId": "benin_warrior_chief",
+      "status": "oyuna_eklendi",
+      "integratedId": "benin_warrior_chief",
+      "resolution": "MARKK C2384 kabartmasındaki kalkanlı ve mızraklı savaşçı şef. Özel bir alay adı değildir."
+    },
+    {
+      "faction": "Sasani İmparatorluğu",
+      "candidate": "Pushtigban",
+      "needed": "Muhafız teşkilatı belgeli; Aswaran ile tekrara düşmeyecek donanım ve görev ayrımı gerekiyor.",
+      "sourceIds": [
+        "sasanian_army"
+      ],
+      "researchId": "sasanian_pushtigban_review",
+      "status": "mevcut_kartla_temsil",
+      "resolution": "Mevcut Sasani Aswaran kartıyla donanım örtüşüyor; ayrı görsel kanıt olmadan yeni kart açılmadı."
+    },
+    {
+      "faction": "Memlük Sultanlığı",
+      "candidate": "Balta taşıyıcı muhafızlar",
+      "needed": "Dönem baltası ve kurum açıklaması var; baştan ayağa giysi görseli bulunmalı.",
+      "sourceIds": [
+        "mamluk_axe"
+      ],
+      "researchId": "mamluk_axe_guard_review",
+      "status": "oyuna_eklendi",
+      "integratedId": "mamluk_axebearer",
+      "resolution": "Met 69.156 kaydı, Memlük sultan ve emirlerinin özel baltacı maiyetinden söz eder. Yaya balta kullanımı oyun temsilidir."
+    },
+    {
+      "faction": "Ahameniş İmparatorluğu",
+      "candidate": "Melophoroi",
+      "needed": "Altın dipli mızrak belgeli; mevcut Ölümsüzler kartıyla örtüşme çözülmeden ayrı kart açılmamalı.",
+      "sourceIds": [
+        "persian_apple"
+      ],
+      "researchId": "achaemenid_melophoroi_review",
+      "status": "mevcut_kartla_temsil",
+      "resolution": "Ölümsüzler kartıyla örtüşen kraliyet muhafızı temsili; ayrı tekrar eklenmedi."
+    },
+    {
+      "faction": "Tudor İngilteresi",
+      "candidate": "Gentlemen at Arms",
+      "needed": "Kuruluş tarihi doğrulandı; günümüz tören üniforması erken dönem savaş kıyafeti yerine kullanılmamalı.",
+      "sourceIds": [
+        "tudor_guard"
+      ],
+      "researchId": "tudor_gentlemen_review",
+      "status": "bu_secide_elenen",
+      "resolution": "1509 kuruluşu doğrulanıyor; modern tören üniforması erken dönem savaşçıya taşınmadı."
+    },
+    {
+      "faction": "Silla Krallığı",
+      "candidate": "Hwarang çevreleri",
+      "needed": "Askerî eğitim ve sosyal/dinî örgütlenmeyi ayır; aynı üniformalı profesyonel muhafız alayı varsayma. Dönem zırhı ve silahları için ek müze referansı gerekiyor.",
+      "sourceIds": [
+        "silla_hwarang"
+      ],
+      "researchId": "silla_hwarang_review",
+      "status": "bu_secide_elenen",
+      "resolution": "Gençlik ve aristokrat eğitim kurumu; tek üniformalı savaş alayı gibi gösterilemez."
+    },
+    {
+      "faction": "Tibet",
+      "candidate": "Erken dönem saray muhafızı araştırması",
+      "needed": "Bulunan geç dönem tören süvarisi tüfek de taşır. Bu görselle erken dönem birliği eklenmedi; daha eski muhafız adı ve donanım kaydı gerekiyor.",
+      "sourceIds": [
+        "tibet_met35942"
+      ],
+      "researchId": "tibet_early_guard_review",
+      "status": "bu_secide_elenen",
+      "resolution": "İncelenen zırh ve fotoğraflar erken Tibet dönemi muhafızını doğrulamıyor."
+    },
+    {
+      "faction": "Māori toplulukları",
+      "candidate": "Yüksek statülü taiaha savaşçısı araştırması",
+      "needed": "Taiaha ve statü ilişkisi belgeli. Belirli iwi, tarih, savaşçı statüsü ve kıyafet kaynağı seçilmeden tüm Māori adına tek seçkin alay üretilmemeli.",
+      "sourceIds": [
+        "maori_taiaha"
+      ],
+      "researchId": "maori_ranked_warrior_review",
+      "status": "bu_secide_elenen",
+      "resolution": "Silahın rütbe anlamı doğrulanıyor; bu seçkide tam kıyafet ve görsel kullanım dayanağı eksik."
+    },
+    {
+      "faction": "Niue",
+      "candidate": "Toa / katoua savaşçısı araştırması",
+      "needed": "Toa genel savaşçı sözcüğüdür; seçkin birlik diye çevrilmemeli. Tarih kapsamı, görsel hakları ve seçkinlik kanıtı eksik; oyuna eklenmedi.",
+      "sourceIds": [
+        "niue_toa"
+      ],
+      "researchId": "niue_toa_review",
+      "status": "bu_secide_elenen",
+      "resolution": "Toa genel savaşçı adıdır; incelenen geç eserler ayrı tarihî seçkin birlik kanıtı sağlamıyor."
+    }
+  ]
+}

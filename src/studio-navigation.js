@@ -3,11 +3,11 @@ import './studio-navigation.css';
 import {mountChannelPicker} from './channel-branding.js';
 
 const groups = [
-  ['Yarış ve mücadele', [['track','Parkur','↘'],['arena','Küre Arenası','◉'],['territory','Alan Savaşı','⬡'],['ball-duel','Top Düellosu','⚔'],['rock-paper-scissors','Taş Kâğıt Makas','✂']]],
+  ['Yarış ve mücadele', [['track','Parkur','↘'],['arena','Küre Arenası','◉'],['territory','Alan Savaşı','⬡'],['crown-battle','Taç Savaşı','♛'],['ball-duel','Top Düellosu','⚔'],['rock-paper-scissors','Taş Kâğıt Makas','✂']]],
   ['Akış ve kırma', [['spiral','Spiral','◎'],['spiral-breaker','Spiral Kırıcı','▧'],['glass-breaker','Cam Kırıcı','◇'],['ring-escape','Halka Kaçışı','◌']]],
   ['Veri ve deney', [['pi','Pi Çarpışmaları','π'],['statistics','İstatistik','▥']]],
 ];
-const standalone = new Set(['ball-duel','spiral-breaker','glass-breaker','ring-escape','rock-paper-scissors']);
+const standalone = new Set(['crown-battle','ball-duel','spiral-breaker','glass-breaker','ring-escape','rock-paper-scissors']);
 
 // Move the existing controls, keeping their listeners, values and recording locks.
 function settingGroup(parent, title, description, nodes, open = false) {

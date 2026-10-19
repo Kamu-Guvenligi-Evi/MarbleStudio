@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test:battle-behavior": "node tests/historical-battle-behavior-suite.mjs",
+    "test:studio-crown": "node tests/studio-crown-browser.mjs",
     "test:rps": "node tests/rock-paper-scissors.mjs && node tests/rock-paper-scissors-browser.mjs",
     "test:manual-sounds": "node tests/manual-game-sounds.mjs && node tests/manual-game-sounds-browser.mjs",
     "test:sound-director": "node tests/sound-director.mjs && node tests/game-sound-director.mjs && node tests/sound-director-browser.mjs && node tests/game-sound-director-browser.mjs",

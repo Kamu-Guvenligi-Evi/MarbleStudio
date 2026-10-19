@@ -1,0 +1,20 @@
+Taç Savaşı — Marble Studio entegrasyonu (19 Ekim 2026)
+
+Stüdyo menüsündeki Taç Savaşı bağlantısı /crown-battle.html sayfasını açar.
+Oyun kendi arayüzünü korur; üst bağlantı stüdyoya döner.
+Tarihî ordu atölyesi, kale kuşatması, görsel deneme ve Selçuklu taktik
+denemesi üretim derlemesine dahildir.
+
+Oyun kaynakları, yerel birlik görselleri ve savaş sesleri depoya eklenmiştir.
+Ses kaynakları ve lisans bilgileri public/audio/battle/SOURCES.txt içindedir.
+Birlik görsellerinin kaynak bilgileri tarihî birlik/komutan kataloglarındadır.
+
+Kontroller:
+  npm run build
+  npm run test:battle-behavior
+  npm run test:studio-crown (Vite geliştirme sunucusu açık olmalı)
+
+Tarayıcı testi masaüstü ve mobilde stüdyo → oyun → ordu atölyesi → oyun
+→ stüdyo geçişini ve diğer oyunların ortak menü bağlantısını doğrular.
+TEST_ORIGIN ortam değişkeniyle farklı yerel sunucu adresi kullanılabilir.
+Test sırasında uzak görsel ve müzik indirmeleri engellenir.

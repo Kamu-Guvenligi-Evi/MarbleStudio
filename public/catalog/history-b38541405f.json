@@ -1,0 +1,22 @@
+{
+  "id": "history-b38541405f",
+  "category": "history",
+  "name": "Büyük Petro",
+  "englishName": "Peter the Great",
+  "src": "/catalog/history-b38541405f.jpg",
+  "fit": "cover",
+  "source": "https://commons.wikimedia.org/wiki/File:Inconnu_d%27apr%C3%A8s_J.-M._Nattier,_Portrait_de_Pierre_Ier_(mus%C3%A9e_de_l%E2%80%99Ermitage).jpg",
+  "identitySource": "https://en.wikipedia.org/wiki/Peter_the_Great",
+  "credit": "Attributed to Jean-Marc Nattier",
+  "license": "Public domain",
+  "licenseUrl": "",
+  "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Inconnu_d%27apr%C3%A8s_J.-M._Nattier%2C_Portrait_de_Pierre_Ier_%28mus%C3%A9e_de_l%E2%80%99Ermitage%29.jpg/330px-Inconnu_d%27apr%C3%A8s_J.-M._Nattier%2C_Portrait_de_Pierre_Ier_%28mus%C3%A9e_de_l%E2%80%99Ermitage%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "curated": true,
+  "historicalNote": "Rusya · hükümdar · Sanatsal tasvir",
+  "keywords": "Peter the Great Rusya · hükümdar",
+  "portraitFrame": [
+    0.51,
+    0.28,
+    0.65
+  ]
+}

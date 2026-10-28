@@ -1,0 +1,107 @@
+14 EKİM 2026 — SAVAŞ DAVRANIŞLARI VE PC / TELEFON MENÜLERİ
+
+Kapsam / koordinasyon
+Proje açıklamaları, historical-combat-notes.txt ve historical-civilizations-notes.txt
+incelendi. Motor dosyaları ana sekmeye önceden bildirildi. Kullanıcının ek PC/telefon
+isteği üzerine ana sekme crown-battle-app.js ve crown-battle.css sahipliğini devretti.
+Katalog, kimlikler, kayıt biçimi, araştırma ve görsel dosyaları değiştirilmedi.
+Klasik dört birlikli mod ve tarihî ordu aktarımı korunuyor. Haricî indirme yapılmadı.
+
+Tespit edilen sorunlar
+- Hedef merkezine doğrudan yaklaşma ve sık hedef seçimi yığılma/titreme yaratıyordu.
+- Mızrak avantajı hücum yönünü yeterince ayırmıyordu; temas hâlinde yeni hücum riski vardı.
+- Okçuların kaçışı ve emirlerin otomatik davranışla ilişkisi açık sınırlar taşımıyordu.
+- Yakındaki askerleri tüm ordu üzerinden arama büyük ordularda pahalıydı.
+- Uzayan komuta/ordu panelleri ve dikey sahne PC'de kumandaları ekran dışına itiyordu.
+
+Uygulama
+- 40 birimlik uzamsal hücreler, sınırlı komşu örneklemesi, hedef doluluk puanı,
+  sabit yaklaşım şeritleri, yerel ayrışma ve hedef değiştirme eşiği kullanılıyor.
+- Süvari: en az 28 birim koşu, yeterli hız ve hedefe yönelim; 7 sn hücum beklemesi.
+  Temas ve emir değişimi koşu birikimini sıfırlar. Mızrak karşılığı ön yöne bağlıdır.
+- Yaya okçu 36, atlı okçu 180 dünya birimi kaçış bütçesine sahip. Atlı hareketle
+  ateş eder; sınırdaki kaçış denemeleri de bütçeyi tüketir. Yakında hasar %28 olur.
+- Fil: yavaş ivme/dönüş, ön tarafta yerel çoklu darbe; sürekli süvari hücumu yapmaz.
+- Tüfek: sabit doldurma aralığı, .24 sn ateş evresi; weaponPhase ve reloadRemaining
+  hareket emri sırasında da güncellenir. Mevcut silah/rol verisi kullanılır, ad tahmini yok.
+- moveSelected(x,y): intikal, varışta mevzi tutma. stopSelected(): hücumu iptal eder,
+  yerinde savunur. attackSelected(enemyId): belirli hedef, otomatik kaçış yok; hedef
+  ölünce bekler. engageSelected(): serbest savaşa döner. Dur emri ateşkes değildir.
+- PC: ekrana sığan meydan/kumandalar, ayrı kaydırılan Komuta / Ordu ve alan /
+  Günlük-kayıt sekmeleri. Telefon: tek sütun, dokunma boyutları, seçimden meydana dönüş.
+- Emir düğmeleri her menüde sahnenin altında. A tümü, H serbest hücum, S dur, T hedef;
+  boş alana emir intikal, düşmana emir saldırıdır. Ok tuşları menüler arasında geçer.
+- Kare başına simülasyon çalışma bütçesi 12 ms: ağır yükte biriken süre sınırlandırılır;
+  girişleri uzun yakalama döngülerinde bekletmek yerine oyun zamanı yavaşlar.
+
+Değişen dosyalar
+src/crown-battle.js
+src/crown-battle-app.js
+src/crown-battle.css
+tests/crown-battle-behavior.mjs (yeni)
+tests/crown-battle-layout-browser.mjs (yeni)
+tests/crown-battle-browser.mjs (menü geçişlerine uyarlama)
+tests/historical-combat-browser.mjs (menü geçişlerine uyarlama)
+docs/combat-behavior-notes.txt (bu dosya)
+
+Doğrulama — yerel Node v24.21.0 / Chrome / 127.0.0.1:5173
+Komutlar: tools/node-runtime/node-v24.21.0-win-x64/node.exe tests/<test-adı>.mjs
+- crown-battle-behavior: 10 kontrol geçti. Ön/yan/arka mızrak, gerçek koşulu hücum,
+  12 sn temasta yeniden hücum olmaması, atlı kovalamacasında 45 sn içinde yakalama,
+  yaya kaçışı, 48'e48 sıkışık dövüşün 10.9 sn'de bitmesi, emir önceliği, tüfek
+  doldurma, fil alan hasarı ve hedef kararlılığı doğrulandı.
+- Aynı test: 2400 asker / 60 adım 2200 ms; 569762 hedef adayı ve 747341 ayrışma
+  çifti. Bu bir motor ölçümüdür; tarayıcı FPS veya internet tüketimi ölçümü değildir.
+- crown-battle: klasik senaryolar, 1001 süvarili dizilim, emirler ve determinizm geçti.
+- historical-combat: katalog türleri, 2501 askerlik kayıt, silahlar ve determinizm geçti.
+- historical-combat-browser: atölyeden aktarım, adetlerin korunması, yeniden yükleme,
+  geçersiz girişler, mobil emirler, klasik mod ve yerel varlıklar geçti.
+- crown-battle-layout-browser: 1366x768, 1920x1080, 900x700, 390x844, 320x568,
+  844x390; yatay taşma, menüler, PC'de ekrana sığma ve klavye emirleri geçti.
+  Dokunmatik bağlamda intikal, dur ve düşman seçerek saldırı da geçti.
+- crown-battle-browser: masaüstü/mobil, duraklatma, hız, senaryo, sinema, WebM
+  indirme ve ffmpeg ile 1080x1920 çözümleme geçti. İlk kayıt denemelerinde Chrome
+  zaman aşımı görüldü; kare bütçesi düzenlemesinden sonraki tam test geçti.
+- Vite üretim derlemesi geçti; mevcut büyük paket uyarısı sürüyor.
+Önizlemeler: artifacts/crown-battle/layout-1366.jpg ve layout-390.jpg.
+
+Sınırlar / araştırma devri
+Çok yoğun hücrelerde komşular örneklenir; kesin yol bulma/katı beden fiziği değildir.
+Arena açık alandır; engel haritası yoktur. Çok büyük ordularda gerçek zamanlı 30 FPS
+garantisi verilmez. 12 ms bütçe tek bir pahalı adımı kesemez. 180 sn savaş sınırı korunur.
+Telefon meydanı ve WebM kaydı 9:16 kalır. PC meydanı yatay alanı doldurur;
+aynı savaş koordinatları geniş ekrana yansıtılır, motor harita boyutları değişmez.
+Kaçış bütçesi bilinçli oyun dengesi kuralıdır, tarihî bir mesafe iddiası değildir.
+Araştırma sekmesine hypaspist silah belirsizliği, Ölümsüzlerin yay+mızrak donanımı,
+Sparta hippeis'in yaya rolü, solak ve atlı samuray rolleri ile dönemsel hussar/
+yeniçeri donanımı iletildi. Mevcut açık rol verisi korundu; sonraki araştırma
+düzeltmeleri historical-combat.js üzerinden, birlik kimlikleri korunarak yapılabilir.
+
+PC MEYDAN DÜZELTMESİ — 14 EKİM 2026
+Sorun: önceki responsive düzen PC'de 9:16 tuvali dar bırakıyor, iki yanda boşluk
+oluşturuyordu. PC'de tuval artık tiyatro alanının tamamını doldurur. 1366x768
+ekranda yaklaşık 1014x464 px meydan; geniş ekranlarda 1440 px sayfa sınırı kaldırıldı.
+Menü 280–340 px yan sütunda, ana kontroller ekran içinde tutulur. Asker, bayrak,
+can çubuğu ve atış/komut efektleri orantılı çizilir; askerler daha büyük gösterilir.
+Arazi kırpılarak doldurulur, görüntüdeki ağaç/kayalar yatay esnetilmez.
+ResizeObserver pencere/sinema değişimini izler; savaş ve emirler sıfırlanmaz.
+PC için okunur yatay skor/zaman katmanı eklendi. 900 px altında telefon düzeni korunur.
+WebM ayrı 1080x1920 tuvalden kaydedilir; canlı pencereyi boyutlandırmak videonun
+oranını değiştirmez. Sprite/zemin önbelleği paylaşılır; ek çizim yalnız kayıtta yapılır.
+Lider mountCommanders import/bağlantısı korundu. Motor, kayıt kimlikleri, katalog,
+ordu verileri ve diğer sekmelerin görsel modülleri değiştirilmedi.
+Değişen dosyalar: src/crown-battle-renderer.js, src/crown-battle-app.js,
+src/crown-battle.css, tests/crown-battle-layout-browser.mjs,
+tests/crown-battle-browser.mjs ve bu not.
+Doğrulama: 6 ekran boyutunda yerleşim/menü/emir testi PASS; PC tuvalinin alanı
+doldurduğu ve geniş olduğu, telefonun 9:16 kaldığı artık açık test koşullarıdır.
+PC düşmana fareyle hedef verme, duraklatma, hız, klasik senaryolar, mobil emirler,
+kayıt sırasında pencere/sinema değişimi, WebM indirme ve ffmpeg 1080x1920 çözümleme PASS.
+Kayıt testi ilk iki çalışmada indirme zaman aşımı verdi; canlı dosya güncellemeleri
+ile çakışma olasılığı görüldü. Dosyalar sabitken son tam çalışma geçti. Bağımsız
+kayıt denemesi de indirdi. Genel kayıt performansı/FPS garantisi çıkarılmaz.
+Görüntü kontrolü: artifacts/crown-battle/layout-1366.jpg; test videosu sample.webm.
+Sınır: geniş ekran bir sunum uyarlamasıdır; simülasyonun 600x960 koordinatları
+korunur. Çok kalabalık sıralarda büyük sprite'lar üst üste gelebilir. Kayıt sırasında
+ikinci tuvali çizme ve video kodlama maliyeti vardır.
+Son üretim derlemesi: PASS (3.63 sn); mevcut paket boyutu uyarısı sürüyor.

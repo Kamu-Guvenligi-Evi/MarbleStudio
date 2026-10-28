@@ -1,0 +1,9 @@
+User clarified variety means the breakable spiral surface, not background scenery.
+Added five real material painters and debris styles: glass, ceramic, obsidian,
+emerald, circuit. Theme menu now has 23 entries (17 material types, 6 scenery variants).
+Files: src/spiral-materials.js, src/spiral-themes.js, tests/spiral-materials.mjs.
+Passed material tests: permanent holes, distinct textures, unchanged physics RNG,
+cached surfaces, serialization and exported frames for all five new materials.
+Passed theme menu/persistence/mobile tests and Vite build (size advisory only).
+Visually checked artifacts/spiral-new-materials.png. No downloads required.
+User's execute-through-completion preference saved to C:/Users/yigit/.codex/AGENTS.md.

@@ -1,0 +1,30 @@
+Kale Kusatmasi - 2026-10-15
+
+Scope: isolated crown-siege mode; classic battle implementation unchanged.
+Large castle remains on left, blue defenders inside/on walls, red attackers on right.
+
+Added crew-operated battering ram, two buildable/destroyable ladders, single-file
+climbing, parapet melee and courtyard descent. Ram requires four nearby crew.
+Attack plans: balanced, gate, walls. Shield advance trades speed for arrow cover.
+Defense: limited regenerating supplies, oil with warning, interruptible gate repair,
+and timed arrow volley. Defender AI uses the same ability costs and cooldowns.
+Canvas equipment art matches existing terrain and units; no downloaded assets.
+UI includes front camera shortcuts, equipment status, ability controls and event log.
+
+Validation passed:
+- tests/crown-siege-operations.mjs: equipment, abilities, crew, plans and role checks.
+- tests/crown-siege.mjs: collision, orders, capture, outcomes and classic isolation.
+  Seeds 1066/42/123: gate breach 75/76/75s, end 128/127/128s, two climbs each.
+- Alternate plan simulations: gate 135s / 6 ram hits / 0 climbs;
+  walls 153s / 5 ram hits / 8 climbs. Both completed.
+- tests/crown-siege-browser.mjs: 1440x1000 and 390x844, controls, camera,
+  tactics, commands, reset, victory; no browser errors or horizontal overflow.
+- tests/crown-battle.mjs: existing classic regressions passed.
+- Vite production build passed (6.08s); existing chunk-size warning remains.
+
+Browser tests import the exact script src from HTML, including Vite query params,
+to avoid accidentally instantiating a second application module.
+
+Preview: http://127.0.0.1:5173/crown-siege.html
+Artifacts: artifacts/crown-siege/deployment-1440.png, deployment-390.png,
+desktop.png, mobile.png, build-operations.log.

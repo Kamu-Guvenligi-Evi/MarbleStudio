@@ -1,0 +1,22 @@
+{
+  "id": "history-06cb836a64",
+  "category": "history",
+  "name": "Jeanne d’Arc",
+  "englishName": "Joan of Arc",
+  "src": "/catalog/history-06cb836a64.jpg",
+  "fit": "cover",
+  "source": "https://commons.wikimedia.org/wiki/File:Joan_of_Arc_miniature_graded.jpg",
+  "identitySource": "https://en.wikipedia.org/wiki/Joan_of_Arc",
+  "credit": "Derived from original commons upload at which is now in the history version: 01:39, 13. 8. 2005\n\nColour-graded to reveal more detail using GIMP software \"curves\" tool",
+  "license": "Public domain",
+  "licenseUrl": "",
+  "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Joan_of_Arc_miniature_graded.jpg/330px-Joan_of_Arc_miniature_graded.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "curated": true,
+  "historicalNote": "Fransa · askerî lider · Sanatsal tasvir",
+  "keywords": "Joan of Arc Fransa · askerî lider",
+  "portraitFrame": [
+    0.46,
+    0.24,
+    0.7
+  ]
+}

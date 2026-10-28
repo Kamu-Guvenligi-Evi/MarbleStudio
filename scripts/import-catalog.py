@@ -43,6 +43,8 @@ def download(spec):
     cached = DEST / (ident + '.json')
     if cached.exists():
         item = json.loads(cached.read_text(encoding='utf-8'))
+        if item.get('curated') and (ROOT / 'public' / item['src'].lstrip('/')).exists():
+            return item
         if (ROOT / 'public' / item['src'].lstrip('/')).exists() and item.get('fileOverride')==FILE_OVERRIDES.get(title) and item.get('brandSlug')==BRAND_OVERRIDES.get(title):
             if item['category']!=category or item['name']!=name:
                 item.update(category=category,name=name)

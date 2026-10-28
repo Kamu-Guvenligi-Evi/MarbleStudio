@@ -1,0 +1,67 @@
+Taç Muharebesi — ek tarihî birlikler ve Warg görselleri, 15 Ekim 2026
+
+Bu çalışma: 6 tarihî birlik, 1 Isengard süvarisi; mevcut Azog/Warg çizimi yenilendi.
+Katalog doğrulaması: 186 birlik / 90 ülke-faksiyon grubu.
+Önceki 14 birlik docs/major-civilizations-integration-2026-10-15.txt içinde.
+Bütün tarihî birliklerin veya medeniyetlerin araştırması tamamlandı iddiası yoktur.
+
+YENİ TARİHÎ BİRLİKLER
+japan_odachi_samurai — Japonya; iki elli uzun ōdachi, zırh bağları ve kabuto.
+polish_medieval_knight — Polonya Krallığı; ortaçağ zırhlı şövalyesi, yeni ülke menüsü.
+macedon_sarissa_phalangite — Makedonya Krallığı; iki elle sarissa ve küçük kalkan.
+byzantine_menavlatos — Bizans; kalın saplı menavlion, ağır süvariye karşı piyade.
+khmer_crossbowman — Khmer İmparatorluğu; arbalet, sampot, Bayon tasvirindeki
+  süslü omuzluk/yaka ve çapraz göğüs kayışları. Kabartmadan renk/malzeme kesinlenmez.
+irish_kern_spearman — İrlanda Gal lordlukları; léine, pelerin, mızrak ve saç biçimi.
+
+Başlıca kaynaklar (ayrıntılı eşleştirme birimlerin sources alanında):
+https://emuseum.nich.go.jp/detail?content_base_id=100493&content_part_id=0&content_pict_id=0&langId=en
+https://emuseum.nich.go.jp/detail?content_base_id=100513&content_part_id=1&content_pict_id=0&langId=en
+https://muzhp.pl/wiedza-on-line/rycerz
+https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Polybius/18*.html#29
+https://archives.maryjahariscenter.org/blog/a-tenth-century-byzantine-military-manual
+https://cambodianess.com/article/picture-of-the-day-khmer-archers-and-crossbowmen-at-bayon
+https://catalogue.nli.ie/Record/vtls000171614
+https://commons.wikimedia.org/wiki/File:Gallowglass_-_D%C3%BCrer.png
+
+WARG / AZOG
+me_uruk_warg_rider: Orta Dünya > Isengard. Koyu, sırtlanı andıran Warg;
+yüksek omuz, geriye alçalan gövde, kısa kuyruk, geniş çene. Zırhlı Uruk-hai,
+beyaz el işaretli kalkan ve pala. Uruk-hai binici oyun uyarlaması olarak belirtilir;
+filmdeki tüm Warg binicilerinin Uruk-hai olduğu ileri sürülmez.
+Kullanıcı sırtlan çizimini beğendi: bu görünüm korunmalı.
+Kaynaklar:
+https://www.zbrushcentral.com/t/interview-ben-mauro/334929
+https://www.warhammer-community.com/en-gb/articles/sjZ0P8uD/middle-earth-faction-focus-isengard/
+
+me_azog_warg: kullanıcı eski görseli beğenmediği için ayrı yerel Canvas çizimi.
+Soluk kaslı gövde, yara izleri, demir kanca, ağır topuz; beyaz Warg için kürk,
+güçlü çene, dişler, pençeli patiler ve eklemli bacaklar. İskelet/çizim Isengard
+bineğinden bağımsızdır. Mevcut savaş değerleri değiştirilmedi.
+Referans: https://www.wetanz.com/us/azog-the-defiler-on-warg
+Weta fotoğrafı yalnız artifacts/uruk-warg/azog-weta-reference.jpg araştırma dosyasıdır;
+oyunda dağıtılan kart görseli özgün Canvas çiziminden alınan WebP'dir.
+
+DOSYALAR / DİĞER SEKMEYE DEVİR
+src/additional-historical-units.js ve src/additional-historical-art.js
+historical-catalogue, historical-art-profiles, historical-warrior-art bağlantıları;
+historical-culture-groups içindeki Polonya menüsü.
+src/middle-earth-units.js, middle-earth-visual-profiles.js,
+middle-earth-stylized-expansion.js, yeni middle-earth-azog-art.js.
+public/warrior-sprites/middle-earth/{uruk-warg-rider,azog-warg}-portrait.webp
+crown-battle-movement-sound.js: yeni Warg için at nalı sesinin uygulanmaması.
+Bu çalışma crown-battle.js / crown-battle-renderer.js dosyalarını değiştirmedi.
+
+DOĞRULAMA
+node tests/major-civilizations.mjs --additional: 6 birlik, 480 kare, 6 farklı
+siluet, hasar/mermi türleri, ülke menüleri, savaş aktarımı ve kayıt yükleme geçti.
+node tests/uruk-warg-rider.mjs: Warg hücum/hasarı, iki Warg için 160 hareket karesi,
+taşma/boş çizim kontrolü, farklı siluet, kart, Isengard menüsü ve kayıt geçti.
+node tests/historical-civilizations.mjs: 186 birlik, 90 grup, filtreler, transfer,
+kalıcılık, kart görselleri ve mobil kontrol geçti.
+Vite production build geçti; mevcut büyük paket boyutu uyarısı var.
+
+Önizlemeler:
+artifacts/additional-historical/six-warriors.jpg
+artifacts/uruk-warg/warg-comparison.jpg
+Kontrol sonuçları aynı klasörlerin checks.json dosyalarında.

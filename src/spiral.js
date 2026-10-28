@@ -41,8 +41,8 @@ export function spiralMultiplierLayout(seed=2048){
 }
 
 export class Spiral{
-  constructor({variant='classic',theme='ice',seed=2048,count=1,ballImages=[],ballNames=[],onHit=()=>{}}={}){
-    this.variant=spiralVariant(variant);this.dynamics=SPIRAL_VARIANTS[this.variant];this.theme=normalizeSpiralTheme(theme);this.palette=SPIRAL_THEMES[this.theme].hues||BALL_HUES;this.mode='spiral';this.seed=seed;this.rng=random(seed);this.onHit=onHit;
+  constructor({spiralBackground=true,variant='classic',theme='ice',seed=2048,count=1,ballImages=[],ballNames=[],onHit=()=>{}}={}){
+    this.spiralBackground=spiralBackground;this.variant=spiralVariant(variant);this.dynamics=SPIRAL_VARIANTS[this.variant];this.theme=normalizeSpiralTheme(theme);this.palette=SPIRAL_THEMES[this.theme].hues||BALL_HUES;this.mode='spiral';this.seed=seed;this.rng=random(seed);this.onHit=onHit;
     this.time=0;this.state='ready';this.finished=[];this.balls=[];this.particles=[];
     this.sectionCount=1;this.sections=[];this.sequence=[];this.finishY=960;
     this.cleared=initialFront;this.lastSpawn=-10;this.totalBreaks=0;

@@ -1,0 +1,184 @@
+{
+  "date": "2026-10-15",
+  "scope": "Alman, İngiliz ve Yunan birlikleri; ateşli silah gerektirmeyen tarihî savaşçılar",
+  "status": "Ara?t?r?lan 6 yeni birlik ve yeniden d?zenlenen Thebai Kutsal Birli?i oyuna entegre edildi. Test ve ek Ha?l?/K?p?ak kay?tlar? i?in europe-crusader-integration-2026-10-15.txt dosyas?na bak.",
+  "catalogueSnapshot": {
+    "german": [
+      "landsknecht",
+      "teutonic_knight",
+      "german_armoured_foot",
+      "german_doppelsoldner",
+      "german_ministerial"
+    ],
+    "english": [
+      "england_housecarl",
+      "english_cheshire_guard",
+      "english_yeoman_guard"
+    ],
+    "greek": [
+      "spartan",
+      "varangian",
+      "macedon_companions",
+      "macedon_hypaspists",
+      "byzantine_kataphraktos"
+    ]
+  },
+  "summary": {
+    "newCandidates": 6,
+    "retiredCandidateForReview": 1,
+    "addedToGameThisResearch": 7
+  },
+  "sources": {
+    "armouries": "https://royalarmouries.org/objects-and-stories/stories/the-hundred-years-war-1337-1453",
+    "wallaceHalberd": "https://wallacelive.wallacecollection.org/eMP/eMuseumPlus?module=collection&objectId=61449&service=ExternalInterface",
+    "englishWarfare": "https://www.english-heritage.org.uk/learn/story-of-england/medieval/war/",
+    "xenophon": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Aabo%3Atlg%2C0032%2C006%3A3",
+    "plutarch": "https://sourcebooks.web.fordham.edu/pwh/sacredband.asp"
+  },
+  "candidates": [
+    {
+      "proposedId": "german_pavise_crossbowman",
+      "name": "Alman pavisli arbaletçi",
+      "cultureId": "german",
+      "faction": "Alman Toprakları",
+      "period": "15. yüzyıl",
+      "classification": "Uzman menzilli piyade; belirli bir elit muhafız alayı değil",
+      "evidence": "Royal Armouries, arbaletçilerin kurma sırasında pavisle korunmasını açıklar; aynı koleksiyonda 15. yüzyıla ait Alman pavisleri bulunur. Bu, donanıma dayalı oyun tipi önerisidir; tek tip üniforması olan bir alay iddiası değildir.",
+      "sourceIds": [
+        "armouries"
+      ],
+      "visualReferences": [
+        {
+          "url": "https://royalarmouries.org/collection/object/object-518",
+          "use": "Alman pavisinin biçimi; koleksiyon bağlantısı doğrulandı, görsel henüz yakından incelenmedi"
+        },
+        {
+          "url": "https://www.metmuseum.org/art/collection/search/21940",
+          "use": "1460 arbaletinin mekanik biçimi; süslü kont silahı sıradan savaş arbaleti gibi kopyalanmamalı"
+        }
+      ],
+      "visualCaution": "Met yayını bu süslü arbaleti öncelikle av/tören bağlamında değerlendirir. Pavis resmi tek başına arbaletçinin bütün kıyafetini kanıtlamaz.",
+      "gameProposal": "Yavaş kurulan arbalet ve yüksek dikdörtgen pavis; mevcut Alman yakın dövüşçülerinden belirgin biçimde ayrılır.",
+      "integrationStatus": "Yeni aday; çizim ve silah davranışı hazırlanmadı"
+    },
+    {
+      "proposedId": "german_halberdier",
+      "name": "Alman teberci",
+      "cultureId": "german",
+      "faction": "Alman Toprakları",
+      "period": "15. yüzyıl sonu – 16. yüzyılın ilk yarısı",
+      "classification": "Teber kullanan piyade; ayrı adlandırılmış elit birlik değil",
+      "evidence": "Wallace A952, yaklaşık 1500 tarihli Alman teberidir; müze açıklaması bu biçimi Alman ve İsviçre piyadesinin kullandığı tip olarak tanımlar.",
+      "sourceIds": [
+        "wallaceHalberd"
+      ],
+      "visualReferences": [
+        {
+          "url": "https://wallacelive.wallacecollection.org/eMP/eMuseumPlus?module=collection&objectId=61449&service=ExternalInterface",
+          "use": "A952: uzun üst sivri uç, eğik kesici ağız, arka kanca ve sap bağlantıları"
+        }
+      ],
+      "visualCaution": "Silah kaynağı tek başına Landsknecht kıyafetini kanıtlamaz. Landsknecht adı kullanılacaksa dönemin kıyafet tasviri ayrıca incelenmeli.",
+      "gameProposal": "Mevcut uzun mızraklı Landsknecht ve çift elli kılıççıdan farklı, daha kısa erişimli kesme/delme silahı.",
+      "integrationStatus": "Yeni aday; kıyafet referansı ve özgün çizim bekliyor"
+    },
+    {
+      "proposedId": "english_billman",
+      "name": "İngiliz bill piyadesi",
+      "cultureId": "english",
+      "faction": "İngiltere Krallığı",
+      "period": "15. yüzyıl",
+      "classification": "Kancalı sırık silahlı piyade; elit saray muhafızı değil",
+      "evidence": "Royal Armouries bill silahının İngiliz ortaçağ piyadesindeki yaygınlığını, kesici ağzını, delici ucunu ve atlıya karşı kancasını açıklar.",
+      "sourceIds": [
+        "armouries"
+      ],
+      "visualReferences": [
+        {
+          "url": "https://royalarmouries.org/objects-and-stories/stories/the-hundred-years-war-1337-1453",
+          "use": "Bills bölümü; VII.1495 İtalyan/Avrupa örneği silah biçimine yardımcıdır, İngiliz üretimi diye etiketlenmemeli"
+        }
+      ],
+      "visualCaution": "Bill, geniş baltalı teberle aynı başlığa dönüştürülmemeli. Yeoman muhafızının kıyafeti kopyalanmamalı.",
+      "gameProposal": "Kancası belirgin uzun silah; süvariye karşı piyade rolü.",
+      "integrationStatus": "Yeni aday; silah/kıyafet çizimi bekliyor"
+    },
+    {
+      "proposedId": "english_dismounted_man_at_arms",
+      "name": "İngiliz zırhlı yaya savaşçı",
+      "cultureId": "english",
+      "faction": "İngiltere Krallığı",
+      "period": "15. yüzyıl",
+      "classification": "Men-at-arms içinden ağır zırhlı savaşçı temsili; özel adlı muhafız alayı değil",
+      "evidence": "English Heritage, İngiliz men-at-arms sınıfını ve İngiliz ordularının çoğunlukla yaya savaşmasını açıklar. Royal Armouries pollaxe kullanımını hem savaş hem turnuva bağlamında belgeler.",
+      "sourceIds": [
+        "englishWarfare",
+        "armouries"
+      ],
+      "visualReferences": [
+        {
+          "url": "https://royalarmouries.org/collection/object/object-24927",
+          "use": "İngiliz pollaxe, 1450–1500; koleksiyon bağlantısı doğrulandı, görsel henüz yakından incelenmedi"
+        }
+      ],
+      "visualCaution": "Savaş zırhı kullanılmalı; VIII. Henry'nin özel yaya turnuva zırhı savaş üniforması kabul edilmemeli. Bütün men-at-arms aynı pahalı tam zırha sahipti iddiası kurulmaz.",
+      "gameProposal": "Plaka zırh, küçük başlı pollaxe; zincir zırhlı ve büyük baltalı Housecarl'dan ayrı dönem ve siluet.",
+      "integrationStatus": "Yeni aday; savaş zırhı görselinin seçimi bekliyor"
+    },
+    {
+      "proposedId": "greek_rhodian_slinger",
+      "name": "Rodoslu sapancı",
+      "cultureId": "greek",
+      "faction": "Rodos",
+      "period": "MÖ 401 seferi bağlamı",
+      "classification": "Uzman hafif menzilli asker; kalıcı elit muhafız alayı değil",
+      "evidence": "Ksenophon, Anabasis 3.3.16–20'de ordudaki Rodosluların sapancılığını, kurşun mermi kullanmasını ve yaklaşık 200 kişilik bir kuvvet oluşturulmasını anlatır.",
+      "sourceIds": [
+        "xenophon"
+      ],
+      "visualReferences": [],
+      "visualCaution": "Rodos'a özgü üniforma doğrulanmadı. Genel Yunan veya Roma sapancı resmi doğrudan Rodos üniforması diye sunulamaz.",
+      "gameProposal": "Sapan çevirme hareketi, mühimmat kesesi ve kurşun mermi; okçu animasyonu/ok mermisi kopyalanmamalı. Metindeki menzil kıyasları sabit oyun çarpanı değildir.",
+      "integrationStatus": "Yeni aday; Rodos için kültür eşlemesi, görsel ve ayrı sapan davranışı gerekiyor"
+    },
+    {
+      "proposedId": "greek_cretan_archer",
+      "name": "Giritli okçu",
+      "cultureId": "greek",
+      "faction": "Girit Şehir Devletleri",
+      "period": "MÖ 401 seferi bağlamı",
+      "classification": "Uzman/paralı okçu; tek bir devletin elit muhafız alayı değil",
+      "evidence": "Ksenophon, Anabasis 3.3.7'de Giritli okçuları, zırhsız olmalarını ve çatışmadaki menzil sorununu anlatır. 3.4'te düşman oklarının yeniden kullanılması da geçer.",
+      "sourceIds": [
+        "xenophon"
+      ],
+      "visualReferences": [],
+      "visualCaution": "Döneme uygun yay, sadak ve hafif kıyafet için görsel araştırma sürmeli. İskit kıyafetli bir Yunan vazo okçusu otomatik olarak Giritli sayılmaz; boynuzlu fantastik miğfer eklenmez.",
+      "gameProposal": "Hafif okçu; Girit kimliği açıklamada, doğrulanmamış sabit üniforma iddiası olmadan korunmalı.",
+      "integrationStatus": "Yeni aday; Girit için kültür eşlemesi ve görsel referans gerekiyor"
+    },
+    {
+      "existingId": "thebes_sacred_band",
+      "name": "Thebai Kutsal Birliği",
+      "cultureId": "greek",
+      "faction": "Thebai",
+      "period": "MÖ 4. yüzyıl",
+      "classification": "Adı ve seçkin statüsü tarihî metinde belgelenmiş birlik",
+      "evidence": "Plutarkhos'un Pelopidas anlatısı 300 seçilmiş savaşçıdan ve kent tarafından sağlanan bakım/eğitimden söz eder. Olaylardan yüzyıllar sonra yazılmış antik anlatıdır; çağdaş üniforma belgesi değildir.",
+      "sourceIds": [
+        "plutarch"
+      ],
+      "visualReferences": [],
+      "visualCaution": "Kaynak tek renk üniforma veya bütün savaşçıların aynı kalkan süslemesini kullandığını göstermez. Spartalı görseli yalnız renk değiştirerek yeniden kullanılmamalı.",
+      "gameProposal": "Eğitimli hoplit birliği; görseli yeterli kanıtla hazırlanırsa eski kayıt canlandırılabilir.",
+      "integrationStatus": "Yeni keşif değil: eski araştırmada mevcut, uygun görsel olmadığı için katalogda devre dışı. Görsel sorunu çözülmeden etkinleştirilmemeli."
+    }
+  ],
+  "excludedDuplicates": [
+    "Töton şövalyesi, Ministerial, Doppelsöldner ve Housecarl zaten mevcut.",
+    "Genel Alman zırhlı yaya önerisi mevcut german_armoured_foot ile tekrar eder.",
+    "Genel İngiliz uzun yaycı mevcut Cheshire muhafız okçusu ve ayrı Galli uzun yaycıyla rol/görsel tekrarı yaratabilir.",
+    "Tabancalı Reiter bu araştırmanın ateşli silahsız kapsamına uygun değil."
+  ],
+  "handoff": "Önce kaynak görselleri incele; nesne fotoğrafını bütün üniformanın kanıtı sayma. Kullanılabilir referansı bulunmayan adayı hazır görselli gibi sunma. Entegrasyon yapılırsa kültür menüsü, kart silueti, farklı silah davranışı ve canlı savaş doğrulanmalı. Bu araştırmada görsel indirilmedi, çizim veya oyun kodu değiştirilmedi."
+}

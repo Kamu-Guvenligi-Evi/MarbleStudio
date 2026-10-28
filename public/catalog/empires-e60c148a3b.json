@@ -1,0 +1,15 @@
+{
+  "id": "empires-e60c148a3b",
+  "category": "empires",
+  "name": "Etiyopya İmparatorluğu",
+  "src": "/catalog/empires-e60c148a3b-historical.png",
+  "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Ethiopia_(1897%E2%80%931914).svg",
+  "credit": "Thommy",
+  "license": "CC0",
+  "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Flag_of_Ethiopia_%281897%E2%80%931914%29.svg/330px-Flag_of_Ethiopia_%281897%E2%80%931914%29.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "fileOverride": "Flag of Ethiopia (1897–1914).svg",
+  "fit": "flag",
+  "historicalNote": "1897–1914 · Menelik döneminin bayrağı",
+  "curated": true
+}

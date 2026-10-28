@@ -1,0 +1,52 @@
+Komutan orduları — 15 Ekim 2026
+
+İş bölümü (mevcut sekmeler):
+01a13b10-7f99-7a70-b113-bba2c705c791: 19 destek birliği, çizim/katalog entegrasyonu, PC/mobil arayüz, build.
+01a13b6d-28b1-7921-8984-c4623799e14f: Turan fırsat ve muharebeye dönüş koşulları, regresyonlar.
+Bu sekme: Timurlu 3 birlik, koalisyon 5 birlik, 19 hazır ordunun tarihî kapsamı/kaynak arayüzü, son kadro karşılaştırması.
+
+Entegrasyon:
+src/historical-timurid-units.js: timurid_horse_archer, timurid_armored_lancer, timurid_guard_cavalry.
+TDV Timurlular muhafız ve teşkilât için; TDV Ankara Savaşı 1402 fil desteği için; Iranica Armor dönem zırhı için.
+Kavçin adının dayanağı var; kartın kılıç-kalkan donanımı bir oyun rekonstrüksiyonu, tek tip tarihî üniforma iddiası yok.
+Timur 24 tabanı: 12 atlı okçu, 7 zırhlı mızraklı, 4 Kavçin, 1 fil. Eski Moğol/Kıpçak adlandırılmış vekil kartlar çıkarıldı.
+src/historical-army-history.js: 19 komutanda dönem ve kapsam. Kaynaklar UI'de birlik kayıtlarından tekilleştirilir.
+src/historical-army-preset-ui.js: dönem, açılıp kapanan kapsam/kaynak bölümü. Sayısal oranlar oyun ölçeğidir.
+Bu kadrolar bütün tarihî orduların eksiksiz yoklama cetveli değildir. Attila'nın koalisyon müttefikleri, Hannibal'ın Galya piyadesi ve Leonidas'ın Yunan müttefikleri aşağıdaki beş kartla eklendi. Benzer Yunan kent hoplitleri tek destek kartında toplanır; her kent için ayrı elit alay veya tam tarihî asker sayısı iddiası yoktur.
+
+Koalisyon tamamlaması:
+src/historical-coalition-units.js: attila_ostrogoth_cavalry, attila_gepid_spearman, carthage_gallic_swordsman, greek_thespian_hoplite, greek_allied_hoplite.
+Jordanes Getica 199–200: Valamir'in Ostrogotları ve Ardaric'in Gepidleri. Süvari/mızraklı donanımı dönem rekonstrüksiyonudur.
+Polybios 3.114–115: Hannibal'ın merkezindeki Kelt ve İber piyadeleri, Kelt kılıçları.
+Herodotos 7.202–203, 222: Thermopylai müttefikleri ve kalan Thespiailılar. Başlangıç koalisyonu son günün kuvveti diye sunulmaz.
+Kart kaynakları, medeniyet menüleri, iki tarafın savaş türleri ve üç komutanın hazır orduları bağlandı.
+19 hazır ordunun sayı/rol testlerine Attila/Hannibal/Leonidas için 24,97,241 asker ve iki tarafta gerçek spawn kontrolü eklendi: PASS.
+Yeni beş kart yerel kırpımda incelendi: artifacts/commander-army-units/coalition-review.jpg.
+Son 27 destek birliğinin gerçek hasar/kayıt denetimi PASS. commander-army-units.mjs: 2160 animasyon karesi;1366/390px;iki tarafta ekle/çıkar, savaşa geçiş, yeniden yükleme PASS exit0.
+historical-army-presets-browser.mjs:1440/390/320px;tüm19komutan,seçim,ölçekleme,geçersiz adet,karşı tarafı koruma,kayıt ve atölye geçişi PASS exit0.
+historical-army-history.mjs:19komutanda dönem/kapsam/kaynak ve gerçek oluşturma PASS exit0. İkinci bütçe alanı eklendiği için testin asker sayısı seçicisi açık ID ile sınırlandı.
+
+Doğrulama:
+historical-army-presets.mjs PASS: 19 komutan, minimumdan1000'e sayı/rol taraması,4boyut2taraf.
+historical-army-history.mjs PASS:19dönem/kapsam/kaynakpaneli,tekilleştirme,aç-kapa,sayıyla gerçek ordu oluşturma.
+timur-ready-army-browser.mjs PASS:1440/390px,iki taraf97/200asker,komutan ilavesi,karşı tarafı koruma,kaydet-yeniden yükle.
+Main sekmesi commander-army-units.mjs PASS:22birlik1760animasyonkaresi,iki taraf PC/mobil,kayıt.
+Yeni3Timur görseli yerel kırpımda incelendi: artifacts/commander-army-units/timurid-review.jpg.
+commander-balance-audit.mjs: artifacts/commander-balance/timurid-final.json;52/52doğaleleme,changedSources=[].
+Fil kaldırma ikamesi artık timurid_armored_lancer; eski kipchak_lancer anahtarı NaN üretmesin diye düzeltildi.
+
+Koalisyon/bütçe/takip kararı düzeltmelerinden önceki tanı (tarihsel kayıt):
+Timur, Fatih ve Alp Arslan'a karşı 96/240adet testlerde 4/4 kazandı. Taktik kapalı, özel plan kapalı ve fil yerine mızraklı koşullarında da 4/4. Eşit asker sayısı eşit ordu gücü değildir; bu rapor denge veya tarihî doğruluk ispatı değildir.
+NPC canlı Turan tanısı:8savaş,changedSources=[],Timur açık/kapalı4/4. Erken hasarda assemble'dan muharebeye dönüş sağlandı; bu rakibe kapanma görülmedi. Turan bütünüyle başarılı sayılmamalı.
+Audit sonrası ana sekmenin Odachi çizim sınırı düzeltmesi yalnız görsel; bu rapor audit sırasında kaydedilen hashleri taşır.
+
+Son ortak doğrulama — koalisyon, taktik kararları ve bütçe eklendikten sonra:
+- 227 birlik,10896 çizim karesi PASS; boş/kesilen çizim ve tarayıcı hatası yok. Üç yinelenen profil ana sekmede ayrıştırıldı.
+- NPC sekmesi22test betiği+build PASS bildirdi;40özel doktrin+16genel komutan savaşı doğal eleme ile bitti,38oyuncu emri/komutan kaybı kontrolü geçti.
+- Turan24/48/96süvari ve iki yönde6savaşta iki kanadın fiziksel kapanışı,hızlanması ve hasarı doğrulandı.12karışık atlı okçu testi geçti.
+- GüncelAlp–Timur8savaşta kapanış yok;hazırlıksız kanada ateş gelince5,03–7,03sn'de yerel muharebeye dönüyor.Timurplan açık/kapalı4/4kazandı.Bu sonuç genel denge başarısı değildir.
+- Ayrıntı:docs/commander-opportunity-pressure-2026-10-15.txt;artifacts/commander-balance/selection-final-*.log ve turan-effectiveness.json.
+- Ana sekmenin yeni donanım bütçesi:227pozitif birlik puanı,19hazır ordu,16ayna karşılaşma PASS.96eşit adetteTimur8/8;2000eşit puandaFatih3/4,Alp2/4. Küçük tanısal örneklem, eşit kazanma garantisi yok; millet statları keyfî düşürülmedi.
+- BütçeUI1440/390/320px:geçersiz giriş,sayı tercihi,karşı tarafı koruma,oluştur/uygula/kaydet/yeniden yükle/komutan değişimi PASS.
+- Maksimum100000bütçe dahil19preset4bütçe seviyesindeittifak kaydı/geri yükleme/birleştirme birebir PASS; sessiz asker kırpması yok. Büyük ordular için yeniFPSgarantisi verilmedi. Ortak sonbuildPASS; mevcut paket boyutu uyarısı sürüyor.
+- Yorgunluk ve moral eklenmedi.19komutanda10özel medeniyet doktrini,Turan ve8genel donanım dizilişi mevcut;her komutana ayrı tarihî doktrin iddiası yok.

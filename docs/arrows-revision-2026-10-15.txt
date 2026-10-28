@@ -1,0 +1,39 @@
+Taç Muharebesi — ok revizyonu, 2026-10-15
+
+Kullanıcı: Atılan oklar gerçekçi değil, düzelt.
+Dosyalar: src/crown-battle-projectiles.js (yeni), crown-battle.js,
+crown-battle-renderer.js, crown-battle-feedback.js.
+
+Oklar: sabit çıkış hızı, sabit yerçekimi, yer düzlemi/elevasyon ayrımı.
+Hareketli hedefin tahmini kesişim noktası atış anında hesaplanır; uçuş
+sonrasında hedefin konumunu takip etmez. Mesafe arttıkça kavis artar.
+Atlı okçunun çıkış yüksekliği ayrıdır. Masaüstü esnetme/zoom dönüşümünde
+okun yönü ekrandaki gerçek hızına göre hesaplanır; çıkış yay hizasındadır.
+Görsel: ahşap gövde, ince tüyler ve metal uç; tek 80x24 yerel Canvas
+görseli yeniden kullanılır. Harici dosya veya görsel indirmesi yok.
+Yayın önündeki ikinci ok benzeri release çizgisi kaldırıldı, ses korunur.
+
+Oynanış etkisi: hedef yön değiştirip kesişimden uzaklaşırsa ok ıskalar;
+ıskalayan ok yere kadar uçar, yerdeki iz 3 saniyede silinir. İzler mevcut
+efekt listesinde en fazla 96 öğe sınırıyla tutulur. Hasar bir kez verilir.
+Mermi davranışı korunur. Oklar başka bir askere çarpma taraması yapmaz;
+yalnız atış hedefini kesişimde kontrol eder. Bu tam 3B fizik değildir.
+GPU asker çizimi/Balrog ölçeği korunur. soldier() tek başına kullanıldığında
+ölü asker çiziminin frameSprites erişimine optional chaining eklendi.
+
+Doğrulama PASS:
+- tests/crown-battle-projectiles.mjs: 72 projeksiyon teğeti; 20/30/60/120 Hz
+  tek isabet; hedef öne alma; takip etmeme; ıskalama/yere düşme/silinme;
+  engel kontrolü ve 251 okluk yaylımda sınırlı efekt sayısı.
+- tests/crown-battle-projectiles-browser.mjs: 24 PC/dikey, zoom, yön,
+  görünür piksel ve Canvas durum kontrolü.
+- crown-battle-impact, feedback, removal, fortress, behavior,
+  historical-combat: mevcut simülasyon regresyonları geçti.
+- crown-battle-impact-browser: 34 kontrol geçti.
+- crown-battle-sprite-batch-browser: 12 GPU/görsel eşdeğerlik vakası geçti.
+- crown-battle-fps-menu-browser: duraklatma/zoom/atlas/menü geçti.
+- Vite build geçti; mevcut 500 kB chunk uyarısı sürüyor.
+
+Önizleme: artifacts/crown-battle/arrows-revision.png (~467 KiB).
+Derleme günlüğü: artifacts/crown-battle/build-arrows.log.
+Bu tur FPS A/B ölçümü yapılmadı; FPS artışı iddiası yok.

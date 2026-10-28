@@ -1,0 +1,86 @@
+14 Ekim 2026 — Savaş animasyonları ve ses
+
+Önceki durum: saldırı/ölüm sprite kareleri vardı; bütün motor efektleri aynı
+ince halka olarak çiziliyordu. Savaş sesi yoktu, WebM yalnız video içeriyordu.
+
+Uygulama:
+- Gerçek saldırı çözümünde kılıç izi, mızrak hamlesi, ok çıkışı, tüfek parlaması,
+  fil tozu; yalnız HP azaldığında isabet kıvılcımı. Duman artık genişleyerek yükselir.
+- Mevcut atlas/ölüm animasyonu korunur; PC ve telefon sprite saldırısına
+  hamle/geri tepme eklenir. Efekt zamanı simülasyona bağlıdır; duraklamada sabittir.
+- Beş yerel sentez ses: kılıç, yay, tüfek, darbe, fil. Ses aç/kapat, düzey ve
+  Sesi dene düğmeleri. Tercihler localStorage'da; ilk ses kullanıcı etkileşiminde.
+- WebM'ye aynı ses karışımı eklenir. Susturma/düzey kaydı da etkiler.
+  Kayıt durdurulunca klon ses izi kapanır; oyunun ses çıkışı korunur.
+- En fazla 96 yeni görsel efekt, 12 ses; sesler ayrıca zaman aralıklarıyla
+  sınırlandırılır. Örnekler önbelleklenir. Yeni tam ordu/asker çifti taraması yok.
+- Savaş motorundaki iki isteğe bağlı olay kancası isabet/menzil/LOS kontrollerinin
+  ardından çalışır. Hasar, birlik kimlikleri, kayıt biçimi ve klasik mod değişmedi.
+
+Dosyalar:
+Yeni: src/crown-battle-audio.js, src/crown-battle-feedback.js,
+src/crown-battle-audio-ui.js, src/crown-battle-audio.css.
+Dar bağlantılar: src/crown-battle.js (iki olay), src/crown-battle-renderer.js
+(efekt çizimi/hamle), src/crown-battle-app.js (ses, kare, yeniden kurma, kayıt).
+Testler: tests/crown-battle-feedback.mjs, tests/crown-battle-audio-browser.mjs.
+Ana sekmeyle önceden paylaşıldı; kale/navigasyon ve onChange:update korundu.
+Birlik kataloğu ve görsel varlık dosyalarına dokunulmadı, dış indirme yapılmadı.
+
+Doğrulama:
+PASS crown-battle-feedback: temas zamanı, silaha göre efekt/ses, duvar engeli,
+sıfır hasar, 10000 olayda sınır, klasik mızrak, aynı tohumla aynı motor sonucu,
+beş sonlu ve sıfır olmayan ses örneği.
+PASS crown-battle-audio-browser: kullanıcı etkileşimi, gerçek WebAudio sinyali,
+sessiz tercihi/yenileme, ses sınırı, WebM audio+video, klon temizliği,
+indirilen WebM tekrar çözülünce sıfır olmayan ses sinyali,
+1366px/390px taşmama; 14 PC/portre efekt görünürlüğü ve duraklama kontrolü.
+PASS crown-battle-impact: 20/30/60/120 Hz temas, iptal, uçuş ve geniş harita.
+PASS crown-battle-impact-browser: 34 üretim renderer kontrolü, 5 birlik rolü,
+PC/portre, ölüm/duraklama/son kare.
+PASS crown-battle-behavior ve historical-combat: süvari/mızrak, atlı okçu,
+yığılma, emirler, tüfek aralığı, fil alan hasarı ve kayıt kimlikleri korunuyor.
+PASS vite build (mevcut >500kB parça uyarısı sürüyor).
+
+Sınırlar: Sesler sentezdir, tarihî ses kaydı değildir. Fiziksel hoparlörün sesi
+uzaktan dinlenmedi; dijital sinyal ve tarayıcı akışı test edildi. Çok kalabalık
+savaşlarda efekt/ses bilerek seyreltilir; genel motor FPS sorununun tamamen
+çözüldüğü iddia edilmiyor. Ses/video desteği tarayıcıya bağlıdır.
+
+2026-10-14 — Kullanıcı: "savaş sesleri çok kötü"; ses revizyonu
+Sorun: iki sabit sinüsle metal çınlaması, yayda elektronik frekans kayması,
+her vuruşta aynı örnek ve saldırı+temas için çift ses isteği.
+Çözüm: metal/darbe/ağır temas için Kenney Impact Sounds (CC0) kaynaklı
+3'er yerel Foley örneği. 9 OGG toplam 65.643 bayt; kaynak/lisans public/audio/battle.
+Yay/tüfek ve yükleme yedeği ötüşsüz, ayrı geçiş/gövde/kuyruk zarfları kullanır.
+Kısa kuyruk, uçlarda fade, tepe eşleme, 55–6200 Hz miks filtresi ve kompresör.
+Ardışık aynı örnek engeli, küçük perde/seviye farkı, yoğunlukta seviye düşüşü.
+Temasta tek ses; mızrak/menzilli isabeti tok darbe, kılıç teması metal.
+En çok 10 aktif ses, saniyede 14 yeni ses bütçesi ve 4 başlangıç kotası;
+bekleyen ses kuyruğu yok. Savaş RNG'si, hasar, kimlikler, kayıtlar değişmez.
+Örnekler ilk kullanıcı etkileşiminde yerelden bir kez çözülür; başarısız
+yükleme iki saniyede sonlanır ve sentez yedeği kullanılır.
+
+Değişenler: src/crown-battle-audio.js, src/crown-battle-feedback.js,
+tests/crown-battle-audio-mix.mjs (yeni), tests/crown-battle-feedback.mjs,
+tests/crown-battle-audio-browser.mjs, public/audio/battle/*, bu not.
+Ana sekmeye önceden bildirildi; motor/renderer/arayüz dosyaları değiştirilmedi.
+
+PASS crown-battle-audio-mix: 10.000 olay/1 sn -> 17 kabul edilmiş ses;
+sınırlı önbellek, gecikmiş kuyruk yok, ardışık örnek farklı, durma/sessiz,
+24/44,1/48 kHz sonlu ve kısa kuyruklu örnekler.
+PASS crown-battle-feedback: gerçek temas başına bir ses dahil mevcut kontroller.
+PASS crown-battle-impact: 20/30/60/120 Hz hasar/temas/uçuş davranışı korundu.
+PASS crown-battle-audio-browser: 9 Foley dosyası çözüldü, sinyal/tepe/fade
+kontrolleri, başarısız dosya yüklemesinde çalışan yedek, sessiz tercihi,
+sesli WebM indirme/yeniden çözme, PC/telefon kontrolleri ve 14 efekt kontrolü.
+Kayıt testi 16 askerle çalıştırıldı. İlk 320 askerli denemede, diğer sekmenin
+derleme/regresyon işleriyle aynı sırada indirme bekleme zaman aşımı oldu;
+bu revizyon kalabalık savaşta kayıt performansını doğrulamış sayılmaz.
+PASS üretim build: ana sekme çalıştırdı, artifacts/crown-battle/lag-build.log.
+Mevcut >500 kB paket uyarısı sürüyor; ikinci kez derleme çalıştırılmadı.
+
+Sınır: Foley kullanımı kaliteyi yalnız sayısal testle garanti etmez; fiziksel
+hoparlör dinlemesi yapılmadı. Yay/tüfek hâlâ tasarlanmış sentez efektidir.
+Kaynak arşivleri: artifacts/battle-audio/impact.zip (800.850 bayt),
+rpg.zip (964.837 bayt; incelendi, oyunda kullanılmadı).
+Bunlar yerel dosya boyutlarıdır; ölçülmüş toplam internet tüketimi değildir.

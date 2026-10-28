@@ -31,26 +31,26 @@ export function renderTerritory(ctx,race,{countdown=0,paused=false,channel,resul
   drawChannelWatermark(ctx,channel);
   ctx.strokeStyle='#080e2045';ctx.lineWidth=1;ctx.beginPath();for(const i of race.valid){if(race.cells[i]<0)continue;const p=race.position(i);if(race.cells[i+1]!==race.cells[i]){ctx.moveTo(p.x+3,p.y-3);ctx.lineTo(p.x+3,p.y+3);}if(race.cells[i+80]!==race.cells[i]){ctx.moveTo(p.x-3,p.y+3);ctx.lineTo(p.x+3,p.y+3);}}ctx.stroke();
   for(const event of race.events){const age=now-event.time;if(age<0||age>1.15||!event.changedCells)continue;ctx.fillStyle=`rgba(255,255,255,${.5*(1-age/1.15)})`;for(const i of event.changedCells){const p=race.position(i);ctx.fillRect(p.x-3,p.y-3,6.2,6.2);}}
-  for(const b of alive)if(b.trail.length){ctx.beginPath();b.trail.forEach((cell,i)=>{const p=race.position(cell);i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y);});ctx.lineTo(b.body.position.x,b.body.position.y);ctx.lineJoin='round';ctx.lineCap='round';ctx.strokeStyle='#050a16';ctx.lineWidth=8;ctx.stroke();ctx.strokeStyle=b.color;ctx.lineWidth=4.5;ctx.stroke();ctx.strokeStyle='#ffffff90';ctx.lineWidth=1;ctx.stroke();}
+  for(const b of alive)if(b.trail.length){ctx.beginPath();(b.trailAnchor==null?b.trail:[b.trailAnchor,...b.trail]).forEach((cell,i)=>{const p=race.position(cell);i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y);});ctx.lineTo(b.body.position.x,b.body.position.y);ctx.lineJoin='round';ctx.lineCap='round';ctx.strokeStyle='#050a16';ctx.lineWidth=8;ctx.stroke();ctx.strokeStyle=b.color;ctx.lineWidth=4.5;ctx.stroke();ctx.strokeStyle='#ffffff90';ctx.lineWidth=1;ctx.stroke();}
   for(const pickup of race.pickups){const p=race.position(pickup.cell);ctx.beginPath();ctx.arc(p.x,p.y,TERRITORY_PICKUP_RADIUS+3,0,Math.PI*2);ctx.fillStyle='#071325';ctx.fill();ctx.strokeStyle=pickup.type==='speed'?'#ffe66d':'#8ce9ff';ctx.lineWidth=1.5;ctx.stroke();buffIcon(ctx,pickup.type,p.x,p.y);}
   ctx.restore();drawChannelTitle(ctx,channel,270,942);path();ctx.strokeStyle=finalDuel?'#f4d68a':'#7b9db4';ctx.lineWidth=2;ctx.stroke();
   for(const b of alive){const {x,y}=b.body.position,r=b.body.circleRadius;
     if(race.protected(b)){ctx.beginPath();ctx.arc(x,y,r+6,0,Math.PI*2);ctx.fillStyle='#8ce9ff25';ctx.fill();ctx.strokeStyle='#8ce9ff';ctx.lineWidth=2;ctx.stroke();}
     ctx.beginPath();ctx.arc(x,y,r+2,0,Math.PI*2);ctx.fillStyle='#050b17';ctx.fill();drawMarble(ctx,b,x,y,r);ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();
-    if(!b.imageSrc){ctx.beginPath();ctx.arc(x,y,8,0,Math.PI*2);ctx.fillStyle='#081020e8';ctx.fill();text(String(b.id+1),x,y+4,12);}
+    if(!b.imageSrc){ctx.beginPath();ctx.arc(x,y,r*.58,0,Math.PI*2);ctx.fillStyle='#081020e8';ctx.fill();text(String(b.id+1),x,y+5,Math.round(r*.8));}
     if(b.speedUntil>race.time)buffIcon(ctx,'speed',x+r+3,y-r-3,7);
   }
   for(const event of race.events.slice(0,24)){const age=now-event.time;if(age<0||age>1.4||!event.position)continue;const {x,y}=event.position;ctx.save();ctx.globalAlpha=Math.min(1,(1.4-age)*2);
     if(event.type==='elimination'){
       ctx.strokeStyle='#fff0cd';ctx.lineWidth=3;ctx.beginPath();ctx.arc(x,y,14+age*42,0,Math.PI*2);ctx.stroke();
-      if(event.cutPosition){ctx.beginPath();ctx.moveTo(event.cutPosition.x,event.cutPosition.y);ctx.lineTo(x,y);ctx.setLineDash([4,5]);ctx.stroke();ctx.setLineDash([]);}
-      if(event.trail?.length){ctx.beginPath();event.trail.forEach((cell,i)=>{const p=race.position(cell);i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y);});ctx.strokeStyle=race.balls[event.owner].color;ctx.lineWidth=4;ctx.setLineDash([4,6]);ctx.stroke();ctx.setLineDash([]);}
+      if(event.cutPosition&&event.reason!=='territory'){ctx.beginPath();ctx.moveTo(event.cutPosition.x,event.cutPosition.y);ctx.lineTo(x,y);ctx.setLineDash([4,5]);ctx.stroke();ctx.setLineDash([]);}
+      if(event.trail?.length){ctx.beginPath();(event.trailAnchor==null?event.trail:[event.trailAnchor,...event.trail]).forEach((cell,i)=>{const p=race.position(cell);i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y);});ctx.strokeStyle=race.balls[event.owner].color;ctx.lineWidth=4;ctx.setLineDash([4,6]);ctx.stroke();ctx.setLineDash([]);}
       text('OUT',Math.max(60,Math.min(480,x)),Math.max(214,y-20-age*16),17,'#fff0cd',100);
     }else text(`+${(event.cells/race.valid.length*100).toFixed(1)}%`,Math.max(65,Math.min(475,x)),Math.max(214,y-18-age*18),17,'#fff',100);
     ctx.restore();
   }
   const {headline,feed}=territoryHighlights(race,now);ctx.fillStyle='#111e32';ctx.beginPath();ctx.roundRect(24,818,492,97,12);ctx.fill();
-  if(headline?.type==='elimination'){const attacker=race.balls[headline.cutter],victim=race.balls[headline.owner];text(`${raceName(race,attacker)}  ×  ${raceName(race,victim)}`,270,845,18,attacker.color,462);text(`ELIMINATED · +${(headline.cells/race.valid.length*100).toFixed(1)}% TERRITORY`,270,866,12,'#d2dfec');}
+  if(headline?.type==='elimination'){const attacker=race.balls[headline.cutter],victim=race.balls[headline.owner];text(`${raceName(race,attacker)}  ×  ${raceName(race,victim)}`,270,845,18,attacker.color,462);text(`${({trail:'TRAIL CUT',contact:'CAUGHT OUTSIDE',territory:'LAND LOST'})[headline.reason]??'ELIMINATED'} · +${(headline.cells/race.valid.length*100).toFixed(1)}% TERRITORY`,270,866,12,'#d2dfec');}
   else if(headline){const b=race.balls[headline.owner];text(`${raceName(race,b)} CLAIMS +${(headline.cells/race.valid.length*100).toFixed(1)}%`,270,849,18,b.color,460);}
   const older=feed.filter(e=>e!==headline).slice(0,2);if(older.length)text(older.map(e=>`${raceName(race,race.balls[e.cutter])} › ${raceName(race,race.balls[e.owner])}`).join('   ·   '),270,898,12,'#a4b9cd',460);
   if(race.state==='finished'&&resultElapsed>=TERRITORY_RESULT_DELAY){ctx.fillStyle='#080e20eb';ctx.beginPath();ctx.roundRect(56,343,428,268,22);ctx.fill();const winner=race.winners[0];text(race.winners.length===1?'WINNER':'DRAW',270,385,22,'#ffe29a');drawMarble(ctx,winner,270,444,37);text(raceName(race,winner),270,505,24,winner.color,390);text(`${race.share(winner).toFixed(1)}% TERRITORY · ${winner.cuts} ELIMINATIONS`,270,544,16);text(race.winners.length>1?race.winners.map(b=>raceName(race,b)).join(' / '):alive.length===1?'LAST PLAYER STANDING':'MOST TERRITORY AT THE BUZZER',270,582,12,'#9bb4cc',392);}

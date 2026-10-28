@@ -1,0 +1,68 @@
+Bütün komutanların taktik hazırlığı — 15 Ekim 2026
+
+Kapsam ve bulgu
+- Kullanıcının düzeltmesi: başlangıç mesafesi/hazırlık sorunu yalnız Turan
+  için değil, bütün komutanların taktikleri için ele alınmalı.
+- Önceki mesafe ve genel formasyon çalışmasının devamıdır:
+  docs/army-preparation-spacing-2026-10-15.txt.
+- 19 komutanın 10'u CivilizationTactics özel doktrinlerini, Alparslan Turan'ı,
+  diğer 8'i mevcut donanım temelli genel komutan formasyonunu kullanıyor.
+  Bu değişiklik 8 komutana yeni tarihî özel doktrin eklendiği anlamına gelmez.
+- Sabit 12 saniyelik özel doktrin hazırlık sınırı, geniş başlangıç alanında
+  40 eşleşmenin 9'unda düzen kurulmadan taktiği iptal ediyordu. Sorun Osmanlı,
+  Landsknecht, Fransız süvarisi, Condotta, Hoplit ve Qin senaryolarında görüldü.
+
+Değişen dosyalar
+- src/historical-civilization-tactics.js: 10 doktrinin tamamında geniş
+  yerleşim hazırlık sınırı, askerlerin yuvalarına yürüme süresinin yüzde 90
+  dilimi ve saflar arasında geçiş payıyla hesaplanır: 1 + süre * 2.4,
+  en az 12, en fazla 30 saniye. %60 hazır olunca beklemeden ilerlenir.
+  Kompakt/eski yerleşimde 12 saniye korunur. Yakın temas, oyuncu emri ve
+  komutan kaybının mevcut öncelikleri değişmez. Hesap başlangıçta bir kezdir.
+  Ana sekmenin istediği ottoman_janissary_bow, Osmanlı yay rolüne eklendi.
+- tests/historical-doctrine-spacing.mjs: tekrarlanabilir test ve JSON raporu.
+- Bu not. Katalog, preset, arayüz ve görsel dosyaları değiştirilmedi.
+
+Doğrulama — yerel Node v24.21.0, sabit seed 42
+- 10 özel doktrin × 96/240 asker × iki taraf: 40 tam savaş PASS.
+  Hazırlanamayan eşleşme önce 9/40, sonra 0/40. Tamamı doğal elemeyle
+  30.07–115.80 simülasyon saniyesinde bitti. Hazırlıkta gerçek yerleşme oranı
+  en az %60; en geç hazırlık tamamlanması 20.53 saniye.
+- Özel doktrinsiz 8 komutan × iki taraf: 16 tam savaş PASS; genel formasyon
+  tamamlandı ve savaşlar doğal elemeyle bitti.
+- 19 komutan × iki taraf: 38 başlangıç/dur emri/komutan kaybı kontrolü PASS.
+- 10 özel doktrinde hareket etmeyen ordu testi PASS: ek süre sınırlı;
+  düzen kurulamıyorsa normal muharebeye bırakılıyor.
+- Sekiz mevcut regresyon PASS: historical-civilization-tactics,
+  historical-tactics-discipline, historical-tactics-contact,
+  historical-commander-formations, historical-multi-army-tactics,
+  historical-commander-tactics, historical-army-deployment,
+  crown-battle-behavior. Savunma hattı/fırsat bekleme kararları korundu.
+- Raporlar: artifacts/npc-routing/doctrine-spacing-before.json,
+  doctrine-spacing-current.json, doctrine-spacing-after.log;
+  regresyonlar all-doctrines-*.log. Tekrar çalıştırma:
+  tools/node-runtime/node-v24.21.0-win-x64/node.exe tests/historical-doctrine-spacing.mjs
+
+Sınırlar ve eşgüdüm
+- Bunlar sabit kadrolu motor testleridir; ana sekmenin eşzamanlı değiştirdiği
+  otomatik ordu presetlerinin güç dengesi veya her rakibe karşı taktik üstünlük
+  kanıtı değildir. Bütün askerlerin eksiksiz yerleşmesi garanti edilmez.
+- Tarayıcıda görsel değerlendirme ve yeni FPS ölçümü yapılmadı; her kare tüm
+  asker çiftlerini karşılaştıran yeni iş eklenmedi.
+- Araştırma/motor sekmesi ayrıca historical-tactics.js içinde kuşatma
+  kanadının menzilde yakın savunma yapabilmesini düzeltti; onun bağımsız
+  historical-turan-interception testi ve yedi regresyonu PASS olarak bildirildi.
+  Bu nottaki 56 savaş, o değişikliğin ayrı etkinlik değerlendirmesi değildir.
+
+Son eşgüdüm bulgusu
+- Ana sekme 19/19 hazır orduyu yeni birliklerle tamamladığını, 24/48/97/241
+  büyüklüklerinde iki yön ve 1000 askere kadar çekirdek oranı testlerinin
+  geçtiğini bildirdi; görsel/tarayıcı kontrolü onda sürüyor.
+- Araştırma/motor sekmesinin yeni Alparslan kadrosuyla 8 tanısında, plan
+  açıkken Timur 4/4, kapalıyken Alparslan 3/4 kazandı. Seed42 iki yönde ricat
+  ve kuşatma aşamasına geçti fakat kapanış olmadı; seed93 bir yönde
+  assemble/regroup/done, diğer yönde assemble/done gözlendi. Bu sonuçlar
+  taktik fırsatı seçimi/etkinliğinde kalan sorunu gösterir; hazırlık düzeltmesi
+  bütün taktiklerin etkinliğinin çözüldüğü anlamına gelmez. Ayrı rapor:
+  artifacts/commander-balance/turan-effectiveness.json; önceki kadro raporu
+  turan-effectiveness-old-preset.json. Bu bulgu için burada ek motor değişmedi.

@@ -1,0 +1,22 @@
+/* Cinema keeps a single transport strip; commands float above it on demand. */
+#cinema-commands{display:none}
+.cinema .battle-stage{height:100svh;min-height:0}
+.cinema .theater{flex:1;min-height:0}
+.cinema .stage-commands{display:none}
+.cinema.cinema-commands-open .stage-commands{display:block;position:absolute;z-index:5;bottom:66px;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:720px;max-height:50svh;overflow-y:auto;overscroll-behavior:contain;border:1px solid #6b7050;border-radius:9px;padding:12px;background:#18231bf5;box-shadow:0 8px 32px #0008}
+.cinema .transport{flex:none;flex-wrap:nowrap;justify-content:center;gap:8px;height:60px;min-height:60px;padding:8px 12px;z-index:6}
+.cinema .transport .primary{flex:0 1 auto;min-width:0;min-height:40px;max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:9px 12px}
+.cinema .speed-control{margin-left:8px;flex-shrink:0}
+.cinema .speed-control button{min-height:40px;min-width:34px}
+.cinema #cinema-commands{display:block;flex-shrink:0;min-height:40px;color:#ead89f;border-color:#8a8057}
+.cinema #cinema-commands[aria-expanded=true]{background:#414b30}
+.cinema .transport time{width:auto;margin:0 8px;font-size:11px}
+.cinema .formation-tools p{line-height:1.5}
+@media(max-width:600px){
+  .cinema .transport{gap:5px;padding:6px 8px}
+  .cinema .transport .primary{flex:1;min-height:44px;padding:6px;font-size:11px}
+  .cinema #restart,.cinema .transport time{display:none}
+  .cinema .speed-control{margin-left:0}
+  .cinema .speed-control button{min-width:30px;min-height:44px;padding:6px}
+  .cinema #cinema-commands{min-height:44px;padding:6px;font-size:11px}
+}

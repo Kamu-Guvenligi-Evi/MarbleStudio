@@ -1,0 +1,22 @@
+{
+  "id": "history-d51ef5f1e6",
+  "category": "history",
+  "name": "Rabindranath Tagore",
+  "englishName": "Rabindranath Tagore",
+  "src": "/catalog/history-d51ef5f1e6.jpg",
+  "fit": "cover",
+  "source": "https://commons.wikimedia.org/wiki/File:1926_Rabindrath_Tagore.jpg",
+  "identitySource": "https://en.wikipedia.org/wiki/Rabindranath_Tagore",
+  "credit": "Georges Chevalier",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/1926_Rabindrath_Tagore.jpg/330px-1926_Rabindrath_Tagore.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "curated": true,
+  "historicalNote": "Hindistan · şair",
+  "keywords": "Rabindranath Tagore Hindistan · şair",
+  "portraitFrame": [
+    0.52,
+    0.25,
+    0.7
+  ]
+}

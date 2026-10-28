@@ -1,0 +1,88 @@
+Taç Muharebesi — 15 Ekim 2026, beş yeni tarihî savaşçı
+
+Kullanıcı tekrar devam komutu vermeden araştırma ve oyun entegrasyonunu sürdürmemizi istedi.
+Bu parti tamamlandı; kullanıcıya devam sorusu yöneltilmedi.
+
+Eklenenler / medeniyet menüsü
+- byzantine_kataphraktos: Yunanlar / Bizans > Bizans İmparatorluğu.
+- sogdian_cakar: Soğdlar > Soğd şehir devletleri.
+- scots_schiltron: İskoçlar > İskoçya Krallığı.
+- ming_langxian: Çinliler > Ming Hanedanı.
+- ming_rattan_shield: Çinliler > Ming Hanedanı.
+Soğd ve İskoç medeniyet başlıkları yeni; Ming mevcut Çin grubuna bağlandı.
+Schiltron bir düzen, Ming askerleri uzmanlaşmış piyade olarak tanımlandı;
+hepsinin daimi seçkin muhafız alayı olduğu iddia edilmedi.
+
+Kaynaklar / görsel sınırları
+1. Soğd çakar: Étienne de la Vaissière, Encyclopaedia Iranica, ČĀKAR.
+https://www.iranicaonline.org/articles/cakar/
+Zırh ve zırhsız at karşılaştırması:
+https://www.iranicaonline.org/articles/armor/
+Pencikent / Hermitage duvar resmi, Nicolle 2016 fotoğraf 57 aktarımı:
+https://warfare.x10host.com/6-10/Sogdian_murals_from_Panjakent-Warrior_in_armour_assisting_a_prostrate_man.htm
+Yerel referans: artifacts/frontier-warriors/sogd-mail.jpg (240246 bayt).
+Duvar resmindeki kişinin çakar olduğu kesin değil. Uzun zırh, örgü boyun
+koruması ve kolçaklar dönem karşılaştırması; renk, yüz ve at yorumdur.
+
+2. İskoç schiltron: Historic Environment Scotland, Bannockburn BTL4.
+https://portal.historicenvironment.scot/apex/f?p=1505:300::::VIEWTYPE,VIEWREF:designation,BTL4
+https://www.nts.org.uk/schools/learning-at-bannockburn/armour
+Yerel referans: artifacts/frontier-warriors/scots-aketon.jpg (20618 bayt).
+NTS modern eğitim rekonstrüksiyonu: kapitone giysi, küçük miğfer, örgü
+boyunluk. Kilt/yüz boyası yok. Ayrı tarihî schiltron düzen komutu yok.
+
+3–4. Ming: Qi Jiguang, Jixiao Xinshu, bölüm 11.
+https://zh.wikisource.org/zh/紀效新書/卷十一
+Wubei Zhi eski basım görsellerinin aktarımı:
+https://tplafightingwords.com/2021/09/02/shield-wubei-zhi-%E7%89%8C%EF%BC%9A%E6%AD%A6%E5%82%99%E5%BF%97/
+Yerel referanslar: artifacts/frontier-warriors/ming-formation.jpg (51305 bayt)
+ve ming-shield.jpg (278593 bayt). Eski çizimler temel alındı; blogdaki
+modern yorumlar tarihî birincil kaynak gibi sunulmadı.
+Langxian dallı bambu ve metal uçlu, düşük hasarlı uzun erişimli destek
+silahı. Zehir veya takım desteği yeteneği uydurulmadı. Örgü kalkanlı
+askerde dao var; metindeki cirit için ayrı menzilli saldırı eklenmedi.
+Qing kaplan kostümü bu Ming askerlerine uygulanmadı.
+
+5. Bizans katafraktı: Nikephoros Ouranos, Taktika zırh tarifi ve Balkan
+arkeolojisiyle karşılaştırma; Graham Sumner, şekil 14.17 rekonstrüksiyonu.
+https://ebrary.net/242454/sociology/analysis_sources_archaeology
+K. Sinclair, War Writing in Middle Byzantine Historiography, s. 144,
+not 734: Taktika 61.209–214 ve Praecepta III.53–60 topuz kullanımı.
+https://etheses.bham.ac.uk/3977/1/Sinclair13PhD.pdf
+Yerel referans: artifacts/frontier-warriors/byzantine-reconstruction.png
+(331927 bayt; indirmeden önce HEAD ile boyut kontrol edildi).
+Modern rekonstrüksiyon kesin dönem portresi değil. Binicide örgü yüzlük,
+kol/etek koruması ve kapitone dış giysi; atta kaynakta anlatılan deri
+parçalı koruma seçeneği. Renkler/topuz başı biçimi yorum. Kama düzeni
+mekaniği eklenmedi. Klibanophoros adı ayrı birlik gibi çoğaltılmadı.
+
+Uygulama
+src/frontier-warrior-units.js: kaynaklı kayıtlar, profiller ve oyun dengesi.
+src/frontier-warrior-art.js: özgün Canvas zırh/başlık/silah/kalkan/at zırhı.
+historical-catalogue, historical-art-profiles, historical-culture-groups,
+historical-warrior-art bağlantıları tamamlandı. Çizimler mevcut sprite
+önbelleğini kullanıyor; uzaktan resim indirme veya yeni paket yok.
+crown-battle.js ve crown-battle-renderer.js bu çalışma tarafından değiştirilmedi.
+İstatistikler tarihî ölçüm değil, oyun dengesi değerleridir.
+
+Doğrulama
+tests/frontier-warriors.mjs PASS: 5 benzersiz kayıt, doğru medeniyet,
+gerçek savaşta hasar; 400 kare, 5 farklı siluet, boş/kesilmiş kare yok.
+Gerçek ülke menülerinden seçim, savaş başlatma, 5 birliğin yüklenmesi
+ve kayıt yeniden yükleme PASS. Tarayıcı JS hatası yok.
+İlk kontrolde İskoç mızrağının saldırı karesi kesiliyordu; el uzanımı
+daraltılarak düzeltildi, bütün kareler yeniden geçti.
+artifacts/frontier-warriors/checks.json
+artifacts/frontier-warriors/five-warriors.jpg (33479 bayt) görsel olarak incelendi.
+Üretim derlemesi PASS: Vite 7.3.6, 249 modül, 19.46 saniye.
+Mevcut channel-branding paketi için >500 kB uyarısı sürüyor.
+Regresyon: tests/medieval-specialists.mjs PASS (240 kare, menü/savaş/kayıt),
+tests/turkic-arab.mjs --node-only PASS (4 birlik, medeniyet ve hasar).
+Değişen ortak dosyalarda git diff --check PASS.
+
+Kalan araştırma
+- Velaikkara: Polonnaruwa yazıtı mevcut (Siddham IN03103), fakat uygun
+  dönem ekipman/görsel kaynağı henüz doğrulanmadı; oyuna eklenmedi.
+- Kaynakları belirsiz yeni birlikleri renk değiştirerek çoğaltma.
+- Görselleri tekrar modele yükleme; bu dosyada belirtilenler incelendi.
+Dosya boyutları yerel boyutlardır, ölçülmüş internet tüketimi değildir.

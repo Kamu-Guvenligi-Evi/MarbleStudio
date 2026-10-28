@@ -1,0 +1,22 @@
+{
+  "id": "history-7c5ac2d9b7",
+  "category": "history",
+  "name": "Augustus",
+  "englishName": "Augustus",
+  "src": "/catalog/history-7c5ac2d9b7.jpg",
+  "fit": "cover",
+  "source": "https://commons.wikimedia.org/wiki/File:Augustus_of_Prima_Porta.jpg",
+  "identitySource": "https://en.wikipedia.org/wiki/Augustus",
+  "credit": "Justin Benttinen",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Augustus_of_Prima_Porta.jpg/330px-Augustus_of_Prima_Porta.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "curated": true,
+  "historicalNote": "Roma · hükümdar · Sanatsal tasvir",
+  "keywords": "Augustus Roma · hükümdar",
+  "portraitFrame": [
+    0.54,
+    0.16,
+    0.65
+  ]
+}

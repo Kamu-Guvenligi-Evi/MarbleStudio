@@ -1,0 +1,24 @@
+Bounce Waves - 2026-10-14
+Reference: https://www.youtube.com/shorts/MW20-NJg7E4
+Standalone studio game: /bounce-waves.html; Flow navigation group.
+Four related motion modes: ripple bowl, spiral bloom, cross waves, flower pulse.
+Opening corrected: balls start at full height and fall together; first landing at simulation time 0.825s, then wave phase differences unfold. Replay uses the same top start. Opening/descent/landing regression checks and production build passed.
+Five gradient palettes (Aurora, Sunset, Candy, Spectrum, Ember) plus custom two-color gradient.
+Shared channel picker and existing music library; deterministic exact video export with 144 FPS default.
+Fixed perspective camera; shaded sphere atlas and cached floor/shadows. Default density 1400, maximum 2600 requested (2515 actual points inside disk).
+Validation: tests/bounce-waves.mjs, tests/bounce-waves-browser.mjs --encode, tests/production-data.mjs, tests/video-timing.mjs, Vite build passed.
+Browser checks: palette persistence, custom colors, music playback/volume, mobile overflow, 144 FPS export selection, exact preview/export pixel parity, completion.
+Real encode/decode smoke test: 8-second 720p / 12 FPS MP4 with existing Monkeys track and custom colors; not a 144 FPS encode benchmark.
+Headless Chrome dense render (540x960, 2515 spheres): p50 15.5 ms, p95 22.9 ms. Device performance varies.
+Review assets and encoded clips: artifacts/bounce-waves-review; logs: artifacts/bounce-waves-browser.log, artifacts/bounce-waves-build.log.
+Deployment: frontend built. Automatic policy review blocked service restart and opening the browser. Existing service lacks waves-production capability; studio service needs restart to activate this game's export menu. Actual worker encode test passed on dev origin.
+
+Physics consistency - 2026-10-14
+Removed time-varying phase offsets and closing-height scaling: both changed airborne acceleration and could reverse motion without a floor impact. Each ball now follows exact constant-gravity flights, with a fixed per-position launch period for each of the four wave patterns. Opening remains a synchronized drop from rest, landing at 0.825 seconds. The final launch is reduced at floor contact to land at the requested end time. No airborne flattening.
+Sphere centers are offset by their radius above the floor so resting balls no longer intersect it. Height changes restart the simulation instead of teleporting airborne balls. Preview clock no longer discards elapsed time above 50 ms; pause/visibility resets still exclude inactive time.
+Validation: tests/bounce-waves.mjs passed (51,052 measured free-flight acceleration/velocity checks, contacts, finale, 15/30/60/144 FPS cadence parity). tests/bounce-waves-browser.mjs passed on port 5173 (10 FPS/stalled clock, pause/resume, settings restart, existing UI checks, exact preview/export pixel parity). Dense headless render: 2515 balls, p50 16.8 ms, p95 24.8 ms at 540x960; not a device FPS guarantee. Vite production build passed. No new MP4 encode was needed for this physics change.
+Files: src/bounce-waves.js, src/bounce-waves-app.js, src/bounce-waves-renderer.js, tests/bounce-waves.mjs, tests/bounce-waves-browser.mjs. Logs: artifacts/bounce-waves-physics-browser.log, artifacts/bounce-waves-physics-build.log. Screenshot: artifacts/bounce-waves-review/modes.png.
+
+Shaped release correction - 2026-10-14
+Supersedes the synchronized flat opening described above. The four patterns now determine each ball's initial height. All balls are released simultaneously from rest under shared constant gravity. Individual first-impact times follow sqrt(2*h/g), and elastic rebounds return each ball to its own initial height without adding energy at the floor. The final shortened hop remains a dissipative floor contact for the existing end-of-video landing.
+Validation: tests/bounce-waves.mjs passed, including shaped release, shared drop distance, first impact, return to release height, energy conservation across repeated bounces, 51,042 finite-difference acceleration/velocity checks and cadence parity. Browser suite passed including preview/export pixel equality, clock, UI and completion. Vite build passed. Logs: artifacts/bounce-waves-release-browser.log and artifacts/bounce-waves-release-build.log.

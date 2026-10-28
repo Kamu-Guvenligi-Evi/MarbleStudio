@@ -1,0 +1,34 @@
+Silah yönü düzeltmesi — 14 Ekim 2026
+
+Bulgu: Memlük baltasının kesici başı sapın arka tarafındaydı. Sabre/katana
+eğrisi kesici kenarı arkaya dönük gösteriyordu. Klasik kılıcın bekleme/yürüme
+pozu geriye yatıyordu. Yaylarda öndeki el kabzaya, arkadaki el kirişe
+oturmuyordu.
+
+Değişen kaynaklar:
+- src/historical-warrior-art.js: balta başı sap ekseninde çevrildi; sabre ve
+  katana eğrisi düzeltildi; yay kabzası, kiriş, ok çentiği ve eller hizalandı.
+- src/crown-battle-art.js: klasik kılıç dinlenme açısı öne alındı; yay tutuşu
+  hizalandı. Saldırı hazırlığının geriye açılma hareketi korundu.
+
+Birlik kimlikleri, donanım profilleri, savaş motoru, kayıtlar, sprite API,
+renderer ve atlas önbelleği değişmedi. Norse çizim dalları korundu.
+Yeni indirme yok; çizimler mevcut sprite üretiminde bir defa hazırlanıyor.
+
+Doğrulama PASS:
+- tests/historical-elite-art.mjs: 2688 kare; iki takım, idle/walk/attack;
+  boş/kesilmiş/birebir kopya çizim ve tarayıcı hatası yok.
+- tests/historical-commander-art.mjs: 9 komutan, 432 kare.
+- tests/crown-battle-sprite-crop-browser.mjs: 972 atlas karşılaştırması;
+  iki yön, saldırı/yürüme/bekleme, farklı çözünürlük ve ölçekler.
+- Vite build 4.11 s; mevcut >500 kB paket uyarısı devam ediyor.
+  Günlük: artifacts/weapon-build.log.
+- 8 temsilî birlik × iki yön × iki poz görsel incelendi:
+  artifacts/weapon-before.jpg / weapon-after.jpg.
+  Tekrarlama: node artifacts/weapon-preview.mjs after (Vite 5173 açıkken).
+
+Sınır: Kullanıcı birlik isimlerini hatırlamıyor; bu düzeltme saptanan silah
+geometrilerini kapsar. Tüm kıyafet/beden çizimlerinin estetik doğruluğunu
+garanti etmez. Art sekmesi diğer bozuk savaşçı görsellerini ayrıca inceliyor.
+Ana ve art sekmelerine dosya kapsamı önceden bildirildi, art dosya sahipliği
+teslim alındı; bitişte test sonuçları paylaşıldı.

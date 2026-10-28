@@ -1,0 +1,37 @@
+Commander balance audit — 2026-10-15
+
+Scope: diagnose user report that Mehmed II and Alp Arslan are weaker than Timur.
+No production balance or tactic changes made by this task.
+
+Reproduce: bundled Node -> tests/commander-balance-audit.mjs
+Set REPORT=audit-final to write artifacts/commander-balance/audit-final.json.
+52 battles completed by elimination; src JS/JSON hashes unchanged during final run.
+Two seeds (42, 93), both sides mirrored; baseline 96 and 240 soldiers per army.
+Small deterministic sample, not a general win-rate estimate or equal-cost comparison.
+
+96-soldier presets:
+Mehmed II: 32 solak, 48 sipah, 16 akin ci (ottoman_akinci); no janissary.
+Alp Arslan: 64 seljuk_hassa, 32 seljuk_turkmen_archer.
+Timur: 32 kipchak, 24 mongol, 20 kipchak_lancer,
+16 kipchak_masked_swordsman, 4 timur elephants.
+
+Baseline at each size: Timur beats both opponents 4/4; Alp Arslan beats Mehmed 4/4.
+At 96 soldiers, all tactical AI disabled: Alp Arslan beats Timur 3/4;
+Mehmed still loses to Timur and Alp Arslan 4/4 each.
+Only tested commander's bespoke plan disabled, generic formations retained:
+Alp Arslan beats Timur 2/4; Mehmed loses to Timur 4/4.
+Replace Timur's elephants with same number of kipchak_lancer:
+Timur still beats each opponent 4/4.
+
+Interpretation: diversity alone is not established as the cause. Composition and
+unit strengths remain confounded; equal soldier counts are not equal combat power.
+Alp Arslan's bespoke maneuver worsens this matchup in this sample.
+Timur's 56/96 mounted archers fall just below Seljuk's 60% ranged abort threshold.
+Baseline sample plan enters retreat/envelop then aborts after losses.
+Elephants are not necessary for Timur's observed advantage.
+Mehmed's losses persist without tactical AI; investigate roster mix/unit matchup.
+
+Coordination: thread 01a13b6d-28b1-7921-8984-c4623799e14f owns deployment spacing
+change and received results. Re-run after spacing change before adjusting tactics.
+Contact owner 01a13b51-ead4-7090-a516-86581873cf50 confirmed contact file stable;
+received final results. Avoid overlapping edits with these threads.

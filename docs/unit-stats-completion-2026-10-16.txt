@@ -1,0 +1,73 @@
+Taç Savaşı — eksik denge kayıtlarının tamamlanması, 16 Ekim 2026
+
+Sorun
+Sonradan eklenen 50 komutan birliğinin kendi combat verisi vardı, ancak
+merkezî UNIT_STAT_BALANCE listesi eski 352 birimlik incelemede kalmıştı.
+historical-unit-stats testi katalog kapsamı kontrolünde duruyor, yeni
+birliklerin sayısal sınırlarını ve savaş taramasını çalıştıramıyordu.
+
+Düzeltme
+50 kimlik açık ve dondurulmuş profillerle merkezî listeye eklendi.
+Tüm profillerin can/hız/hasar/erişim/saldırı aralığı, zırh, atlı okçu
+hücum hasarı ve arbalet atış aralığı mevcut rol kurallarına göre incelendi.
+47 birliğin değerleri aynen korundu. Üç birimde düzeltme yapıldı:
+- Macar pavis kalkanlısı: can 165 -> 125. Kalkan ve koruma avantajı
+  mevcut 0.27 zırhta kalır; ayrıca aşırı piyade canıyla iki kez sayılmaz.
+- Macar arbaletçisi: saldırı aralığı 2.45 -> 2.50.
+- Milano saha arbaletçisi: saldırı aralığı 2.35 -> 2.50. Ceneviz
+  arbaletçisine göre daha hızlı hareket ve daha kısa atış aralığı korunur.
+Bu sayılar mevcut oyunun denge ölçeğidir, tarihî ölçüm iddiası değildir.
+Yeni asker, ateşli silah veya komutan eklenmedi. Mevcut kimlikler ve
+kayıtlı ordu biçimi değişmedi. Fatih'in önceki güçlendirmesi korunur.
+
+Kapsam
+402 katalog birimi: 371 açık denge profili, 31 korunan fantastik profil.
+Yeni birimlerde inceleme gerektiren kapsam testi gevşetilmedi; bundan
+sonraki eksik kimlikler aynı kontrolle görünür olmaya devam eder.
+
+Dosyalar ve kanıt
+src/historical-unit-stat-balance.js
+artifacts/unit-stats-completion-2026-10-16/review.json:
+  50 birliğin önceki ve sonraki değerleri.
+artifacts/unit-stats-completion-2026-10-16/*.log: doğrulama günlükleri.
+artifacts/unit-stats-2026-10-16/battles.json: 402 birimin savaş taraması.
+
+Doğrulama
+- historical-unit-stats: geçti; 402 birim, 854 savaş, iki taraf,
+  sonlu değerler, kayıtların korunması, karşı birlikler ve tekrar edilebilirlik.
+- historical-equipment-balance: geçti; 402 profil ve 258 savaş.
+- commander-roster-completion: geçti; 46 komutan savaşı, 7520 animasyon
+  karesi, 94 farklı profil; masaüstü/telefon ve iki takım için ekleme/çıkarma,
+  savaşa geçiş ve kayıtlı ordunun yeniden yüklenmesi.
+- turkic-cavalry-balance: geçti; ağır süvarinin hafif akıncıya üstünlüğü
+  ve mızraklılara karşı zayıflığı korunuyor.
+- historical-army-presets ve historical-army-history: geçti.
+- Savaş davranışı: 13/13 test geçti. Toplu çalıştırıcının genel kaynak
+  sabitliği kapısı başarısız oldu; çalışma sırasında başka bir işlem
+  crown-battle-director.js, crown-battle-renderer.js ve
+  crown-battle-sprite-batch.js dosyalarını değiştirdi. Bu değişiklikler
+  bu düzeltmenin parçası değildir; geri alınmadı.
+  Ardından 13 testin yerel import zinciri (102 dosya) incelendi; zincirde
+  dinamik import yok, değişen kaynak bağımlılığı yok ve bu üç dosya zincirin
+  dışında. Sonuçlar savaş mantığı için geçerli; genel kapı geçmiş sayılmadı.
+  Kanıt: artifacts/unit-stats-completion-2026-10-16/behavior-dependency-audit.json.
+- Vite üretim derlemesi: geçti; mevcut büyük paket boyutu uyarısı sürüyor.
+
+Fatih kontrolünün güncellenmesi
+Önceki rapor sonrasında crown-battle.js dosyasının değiştiği görüldü.
+Önceki 4/8 sabit galibiyet eşiği güncel motorda 3/8 sonucu ile başarısız oldu.
+Bugün sayısal değeri değişen üç birlik bu testteki ordularda bulunmuyor.
+Test artık belgelenmiş eski değerleri ve eski ordu dağılımını aynı motor,
+tohum, kapasite, rakipler ve iki başlangıç tarafıyla karşılaştırıyor.
+En az iki ek galibiyet, iki taraftan galibiyet ve birden fazla rakibe karşı
+başarı aranıyor. Mızrak ordusuna yenilme, ayrı sipahi/mızrak karşılaşmaları,
+okçu katılımı, zaman aşımı olmaması ve kapasite kontrolleri korunuyor.
+Bu kontrol için oyun motoruna veya Fatih'in değerlerine ek müdahale yapılmadı.
+
+Güncel sonuç: historical-fatih-balance geçti. Eski ordu 0/8, güçlendirilmiş
+ordu 3/8: Timur 1/2, Alp Arslan 2/2, Harald 0/2, Frundsberg 0/2.
+İki ayrı sipahi/mızrak kontrolü de geçti. Toplam 18 savaşın tamamı elenmeyle
+sonuçlandı. Bu sınırlı örnek genel kazanma oranı olarak yorumlanmamalıdır.
+Bağımsız eş koşullu deneme: artifacts/unit-stats-completion-2026-10-16/
+fatih-paired.mjs ve fatih-paired.json. Kalıcı kontrol:
+tests/historical-fatih-balance.mjs.

@@ -1,0 +1,21 @@
+2026-10-14 - Manual video downloads
+
+User requested removal of random automatic production and video archiving/GitHub uploads.
+Manual exports now require a source snapshot, exact strategy and one video.
+Automatic entry points and schedules are disabled; factory.html redirects to the Studio.
+Browser recordings no longer upload archive copies. Friend packages exclude work-videos.
+New render jobs are transient: completed download byte ranges trigger job-directory cleanup.
+Preview, HEAD, aborted and partial downloads retain the source; legacy folders remain intact.
+Explicit YouTube uploads retain their source until upload completion (including failed uploads for retry).
+HTTP response completion is the cleanup signal; browser disk persistence cannot be confirmed by the server.
+
+Implementation: scripts/manual-export.mjs, scripts/output-file.mjs, scripts/factory-server.mjs,
+src/workbench.js, src/app.js, src/studio-navigation.js.
+Integration passed: tests/manual-export-download.mjs (HTTP lifecycle, disabled APIs, UI, manual submission).
+Log: artifacts/manual-export-download-test.log. Build and git diff --check passed.
+Channel choice/cancel and watermark browser checks passed: artifacts/manual-branding-test.log.
+Branding test now submits manual Pi exports, opens nested recording settings, and expects existing @handles.
+Waited for active glass-breaker render 1b768d06-1d5e-4498-badd-ce37e51b6a14 before restart.
+Start-Studio.ps1 -NoBrowser completed; live 5180 reports API 5, githubSharing=false,
+schedules=[], pending=0. Existing finished MP4 remains present.
+No package downloads or repository pushes performed. Network consumption was not measured.

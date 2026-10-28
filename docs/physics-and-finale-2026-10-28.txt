@@ -1,0 +1,115 @@
+Physics and finale update, 2026-10-28
+
+Claw: supersedes earlier center-following capture notes. Captured balls retain
+their relative pocket offset. Released siblings have separated positions,
+different directions, seeded drift and a 0.35-second recapture cooldown.
+Claw physics regression passed, including sibling separation.
+
+Escape: default ring speed -0.9 rad/s, gravity 220. Elastic contacts and
+initial speed 320-440 keep balls moving. Spatial hashing separates balls;
+visible capacity is 440 at radius 5, with births queued until space is free.
+Saved legacy defaults migrate with flowVersion 3.
+
+Duration starts the finale instead of stopping the game. Multiplication stops,
+the outlet aligns down/right and opens progressively, and balls drain before
+the final 0.8-second hold. Recording follows actual completion. A detached
+recording canvas receives each rendered frame.
+
+Browser regression passed: pause, persistence, navigation, mobile, no JS errors,
+and nonempty 540x960 WebM. Production build passed with existing chunk warning.
+Visual sequence: artifacts/escape-multiply/final-sequence.jpg.
+Observed frames: 60s 541 visible, 64s 290 visible, 67.9s empty.
+2026-10-28 revised reference behavior:
+Supersedes capacity/queued births notes. No birth queue or occupancy stop.
+Above 400 visible particles, use an overlapping particle simulation (skip
+pair separation) with seeded lower-wall agitation; preserve drawn radius.
+This is a visual approximation, not rigid sphere packing. Dense phase lasts
+at least 14 seconds / two ring rotations before timed final drain.
+Birth limit stops multiplication but does not itself start the finale.
+Regression passed: deterministic counts/timing, escape once, wall, limit,
+30000 born and escaped, zero remaining. Browser frame at 60s: 14446 born,
+9631 inside. Preview: artifacts/escape-multiply/dense-flow.png.
+Peak finale update: reaching production limit starts a 0.9s closed-ring hold,
+subtle shake, downward alignment, fast widening outlet and 1100px/s2 pull.
+An expanding outline marks release. Empty scene holds the total for 1.6s.
+Duration now means no-escape timeout; active growth is not cut off by time.
+Physics regression passed: 30000 created/escaped, empty completion, peak hold
+and opening transition. Browser montage: artifacts/escape-multiply/peak-finale.png.
+Visual quality revision: replace colour-batched overlapping paths (green layer
+bias) with cached shaded marble sprites in mixed depth order. Screen-cell
+occlusion culls redundant overlapping drawings; simulated count is unchanged.
+Header region remains clear. Hold damping and shake reduced; release delays
+vary by marble, with slower outlet opening to form a waterfall rather than
+a falling disk. Updated peak-finale.png visually checked; physics regression
+passes with 30000 births/escapes and no remaining balls.
+Performance revision: replace per-frame screen-cell selection with stable
+per-ball draw priorities; approximately 1000 interior and 650 exterior marbles
+are rendered at high density. All balls remain simulated and counted. Native
+size cached sprites, rounded positions and 150ms UI updates reduce draw load.
+Cache step-invariant finale values and trigonometry outside the particle loop.
+Local headless benchmark, same 60s scene / 120 frames: median draw 11.5ms ->
+1.7ms, p95 draw 22.7ms -> 8.1ms; median physics 1.6ms -> 1.3ms.
+These are local measurements, not a guarantee of FPS on every device.
+Verified latest peak-finale.png visually. Physics regression: 30000 created,
+30000 escaped, zero remaining. Browser regression passed pause, persistence,
+navigation, mobile and 540x960 recording with no page errors. Vite build passed.
+Final logic correction: freeze visual cohort at release so density changes no
+longer reveal previously hidden particles. Final exterior balls remain until
+below the canvas, with side containment and minimum downward acceleration
+for zero-gravity presets. Timeout release says FINAL RELEASE instead of
+MAXIMUM. Regression verifies timeout reason, stable visibility, side exit,
+zero-gravity completion and created === escaped. Physics and browser checks
+passed (recording check passed on rerun after parallel CPU-heavy simulation).
+Peak montage regenerated: final empties at 69.18 simulated seconds.
+Count integrity revision: remove visual sampling entirely; every active marble
+is submitted for drawing when in the viewport. Default total birth limit 2000,
+maximum setting 6000; migrate former high defaults. Video now labels Inside
+(created minus escaped), Escaped and Total created separately. Final total is
+explicitly the total escaped across the whole run, not simultaneous occupancy.
+Physics asserts inside count equals actual interior bodies at every step.
+Physics and browser/recording checks passed: 2000 births, 2000 escapes, zero
+remaining; local browser simulation measurement 10.21ms/frame. Montage updated.
+Final trigger correction: remove total-count and elapsed/no-escape triggers.
+Measure actual disk coverage on a spatial sample grid every 0.1 simulation
+seconds; require >=90% in EACH of four horizontal bands for 0.4 seconds.
+This includes the upper cap and rejects a dense bottom with an empty top.
+Births continue until that condition. Legacy duration/limit controls hidden;
+values retained only for saved-setting compatibility, no longer stop growth.
+Physics regression: 7582 created/escaped, zero remaining, minimum band
+coverage 93.38% at release. Sparse timeout/count and bottom-only cases pass.
+Browser and recording regression passed; montage visually confirms full ring.
+Browser CPU timing 45.76ms/frame in this run: dense performance still warrants
+optimization; do not claim this version eliminates all dense-scene stutter.
+Rendering performance: replace thousands of drawImage calls with one reusable
+540x960 particle layer. Cached sprite pixel spans preserve per-ball draw order
+and all visible balls; no sampling/culling beyond viewport. One canvas upload
+and compositing call per frame. Rounded pixel edges use an alpha threshold.
+Same local 120-frame benchmark: draw median 11 -> 3.2ms; p95 128.5 -> 7.6ms.
+Dense browser scenario at 6136 created: 8.65ms/frame vs preceding 45.76ms run.
+Browser pause/persistence/mobile/recording regression passed, no page errors.
+Peak montage regenerated and inspected; full-ring trigger/physics unchanged.
+
+Center source update: all births originate at ring center (270,500), with golden-angle radial velocities 360-440. Every escape creates exactly addition births immediately, no queue or random interior positions. Newborns have 0.08s pair-collision grace to leave shared source. Full-ring finale preserved. Physics tests pass: 11665 created/escaped, release coverage 0.9722. Chrome full/drain/final montage visually checked. Browser benchmark now waits for actual full-ring trigger instead of hardcoded 58 seconds (new flow finishes sooner).
+Browser checks passed: pause/persistence/mobile, 540x960 recording 59363 bytes, no page errors. Recording test duration extended from 2.2s to 4.5s after short recordings produced too few bytes. Actual full-ring benchmark: 10075 total created, 10.72ms/frame (local headless).
+
+Longer run and natural drainage: full threshold raised to 97% in every band for 0.6s; density-driven extra gap reduced .35 to .18 rad. Default Node comparison: 41.78s/11665 births -> about 50s/14353 births before drainage revision. Source remains center, no queue or hidden balls. Physics uses exact inside counter and squared boundary distance to avoid unnecessary hypot. Renderer fast path avoids per-pixel viewport checks for fully visible sprites. Chrome dense count24865 benchmark improved 14.81 ->11.57ms/frame (local, not universal FPS). Drain opening widens .45rad/s to1.05; uniform directional pull, per-ball drain delays, damping and invisible side bounces removed. Extra gravity ramps over1.5s equally inside/outside. Outward offscreen particles culled only after viewport margin. Full/drain/final montage checked. Tests cover preserved horizontal momentum, equal gravity across exit and complete zero-gravity drainage.
+
+Hypnotic audio: new src/escape-multiply-audio.js synthesizes cached glass-tone samples locally (no downloads), 16-step pentatonic motif, restrained bass pulse, stereo motion, filtered feedback echo and compressor. Escape count deltas modulate rhythm/density once per animation frame, capped18 voices; final flow lifts octave and speeds rhythm; empty ring plays one resolving chord. Pause/background/mute use smooth output gate. Restart stops voices. One master mix feeds speakers and recording; cloned recording tracks allow repeated captures without stopping persistent audio destination. tests/escape-multiply-audio-browser.mjs passed: audible RMS .043, peak .112, paused peak .000005, max10 voices under24000 escape events, finale once, reset clears voices; two successive recordings contain live audio tracks, zero page errors. Enable via Ses ac button (browser user gesture).
+
+Audio correction: removed autonomous rhythm, escape-based triggers, bass loop and automatic closing chord. Simulation now accumulates actual approaching wall/pair impacts above25px/s with strength and horizontal position. Each fresh impact group advances pentatonic melody immediately; dense simultaneous hits share a note with65ms minimum spacing, no deferred backlog. No fresh collision = no new note. Strength controls gain, position controls stereo. Shorter400ms tone,3ms attack and reduced120ms echo improve visual contact association. Browser tests verified idle0 notes, escapes-only0, wall1, pair next note, silence/no-backlog on resume, max5 voices under24000 impacts, RMS .039, peak .101, repeated recordings with live audio. Physics deterministic/full-ring tests pass unchanged counts14353.
+
+Population melody progression: 4 collision-driven arrangements based on peak actual interior population (1/32/256/1500). Sparse four-note figure evolves into sixteen-note phrases over Am-F-C-G, bass accents, chord thirds, then fifths and octave replies. Richness holds through drainage and resets on restart. Every layer requires a fresh impact; no independent beat or escape trigger. Group spacing120/100/85/75ms, reduced lead gain in dense stages,18voice cap preserved. Unit test64 impacts produces64/72/88/120 notes across stages, wider pitch vocabulary, idle silence and reset verified. Browser test dense stage peak .106 RMS .038, max11 voices, pause silence and two recordings pass.
+
+Finale audio polish: while draining, real collision notes descend by actual interior fraction through A-minor cadence24,22,19,15,12,7,3,0, with declining intensity. When last visible ball disappears, a single softly rolled A-minor home chord resolves the ending (five voices,130ms spread,1.1s sampled tail). No free-running music added during play. Recording auto-stop waits until audio tailUntil, preserving ending even at accelerated simulation speeds. Reset clears ending state and pending sources. Unit tests cover descending cadence, one-shot ending, reset and tail deadline.
+
+Continuous finale transition: removed 0.9s closed-exit hold. Existing gap stays open and expands immediately; drainage gravity ramps from transition start. Removed pre-release shake, aligned pulse to immediate release. Full simulation and first-frame exit/monotonic-gap regression passed; collision melody/final chord unit checks passed.
+
+Video capture UI: prominent Video cek section in controls; default-on recording audio checkbox; local video preview and download after recording; existing automatic finale/audio-tail stop retained. Two consecutive audio recordings passed in Chrome.
+
+2026-10-28: Escape Multiplier now uses existing createWorkbench Video olustur / Videolarim UI and MP4 production pipeline, default 60 FPS for this mode only. Removed white title pill; white text stays on black. Added snapshot/probe/render adapters and offline rendering of the existing collision/finale melody (virtual simulation clock, stereo 48 kHz). Tests: escape-multiply-video.mjs, audio unit/browser, Vite build passed. Full production worker test: artifacts/escape-multiply/production-check/video.mp4, 720x1280, 7 seconds, 420 frames, 60 FPS, stereo AAC; decoded successfully. Running factory service at 5180 still has old module cache: automatic review rejected direct restart; app launcher blocked by Windows PowerShell execution policy. User must restart via existing Marble Studio launcher; do not claim live queue integration active until escape-production capability is returned. No active queued jobs at last check.
+2026-10-28 follow-up: Resolved live service update through the app's existing start-factory.ps1 launcher (same process-scoped PowerShell invocation as Baslat.cmd). It checked idle queue and managed process identity, restarted service, and built current source. GET /api/factory now advertises escape-production. Browser check confirmed enabled Videoyu hazirla button and 60 FPS. Previous restart blocker is resolved; user only needs Tekrar dene in existing dialog.
+
+Exit endpoint correction: replaced angular inset wall with nearest visible arc / rounded endpoint contact, shared by integration and separation. Escapes counted after clearing outer radius. Radial squared-distance early rejection avoids trig for interior balls. Regression tests pass (tip clearance, real tip bounce, both rotation directions, full finale). Browser dense finale sample: 10.91 ms/frame; no page errors.
+Full-ring hold extended from 0.6 to 2 simulation seconds before drainage; movement and escape-fed spawning continue. Browser verification passed; dense sample 39652 created, 11.68 ms/frame, no page errors.
+Full-ring hold updated to 3 simulation seconds per user request.
+Dense drawing optimization: front-to-back horizontal runs with per-row 32-bit coverage masks skip fully occluded pixels, preserving visible order and actual ball counts. 3-second full hold preserved. Same 90-frame local benchmark (50551 created) before: physics 4.45 ms, draw 14.21 ms, p95 total 24.60 ms; after: physics 2.50 ms, draw 7.67 ms, p95 12.40 ms (timings vary). Pixel reference check passed 1814400 channels across radii 1/2.5/5/16, overlaps and clipping. Video integration 60fps + audio and production build passed. Benchmark scripts in artifacts/escape-multiply/.

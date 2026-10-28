@@ -38,7 +38,7 @@ try{
   await page.unroute(factory+'/api/queue');await page.locator('#videos-dialog [data-wb-close]').click();
   await page.locator('#nav-statistics').click();await page.locator('#statistics-duration').selectOption('15');await page.locator('#statistics-heading').fill('Arşiv testi');await page.locator('#statistics-heading').dispatchEvent('change');
   await page.locator('#studio-export').click();await page.waitForFunction(()=>document.querySelector('#video-submit').textContent==='Videoyu hazırla');
-  assert.equal(await page.locator('[name=orientation][value=landscape]').isChecked(),true);assert.equal(await page.locator('[name=strategy] option[value=variations]').evaluate(o=>o.disabled),true);
+  assert.equal(await page.locator('[name=orientation][value=landscape]').isChecked(),true);assert.equal(await page.locator('select[name=strategy]').count(),0);
   await page.locator('#video-advanced summary').click();await page.locator('[name=resolution]').selectOption('720');
   await page.setViewportSize({width:390,height:844});assert.ok(await page.evaluate(()=>document.querySelector('#video-dialog').scrollWidth<=innerWidth));await page.screenshot({path:'artifacts/easy-export-mobile.png',fullPage:true});
   await page.locator('#video-submit').click();await page.waitForFunction(()=>document.querySelector('#videos-dialog').open);
@@ -47,7 +47,7 @@ try{
   const media=await video.evaluate(v=>({width:v.videoWidth,height:v.videoHeight,duration:v.duration}));assert.equal(media.width,1280);assert.equal(media.height,720);assert.ok(media.duration>=17);
   await video.evaluate(v=>{v.currentTime=8;});await page.waitForFunction(()=>Math.abs(document.querySelector('#videos-list video').currentTime-8)<.2);
   await page.locator('[data-job-action=copy]').first().click();assert.equal(await page.evaluate(()=>navigator.clipboard.readText()),'Arşiv testi');
-  let revealed;await page.route(factory+'/api/reveal',async route=>{revealed=route.request().postDataJSON().id;await route.fulfill({json:{ok:true},headers:{'Access-Control-Allow-Origin':'http://127.0.0.1:5173'}});});await page.locator('[data-job-action=reveal]').first().click();await page.waitForTimeout(100);assert.ok(revealed);
+  assert.equal(await page.locator('[data-job-action=reveal]').count(),0);
   const videoDownload=page.waitForEvent('download');await page.locator('#videos-list a[download]').first().click();assert.match((await videoDownload).suggestedFilename(),/video.mp4/);
   assert.ok(await page.evaluate(()=>document.querySelector('#videos-dialog').scrollWidth<=innerWidth));await page.screenshot({path:'artifacts/easy-videos-mobile.png',fullPage:true});
   await page.locator('#videos-filter').selectOption('cancelled');await page.waitForFunction(()=>!document.querySelector('#videos-list video')&&document.querySelector('#videos-list .wb-empty'));

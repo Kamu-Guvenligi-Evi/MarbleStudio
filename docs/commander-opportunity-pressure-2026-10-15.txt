@@ -1,0 +1,61 @@
+15 Ekim 2026 — Komutan fırsatı ve hazırlık sırasında ateş baskısı
+
+Bulunan sorunlar
+- Turan hazırlığında yakındaki okçu, gerçek yakın dövüş takibi olmadan ricadı
+  başlatabiliyordu. Kanatlara gelen ateş merkez ölçümünde gözden kaçıyordu.
+- Hazırlıksız bir bölüğün hasar alması, bütün orduyu dağıtmadan ele alınmalıydı.
+
+Bu geçişte değişen dosyalar
+- src/historical-tactics.js: ricat için merkeze gerçekten yaklaşan yeterli
+  yakın dövüş kuvveti aranıyor. Hareket ölçümü aynı yem merkeziyle yapılıyor;
+  kendi yem hareketimiz düşman takibi sayılmıyor. Hazırlıksız kanat sürekli
+  ateşte hasar alıyorsa koordineli kapan planı bırakılıyor.
+- src/historical-opponent-analysis.js: sabit sayıda sektörün mevcut kapladığı
+  alanı ölçen ortak hazırlık baskısı kontrolü. En az 1 saniye menzil baskısı,
+  sektörün başlangıç sağlığının en az %5 kaybı ve son 1 saniyede hasar gerekir.
+  Tek isabet/yalnız menzil/elle ayrılan asker yeterli değildir. Ölen askerlerin
+  kaybı hesaba katılır; hazır sektörler bu kontrolle dağıtılmaz.
+- src/historical-civilization-tactics.js: 10 özel doktrinde baskıdaki hazırlıksız
+  sektör yerel savaşa bırakılır; diğer sektörler dizilmeye devam eder. Bırakılan
+  askerler sonraki savunma aşamasında eski yerlerine geri çağrılmaz. Araştırma
+  sekmesinin iki yeni Yunan müttefik hopliti GR_HOPLITE ön hattına bağlandı.
+- tests/historical-preparation-pressure.mjs: yukarıdaki kararların tekrarlanabilir
+  geometrisi, iki takım yönü, kayıp/oyuncu emri ayrımı ve sektör izolasyonu.
+- Bu proje notu.
+
+Doğrulama
+- 22 test betiği PASS. Loglar: artifacts/commander-balance/selection-final-*.log.
+- 40 özel doktrin tam savaşı (10 doktrin x 96/240 asker x iki yön), 16 genel
+  komutan savaşı doğal eleme ile bitti. 19 komutanda 38 oyuncu emri/komutan
+  kaybı kontrolü ve 10 başarısız hazırlık süre sınırı geçti.
+- Turan: 24/48/96 süvari, iki yön = 6 gerçek savaşta iki kanat fiziksel olarak
+  karşı kanatlara ulaştı; gerçek hızlanma ve hasar veren hücum gerçekleşti.
+  12 karışık atlı okçu savaşı: hareketli atış, gerçek geri çekilme, kapanış ve
+  hücum yolu ayrımı PASS. İkili takip/önleme/temas regresyonları PASS.
+- Yeni kontrollü karar testinde 10 doktrin iki yönde hasarlı hazırlığı bıraktı;
+  Osmanlı testinde yalnız vurulan kanat bırakıldı, diğer bölükler dizildi.
+- Klasik savaş, davranış, ittifak, çoklu ordu, oyuncu hareket/saldırı/durma,
+  NPC yön bulma ve 4000 askerlik sınırlı karar sıklığı kontrolleri PASS.
+- 16 sabit kadro plan açık/kapalı karşılaştırması doğal eleme ile bitti.
+- Vite build ve ilgili dosyalarda git diff --check PASS. Build mevcut büyük
+  paket uyarısını veriyor.
+
+Güncel Alp Arslan–Timur tanılaması
+- 96 asker, iki tohum, iki yön, özel plan açık/kapalı = 8 savaş.
+- Kaynak hash kontrolü: test sırasında değişiklik yok. Rapor:
+  artifacts/commander-balance/turan-effectiveness.json.
+- Açık plan kanat ateşi nedeniyle 5,03–7,03 saniyede bırakıldı; önceki aynı
+  tanılamada genel hasar eşiği 8,53–9,03 saniyede bırakıyordu. Bu rakipte
+  kapanış gerçekleşmedi, gerçekleşmiş gibi sayılmadı. Timur açık ve kapalı
+  planda 4/4 kazandı. Taktik kararı düzeltmesi güç dengesi zaferi diye sunulamaz.
+
+Sınırlar
+- 19 komutanın hepsinin benzersiz tarihî doktrini yok: 10 özel doktrin,
+  Turan ve 8 genel donanım tabanlı komutan dizilişi var. Genel diziliş zaten
+  temas öncesi veya menzilde kontrolü bırakır; bu geçişte değiştirilmedi.
+- Sektör kutusu yaklaşık menzil ölçümüdür; ışın/engel hesabı değildir.
+  Gerçek hasar koşulu boş menzil tehdidinde yanlış iptali sınırlar.
+- Bu ek denetim karar başına doğrusal ve 2 Hz; her kare asker çifti taramaz.
+  Yeni tarayıcı görüntüsü veya FPS ölçümü yapılmadı.
+- Millet/birim statları ve preset sayıları bu işte değiştirilmedi. Ana sekme
+  ayrı donanım bütçesi karşılaştırmasını yürütüyor.

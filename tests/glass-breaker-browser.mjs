@@ -19,13 +19,14 @@ try{
   await page.locator('#auto-spawn').check();await page.locator('[data-speed="3"]').click();assert.equal((await state()).speed,3);
   await page.waitForFunction(()=>window.glassBreaker.getState().broken>45);
   await page.locator('#pause').click();const beforeTheme=await state(),images=new Set();
-  for(const theme of ['spectrum','gold','chrome','rose','emerald','sapphire']){
+  await page.locator('summary').filter({hasText:'Görünüm'}).click();
+  for(const theme of ['sahlale','yesilturbe','dantel','revzen','rosewindow','lattice','rumi','hatayi','tulip','penc','cintemani','iznik','rain','fern','ripples','frost','honeycomb','bubbles','spectrum','gold','chrome','rose','emerald','sapphire']){
     await page.locator(`[data-theme="${theme}"]`).click();
     assert.deepEqual(await state(),{...beforeTheme,theme},'Changing appearance must preserve the paused simulation');
     assert.equal(await page.locator('[data-theme][aria-pressed="true"]').count(),1);
     images.add(await page.evaluate(()=>{const pixels=document.querySelector('#game').getContext('2d').getImageData(80,230,380,400).data;let hash=2166136261;for(let i=0;i<pixels.length;i++)hash=Math.imul(hash^pixels[i],16777619);return hash>>>0;}));
   }
-  assert.equal(images.size,6,'Every material must visibly change the canvas');
+  assert.equal(images.size,24,'Every material must visibly change the canvas');
   await page.locator('#live-colors').check();
   assert.deepEqual(await state(),{...beforeTheme,theme:'sapphire'},'Live colors must preserve paused simulation');
   await page.locator('[data-theme="gold"]').focus();await page.keyboard.press('Enter');assert.equal((await state()).theme,'gold');
@@ -39,12 +40,12 @@ try{
   await page.locator('#game').dispatchEvent('pointerdown',{clientX:mobile.x+mobile.width*.5,clientY:mobile.y+mobile.height*440/960,pointerType:'touch'});assert.equal((await state()).balls,count+1);
   await page.screenshot({path:'artifacts/glass-breaker/mobile.jpg',type:'jpeg',quality:65});
   await page.locator('[data-theme="chrome"]').click();await page.reload();await page.waitForFunction(()=>window.glassBreaker?.getState().theme==='chrome');
+  await page.locator('summary').filter({hasText:'Görünüm'}).click();
   assert.equal(await page.locator('[data-theme="chrome"]').getAttribute('aria-pressed'),'true');
   assert.ok(await page.locator('#live-colors').isChecked(),'Live color preference must survive reload');
   await page.locator('#live-colors').uncheck();
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await page.screenshot({path:'artifacts/glass-breaker/chrome-mobile.jpg',type:'jpeg',quality:65});
-  await page.goto(origin);await page.locator('.view-tabs a[href="/glass-breaker.html"]').click();await page.waitForURL('**/glass-breaker.html');
-  await page.goto(origin);await page.locator('#automatic-back').click();await page.locator('#automatic-start a[href="/glass-breaker.html"]').click();await page.waitForURL('**/glass-breaker.html');
-  assert.deepEqual(errors,[]);console.log('PASS: controls, batches, mobile layout; six distinct themes, preserved simulation, keyboard selection and persisted appearance.');
+  await page.setViewportSize({width:1280,height:900});await page.goto(origin);await page.locator('.studio-game-list a[href="/glass-breaker.html"]').click();await page.waitForURL('**/glass-breaker.html');
+  assert.deepEqual(errors,[]);console.log('PASS: controls, batches, mobile layout; twenty-four distinct themes, preserved simulation, keyboard selection and persisted appearance.');
 }finally{await browser.close();}

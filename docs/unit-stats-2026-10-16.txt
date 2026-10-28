@@ -1,0 +1,79 @@
+Taç Savaşı — birim değerleri incelemesi, 16 Ekim 2026
+
+Kapsam
+352 katalog birimi incelendi: 306 tarihî birim, 37 Orta Dünya birimi ve
+9 mitolojik birim. 306 tarihî birimin ve 15 normal Orta Dünya askerinin
+sayısal profili güncellendi. 31 kahraman/yaratığın özel değerleri korundu;
+bunlara tarihî insan fizyolojisi uygulanmadı. Komutanların kişisel profilleri
+ve klasik dört birimlik oyun modu bu tarihî katalog güncellemesinin dışındadır.
+
+Değerlerin anlamı
+Can, hız, menzil ve saldırı aralığı göreli oyun değerleridir. Bunlar tarihî
+ölçümler, gerçek metre/saniye veya her döneme uygulanabilen kesin sayılar
+değildir. Mevcut katalogdaki donanım, dönem, rol ve kaynak notları üzerinden
+silah sınıfları ayrıldı; eski uzmanlaşmalar mümkün olduğunca korundu.
+Bir ülkeye veya döneme tek başına üstünlük çarpanı verilmedi.
+
+Uygulama
+- İnsan piyadelerin can farkları daraltıldı. Korumanın esas sayısal karşılığı
+  zırh oldu; plaka ve zincir zırhın hız bedeli sınırlı tutuldu.
+- Kısa silah, kılıç, taiaha, macuahuitl, balta/topuz, iki elli silah,
+  mızrak, uzun kargı, süvari mızrağı ve hücum mızrağı ayrı ele alındı.
+- Yay, uzun yay, arbalet, erken ateşli silah, sapan ve ciridin vuruş gücü,
+  atış aralığı ve erişimi ayrıştırıldı. Zırh delme sistemi eklenmedi;
+  oyunun mevcut hasar azaltma hesabı geçerlidir.
+- Süvarinin ve fillerin can/hücum değerleri yeniden dengelendi. İki savaş
+  arabası mürettebatlı menzilli platform olarak korundu.
+- Atlı okçuların mevcut ekipmana bağlı hareket hızı 32–48 aralığında korundu.
+  İlk taslaktaki genel hız düşüşü, yorgunluk altında kaçınmayı bozduğu için
+  hareket testinin sonucuna göre geri alındı. Diğer değerleri güncellendi.
+- Normal fantastik askerlerde göreli dayanıklılık ve saldırı ölçeği ayarlandı;
+  ırksal hareket, menzil ve özel roller korundu. Bu bir oyun dengesi kararıdır.
+- Çalışma sırasında eklenen Milano provvisionato piyadesi, Numidyalı hafif
+  piyade, Thebai hopliti ve müttefik Yunan süvarisi ayrıca incelemeye alındı.
+
+Kaynak ve sınır
+Yerel kaynaklar: historical-combat-notes.txt, historical-realism-balance-2026-10-15.txt,
+historical-equipment-balance-2026-10-15.txt; katalog araştırma notları ve silah/zırh
+profilleri. Çizim paletindeki belirsiz kumaş adı zırhsızlık kanıtı sayılmadı.
+The Metropolitan Museum of Art, Arms and Armor—Common Misconceptions and
+Frequently Asked Questions: saha zırhının hareketi tamamen engellemediği ve
+ağırlığın vücuda dağıldığı açıklaması, sınırlı hareket cezasını destekler.
+https://www.metmuseum.org/pt/essays/arms-and-armor-common-misconceptions-and-frequently-asked-questions
+The Metropolitan Museum of Art, Six Crossbow Bolts: arbalet ve erken ateşli
+silahların donanım bağlamı. Verilen azami atış mesafesi oyuna etkili menzil
+olarak kopyalanmadı; saldırı aralıkları tarihî saniye ölçümü iddiası taşımaz.
+https://www.metmuseum.org/art/collection/search/33742
+
+Dosyalar
+src/historical-unit-stat-balance.js: açık birim kimlikleriyle dondurulmuş profiller.
+src/historical-catalogue.js: aynı değerleri katalog ve savaş motoruna bağlar.
+Özel senaryo combat geçersiz kılmaları ve kayıtlı ordu kimlikleri korunur.
+artifacts/unit-stats-2026-10-16/before.json: değişiklik öncesi 348 birim.
+artifacts/unit-stats-2026-10-16/before-additions.json: sonradan eklenen dört birim.
+artifacts/unit-stats-2026-10-16/review.csv: tüm birimlerde eski/yeni değerler.
+artifacts/unit-stats-2026-10-16/review.json: donanım ve sınıflandırmalı ayrıntı.
+artifacts/unit-stats-2026-10-16/build-review.mjs: bu anlık görüntülerden üretici.
+Yeni katalog kimliği eklendiğinde kapsam testi ayrıca inceleme yapılmasını ister.
+
+Doğrulama
+- Tüm 352 birimin sonlu/pozitif değerleri, zırh sınırı, kayıt uyumluluğu ve
+  katalog-motor eşitliği; 754 savaş, iki başlangıç tarafı, sabit tohum tekrarı.
+- 258 donanım karşılaştırma savaşı; uzmanlaşmalar ve karşı birlik dengesi.
+- 117 komutan stratejisi, formasyon, yeni birlik ve atış disiplini kontrolü.
+- 10 rakibe uyarlanan komutan savaşı ve 22 müttefik komutan savaşı.
+- 29 atlı menzilli türün kaçınması, iki taraflı takip, müttefik engeli,
+  30/60 Hz, oyuncu emri ve 1200 asker kontrolü; 8 gerçek atlı birlik savaşı.
+- Tarihî motorun büyük ordu/kayıt/seçim/fil/mızrak/atış kontrolleri;
+  Orta Dünya, mitoloji, Türk süvarileri ve donanım gerçekçilik kontrolleri.
+- Üretim derlemesi ayrı artifacts/unit-stats-2026-10-16/build dizinine alınır.
+Tarayıcı görsel incelemesi bu sayısal değişikliğin doğrulamasına dahil değildir.
+
+Test uyarlamaları
+Uzun kargılıların hücum teması oluşmadan kazanabildiği savaşta her tohumda
+çarpışma sayacı zorunlu tutulmaz; senaryo setinde gerçek sayaç tetiklenmesi
+ve her iki tarafta süvariyi durdurma şartı korunur. Atlı okçu/yaya okçu için
+evrensel kazanan dayatılmaz. Eski ilk-kare kaçış testi, önceki değerlerle de
+hareket başlamayan yerel yol seçimine uygun bir saniyelik pencere kullanır.
+Orta Dünya testleri artık ham kaynak yerine çözülmüş katalog değerini doğrular.
+Müttefik savaş testi, eşzamanlı değişiklik denetimine yeni denge modülünü de alır.

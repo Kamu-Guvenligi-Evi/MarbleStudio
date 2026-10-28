@@ -1,0 +1,27 @@
+15 Ekim 2026 — Geç Orta Çağ süvarileri
+
+İki yeni birlik:
+- italian_condotta_lancer: İtalyanlar > Floransa Cumhuriyeti. Sözleşmeli ağır süvari; condottiere komutan unvanıdır. Mevcut milan_ducal_cavalry dükün maiyetidir, bu seçenek ayrı teşkilatı temsil eder. Yuvarlak Milano tarzı zırh, armet, bordo-altın at örtüsü.
+- imperial_gothic_knight: Almanlar > Kutsal Roma İmparatorluğu. Geç 15. yy Gotik donanım: sallet, boğaz koruması, sivri/yivli plakalar, kısmi at zırhı. Reichsritter bir statüdür; tek tip imparator muhafız alayı değildir. 16. yy Maximilian donanımıyla karıştırılmadı; evrensel imparatorluk üniforması iddiası yok.
+
+Mevcut teutonic_knight düzeltildi, kopya eklenmedi: 13. yy zincir zırh, büyük miğfer, beyaz kumaş/siyah haç. Dev boynuzlar standart savaş donanımı olarak gösterilmedi. Tarikatın başlangıcı Akka 1190; Baltık faaliyetleri sonradır.
+
+Dosyalar: src/late-medieval-cavalry-units.js, src/late-medieval-cavalry-art.js; catalogue, profiles, culture-groups, warrior-art ve european-elite-units bağlantıları. Native Canvas çizimler; kart ve savaş aynı sprite sistemini kullanıyor. crown-battle.js / crown-battle-renderer.js değiştirilmedi. Daha önce onaylanan Warg/sırtlan görsellerine dokunulmadı.
+
+Yerel müze referansları (dosya boyutu, ölçülmüş ağ tüketimi değil):
+public/warrior-references/italian-armet-met-24810.jpg — 89670 bayt
+public/warrior-references/gothic-armor-met-35903.jpg — 33766 bayt
+Her ikisi The Met kamu malı/Open Access. Gotik zırh müzede birleştirilmiş, yaklaşık yarısı modern restorasyon; katalogda açıkça belirtildi. At örtüleri özgün yorumdur. Referans fotoğrafları ile oyun sprite'ları farklı varlıklardır.
+
+Kaynaklar:
+https://www.metmuseum.org/art/collection/search/24810
+https://www.metmuseum.org/art/collection/search/35903
+https://www.nationalgallery.org.uk/paintings/catalogues/gordon-2003/the-battle-of-san-romano
+https://www.historisches-lexikon-bayerns.de/Lexikon/Artikel_45405
+https://www.deutscher-orden.de/spiritualitaet/ordenspatrone
+https://www.deutscher-orden.de/spiritualitaet/das-kreuz
+
+Doğrulama: tests/late-medieval-cavalry.mjs geçti. Yeni iki birlik + Töton + Milano: 256 kare, 4 ayrı siluet, boş/kesilen kare yok. Müze görselleri yükleniyor; ülke menüleri, savaş başlatma, kayıt sonrası yeniden yükleme, canlı savaşta hasar testi başarılı. Tarayıcı JS hatası yok. Vite üretim derlemesi geçti; büyük paket uyarısı sürüyor.
+Önizleme: artifacts/late-medieval-cavalry/four-cavalry.jpg (38725 bayt); gözle incelendi.
+Test raporu: artifacts/late-medieval-cavalry/checks.json
+Derleme günlüğü: artifacts/late-medieval-cavalry/build.log

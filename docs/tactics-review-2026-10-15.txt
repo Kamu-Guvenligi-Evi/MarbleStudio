@@ -1,0 +1,61 @@
+15 Ekim 2026 — diğer medeniyet taktikleri ve komutan dizilişleri
+
+Tamamlanan hareket düzeltmeleri
+- İngiliz/Yunan ve diğer yakın dövüş birlikleri, düşmanın daha uzun silahının erişiminde eski formasyon noktasında beklemiyor. Temasa giren asker sonraki kararda eski yuvasına geri çağrılmıyor.
+- Qin ve Japon destek birlikleri yalnız düşman okçusu yaklaştı diye ricat etmiyor; yakın dövüş tehdidi kullanılıyor.
+- Mevcut gerçek süvari hücumu formasyon yönlendirmesi tarafından kesilmiyor. Hasar veya hız bonusu eklenmedi.
+- Qin dahil atış baskısı altındaki yaklaşmada gereksiz durma mesafesi kaldırıldı.
+
+Ordu ayrımı
+- historical-tactics.js, historical-civilization-tactics.js, historical-commander-tactics.js artık armyId kullanıyor.
+- b.tactics.armies / b.tactics.civilizations.armies: Map(armyId,state). state.armyId mevcut.
+- teams[team] yalnız ilk ordunun eski API uyumluluk görünümü. Çoklu ordu gösterimi Map kullanmalı (motor/UI sekmesine bildirildi).
+- activeCommander(b,team,armyId), armyCommanders Map'ini esas alıyor. Aynı taraftaki iki ordu komutan/asker paylaşmıyor; lider kaybı yalnız ilgili ordunun planını bitiriyor.
+
+Komutan başlangıç dizilişi
+- Yeni historical-commander-formations.js, HistoricalTactics tarafından çağrılıyor; motor ve formasyon geometrisi dosyaları değiştirilmedi.
+- Özel doktrinler kendi dizilişlerini korur. Doktrinsiz fakat komutanlı ordu: piyade hat, kargı çoğunluğu blok, atış ağırlıklı rakipte seyrek, okçu ayrı geride seyrek, süvari kanatta kama.
+- Bu genel düzen yalnız açılış içindir: en çok 5 saniye; hazır olunca, temas/atış menzili veya süvari için 175 pikselde normal muharebeye bırakır. Sonradan dövüşen orduyu yeniden dizmeye çalışmaz.
+- Manuel emir, lider kaybı ve kale navigasyonu önceliklidir. Diziliş kararları 1 Hz, aktif işler bitince tarama da biter. Hasar/hız/ivme değişmez.
+- API b.tactics.formations.armies: state.groups[{role,kind,count}], members[{unit,goal,role}], phase, armyId, commander.
+
+Doğrulama
+- artifacts/tactics-review/baseline.json ve revised.json: düzeltme öncesi/sonrası toplam 240 tamamlanan savaş, 0 süre aşımı. 10 doktrin x 3 rakip x 2 taraf x açık/kapalı; seed 42. Her koşu grubunda kaynak hashleri sabit; iki grup arasında motor aynı.
+- Bu sınırlı karşılaştırmada taktik açık İngiliz galibiyeti 2/6 -> 4/6, Yunan 2/6 -> 3/6. Sonuçlar genel denge veya her rakibe üstünlük garantisi değildir.
+- Son entegrasyon sonrası PASS: historical-commander-formations, historical-multi-army-tactics, historical-tactics-contact, historical-commander-tactics, historical-civilization-tactics, historical-opponent-ai, historical-turan-charge, historical-tactics.
+- Komutan dizilişi testi iki taraf, karma kadro/çakışmayan yuvalar, fiziksel hareket, manuel emir, komutan ölümü izolasyonu, süvari ivmesi, 1 Hz ve süre sınırını kapsar.
+- Tarayıcı: 20 senaryo, 600 kare, masaüstü 1100x720 ve mobil 390x844, 0 JS hatası.
+- Vite production build başarılı; mevcut büyük chunk uyarısı sürüyor. İzole çıktı artifacts/tactics-review/build.
+- Gerçek FPS artışı ölçülmedi. Yeni genel diziliş açılışı 240 savaş karşılaştırmasından sonra eklendi; ayrı regresyon testleriyle doğrulandı.
+
+Ek denetim ve Turan atlı okçuları — 15 Ekim 2026
+- Kullanıcı: atlı okçular Turan düzenini bozuyor. Sebep: HistoricalTactics yalnız seljuk_hassa kabul ediyor, hazır Selçuklu ordusundaki 8 Türkmen atlı okçusunu bağımsız skirmish davranışında bırakıyordu.
+- Aynı ordunun menzilli süvarileri artık uygun Turan komutanının planına katılır. Okçular yem merkezinde; yakın dövüş hassa süvarileri iki kanatta. Her kanat için en az 2 yakın dövüş süvarisi gerekir; yalnız okçudan sahte ağır süvari hücumu üretilmez.
+- Merkez gerçek başlangıç konumundan en az 100 piksel geri çekilme hedefi alır. Aktif plan boyunca bağımsız skirmish hareketi taktik rotasını ezmez. Okçular hareket ederken gerçek mermi/ok çıkarır; yakındaki tehdide göre geri çekilme hızı yükselir. Kuşatma ve hücum evresinde okçu hedefleri takip grubunun 120 piksel gerisinde kalır; okçular chargeRelease listesine girmez.
+- Manuel emir, kendi komutanının kaybı, alan yetersizliği ve gerçek takip gerekliliği korunur. Takip veya kanat kapanması gerçekleşmezse normal muharebeye dönüş sürer; her savaşta kuşatma/galibiyet garantisi yoktur.
+- Yeni tests/historical-turan-horse-archers.mjs: 2 taraf x 24/48/96 toplam asker x Türkmen/Kıpçak = 12 savaş; üyelik, fiziksel ricat, hareketli gerçek atış, bağımsız kaçışın bastırılması, okçunun hücum grubundan ayrılması, sonlu hedefler, süreli çıkış. Ayrıca manuel dur ve komutan ölümü. PASS.
+- Hazır 16 hassa + 8 Türkmen kadrosu seed42 açık geniş haritada iki tarafta assemble/retreat/envelop/charge/done tamamladı; gerçek süvari darbe hasarı var. Daha büyük ve farklı bileşimlerde bazı takip/kuşatma girişimleri iptal oluyor; bu sonuçlar testlerde gizlenmiyor.
+- Önceki denetimden ek düzeltmeler: genel komutan dizilişinde süvari kanadı sabit açıklık yerine grubun gerçek boyutuyla seçilir; 240 kişilik karma orduda süvarinin atlanması giderildi. Konuma göre yuva eşlemesi çapraz yürüyüşü azaltır. 5 saniyelik üst sınır 1 Hz karar periyodunu beklemeden uygulanır. Bu dosya daha sonraki müttefik spawn çalışması için diğer sekmeye bırakıldı.
+- Ming ve diğer doktrinlerde zaten çatışmaya girerek serbest bırakılmış askerler, eski yuvalarına dönmedikleri için bütün ordunun hazırlanma evresini kilitlemez. 60/160 kişilik Ming, iki taraf, gerçek temas senaryoları PASS.
+- artifacts/tactics-review/stress-before-horse-archers.json ilk 78 savaş denetimini saklar. stress.json son 78 savaş: 66 doktrin/boyut/ayna + 12 çoklu ordu/manuel emir/lider kaybı; kaynak hashleri koşu boyunca sabit, 0 geçersiz konum, 0 süre aşımı. İlk denetimdeki 3 Ming hazırlık tıkanması son koşuda yok.
+- İlgili 8 eski regresyon dosyası PASS; yeni atlı okçu dosyasıyla toplam 9. Genel diziliş testi müttefikin kendi dizilişini erken tamamlamasına izin verir, başka komutan ölünce evresinin değişmemesini denetler.
+- Tarayıcı artifacts/tactics-browser-assist.mjs: 22 senaryo, 1100x720 ve 390x844, 0 JS hatası. İki karma Selçuklu ordusunda 3 taktik rota çiziliyor ve tüm Turan evreleri gerçek simülasyonda tamamlanıyor.
+- Vite production build PASS; mevcut büyük çıktı parçası uyarısı devam ediyor. Motor/spawn değişiklikleri ayrı sekmenindir; bu Turan düzeltmesi historical-tactics.js içindedir.
+
+Tarihsel davranış ve düzen disiplini — 15 Ekim 2026
+- Kullanıcı: taktikleri gerçek hayattaki işleyişlerine yaklaştır. Bu bölüm önceki genel 32 saniye çıkış kuralını değiştirir; başarılı bir savunma hattı sırf zaman dolduğu için serbest takibe geçmez.
+- Kaynaklar: English Heritage, Hastings savaş anlatısı (https://www.english-heritage.org.uk/visit/places/1066-battle-of-hastings-abbey-and-battlefield/history-and-stories/what-happened-battle-hastings); Musée de l'Armée, Agincourt (https://www.musee-armee.fr/ExpoChevaliersBombardes/battle-agincourt.html); Polybios, Tarihler XVIII, 29–32 (https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Polybius/18%2A.html).
+- Tarihî dayanak: savunma hattının takiple bozulabilmesi, süvari hücumunun karşı düzen ve araziye bağımlılığı, sık düzenin saflar ve uygun zemin gerektirmesi. Polybios'un Makedon falanksı açıklaması Sparta hoplitlerinin aynı donanıma/taktiğe sahip olduğu iddiasına dönüştürülmedi. Piksel eşikleri ve AI kararları oyun yorumudur; gerçek ölçüler veya evrensel millet özellikleri değildir.
+- historical-civilization-tactics.js: hold için 18 saniye, bütün doktrinler için 32 saniye zorunlu kapanış kaldırıldı. Başarısız hazırlık hâlâ 12 saniye sonunda bırakılır. Komutan kaybı, yetersiz kuvvet, manuel emir ve harita/navigasyon kısıtları geçerlidir.
+- İngiliz savunma hattı ve süvariye karşı durmuş mızrak hattı yakın mesafede mevcut silah, yön ve engel kontrolleriyle savaşır. Kısa yerel adım atabilir; kaçan hedefin peşinden sınırsız gitmez, boşta kalan asker yuvasına döner. Ateş baskısında yaklaşma ve tehdit değişince ilerleme korunur.
+- Fransız süvarisi yaklaşırken seçtiği hedef korunmaya girerse wait evresine döner. Açık hedef bulamazsa uygun kanat yolu arar; yol da yoksa kontrolü bırakıp cepheye koşmaz. Zaten fiziksel hücuma/temasa girmiş asker aniden ışınlanıp geri döndürülmez.
+- Osmanlı kanat süvarisi önce düşman cephesinin dışına yana çıkar, sonra ileri gider. Sınır nedeniyle bir dosyanın kanat yolu kapanırsa merkez yanında kalır; bu durum başarılı kuşatma sayılmaz. İtalyan/Fransız kanat hesabı grubun iç dosyalarının genişliğini de kapsar.
+- Ortak ilerlemede mevcut görev hedefine yaklaşmış veya temasa girmiş asker oranı en az %60 olmalıdır. Geride kalan saflar için sanal merkez bekler. Kanattaki Osmanlı süvarisi yay merkezini bu hesapta durdurmaz; geri alınan Qin yayları kendi gerçek geri hedefleriyle değerlendirilir.
+- Hasar, zırh, hız veya kazanma garantisi eklenmedi. Bu oyunun iki boyutlu açık alan hareket modeli; tarihî arazi, yorgunluk, haberleşme ve moralin eksiksiz simülasyonu değildir. İki taraf da yerini korursa çatışmanın başlamaması meşru bir sonuçtur.
+- Yeni tests/historical-tactics-discipline.mjs eski kaynakta savunma süresi hatasını yeniden üretti. Son kaynakta iki taraf için 45 saniye hat koruma, gerçek silah saldırısı, kovalamayı kesme, kapanan hücum fırsatı, yana açılma, safları bekleme, dar haritada kapalı kanat ve başarısız hazırlık çıkışı PASS.
+- Eski opponent-ai testi fırsat kapanınca done yerine wait ve korunmuş emirler bekler. Civilization testi fiziksel kanat hareketi için geniş alan kullanır; genel zaman aşımı beklentisi yerine 45 saniyede geçerli/sınırlar içinde emir ve devam eden savunmayı denetler. Dar harita ayrı yeni testte korunur. Ayrıca normal haritada 10 doktrin x 2 taraf ayrı kontrol edildi: hepsi hazırlıktan gerçek davranışına geçti.
+- Toplam 10 ilgili test dosyası PASS: historical-tactics-discipline, historical-tactics-contact, historical-civilization-tactics, historical-opponent-ai, historical-commander-formations, historical-multi-army-tactics, historical-commander-tactics, historical-turan-charge, historical-tactics, historical-turan-horse-archers.
+- Son artifacts/tactics-review/stress.json: 78 savaş, 0 adet 180 saniye sınırı, geçersiz hareket/hedef yok, kaynak hashleri sabit. İki küçük/dar Selçuklu senaryosu manevrayı erken bırakıp normal muharebeyi tamamladı; bu kuşatma başarısı olarak sayılmadı. Bu son tarama diğer sekmenin crown-battle.js komutan kovalama düzeltmesini de içerir.
+- Chrome: 22 sahne, masaüstü/mobil, 0 JS hatası; iki karma Turan ordusu tüm evreleri tamamladı. Vite build PASS (mevcut 500 kB çıktı uyarısı). Bunlar genel FPS ölçümü veya her muhtemel karşılaşmada başarı garantisi değildir.
+- Diğer sekmeye taktik kaynağının stabil olduğu bildirildi; 18 komutanlı ittifak savaşının son birleşik denetimini o sekme yürütüyor. Timur hazır ordusundaki birimler ekipman temsili; belirli Kıpçak/Moğol kartlarının Timur'a hizmet ettiğine kanıt sayılmamalı. Özel Timurlu taktiği bu çalışmada eklenmedi.
+- İttifak sekmesi son sonucu bildirdi: 18 savaş, kaynak hashleri sabit, 17 doğal bitiş, 1 süre sınırı; 0 davranış uyarısı/hata. 1920 kişilik son senaryoda 180 saniyede 2/243 asker hayatta ve son 15 saniyede hasar devam ediyor: kilitlenme diye raporlanmadı. Diğer büyük savaş 152,3 saniyede bitti. Ayrıntı docs/alliance-simulation-2026-10-15.txt. Bu ayrı test grubundaki süre sınırı yukarıdaki 78 savaşlık grubun sonuçlarıyla karıştırılmamalı.

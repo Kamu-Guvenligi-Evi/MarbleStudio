@@ -1,0 +1,65 @@
+15 Ekim 2026 — araştırma ve oyun entegrasyonu devam kaydı
+
+Bu tur tamamlanan 5 yeni kayıt:
+welsh_longbowman, hungarian_early_hussar, hussite_flailman,
+mexica_cuachicque, mexica_otomi_rank.
+
+Dosyalar: src/european-specialist-{units,art}.js ve src/mexica-rank-{units,art}.js.
+Katalog, sanat profilleri, ortak çizim yönlendiricisi ve kültür grupları bağlandı.
+Galler, Macaristan, Bohemya ve mevcut Mexica ülke menüleri kullanılıyor.
+Kaynak URL'leri ve görsel belirsizlikler birlik kayıtlarında.
+
+Doğrulama:
+tests/european-specialists.mjs: 240 kare, 3 farklı siluet, canlı hasar,
+ülke menüleri, savaşı başlatma ve kayıtlı ordunun yeniden yüklenmesi geçti.
+tests/mexica-ranks.mjs: 160 kare, 2 farklı siluet, aynı entegrasyon kontrolleri geçti.
+Her iki grupta boş/kırpılmış kare ve tarayıcı JavaScript hatası yok.
+Vite build geçti (46.13 s); büyük paket boyutu uyarısı devam ediyor.
+Test sonuçları ve önizlemeler artifacts/european-specialists ve artifacts/mexica-ranks altında.
+
+Görsel araştırma:
+Museum Wales fotoğrafında yalnız kemer kalkanı ayrıntısı görüldü; giysi
+kurumun yazılı tarifinden. Model modern rekonstrüksiyon, üniforma genellemesi yok.
+Met 42.50.29 kalkan fotoğrafı incelendi; Macar hussarında kanat yok.
+Çek H2-20 savaş döveni fotoğrafı incelendi; kayıt 19. yy kopyası olabilir.
+Bodleian Mendoza 64r sayfası 800 px / 307684 bayt yerel referansta incelendi.
+Cuachicque dikdörtgen sırt alameti, kısa saç ve geometrik kalkan;
+Otomi daralan sırt alameti, bağlı saç ve mavi-beyaz kalkan ile ayrıldı.
+Macuahuitl kodeksin bu esir tutma sahnesindeki elde görülmez; dönem donanımı
+olarak tamamlandığı iki kayıtta da açıkça yazıldı.
+Wikimedia indirme 429 verdi; doğrudan Bodleian küçük IIIF görseli kullanıldı.
+Dosya boyutları ölçülmüş internet tüketimi değildir.
+
+Eklenmeyen aday: Medjay — mevcut Nubyalı okçuyla tekrar riski ve asker/polis
+rolünü tek elit birlik diye sunma sorunu nedeniyle şimdilik bekliyor.
+Paylaşılan çalışma: crown-battle.js ve crown-battle-renderer.js değiştirilmedi.
+Kullanıcı her parti sonunda tekrar komut istemiyor; araştırma/entegrasyon sürdürülmeli.
+
+Sonraki tamamlanan eklemeler (bu devam çalışmasında toplam 11 yeni kayıt):
+maori_taiaha, hawaiian_alii;
+japan_yari_ashigaru, japan_yumi_ashigaru, ottoman_akinci, ottoman_azap_archer.
+Japon kültürü 3 -> 5; Türk kültürü 14 -> 16. Osmanlılar mevcut Osmanlı ülkesinde.
+Ashigaru ve azap elit alay diye etiketlenmedi; piyade görevleri açıklandı.
+Māori ustası ve Hawaiili aliʻi de isimli daimî alay değil, savaşçı/statü temsili.
+
+Dosyalar: src/pacific-warrior-{units,art}.js, src/turkish-japanese-{units,art}.js.
+Katalog, profil ve ortak çizim yönlendiricisine bağlandılar; ana savaş/FPS dosyaları değiştirilmedi.
+Kaynaklar, rol sınırlamaları ve görsel yorumlar kayıtların sources/visualNote alanlarında.
+Kaynak fotoğrafları kartlara gömülmedi; kartlar ve savaş özgün önbellekli oyun çizimlerini kullanıyor.
+Pacific: Te Papa taiaha, Parkinson sonrası gravür, British Museum mahiole,
+Te Papa FE000327 tüy pelerin ve Bishop Museum ihe açıklaması incelendi.
+Türk/Japon: Saitama müze ashigaru zırh fotoğrafı, TDV Akıncı minyatürü
+(TSMK Hazine 1517, 212a), Real Academia C-56-041b4 azap gravürü incelendi.
+Azap görseli 1664 baskısı, 16. yy kostüm geleneği; kadırga okçusu tasviri.
+Gravür siyah beyaz, dolayısıyla azap renkleri tarihsel üniforma iddiası değil.
+Referanslar artifacts/turkish-japanese/references altında; vecellio.html başarısız
+eski ayna denemesinin park sayfasıdır, kaynak olarak kullanılmadı.
+
+Doğrulama: tests/pacific-warriors.mjs 160 kare / 2 ayrı siluet geçti.
+tests/turkish-japanese.mjs 320 kare / 4 ayrı siluet, canlı hasar, ülke menüleri,
+savaşı başlatma, kayıtlı ordunun yeniden yüklenmesi geçti; JS hatası yok.
+Son Vite build: 11.90 s, başarılı; mevcut 500 kB paket uyarısı sürüyor.
+Sonuçlar artifacts/pacific-warriors/checks.json ve artifacts/turkish-japanese/checks.json.
+Önizlemeler aynı klasörlerde two-warriors.jpg ve four-warriors.jpg.
+
+Sonraki parti: 9 yeni Avrupa/Haçlı/Kıpçak kaydı + 1 Thebai yeniden etkinleştirmesi tamamlandı. Ayrıntı ve doğrulama: docs/europe-crusader-integration-2026-10-15.txt. Kullanıcının son talebi: bu sekme görsel araştırma/entegrasyon, diğer sekme Türk atlılarının güç dengesi.

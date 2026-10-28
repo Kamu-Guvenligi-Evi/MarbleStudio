@@ -1,0 +1,36 @@
+2026-10-16 — Geniş ekranda formasyonların yatay gerilmesi
+
+Kullanıcının 16:53 görüntüsü: 1913 x 781, mavi 1289 / kızıl 1501.
+Yerel kayıt incelemesindeki mevcut ordular Timur ve Mehmed II; sayılar eşleşiyor.
+Kayıt ekran görüntüsünden daha yeni. Eşzamanlı motor çalışması nedeniyle eski
+görüntünün tüm asker koordinatlarının birebir yeniden üretildiği iddia edilmiyor.
+
+Kesin hata: 600 x 960 dünya görünümü yatay ekrana esnetiliyordu.
+1913 x 781 için yatay/dikey mesafe oranı 3.9191 idi. Sprite şekillerindeki
+ters ölçekleme askerler arasındaki mesafeyi düzeltmiyordu. GPU katmanı da
+bağımsız olarak sabit 600 x 960 kamera kullanıyordu.
+
+Düzeltme: yatay görünüm genişliği ekran oranından hesaplanıyor. Canvas,
+GPU, kamera dönüşümü, seçim/emir koordinatları, görünür alan, arazi çözünürlüğü
+ve yönetmenin genel plan kadrajı aynı görünüm ölçülerini kullanıyor.
+Portre sunumu korunuyor. Asker koordinatları ve savaş motoru değiştirilmedi.
+
+Geçen kontroller:
+- crown-battle-projection-browser.mjs: 2790 asker, 3 yatay görünüm ve portre,
+  Canvas/GPU ölçek eşitliği, zoom/pan, ekran-dünya dönüşümü, sabit asker konumu.
+- crown-battle-camera-browser.mjs: 1366 ve 390 px, kamera sınırları, emirler,
+  dokunmatik hareketler; geniş ekranda harita dışı tıklama yerine geçerli hedef.
+- crown-battle-formations-browser.mjs: 1366 ve 390 px, yerleştirme, yön, geri
+  alma, kayıt, hareket ve dokunmatik iptal. Silme beklentisi mevcut restore
+  sözleşmesine uyarlandı: elle yerleştirilenler aynen korunur, otomatik yeni
+  askerler güncel mevcuda göre yeniden üretilir. Her iki grup ayrıca doğrulanır.
+- crown-battle-sprite-batch-browser.mjs: 30 GPU/Canvas karşılaştırması.
+- crown-battle-director.mjs; crown-battle-deployment.mjs.
+- Vite derlemesi başarılı (mevcut büyük paket uyarısı var).
+- 5180 portundan derlenmiş oyun: HTTP 200, yeni projeksiyon paketi, açılan
+  meydan, tarayıcı hatası yok.
+
+Görsel: artifacts/opening-inspection/corrected-opening.jpg
+Test günlükleri: artifacts/opening-inspection/*-test.log ve build.log.
+Bu doğrulama tüm tarihsel taktiklerin veya bütün medeniyet eşleşmelerinin
+yeniden onaylandığı anlamına gelmez. Diğer motor çalışması durdurulmadı.

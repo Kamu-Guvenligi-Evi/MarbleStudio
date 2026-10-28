@@ -1,0 +1,28 @@
+2026-10-14 — Functional trial map: Kale Geçidi
+
+URL: http://127.0.0.1:5173/crown-battle.html?map=fortress
+UI: Ordu ve alan > Haritalar > Kale Geçidi. Armies still start at zero.
+
+Geometry shared between canvas drawing and physics in crown-battle-fortress.js.
+Full-height river with two passable bridges; east-bank castle with open west gate,
+solid walls, courtyard keep and four solid houses. No destruction/siege system yet.
+Visibility-graph paths cached by body radius in crown-battle-navigation.js.
+Movement, cavalry charge, knockback and crowd separation respect solid footprints.
+Placement rejects blocked formations. Map switches relocate blocked units to nearest
+free land and clear placement undo. Walls/houses block attacks; water allows missiles.
+Other maps retain their existing decorative structures and unrestricted movement.
+
+Validation:
+- crown-battle-fortress.mjs: both bridges, foot/horse/elephant paths, house detours,
+  courtyard gate, legal positions each frame, placement, LOS, charge, knockback,
+  map changes; 68-unit mixed autonomous battle resolves in 64.7 simulation seconds.
+- crown-battle-fortress-browser.mjs: desktop 1366 and mobile 390 pass. Real canvas
+  placement rejects water, open-land deployment works, map switch refreshes undo,
+  rebuilt battle preserves physics, zero start, play/pause, no page errors.
+- Existing battle, behavior, formations, impact and historical-combat tests pass.
+- Vite production build passes (existing chunk size warning).
+Small local previews: artifacts/crown-battle/fortress-1366.jpg and fortress-390.jpg.
+Browser test blocks HMR WebSocket to avoid other authorized tabs reloading its page.
+
+Concurrent animation/audio tab informed; its narrow engine event hooks coexist.
+No new external assets, downloads or packages required for this map.

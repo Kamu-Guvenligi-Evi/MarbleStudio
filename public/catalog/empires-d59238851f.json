@@ -1,0 +1,15 @@
+{
+  "id": "empires-d59238851f",
+  "category": "empires",
+  "name": "İspanyol İmparatorluğu",
+  "src": "/catalog/empires-d59238851f-historical.png",
+  "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Spain_(1785%E2%80%931873,_1875%E2%80%931931).svg",
+  "credit": "previous version User:Ignaciogavira ; current version HansenBCN, designs from SanchoPanzaXXI",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+  "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Flag_of_Spain_%281785%E2%80%931873%2C_1875%E2%80%931931%29.svg/330px-Flag_of_Spain_%281785%E2%80%931873%2C_1875%E2%80%931931%29.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "fileOverride": "Flag of Spain (1785–1873, 1875–1931).svg",
+  "fit": "flag",
+  "historicalNote": "1785–1873 · İspanyol deniz ve devlet bayrağı",
+  "curated": true
+}

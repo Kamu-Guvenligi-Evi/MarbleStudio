@@ -1,0 +1,40 @@
+Atlı okçu hareket düzeltmesi — 15 Ekim 2026
+
+Sorun ve kapsam
+- Önce proje savaş/historical notları ve mevcut motor incelendi, ana sekmeyle dosya sahipliği paylaşıldı.
+- Eski süvari kaçışı toplam 180 pikselde kalıcı olarak tükeniyordu. Sabit tohumlu Moğol–Roma denemesinde 5. saniyede 172 piksel harcanıyor, 10. saniyede mesafe 15 piksele iniyor, sonraki 20 saniye ateş devam etmiyordu.
+- Doğrudan uzaklaşma dost sıralarının çevresinden yol aramıyordu. Atış için hedefe dönüş, kaçışa dönüşle çelişebiliyordu.
+
+Uygulama
+- Yeni crown-battle-mounted-skirmish.js modülü yalnız cavalry+ranged rollerinde çalışır; isim veya medeniyet eşleştirmesi yoktur. Katalog, hasar/zırh değerleri, kimlikler, kayıt biçimi ve görseller değişmedi.
+- Sürekli mesafe koruma, farklı giriş/çıkış eşikleri, eğik geri çekilme, menzil içinde dolaşma ve kararlı rota seçimi eklendi.
+- Her yaklaşık 0,3 saniyede 16 yön ve en fazla 40 yerel komşu değerlendirilir. Mevcut walk/navigasyon kullanılır; bütün askerleri birbirleriyle karşılaştıran döngü yoktur.
+- Kaçış sırasında gövde yönünü atış hedefi bozmaz. Oyuncunun hareket rotasını takip ederken atış yapılabilir; dur ve açık saldırı emirleri özerk kaçıştan önceliklidir.
+- Kaçış mesafesi artık yaşam boyu kota değildir. Gerçek düşman hasarı ilerleme sayılır; 30 saniyelik sonuçsuz etkin manevradan sonra normal çatışmaya dönülür. İlk uzun yaklaşma bu süreyi tüketmez.
+- Komutan taktikleri ve diğer sekmenin yaya screening davranışı korunmuştur.
+
+Bu görevde değiştirilen/eklenen dosyalar
+src/crown-battle.js
+src/crown-battle-mounted-skirmish.js
+tests/crown-battle-mounted-skirmish.mjs
+tests/crown-battle-mounted-battles.mjs
+tests/crown-battle-mounted-browser.mjs
+tests/crown-battle-behavior.mjs
+tests/historical-army-support-units.mjs
+tests/historical-tactics-units.mjs
+docs/mounted-archer-movement-2026-10-15.txt
+Eski üç testte 180 piksel sonunda yakalanmayı zorunlu tutan beklentiler sürdürülen hareket/gerçek hasar beklentisiyle değiştirildi.
+
+Doğrulama
+- mounted-skirmish PASS: mevcut 18 atlı menzilli tür; 4 tür x 2 takım 45 saniyelik takip; dost süvari sırası çevresinden çıkış (iki takım, 30/60 Hz); köşe dönüşü; hasarsız kovalamaca sınırı; dur/hareket/saldır emirleri; 1200 askerde sınırlı yerel sorgu.
+- mounted-battles PASS: iki takımda piyade, hassa süvarisi, atlı okçu ve komutanlı karma ordu karşılaşmaları. Sekiz savaş 16,1–121,3 saniyede gerçek eleme ile bitti. Moğol atlı okçuları piyadeyi yendi, sayıca üstün hassa süvarisine ve atlı okçulara kaybetti. Tek tohumlu örnekler genel güç dengesi garantisi değildir.
+- mounted-browser PASS: gerçek oyun sayfası açıldı; 1440x900 ve 390x844 boyutlarında 20 saniye render/simülasyon, her birinde 60 hareketli atış, dört hareketli süvari, sıfır tarayıcı hatası.
+- Regresyon PASS: crown-battle, behavior, screening, npc-routing, formation-movement; historical-turan-horse-archers, pursuit, interception, opportunity, fallback, charge; historical-army-support-units ve historical-tactics-units (--node-only).
+- Vite build başarılı (11,13 saniye); 500 kB üzeri paket boyutu uyarısı var.
+- Loglar: artifacts/mounted-skirmish/ . Node testleri tests/<ad>.mjs olarak yerel Node ile tekrar çalıştırılabilir. Browser testi localhost:5173 ve yerel Chrome gerektirir.
+
+Kalan sınırlamalar
+- crown-battle-fortress testi BAŞARISIZ: eski sabit sınırlar {-300,900,-480,1440}, güncel geniş harita sınırları {-2100,2700,-3360,4320}. İlk samurai köprü koordinatları gerçek haritaya uymuyor. Bu test değiştirilmedi ve ana sekmeye bildirildi; kale regresyonu onaylanmış değildir.
+- Tamamen çevrilmiş birliklere geçiş/ışınlanma verilmez; açık yol yoksa kaçış garanti edilmez. Açık saldırı emri otomatik kaçışı bastırır.
+- 30 saniyelik sonuçsuz manevra sınırı bu bağımsız davranış içindir; komutanlar kendi taktik durumlarını yönetir.
+- 1200 asker testi sonlu koordinatları ve sınırlı sorgu sayısını doğrular; ölçülmüş FPS iyileşmesi iddia edilmez.

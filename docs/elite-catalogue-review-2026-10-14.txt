@@ -1,0 +1,68 @@
+Taç Muharebesi — birlik ve görsel düzenlemesi, 14 Ekim 2026
+
+Kapsam: kılıç, mızrak ve yay ağırlıklı tarihsel birlikler; süvariler dahil.
+Yeni kayıtlar katalogdan ordu seçimine ve savaş motorunun rol temsillerine aktarılır.
+Fotoğraflar/çizimler referans portreleridir; savaş alanındaki hareketli askerler oyun çizimleridir.
+
+YENİ ARAŞTIRMA KAYITLARI
+- mexica_jaguar: Jaguar savaşçıları; Kartal savaşçılarıyla aynı Mexica grubunda.
+  British Museum: https://www.britishmuseum.org/collection/object/E_Am1856-0422-93
+  Codex Magliabechiano, yaprak 30r, 16. yy; ritüel bağlam, bütün üniformayı göstermez.
+- carthage_sacred_band: Kartaca Kutsal Birliği; MÖ 4. yy seçkisi, Thebai ile karıştırılmaz.
+  Diodoros 16.80.4: https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Diodorus_Siculus/16D%2A.html
+  Dodge 1891 çizimi modern yorumdur; Hannibal döneminde süreklilik iddiası yoktur.
+- egypt_sherden: II. Ramsesin Şerden muhafızları; Yeni Krallık Mısır, MÖ 13. yy.
+  Jorrit M. Kelder / Getty: https://www.getty.edu/publications/egypt-classical-world/01/
+  Abu Simbel kabartmasının Rosellini/Breasted aktarımı. Etnik köken kesinleştirilmedi.
+- gaelic_gallowglass: İrlanda Gal lordluklarında profesyonel ağır piyade.
+  Luke McInerney: https://www.clarelibrary.ie/eolas/coclare/history/gallowglass_of_thomond.pdf
+  Bu araştırmada kütüphane PDF'sinin arama dizini metinleri kullanıldı; doğrudan PDF isteği 403 döndü.
+  Dürer 1521 grup çizimi, 13. yy için birebir referans değildir; gruptaki herkes ağır piyade değildir.
+Yeni dört görsel kamu malıdır. Commons dosya sayfası, üretici ve kullanım notları
+src/historical-unit-visuals.json içindedir ve katalog kartlarında gösterilir.
+
+OSMANLI SADELEŞTİRMESİ
+Sipah, Silahdar, sağ/sol Ulufeciler ve sağ/sol Gureba tarihsel olarak farklı bölüklerdir.
+Oyunda aynı süvari rolünü tekrar ettikleri için tek Kapıkulu süvarileri kartında temsil edilirler.
+Kaynak: https://islamansiklopedisi.org.tr/alti-boluk
+Korunan kimlik: ottoman_sipah. Yeniçeri ve Solak ayrı kalır.
+Birleşen eski kimlikler:
+  ottoman_silahdar, ottoman_ulufeci_right, ottoman_ulufeci_left,
+  ottoman_gureba_right, ottoman_gureba_left.
+Kayıt göçü bu kimliklerdeki askerleri ottoman_sipah sayısına toplar; kayıt sırasından bağımsız toplam koruma testi geçti.
+Sipahi görseli Rålamb 1657–1658 kıyafet kitabındandır; Altı Bölüğün tek tip üniforması sayılmaz.
+
+ÖNCEKİ EKSİK GÖRSELLER
+Yedi kayıt için görsel eklendi: ghaznavid_guard, seljuk_hassa, mamluk_burji,
+sasanian_aswaran, macedon_companions, parthian_cataphract, rome_equites.
+Doğrudan birlik tasviri olmayan saray/heykel/komutan referansları kart notlarında belirtilir.
+Uygun kaynaklı görsel bulunamayan beş kayıt aktif listeden çıkarıldı:
+abbasid_ghulam, ghaznavid_daylami, sparta_hippeis, thebes_sacred_band, seleucid_silver_shields.
+Araştırma kayıtları korunur. Bu, başka bir yerde görsel bulunamayacağı iddiası değildir.
+Bu beş birliğe ait eski kayıt sayıları kaldırılır; diğer birlikler korunur ve kullanıcı bilgilendirilir.
+
+DOSYALAR
+src/historical-catalogue.js: aktif liste, birleştirme eşlemesi ve rol temsilleri.
+docs/historical-elite-research-2026-10-14.json: tarihsel kayıtlar ve kaynaklar.
+src/historical-unit-visuals.json: portre, kaynak, lisans ve tarihsel belirsizlik notları.
+public/warrior-references/elite-*: yerel görseller; oyun dış görsel isteği yapmaz.
+scripts/add-reviewed-missing-visuals.mjs ve add-reviewed-elite-expansion.mjs: tekrarlanabilir kayıt işlemleri.
+
+İnternet kotası: büyük asıllar yerine dört yeni görselde toplam 158.932 bayt yerel
+dosya kullanıldı. Bu sayı internet trafiği ölçümü değildir; arama, sayfa ve protokol trafiğini içermez.
+Katalogdaki önceden mevcut bütün görseller için toplu lisans doğrulaması yapıldığı iddia edilmez.
+
+DOĞRULAMA
+Aktif katalog: 40 birlik, 31 medeniyet grubu; eksik yerel görsel yok.
+Osmanlı: 8 karttan 3 karta indirildi (Yeniçeri, Kapıkulu süvarileri, Solak).
+PASS: historical-combat.mjs — yeni roller ve bütün aktif savaşçı türleri.
+PASS: historical-civilizations.mjs — 40 birlik, 31 grup, filtreler, gizli seçim sayıları,
+aktarım, kalıcılık, portreler ve mobil görünüm.
+PASS: historical-portraits.mjs — 40 referans portresi, seçim, mobil görünüm ve görsel hata yedeği.
+PASS: historical-armies-browser.mjs — görseller, sayılar, depolama, filtreler,
+Türkçe arama, JSON dışa aktarım, sıfırlama, 390 px görünüm; dış ağ isteği/sayfa hatası yok.
+PASS: crown-battle-removal.mjs — kayıt göçü, sıra bağımsız Osmanlı toplamı,
+negatif/taşan sayıları reddetme ve asker silme kontrolleri.
+PASS: Vite üretim derlemesi, 4,79 saniye; mevcut 500 kB paket boyutu uyarısı sürüyor.
+Derleme günlüğü: artifacts/historical-elite-final-build.log.
+Diğer sekmenin kırmızı takım yönetimi geliştirmesi ayrı devam ediyor; bu sonuçlar katalog düzenlemesini kapsar.

@@ -1,0 +1,45 @@
+15 Ekim 2026 — Ahameniş hizmetindeki dört tarihsel donanım rolü
+
+Eklendi:
+- paphlagonian_short_spearman: Paflagon kısa mızraklısı; örgülü başlık,
+  küçük kalkan, kısa mızrak ve baldır ortasına çıkan çizme.
+- colchian_hide_spearman: Kolhis deri kalkanlı mızraklısı; ahşap başlık,
+  ham deri kalkan ve kısa mızrak.
+- libyan_fire_javelineer: Libyalı ahşap uçlu ciritçi; deri örtüler ve
+  ateşte sertleştirilmiş ahşap uç. Ateş hasarı veya alevli silah değildir.
+- aithiopian_palm_archer: Aithiop uzun yaylısı; uzun palmiye yayı, taş
+  uçlu kısa ok, hayvan postu ve kırmızı/beyaz gövde boyası.
+
+Kaynaklar: Herodotos 7.72, 7.79, 7.71, 7.69:
+https://lexundria.com/hdt/7.72/mcly
+https://lexundria.com/hdt/7.79/mcly
+https://lexundria.com/hdt/7.71/mcly
+https://lexundria.com/hdt/7.69/mcly
+
+Dört kart da ayrı seçkin alay iddiası taşımaz. Kaynakta geçen donanım
+oynanabilir rollere ayrılır. Aithiop antik coğrafi adlandırmadır; modern
+Etiyopya devleti veya tek bir modern etnik kimlikle eşitlenmez. Renkler,
+belirtilmeyen biçimler ve giysi kesimleri yorumdur; kartlarda açıklanır.
+Görseller özgün Canvas çizimleridir, internetten indirilmiş resimler değil.
+Elde taşınan cirit/ok uçları özelleştirilmiştir; uçuşta mevcut ortak
+dart/ok çizimi kullanılır. Çatışma motoru değiştirilmedi.
+
+Dosyalar: src/achaemenid-contingent-units.js ve -art.js;
+historical-catalogue, historical-art-profiles, historical-warrior-art,
+historical-culture-groups bağlantıları. Her birlik kendi antik kültür
+grubunda görünür. crown-battle.js değiştirilmedi.
+
+Doğrulama: tests/achaemenid-contingent.mjs geçti. 320 animasyon karesi,
+4 farklı görünüm, 8 tam 12v12 savaş (en uzun 41,13 simülasyon saniyesi),
+1366/390 piksel ekranlarda iki takım, ekleme/silme, başlatma ve kayıttan
+yükleme; tarayıcı hatası yok. units.jpg görsel olarak incelendi.
+historical-equipment-balance: 288 farklı profil, 258 aynalı savaş geçti.
+Vite üretim derlemesi başarılı; mevcut büyük paket uyarısı sürüyor.
+Genel animasyon taraması geçti: 13.824 kare, iki takımda bekleme/yürüme/
+saldırı; boş veya kırpılmış çizim ve tarayıcı hatası yok.
+
+Çıktılar: artifacts/achaemenid-contingent/ altında checks.json,
+full-battles.json, units.jpg, equipment.log, elite-art.log, build.log.
+Motor sekmesine birlik kimlikleri ve doğrulama sonuçları bildirildi.
+Motor sekmesi ayrıca kendi koşul testinin 30 birlik / 60 doğal bitişli
+savaşla geçtiğini bildirdi; bu turda ilgili motor dosyalarına dokunulmadı.

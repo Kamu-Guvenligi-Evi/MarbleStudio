@@ -1,9 +1,10 @@
 // Portable, versioned score. AI selects cues; the player never invents AI decisions.
 import {MEME_SOUNDS,MEME_INTERVALS,memeSamples} from './meme-audio.js';
 import {RECORDED_SOUNDS,recordedSamples} from './recorded-sounds.js';
+import {goalCrowdSamples} from './goal-arena-audio.js';
 import {SOFT_SOUNDS,SOFT_INSTRUMENTS,SOFT_PHRASES,softSamples,createNoteClimb} from './soft-audio.js';
-export const VOICES = ['tick','glass','pluck','sparkle','thump','sweep','resolve',...Object.keys(SOFT_SOUNDS),...Object.keys(MEME_SOUNDS),...Object.keys(RECORDED_SOUNDS)];
-export const VOICE_NAMES = {tick:'Hafif temas',glass:'Cam tınısı',pluck:'Yumuşak nota',sparkle:'Parıltı',thump:'Bas vurgu',sweep:'Yükseliş',resolve:'Final akoru',...SOFT_SOUNDS,...MEME_SOUNDS,...Object.fromEntries(Object.entries(RECORDED_SOUNDS).map(([id,clip])=>[id,clip.name]))};
+export const VOICES = ['tick','glass','pluck','sparkle','thump','sweep','resolve','goal-horn',...Object.keys(SOFT_SOUNDS),...Object.keys(MEME_SOUNDS),...Object.keys(RECORDED_SOUNDS)];
+export const VOICE_NAMES = {tick:'Hafif temas',glass:'Cam tınısı',pluck:'Yumuşak nota',sparkle:'Parıltı',thump:'Bas vurgu',sweep:'Yükseliş',resolve:'Final akoru','goal-horn':'Mackolik goal alert',...SOFT_SOUNDS,...MEME_SOUNDS,...Object.fromEntries(Object.entries(RECORDED_SOUNDS).map(([id,clip])=>[id,clip.name]))};
 const object = properties => ({type:'object',additionalProperties:false,required:Object.keys(properties),properties});
 const num = (minimum,maximum,type='number') => ({type,minimum,maximum});
 export const PLAN_SCHEMA = object({
@@ -107,6 +108,8 @@ export function softPlan(trace,instrument='kalimba',phrase=''){
 
 // Both live playback and exported PCM use the same deterministic instrument.
 export function cueSamples(plan,cue,rate=48000) {
+  // Keep the saved voice ID compatible with existing projects.
+  if(cue.voice==='goal-horn')return goalCrowdSamples(cue.gain,rate);
   const soft=softSamples(cue.voice,d=>frequency(plan,d,1),cue.degree,cue.gain,rate);
   if(soft)return soft;
   const recorded=memeSamples(cue.voice,rate)??recordedSamples(cue.voice,rate);

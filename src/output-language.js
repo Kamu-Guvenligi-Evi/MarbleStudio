@@ -9,6 +9,9 @@ for (let a=65;a<=90;a++) for (let b=65;b<=90;b++) {
   if(tr!==code && en!==code) names.set(tr,en);
 }
 const translations = {
+  'Fransız İmparatorluğu':'French Empire','İspanyol İmparatorluğu':'Spanish Empire','Portekiz İmparatorluğu':'Portuguese Empire',
+  'Brezilya İmparatorluğu':'Empire of Brazil','Avusturya İmparatorluğu':'Austrian Empire','Japon İmparatorluğu':'Empire of Japan',
+  'Etiyopya İmparatorluğu':'Ethiopian Empire','Kore İmparatorluğu':'Korean Empire',
   'Üçgen':'Triangle','Kare':'Square','Altıgen':'Hexagon','Yıldız':'Star','Daire':'Circle','Pi Çarpışmaları':'Pi Collisions',
   'Lavanta':'Lavender','Mercan':'Coral','Buz':'Ice','Altın':'Gold','Nane':'Mint','Mavi':'Blue','Alev':'Flame',
   'İnci':'Pearl','Bakır':'Copper','Fıstık':'Pistachio','Orkide':'Orchid','Turkuaz':'Turquoise',

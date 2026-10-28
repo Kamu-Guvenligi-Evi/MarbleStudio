@@ -1,0 +1,46 @@
+Fil ordu kapasitesi — 15 Ekim 2026
+
+Kullanıcı isteği: Bir fil, ordu kurarken tek asker yerine birkaç askerlik yer kaplasın.
+Kural: timur (tarihî fil) ve me_mumakil 10 kapasite; diğer birlikler 1 kapasite.
+Elephant savaş rolünü paylaşan mitolojik devler bu kurala dahil değil.
+Can, zırh, hasar, hareket, komutan ve savaş motoru değiştirilmedi.
+
+Otomatik ordu kapasiteye göre ölçekleniyor, kalan yerler uygun maliyetli birliklerle
+dolduruluyor. Timur çekirdeği 24 gerçek birlik / 33 kapasite. 96 kapasite örneği:
+35 atlı okçu + 20 zırhlı mızraklı + 11 muhafız + 3 fil = 69 gerçek birlik.
+200 kapasite: 73 + 43 + 24 + 6 fil = 146 gerçek birlik. Komutan ayrıca eklenir.
+Menü gerçek adet, kapasite ve donanım puanını ayrı gösterir. Birlik kartları ve
+manuel ordu özeti fil maliyetini belirtir; kırmızı/mavi kaldırma ve geri alma korunur.
+Mevcut kayıtlar gerçek adet olarak yüklenir, askerler silinmez veya çoğaltılmaz.
+
+Değişen kaynaklar:
+src/historical-army-capacity.js (yeni), src/historical-army-presets.js (yalnız hesap),
+src/historical-army-preset-ui.js, src/crown-battle-alliance-ui.js,
+src/crown-battle-recruitment.js.
+Testler: historical-army-capacity.mjs (yeni), historical-army-presets.mjs,
+historical-army-history.mjs, historical-army-budget.mjs,
+historical-army-budget-browser.mjs, timur-ready-army-browser.mjs.
+Diğer sekmenin Harald preset satırı ve yeni antik birlikleri korundu.
+
+Doğrulama:
+PASS kapasite: minimum, tam dolum, 100000 kapasite, eski kayıtlar, gerçek fil doğumu.
+PASS 20 komutan: minimumdan 1000'e kapasite taraması; dört boyut ve iki takım.
+PASS crown-battle.mjs: klasik senaryolar, emirler, hücum, mızrak, deterministik savaş.
+PASS budget: 233 birlik fiyatı / 20 preset; 16 aynalanmış savaş doğal sona erdi.
+PASS bütçe tarayıcı: 1440/390/320px, geçersiz giriş, mod tercihi, kayıt ve taraf ayrımı.
+PASS tarihî kapsam tarayıcı: 20 komutanın dönem/kaynak paneli ve ordu oluşturması.
+PASS Timur tarayıcı 1440/390/320px: iki takımın kapasitesi/gerçek adedi, kayıt,
+manuel özet, kırmızı fil silme ve geri alma.
+PASS tüm preset tarayıcı 1440/390/320px ve tarihî ordu atölyesi: oluşturma ve kayıt.
+PASS Vite production build; mevcut 500 kB chunk uyarısı devam ediyor.
+
+Sınırlar:
+10 kapasite oyun kuralıdır, tarihî veya birebir güç eşdeğerliği değildir.
+Donanım bütçesi ayrı bir mod; seçilen kapasiteyle birlikte ikinci bir sınır koymaz.
+Manuel seçimde yeni bir sert üst sınır eklenmedi; kullanılan kapasite gösterilir.
+Eski kayıtların fil adedi otomatik azaltılmaz; yeni kural orduyu yeniden kurarken işler.
+Kapasite hesabı ordu oluşturulurken yapılır; savaşın her karesine ek işlem eklenmedi.
+16 savaş taktikler kapalı, 42/93 seed, iki taraf yer değişimli, Fatih/Alp Arslan rakipli:
+96 eşit kapasitede Timur 0/8; 2000 eşit donanım puanında Timur 3/8 kazandı.
+Bu küçük örneklem genel denge sonucu değildir; kapasite ve güç eşitliği ayrıdır.
+Ham rapor: artifacts/commander-balance/budget.json.

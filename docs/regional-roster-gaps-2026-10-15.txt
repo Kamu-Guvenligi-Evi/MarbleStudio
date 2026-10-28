@@ -1,0 +1,61 @@
+15 Ekim 2026 — bölgesel kadro eksikleri
+
+Oyuna eklenenler (katalog toplamı: 269; tarihî ve fantastik kayıtlar birlikte):
+- Traklar: thracian_rhomphaia_warrior — Trak rhomphaia piyadesi.
+- Aotearoa / Māori toplulukları: maori_patu_warrior — Māori patu paraoa savaşçısı.
+- Hawaiʻi şeflikleri: hawaiian_slinger — Hawaiili māʻa sapancısı.
+- İrlanda Gal lordlukları: irish_kern_archer — İrlanda kern okçusu.
+- Daklar: dacian_shield_spearman — Dak kalkanlı mızraklısı.
+
+Kaynaklar ve sınırları:
+1. Bulgaristan Ulusal Arkeoloji Enstitüsü/Müzesi, Heros Hephaistos (2005),
+   E. Paunov rhomphaia makalesi; İngilizce özet PDF sayfa 42.
+   https://naim.bg/issuesFiles/_HEROS_HEPHAISTOS.pdf
+   Kochan örneği 128 cm: 76 cm düz tek ağızlı bıçak, 52 cm kabza.
+   Tarihleme MÖ geç 4. – orta 3. yy. Buluntu bağlamı güvenli kazı değildir.
+   Dacian falx biçimindeki büyük kıvrık ağız kullanılmadı. İki el animasyonda
+   kabzayı takip eder. Miğfer ve tunik aynı mezar takımından gelmez.
+2. Pitt Rivers Museum, Cook-Voyage Collections, patu paraoa.
+   https://web.prm.ox.ac.uk/cookvoyages/index.php/en/the-objects/102-objects/new-zealand/337-1887-1-387.html
+   Banks bağlantılı balina kemiği kısa el silahı. Web sayfasında envanter
+   numarası tutarsız olduğundan oyun notu numarayı kesinleştirmez.
+   Met'in 19. yy yeşil taş mere örneği bu birliğin dönem veya malzeme kaynağı değildir.
+3. Bishop Museum, Hawaiʻi Alive, Mea Kaua.
+   https://www.hawaiialive.org/resource/mea-kaua
+   Kamakau üzerinden Kaeleku/Māui sapancı geleneği. Sayfadaki donanım fotoğrafı
+   modern rekonstrüksiyondur. Müze görseli oyuna kopyalanmadı; ayrı Canvas çizimi.
+4. University College Cork, CELT, John Dymmok: A Treatise of Ireland, yaklaşık 1600.
+   https://celt.ucc.ie/published/E590000-001.html
+   Kern donanımı arasında yay ve dikenli uçlu oklar belgelenir. Yabancı gözlemci
+   anlatısı; standart okçu üniforması veya bütün kernlerin okçu olduğu iddia edilmez.
+5. University of St Andrews, Trajan's Column: The Human Figure Types.
+   https://arts.st-andrews.ac.uk/trajans-column/the-project/the-human-figure-types/
+   Dak figürlerinde oval kalkan, kemerli tunik, pantolon, pelerin ve saplı silah
+   tutuşu. Kayıp silah parçaları nedeniyle mızrak rekonstrüksiyon olarak belirtilir.
+
+Bunlar donanım temelli savaşçı rolleridir; hepsine seçkin alay kimliği atfedilmez.
+Tüm çizimlerde giysi renkleri ve kaynakların belirlemediği ayrıntılar temsilidir.
+Her birimin kaynak bağlantısı, görsel açıklaması ve özel savaş değerleri katalogda.
+
+Dosyalar:
+src/regional-roster-gaps.js — beş kayıt ve çizim profilleri.
+src/regional-roster-gap-art.js — özgün başlık, gövde, silah ve kalkan çizimleri.
+src/historical-catalogue.js, historical-art-profiles.js, historical-warrior-art.js — bağlantılar.
+tests/regional-roster-gaps.mjs — hasar/mermi, tam savaş, animasyon ve menü kontrolleri.
+Motor, taktik, komutan ve yorgunluk/moral dosyaları değiştirilmedi.
+
+Doğrulanan sonuçlar:
+- 10 tam savaş sonuçlandı; en uzunu 25,87 simülasyon saniyesi.
+- Her iki takımda yakın dövüş/atış hasarı, taş ve ok mermi türleri doğrulandı.
+- 400 animasyon karesi: boş veya kesilmiş çizim yok; beş ayrı siluet.
+- PC ve telefon menülerinde ekle/sil, savaşa geçiş ve yeniden yükleme geçti.
+- Genel denge testi: 269 farklı profil, varsayılan profile düşen kayıt yok;
+  258 mevcut karşılaşma zaman aşımı olmadan tamamlandı.
+- Vite derlemesi geçti (6,69 sn); mevcut 500 kB paket boyutu uyarısı sürüyor.
+- Tüm katalog görsel taraması geçti: 12.912 karede boş/kesilmiş çizim veya
+  tarayıcı hatası yok. Tarihî çizimlerde aynı resim/siluet kopyası bulunmadı.
+
+Yerel çıktı: artifacts/regional-roster-gaps/units.jpg (22.284 bayt).
+Kontrol kayıtları aynı dizinde checks.json, full-battles.json, balance.log,
+all-art.log ve build.log. Dosya boyutu internet tüketimi ölçümü değildir.
+Diğer motor sekmesine kimlikler ve roller bildirildi.

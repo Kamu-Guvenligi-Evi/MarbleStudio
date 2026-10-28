@@ -1,0 +1,58 @@
+Orta Dünya takılma düzeltmesi — 15 Ekim 2026
+
+Kullanıcının bildirdiği koşul: savaş sırasında, Orta Dünya birlikleri.
+Kullanıcının gerçek asker sayısı ve açık Opera oturumunun FPS değeri bilinmiyor.
+
+Son uygulanan değişiklikler:
+- crown-battle-pc-scene.js: ortak temas gölgesini CPU canvas üzerinde üret.
+  CPU animasyon önbelleğine GPU canvas kopyalamak her yeni pozun piksel
+  okumasında pahalı senkronizasyon oluşturuyordu.
+- crown-battle-sprite-cache.js: kesirli görsel ölçeklerinde atlasın sağ/alt
+  sınırlarını tam piksele yuvarla. Kesirli genişlik/yükseklik sonraki atlas
+  konumlarını ve premultiplied pixel buffer adreslerini bozuyordu.
+- Ayrı küçük ara canvas denendi; bağımsız faydası kanıtlanmadı ve kaldırıldı.
+- Savaş kuralları, asker sayıları ve görsel varlıklar değiştirilmedi.
+
+Doğrulama:
+- Yeni atlas-pixels testi: düzeltme öncesi 10 geçersiz dikdörtgen ve
+  1.794.512 farklı renk bileşeni; son hâlinde ikisi de 0. PASS.
+- Sprite crop: 972 karşılaştırma PASS. Referans CPU canvas'a çevrildi;
+  GPU ve CPU küçültme filtreleri farklı. Yakınlaştırmasız fark <= 1/255;
+  kesirli yakınlaştırmada kenar farkı <= 12/255 ve ortalama < .02/255.
+- Sprite batch: 18 GPU/Canvas karşılaştırması, yön/ölüm/yakınlaştırma,
+  artımlı yükleme ve context kaybı fallback kontrolleri PASS; GL hatası 0.
+- Layers ve FPS/menu tarayıcı testleri PASS.
+- Vite build PASS: artifacts/battle-playability/lag-build.
+  Mevcut büyük chunk uyarısı var; dağıtım yapılmadı.
+
+Yerel Chrome headless, classic harita, iki eşit Orta Dünya ordusu,
+36 birlik türü, 180 kare (ilk 30 ölçüme dahil değil), CDP profiler açık.
+Arka plan bilgisayar yükü değişiyor; bunlar kullanıcının Opera FPS ölçümü değil.
+
+Son art arda soğuk önbellek karşılaştırması, 360 asker:
+                      önce       sonra
+Çizim ortanca         20.5 ms     12.7 ms
+Çizim p95             28.0 ms     22.0 ms
+Çizim en uzun         34.0 ms     24.5 ms
+Kare aralığı ortanca  21.0 ms     14.2 ms
+Kare aralığı p95      27.9 ms     27.9 ms
+Motor ortanca          0.8 ms      1.5 ms
+Bu senaryo normal açılış hazırlığını atlayıp yeni poz oluşturma yolunu zorlar.
+Profilde cache.get örnek sayısı 1872 -> 167. Çizim beklemesi belirgin azaldı.
+
+Hazırlanmış 1944 askerle ilk çiftte ortanca kare 27.9 -> 20.9 ms idi.
+Son hâl ve hemen ardından eski kodla tekrar ölçümde ikisi de 13.9 ms çıktı;
+çizim ortancası ikisinde de 10 ms, çizim p95 eski 13.7 / yeni 11.6 ms.
+Bu nedenle hazırlanmış savaşta sürekli FPS artışı veya sabit 60 FPS iddiası yok.
+
+Kanıtlar artifacts/battle-playability/ altında:
+middle-earth-cold-final-before.json, middle-earth-cold-final-after.json,
+middle-earth-warm-final.json, middle-earth-warm-baseline-repeat.json,
+ilgili testlerin *-lag.log dosyaları ve lag-build.log.
+Eski sprite cache yalnız karşılaştırma için sprite-cache-before-lag.js içinde.
+Testte LAG_BASELINE bu yerel yedeği kullanır; WARM hazırlığı açar,
+LOAD_COUNT toplam istenen asker sayısını belirler. --middle-earth türleri seçer.
+
+Devam gerekirse: kullanıcının aynı ordusuyla gerçek tarayıcıdaki kare sürelerini
+ölç; artık boundsOf ve SpriteLibrary.get poz hazırlığındaki başlıca maliyetler.
+Recruitment veya diğer sekmenin dosyalarına bu düzeltmede dokunulmadı.

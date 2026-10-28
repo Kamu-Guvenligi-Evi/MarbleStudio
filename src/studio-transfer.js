@@ -1,3 +1,8 @@
+import {normalizeEscapeSnapshot} from './escape-multiply-video.js';
+import {normalizeMergeSnapshot} from './merge-evolution.js';
+import {normalizeWavesSnapshot} from './bounce-waves.js';
+import {normalizeGoalSnapshot} from './goal-arena-video.js';
+import {normalizeMultiplierSnapshot} from './ball-multiplier-video.js';
 import {normalizeRpsSnapshot} from './rock-paper-scissors-video.js';
 import {normalizeDuel,DUEL_KEY} from './ball-duel.js';
 import {normalizePi,PI_KEY} from './pi-collisions.js';
@@ -7,6 +12,11 @@ import {isBreaker,normalizeBreaker} from './breaker-video.js';
 
 export function normalizeSnapshot(raw) {
   if(!raw||typeof raw!=='object')throw new Error('Studio çalışması geçersiz.');
+  if(raw.mode==='merge-evolution')return normalizeMergeSnapshot(raw);
+  if(raw.mode==='bounce-waves')return normalizeWavesSnapshot(raw);
+  if(raw.mode==='goal-arena')return normalizeGoalSnapshot(raw);
+  if(raw.mode==='escape-multiply')return normalizeEscapeSnapshot(raw);
+  if(raw.mode==='ball-multiplier')return normalizeMultiplierSnapshot(raw);
   if(raw.mode==='rock-paper-scissors')return normalizeRpsSnapshot(raw);
   if(raw.mode==='ball-duel')return normalizeDuel(raw);
   if(isBreaker(raw.mode))return normalizeBreaker(raw);

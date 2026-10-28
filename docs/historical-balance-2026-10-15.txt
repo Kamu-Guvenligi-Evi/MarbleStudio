@@ -1,0 +1,60 @@
+İnsan medeniyetleri güç dengesi — 15 Ekim 2026
+
+Kapsam ve bulgu
+85 tarihî birlik türü kontrol edildi. Mitoloji ve Orta Dünya hariçtir.
+İlk tarama 1020, hedefli eşleşmelerle önce/sonra karşılaştırma 1068'er savaş.
+Bazı donanımlı askerler hâlâ genel 120 can/%10 zırhlı kılıçlı veya
+180 can/%12 zırhlı süvari değerlerini kullanıyordu. Genel değerleri tüm
+kataloğa yaymak yerine mevcut donanımı belgelenen dokuz birlik ayarlandı.
+Dayanak: historical-elite-research-2026-10-14.json, mevcut katalog ve
+historical-art-profiles.js. Yeni tarihsel üstünlük iddiası/araştırma yapılmadı.
+
+Değişen dosyalar
+- src/historical-combat.js: yalnız TUNED_TYPES tablosuna dokuz kayıt.
+- tests/historical-balance.mjs: yeni gerçek motor karşılaşma testi.
+- docs/historical-balance-2026-10-15.txt: bu not.
+Ana sekmeyle önceden paylaşıldı; onun FPS karşılaştırması bitince statlar yazıldı.
+Katalog, görseller, menüler, motor, kimlikler ve kayıt şemaları değiştirilmedi.
+Kare başına yeni hesaplama eklenmedi. FPS artışı iddiası yok.
+
+Yeni değerler (can / hasar / zırh / hız / erişim / saldırı aralığı)
+german_armoured_foot: 160 / 31 / .28 / 21 / 23 / 1.25
+england_housecarl: 150 / 36 / .16 / 22 / 24 / 1.4
+gaelic_gallowglass: 155 / 37 / .16 / 21 / 25 / 1.5
+rome_praetorian: 140 / 22 / .22 / 22 / 16 / 1
+parthian_cataphract: 230 / 28 / .28 / 31 / 32 / 1.35; hücum 58
+sasanian_aswaran: 225 / 29 / .26 / 33 / 30 / 1.35; hücum 56
+templar_knight, hospitaller_knight, teutonic_knight:
+  215 / 28 / .22 / 36 / 27 / 1.3; hücum 56
+Üç tarikat aynı temsil edilen donanım sınıfında aynı oyun değerlerini kullanır.
+Diğer 76 türün, komutanların, Orta Dünya ve mitoloji türlerinin statları korundu.
+
+Tekrarlanabilir sonuçlar
+Gerçek Battle motoru, varsayılan dizilim/alan; 5, 39, 1066 tohumları,
+her eşleşmede iki takım yönü, 1/30 saniye adım, 240 saniye sınırı.
+1068 karşılaşmanın tamamı bitti; süre aşımı yok.
+- 12 Alman zırhlı/Housecarl/Gallowglass, 12 Romalıya karşı önceden 0/6,
+  şimdi 6/6 kazandı. Kalan toplam can oranları %53/%43/%48.
+  Üçü de 18 Romalıya ve eşit sayıdaki Varanglara hâlâ yeniliyor.
+- Praetorian/Romalı eşleşmesinde kazanan Romalıların ortalama kalan toplam
+  canı 477'den 140'a düştü; iki kalkanlı birliğin farkı daraldı.
+- Beş ağır süvari, genel süvari değerindeki Kapıkulu süvarilerine karşı
+  3/6 yerine 6/6 kazanıyor; kalan canları %33–43, kayıpsız üstünlük yok.
+  Daha ağır Avrupa şövalyelerine ve 18 Spartalıya hâlâ yeniliyorlar.
+- Tüm yaya menzilli türler eşit sayıdaki test süvarisine yeniliyor.
+- Tüm mızraklı türler 18'e 12 test süvarisini durduruyor ve gerçek
+  mızrak karşı saldırısı gerçekleşiyor. Atlı okçu testlerinde kilitlenme yok.
+- Bütün kılıçlı türler testte %50 fazla Romalıya yeniliyor.
+
+PASS kontrolleri
+historical-balance, historical-combat, historical-commanders-combat,
+crown-battle-behavior, crown-battle-charge, crown-battle,
+middle-earth-balance (348 savaş), middle-earth-combat ve Vite build.
+Raporlar: artifacts/historical-balance/before.json ve after.json.
+Günlükler: artifacts/historical-balance/check-*.log ve build.log.
+
+Sınırlar
+Seçili eşleşmeler ve üç tohum; her harita/karma ordu için kesin denge değil.
+Eşit adet, farklı silah/zırh sınıflarında eşit güç demek değildir.
+Puan/maliyet sistemi eklenmedi; komutanların eşit değer politikası korundu.
+Yeni değerler için açık oyunu yenileyip yeni savaş başlatmak gerekir.

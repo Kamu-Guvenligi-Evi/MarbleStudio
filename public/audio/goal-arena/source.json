@@ -1,0 +1,13 @@
+{
+  "title": "Mackolik goal sound",
+  "source": "https://arsiv.mackolik.com/Canli-Sonuclar",
+  "download": "https://im.mackolik.com/img5/goal_sound.mp3",
+  "license": "No reuse license stated by the source",
+  "copyright": "Rights remain with their respective holders.",
+  "description": "Goal audio from the official Mackolik live scores page. Its goal_sound_player element loads this MP3, and Mackolik.LiveScore.playSound plays that element.",
+  "sourceSha256": "e671a6e0fe64945b9813297d6818b69d891f80af5a5bfa0c20bb826e4c99624e",
+  "trimStart": 0,
+  "duration": 3.0040833333333334,
+  "rate": 24000,
+  "processing": "Complete clip at original speed; mono PCM16; peak normalized to 0.95; 3 ms attack and 10 ms release."
+}

@@ -1,0 +1,52 @@
+15 Ekim 2026 — Ordu taktikleri için canlı komutan şartı
+
+SORUN
+Selçuklu sahte ricat yönetmeni, uygun birlik sayısı bulunduğunda komutansız
+ordularda da devreye giriyordu. Mevcut komutanlar yalnız savaşan askerlerdi.
+
+DEĞİŞİKLİK
+src/historical-commander-tactics.js: activeCommander / commanderSupportsDoctrine.
+Katalogdaki açık doctrineIds eşlemesi kullanılır; ad, ırk veya menü grubundan
+taktik çıkarılmaz. Canlılık, kaldırılma, takım ve gerçek komutan türü doğrulanır.
+src/historical-tactics.js: başlangıçta TR_SELJUK yetkisi gerekir. Başlatan
+komutan ölür, kaldırılır veya değiştirilirse manevra biter. Karar aralarında da
+eski yönlendirme uygulanmaz; iki takım birbirinden bağımsızdır. Komutanın
+durma emri komuta yetkisini kaldırmaz. Askerlere verilen oyuncu emirleri önceliklidir.
+Normal asker davranışları, kayıt kimlikleri, temel değerler ve klasik mod korunur.
+Canlı komutan kontrolü iki takım için sabit maliyetlidir. Ordu kararları 2 Hz;
+komutan kaybı tam ordu/karşılıklı asker taraması başlatmaz.
+
+TESTLER (ilk komutan bağlantısı)
+tests/historical-commander-tactics.mjs PASS: eksik/yanlış/ölü komutan,
+iki takım x üç manevra aşaması x ölüm/kaldırma, aynı karede eski emrin reddi,
+diğer takımın etkilenmemesi, normal muharebe, komutanın durması, klasik mod.
+Gerçek ricat ortasında komutan ölümü ardından normal savaşın sonuçlanması PASS.
+tests/historical-tactics.mjs PASS: gerçek ricat, takip ve kanat hareketi,
+takip etmeyen düşman, dört oyuncu emri, alan/kuvvet kısıtları, deterministik
+tam savaş ve 4000 asker için doğrusal, saniyede iki karar kontrolü.
+Mevcut ricat testlerine gerekli Alp Arslan seçimi eklendi.
+tests/crown-battle-tactical-visuals.mjs ve browser.mjs PASS; tarayıcıda 480
+hücum karesi, kırpılma yok, gerçek ricat ve üç grup rotası doğrulandı.
+crown-battle, crown-battle-behavior, crown-battle-tactics, historical-combat,
+historical-commanders-combat testleri PASS. Davranış testi 2400 asker / 60
+adımı bu çalıştırmada 430 ms'de tamamladı; bu ekran FPS ölçümü değildir.
+Üretim derlemesi PASS: artifacts/commander-tactics-build.
+Günlük artifacts/commander-tactics-build.log; mevcut büyük paket uyarısı var.
+
+PARALEL TESLİMLER
+Lider kataloğu/types/art/menü sahibi ana oyun sekmesi.
+Yeni medeniyet taktik modülü sahibi araştırma/formasyon sekmesi. Bu modül
+henüz yazılmadı ve sonraki teslimde entegre edilecek. Şu anda yalnız TR_SELJUK
+ordu manevrası uygulanıyor. Diğer doctrineIds kayıtları hazırlıktır; yeni lider
+eklemek henüz uygulanmamış bir taktiği çalıştırmaz. Normal silah/rol davranışları
+komutansız da çalışır. Kullanıcının kültür ortaklığı isteği tarihî devlet
+aidiyetinden ayrı tutulur; aynı kültür tüm dönem taktiklerini otomatik açmaz.
+Yeni 19 liderli JSON ardından historical-commanders-combat,
+historical-commander-tactics ve historical-tactics tekrar PASS.
+Yeni 19 lider/art/menü ardından tactical-visuals-browser (480 kare, kırpılma 0,
+gerçek ricat, 3 rota) ve üretim derlemesi tekrar PASS.
+Katalog sahibi sekme 19 benzersiz siluet / 912 animasyon karesi PASS bildirdi.
+Son teslim bildirimi: 19 portre, kayıt/JSON, 320/390 px mobil, sekmeler arası
+eşitleme, sahada 19 liderin hareket/kaldırma/can kontrolü ve build PASS.
+Menü tarayıcı testinde harici istek 0. Bu internet baytı ölçümü değildir.
+Yeni portre/menü test raporu: docs/historical-commanders-expansion-2026-10-15.txt.

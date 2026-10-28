@@ -1,0 +1,3 @@
+﻿import fs from 'node:fs/promises';
+const cats=JSON.parse(await fs.readFile('artifacts/png-categories.json','utf8'));console.log(cats.filter(x=>/raspberry|plant|seed|gem|sapphire|amber|amethyst|topaz|guitar|violin|flute|drum|trumpet|saxophone/.test(x[0])).map(x=>x.join(' ')).join('\n'));
+const url='https://www.pngwing.com/en/free-png-dfftw';try{const r=await fetch(url,{signal:AbortSignal.timeout(12000)});const h=await r.text();await fs.writeFile('artifacts/seedling-page.html',h);console.log('seedling page',r.status,[...new Set(h.match(/https:\/\/[^"\s<>]+\.png/g)||[])].slice(0,3));}catch(e){console.log(e.message)}

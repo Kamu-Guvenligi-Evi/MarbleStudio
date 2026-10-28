@@ -8,7 +8,7 @@ repair=[]
 for file in files:
     if not imp.re.fullmatch(r'[a-z]+-[a-f0-9]{10}\.json',file.name):continue
     item=json.loads(file.read_text(encoding='utf-8'))
-    if item.get('generated') or item.get('provider')=='espn':continue
+    if item.get('generated') or item.get('curated') or item.get('provider')=='espn':continue
     if item['category']=='countries':
         item['source']=item['downloadUrl'];file.write_text(json.dumps(item,ensure_ascii=False),encoding='utf-8')
     if item['category']!='countries' and not item.get('brandSlug'):

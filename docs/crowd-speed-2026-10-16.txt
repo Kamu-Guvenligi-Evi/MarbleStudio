@@ -1,0 +1,79 @@
+Crowd playback follow-up, 2026-10-16
+Historical note; later changes and final results: crowd-fix-2026-10-16.txt.
+Workspace: C:/Users/yigit/Desktop/Products/MarbleStudio
+User: severe stutter with 3,000-10,000 soldiers, especially 4x.
+
+Production changes:
+- crown-battle-timing.js: large live armies request 20 updates per playback
+  second; simulation dt is 0.05/0.10/0.20 at 1x/2x/4x. Previously 4x
+  requested four times as many full-army updates. Keep 9ms RAF work budget,
+  bounded backlog, pending tick completion and responsive pause/commands.
+- crown-battle.js: sliced crowd updates accept up to 0.20s. Synchronous
+  replay/export and small armies retain their previous timestep limits.
+  This is a temporal precision tradeoff: accelerated combat is not claimed
+  to produce identical outcomes to the old 0.05s stepping. Swept arrow and
+  charge contact, melee wind-up and finite state are regression tested.
+- crown-battle-renderer.js: deferred atlas work cannot repeatedly rebuild
+  an unchanged crowd tick and restart GPU movement interpolation. Missing
+  poses retry on the next completed tick; paused preparation still works.
+  Slow completed ticks can interpolate up to 2s instead of freezing after
+  500ms. This smooths presentation; it does not increase simulation speed.
+- crown-battle-crowd-deployment.js: expanded classic armies >=2,500 start
+  in spaced ranks rather than overlapping strips. Cavalry wings and flank
+  preset retained; manual deployment, small and historical battles retained.
+- crown-battle-npc-routing.js: route history expiry accounts for 0.2s ticks
+  and floating-point drift so continuous 4x walking retains its detour state.
+- crown-battle.js: blocked troops obey their retarget timer; accelerated
+  retry remains possible without searching on every tick. Large autonomous
+  armies score 24 target candidates instead of 96; held units retain 96.
+  Reuse candidate distance and use sqrt for bounded-coordinate distances.
+  Target sampling changes AI choices; no claim of identical battle outcomes.
+  Physical projectile/charge contacts remain separate exhaustive queries.
+- Tried live Float64 coordinates in SpatialGrid: parity passed, no reliable
+  speed benefit; fully reverted that experiment.
+- Tried 24-unit physical grid cells: actual-app speed did not improve;
+  reverted both the grid and contact-query changes to the 40-unit grid.
+
+Local performance artifacts (not physical monitor FPS):
+- artifacts/crowd-speed/browser.log: paired old/new timestep stress run,
+  5s warmup + roughly 13s measurement, selected 4x, artificially overlapping
+  armies. 3,000 simulation rate 1.208 -> 3.585x; 10,000 0.215 -> 0.846x.
+- artifacts/crowd-speed/final-browser.log: final implementation, 3,000
+  3.711x, 10,000 0.724x. RAF median 13.9/13.8ms; p95 34.6/21.0ms.
+  Every soldier retained, no JS/GL errors. Host load varies; these are
+  indicative local measurements. The dense 10k case is STILL far below 4x.
+- Repeated actual-app 10k measurements (10s warmup + 20s sample) did NOT
+  reproduce the isolated 3.92x result in app-performance.json. Do not cite
+  that one-off run as proof of a fix. paired-target-budget.json: 1.01x,
+  alive 9,392 -> 6,929, median/p95 RAF 14/21ms, one frame >50ms, no JS errors.
+  Discarded fine-grid variant: 0.95x. The 10k actual-app bottleneck remains.
+- engine-paired.mjs: same 60 simulated ticks at 10k, ABBA before/after
+  target-budget experiment. Target checks 10,877,449 -> 3,217,780; warmed
+  run 2,664 -> 2,536ms. Modest CPU gain, not evidence of full 4x playback.
+  These are local headless benchmarks, not physical screen FPS. Shared
+  machine load and changing alive counts limit cross-run comparisons.
+- Final dense-scene validation artifacts/crowd-speed/verified/browser.json:
+  3,000 at selected 4x achieved 4.00x; 10,000 achieved 3.43x. RAF median/p95
+  6.9/7.1ms and 13.9/20.9ms respectively; no JS/GL errors, original total
+  soldier arrays retained. This synthetic setup has overlapping armies and
+  does not report alive counts. It is NOT interchangeable with actual-app
+  measurements of spaced deployment; do not claim every 10k battle is 3.43x.
+- Final actual-app confirmation paired-verified.json: 10,000 total, selected
+  4x, achieved 1.12x; alive 8,832 -> 5,875, completed simulation 14.4 -> 37.0s.
+  RAF median/p95 14/27.8ms, max 55.6ms, one >50ms frame, zero JS errors.
+  This confirms the remaining simulation bottleneck. User objective of
+  smooth real 4x large-army playback is NOT complete. Further work must
+  profile the actual spaced deployment, not optimize only the dense fixture.
+
+Final checks: artifacts/crowd-speed/checks.mjs PASS all eight suites:
+timing, crowd deployment, accelerated crowd contact, NPC routing, physical
+contact, sliced simulation, sliced render, real-app crowd controls. Vite
+production build PASS. crown-battle-frontline.mjs separately PASS held-rank
+spacing, cavalry targeting, explicit orders and projectile/death behavior.
+Individual logs in the artifact directory.
+New accelerated contact fixtures retain 2,500 total units with two alive
+participants to isolate arrow, melee and cavalry step behavior.
+
+No downloads, uploads, new dependencies or subagents. Original snapshots
+for this turn: artifacts/crowd-speed/crown-battle*.js. Shared checkout has
+unrelated ongoing work; no commits or broad resets performed.

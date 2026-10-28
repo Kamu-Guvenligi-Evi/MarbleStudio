@@ -1,0 +1,85 @@
+import assert from 'node:assert/strict';
+import {mkdir,readFile,stat} from 'node:fs/promises';
+import path from 'node:path';
+import {randomUUID} from 'node:crypto';
+import {chromium} from 'playwright';
+import {validateBatch,sourceRecipe} from '../src/factory-recipes.js';
+import {probeMultiplier} from '../src/ball-multiplier-video.js';
+import {produce} from '../scripts/factory-worker.mjs';
+
+const origin=process.env.TEST_FACTORY_ORIGIN??'http://127.0.0.1:5174';
+const source={mode:'ball-multiplier',project:{count:5,seed:42,limit:800,duration:5,sound:true,music:{track:'monkeys',volume:27},soundStyle:'melodic-piano',soundOverrides:{bounce:'bonk',wall:'off'}}};
+const options=validateBatch({source,strategy:'exact',resolution:720,fps:12,orientation:'portrait',audio:'all',channel:'Clipverseuni'});
+const recipe=sourceRecipe(options.source,42),analysis=probeMultiplier(recipe);
+const root=path.resolve('artifacts/multiplier-video-'+Date.now());await mkdir(root,{recursive:true});
+const browser=await chromium.launch({channel:'chrome',headless:true});
+try{
+  const page=await browser.newPage({viewport:{width:1280,height:900}}),errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.addInitScript(source=>{localStorage.setItem('marble-studio-ball-multiplier-v1',JSON.stringify(source.project));localStorage.setItem('marble-studio.channel','Clipverseuni');},source);
+  let queued;
+  await page.route('**/api/factory?*',route=>route.fulfill({json:{apiVersion:4,capabilities:['studio-workbench','multiplier-production'],jobs:[],summary:{done:0,pending:0},total:0}}));
+  await page.route('**/api/queue',route=>{queued=route.request().postDataJSON();return route.fulfill({json:{jobs:[]}});});
+  await page.goto(origin+'/ball-multiplier.html');
+  await page.waitForFunction(()=>window.multiplierStudio?.state().total>5);
+  await page.locator('#pause').click();
+  const paused=await page.evaluate(()=>window.multiplierStudio.state());
+  await page.waitForTimeout(150);
+  assert.deepEqual(await page.evaluate(()=>window.multiplierStudio.state()),paused);
+  assert.equal(await page.locator('#game-sound-style').inputValue(),'melodic-piano');
+  assert.equal(await page.locator('#limit').inputValue(),'2000','old default upgrades once');
+  assert.equal(await page.locator('#manual-sound-bounce').inputValue(),'bonk');
+  await page.locator('.manual-sounds summary').click();
+  await page.locator('#manual-sound-multiply').selectOption('coin');
+  assert.equal(await page.evaluate(()=>window.multiplierStudio.snapshot().soundOverrides.multiply),'coin');
+  await page.waitForFunction(()=>document.querySelector('#music-track').value==='monkeys');
+  await page.locator('#music-preview').click();
+  await page.waitForFunction(()=>!document.querySelector('#music-audio').paused);
+  await page.locator('#music-preview').click();
+  assert.ok(await page.locator('#music-audio').evaluate(p=>p.paused));
+  await page.locator('#studio-export').click();
+  await page.waitForFunction(()=>document.querySelector('#video-submit').textContent==='Videoyu hazırla');
+  assert.equal(await page.locator('#video-form [name=fps]').inputValue(),'144');
+  assert.equal(await page.locator('#video-form [name=audio]').inputValue(),'all');
+  assert.ok(await page.locator('#video-form [name=strategy] option[value=variations]').evaluate(option=>option.disabled));
+  await page.locator('#video-submit').click();
+  assert.equal(await page.locator('#channel-choice select').inputValue(),'Clipverseuni');
+  await page.locator('#channel-choice button[type=submit]').click();
+  await page.waitForFunction(()=>document.querySelector('#videos-dialog')?.open);
+  assert.equal(queued.source.project.music.track,'monkeys');assert.equal(queued.source.project.soundStyle,'melodic-piano');assert.equal(queued.source.mode,source.mode);assert.equal(queued.fps,144);assert.equal(queued.channel,'Clipverseuni');
+  assert.deepEqual(queued.source.project.soundOverrides,{wall:'off',bounce:'bonk',multiply:'coin'});
+  await page.goto(origin+'/ball-multiplier.html');
+  await page.setViewportSize({width:390,height:844});
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'mobile has no horizontal overflow');
+  await page.goto(origin+'/factory-render.html');await page.waitForFunction(()=>window.factoryRenderer);
+  const rendered=await page.evaluate(async({recipe,analysis})=>{
+    await window.factoryRenderer.begin({recipe,analysis,speed:1,intro:0,fps:12,width:720,height:1280,channel:'Clipverseuni',copy:{hook:'Test'}});
+    window.factoryRenderer.frame(Math.ceil((analysis.simulationSeconds+1)*12));
+    const effects=window.factoryRenderer.audio().effects;
+    return {result:window.factoryRenderer.result(),effects:effects.length,voices:effects.map(e=>e.cue?.voice)};
+  },{recipe,analysis});
+  assert.ok(rendered.result.complete);assert.equal(rendered.result.balls,analysis.balls);assert.ok(rendered.effects>0);
+  assert.ok(rendered.voices.includes('bonk'),'video uses the selected manual collision sound');
+  // A small local preview of the full default ending for visual review.
+  const dense=await page.evaluate(async()=>{
+    const {BallMultiplier}=await import('/src/ball-multiplier.js');
+    const {renderMultiplier}=await import('/src/ball-multiplier-renderer.js');
+    const game=new BallMultiplier();while(game.state==='running')game.step();
+    const canvas=document.querySelector('#render');canvas.width=432;canvas.height=768;
+    renderMultiplier(canvas.getContext('2d'),game,{channel:'Clipverseuni'});
+    return game.balls.length;
+  });
+  await page.setViewportSize({width:460,height:800});
+  await page.locator('#render').screenshot({path:path.join(root,'filled-preview.png')});
+  assert.deepEqual(errors,[]);console.log('PASS browser, pause, mobile, channel, export dialog, replay and sound:',dense,'balls');
+}finally{await browser.close();}
+
+const job={id:randomUUID(),mode:source.mode,ordinal:0,options};
+await produce(job,{root,origin,history:[],cancelled:()=>false,update:async patch=>Object.assign(job,patch)});
+const metadata=JSON.parse(await readFile(path.join(root,job.id,'metadata.json'),'utf8'));
+assert.ok(metadata.analysis.complete);assert.equal(metadata.analysis.balls,analysis.balls);
+assert.ok(metadata.musicCredits.some(credit=>credit.includes('Monkeys Spinning Monkeys')),'export includes selected music and attribution');
+assert.equal(metadata.video.fps,12);assert.equal(metadata.video.speed,1);
+assert.equal(metadata.video.width,720);assert.equal(metadata.video.height,1280);
+for(const file of ['video.mp4','cover.jpg','metadata.json','upload.txt'])assert.ok((await stat(path.join(root,job.id,file))).size>0);
+console.log('PASS actual MP4 encode/decode:',metadata.video.duration+'s; artifacts:',root);

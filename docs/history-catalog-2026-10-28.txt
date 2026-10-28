@@ -1,0 +1,30 @@
+Tarihi kişiler kütüphanesi — 28 Ekim 2026
+
+16 mevcut kişi korundu, 80 kişi eklendi; toplam 96.
+Eksikler: Osmanlı/Selçuklu ve Anadolu düşünce tarihi, Asya hükümdarları,
+antik düşünürler, kadın bilim insanları, insan hakları, edebiyat ve müzik.
+Bu alanlar genişletildi; liste bütün tarihî kişilerin eksiksiz envanteri değildir.
+
+Yeni kayıtların kişi kimliği Wikipedia makalesiyle, görsel bilgisi Commons
+dosya açıklamasıyla eşleştirildi. İmza görseli döndüren Mimar Sinan ve
+uygunsuz minyatür döndüren Hacı Bektaş Veli için anıt fotoğrafları seçildi:
+https://commons.wikimedia.org/wiki/File:Mimar_Sinan_monument_in_2024_6024.jpg
+https://commons.wikimedia.org/wiki/File:Hacibektas-01-mihalorel.jpg
+Her yeni kayıtta identitySource, source, credit, license, licenseUrl var.
+Eski dönem görsellerinin önemli bölümü temsili resim veya heykeldir;
+sanatsal tasvir notu eklendi. Timur rekonstrüksiyon, Selahaddin sikke,
+Aşoka Sanchi kabartması olarak açıkça belirtilir. Tarihsel yüz kesinliği
+iddia edilmez. Görseller 330px küçük yerel dosyalardır.
+
+Arama Türkçe adın yanı sıra İngilizce ad, meslek ve bölgeyi tarar.
+Eski 16 kişinin de meslek/bölge bilgileri tamamlandı.
+24 kayıtta yüz odaklı kadraj metadata ile ayarlandı; kaynak dosya değişmez.
+Kaynak görseller yeniden dağıtılırken dosyalardaki lisanslar korunmalıdır.
+
+Yenileme: scripts/expand-history.mjs --write, ardından scripts/frame-history.mjs.
+Kaynak önbelleği: artifacts/history-source-metadata.json.
+Yeni curated kayıtlar genel importer tarafından korunur.
+Kontrol: tests/history-catalog-browser.mjs — 96 dosya/kimlik, lisans,
+meslek araması, seçim, kadro, kalıcılık ve mobil görünüm başarılı;
+tarayıcı testi boyunca dış görsel isteği yok.
+İletişim dökümleri veya büyük kaynak dosyalar indirilmedi.

@@ -1,0 +1,59 @@
+NPC takılma ve Turan kovalamacası — 15 Ekim 2026
+
+Bulgu
+- Selçuklu süvarisi, dur emri verilmiş 17 dost atlı okçunun oluşturduğu hattın
+  arkasında hedefe yaklaşık 196 birim uzakta 30 saniye boyunca kalabiliyordu.
+  Yerel yön düzeltmesi hattın ucuna ulaşamıyordu.
+- Eski ilerleme ölçüsü asker hareketini izliyordu; kaçan hedefle mesafe aynı
+  kaldığında sonuçsuz kovalamayı ayırt etmiyordu.
+
+Değişiklik
+- src/crown-battle-npc-routing.js: hedefe yaklaşmayı ölçer. Üç saniye sonuçsuz
+  kovalamadan sonra eski hedefe geçici seçim cezası uygular; alternatif yoksa
+  takibi sürdürür. Hedef değişiminde cezanın korunması ileri geri seçimi önler.
+- Gerçekten ilerleyemeyen asker, duran/yavaş dostların çevresinde kısa bir yol
+  hesaplar. Oyuncunun dur emrindeki askerlerini yerinden oynatmaz; ışınlanmaz.
+  Erken dolanma Turan safını bozduğundan eşik 2.2 saniye ilerleyememe olarak
+  doğrulandı. Hareketli birliklere normal yönlendirme devam eder.
+- src/crown-battle.js: mevcut hedef seçme aralığına izleme, hedef puanına ceza,
+  yürüyüşe yerel rota bağlantısı; durağanlık ölçüsü zaman adımına bağlandı.
+- Hareket emri mevcut formasyon rotasını kullanır. Açık saldırı hedefi otomatik
+  değiştirilmez; dur emri korunur. Komutan/kale navigasyonu mevcut yollarında.
+- Birim kimliği, ordu kaydı, güç dengesi, taktik tanımı veya görsel değiştirilmedi.
+  Aynı dosyada diğer sekmenin fizik temas/ayırma değişiklikleri de bulunuyor.
+
+Performans sınırı
+- Mevcut mekânsal indeks kullanılır: yerel sorgu 110 birim, en çok 32 komşu.
+- Oyuncu formasyon yoluyla paylaşılan kare başına en fazla bir rota bütçesi;
+  yeniden deneme aralığı en az 1.5 saniye, yol önbelleği 4 saniye.
+- Yeni tüm-ordu çift karşılaştırması eklenmedi.
+
+Tekrarlanabilir doğrulama (yerel Node v24.21.0, birleşik stabil kaynak)
+- tests/crown-battle-npc-routing.mjs PASS: iki taraf, 30/60 Hz, dört sabit dost
+  hat senaryosu. Hattın ucundan dolaşıp 11.33–11.50 saniyede hedefe erişim;
+  her senaryoda tek rota hesabı. Dur emrindeki hat yerinde kalır.
+  Sonuçsuz kovalama 3.67 saniyede erişilebilir alternatife geçer, bir hedef
+  değişimi yapar. Açık saldırıda hedef değiştirmez. Tek hedef, hareket/dur PASS.
+- tests/historical-turan-pursuit.mjs PASS: iki taraf, iki tohum (42/93),
+  24/96 askerlik Selçuklu orduları; karşıda saf veya karma Kıpçak atlı okçuları.
+  16/16 savaş doğal elemeyle 19.87–72.07 saniyede biter; süreyle bitiş yok.
+  İlk hasardan sonraki hasarsız aralıkların en büyüğü 1.77 saniye.
+- historical-turan-horse-archers PASS: 12 karma Turan karşılaşması; hareketli
+  atış, gerçek ricat, hücum koridorları, sınırlı taktik süresi, oyuncu/komutan.
+- historical-turan-charge PASS: 6 ayna karşılaşması ve dar alan geri dönüşü.
+- crown-battle, crown-battle-behavior, crown-battle-formation-movement,
+  historical-tactics, historical-tactics-discipline, historical-tactics-contact,
+  historical-multi-army-tactics, historical-commander-formations PASS.
+- crown-battle-formations ve historical-commander-targeting PASS.
+- Davranış testi: sıkışık 48'e 48 yakın dövüş 25.2 saniyede bitti.
+  2400 asker/60 simülasyon adımı 445 ms; 526810 hedef adayı, 286619 ayırma
+  çifti. Bu ekransız motor ölçümüdür; tarayıcı FPS ölçümü değildir.
+- Test günlükleri artifacts/npc-routing altında. Aynı klasördeki baseline ve
+  route/pursuit engine kopyaları geçici teşhis anlık görüntüleridir; üretimde
+  kullanılmaz ve nihai test kaynağı değildir.
+
+Sınırlar
+- Yerel yol bulma, tamamen kapalı dost çemberi veya çok geniş sabit duvar için
+  küresel yol garantisi vermez. Bilerek verilen imkânsız saldırı emri değiştirilmez.
+- Bu görevde doğrulama ekransız simülasyonla yapıldı; görsel akıcılık için yeni
+  tarayıcı/FPS iddiası yok. Ana sekmenin büyük ittifak testleri ayrıca raporlanır.

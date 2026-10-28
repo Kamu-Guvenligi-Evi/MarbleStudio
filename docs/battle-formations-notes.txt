@@ -1,0 +1,59 @@
+2026-10-15 — Formasyon genişletmesi ve hareket düzeltmesi
+
+Toplam 10 diziliş: Hat, Sık düzen, Kama, Seyrek düzen; yeni Yürüyüş kolu,
+Hilal, İçi boş kare, Çember, Sol kademeli hat ve Sağ kademeli hat.
+Menüde seçilen düzenin 16 askerlik SVG şeması, ön cephe oku ve açıklaması var.
+Hilal/kare/çember bir yerleştirme düzenidir; otomatik kuşatma, dışa dönük
+savunma veya hayalî savaş bonusu vermez. Tarihî taktik motoru ayrı çalışır.
+
+Savaş sonrası formasyon yürüyüşü: açık alanda duran müttefiklerin çevresinden
+önbellekli yerel rota. En fazla 32 yerel komşu, kare başına bir rota araması,
+asker başına en erken 1 saniyede yeniden planlama. Tamamen kapalı kalan
+askere yakın müttefikler çarpışma çözümünde yer açar; bu küçük yer değiştirmeler
+oluşturabilir. Kale rotası ve otomatik savaş/taktik yürümesi değiştirilmedi.
+Varış toleransı .75 dünya birimi; dolaşmalı hareket testi 30 saniye sınırında.
+Eski 15 saniyelik sınır genişletildi; önceki motor 30 saniyede de takılıyordu.
+
+Doğrulama (2026-10-15):
+- 1050 geometri senaryosu; 30 güvenli kapasite reddi PASS.
+- 80 yerleştirme/yön/takım kombinasyonu PASS.
+- 80 hareket/yön/takım kombinasyonu PASS; en uzun 26.7 saniye; ışınlanma yok.
+- Yeni şekil seçimleri dahil 1366/390 formasyon browser PASS.
+- crown-battle, behavior, tactics, historical-tactics, historical-combat PASS.
+- Vite build PASS (6.58s; mevcut büyük paket uyarısı).
+- Diğer sekme boyut slider/+/− ve uygulama kontrolünü ekledi; kendi
+  160 boyut senaryosu ve 1366/390 resize/undo/reload/movement testleri PASS bildirdi.
+
+Yeni dosyalar: src/crown-battle-formation-path.js,
+tests/crown-battle-formation-layouts.mjs, tests/crown-battle-formation-movement.mjs.
+
+2026-10-14 — Önceki giriş ve formasyon notları (tarihî kayıt)
+
+Normal giriş: http://127.0.0.1:5173/crown-battle.html
+Bu giriş artık varsayılan olarak medeniyetli oyunu açar. Klasik mod açıkça
+?mode=classic ile açılır. Mevcut tarihî ordu kayıtları korunur.
+
+Birlik seç > Hat / Sık düzen / Kama / Seyrek düzen > yön seç >
+Sahaya yerleştir > haritaya tıkla. Esc yerleştirmeyi iptal eder.
+Savaş öncesi doğrudan yerleştirir; başladıktan sonra aynı araç yürüyüş
+emri verir. Telefonun iki parmak kamera hareketi yerleştirmeyi iptal eder.
+Harita sınırları ve fil dahil seçilen birliklerin boyutları hesaba katılır.
+Alana sığmayan formasyon reddedilir. Seçilmeyen birliklerle çakışma kontrolü yok.
+
+Dosyalar: crown-battle-formations.js, crown-battle-formation-ui.js,
+crown-battle-formations.css; motor, uygulama ve renderer entegrasyonu.
+Diğer sekmenin kırmızı/mavi takım seçim kontrolleri birlikte doğrulandı.
+
+Doğrulama:
+- Vite build PASS (6.83s; mevcut büyük chunk uyarısı).
+- Formasyon motor testi PASS: 32 düzen/yön/takım kombinasyonu, sınırlar,
+  karışık birimler, geçersiz yerleşim, savaş sonrası emir ve varış.
+- Formasyon browser 1366/390 PASS: varsayılan medeniyetli giriş,
+  boş ordular, iki takım, önizleme, Esc, telefon pinch, yürüyüş emri.
+- crown-battle, behavior, impact, removal, historical-combat,
+  historical-commanders-combat motor testleri PASS.
+- Removal browser 1366/390 PASS. Lider seçimi öncesi açılır paneli açan
+  kullanıcı adımı teste eklendi.
+- Kamera sekmesinin raporu: hit-test 168 PASS, teams ve camera
+  1366/390 PASS; layout 1366/1920/900/390/320/844 ve touch PASS.
+- Eski klasik senaryo testlerinin URL'leri açık ?mode=classic kullanır.

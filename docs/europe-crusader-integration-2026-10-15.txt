@@ -1,0 +1,70 @@
+Taç Muharebesi — 15 Ekim 2026, görsel ve birlik entegrasyonu
+
+Kapsam: 9 yeni kayıt + arşivden yeniden düzenlenerek etkinleştirilen
+thebes_sacred_band = 10 oynanabilir ekleme. Mevcut Türk süvarilerinin
+güç dengesi kullanıcının son talebiyle diğer sekmeye bırakıldı.
+
+Eklenenler ve menüleri:
+Almanlar / Alman Toprakları: german_pavise_crossbowman, german_halberdier.
+İngilizler / İngiltere Krallığı: english_billman, english_dismounted_man_at_arms.
+Yunanlar / Rodos: greek_rhodian_slinger.
+Yunanlar / Girit Şehir Devletleri: greek_cretan_archer.
+Yunanlar / Thebai: thebes_sacred_band (aynı kimlikle geri getirildi, kopya yok).
+Haçlı Orduları / Tapınak Tarikatı: templar_sergeant.
+Haçlı Orduları / Haçlı Seferi Orduları: crusader_crossbowman.
+Türkler / Kıpçak / Kuman: kipchak_lancer.
+Mevcut Tapınak ve Hospitalier şövalyeleri Haçlı Orduları menüsüne taşındı;
+bu iki eski birlik yeni ekleme sayısına dahil değildir. Tötonlar Almanlarda.
+Güncel aile sayıları: Alman 7, İngiliz 5, Yunan/Bizans 8, Haçlı 4, Türk 17.
+
+Dosyalar: src/europe-crusader-units.js, src/europe-crusader-art.js.
+Katalog, profil, ortak çizim yönlendiricisi ve kültür menüsüne bağlandı.
+Pavis, teber, bill, pollaxe, sapan, iki arbalet biçimi ve başlıklar farklı
+çizilir. Aynı çizimin yalnız rengini değiştiren yeni birimler yapılmadı.
+Kıpçak mızraklısı mevcut maskeli baş donanımını kullanır; uzun mızrak,
+zincir zırh, yuvarlak kalkan ve atlı rolüyle kılıçlı varyanttan ayrılır.
+Sapan tanesi crown-battle-projectiles.js içinde ayrı görünür; ok çizilmez.
+Ana crown-battle.js ve crown-battle-renderer.js bu çalışmada değiştirilmedi.
+
+İncelenen fotoğraflar:
+Wallace A952 Alman teberi: uzun uç, eğik balta ağzı, arka kanca.
+https://wallacelive.wallacecollection.org/eMP/eMuseumPlus?module=collection&objectId=61449&service=ExternalInterface
+Met 21940 arbalet mekanizması (1460); süslü av silahı bütün piyade
+donanımının belgesi olarak sunulmadı.
+https://www.metmuseum.org/art/collection/search/21940
+Met 08.2.4 pilos: konik gövde ve alt bant. Thebai'ye özgü eser iddiası yok.
+https://www.metmuseum.org/art/collection/search/248012
+Fotoğraflar artifacts/europe-crusaders altında. Wallace fotoğrafı yalnız
+yerel inceleme referansı; oyunun dağıtılan kaynak görsellerine eklenmedi.
+Met'in kamu malı iki fotoğrafı public/warrior-references içine kopyalandı
+ve Alman arbaletçi / Thebai kartlarının Tarihî kaynaklar görünümüne bağlandı.
+Toplam yerel fotoğraf boyutu 77777 bayt; ölçülmüş internet tüketimi değildir.
+Kıpçak mızraklısına mevcut elite-kipchak-mask.jpg ve Jim Kelly CC BY 2.0
+atıfları bağlandı. Lipovets miğferinin tarihleme/kültür atfı tartışmalı;
+yalnız baş donanımına referans. Bütün Kıpçakların maskeli olduğu söylenmez.
+
+Diğer kayıtların donanımı kaynak metinlerinden yorumlandı; bu partide
+her birinin ayrı bütün savaşçı fotoğrafı bulunduğu iddia edilmemeli.
+Royal Armouries pavis ve pollaxe kayıtları metinle incelendi, fotoğrafları
+incelenmiş sayılmamalı. Kıyafet renkleri kesin üniforma olarak sunulmuyor.
+Elit olmayan donanım görevleri (bill, arbaletçi vb.) elit alay diye yazılmadı.
+Kaynaklar ve belirsizlikler birlik kayıtlarının sources/visualNote alanında.
+
+Doğrulama:
+tests/europe-crusader.mjs: 10 kaydın tekilliği, ülke üyeliği, canlı savaşta
+hasar ve doğru mermi türü; 800 animasyon karesi, 10 farklı siluet, taşma yok.
+Ülke menülerinden seçim, üç referans resminin gerçekten açılması, savaş
+başlatma ve sayfa yenilemesinden sonra 10 kişilik ordunun korunması geçti.
+Tarayıcı JavaScript hatası yok. Sonuç: artifacts/europe-crusaders/checks.json.
+tests/crown-battle-projectiles.mjs: mevcut balistik, çarpışma, ıskalama,
+duvar, yerde kalma/silinme ve sınırlı efekt testleri geçti.
+Vite build başarılı, 12.80 s. Mevcut 500 kB paket boyutu uyarısı sürüyor.
+Önizleme: artifacts/europe-crusaders/ten-warriors.jpg, 53865 bayt.
+
+Diğer sekme için denge notu (değişiklik uygulanmadı):
+tests/turkic-cavalry-balance.mjs ve artifacts/europe-crusaders/cavalry-before.json
+ön inceleme için oluşturuldu. Dört mevcut Türk ağır süvari türü, eşit 12
+kişilik Tapınak şövalyesine karşı 6'şar denemenin hiçbirini kazanamadı;
+12 akıncıya karşı 6'şar galibiyet, 18 Spartalıya karşı 0/6. Bunlar sınırlı
+senaryolar; tek başına genel denge sonucu değildir. Kullanıcı denge işini
+diğer sekmeye devrettiği için burada mevcut süvari değerleri değiştirilmedi.

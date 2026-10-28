@@ -18,7 +18,12 @@ async function renderCatalogImage(item) {
   // Fill the marble with a sharp square crop; the renderer clips it to a circle.
   const side=Math.min(img.naturalWidth,img.naturalHeight);
   const offsetY=(img.naturalHeight-side)*(item.fit==='contain'?.5:.22);
-  if(item.fit==='contain') {
+  if(item.fit==='flag') {
+    // Inscribe the entire flag in the circular marble, including its corners.
+    const scale=size*.94/Math.hypot(img.naturalWidth,img.naturalHeight);
+    const w=img.naturalWidth*scale,h=img.naturalHeight*scale;
+    ctx.drawImage(img,(size-w)/2,(size-h)/2,w,h);
+  }else if(item.fit==='contain') {
     // Trim transparent asset margins before cropping the visible artwork.
     const probe=document.createElement('canvas');probe.width=probe.height=128;
     const scan=probe.getContext('2d',{willReadFrequently:true});scan.drawImage(img,0,0,128,128);
@@ -61,7 +66,7 @@ export function createImageCatalog({getImages,getNames,getCount,onRosterChange,o
   const status=message=>{$('catalog-status').textContent=message;};
   const filtered=()=>{
     const query=fold($('catalog-search').value.trim());
-    return (catalog?.items??[]).filter(item=>(category==='all'||item.category===category)&&(!query||fold(item.name+' '+(item.localName??'')).includes(query)));
+    return (catalog?.items??[]).filter(item=>(category==='all'||item.category===category)&&(!query||fold(item.name+' '+(item.localName??'')+' '+(item.keywords??'')).includes(query)));
   };
   function renderRoster() {
     $('catalog-roster').replaceChildren();$('catalog-target').replaceChildren();
@@ -113,7 +118,9 @@ export function createImageCatalog({getImages,getNames,getCount,onRosterChange,o
       img.onerror=()=>{button.disabled=true;img.alt='Görsel yüklenemedi';};
       const label=document.createElement('span');label.textContent=item.localName?`${item.localName} · ${item.name}`:item.name;button.append(img,label);button.onclick=()=>apply([item],false);
       const source=document.createElement('a');source.href=item.source;source.target='_blank';source.rel='noopener';source.textContent='Kaynak ↗';source.title=`${item.credit} · ${item.license}`;source.setAttribute('aria-label',`${item.name}: kaynak ve kullanım bilgisi`);
-      card.append(button,source);$('catalog-grid').append(card);
+      card.append(button);
+      if(item.historicalNote){const note=document.createElement('small');note.className='catalog-history';note.textContent=item.historicalNote;card.append(note);}
+      card.append(source);$('catalog-grid').append(card);
     }
   }
   async function apply(items,bulk) {
@@ -124,7 +131,7 @@ export function createImageCatalog({getImages,getNames,getCount,onRosterChange,o
       const sources=await Promise.all(items.map(prepareCatalogImage));
       if(!dialog.open||original!==getImages()||namesOriginal!==getNames())throw new Error('Seçim değişti. Görselleri yeniden seç.');
       const images=[...original],names=[...namesOriginal];
-      sources.forEach((src,i)=>{const target=bulk?i:index;images[target]=src;names[target]=englishRosterName(items[i].name);});
+      sources.forEach((src,i)=>{const target=bulk?i:index;images[target]=src;names[target]=englishRosterName(items[i].englishName??items[i].name);});
       onRosterChange(images,names);onApplied();
       if(!bulk)selected=(selected+1)%getCount();
       status(bulk?`${sources.length} topa görsel ve isim eklendi. Kadron hazır.`:`${items[0].name}, ${index+1}. topa eklendi. Sırada ${selected+1}. top var.`);

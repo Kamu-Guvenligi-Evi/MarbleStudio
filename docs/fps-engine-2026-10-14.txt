@@ -1,0 +1,42 @@
+14 Ekim 2026 — savaş motoru FPS optimizasyonu
+
+Değişiklikler: src/crown-battle.js
+- Yakın birlik aramasında iç içe Map yerine dolu alan sınırlarına göre düz
+  hücre dizisi kullanılır; negatif koordinatlar ve boş ordu desteklenir.
+- Kalabalık hücrelerin aynı deterministik örnekleme indisleri önbelleklenir.
+- Aramada satırın uzaklığı tekrar hesaplanmaz; daire dışı satırlar atlanır.
+- Temas etmeyen asker çiftlerinde pahalı Math.hypot çağrısı atlanır.
+  Temas sınırında tolerans ve eski hesap korunur.
+- Hız sönümleme katsayısı asker başına değil, adım başına hesaplanır.
+Asker sayısı, saldırı kuralları, aday sırası ve simülasyon hızı azaltılmadı.
+
+Tekrarlanabilir doğrulama:
+tools/node-runtime/node-v24.21.0-win-x64/node.exe tests/crown-battle-engine-performance.mjs src/crown-battle.js artifacts/crown-battle/engine-fps-final.json artifacts/crown-battle/engine-before-fps-2026-10-14.js
+
+PASS: eski/yeni yakınlık sorgularında hücre sınırları, negatif konumlar,
+boş/ölü/hareket eden birlikler, örnekleme sırası ve sonuç sınırları aynı.
+PASS: 320, 2000 normal; 1800, 4000 sıkışık asker sahneleri. Her sahne için
+90 adım, iki tekrar, dönüşümlü eski/yeni sıra; her 15 adımda tüm savaş
+durumunun SHA256 özeti birebir aynı. İki sürüm aynı güncel bağımlılıkları kullanır.
+
+Son ölçüm (iki tekrarın medyanlarının ortalaması; ms/simülasyon adımı):
+320 normal:   eski 1.174  -> yeni 0.817  (~%30 azalma)
+2000 normal:  eski 25.889 -> yeni 17.438 (~%33 azalma)
+1800 sıkışık: eski 49.085 -> yeni 35.712 (~%27 azalma)
+4000 sıkışık: eski 112.458 -> yeni 84.069 (~%25 azalma)
+Ham sonuç: artifacts/crown-battle/engine-fps-final.json
+Özellikle 2000 asker tekrarlarında sistem yükü/JIT etkisi yüksek; mutlak
+süreler sabit değildir. Bunlar Node CPU ölçümleridir, tarayıcı FPS ölçümü değildir.
+
+Ek PASS: crown-battle-behavior, crown-battle-formations, crown-battle-removal,
+crown-battle-impact, historical-combat, crown-battle testleri (tests/*.mjs).
+Kısa test günlükleri: artifacts/crown-battle/fps-test-*.log
+Üretim derlemesi PASS: artifacts/crown-battle/build-fps-final.log, 6.02s.
+Mevcut 500 kB üzeri paket uyarısı devam ediyor.
+
+Diğer sekmenin çizim/atlas/adaptif DPR değişiklikleri ve tarayıcı sonuçları:
+docs/battle-performance-notes.txt
+Oradaki ağır tarayıcı testinde uzun RAF duraklamaları hâlâ görüldü; tamamen
+takılmasız oyun veya sabit 60 FPS doğrulanmadı. 4000 askerin sıkışık temasında
+CPU süresi hâlâ yüksek. Başlangıç ve adaptif tarayıcı koşuları farklı örnek
+sayılarına/profil ayarlarına sahip olduğundan FPS yüzdesi karşılaştırılmaz.

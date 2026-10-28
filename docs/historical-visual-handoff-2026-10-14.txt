@@ -1,0 +1,147 @@
+TAÇ MUHAREBESİ — GÖRSEL VE SEKME TESLİMİ — 14 EKİM 2026
+
+Ortak teslim: src/historical-unit-visuals.json
+Yerel dosyalar: public/warrior-references/elite-*
+Araştırma kaynağı: docs/historical-elite-research-2026-10-14.json
+
+İŞ BÖLÜMÜ
+Araştırma sekmesi birlik, görsel, kaynak, lisans ve belirsizlik notlarını hazırlar.
+Oyun sekmesi ortak JSON'u historical-catalogue.js üzerinden okur; kart, komuta
+düğmesi ve ordu listesine aktarır. Davranış sekmesi savaş davranışını düzenler.
+Araştırma sekmesi oyun arayüzü, kayıt kimlikleri ve savaş dosyalarını değiştirmez.
+
+BU TESLİM
+Güncel manifest: 19 birlik kaydı, 14 farklı ana görsel.
+Katalog genelinde 44 birliğin 32'sinde görsel var; 12'sinde eksik.
+İlhanlı ve Moğol Keşik kayıtları aynı genel dönem çizimini kullanır.
+Silahdar, sağ/sol Ulufeciler ve sağ/sol Garipler aynı genel Knötel sipahi
+çizimini paylaşır. Bu beş kayıt birliğe özgü doğrulanmış tasvir değildir;
+visualMatch=period_reference ve her kartta açıklama vardır.
+Praetorianlar için Leutemann'ın 1880 tarihli tarih resmi eklendi.
+Bu sayılar benzersiz birlik tasvirlerinin tamamlandığı anlamına gelmez.
+
+Güncel eksikler: abbasid_ghulam, ghaznavid_guard, ghaznavid_daylami,
+seljuk_hassa, mamluk_burji, parthian_cataphract, sasanian_aswaran,
+macedon_companions, sparta_hippeis, thebes_sacred_band,
+seleucid_silver_shields, rome_equites.
+
+Komutanlar ayrı dosyadadır: src/historical-commanders.json (9 kayıt).
+Teslim notu: docs/historical-commanders-handoff-2026-10-14.txt.
+Araştırma doğrulaması: 19 manifest kimliği katalog ile eşleşiyor;
+görseller mevcut, kaynak/lisans/not alanları dolu, UTF-8 kontrolü geçti.
+Aşağıdaki eski parti testleri o teslimlerin sayılarıyla korunmuştur.
+
+Tarihsel çizimler ve modern canlandırmalar kart notlarında ayrılmıştır.
+Sipahi çizimi Kapıkulu Sipah bölüğünü kesin belgelemiyor; Diez atlıları da
+Keşik muhafızlarına özel değildir. Genel referans oldukları açıkça belirtilir.
+Tapınakçı üçlü çiziminde ortadaki şövalyedir; diğer figürler savaşçı sayılmaz.
+Töton resmi 1884 tarihli toplu atlı sahnesidir, dönemden kalma portre değildir.
+
+ALTERNATİF / ELENENLER
+elite-templar-mounted.jpg: Matthew Paris'in iki şövalyeyi tek at üzerinde
+gösteren 13. yüzyıl çizimi. Sembolik kullanım; normal savaş düzeni sayılmaz.
+Kaynak: https://commons.wikimedia.org/wiki/File:Templari_Paris.jpg
+Ana JSON'a bağlanmadı; alternatif tarihsel referans olarak tutuluyor.
+artifacts/elite-visual-research/rejected-praetorian-photo.jpg: canlandırma
+fotoğrafı olduğu için savaşçı çizimi olarak kullanılmadı.
+artifacts/elite-visual-research/review-hospitallers.jpg: kimlik/atıf belirsiz;
+kullanıma alınmadı. Görseli açık kalan birlikler tamamlanmış sayılmaz.
+
+DAVRANIŞ SEKME NOTLARI
+Sparta Hippeis adı atlı çağrışımı yapsa da seçkin yaya hoplit birliğidir.
+Hypaspist donanımı tartışmalıdır; uzun sarissa kesin kabul edilmemeli.
+Ölümsüzler yaya; Solak yaya okçu. Ortaçağ atlı samurayı için 1600 tarihli
+Ii Kırmızı Birlik çizimi aynı dönem belgesi sayılamaz.
+
+DOĞRULAMA VE TRAFİK
+Kaynak sayfaları yerelde önbelleklendi; küçük önizlemeler kullanıldı.
+Görsel incelemeleri küçük temas sayfalarında yapıldı. Bu işlem internet
+tüketiminin ölçüldüğü veya belirli miktarda azaldığı anlamına gelmez.
+Oyun sekmesi toplam 23 birlik görseli için komuta/ordu portreleri, mobil,
+seçim ve yükleme hatası geri dönüş kontrollerinin geçtiğini bildirdi.
+Son partideki Türkçe kodlama hatası düzeltildi; UTF-8 kontrolü geçti.
+Yerel kontrol: 44 katalog kaydı içinde 10 görsel eşleşmesi doğrulandı;
+9 benzersiz dosyanın tamamı görüntü olarak açıldı, eksik dosya bulunmadı.
+Bu paragraftaki 10 kayıt/9 dosya kontrolü önceki partiye aittir.
+
+DÖRDÜNCÜ PARTİ — ATLI SAMURAY, BAHRİ MEMLÜK, HOSPITALIER
+Yeni kayıtlar: japan_mounted_samurai, mamluk_bahri, hospitaller_knight.
+elite-mounted-samurai.jpg: 118993 bayt; yaklaşık 1293 Mōko Shūrai Ekotoba,
+Takezaki Suenaga'nın at üzerindeki tasviri. PD-Art. Dönem zırhı ve yay görünür.
+elite-mamluk-horsemen.jpg: 128012 bayt; Kahire, 1366, Chester Beatty
+Ar 5655.118 f.2v; dört atlının müsabakası. Bahri dönemi süvari eğitimi
+referansıdır; belirli bir muhafız alayının kesin portresi değildir. PD-Art.
+elite-hospitaller.jpg: 57370 bayt; Newbog, 2006, 13. yüzyıl sonu
+Hospitalier şövalyesi canlandırması. CC BY-SA 3.0; atıf ve lisans JSON'da.
+Modern çizimdir; figür ayakta, zincir zırhlı, kılıç ve kalkanlıdır.
+Üç dosya 500 piksel önizleme olarak alındı; bu boyutlar yerel dosya
+boyutlarıdır, ölçülmüş internet tüketimi değildir. Tarihsel kaynak ve
+lisans bağlantıları her kaydın source/credit/license alanlarında tutulur.
+Yeni partinin ardından katalogda 44 birlikten 26'sı görselli, 18'i eksiktir.
+Yerel doğrulama: 13 kaydın katalog kimliği, dosya yolu, kaynak, atıf,
+lisans ve UTF-8 alanları geçti; 12 benzersiz görselin tamamı açıldı.
+Oyun sekmesine yeni üç kimlik ve kullanım notları iletildi.
+
+GÖRSELİ EKSİK KALAN OYUN KİMLİKLERİ
+ottoman_silahdar, ottoman_ulufeci_right, ottoman_ulufeci_left,
+ottoman_gureba_right, ottoman_gureba_left, abbasid_ghulam,
+ghaznavid_guard, ghaznavid_daylami, seljuk_hassa, mamluk_burji,
+parthian_cataphract, sasanian_aswaran, macedon_companions,
+sparta_hippeis, thebes_sacred_band, seleucid_silver_shields,
+rome_praetorian, rome_equites.
+Öncelik: dönemle uyumlu antik süvari çizimleri ve Burci atlıları.
+Roma kataphrakt çizimi Part/Sasani diye; silahdar ağa kostümü ise
+Silahdar bölüğü eri diye etiketlenmemeli. Sparta Hippeis yaya birliğidir.
+
+Yeni parti için ayrılan adaylar:
+artifacts/elite-visual-research/review-elite-mamluk-lancer.jpg:
+https://commons.wikimedia.org/wiki/File:A_Mamluk_Training_with_a_Lance.jpeg
+Yaklaşık 1500, David Collection 19/2001; PD-Art, 128493 bayt.
+Yaya mızrak eğitimi olduğundan Burci süvari kartına bağlanmadı.
+Müze açıklaması: https://catalog.davidmus.dk/en/item/209/19-2001.pdf
+BnF Arabe 2826 f.107v atlı okçu adayı: Commons sayfasında 15. yüzyıl
+ve 16. yüzyıl ifadeleri çelişiyor; başka katalog/araştırma sonuçları
+1578–1579 gösteriyor. Bahri/Burci dönem belgesi sayılmadı, indirilmedi.
+Kaynak izi: https://mandragore.bnf.fr/ark:/12148/cgfbt35835
+
+FİL GÖRSELİ İNCELEMESİ — EK TESLİM
+Oyun sekmesinden fil çizimi revizyonu isteği geldi. Üç küçük aday incelendi;
+uygunluk eksikleri nedeniyle timur kaydına henüz yeni görsel bağlanmadı.
+artifacts/elite-visual-research/review-elite-war-elephant.jpg:
+https://commons.wikimedia.org/wiki/File:Elephant_Armour_and_Howdah.jpg
+1880 gravürü; zırh/platform görünür fakat tüfek ve top içerir, kapsam dışı.
+artifacts/elite-visual-research/review-elite-elephant-miniature.jpg:
+https://commons.wikimedia.org/wiki/File:War_elephant_attacking_a_horse_and_rider.jpg
+1600–1800 Hint albümü; kompozisyon dönük ve mürettebat/platform zayıf.
+artifacts/elite-visual-research/review-elite-delhi-elephant.jpg:
+https://commons.wikimedia.org/wiki/File:Timur_defeats_the_sultan_of_Delhi_(cropped1to1).jpg
+1595–1600 tarihli, 1398 Delhi savaşını sonradan anlatan Zafername minyatürü.
+Yaylı fil binicisi açıkça görünür; sahne Timur'un karşısındaki Delhi ordusunu
+anlatır. Timurlu birliğinin doğrudan teçhizat belgesi olarak kullanılamaz.
+
+
+14 Ekim 2026 — seçkin birlik ekleme partisi tamamlandı
+
+Oynanabilir katalog: 52 birlik, 41 medeniyet grubu.
+Bu parti: 8 yeni birlik. Dünya araştırma dosyasının toplam entegrasyonu: 10 (önceki Han Yulin ve İnka dahil).
+18 aday sonuçlandırıldı: 8 eklendi, 2 mevcut kartla temsil edildi, 8 bu seçkide elendi.
+Çalışma listesi 129 grup içerir; tüm grupların araştırması bitmiş değildir.
+
+Yeni birlikler:
+assyria_royal_guard: Yeni Asur — Kraliyet muhafızı
+goryeo_yongho_guard: Goryeo Kore — Yongho muhafızı
+song_beiwei: Song Hanedanı — Beiwei süvarisi
+mughal_ahadi: Babür İmparatorluğu — Ahadi süvarisi
+khmer_ranked_cavalry: Khmer İmparatorluğu — Rütbeli Khmer süvarisi
+maya_sajal: Maya şehir devletleri — Sajal · Soylu savaşçı
+benin_warrior_chief: Benin Krallığı — Savaşçı şef
+mamluk_axebearer: Memlük Sultanlığı — Baltalı maiyet askeri
+
+Yerel kaynak görselleri, lisans/atıf ve rekonstrüksiyon sınırları kartlarda kayıtlı.
+Song ve Babür görselleri doğrudan birlik üniforması kanıtı sayılmadı.
+Sajal, Khmer rütbeli süvarisi ve Benin savaşçı şefi adlandırılmış muhafız alayı olarak sunulmadı.
+
+Doğrulama: historical-combat geçti; historical-elite-art 2496 kare geçti; verify-batch 8 birliğin kaynak görsellerini, seçimini ve savaşını doğruladı.
+Sonuç: artifacts/elite-research/batch-checks.json
+Önizleme: artifacts/elite-research/batch-preview.jpg
+Derleme günlüğü: artifacts/elite-research/final-build.log

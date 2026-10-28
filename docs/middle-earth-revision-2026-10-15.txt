@@ -1,0 +1,107 @@
+ORTA DÜNYA — SON DURUM, 15 EKİM 2026
+
+Kullanıcının son geri bildirimi: ilk Balrog, Witch-king ve Sauron görselleri
+oyundaki diğer askerlerden fazla gerçekçi görünüyordu. Bu üç görsel yeniden
+üretildi: belirgin koyu çizgiler, sade geometrik biçimler, iki tonlu gölge,
+mevcut askerlerle uyumlu oyun çizimi. Önceki gerçekçi sürüm artık kullanılmıyor.
+Gondor miğferleri yükseltilmiş metal sırt, göz açıklığı, yanak/burun koruması ve
+veteran süslemesiyle revize edildi. Cüce silüeti ve takım işaretleri düzeltildi.
+
+Görseller ve ölçek:
+- public/warrior-sprites/middle-earth/{balrog,witch-king,sauron}.webp
+- Altı pozlu saydam sprite sayfaları; idle/walk/attack pozlarına eşlenir.
+- Ayaklar ortak tabana hizalı; komşu hücreye taşan kılıç düzeltildi.
+- Balrog visualScale=3.5; testte görünür boy Gondor'un 3.141 katı.
+- Sauron visualScale=1.4; görünür boy oranı 1.585. Witch-king visualScale=1.12.
+- Üç WebP toplamı 638694 bayt yerel dosya boyutudur; internet ölçümü değildir.
+- Önizleme: artifacts/middle-earth/revised-scale.jpg
+- Üretim modu, kaynaklar ve tam istemler: docs/middle-earth-art-prompts-2026-10-15.txt
+
+Değişen uygulama dosyaları:
+- src/middle-earth-art.js: 18 farklı tam boy çizim, Gondor miğferleri, cüce
+  yüksekliği, takım işaretleri ve üç yeni sprite'a geçiş.
+- src/middle-earth-painted-art.js: tek sefer yükleme, poz/ayak hizası, takım izi.
+- src/middle-earth-units.js: ölçekler; Gandalf'ın asa/Glamdring yakın dövüş rolü.
+- src/crown-battle-art.js: yükleme sürümüyle önbelleği yenileme.
+- src/crown-battle-visual-scale.js: ortak görsel ölçek.
+- src/crown-battle-renderer.js: ölçekli çizim/gölge/seçim, geniş gövdede kırpma,
+  duraklatılmış oyunda yeni görsel yüklenince yenileme.
+- src/crown-battle-sprite-batch.js: aynı ölçeği GPU çizimine uygulama.
+- src/crown-battle-hit-test.js: ölçek/ayna/savaş ofsetine uygun alfa seçimi.
+- src/historical-armies.js: yüklenen kartları yenileme, OYUN ÇİZİMİ etiketi.
+- scripts/pack-middle-earth-art.mjs: yerel PNG -> WebP paketleme.
+- Testler: middle-earth.mjs, middle-earth-combat.mjs,
+  middle-earth-revision-browser.mjs, crown-battle-sprite-batch-browser.mjs.
+
+Doğrulama — tamamlandı:
+- middle-earth.mjs PASS: 18 ayrı silüet, 6 kahraman, 864 poz, iki takım,
+  kırpılma/boş çizim yok; kayıt-yükleme-savaş; cüce ölçeği; PC/telefon katalog,
+  kırmızı kahramanı kaldırma; tarayıcı hatası/dış ağ isteği yok.
+- middle-earth-combat.mjs PASS: kimlikler/karma kayıtlar, iki takımda emir ve
+  kaldırma; Legolas oku, Gandalf/Sauron/trol/Balrog alan vuruşları;
+  aynı tohumlu karma savaşlar aynı sonuçla 39.8 simülasyon saniyesinde bitti.
+- middle-earth-revision-browser.mjs PASS: 3 varlık yüklendi; 12 büyük gövde
+  seçim kontrolü; ekran kenarında gövde korunması; mobil fallback; atlas sınırı.
+- crown-battle-sprite-batch-browser.mjs PASS: 12 GPU/2D karşılaştırması,
+  badFraction=0, glError=0; kayıp/eksik GPU fallback kontrolleri geçti.
+- crown-battle.mjs PASS: field 49.0s, wall 23.6s, flank 42.2s;
+  süvari/mızrak, ok uçuşu, emirler ve deterministik klasik sonuçlar korundu.
+- Vite üretim derlemesi PASS (5.21s). Büyük chunk uyarısı devam ediyor.
+
+Sınırlar ve koordinasyon:
+- 18 kimlik, 6 kahraman, mevcut ordu kayıtları ve klasik oyun korunuyor.
+- Atlas üst sınırı 16x1024 sayfa / 64 MiB ve mevcut kare bütçeleri değişmedi.
+  Bu revizyon için FPS artışı ölçülmedi veya iddia edilmedi.
+- Yeni görseller altı ana poz kullanır; kesintisiz iskelet animasyonu değildir.
+  Diğer 15 karakter mevcut prosedürel çizim yolunu kullanır.
+- Büyük görsel ölçek, savaş çarpışma yarıçapını değiştirmez.
+  Yeni uçuş/büyü sistemi ve mitoloji genişlemesi eklenmedi.
+- Ana sekmeye dosyalar ve stil düzeltmesi bildirildi. Ses dosyalarına dokunulmadı.
+  FPS sekmesi son kontrolden sonra ok uçuşu/çizimi üzerinde ayrı işe başladı.
+
+AŞAĞIDAKİ BÖLÜM ESKİ ARA NOTTUR; YUKARIDAKİ SON DURUM GEÇERLİDİR.
+ORTA DÜNYA — 15 EKİM 2026
+
+Kapsam: Kullanıcı önce Orta Dünya'nın düzeltilmesini, sonra mitolojiye
+geçilmesini istedi. Önceki Orta Dünya sekmesi durduğunu bildirdi. Ana oyun
+sekmesine dosyalar önceden bildirildi. Arayüz, renderer/cache, tarihî asker
+çizimleri ve onaylanan dokuz mitolojik canlının dosyaları değiştirilmedi.
+
+Bulunan sorunlar:
+- Savaş sprite'ları fotoğraf kırpıntılarından oluşuyor; tüm resim hareket ediyor,
+  uzuvlar yürümüyor/saldırmıyordu. Bazı karakterlerde alt gövde yoktu.
+- Gondor, Uruk ve cüce alt türleri aynı fotoğrafı paylaşıyordu. Takım rengi yoktu.
+- Gandalf standart okçu rolü nedeniyle yay oku atıyordu.
+- Önceki test yalnız mavi takımın 432 pozunu denetliyordu; silüet ayrılığı yoktu.
+
+Uygulama:
+- src/middle-earth-art.js: 18 tam boy prosedürel çizim, bağımsız bacak/kol/silah,
+  pelerin, ok çekme/bırakma, trol ve Balrog için ayrı gövde/uzuv modelleri.
+  Gondor'un ağacı, Rohan'ın yuvarlak kalkanı, Uruk'un eli, cüce zırhı,
+  kahramanların farklı giysi/silahları; iki takım renkleri ve renderer aynalaması.
+  Cüce boyu .67 korunur. Doku yolları tekrar kullanılır; kareler mevcut atlas
+  yolunda önbelleklenir. Asker başına yeni çizim veya ağ isteği eklenmez.
+- src/middle-earth-units.js: kimlikler, 18 kayıt, 6 kahraman ve kaynak görselleri
+  korunur. Kaynak fotoğrafı ile oyun çizimi açıklaması ayrılır. Gandalf asa ve
+  Glamdring ile yakın dövüşür (menzil 30); can/hasar/bekleme/alan etkisi korunur.
+  Donanım kaynağı: https://tolkiengateway.net/wiki/Glamdring
+- tests/middle-earth-combat.mjs: ID ve combat değerleri, tarihî birliklerle
+  karma kayıtlar, iki takımda seçme/hareket/durma/saldırı/otomatik/silme,
+  Legolas'ın oku, Gandalf/Sauron/trol/Balrog yakın alan vuruşları ve aynı tohumlu
+  karma orduların sonuca ulaşması.
+- tests/middle-earth.mjs: 864 poz, iki takım renkleri ve tüm hareketler,
+  farklı silüetler, kırpılma, cüce atlas ölçeği, kayıt/yükleme/savaşa geçiş,
+  PC/telefon katalog araması ve kırmızı kahramanı kaldırma kontrolleri.
+
+Doğrulama (güncellenecek):
+- Node combat testi PASS; iki aynı tohumlu karma savaş 39.8 simülasyon saniyesinde
+  aynı sonuçla tamamlandı. Üretim derlemesi PASS (mevcut büyük chunk uyarısı var).
+- Browser kontrolü FPS sekmesinin ölçüm penceresi sonrasında çalıştırılacak.
+
+Sınırlar:
+- Yeni özel büyü/uçuş sistemi yok; Gandalf yakın dövüş, Balrog yerde alan vuruşu
+  kullanır. Balrog kanatları film uyarlamasının görsel yorumudur.
+- Mevcut denge değerleri büyük ölçüde korunur; geniş çaplı denge çalışması değil.
+- Bu değişiklik ayrı FPS çalışmasının sonucu hakkında ölçüm iddiası içermez.
+- Yeni Elrond/Ent/Nazgûl kadrosu ve mitoloji genişletmesi bu revizyonda eklenmedi.
+- Kaynak fotoğrafları kaynak görünümünde kalır; bu iş yeni lisans sağlamaz.

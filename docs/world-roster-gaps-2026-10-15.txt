@@ -1,0 +1,61 @@
+Taç Muharebesi — dünya ordularının eksik görevleri, 15 Ekim 2026
+
+Bu grup: 6 yeni birlik. Katalog toplamı 247 (fantastik birlikler dahil).
+Önceki 8 birliklik army-gap grubundan ayrıdır.
+
+Meksika / Mexica (Aztek): mexica_foot_archer, mexica_slinger
+İskoçya Krallığı: scots_foot_archer, scots_light_horse
+İnka İmparatorluğu: inca_spearman
+Tang Hanedanı: tang_long_spearman
+
+Kaynaklar ve sınırlar
+- Mexica yay ve sapan desteği: https://en.wikipedia.org/wiki/Aztec_warfare
+  İkincil derleme. Destek birliklerine Kartal/Jaguar seçkin rütbesi verilmedi.
+- İskoç okçu ve hafif atlı: Historic Environment Scotland, Stirling Bridge:
+  https://portal.historicenvironment.scot/apex/f?p=1505:300:::::VIEWTYPE,VIEWREF:designation,BTL28
+  Kaynak iki rolü de sayıyor. Hafif atlı için mızraklı teçhizat oyun rekonstrüksiyonudur.
+  Modern kilt/tartan veya geç dönem Royal Company of Archers ile karıştırılmadı.
+- İnka chuki: https://en.wikipedia.org/wiki/Inca_army (ikincil derleme).
+  Askerî dama desenli uncu: https://www.lacma.org/andean-uncu
+  Başlık ve küçük ahşap kalkan ayrıntıları temsili; evrensel üniforma iddiası yok.
+- Tang uzun mızrak: https://en.wikipedia.org/wiki/Military_history_of_the_Tang_dynasty
+  657 İrtiş seferi anlatısı, ikincil derleme.
+  Göğüs levhaları, merkez bağları, üst kol koruması ve ayrık etek:
+  https://collections.bowers.org/objects/151/tomb-figure
+  Müze figürünün donanım tarifi esas alındı; kesin alay adı uydurulmadı.
+
+Görseller özgün Canvas çizimleri; kaynak fotoğrafının kopyası veya birebir
+rekonstrüksiyonu değildir. Yeni yüksek çözünürlüklü görsel indirilmedi.
+Altı birliğin zırh/başlık siluetleri ayrı; sapan, yay, bronz mızrak,
+iki elli uzun mızrak ve hafif atlı donanımı farklı çiziliyor.
+Renkler ve savaş değerleri oyun tasarımıdır, tarihî ölçüm değildir.
+
+Dosyalar
+src/world-roster-gaps.js — kaynaklar, roller, savaş değerleri, art profilleri
+src/world-roster-gap-art.js — özel çizimler
+src/historical-catalogue.js — oynanabilir katalog bağlantısı
+src/historical-art-profiles.js — profil bağlantısı
+src/historical-warrior-art.js — çizim bağlantısı
+tests/world-roster-gaps.mjs — oynanış ve tarayıcı doğrulaması
+
+Doğrulama
+- 6 birlik iki tarafta gerçek hasar veriyor; ok ve sapan mermisi ayrımı geçti.
+- Hafif süvari iki tarafta ivme kazanıp hasarlı hücum yapıyor.
+- 480 animasyon karesi: boş/kırpılmış görsel yok, 6 farklı siluet.
+- 1366 ve 390 piksel ekranlarda iki takıma ekle/sil, başlat ve yeniden yükle geçti.
+- 12 ayrı 12'ye 12 savaş tamamlandı; en uzunu 24,77 simülasyon saniyesi.
+  Bu kontrol tarihî sonuç veya eşit kazanma oranı iddiası değildir.
+- Genel donanım testi: 247 farklı savaş profili, genel varsayılana düşen yok;
+  258 aynalı savaşta zaman aşımı yok.
+- Vite üretim derlemesi çıkış kodu 0. Mevcut büyük paket uyarısı sürüyor.
+- Genel katalog görsel taraması: 11.856 kare geçti. Boş/kırpılmış görsel,
+  eksik profil, birebir kopya çizim veya aynı siluet bulunmadı.
+
+Çıktılar: artifacts/world-roster-gaps/
+units.jpg — yerel, yaklaşık 27 kB önizleme; görsel olarak incelendi.
+checks.json — animasyon ve masaüstü/telefon sonuçları
+full-battles.json — 12 tam savaş
+balance.log, global-art.log, build.log — doğrulama günlükleri
+
+Motor, komutan ordusu şablonları, moral ve yorgunluk değiştirilmedi.
+Diğer motor sekmesine kimlikler ve rol sözleşmesi bildirildi.

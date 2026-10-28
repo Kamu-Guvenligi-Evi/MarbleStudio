@@ -1,0 +1,39 @@
+15 Ekim 2026 — Anadolu Selçuklu ve Endülüs muhafızları
+
+Oyuna eklenen 2 birlik:
+- rum_halka_guard: Türkler > Anadolu Selçuklu Devleti > Halka-i hâs — Selçuklu muhafızı. 12–13. yy; zırhlı kılıçlı yaya oyun temsili.
+- cordoba_saqaliba: Endülüslüler > Kurtuba Halifeliği > Sakālibe — Kurtuba saray muhafızı. 10. yy; kılıçlı yaya oyun temsili.
+
+Araştırma ve sınırları:
+TDV Hassa Ordusu ve Erkan Göksu (2011), s. 144, Selçuklu hassa/gulâm adlarını destekler. İlişkili adlar ayrı kopya birlikler olarak eklenmedi.
+Konya savaşçı kabartması (Türk ve İslâm Eserleri Müzesi, envanter 2540, 12. yy) sivri miğfer, sıralı zırh, kısa çizme, kılıç ve kalkan referansıdır. Figürlerin hassa mensubu olduğu doğrulanmış değildir; zırh malzemesi ve renkler yorumdur.
+TDV Sakālibe, III. Abdurrahman döneminin saray muhafızlarını destekler. Sakālibe bütün üyeleri asker olan homojen etnik Arap birliği değildir; Endülüs ayrı kültür grubu olarak yerleştirildi.
+Leyre sandığı (1004–1005) arka yüzündeki kılıçlı ve yuvarlak kalkanlı avcı, dönem kıyafeti karşılaştırmasıdır. Muhafız portresi değildir; başlık, renkler ve koruma düzeyi oyun yorumudur. Fotoğraf sayfasındaki tarihsel anlatım yerine tarihlemede Museo de Navarra kullanıldı.
+
+Kaynaklar (birliklerin sources alanlarında da bulunur):
+https://islamansiklopedisi.org.tr/hassa-ordusu
+https://dergipark.org.tr/en/download/article-file/636358
+https://islamicart.museumwnf.org/database_item.php?id=object;ISL;tr;Mus01;10;en
+https://islamansiklopedisi.org.tr/sakalibe
+https://museodenavarra.navarra.es/documents/20359270/20359292/MdN%2B-%2B6%2BObras%2Bmaestras%2BEN-FR.pdf
+https://warfare.ueuo.com/6C-11C/Leyre-Casket.htm
+
+Görseller:
+artifacts/andalus-rum/konya-reference.jpg (20.281 bayt), leyre-reference.jpg (77.992 bayt) incelendi. Çalışma referanslarıdır; oyun haricî resimleri indirmez.
+Özgün canvas çizimleri: src/andalus-rum-art.js. Birlik ve profiller: src/andalus-rum-units.js.
+Katalog, kültür grupları, profil tablosu ve çizim çağrıları bağlandı. Ortak savaş motoru/renderer değiştirilmedi.
+İki ayrı siluet ve donanım; önizleme artifacts/andalus-rum/two-warriors.jpg (13.245 bayt) görsel olarak incelendi.
+Bu yerel dosya boyutları ölçülmüş internet tüketimi değildir.
+
+Doğrulama:
+tests/andalus-rum.mjs başarılı: 2 benzersiz kayıt, kültür/devlet eşleşmesi, gerçek savaşta hasar.
+160 animasyon karesi, boş veya kenardan kırpılmış kare yok, 2 farklı alfa silueti.
+Ülke menüsünden iki birliği seçme, savaşı başlatma ve kayıtlı kadroyu yeniden yükleme başarılı; tarayıcı hatası yok.
+tests/turkic-arab.mjs --node-only: önceki 4 birlik kontrolü başarılı.
+Vite build başarılı (4,88 saniye); mevcut 500 kB üstü paket uyarısı sürüyor.
+Sonuçlar: artifacts/andalus-rum/checks.json ve build.log.
+
+Devam için:
+Önceki turdaki Endülüs ve Anadolu Selçuklu adayları artık eklendi.
+Şurtatü'l-hamîs ve Nasrî Ghumara muhafızları henüz eklenmedi; seçkin birlik kimliği, mevcut kadroyla tekrar ve donanım kanıtı araştırılmalı.
+Bu turda yeni lider eklenmedi veya FPS iyileştirmesi yapılmadı.

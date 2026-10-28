@@ -1,0 +1,41 @@
+15 Ekim 2026 — Asur, Khmer, Maya ve İnka kadro tamamlaması
+
+Eklenen 5 birlik:
+assyrian_shield_spearman — Asur kalkanlı mızraklısı
+assyrian_mounted_archer — Asur atlı okçusu
+khmer_shield_spearman — Khmer kalkanlı mızraklısı
+maya_shield_spearman — Maya kalkanlı mızraklısı
+inca_axeman — İnka bronz baltalı piyadesi
+
+Katalog 258 kayıt içeriyor; bu toplam fantastik birlikleri de içerir.
+Kaynaklar ve yorum sınırları src/relief-roster-gaps.js içinde kartlara bağlı.
+Hepsi donanım rolüdür; doğrulanmamış seçkin alay adı verilmedi.
+Asur: British Museum kabartma açıklaması (Google Arts) ve Museo Barracco.
+Khmer: L. A. Sedov, Angkor Society and State, 1978; Angkor Database nüshası.
+Maya: Met 313151 Jaina figürü; mızrak, benzer figüre ilişkin müze yorumundan rekonstrüksiyon. Maya'da mevcut sajal zaten mızrak taşır; yeni rol farklı giysi ve kalkanla sıradan donanım seçeneğidir.
+İnka: Met 315476 / 1987.394.401. Küçük müze fotoğrafı incelendi: tek taraflı kavisli ağız ve kabartmalı bronz sap çizildi. Ahşap sap varsayılmadı.
+Referans: artifacts/relief-roster-gaps/inca-axe-reference.jpg, 48.013 bayt yerel dosya.
+Kıyafetlerin kaynakta kesin olmayan ayrıntıları ve renkler temsili olarak belirtildi.
+
+Dosyalar:
+src/relief-roster-gaps.js — kartlar, kaynaklar, combat ve görünüm profilleri
+src/relief-roster-gap-art.js — ayrı miğfer/saç, giysi, kalkan ve silah çizimleri
+src/historical-catalogue.js, historical-art-profiles.js, historical-warrior-art.js — bağlantılar
+tests/relief-roster-gaps.mjs — hasar, kayıt, animasyon, menü, tam savaş
+Motor, taktik, yorgunluk ve moral değiştirilmedi.
+
+Doğrulama:
+İki takımda gerçek hasar, ok tipi, sonlu durum, ordu kayıtları: GEÇTİ.
+Asur atlı okçusu ranged/skirmish, chargeDamage 0; noStirrups çizim profili.
+400 animasyon karesi: GEÇTİ; boş/kesilmiş çizim yok, 5 farklı siluet.
+1366 ve 390 genişliklerinde iki takımda seç/çıkar, savaşa taşı, yenile: GEÇTİ.
+10 tam savaş (12'ye 12 Roma, seed 19, iki yön): GEÇTİ. En uzun 25,93 saniye. Kapsamlı denge garantisi değildir.
+Genel donanım denge testi: GEÇTİ; 258 farklı profil, genel profile düşme yok; mevcut 258 aynalanmış regresyon savaşında zaman aşımı yok.
+Vite üretim derlemesi: GEÇTİ. Mevcut 500 KB üzeri paket uyarısı sürüyor.
+Tüm katalog çizim taraması: GEÇTİ. 258 birliğin 12.384 karesi; boş/kesilmiş/aynı çizim veya siluet ve tarayıcı hatası yok.
+Önizleme: artifacts/relief-roster-gaps/units.jpg (24.179 bayt).
+Diğer çıktılar: aynı klasörde checks.json, full-battles.json, build.log, balance.log, global-art.log.
+
+Kalan kadro araştırması: Göktürk, Tibet, Benin, Moche gibi az seçenekli medeniyetler. Az kart olması tek başına belirli bir birliğin tarihsel varlığını kanıtlamaz; kaynak doğrulaması gerekiyor. Katalog tüm tarihî birlikleri tamamlamış değildir.
+Motor sekmesine 01a13b10-7f99-7a70-b113-bba2c705c791 bu 5 kimlik ve test özeti iletildi.
+İnternet tüketimi ölçülmedi; yerel dosya boyutu internet baytı olarak sunulmadı.

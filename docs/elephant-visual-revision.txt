@@ -1,0 +1,15 @@
+2026-10-14 — Savaş fili görsel revizyonu
+
+Savaş alanı: src/historical-elephant-art.js, historical-battle-art.js üzerinden bağlı.
+Yeni özgün canvas çizimi: gölgeli gövde, eklemli dört ayak, diş/hortum,
+zırh ve örtü, platformda okçu/mızrakçı, önde sürücü, takım sancağı.
+Mevcut sprite boyutu ve ayak konumu korundu; savaş davranışlarına dokunulmadı.
+Tarihsel üniformanın birebir rekonstrüksiyonu olarak sunulmuyor.
+
+Doğrulama: 2 takım × 3 eylem × 8 kare = 48 kare; boş/kesilen kare yok.
+Tarayıcı JS hatası yok. historical-portraits testi geçti (23 referans).
+Vite build geçti; mevcut büyük paket uyarısı sürüyor.
+Önizleme: artifacts/historical-combat/elephant-revision.png.
+
+Karttaki timur.jpg değiştirilmedi. Görsel araştırma sekmesinin üç adayı,
+dönem/ordu/teçhizat uyumsuzluğu nedeniyle ana kart için uygun görülmedi.

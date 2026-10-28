@@ -1,0 +1,82 @@
+2026-10-14 - Territory Battle: larger balls and risk/reward
+
+Ball radius 13 -> 19 (diameter +46%); number badges scale with the ball.
+Arena dimensions stay unchanged. Trail cuts now include the visible ball edge.
+Players pursue nearby exposed trails; safety returns and opening protection remain.
+After the opening, 30% of loop plans consider larger rectangles, with small-route
+fallbacks for narrow maps. Land is awarded only after returning home. Being cut
+before closing a loop eliminates the player without awarding its enclosed area.
+Larger bodies use improved detour/resume paths; pickups can be approached from
+reachable cells within their actual collection radius.
+
+Validation passed: territory, territory-rules, territory-pickups,
+territory-contact, territory-watchability, territory-crowds, territory-risk.
+Crowd checks: 72 matches across 12 maps, 12/20 players, three seeds; no outline
+overlaps or teleports. Longest stay within 12px: 3.27 seconds.
+Eight portrait pacing samples: mean 38.6s, seven >=25s. Shortest 17.71s was
+a legitimate last-survivor result. Tests allow decisive early finishes while
+checking aggregate pacing. These are simulation metrics, not viewer retention.
+Browser preset/mobile/final checks passed before the final pickup route adjustment;
+the renderer did not change afterward. Final Vite build passed (existing chunk warning).
+Actual MP4 encode/decode passed on final source: portrait, 8 players, 720p,
+30fps test output, effects and result hold. Production default remains 144fps.
+Video: artifacts/territory-export-1791989033204/territory-portrait/video.mp4
+Preview: artifacts/territory-watchability-after.jpg
+New regression test: tests/territory-risk.mjs
+
+Build is in dist; production studio http://127.0.0.1:5180, dev :5174.
+No required work remaining for this request. Refresh and start a new match.
+
+2026-10-14 - Route coherence and duration
+User focus: irrational ball routes and area collection.
+Open claims now keep their objective; pickups and hunts do not interrupt them.
+Immediate danger can still trigger the existing short return home.
+Returning home clears the obsolete claim/pickup/detour plan. Nearby useful
+frontiers replace random long walks across owned territory; empty loops are skipped.
+Retracing removes the abandoned trail branch from both drawing and cut ownership.
+Renderer includes the home anchor and labels TRAIL CUT / CAUGHT OUTSIDE / LAND LOST.
+Equally exposed body contacts yield instead of favoring the first updated player;
+UI rules reflect this. Actual trail cuts retain immediate elimination/inheritance.
+Default and portrait/crowd presets: 60 seconds, country: 45, optional 90 supported
+in project normalization. Explicit saved durations stay unchanged.
+Passed: territory-routes, risk (6 seeded matches, 5 with >5% claim), rules, pickups,
+contact, watchability, crowds, territory, watchability-browser; Vite build.
+72 crowd matches (12/20 players, 12 maps): no overlap/teleport, worst 12px dwell 2.11s.
+New route/risk regressions included in scripts/check.mjs.
+Browser preview: artifacts/territory-watchability-after.jpg (inspected).
+Production dist rebuilt. Viewer retention has not been measured.
+Final actual MP4 encode/decode passed: artifacts/territory-export-1791990143043/territory-portrait/video.mp4 (8 players, 720p/30fps verification, effects and result hold). No required work remains for this route/duration request.
+
+2026-10-14: Follow-up: tactical buff use.
+Speed now expands interception range within the ordinary travel-time budget and
+plans larger claims with the extra distance available before expiry. Travel-time
+estimates account for the boost ending mid-route. Shield raids reserve an explicit
+return path and must fit remaining protection plus a safety margin; shield claims
+also fit that budget. Exposed shield users evaluate a nearby return before expiry.
+Active buffs prioritize play over chasing another pickup. A newly collected buff
+replans an unstarted loop only at a cell boundary; committed claims remain intact.
+Buff durations remain speed 2s / shield 1.5s. No renderer or other game edits.
+New tests/territory-buffs.mjs covers timing, raids, return, claim size, commitment,
+mid-cell contact and pickup priority; registered in scripts/check.mjs.
+Passed: buffs, routes, rules, pickups, risk, watchability, contact, crowds, territory,
+watchability-browser and Vite build. 72 crowd matches: no overlap/teleport;
+longest stay within 12px 2.08s. Production dist rebuilt; existing chunk-size warning.
+
+2026-10-14: Follow-up: implausible movement, actual claim forecasts and detour commitment.
+Rectangle candidates now end at their first return to owned land. A bounded flood
+estimates the territory enclosed by that actual excursion, rather than scoring
+the unused full rectangle. Both travel directions are considered, with enclosed
+patches preferred over thin perimeter strips. The local estimate can undercount
+pockets closed outside the candidate bounding box; capture remains authoritative.
+After a sideways dodge, open claims rejoin a reachable forward waypoint ranked
+by travel distance and skipped route, rather than automatically going home.
+Ordinary point-to-point navigation retains direct destination recovery.
+Regression coverage added to territory-routes: irregular frontiers across 24
+seeds, first-return forecast versus actual capture, and continued claims after
+yielding. All 9 Territory simulation suites and watchability-browser passed.
+72 crowd matches, 12/20 players on all 12 maps: no overlap/teleport; longest stay
+within 12px 2.88s. Six extra portrait matches (8/20, seeds 2048/42/7): 651 closed
+route plans, zero unreachable steps after a first return; 280 captures, 85 thin.
+Simulation-only 144 Hz step timing: p95 0.05 ms, p99 1.23 ms, max 13.97 ms.
+These timings exclude drawing and do not establish end-to-end frame rate.
+Production build passed, existing chunk-size warning remains. No other game edited.

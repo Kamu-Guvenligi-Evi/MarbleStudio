@@ -1,0 +1,43 @@
+15 Ekim 2026 — taktik denetimi (düzeltme öncesi kanıt)
+
+Yöntem: aynı askerler, komutan, seed ve taraf; taktik açık/kapalı karşılaştırması.
+352 ana koşu + 176 ek tam savaş, 120 büyük ordu yerleşim kontrolü,
+12 zaman serisi ve gerçek BattleRenderer ile 12 kare. Tam savaşlarda timeout yok.
+Eşit asker sayısı eşit bütçe değildir; bu sonuçlar genel birlik güç sıralaması değildir.
+
+Tekrarlanan sorunlar:
+- Kalkan duvarı / Landsknecht: ek 8 seed x 2 tarafta açık 0/16, kapalı16/16 galibiyet.
+- Hoplit / Landsknecht: aynı karşılaştırmada açık0/16, kapalı16/16.
+- Her iki düzende hedef noktasında duran askerler kendi erişimleri dışında,
+  uzun mızrakların erişiminde kalıyor. Kalkan duvarında10.sn24kişinin20si duruyor;
+  sekizi bu erişim farkıyla vuruluyor. Bu yalnız estetik bir sorun değil.
+- Condotta / Landsknecht: iki halde16/16galibiyet; ortalama sağ kalan7.94vs20.19.
+  Yana açılma sırasında kayıp, gereksiz uzayan manevra.
+- Qin: yaklaşmayan okçulara bile mesafe projeksiyonuyla ricat; izlenen örnekte
+  açık42atak/1009hasar, kapalı81atak/1912hasar. Yaklaşma ve düşman rolü ayrımı eksik.
+- Fransız süvarileri ortak tek hedefe yığılıyor; hedef kaybı bütün taktiği kalıcı
+  bitirebiliyor. Ranged rakibe karşı kazanırken daha fazla kayıp verebiliyor.
+- Büyük ordular: 120 kısa kontrolün22sinde başlatılamama,11inde toplanma timeout.
+  Dar harita sınırları ve sabit sıra aralıkları ölçeklenmeyi kısıtlıyor.
+
+İşe yarayan örnekler: Alman mızrak düzeni ve Ming düzeni Romalılara karşı
+  4/4 kazanırken kapalı0/4; Japon düzeni aynı örnekte4/4vs2/4.
+
+Kanıt: artifacts/battle-ai-audit-matrix.json, battle-ai-audit-focused.json,
+battle-ai-audit-traces.json, battle-ai-audit-visual.jpg.
+Tekrar: yerel node ile artifacts/battle-ai-audit-2026-10-15.mjs ve
+artifacts/battle-ai-audit-focused.mjs. Kaynak hashleri sonuçlarda kayıtlıdır.
+Ana matrisin Selçuklu bölümü son Turan hücum düzeltmesinden ÖNCE çalıştı;
+son sürüm için bu sayıları kullanma. Yeni sürümün ayrı charge testi araştırma
+sekmesinde tamamlandı. Bu audit çoklu ordu izolasyonu değişikliklerinden de önce.
+
+Görsel sınır: sabit kareler incelendi; bütün yürüyüş/çarpışma animasyonlarının
+öznel kalitesinin kusursuz olduğu iddia edilmez.
+Somut hatalar ana sekmeye ve taktiklerin sahibi araştırma sekmesine iletildi.
+Bu audit dosyası sorunların düzeltildiği anlamına gelmez.
+
+Sonraki durum: araştırma sekmesi erişim farkında bekleme, Qin/Japon ricat
+tetikleri ve süvari hücumunun kesilmesini düzeltti. Ayrı 240 önce/sonra koşu,
+regresyonlar ve kalan kapsam için docs/tactics-review-2026-10-15.txt.
+Otomatik ordu çeşitliliği ve yeni 66 karma savaş testi:
+docs/army-diversity-2026-10-15.txt. Yukarıdaki eski sayılar yeniden ölçülmedi.

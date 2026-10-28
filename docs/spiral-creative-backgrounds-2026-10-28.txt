@@ -1,0 +1,7 @@
+﻿Spiral update - 2026-10-28
+Added creative materials: alien, clockwork, amber, mushroom, pixels, starmap.
+All 11 new materials now use existing animated scenery. Total: 29 themes, 17 with scenery.
+Menu: spiral-background switch. Persistent spiralBackground defaults true for legacy projects.
+Switch updates active race without reset; false gives plain #080d15 backdrop, preserving material.
+Project serialization and factory recipe spread retain spiralBackground; shared renderer honors it.
+Validation: spiral-themes.mjs (toggle, reload, mode isolation, mobile, plain pixel, rendering), spiral-materials.mjs (29 distinct textures, fracture masks, RNG, export frames), spiral-scenery.mjs (17 animated themes), Vite build passed. Build retains bundle-size advisory.

@@ -1,0 +1,46 @@
+Eksik ordu rolleri — 15 Ekim 2026
+
+8 yeni oynanabilir birim:
+sasanian_foot_archer / sasanian_paygan_spearman -> Farslar / Sâsânî İmparatorluğu
+tang_mounted_archer -> Çinliler / Tang Hanedanı
+song_crossbowman -> Çinliler / Song Hanedanı
+swiss_crossbowman -> İsviçreliler / İsviçre kantonları
+hussite_crossbowman -> Çekler / Bohemya / Hussitler
+roman_auxiliary_spearman -> İtalyanlar / Roma / Roma İmparatorluğu
+athenian_cavalry -> Yunanlar / Bizans / Atina
+
+Katalog toplamı 233 -> 241 (fantastik birimler dahil; tamamı tarihî birim sayısı değildir).
+src/army-gap-units.js: açıklamalar, kaynak bağlantıları, oyun değerleri, çizim profilleri.
+src/army-gap-art.js: farklı başlık, zırh, kalkan ve silah geometrileri.
+Katalog/profil/çiziciye bağlandı; Atina Yunan medeniyet menüsüne eklendi.
+Motor ve komutan ordu presetleri değiştirilmedi. Mevcut ok, arbalet oku ve süvari hücum mekanikleri kullanılır.
+Tang atlı okçusu ranged/skirmish, Atina süvarisi kopis kullanan yakın dövüş rolüdür.
+Yorgunluk veya moral eklenmedi. Savaş değerleri oyun dengesi içindir.
+
+Tarihî sınırlar:
+Paygān sıradan destek piyadesidir; seçkin muhafız olarak adlandırılmadı.
+Song arbaletçisi tek atışlıdır. Kaynağı ikincil derlemedir; özel alay adı iddiası yok.
+Hussit kemer kancası Sión buluntusundan; arbaletçi kendiliğinden savaş arabası oluşturmaz.
+Atina donanımı Ksenophon'un önerilerini temsil eder; standart üniforma iddiası yok, üzengi yok.
+Roma auxilia donanımı genel dönem rekonstrüksiyonu; Firmus taşının birebir kopyası değildir.
+Renkler, animasyon ve kaynakların göstermediği giysi ayrıntıları temsili olarak belirtildi.
+
+Kaynaklar her kartın sources alanında. Princeton 1996-27 kaynak fotoğrafı:
+public/warrior-references/gap-tang-1996-27.jpg (400 px genişlik, 22.436 bayt yerel dosya).
+Bu dosya boyutu ölçülmüş toplam internet tüketimi değildir.
+Müze fotoğrafı ve oyun sprite önizlemesi birer kez görsel olarak incelendi.
+
+Kontroller:
+tests/army-gap.mjs: PASS; 8 rol iki takımda gerçek hasar, ok/bolt türü,
+ordu kaydı, Atina ivmeli hücum; 640 animasyon karesi boş/kırpılmış değil,
+8 farklı siluet; 1366/390 px menüde iki tarafa ekle/sil, savaşa geçiş ve yeniden yükleme.
+Sonrasında Tang başlığı kaynak nesneye göre sivriltildi, müze fotoğrafı karta bağlandı.
+16 ayrı 12'ye 12 tam savaş: iki takım yönünde tamamlandı, en uzunu 30 simülasyon saniyesi.
+artifacts/army-gap/battles.json sonuçları içerir.
+tests/historical-equipment-balance.mjs: PASS; 241 farklı profil ve mevcut 258 savaş regresyonu.
+Vite üretim derlemesi PASS; mevcut 500 kB paket büyüklüğü uyarısı sürüyor.
+Hedef dosyalarda git diff --check PASS.
+Önizleme: artifacts/army-gap/units.jpg; son başlık değişikliğiyle yeniden oluşturuldu.
+tests/historical-elite-art.mjs: PASS; son sürümde 11.568 kare, iki takım,
+idle/walk/attack. Boş/kırpılmış kare, eksik profil, aynı çizim/siluet veya tarayıcı hatası yok.
+Sonuç: artifacts/historical-combat/elite-art-checks.json.

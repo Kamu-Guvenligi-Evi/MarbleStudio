@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="tr">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#141a17"><title>Birlik görsel denemesi · Marble Studio</title><link rel="stylesheet" href="/src/crown-battle-visual-lab.css"></head>
+<body>
+  <main>
+    <header><div><p class="eyebrow">MARBLE STUDIO / GÖRSEL DENEME</p><h1>Önce küçük bir bölük.</h1><p id="study-description">6 mavi, 6 kızıl samuray. Aynı muharebe, iki farklı çizim.</p></div><a class="button" href="/crown-battle.html">Denemeyi bırak · Oyuna dön ↗</a></header>
+    <nav class="unit-picker" aria-label="Denenecek birlik"><button data-unit="charge" aria-pressed="false">Hücum <small>3 × 9</small></button><button data-unit="samurai" aria-pressed="true">Samuray <small>6 × 6</small></button><button data-unit="hussar" aria-pressed="false">Kanatlı Hussar <small>3 × 3</small></button><button data-unit="sauron" aria-pressed="false">Sauron <small>1 × 1</small></button></nav>
+    <section class="arena" aria-label="Birlik deneme meydanı">
+      <div class="arena-bar"><span id="style-label">YENİ GÖRÜNÜM</span><span id="survivors" role="status">6 MAVİ / 6 KIZIL</span></div>
+      <canvas id="study-battle" aria-label="Görsel deneme muharebesi"></canvas>
+      <div class="controls">
+        <div class="switch" role="group" aria-label="Görsel karşılaştırma"><button id="original" aria-pressed="false">Mevcut görünüm</button><button id="study" aria-pressed="true">Yeni görünüm</button></div>
+        <div class="playback"><button id="play" class="primary">▶ Savaşı başlat</button><button id="reset">↺ Başa al</button><button id="slow" aria-pressed="false">½ Yavaşlat</button><button id="zoom" aria-pressed="true">Yakın görünüm</button></div>
+      </div>
+    </section>
+    <p class="note">Görünümü savaş sürerken de değiştirebilirsin. Bu deneme ana oyundaki çizimleri ve kayıtlı ordularını değiştirmez.</p>
+    <section class="details" aria-label="Yakından animasyon karşılaştırması">
+      <div class="detail-title"><div><p class="eyebrow">YAKINDAN BAK</p><h2 id="detail-heading">Zırh, duruş ve hareket</h2></div><label>Animasyon <select id="pose"><option value="walk">Yürüyüş</option><option value="attack">Vuruş</option><option value="idle">Duruş</option></select></label></div>
+      <div class="comparison"><figure><canvas id="old-detail" width="480" height="320" aria-label="Seçili birliğin mevcut çizimi"></canvas><figcaption>MEVCUT</figcaption></figure><figure><canvas id="new-detail" width="480" height="320" aria-label="Seçili birliğin yeni çizimi"></canvas><figcaption>YENİ DENEME</figcaption></figure></div>
+      <p id="detail-note" class="note">Katmanlı zırh, daha belirgin ışık-gölge, eklemli adımlar ve iki elle kılıç hareketi.</p>
+    </section>
+  </main><script type="module" src="/src/crown-battle-visual-lab.js"></script>
+</body></html>

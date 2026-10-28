@@ -1,0 +1,65 @@
+Taç Savaşı — crowded battle throughput follow-up, 2026-10-16
+
+User reports continuing severe slowdown at 3,000–10,000 soldiers.
+The previous 6 ms sliced loop kept controls responsive but discarded elapsed
+time and left too little CPU time to complete combat ticks.
+
+Changes:
+- src/crown-battle-timing.js and crown-battle-app.js: bounded catch-up queue,
+  multiple completed ticks per frame when affordable, 20 Hz combat at >=2,500
+  soldiers (engine's supported 0.05 s maximum); 18 ms crowd work allowance.
+  Smaller battles retain 30 Hz. All soldiers still update. Pending ticks resume
+  without restarting; normal 1x/2x/4x rates work when CPU capacity permits.
+- crown-battle.js: move unit update/separation bodies out of generators into
+  ordinary methods. Preserve loop order, random calls and 32-unit yields.
+- crown-battle-renderer.js: adapt crowd redraw cadence to measured drawing
+  cost, maximum 30 Hz, interval capped at 150 ms. Slow draws leave CPU time for
+  combat. Camera, selection, resize and pause invalidations draw immediately.
+  Soldier count, sprite resolution, poses and collision checks are retained.
+
+Validation passed:
+- crown-battle-sliced-simulation.mjs with start-of-turn engine snapshot:
+  exact state hashes at 15/30/45 ticks for 320/3,000/10,000 units, including
+  movement, damage, projectiles and results. This verifies the engine refactor
+  at the same timestep; changing live pacing to 20 Hz need not produce identical
+  outcomes to a 30 Hz battle.
+- crown-battle-timing.mjs: counts 320/3,000/10,000, rates 1x/2x/4x, partial ticks,
+  bounded backlog/work and finished battles.
+- crown-battle-render-pacing.mjs: costly drawing, bounded redraw delay,
+  camera/selection/resize/pause invalidation, unchanged paused scene, small army.
+- crown-battle-physical-contact.mjs and crown-battle-projectiles.mjs:
+  physical contacts at 20/30/60/120 Hz, swept projectile hits and charge rules.
+- crown-battle-contact-query.mjs: 3,000 rays against 2,400 bodies, exhaustive oracle.
+- crown-battle-crowd-controls-browser.mjs: actual app at 10,000 soldiers,
+  zoom, pause mid-tick, resume, restart; no page errors.
+- Vite production build exit 0; existing >500 kB chunk-size warning remains.
+
+Local Chrome benchmark, mixed armies deliberately packed into contact:
+tests/crown-battle-throughput-browser.mjs, 5 seconds warm-up then ~13 seconds
+measurement; completed simulation ticks counted (not merely pending tick time).
+Final 10,000 paired run:
+  Before: 13.0408 wall seconds, 1.1000 completed simulation seconds (0.0844x).
+  After:  12.9952 wall seconds, 12.3000 completed simulation seconds (0.9465x).
+Final 3,000 current run:
+  13.0410 wall seconds, 12.3500 completed simulation seconds (0.9470x).
+All soldiers retained, no page/WebGL errors.
+
+Limits:
+Other local CPU-heavy tasks ran during this session. Earlier current-build
+10,000 runs achieved only 0.186x; measurements are load-sensitive, not a
+controlled universal speedup claim. Different progress also means different
+combat phases. Near-real-time simulation is not smooth visible rendering:
+the final 10,000 run had 55.6 ms p95 RAF intervals and 61.1 ms maximum drawing
+cost; skipped draws count as zero in draw statistics. Adaptive redraw trades
+animation frequency for simulation progress. No 60 FPS guarantee. General
+grid/tactics work and a single unit group can still exceed the soft time budget.
+CPU profiles identify local neighbor queries and sprite drawing as remaining
+costs. Several packed-position/finer-grid experiments were reverted because
+they did not reliably help; the existing spatial sampling remains unchanged.
+
+Evidence/snapshots: artifacts/crowd-throughput/ (local, not required at runtime).
+final-browser.json, final-3000.json, parity.log, build.log and named test logs.
+The comparison benchmark requires these local baseline snapshots and Vite on
+127.0.0.1:5173; COUNT filters army size, CURRENT=1 skips the baseline.
+No downloads, package installs, cloud uploads or external image transfers.
+No measured network-byte reduction claimed.

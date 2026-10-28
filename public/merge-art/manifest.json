@@ -1,0 +1,1915 @@
+{
+  "reference": [
+    {
+      "src": "/merge-art/reference-skull.png",
+      "source": "Kullanıcının referans videosu",
+      "reference": true
+    },
+    {
+      "src": "/merge-art/reference-lantern.png",
+      "source": "Kullanıcının referans videosu",
+      "reference": true
+    },
+    {
+      "src": "/merge-art/reference-spider.png",
+      "source": "Kullanıcının referans videosu",
+      "reference": true
+    },
+    {
+      "src": "/merge-art/reference-batman.png",
+      "source": "Kullanıcının referans videosu",
+      "reference": true
+    },
+    {
+      "src": "/merge-art/reference-iron.png",
+      "source": "Kullanıcının referans videosu",
+      "reference": true
+    },
+    {
+      "src": "/merge-art/reference-hulk.png",
+      "source": "Kullanıcının referans videosu",
+      "reference": true
+    },
+    {
+      "src": "/merge-art/reference-superman.png",
+      "source": "Kullanıcının referans videosu",
+      "reference": true
+    },
+    {
+      "src": "/merge-art/reference-gauntlet.png",
+      "source": "Kullanıcının referans videosu",
+      "reference": true
+    }
+  ],
+  "avengers": [
+    {
+      "src": "/merge-art/wiki-000.jpg",
+      "source": "https://en.wikipedia.org/wiki/Black_Widow_(Natasha_Romanova)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Natasha_Romanova_incarnations.jpg",
+      "title": "Black Widow (Natasha Romanova)"
+    },
+    {
+      "src": "/merge-art/wiki-001.webp",
+      "source": "https://en.wikipedia.org/wiki/Hawkeye_(Clint_Barton)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Hawkeye_(circa_2022).webp",
+      "title": "Hawkeye (Clint Barton)"
+    },
+    null,
+    {
+      "src": "/merge-art/wiki-003.png",
+      "source": "https://en.wikipedia.org/wiki/Iron_Man",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Iron_Man_(circa_2018).png",
+      "title": "Iron Man"
+    },
+    {
+      "src": "/merge-art/wiki-004.png",
+      "source": "https://en.wikipedia.org/wiki/Black_Panther_(character)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Black_Panther_(T'Challa).png",
+      "title": "Black Panther (character)"
+    },
+    {
+      "src": "/merge-art/wiki-005.png",
+      "source": "https://en.wikipedia.org/wiki/Hulk",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Hulk_(circa_2019).png",
+      "title": "Hulk"
+    },
+    null,
+    null
+  ],
+  "justice": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "gotham": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "planets": [
+    {
+      "src": "/merge-art/wiki-023.jpg",
+      "source": "https://en.wikipedia.org/wiki/Mercury_(planet)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Mercury_in_true_color.jpg",
+      "title": "Mercury (planet)"
+    },
+    {
+      "src": "/merge-art/wiki-024.jpg",
+      "source": "https://en.wikipedia.org/wiki/Venus",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Venus_from_Mariner_10.jpg",
+      "title": "Venus"
+    },
+    {
+      "src": "/merge-art/wiki-025.jpg",
+      "source": "https://en.wikipedia.org/wiki/Earth",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Meteosat-12-fci-march-equinox-2025-noon.jpg",
+      "title": "Earth"
+    },
+    {
+      "src": "/merge-art/wiki-026.png",
+      "source": "https://en.wikipedia.org/wiki/Mars",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Mars_-_August_30_2021_-_Flickr_-_Kevin_M._Gill.png",
+      "title": "Mars"
+    },
+    {
+      "src": "/merge-art/wiki-027.png",
+      "source": "https://en.wikipedia.org/wiki/Jupiter",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Jupiter_OPAL_2024.png",
+      "title": "Jupiter"
+    },
+    {
+      "src": "/merge-art/wiki-028.png",
+      "source": "https://en.wikipedia.org/wiki/Saturn",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Saturn_global_view_from_Cassini%2C_rings_open_Better_Colour.png",
+      "title": "Saturn"
+    },
+    {
+      "src": "/merge-art/wiki-029.png",
+      "source": "https://en.wikipedia.org/wiki/Uranus",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Uranus_Voyager2_color_calibrated.png",
+      "title": "Uranus"
+    },
+    {
+      "src": "/merge-art/wiki-030.png",
+      "source": "https://en.wikipedia.org/wiki/Neptune",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Neptune_Voyager2_color_calibrated.png",
+      "title": "Neptune"
+    }
+  ],
+  "cosmos": [
+    {
+      "src": "/merge-art/wiki-031.gif",
+      "source": "https://en.wikipedia.org/wiki/Meteoroid",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Meteoroid_meteor_meteorite.gif",
+      "title": "Meteoroid"
+    },
+    {
+      "src": "/merge-art/wiki-032.jpg",
+      "source": "https://en.wikipedia.org/wiki/Moon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:FullMoon2010.jpg",
+      "title": "Moon"
+    },
+    {
+      "src": "/merge-art/wiki-025.jpg",
+      "source": "https://en.wikipedia.org/wiki/Earth",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Meteosat-12-fci-march-equinox-2025-noon.jpg",
+      "title": "Earth"
+    },
+    {
+      "src": "/merge-art/wiki-033.jpg",
+      "source": "https://en.wikipedia.org/wiki/Sun",
+      "fileSource": "https://en.wikipedia.org/wiki/File:The_Sun_in_white_light.jpg",
+      "title": "Sun"
+    },
+    {
+      "src": "/merge-art/wiki-034.jpg",
+      "source": "https://en.wikipedia.org/wiki/Star_cluster",
+      "fileSource": "https://en.wikipedia.org/wiki/File:M44_47x300s-10%C2%B0C_O30_G0_PM_RGB_03032022.jpg",
+      "title": "Star cluster"
+    },
+    {
+      "src": "/merge-art/wiki-035.jpg",
+      "source": "https://en.wikipedia.org/wiki/Galaxy",
+      "fileSource": "https://en.wikipedia.org/wiki/File:NGC_4414_(NASA-med).jpg",
+      "title": "Galaxy"
+    },
+    {
+      "src": "/merge-art/wiki-036.jpg",
+      "source": "https://en.wikipedia.org/wiki/Galaxy_cluster",
+      "fileSource": "https://en.wikipedia.org/wiki/File:BoRG-58.jpg",
+      "title": "Galaxy cluster"
+    },
+    {
+      "src": "/merge-art/wiki-037.png",
+      "source": "https://en.wikipedia.org/wiki/Observable_universe",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Observable_Universe_with_Measurements_01.png",
+      "title": "Observable universe"
+    }
+  ],
+  "sun-life": [
+    {
+      "src": "/merge-art/wiki-038.jpg",
+      "source": "https://en.wikipedia.org/wiki/Orion_Nebula",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Orion_Nebula_-_Hubble_2006_mosaic_18000.jpg",
+      "title": "Orion Nebula"
+    },
+    {
+      "src": "/merge-art/wiki-039.jpg",
+      "source": "https://en.wikipedia.org/wiki/Protostar",
+      "fileSource": "https://en.wikipedia.org/wiki/File:LH_95.jpg",
+      "title": "Protostar"
+    },
+    {
+      "src": "/merge-art/wiki-033.jpg",
+      "source": "https://en.wikipedia.org/wiki/Sun",
+      "fileSource": "https://en.wikipedia.org/wiki/File:The_Sun_in_white_light.jpg",
+      "title": "Sun"
+    },
+    {
+      "src": "/merge-art/wiki-040.png",
+      "source": "https://en.wikipedia.org/wiki/Red_giant",
+      "fileSource": "https://en.wikipedia.org/wiki/File:HR-diag-no-text-2.svg",
+      "title": "Red giant"
+    },
+    {
+      "src": "/merge-art/wiki-041.jpg",
+      "source": "https://en.wikipedia.org/wiki/Planetary_nebula",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Planetary_nebulae_with_annotated_information.jpg",
+      "title": "Planetary nebula"
+    },
+    {
+      "src": "/merge-art/wiki-042.png",
+      "source": "https://en.wikipedia.org/wiki/White_dwarf",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Sirius_A_and_B_Hubble_photo.editted.PNG",
+      "title": "White dwarf"
+    }
+  ],
+  "massive-star": [
+    {
+      "src": "/merge-art/wiki-043.jpg",
+      "source": "https://en.wikipedia.org/wiki/Molecular_cloud",
+      "fileSource": "https://en.wikipedia.org/wiki/File:LH_95.jpg",
+      "title": "Molecular cloud"
+    },
+    {
+      "src": "/merge-art/wiki-039.jpg",
+      "source": "https://en.wikipedia.org/wiki/Protostar",
+      "fileSource": "https://en.wikipedia.org/wiki/File:LH_95.jpg",
+      "title": "Protostar"
+    },
+    {
+      "src": "/merge-art/wiki-044.png",
+      "source": "https://en.wikipedia.org/wiki/Blue_supergiant",
+      "fileSource": "https://en.wikipedia.org/wiki/File:HR-diag-no-text-2.svg",
+      "title": "Blue supergiant"
+    },
+    {
+      "src": "/merge-art/wiki-045.png",
+      "source": "https://en.wikipedia.org/wiki/Red_supergiant",
+      "fileSource": "https://en.wikipedia.org/wiki/File:HR-diag-no-text-2.svg",
+      "title": "Red supergiant"
+    },
+    {
+      "src": "/merge-art/wiki-046.jpg",
+      "source": "https://en.wikipedia.org/wiki/Supernova",
+      "fileSource": "https://en.wikipedia.org/wiki/File:SN1994D.jpg",
+      "title": "Supernova"
+    },
+    {
+      "src": "/merge-art/wiki-047.jpg",
+      "source": "https://en.wikipedia.org/wiki/Black_hole",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Black_hole_-_Messier_87_crop_max_res.jpg",
+      "title": "Black hole"
+    }
+  ],
+  "missions": [
+    {
+      "src": "/merge-art/wiki-048.jpg",
+      "source": "https://en.wikipedia.org/wiki/Sputnik_1",
+      "fileSource": "https://en.wikipedia.org/wiki/File:%D0%9F%D0%B5%D1%80%D0%B2%D1%8B%D0%B9_%D0%B2_%D0%BC%D0%B8%D1%80%D0%B5_%D0%B8%D1%81%D0%BA%D1%83%D1%81%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D1%81%D0%BF%D1%83%D1%82%D0%BD%D0%B8%D0%BA_%D0%97%D0%B5%D0%BC%D0%BB%D0%B8.jpg",
+      "title": "Sputnik 1"
+    },
+    {
+      "src": "/merge-art/wiki-049.gif",
+      "source": "https://en.wikipedia.org/wiki/Vostok_1",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Vostok1_big.gif",
+      "title": "Vostok 1"
+    },
+    {
+      "src": "/merge-art/wiki-050.jpg",
+      "source": "https://en.wikipedia.org/wiki/Apollo_11",
+      "fileSource": "https://en.wikipedia.org/wiki/File:A_Man_on_the_Moon%2C_AS11-40-5903_(cropped).jpg",
+      "title": "Apollo 11"
+    },
+    {
+      "src": "/merge-art/wiki-051.jpg",
+      "source": "https://en.wikipedia.org/wiki/Space_Shuttle",
+      "fileSource": "https://en.wikipedia.org/wiki/File:STS120LaunchHiRes-edit1.jpg",
+      "title": "Space Shuttle"
+    },
+    {
+      "src": "/merge-art/wiki-052.jpg",
+      "source": "https://en.wikipedia.org/wiki/International_Space_Station",
+      "fileSource": "https://en.wikipedia.org/wiki/File:The_station_pictured_from_the_SpaceX_Crew_Dragon_5.jpg",
+      "title": "International Space Station"
+    },
+    {
+      "src": "/merge-art/wiki-053.jpg",
+      "source": "https://en.wikipedia.org/wiki/Mars_rover",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Curiosity_Self-Portrait_at_'Big_Sky'_Drilling_Site.jpg",
+      "title": "Mars rover"
+    },
+    {
+      "src": "/merge-art/wiki-054.png",
+      "source": "https://en.wikipedia.org/wiki/James_Webb_Space_Telescope",
+      "fileSource": "https://en.wikipedia.org/wiki/File:JWST_spacecraft_model_3.png",
+      "title": "James Webb Space Telescope"
+    },
+    {
+      "src": "/merge-art/wiki-055.jpg",
+      "source": "https://en.wikipedia.org/wiki/Space_Launch_System",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Artemis_II_launch_(SLS_MAF_20260401_ArtemisIILaunch_02)_crop.jpg",
+      "title": "Space Launch System"
+    }
+  ],
+  "moons": [
+    {
+      "src": "/merge-art/wiki-056.jpg",
+      "source": "https://en.wikipedia.org/wiki/Phobos_(moon)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Phobos_colour_2008.jpg",
+      "title": "Phobos (moon)"
+    },
+    {
+      "src": "/merge-art/wiki-057.jpg",
+      "source": "https://en.wikipedia.org/wiki/Deimos_(moon)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:NASA-Deimos-MarsMoon-20090221.jpg",
+      "title": "Deimos (moon)"
+    },
+    {
+      "src": "/merge-art/wiki-058.png",
+      "source": "https://en.wikipedia.org/wiki/Europa_(moon)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Europa_-_Perijove_45_(cropped).png",
+      "title": "Europa (moon)"
+    },
+    {
+      "src": "/merge-art/wiki-032.jpg",
+      "source": "https://en.wikipedia.org/wiki/Moon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:FullMoon2010.jpg",
+      "title": "Moon"
+    },
+    {
+      "src": "/merge-art/wiki-059.png",
+      "source": "https://en.wikipedia.org/wiki/Io_(moon)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Io_highest_resolution_natural_color.png",
+      "title": "Io (moon)"
+    },
+    {
+      "src": "/merge-art/wiki-060.png",
+      "source": "https://en.wikipedia.org/wiki/Callisto_(moon)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Callisto_VGR2_C2060635_OGB.png",
+      "title": "Callisto (moon)"
+    },
+    {
+      "src": "/merge-art/wiki-061.jpg",
+      "source": "https://en.wikipedia.org/wiki/Titan_(moon)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Titan_in_true_color_by_Kevin_M._Gill.jpg",
+      "title": "Titan (moon)"
+    },
+    {
+      "src": "/merge-art/wiki-062.png",
+      "source": "https://en.wikipedia.org/wiki/Ganymede_(moon)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Ganymede_-_Perijove_34_Composite.png",
+      "title": "Ganymede (moon)"
+    }
+  ],
+  "first-elements": [
+    {
+      "src": "/merge-art/wiki-063.jpg",
+      "source": "https://en.wikipedia.org/wiki/Hydrogen",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Hydrogen_discharge_tube.jpg",
+      "title": "Hydrogen"
+    },
+    {
+      "src": "/merge-art/wiki-064.jpg",
+      "source": "https://en.wikipedia.org/wiki/Helium",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Helium_discharge_tube.jpg",
+      "title": "Helium"
+    },
+    {
+      "src": "/merge-art/wiki-065.png",
+      "source": "https://en.wikipedia.org/wiki/Lithium",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Purified_lithium_in_an_ampoule_under_argon%2C_dark_background.png",
+      "title": "Lithium"
+    },
+    {
+      "src": "/merge-art/wiki-066.jpg",
+      "source": "https://en.wikipedia.org/wiki/Beryllium",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Be-140g.jpg",
+      "title": "Beryllium"
+    },
+    {
+      "src": "/merge-art/wiki-067.jpg",
+      "source": "https://en.wikipedia.org/wiki/Boron",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Boron_R105.jpg",
+      "title": "Boron"
+    },
+    {
+      "src": "/merge-art/wiki-068.jpg",
+      "source": "https://en.wikipedia.org/wiki/Carbon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Graphite-and-diamond-with-scale.jpg",
+      "title": "Carbon"
+    },
+    {
+      "src": "/merge-art/wiki-069.jpg",
+      "source": "https://en.wikipedia.org/wiki/Nitrogen",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Fluessiger_Stickstoff.jpg",
+      "title": "Nitrogen"
+    },
+    {
+      "src": "/merge-art/wiki-070.jpg",
+      "source": "https://en.wikipedia.org/wiki/Oxygen",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Liquid_oxygen_in_a_beaker_(cropped_and_retouched).jpg",
+      "title": "Oxygen"
+    }
+  ],
+  "noble-gases": [
+    {
+      "src": "/merge-art/wiki-064.jpg",
+      "source": "https://en.wikipedia.org/wiki/Helium",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Helium_discharge_tube.jpg",
+      "title": "Helium"
+    },
+    {
+      "src": "/merge-art/wiki-071.jpg",
+      "source": "https://en.wikipedia.org/wiki/Neon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Neon_discharge_tube.jpg",
+      "title": "Neon"
+    },
+    {
+      "src": "/merge-art/wiki-072.jpg",
+      "source": "https://en.wikipedia.org/wiki/Argon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Argon_discharge_tube.jpg",
+      "title": "Argon"
+    },
+    {
+      "src": "/merge-art/wiki-073.jpg",
+      "source": "https://en.wikipedia.org/wiki/Krypton",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Krypton_discharge_tube.jpg",
+      "title": "Krypton"
+    },
+    {
+      "src": "/merge-art/wiki-074.jpg",
+      "source": "https://en.wikipedia.org/wiki/Xenon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Xenon_discharge_tube.jpg",
+      "title": "Xenon"
+    },
+    {
+      "src": "/merge-art/wiki-075.jpg",
+      "source": "https://en.wikipedia.org/wiki/Radon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Radon86(1).jpg",
+      "title": "Radon"
+    },
+    null
+  ],
+  "alkali": [
+    {
+      "src": "/merge-art/wiki-065.png",
+      "source": "https://en.wikipedia.org/wiki/Lithium",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Purified_lithium_in_an_ampoule_under_argon%2C_dark_background.png",
+      "title": "Lithium"
+    },
+    {
+      "src": "/merge-art/wiki-077.jpg",
+      "source": "https://en.wikipedia.org/wiki/Sodium",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Na_(Sodium).jpg",
+      "title": "Sodium"
+    },
+    {
+      "src": "/merge-art/wiki-078.jpg",
+      "source": "https://en.wikipedia.org/wiki/Potassium",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Potassium-2.jpg",
+      "title": "Potassium"
+    },
+    {
+      "src": "/merge-art/wiki-079.jpg",
+      "source": "https://en.wikipedia.org/wiki/Rubidium",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Rb5.JPG",
+      "title": "Rubidium"
+    },
+    {
+      "src": "/merge-art/wiki-080.jpg",
+      "source": "https://en.wikipedia.org/wiki/Caesium",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Cesium.jpg",
+      "title": "Caesium"
+    },
+    null
+  ],
+  "halogens": [
+    {
+      "src": "/merge-art/wiki-082.jpg",
+      "source": "https://en.wikipedia.org/wiki/Fluorine",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Fluoro_liquido_a_-196%C2%B0C_1.jpg",
+      "title": "Fluorine"
+    },
+    {
+      "src": "/merge-art/wiki-083.jpg",
+      "source": "https://en.wikipedia.org/wiki/Chlorine",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Chlorine_in_bottle.jpg",
+      "title": "Chlorine"
+    },
+    {
+      "src": "/merge-art/wiki-084.jpg",
+      "source": "https://en.wikipedia.org/wiki/Bromine",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Bromine_vial_in_acrylic_cube.jpg",
+      "title": "Bromine"
+    },
+    {
+      "src": "/merge-art/wiki-085.jpg",
+      "source": "https://en.wikipedia.org/wiki/Iodine",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Sample_of_iodine.jpg",
+      "title": "Iodine"
+    },
+    {
+      "src": "/merge-art/wiki-086.jpg",
+      "source": "https://en.wikipedia.org/wiki/Astatine",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Glow_from_a_sample_of_astatine_(cropped).jpg",
+      "title": "Astatine"
+    },
+    null
+  ],
+  "metals": [
+    {
+      "src": "/merge-art/wiki-088.jpg",
+      "source": "https://en.wikipedia.org/wiki/Aluminium",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Aluminium-4.jpg",
+      "title": "Aluminium"
+    },
+    {
+      "src": "/merge-art/wiki-089.jpg",
+      "source": "https://en.wikipedia.org/wiki/Iron",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Iron_electrolytic_and_1cm3_cube.jpg",
+      "title": "Iron"
+    },
+    {
+      "src": "/merge-art/wiki-090.jpg",
+      "source": "https://en.wikipedia.org/wiki/Nickel",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Nickel_electrolytic_and_1cm3_cube.jpg",
+      "title": "Nickel"
+    },
+    {
+      "src": "/merge-art/wiki-091.jpg",
+      "source": "https://en.wikipedia.org/wiki/Copper",
+      "fileSource": "https://en.wikipedia.org/wiki/File:NatCopper.jpg",
+      "title": "Copper"
+    },
+    {
+      "src": "/merge-art/wiki-092.jpg",
+      "source": "https://en.wikipedia.org/wiki/Silver",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Silver_crystal.jpg",
+      "title": "Silver"
+    },
+    {
+      "src": "/merge-art/wiki-093.jpg",
+      "source": "https://en.wikipedia.org/wiki/Platinum",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Platinum_crystals.jpg",
+      "title": "Platinum"
+    },
+    {
+      "src": "/merge-art/wiki-094.jpg",
+      "source": "https://en.wikipedia.org/wiki/Gold",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Gold-crystals.jpg",
+      "title": "Gold"
+    },
+    {
+      "src": "/merge-art/wiki-095.jpg",
+      "source": "https://en.wikipedia.org/wiki/Iridium",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Iridium_(77_Ir)_(cropped).jpg",
+      "title": "Iridium"
+    }
+  ],
+  "gems": [
+    {
+      "src": "/merge-art/wiki-096.jpg",
+      "source": "https://en.wikipedia.org/wiki/Fluorite",
+      "fileSource": "https://en.wikipedia.org/wiki/File:3192M-fluorite1.jpg",
+      "title": "Fluorite"
+    },
+    {
+      "src": "/merge-art/wiki-097.jpg",
+      "source": "https://en.wikipedia.org/wiki/Labradorite",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Labradorite_polie_3(Madagascar).jpg",
+      "title": "Labradorite"
+    },
+    {
+      "src": "/merge-art/wiki-098.jpg",
+      "source": "https://en.wikipedia.org/wiki/Lazurite",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Lazurite.jpg",
+      "title": "Lazurite"
+    },
+    {
+      "src": "/merge-art/wiki-099.jpg",
+      "source": "https://en.wikipedia.org/wiki/Almandine",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Almandin.jpg",
+      "title": "Almandine"
+    },
+    {
+      "src": "/merge-art/wiki-100.jpg",
+      "source": "https://en.wikipedia.org/wiki/Topaz",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Topaze%2C_quartz_fum%C3%A9_1.jpg",
+      "title": "Topaz"
+    },
+    {
+      "src": "/merge-art/wiki-101.jpg",
+      "source": "https://en.wikipedia.org/wiki/Emerald",
+      "fileSource": "https://en.wikipedia.org/wiki/File:B%C3%A9ryl_var._%C3%A9meraude_sur_gangue_(Muzo_Mine_Boyaca_-_Colombie)_2.jpg",
+      "title": "Emerald"
+    },
+    {
+      "src": "/merge-art/wiki-102.jpg",
+      "source": "https://en.wikipedia.org/wiki/Ruby",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Corundum-215330.jpg",
+      "title": "Ruby"
+    },
+    {
+      "src": "/merge-art/wiki-103.jpg",
+      "source": "https://en.wikipedia.org/wiki/Diamond",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Rough_Diamond.jpg",
+      "title": "Diamond"
+    }
+  ],
+  "butterfly": [
+    {
+      "src": "/merge-art/wiki-104.jpg",
+      "source": "https://en.wikipedia.org/wiki/Egg",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Adolphe_Millot_oeufs-fixed.jpg",
+      "title": "Egg"
+    },
+    {
+      "src": "/merge-art/wiki-105.jpg",
+      "source": "https://en.wikipedia.org/wiki/Caterpillar",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Chenille_de_Grand_porte_queue_(macaon).jpg",
+      "title": "Caterpillar"
+    },
+    {
+      "src": "/merge-art/wiki-106.jpg",
+      "source": "https://en.wikipedia.org/wiki/Pupa",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Cetoine_global.jpg",
+      "title": "Pupa"
+    },
+    {
+      "src": "/merge-art/wiki-107.jpg",
+      "source": "https://en.wikipedia.org/wiki/Monarch_butterfly",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Monarch_Butterfly_Danaus_plexippus_Male_2664px.jpg",
+      "title": "Monarch butterfly"
+    }
+  ],
+  "reef": [
+    null,
+    {
+      "src": "/merge-art/wiki-109.jpg",
+      "source": "https://en.wikipedia.org/wiki/Coral",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Coral_Outcrop_Flynn_Reef.jpg",
+      "title": "Coral"
+    },
+    {
+      "src": "/merge-art/wiki-110.jpg",
+      "source": "https://en.wikipedia.org/wiki/Shrimp",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Palaemon_serratus_Croazia.jpg",
+      "title": "Shrimp"
+    },
+    {
+      "src": "/merge-art/wiki-111.jpg",
+      "source": "https://en.wikipedia.org/wiki/Crab",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Cancer_pagurus.jpg",
+      "title": "Crab"
+    },
+    {
+      "src": "/merge-art/wiki-112.jpg",
+      "source": "https://en.wikipedia.org/wiki/Clownfish",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Amphiprion_ocellaris_(Clown_anemonefish)_by_Nick_Hobgood.jpg",
+      "title": "Clownfish"
+    },
+    {
+      "src": "/merge-art/wiki-113.jpg",
+      "source": "https://en.wikipedia.org/wiki/Sea_turtle",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Chelonia_mydas_is_going_for_the_air_edit.jpg",
+      "title": "Sea turtle"
+    },
+    {
+      "src": "/merge-art/wiki-114.jpg",
+      "source": "https://en.wikipedia.org/wiki/Reef_shark",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Caribbean_reef_shark.jpg",
+      "title": "Reef shark"
+    },
+    {
+      "src": "/merge-art/wiki-115.jpg",
+      "source": "https://en.wikipedia.org/wiki/Coral_reef",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Blue_Linckia_Starfish.JPG",
+      "title": "Coral reef"
+    }
+  ],
+  "ocean": [
+    {
+      "src": "/merge-art/wiki-110.jpg",
+      "source": "https://en.wikipedia.org/wiki/Shrimp",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Palaemon_serratus_Croazia.jpg",
+      "title": "Shrimp"
+    },
+    {
+      "src": "/merge-art/wiki-111.jpg",
+      "source": "https://en.wikipedia.org/wiki/Crab",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Cancer_pagurus.jpg",
+      "title": "Crab"
+    },
+    {
+      "src": "/merge-art/wiki-116.jpg",
+      "source": "https://en.wikipedia.org/wiki/Fish",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Balantiocheilos_melanopterus_-_Karlsruhe_Zoo_02_(cropped).jpg",
+      "title": "Fish"
+    },
+    {
+      "src": "/merge-art/wiki-117.jpg",
+      "source": "https://en.wikipedia.org/wiki/Octopus",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Octopus2.jpg",
+      "title": "Octopus"
+    },
+    {
+      "src": "/merge-art/wiki-113.jpg",
+      "source": "https://en.wikipedia.org/wiki/Sea_turtle",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Chelonia_mydas_is_going_for_the_air_edit.jpg",
+      "title": "Sea turtle"
+    },
+    {
+      "src": "/merge-art/wiki-118.jpg",
+      "source": "https://en.wikipedia.org/wiki/Dolphin",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Tursiops_truncatus_01.jpg",
+      "title": "Dolphin"
+    },
+    {
+      "src": "/merge-art/wiki-119.jpg",
+      "source": "https://en.wikipedia.org/wiki/Shark",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Corl0207_(28225976491).jpg",
+      "title": "Shark"
+    },
+    {
+      "src": "/merge-art/wiki-120.jpg",
+      "source": "https://en.wikipedia.org/wiki/Blue_whale",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Anim1754_-_Flickr_-_NOAA_Photo_Library.jpg",
+      "title": "Blue whale"
+    }
+  ],
+  "dinosaurs": [
+    {
+      "src": "/merge-art/wiki-121.jpg",
+      "source": "https://en.wikipedia.org/wiki/Compsognathus",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Compy.jpg",
+      "title": "Compsognathus"
+    },
+    {
+      "src": "/merge-art/wiki-122.jpg",
+      "source": "https://en.wikipedia.org/wiki/Velociraptor",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Velociraptor_skeleton_white_background.jpg",
+      "title": "Velociraptor"
+    },
+    {
+      "src": "/merge-art/wiki-123.jpg",
+      "source": "https://en.wikipedia.org/wiki/Ankylosaurus",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Ankylosaur_head_-_cast_-_Custer_County_Montana_-_Museum_of_the_Rockies_-_2013-07-08.jpg",
+      "title": "Ankylosaurus"
+    },
+    {
+      "src": "/merge-art/wiki-124.jpg",
+      "source": "https://en.wikipedia.org/wiki/Stegosaurus",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Journal.pone.0138352.g001A.jpg",
+      "title": "Stegosaurus"
+    },
+    {
+      "src": "/merge-art/wiki-125.jpg",
+      "source": "https://en.wikipedia.org/wiki/Triceratops",
+      "fileSource": "https://en.wikipedia.org/wiki/File:LA-Triceratops_mount-2.jpg",
+      "title": "Triceratops"
+    },
+    {
+      "src": "/merge-art/wiki-126.jpg",
+      "source": "https://en.wikipedia.org/wiki/Allosaurus",
+      "fileSource": "https://en.wikipedia.org/wiki/File:WLA_hmns_Allosaurus_White_Background.jpg",
+      "title": "Allosaurus"
+    },
+    {
+      "src": "/merge-art/wiki-127.jpg",
+      "source": "https://en.wikipedia.org/wiki/Tyrannosaurus",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Tyrannosaurus_Rex_Holotype.jpg",
+      "title": "Tyrannosaurus"
+    },
+    {
+      "src": "/merge-art/wiki-128.jpg",
+      "source": "https://en.wikipedia.org/wiki/Titanosaurus",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Titanosaurus.jpg",
+      "title": "Titanosaurus"
+    }
+  ],
+  "garden": [
+    {
+      "src": "/merge-art/wiki-129.jpg",
+      "source": "https://en.wikipedia.org/wiki/Seed",
+      "fileSource": "https://en.wikipedia.org/wiki/File:%D0%A0%D0%B0%D0%B7%D0%BD%D0%BE%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%B8%D0%B5_%D1%81%D0%B5%D0%BC%D1%8F%D0%BD.jpg",
+      "title": "Seed"
+    },
+    {
+      "src": "/merge-art/wiki-130.jpg",
+      "source": "https://en.wikipedia.org/wiki/Seedling",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Monocot_vs_dicot_crop_Pengo.jpg",
+      "title": "Seedling"
+    },
+    {
+      "src": "/merge-art/wiki-131.jpg",
+      "source": "https://en.wikipedia.org/wiki/Leaf",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Lisc_lipy.jpg",
+      "title": "Leaf"
+    },
+    {
+      "src": "/merge-art/wiki-132.jpg",
+      "source": "https://en.wikipedia.org/wiki/Bud",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Fagus_sylvatica_bud.jpg",
+      "title": "Bud"
+    },
+    {
+      "src": "/merge-art/wiki-133.jpg",
+      "source": "https://en.wikipedia.org/wiki/Flower",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Magnolia_grandiflora_-_flower_1.jpg",
+      "title": "Flower"
+    },
+    {
+      "src": "/merge-art/wiki-134.jpg",
+      "source": "https://en.wikipedia.org/wiki/Apple",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Pink_lady_and_cross_section.jpg",
+      "title": "Apple"
+    },
+    {
+      "src": "/merge-art/wiki-135.jpg",
+      "source": "https://en.wikipedia.org/wiki/Tree",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Usamljeni_jasen_-_panoramio_(cropped).jpg",
+      "title": "Tree"
+    },
+    {
+      "src": "/merge-art/wiki-136.jpg",
+      "source": "https://en.wikipedia.org/wiki/Forest",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Aerial_view_of_the_Amazon_Rainforest.jpg",
+      "title": "Forest"
+    }
+  ],
+  "weather": [
+    {
+      "src": "/merge-art/wiki-137.jpg",
+      "source": "https://en.wikipedia.org/wiki/Dew",
+      "fileSource": "https://en.wikipedia.org/wiki/File:A_drop_of_dew_on_a_clover.jpg",
+      "title": "Dew"
+    },
+    {
+      "src": "/merge-art/wiki-138.jpg",
+      "source": "https://en.wikipedia.org/wiki/Fog",
+      "fileSource": "https://en.wikipedia.org/wiki/File:A_foggy_winter_morning.jpg",
+      "title": "Fog"
+    },
+    {
+      "src": "/merge-art/wiki-139.jpg",
+      "source": "https://en.wikipedia.org/wiki/Cloud",
+      "fileSource": "https://en.wikipedia.org/wiki/File:ISS-40_Thunderheads_near_Borneo.jpg",
+      "title": "Cloud"
+    },
+    {
+      "src": "/merge-art/wiki-140.jpg",
+      "source": "https://en.wikipedia.org/wiki/Rain",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Hard_rain_on_a_roof.jpg",
+      "title": "Rain"
+    },
+    {
+      "src": "/merge-art/wiki-141.jpg",
+      "source": "https://en.wikipedia.org/wiki/Snow",
+      "fileSource": "https://en.wikipedia.org/wiki/File:CargoNet_Di_12_Euro_4000_L%C3%B8nsdal_-_Bolna.jpg",
+      "title": "Snow"
+    },
+    {
+      "src": "/merge-art/wiki-142.jpg",
+      "source": "https://en.wikipedia.org/wiki/Lightning",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Port_and_lighthouse_overnight_storm_with_lightning_in_Port-la-Nouvelle.jpg",
+      "title": "Lightning"
+    },
+    {
+      "src": "/merge-art/wiki-143.jpg",
+      "source": "https://en.wikipedia.org/wiki/Tornado",
+      "fileSource": "https://en.wikipedia.org/wiki/File:F5_tornado_Elie_Manitoba_2007.jpg",
+      "title": "Tornado"
+    },
+    {
+      "src": "/merge-art/wiki-144.jpg",
+      "source": "https://en.wikipedia.org/wiki/Rainbow",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Double-alaskan-rainbow.jpg",
+      "title": "Rainbow"
+    }
+  ],
+  "fruit": [
+    {
+      "src": "/merge-art/wiki-145.jpg",
+      "source": "https://en.wikipedia.org/wiki/Strawberry",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Garden_strawberry_(Fragaria_%C3%97_ananassa)_single2.jpg",
+      "title": "Strawberry"
+    },
+    {
+      "src": "/merge-art/wiki-146.jpg",
+      "source": "https://en.wikipedia.org/wiki/Cherry",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Cherry_season_(48216568227).jpg",
+      "title": "Cherry"
+    },
+    {
+      "src": "/merge-art/wiki-147.jpg",
+      "source": "https://en.wikipedia.org/wiki/Plum",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Plums_African_Rose_-_whole%2C_halved_and_slice.jpg",
+      "title": "Plum"
+    },
+    {
+      "src": "/merge-art/wiki-148.jpg",
+      "source": "https://en.wikipedia.org/wiki/Apricot",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Apricot_and_cross_section.jpg",
+      "title": "Apricot"
+    },
+    {
+      "src": "/merge-art/wiki-149.jpg",
+      "source": "https://en.wikipedia.org/wiki/Peach",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Illustration_Prunus_persica_clean_no_descr.jpg",
+      "title": "Peach"
+    },
+    {
+      "src": "/merge-art/wiki-150.jpg",
+      "source": "https://en.wikipedia.org/wiki/Pear",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Pears.jpg",
+      "title": "Pear"
+    },
+    {
+      "src": "/merge-art/wiki-134.jpg",
+      "source": "https://en.wikipedia.org/wiki/Apple",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Pink_lady_and_cross_section.jpg",
+      "title": "Apple"
+    },
+    {
+      "src": "/merge-art/wiki-151.jpg",
+      "source": "https://en.wikipedia.org/wiki/Melon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Cantaloupe_and_canary_melon.jpg",
+      "title": "Melon"
+    }
+  ],
+  "berries": [
+    {
+      "src": "/merge-art/wiki-152.jpg",
+      "source": "https://en.wikipedia.org/wiki/Redcurrant",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Ribes_rubrum_1.jpg",
+      "title": "Redcurrant"
+    },
+    {
+      "src": "/merge-art/wiki-153.jpg",
+      "source": "https://en.wikipedia.org/wiki/Blueberry",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Blueberries.jpg",
+      "title": "Blueberry"
+    },
+    {
+      "src": "/merge-art/wiki-154.jpg",
+      "source": "https://en.wikipedia.org/wiki/Raspberry",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Raspberry_-_halved_(Rubus_idaeus).jpg",
+      "title": "Raspberry"
+    },
+    {
+      "src": "/merge-art/wiki-155.jpg",
+      "source": "https://en.wikipedia.org/wiki/Blackberry",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Ripe%2C_ripening%2C_and_green_blackberries.jpg",
+      "title": "Blackberry"
+    },
+    {
+      "src": "/merge-art/wiki-145.jpg",
+      "source": "https://en.wikipedia.org/wiki/Strawberry",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Garden_strawberry_(Fragaria_%C3%97_ananassa)_single2.jpg",
+      "title": "Strawberry"
+    },
+    {
+      "src": "/merge-art/wiki-156.jpg",
+      "source": "https://en.wikipedia.org/wiki/Grape",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Grapes%2C_Rostov-on-Don%2C_Russia.jpg",
+      "title": "Grape"
+    }
+  ],
+  "orchard": [
+    {
+      "src": "/merge-art/wiki-146.jpg",
+      "source": "https://en.wikipedia.org/wiki/Cherry",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Cherry_season_(48216568227).jpg",
+      "title": "Cherry"
+    },
+    {
+      "src": "/merge-art/wiki-147.jpg",
+      "source": "https://en.wikipedia.org/wiki/Plum",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Plums_African_Rose_-_whole%2C_halved_and_slice.jpg",
+      "title": "Plum"
+    },
+    {
+      "src": "/merge-art/wiki-148.jpg",
+      "source": "https://en.wikipedia.org/wiki/Apricot",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Apricot_and_cross_section.jpg",
+      "title": "Apricot"
+    },
+    {
+      "src": "/merge-art/wiki-149.jpg",
+      "source": "https://en.wikipedia.org/wiki/Peach",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Illustration_Prunus_persica_clean_no_descr.jpg",
+      "title": "Peach"
+    },
+    {
+      "src": "/merge-art/wiki-150.jpg",
+      "source": "https://en.wikipedia.org/wiki/Pear",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Pears.jpg",
+      "title": "Pear"
+    },
+    {
+      "src": "/merge-art/wiki-134.jpg",
+      "source": "https://en.wikipedia.org/wiki/Apple",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Pink_lady_and_cross_section.jpg",
+      "title": "Apple"
+    }
+  ],
+  "harvest": [
+    {
+      "src": "/merge-art/wiki-129.jpg",
+      "source": "https://en.wikipedia.org/wiki/Seed",
+      "fileSource": "https://en.wikipedia.org/wiki/File:%D0%A0%D0%B0%D0%B7%D0%BD%D0%BE%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%B8%D0%B5_%D1%81%D0%B5%D0%BC%D1%8F%D0%BD.jpg",
+      "title": "Seed"
+    },
+    {
+      "src": "/merge-art/wiki-130.jpg",
+      "source": "https://en.wikipedia.org/wiki/Seedling",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Monocot_vs_dicot_crop_Pengo.jpg",
+      "title": "Seedling"
+    },
+    {
+      "src": "/merge-art/wiki-134.jpg",
+      "source": "https://en.wikipedia.org/wiki/Apple",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Pink_lady_and_cross_section.jpg",
+      "title": "Apple"
+    },
+    {
+      "src": "/merge-art/wiki-134.jpg",
+      "source": "https://en.wikipedia.org/wiki/Apple",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Pink_lady_and_cross_section.jpg",
+      "title": "Apple"
+    },
+    {
+      "src": "/merge-art/wiki-134.jpg",
+      "source": "https://en.wikipedia.org/wiki/Apple",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Pink_lady_and_cross_section.jpg",
+      "title": "Apple"
+    },
+    {
+      "src": "/merge-art/wiki-157.jpg",
+      "source": "https://en.wikipedia.org/wiki/Basket",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Baskets_in_Haikou_03.jpg",
+      "title": "Basket"
+    },
+    {
+      "src": "/merge-art/wiki-158.jpg",
+      "source": "https://en.wikipedia.org/wiki/Harvest",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Agriculture_in_Volgograd_Oblast_002.JPG",
+      "title": "Harvest"
+    }
+  ],
+  "strings": [
+    {
+      "src": "/merge-art/wiki-159.jpg",
+      "source": "https://en.wikipedia.org/wiki/Ukulele",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Kumalae_ukulele_of_c._1910.webm",
+      "title": "Ukulele"
+    },
+    {
+      "src": "/merge-art/wiki-160.jpg",
+      "source": "https://en.wikipedia.org/wiki/Mandolin",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Mandolin_MET_DP169023_(2).jpg",
+      "title": "Mandolin"
+    },
+    {
+      "src": "/merge-art/wiki-161.png",
+      "source": "https://en.wikipedia.org/wiki/Guitar",
+      "fileSource": "https://en.wikipedia.org/wiki/File:GuitareClassique5.png",
+      "title": "Guitar"
+    },
+    {
+      "src": "/merge-art/wiki-162.png",
+      "source": "https://en.wikipedia.org/wiki/Violin",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Violin_VL100.png",
+      "title": "Violin"
+    },
+    {
+      "src": "/merge-art/wiki-163.jpg",
+      "source": "https://en.wikipedia.org/wiki/Viola",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Bratsche.jpg",
+      "title": "Viola"
+    },
+    {
+      "src": "/merge-art/wiki-164.png",
+      "source": "https://en.wikipedia.org/wiki/Cello",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Cello_front_side.png",
+      "title": "Cello"
+    },
+    {
+      "src": "/merge-art/wiki-165.jpg",
+      "source": "https://en.wikipedia.org/wiki/Double_bass",
+      "fileSource": "https://en.wikipedia.org/wiki/File:AGK_bass1_full.jpg",
+      "title": "Double bass"
+    },
+    {
+      "src": "/merge-art/wiki-166.png",
+      "source": "https://en.wikipedia.org/wiki/Harp",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Harp.png",
+      "title": "Harp"
+    }
+  ],
+  "winds": [
+    {
+      "src": "/merge-art/wiki-167.jpg",
+      "source": "https://en.wikipedia.org/wiki/Whistle",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Pea_Whistle.jpg",
+      "title": "Whistle"
+    },
+    {
+      "src": "/merge-art/wiki-168.jpg",
+      "source": "https://en.wikipedia.org/wiki/Flute",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Shinobue_and_other_flutes-3.jpg",
+      "title": "Flute"
+    },
+    {
+      "src": "/merge-art/wiki-169.png",
+      "source": "https://en.wikipedia.org/wiki/Clarinet",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Leitner%2BKraus_410_320.png",
+      "title": "Clarinet"
+    },
+    {
+      "src": "/merge-art/wiki-170.jpg",
+      "source": "https://en.wikipedia.org/wiki/Oboe",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Oboe_Patricola_Artista_PT1.jpg",
+      "title": "Oboe"
+    },
+    {
+      "src": "/merge-art/wiki-171.png",
+      "source": "https://en.wikipedia.org/wiki/Bassoon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:FoxBassoon.png",
+      "title": "Bassoon"
+    },
+    {
+      "src": "/merge-art/wiki-172.jpg",
+      "source": "https://en.wikipedia.org/wiki/Trumpet",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Yamaha_Trumpet_YTR-8335LA_crop.jpg",
+      "title": "Trumpet"
+    },
+    {
+      "src": "/merge-art/wiki-173.png",
+      "source": "https://en.wikipedia.org/wiki/Saxophone",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Eight_saxophone_sizes_smaller.png",
+      "title": "Saxophone"
+    },
+    {
+      "src": "/merge-art/wiki-174.jpg",
+      "source": "https://en.wikipedia.org/wiki/Tuba",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Yamaha_Bass_tuba_YFB-822.tif",
+      "title": "Tuba"
+    }
+  ],
+  "rhythm": [
+    {
+      "src": "/merge-art/wiki-175.jpg",
+      "source": "https://en.wikipedia.org/wiki/Cymbal",
+      "fileSource": "https://en.wikipedia.org/wiki/File:ZildjianCustomRide.jpg",
+      "title": "Cymbal"
+    },
+    {
+      "src": "/merge-art/wiki-176.jpg",
+      "source": "https://en.wikipedia.org/wiki/Tambourine",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Pandeiro_new_30-09-07.jpg",
+      "title": "Tambourine"
+    },
+    {
+      "src": "/merge-art/wiki-177.jpg",
+      "source": "https://en.wikipedia.org/wiki/Bongo_drum",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Bongos_Meinl_HB100-NT.jpg",
+      "title": "Bongo drum"
+    },
+    {
+      "src": "/merge-art/wiki-178.jpg",
+      "source": "https://en.wikipedia.org/wiki/Snare_drum",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Caisse_claire.jpg",
+      "title": "Snare drum"
+    },
+    {
+      "src": "/merge-art/wiki-179.jpg",
+      "source": "https://en.wikipedia.org/wiki/Bass_drum",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Gran_cassa.jpg",
+      "title": "Bass drum"
+    },
+    {
+      "src": "/merge-art/wiki-180.jpg",
+      "source": "https://en.wikipedia.org/wiki/Marimba",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Marimba_One_4000_Series.jpg",
+      "title": "Marimba"
+    },
+    {
+      "src": "/merge-art/wiki-181.jpg",
+      "source": "https://en.wikipedia.org/wiki/Timpani",
+      "fileSource": "https://en.wikipedia.org/wiki/File:USAFE_Band_timpanist.jpg",
+      "title": "Timpani"
+    },
+    {
+      "src": "/merge-art/wiki-182.png",
+      "source": "https://en.wikipedia.org/wiki/Drum_kit",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Drums_schematic.svg",
+      "title": "Drum kit"
+    }
+  ],
+  "orchestra": [
+    {
+      "src": "/merge-art/wiki-168.jpg",
+      "source": "https://en.wikipedia.org/wiki/Flute",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Shinobue_and_other_flutes-3.jpg",
+      "title": "Flute"
+    },
+    {
+      "src": "/merge-art/wiki-169.png",
+      "source": "https://en.wikipedia.org/wiki/Clarinet",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Leitner%2BKraus_410_320.png",
+      "title": "Clarinet"
+    },
+    {
+      "src": "/merge-art/wiki-162.png",
+      "source": "https://en.wikipedia.org/wiki/Violin",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Violin_VL100.png",
+      "title": "Violin"
+    },
+    {
+      "src": "/merge-art/wiki-164.png",
+      "source": "https://en.wikipedia.org/wiki/Cello",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Cello_front_side.png",
+      "title": "Cello"
+    },
+    {
+      "src": "/merge-art/wiki-172.jpg",
+      "source": "https://en.wikipedia.org/wiki/Trumpet",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Yamaha_Trumpet_YTR-8335LA_crop.jpg",
+      "title": "Trumpet"
+    },
+    {
+      "src": "/merge-art/wiki-166.png",
+      "source": "https://en.wikipedia.org/wiki/Harp",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Harp.png",
+      "title": "Harp"
+    },
+    {
+      "src": "/merge-art/wiki-183.jpg",
+      "source": "https://en.wikipedia.org/wiki/Piano",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Steinway_Vienna_002.JPG",
+      "title": "Piano"
+    },
+    {
+      "src": "/merge-art/wiki-184.jpg",
+      "source": "https://en.wikipedia.org/wiki/Pipe_organ",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Neunkirchen_am_Brand_Kirche_Orgel-20210411-RM-155230.jpg",
+      "title": "Pipe organ"
+    }
+  ],
+  "dragon": [
+    {
+      "src": "/merge-art/wiki-185.jpg",
+      "source": "https://en.wikipedia.org/wiki/Spark_(fire)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Sparks_from_a_Grinder.jpg",
+      "title": "Spark (fire)"
+    },
+    {
+      "src": "/merge-art/wiki-186.jpg",
+      "source": "https://en.wikipedia.org/wiki/Egg",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Adolphe_Millot_oeufs-fixed.jpg",
+      "title": "Egg"
+    },
+    {
+      "src": "/merge-art/wiki-187.jpg",
+      "source": "https://en.wikipedia.org/wiki/Lizard",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Hemidactylus_platyurus_(Flat-tailed_House_Gecko)_on_white_background%2C_focus_stacking.jpg",
+      "title": "Lizard"
+    },
+    {
+      "src": "/merge-art/wiki-188.jpg",
+      "source": "https://en.wikipedia.org/wiki/Wyvern",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Y_Draig_Aur_Owain_Glynd%C5%B5r.jpg",
+      "title": "Wyvern"
+    },
+    {
+      "src": "/merge-art/wiki-189.png",
+      "source": "https://en.wikipedia.org/wiki/Dragon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:St_Catherine%2C_St_George_and_the_Dragon_(M%C3%A4staren_fr%C3%A5n_Kappenberg)_-_Nationalmuseum_-_18337_(brightened)%2C_draken.png",
+      "title": "Dragon"
+    },
+    {
+      "src": "/merge-art/wiki-189.png",
+      "source": "https://en.wikipedia.org/wiki/Dragon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:St_Catherine%2C_St_George_and_the_Dragon_(M%C3%A4staren_fr%C3%A5n_Kappenberg)_-_Nationalmuseum_-_18337_(brightened)%2C_draken.png",
+      "title": "Dragon"
+    },
+    {
+      "src": "/merge-art/wiki-190.jpg",
+      "source": "https://en.wikipedia.org/wiki/Chinese_dragon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Azure_Dragon.jpg",
+      "title": "Chinese dragon"
+    },
+    {
+      "src": "/merge-art/wiki-189.png",
+      "source": "https://en.wikipedia.org/wiki/Dragon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:St_Catherine%2C_St_George_and_the_Dragon_(M%C3%A4staren_fr%C3%A5n_Kappenberg)_-_Nationalmuseum_-_18337_(brightened)%2C_draken.png",
+      "title": "Dragon"
+    }
+  ],
+  "wizard": [
+    {
+      "src": "/merge-art/wiki-185.jpg",
+      "source": "https://en.wikipedia.org/wiki/Spark_(fire)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Sparks_from_a_Grinder.jpg",
+      "title": "Spark (fire)"
+    },
+    {
+      "src": "/merge-art/wiki-191.jpg",
+      "source": "https://en.wikipedia.org/wiki/Magician_(fantasy)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:The_Enchanted_Garden_of_Messer_Ansaldo_by_Marie_Spartali_Stillman_(1889).jpg",
+      "title": "Magician (fantasy)"
+    },
+    {
+      "src": "/merge-art/wiki-192.jpg",
+      "source": "https://en.wikipedia.org/wiki/Grimoire",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Kat_nr_062_Svartkonstbok%2C_fr%C3%A5n_Island_-_KMB_-_16000300015519_(cropped).jpg",
+      "title": "Grimoire"
+    },
+    {
+      "src": "/merge-art/wiki-193.jpg",
+      "source": "https://en.wikipedia.org/wiki/Potion",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Filtre_d'Amour.jpg",
+      "title": "Potion"
+    },
+    {
+      "src": "/merge-art/wiki-194.jpg",
+      "source": "https://en.wikipedia.org/wiki/Crystal_ball",
+      "fileSource": "https://en.wikipedia.org/wiki/File:A_crystal_ball_at_work.jpg",
+      "title": "Crystal ball"
+    },
+    {
+      "src": "/merge-art/wiki-195.jpg",
+      "source": "https://en.wikipedia.org/wiki/Wand",
+      "fileSource": "https://en.wikipedia.org/wiki/File:John_William_Waterhouse_-_Magic_Circle.JPG",
+      "title": "Wand"
+    },
+    {
+      "src": "/merge-art/wiki-196.jpg",
+      "source": "https://en.wikipedia.org/wiki/Merlin",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Arthur-Pyle_The_Enchanter_Merlin.JPG",
+      "title": "Merlin"
+    },
+    {
+      "src": "/merge-art/wiki-197.jpg",
+      "source": "https://en.wikipedia.org/wiki/Magic_circle",
+      "fileSource": "https://en.wikipedia.org/wiki/File:John_William_Waterhouse_-_Magic_Circle.JPG",
+      "title": "Magic circle"
+    }
+  ],
+  "knight": [
+    null,
+    {
+      "src": "/merge-art/wiki-199.jpg",
+      "source": "https://en.wikipedia.org/wiki/Shield",
+      "fileSource": "https://en.wikipedia.org/wiki/File:The_uncivilized_races_of_men_in_all_countries_of_the_world%3B_being_a_comprehensive_account_of_their_manners_and_customs%2C_and_of_their_physical%2C_social%2C_mental%2C_moral_and_religious_characteristics._By_(14762645001).jpg",
+      "title": "Shield"
+    },
+    {
+      "src": "/merge-art/wiki-200.png",
+      "source": "https://en.wikipedia.org/wiki/Helmet",
+      "fileSource": "https://en.wikipedia.org/wiki/File:A_Wide_Variety_Of_Helmets.png",
+      "title": "Helmet"
+    },
+    null,
+    {
+      "src": "/merge-art/wiki-202.jpg",
+      "source": "https://en.wikipedia.org/wiki/Knight",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Codex_Manesse_Hartmann_von_Aue.jpg",
+      "title": "Knight"
+    },
+    {
+      "src": "/merge-art/wiki-203.jpg",
+      "source": "https://en.wikipedia.org/wiki/Commanding_officer",
+      "fileSource": "https://en.wikipedia.org/wiki/File:The_Cooperation_of_the_Allied_Forces_on_the_Western_Front%2C_1914-1918_Q7179.jpg",
+      "title": "Commanding officer"
+    },
+    {
+      "src": "/merge-art/wiki-204.jpg",
+      "source": "https://en.wikipedia.org/wiki/King",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Aachen_Domschatz_Bueste1.jpg",
+      "title": "King"
+    },
+    {
+      "src": "/merge-art/wiki-205.jpg",
+      "source": "https://en.wikipedia.org/wiki/Crown",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Saint_Edward's_Crown.jpg",
+      "title": "Crown"
+    }
+  ],
+  "fire": [
+    {
+      "src": "/merge-art/wiki-206.jpg",
+      "source": "https://en.wikipedia.org/wiki/Ember",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Embers_01.JPG",
+      "title": "Ember"
+    },
+    {
+      "src": "/merge-art/wiki-185.jpg",
+      "source": "https://en.wikipedia.org/wiki/Spark_(fire)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Sparks_from_a_Grinder.jpg",
+      "title": "Spark (fire)"
+    },
+    {
+      "src": "/merge-art/wiki-207.jpg",
+      "source": "https://en.wikipedia.org/wiki/Flame",
+      "fileSource": "https://en.wikipedia.org/wiki/File:DancingFlames.jpg",
+      "title": "Flame"
+    },
+    {
+      "src": "/merge-art/wiki-208.jpg",
+      "source": "https://en.wikipedia.org/wiki/Torch",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Lewes_Bonfire%2C_discarded_torch.jpg",
+      "title": "Torch"
+    },
+    null,
+    {
+      "src": "/merge-art/wiki-210.jpg",
+      "source": "https://en.wikipedia.org/wiki/Lava",
+      "fileSource": "https://en.wikipedia.org/wiki/File:001_Volcano_eruption_of_Litli-Hr%C3%BAtur_in_Iceland_in_2023_Photo_by_Giles_Laurent.jpg",
+      "title": "Lava"
+    },
+    {
+      "src": "/merge-art/wiki-211.png",
+      "source": "https://en.wikipedia.org/wiki/Phoenix_(mythology)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Phoenix_(1583).svg",
+      "title": "Phoenix (mythology)"
+    },
+    {
+      "src": "/merge-art/wiki-033.jpg",
+      "source": "https://en.wikipedia.org/wiki/Sun",
+      "fileSource": "https://en.wikipedia.org/wiki/File:The_Sun_in_white_light.jpg",
+      "title": "Sun"
+    }
+  ],
+  "ice": [
+    {
+      "src": "/merge-art/wiki-212.jpg",
+      "source": "https://en.wikipedia.org/wiki/Drop_(liquid)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Water_drop_light_art_vijayanrajapuram_01.jpg",
+      "title": "Drop (liquid)"
+    },
+    {
+      "src": "/merge-art/wiki-213.jpg",
+      "source": "https://en.wikipedia.org/wiki/Frost",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Saint-Amant_16_Gel%C3%A9e_blanche_2008.jpg",
+      "title": "Frost"
+    },
+    {
+      "src": "/merge-art/wiki-214.jpg",
+      "source": "https://en.wikipedia.org/wiki/Snowflake",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Snowflake_(lumehelves).jpg",
+      "title": "Snowflake"
+    },
+    {
+      "src": "/merge-art/wiki-215.jpg",
+      "source": "https://en.wikipedia.org/wiki/Ice",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Ice_Block%2C_Canal_Park%2C_Duluth_(32752478892).jpg",
+      "title": "Ice"
+    },
+    {
+      "src": "/merge-art/wiki-216.jpg",
+      "source": "https://en.wikipedia.org/wiki/Quartz",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Quartz_Br%C3%A9sil.jpg",
+      "title": "Quartz"
+    },
+    {
+      "src": "/merge-art/wiki-217.jpg",
+      "source": "https://en.wikipedia.org/wiki/Iceberg",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Iceberg_in_the_Arctic_with_its_underside_exposed.jpg",
+      "title": "Iceberg"
+    },
+    {
+      "src": "/merge-art/wiki-189.png",
+      "source": "https://en.wikipedia.org/wiki/Dragon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:St_Catherine%2C_St_George_and_the_Dragon_(M%C3%A4staren_fr%C3%A5n_Kappenberg)_-_Nationalmuseum_-_18337_(brightened)%2C_draken.png",
+      "title": "Dragon"
+    },
+    {
+      "src": "/merge-art/wiki-205.jpg",
+      "source": "https://en.wikipedia.org/wiki/Crown",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Saint_Edward's_Crown.jpg",
+      "title": "Crown"
+    }
+  ],
+  "forest": [
+    {
+      "src": "/merge-art/wiki-218.png",
+      "source": "https://en.wikipedia.org/wiki/Spore",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Sporic_meiosis.svg",
+      "title": "Spore"
+    },
+    {
+      "src": "/merge-art/wiki-219.jpg",
+      "source": "https://en.wikipedia.org/wiki/Mushroom",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Sparrige_Sch%C3%BCppling_(Pholiota_squarrosa).jpg",
+      "title": "Mushroom"
+    },
+    {
+      "src": "/merge-art/wiki-220.jpg",
+      "source": "https://en.wikipedia.org/wiki/Moss",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Tionesta-ac-moss2.jpg",
+      "title": "Moss"
+    },
+    {
+      "src": "/merge-art/wiki-130.jpg",
+      "source": "https://en.wikipedia.org/wiki/Seedling",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Monocot_vs_dicot_crop_Pengo.jpg",
+      "title": "Seedling"
+    },
+    {
+      "src": "/merge-art/wiki-135.jpg",
+      "source": "https://en.wikipedia.org/wiki/Tree",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Usamljeni_jasen_-_panoramio_(cropped).jpg",
+      "title": "Tree"
+    },
+    {
+      "src": "/merge-art/wiki-221.jpg",
+      "source": "https://en.wikipedia.org/wiki/Ent",
+      "fileSource": "https://en.wikipedia.org/wiki/File:TREEBEARD.jpg",
+      "title": "Ent"
+    },
+    {
+      "src": "/merge-art/wiki-222.jpg",
+      "source": "https://en.wikipedia.org/wiki/Fairy",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Falero_Luis_Ricardo_Lily_Fairy_1888.jpg",
+      "title": "Fairy"
+    },
+    {
+      "src": "/merge-art/wiki-223.jpg",
+      "source": "https://en.wikipedia.org/wiki/World_tree",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Yggdrasil.jpg",
+      "title": "World tree"
+    }
+  ],
+  "shadow": [
+    {
+      "src": "/merge-art/wiki-224.jpg",
+      "source": "https://en.wikipedia.org/wiki/Shadow",
+      "fileSource": "https://en.wikipedia.org/wiki/File:The_shadow_of_a_musician_playing_transverse_flute.jpg",
+      "title": "Shadow"
+    },
+    {
+      "src": "/merge-art/wiki-225.png",
+      "source": "https://en.wikipedia.org/wiki/Ghost",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Hammersmith_Ghost.PNG",
+      "title": "Ghost"
+    },
+    {
+      "src": "/merge-art/wiki-226.jpg",
+      "source": "https://en.wikipedia.org/wiki/Bat",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Big-eared-townsend-fledermaus.jpg",
+      "title": "Bat"
+    },
+    null,
+    null,
+    {
+      "src": "/merge-art/wiki-229.jpg",
+      "source": "https://en.wikipedia.org/wiki/Curse",
+      "fileSource": "https://en.wikipedia.org/wiki/File:A_woman_makes_a_cursing_ritual_ceremony.jpg",
+      "title": "Curse"
+    },
+    {
+      "src": "/merge-art/wiki-189.png",
+      "source": "https://en.wikipedia.org/wiki/Dragon",
+      "fileSource": "https://en.wikipedia.org/wiki/File:St_Catherine%2C_St_George_and_the_Dragon_(M%C3%A4staren_fr%C3%A5n_Kappenberg)_-_Nationalmuseum_-_18337_(brightened)%2C_draken.png",
+      "title": "Dragon"
+    },
+    {
+      "src": "/merge-art/wiki-205.jpg",
+      "source": "https://en.wikipedia.org/wiki/Crown",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Saint_Edward's_Crown.jpg",
+      "title": "Crown"
+    }
+  ],
+  "treasure": [
+    {
+      "src": "/merge-art/wiki-230.jpg",
+      "source": "https://en.wikipedia.org/wiki/Coin",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Kiloware.JPG",
+      "title": "Coin"
+    },
+    {
+      "src": "/merge-art/wiki-231.png",
+      "source": "https://en.wikipedia.org/wiki/Silver_coin",
+      "fileSource": "https://en.wikipedia.org/wiki/File:1_ecu_Louis_XVI_1-_1784_M.png",
+      "title": "Silver coin"
+    },
+    {
+      "src": "/merge-art/wiki-232.jpg",
+      "source": "https://en.wikipedia.org/wiki/Gold_coin",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Dubai_gold_coins.jpg",
+      "title": "Gold coin"
+    },
+    {
+      "src": "/merge-art/wiki-233.jpg",
+      "source": "https://en.wikipedia.org/wiki/Lock_and_key",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Solex_99_30_padlock_with_keys_(DSCF2659).jpg",
+      "title": "Lock and key"
+    },
+    {
+      "src": "/merge-art/wiki-234.jpg",
+      "source": "https://en.wikipedia.org/wiki/Money_bag",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Omobono_lianori.jpg",
+      "title": "Money bag"
+    },
+    {
+      "src": "/merge-art/wiki-235.jpg",
+      "source": "https://en.wikipedia.org/wiki/Treasure",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Tesoro_de_Villena.jpg",
+      "title": "Treasure"
+    },
+    {
+      "src": "/merge-art/wiki-236.png",
+      "source": "https://en.wikipedia.org/wiki/Gemstone",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Cardinal_gems.png",
+      "title": "Gemstone"
+    },
+    {
+      "src": "/merge-art/wiki-237.jpg",
+      "source": "https://en.wikipedia.org/wiki/Crown_Jewels_of_the_United_Kingdom",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Crown_Jewels_of_the_United_Kingdom_1952-12-13.jpg",
+      "title": "Crown Jewels of the United Kingdom"
+    }
+  ],
+  "robots": [
+    {
+      "src": "/merge-art/wiki-238.jpg",
+      "source": "https://en.wikipedia.org/wiki/Screw",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Screws.jpg",
+      "title": "Screw"
+    },
+    {
+      "src": "/merge-art/wiki-239.gif",
+      "source": "https://en.wikipedia.org/wiki/Gear",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Animated_two_spur_gears_1_2.gif",
+      "title": "Gear"
+    },
+    {
+      "src": "/merge-art/wiki-240.jpg",
+      "source": "https://en.wikipedia.org/wiki/Printed_circuit_board",
+      "fileSource": "https://en.wikipedia.org/wiki/File:SEG_DVD_430_-_Printed_circuit_board-4276.jpg",
+      "title": "Printed circuit board"
+    },
+    {
+      "src": "/merge-art/wiki-241.jpg",
+      "source": "https://en.wikipedia.org/wiki/Electric_battery",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Batteries.jpg",
+      "title": "Electric battery"
+    },
+    null,
+    {
+      "src": "/merge-art/wiki-243.jpg",
+      "source": "https://en.wikipedia.org/wiki/Robot",
+      "fileSource": "https://en.wikipedia.org/wiki/File:HONDA_ASIMO.jpg",
+      "title": "Robot"
+    },
+    {
+      "src": "/merge-art/wiki-244.jpg",
+      "source": "https://en.wikipedia.org/wiki/Mecha",
+      "fileSource": "https://en.wikipedia.org/wiki/File:%E3%82%AF%E3%83%A9%E3%82%BF%E3%82%B9%E3%83%BBMaker_Faire_Tokyo_2012_(1).jpg",
+      "title": "Mecha"
+    },
+    null
+  ],
+  "city": [
+    {
+      "src": "/merge-art/wiki-246.jpg",
+      "source": "https://en.wikipedia.org/wiki/Brick",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Brick.jpg",
+      "title": "Brick"
+    },
+    null,
+    null,
+    {
+      "src": "/merge-art/wiki-249.jpg",
+      "source": "https://en.wikipedia.org/wiki/House",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Katsura_Imperial_Villa_in_Spring.jpg",
+      "title": "House"
+    },
+    null,
+    null,
+    {
+      "src": "/merge-art/wiki-252.jpg",
+      "source": "https://en.wikipedia.org/wiki/Castle",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Panor%C3%A1mica_Oto%C3%B1o_Alc%C3%A1zar_de_Segovia.jpg",
+      "title": "Castle"
+    },
+    {
+      "src": "/merge-art/wiki-253.jpg",
+      "source": "https://en.wikipedia.org/wiki/Metropolis",
+      "fileSource": "https://en.wikipedia.org/wiki/File:View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_(cropped).jpg",
+      "title": "Metropolis"
+    }
+  ],
+  "vehicles": [
+    {
+      "src": "/merge-art/wiki-254.jpg",
+      "source": "https://en.wikipedia.org/wiki/Wheel",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Landesmuseum_W%C3%BCrttemberg_Kelten_011.4.jpg",
+      "title": "Wheel"
+    },
+    null,
+    {
+      "src": "/merge-art/wiki-256.jpg",
+      "source": "https://en.wikipedia.org/wiki/Bicycle",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Left_side_of_Flying_Pigeon.jpg",
+      "title": "Bicycle"
+    },
+    null,
+    {
+      "src": "/merge-art/wiki-258.jpg",
+      "source": "https://en.wikipedia.org/wiki/Car",
+      "fileSource": "https://en.wikipedia.org/wiki/File:1925_Ford_Model_T_touring.jpg",
+      "title": "Car"
+    },
+    null,
+    {
+      "src": "/merge-art/wiki-260.jpg",
+      "source": "https://en.wikipedia.org/wiki/High-speed_rail",
+      "fileSource": "https://en.wikipedia.org/wiki/File:N700a-Mt.Fuji.jpg",
+      "title": "High-speed rail"
+    },
+    {
+      "src": "/merge-art/wiki-261.jpg",
+      "source": "https://en.wikipedia.org/wiki/Rocket",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Soyuz_TMA-9_launch.jpg",
+      "title": "Rocket"
+    }
+  ],
+  "candy": [
+    null,
+    {
+      "src": "/merge-art/wiki-263.jpg",
+      "source": "https://en.wikipedia.org/wiki/Candy",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Candy_in_Damascus.jpg",
+      "title": "Candy"
+    },
+    {
+      "src": "/merge-art/wiki-264.jpg",
+      "source": "https://en.wikipedia.org/wiki/Lollipop",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Farbenfrohe_Lollipops%2C_Austria.jpg",
+      "title": "Lollipop"
+    },
+    null,
+    {
+      "src": "/merge-art/wiki-266.jpg",
+      "source": "https://en.wikipedia.org/wiki/Doughnut",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Glazed-Donut.jpg",
+      "title": "Doughnut"
+    },
+    {
+      "src": "/merge-art/wiki-267.jpg",
+      "source": "https://en.wikipedia.org/wiki/Cupcake",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Cupcakes%2C_chocolate_and_strawberry_flavour.jpg",
+      "title": "Cupcake"
+    },
+    {
+      "src": "/merge-art/wiki-268.jpg",
+      "source": "https://en.wikipedia.org/wiki/Cake",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Pound_layer_cake.jpg",
+      "title": "Cake"
+    },
+    null
+  ],
+  "chess": [
+    {
+      "src": "/merge-art/wiki-270.jpg",
+      "source": "https://en.wikipedia.org/wiki/Pawn_(chess)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Chess_piece_-_White_pawn.JPG",
+      "title": "Pawn (chess)"
+    },
+    {
+      "src": "/merge-art/wiki-271.jpg",
+      "source": "https://en.wikipedia.org/wiki/Knight_(chess)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Chess_piece_-_White_knight.JPG",
+      "title": "Knight (chess)"
+    },
+    {
+      "src": "/merge-art/wiki-272.jpg",
+      "source": "https://en.wikipedia.org/wiki/Bishop_(chess)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Chess_piece_-_White_bishop.JPG",
+      "title": "Bishop (chess)"
+    },
+    {
+      "src": "/merge-art/wiki-273.jpg",
+      "source": "https://en.wikipedia.org/wiki/Rook_(chess)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Chess_piece_-_White_rook.JPG",
+      "title": "Rook (chess)"
+    },
+    {
+      "src": "/merge-art/wiki-274.jpg",
+      "source": "https://en.wikipedia.org/wiki/Queen_(chess)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Chess_piece_-_White_queen.jpg",
+      "title": "Queen (chess)"
+    },
+    {
+      "src": "/merge-art/wiki-275.jpg",
+      "source": "https://en.wikipedia.org/wiki/King_(chess)",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Chess_piece_-_White_king.jpg",
+      "title": "King (chess)"
+    }
+  ],
+  "sea-quest": [
+    {
+      "src": "/merge-art/wiki-276.jpg",
+      "source": "https://en.wikipedia.org/wiki/Seashell",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Conchiglie_Seashells_01.jpg",
+      "title": "Seashell"
+    },
+    null,
+    {
+      "src": "/merge-art/wiki-278.jpg",
+      "source": "https://en.wikipedia.org/wiki/Map",
+      "fileSource": "https://en.wikipedia.org/wiki/File:World_Map_1689.JPG",
+      "title": "Map"
+    },
+    null,
+    null,
+    {
+      "src": "/merge-art/wiki-281.jpg",
+      "source": "https://en.wikipedia.org/wiki/Sailing_ship",
+      "fileSource": "https://en.wikipedia.org/wiki/File:John_C._Munro_off_Hong_Kong.jpg",
+      "title": "Sailing ship"
+    },
+    {
+      "src": "/merge-art/wiki-282.png",
+      "source": "https://en.wikipedia.org/wiki/Piracy",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Flag_of_Edward_England.svg",
+      "title": "Piracy"
+    },
+    {
+      "src": "/merge-art/wiki-235.jpg",
+      "source": "https://en.wikipedia.org/wiki/Treasure",
+      "fileSource": "https://en.wikipedia.org/wiki/File:Tesoro_de_Villena.jpg",
+      "title": "Treasure"
+    }
+  ],
+  "grass-pokemon": [
+    {
+      "src": "/merge-art/pokemon-001.png",
+      "source": "https://www.pokemon.com/pokedex/1"
+    },
+    {
+      "src": "/merge-art/pokemon-002.png",
+      "source": "https://www.pokemon.com/pokedex/2"
+    },
+    {
+      "src": "/merge-art/pokemon-003.png",
+      "source": "https://www.pokemon.com/pokedex/3"
+    }
+  ],
+  "fire-pokemon": [
+    {
+      "src": "/merge-art/pokemon-004.png",
+      "source": "https://www.pokemon.com/pokedex/4"
+    },
+    {
+      "src": "/merge-art/pokemon-005.png",
+      "source": "https://www.pokemon.com/pokedex/5"
+    },
+    {
+      "src": "/merge-art/pokemon-006.png",
+      "source": "https://www.pokemon.com/pokedex/6"
+    }
+  ],
+  "water-pokemon": [
+    {
+      "src": "/merge-art/pokemon-007.png",
+      "source": "https://www.pokemon.com/pokedex/7"
+    },
+    {
+      "src": "/merge-art/pokemon-008.png",
+      "source": "https://www.pokemon.com/pokedex/8"
+    },
+    {
+      "src": "/merge-art/pokemon-009.png",
+      "source": "https://www.pokemon.com/pokedex/9"
+    }
+  ],
+  "bug-pokemon": [
+    {
+      "src": "/merge-art/pokemon-010.png",
+      "source": "https://www.pokemon.com/pokedex/10"
+    },
+    {
+      "src": "/merge-art/pokemon-011.png",
+      "source": "https://www.pokemon.com/pokedex/11"
+    },
+    {
+      "src": "/merge-art/pokemon-012.png",
+      "source": "https://www.pokemon.com/pokedex/12"
+    }
+  ]
+}

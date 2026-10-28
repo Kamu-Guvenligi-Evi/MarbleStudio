@@ -136,3 +136,5 @@ function frame(now){
 }
 restart();requestAnimationFrame(frame);
 window.rpsStudio={snapshot:()=>structuredClone(settings),state:()=>({time:game.time,state:game.state,winner:game.winner,counts:game.counts(),total:game.pieces.length,conversions:game.conversions,obstacles:structuredClone(game.obstacles),paused,recording:Boolean(recorder),audio:sound.state()})};
+import {mountStudioNavigation} from './studio-navigation.js';
+mountStudioNavigation('rock-paper-scissors');

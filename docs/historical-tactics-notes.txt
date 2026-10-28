@@ -1,0 +1,51 @@
+15 Ekim 2026 — Tarihî ordu taktikleri / ilk motor entegrasyonu
+
+Araştırma: ayrı araştırma sekmesi. Kaynak aktarımı: Ali Sevim, TDV İslâm
+Ansiklopedisi, Malazgirt Muharebesi (https://islamansiklopedisi.org.tr/malazgirt-muharebesi).
+Merkezin sahte ricadı, gerçek takip ve kanat kuvvetlerinin müdahalesi temel alındı.
+Mesafe, süre ve kuvvet eşikleri tarihî ölçüm değil oyun uygulaması parametreleridir.
+
+Dosyalar: src/historical-tactics.js; src/crown-battle.js dar bağlantıları;
+tests/historical-tactics.mjs; bu not. Arayüz/katalog/görseller değiştirilmedi.
+
+İlk davranış: seljuk_hassa, en az 12 serbest asker ve orduda en az %60 pay.
+Başlangıç yerleşimi değişmez. Savaş başladıktan sonra merkez/iki kanat atanır.
+Uygun alan varsa merkez düşmana yaklaşır, 100 birimlik sınırlı ricat dener.
+Kanatlar ancak aynı düşman askeri gerçekten en az 35 birim takip etmiş ve merkez
+en az 25 birim geri çekilmişse kapanır. Takip yoksa 8 saniye sonra normal savaş.
+Hazırlık en fazla 18, kanat müdahalesi 9 saniye; bir savaşta tek girişim.
+Sıra/derinlik konumları birbirinden ayrıdır; büyük kuvvet alana sığmazsa zorlanmaz.
+Kale, yetersiz alan/kuvvet veya yeterli oyuncu emri durumunda manevra iptal edilir.
+Hareket, durma, hedefe saldırı ve serbest hücum oyuncu emirleri anında önceliklidir.
+Serbest hücum emri verilen asker bu savaş boyunca otomatik ordu taktiğine dönmez.
+Etnik hasar/hız/zırh bonusu yok. Birlik değerleri, kimlikler ve ordu kayıtları aynı.
+Klasik modda bu yönetici yok. tacticalAI:false, test/karşılaştırma için kapatır.
+
+Performans: ordu kararı saniyede iki kez doğrusal tarama yapar; hedef/hareket mevcut
+yerel ızgarayı kullanır. Görev dağılımı bir defalık sıralama; her kare çift karşılaştırma
+yok. Taktik bitince yönetici taraması durur. 4000 askerlik tarama sınırı test edildi.
+Ek yerel deneme: 24/60/120 Selçuklu açık geniş haritada ricat+kanat aşamalarını tamamladı;
+240 askerde hazırlık süresi doldu, 2000 askerde alan kontrolü normal savaşa bıraktı.
+Bu ölçümler tarayıcı FPS ölçümü değildir.
+
+İlk doğrulama:
+PASS tests/historical-tactics.mjs: iki takımda gerçek geri hareket ve kanat hareketi;
+takip etmeyen rakip, dört oyuncu emri, başlangıç/klasik, yetersiz alan/kuvvet/kale,
+deterministik tekrar ve doğrusal/saniyede iki karar sınırı.
+PASS crown-battle, historical-combat, crown-battle-behavior, crown-battle-tactics,
+crown-battle-charge, crown-battle-deployment testleri.
+PASS Vite üretim derlemesi (artifacts/tactics-build).
+PASS crown-battle-formations-browser: 1366px PC ve 390px telefon; iki takım,
+yerleşim, yön, önizleme, iptal, hareket ve telefon yakınlaştırma iptali.
+Mevcut sorun: crown-battle-formations.mjs:40 'Formation reaches assigned positions'.
+tacticalAI:false ile de tekrarlandı; samuray hareket senaryosu. Ana sekmeye bildirildi.
+
+Sınırlar: şu an kaynak aktarımı tamamlanmış taktik yalnız Selçuklu hassa ricadı.
+Kıpçak veya bütün Türk gruplarına isimden dolayı uygulanmaz. Tuzak garanti başarı
+değildir; tehdit altındaki kanatlar yakın savunmaya döner. Arazi görüş engeli, moral,
+yorulma ve gerçek gizlenme bu sürümde modellenmez. Açık alanda kanat manevrasıdır.
+Araştırma devri alındı: Alman, İngiliz, Fransız, İtalyan, Yunan, Pers,
+Türk, Japon, Çin; 35 devlet/dönem. historical-tactics-research-2026-10-15.txt
+ve historical-tactics-mapping-2026-10-15.json. Diğer doktrinler henüz uygulanmadı.
+Sonraki katalog eklemesi: Part atlı okçusu, Ming uzun mızraklı, uzun kalkanlı ve
+kısa silahlı destek. Ayrıntı/testler: historical-tactics-units-notes.txt.

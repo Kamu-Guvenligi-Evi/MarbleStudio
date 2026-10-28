@@ -1,0 +1,59 @@
+İttifak savaşları: süre, sıkışma ve çizim kontrolü — 15 Ekim 2026
+
+Bu sekmenin kapsamı
+- crown-battle.js: constructor/checkOutcome ve yerel separation bloğu.
+- Canlı oyunun expandedMap savaşlarında 180 saniyelik zorunlu bitiş kaldırıldı.
+  Varsayılan klasik test savaşları 180 saniye; açık timeLimit destekleniyor.
+  outcomeReason, doğal eleme ile süre dolmasını ayırır. Komutan tek başına
+  yenilmiş orduyu hayatta tutamaz.
+- Derin gövde çakışmalarına ikinci, sınırlı yerel ayırma geçişi uygulanır.
+  Hücumdaki askerler tamamen muaf değildir; yalnız %70 gövde mesafesi korunur.
+- Hazır ve doğru animasyon pozları kareler arasında yeniden kullanılır.
+  Geçici bütçe yedekleri kalıcı poz sayılmaz; atılan atlas sayfaları temizlenir.
+
+Koordinasyon
+01a13b6d: chooseTarget/walk/no-progress ve dost hattı dolanma.
+01a13b51: charge ve arrow collision/step, bağımsız contact modülü.
+Bu sekme bu bölümlere müdahale etmedi; ortak motor dar yamalarla düzenlendi.
+
+Yerel doğrulama
+PASS: crown-battle-outcome-separation, crown-battle-pose-cache-browser,
+crown-battle-charge, historical-commander-targeting,
+historical-commanders-combat, historical-commander-movement,
+historical-multi-army-tactics, historical-tactics-discipline,
+crown-battle-frame-budget-browser, crown-battle-sprite-batch-browser,
+crown-battle-alliances-browser (bağımsız sayılar, yenileme, arama, mobil).
+
+Performans değerlendirmesinin sınırı
+Önceki alliance render fixture katmanlı çizimi kullanmıyordu; gerçek uygulama
+enableLayers kullanıyor. Fixture düzeltildi. Eski katmansız sayılar canlı oyun
+FPS ölçümü olarak kullanılmamalı.
+1800 asker, katmanlı Chrome headless, aynı gün kısa A/B:
+pose cache kapalı: draw median6.1/p9516.0ms; steady median5.7ms.
+pose cache açık: draw median6.2/p9518.1ms; steady median5.3ms.
+Her ikisinde engine median5.2ms, sonuç sayıları832/767, GL ve sayfa hatası0.
+Kesin FPS artışı doğrulanmadı; eşzamanlı yerel süreçler ölçümleri etkiliyor.
+İlk frame/ön hazırlık maliyeti ayrı; kullanıcı oturumunun FPS'si ölçülmedi.
+Ham küçük raporlar: artifacts/alliance-simulation/renderer-pose-{off,on}.json.
+
+Son birleşik kaynakla doğrulama
+artifacts/alliance-simulation/battles-final-fixes.json:
+18/18 doğal eleme, süre dolması0, kayıtlı sorun0, değişen kaynak0.
+9 senaryo iki taraf değiştirilerek:2v2,aynı komutan,1v2,3v1,4v4,
+komutan kaybı,müttefik ordu kaybı,genel/özel taktik,1920 asker4v4.
+1920 asker normal174.43sn [0,181]; ayna182.4sn [127,0].
+Eski180sn sınırını aşan savaş doğal şekilde sonuçlandı.
+Kalabalık son safhalarda derin çakışma hâlâ oluşabiliyor; tamamen giderildi
+denemez. Büyük senaryoda en kötü oran14/309 ve15/267 yaşayan asker.
+NPC rota, fizik temas ve komutan hedef testleri birleşik kaynakta tekrarPASS.
+Vitebuild exit0; mevcut büyük chunk uyarısı devam ediyor.
+İlk tarama18/18 başarılıydı ancak npc-routing dosyası test sırasında değişti;
+son rapor bu yüzden sabit kaynakla yeniden alındı.
+
+Son katmanlı tarayıcı kontrolü PASS (1366x768,DPR1,headless,ses kapalı):
+384 asker: frameP5013.8/P9520.8ms, stepP502.2ms, drawP509.1ms.
+1920 asker: frameP5034.7/P9541.8ms, stepP5013.5ms, drawP5017.1ms.
+Sayfa hatası yok; katmanlar açık; asker koordinatları sonlu.
+Bu sonuç1920 askerde60FPS garantisi vermez. Ağır ordu performansı hâlâ
+çalışma gerektiriyor; bu düzeltmeleri tamamen çözülmüş FPS olarak sunmuyoruz.
+Rapor: artifacts/alliance-simulation/browser.json.

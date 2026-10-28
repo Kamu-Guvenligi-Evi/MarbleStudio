@@ -1,0 +1,51 @@
+KAÇIŞ ÇOĞALMASI — REFERANS ANALİZİ / İLK SÜRÜM
+
+Kaynak: C:\Users\yigit\Videos\Ekran Kayıtları\Ekran Kaydı 2026-10-28 113653.mp4
+Kayıt: 61,63 sn, 1010x990, 30 FPS, 33.562.278 bayt; AAC stereo ses kanalı mevcut.
+Video yerelde incelendi; sosyal medya arayüzü oyun alanının parçası değil.
+Örnek kareler: .cache/video-20261028/contact.jpg ve end.jpg.
+
+Gözlem:
+- Dikey siyah oyun alanı, sabit kamera, ince beyaz tek halka.
+- Üstte beyaz yuvarlatılmış etikette '+3 after each escape'.
+- Halka üstünde 'Balls:' sayacı; 4,7,10 gibi üçer artan değerler.
+- Halkanın yaklaşık 25–30 derecelik açıklığı sürekli dönüyor.
+- Küçük pastel/neon renkli toplar aşağı ivmeleniyor, iç duvardan sekiyor.
+- Kaçan toplar dışarı düşmeye devam ediyor; içeride yeni toplar beliriyor.
+- 0–20 sn seyrek; 25–40 sn büyüyen küme; 45–60 sn dolan halka ve yoğun dış akış.
+- Yaklaşık sayaç örnekleri: 10 sn 10; 20 sn 22; 30 sn 178; 40 sn 1009;
+  50 sn 5308; 58 sn 22543. Küçük yazılı temas karelerinden okunanlar yaklaşık.
+- Oyuncu girdisi / kazanma ekranı görünmüyor; otomatik fizik gösterimi.
+
+Uygulama:
+- escape-multiply.html ve src/escape-multiply*.js. Stüdyo menüsü: Kaçış Çoğalması.
+- 540x960 sahne; merkez (270,500), halka yarıçapı 180; fizik 120 Hz sabit adım.
+- Başlangıç 1 top; kaçış başına 3 yeni top; sayaç toplam üretilen toplar.
+- Tohumlu rastgelelik; aynı ayarlar aynı simülasyonu üretir.
+- Tek kaçış tek doğum olayı; ekranı terk eden parçacıklar bellekten çıkarılır.
+- Referans ayarları: tohum 49, açıklık 30 derece, dönüş -0,25 rad/sn,
+  yerçekimi 310, top yarıçapı 2,5; 62 sn süre; 30.000 toplam üretim sınırı.
+- Yoğunluk için toplar birbirlerinin içinden geçebilir. Videodan top-top
+  çarpışma modeli kesin belirlenemiyor; bu bir uygulama varsayımıdır.
+- Başlangıç koşulları kaynak kodu olmadan bilinemez: kare kare aynı yörünge
+  veya sayaç garantisi yok; mekanik ve görsel akış yeniden oluşturuldu.
+- Özgün ses kaydı dinlenerek çözümlenmedi; isteğe bağlı sentez kaçış tonları var.
+- Duraklat, tekrar, yeni tohum, ayar saklama, tam ekran ve yerel WebM kayıt.
+- Kayıt 540x960 30 FPS, açık ses tercihini içerir; sekme gizlenince sonlandırılır.
+- Fabrikanın toplu MP4 üretimine entegrasyon bu ilk sürümde yok.
+
+Doğrulama komutları (yerel tools/node-runtime altındaki Node ile):
+node tests/escape-multiply.mjs
+node tests/escape-multiply-browser.mjs
+node node_modules/vite/bin/vite.js build
+
+Sonuçlar:
+- Fizik testi geçti: 21.034 üretilen top, 7.011 kaçış, 14.180 görünür top.
+- Tarayıcı testi geçti: aktif menü, duraklatma, ayar kalıcılığı, referansa dönüş,
+  mobil yatay taşma kontrolü, kayıt kilidi ve çözümlenebilen 540x960 WebM.
+- Tarayıcı çalışma zamanı hatası yok. Yoğun sahne 18.277 top örneğinde
+  iki fizik adımı + çizim ortalama 4,82 ms (yerel headless Chrome; FPS garantisi değil).
+- Vite üretim derlemesi geçti; büyük paket boyutu uyarısı mevcut.
+- Görsel çıktılar: artifacts/escape-multiply/desktop.jpg, mobile.jpg, finale.jpg.
+
+Boyut duzeltmesi: Varsayilan yaricap 5 px (cap 10 px). Cap surgusu 2-32 px, canli uygulanir ve ilerleme/duraklatma korunur. Eski 2.5 px varsayilan bir kez tasinir; yeni ozel boyutlar korunur. Fizik ve tarayici testleri gecti: 5209 toplam, 3496 gorunen; kayit 540x960, mobil tasma ve JS hatasi yok.

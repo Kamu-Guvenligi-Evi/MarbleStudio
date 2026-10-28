@@ -6,7 +6,8 @@ export async function beginBreaker(config){
   frame?.remove();job=config;steps=0;effects=[];lastEffect=-1;
   frame=document.createElement('iframe');frame.hidden=true;
   const loaded=new Promise((resolve,reject)=>{frame.onload=resolve;frame.onerror=()=>reject(new Error('Kırıcı görüntüsü yüklenemedi.'));});
-  frame.src=`/${config.recipe.mode}.html?video-render=1`;document.body.append(frame);await loaded;
+  const renderWidth=Math.ceil(Math.min(config.width??1080,(config.height??1920)*540/960));
+  frame.src=`/${config.recipe.mode}.html?video-render=1&render-width=${renderWidth}`;document.body.append(frame);await loaded;
   view=frame.contentWindow.breakerVideo;
   if(!view)throw new Error('Kırıcı video görüntüsü hazır değil.');
   const direct=createGameSoundDirector(job.recipe.mode,job.recipe.soundStyle==='reference'?'original':job.recipe.soundStyle,job.recipe.soundOverrides);

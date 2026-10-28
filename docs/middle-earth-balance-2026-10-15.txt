@@ -1,0 +1,58 @@
+Orta Dünya güç dengesi — 15 Ekim 2026
+
+Amaç
+Normal zırhlı birliklerdeki aşırı dayanıklılık/hasar birleşimini azaltmak;
+kahraman ve devlerin ayrı güç seviyesini, mevcut kimlikleri ve kayıtları korumak.
+
+Değişen dosyalar
+- src/middle-earth-units.js
+- tests/middle-earth-balance.mjs (yeni tekrarlanabilir karşılaşma testi)
+- docs/middle-earth-balance-2026-10-15.txt
+Motor, arayüz, görsel dosyaları ve klasik mod tanımları değiştirilmedi.
+
+İstatistik değişiklikleri (önce -> sonra)
+- me_gondor_veteran: can 180 -> 170, hasar 30 -> 28,
+  zırh .30 -> .26, saldırı aralığı 1 -> 1.1 saniye.
+- me_iron_hills_dwarf: can 180 -> 175, hasar 29 -> 28,
+  zırh .30 -> .28, saldırı aralığı 1 -> 1.15 saniye.
+- me_iron_hills_veteran: can 230 -> 210, hasar 37 -> 34,
+  zırh .36 -> .30, saldırı aralığı 1 -> 1.25 saniye.
+- me_gondor_cavalry: can 255 -> 245, hasar 31 -> 30,
+  zırh .30 -> .28, saldırı aralığı 1.2 -> 1.25 saniye.
+- me_dwarf_ram_rider: can 290 -> 255, hasar 36 -> 32,
+  zırh .32 -> .30, hücum hasarı 66 -> 60,
+  saldırı aralığı 1.35 -> 1.4 saniye.
+Hızlar, roller, boyutlar, kahramanlar ve devler korundu.
+
+Yöntem ve sonuçlar
+Gerçek Battle motoru; 5, 39, 1066 rastgelelik tohumları, iki takım yönü,
+1/30 saniye adım, karşılaşma başına 240 saniye sınırı.
+Önceki rapor 336, son rapor 348 karşılaşma içerir; son testte iki ek
+karşılaşma türü vardır. 36 Orta Dünya birlik tanımı kapsanır.
+- 12 Gondor süvarisi / 12 şövalye: galibiyet 6/6 -> 3/6.
+- 12 seçkin cüce / 18 Varang: galibiyet 6/6 -> 0/6.
+  Seçkin cüceler 12 Varanga karşı son testte 6/6 kazandı.
+- 12 koçlu cüce / 12 şövalye: 6/6 galibiyet korundu;
+  kalan toplam cüce canı ortalaması 1332 -> 426.
+- 12 Gondor kıdemlisi / 12 Varang: kalan can ortalaması 810 -> 199.
+- 12 normal Demir Tepeler cücesi / 12 Varang: kalan can 798 -> 204.
+- Dört normal süvari türü, 18 mızraklı karşısında 12 kişilik gruplarla yenildi.
+- Nazgûl grubu 24 mızraklıya; Balrog, Sauron ve Mumakil testteki
+  20–24 tüfekliye yenilebildi. Kahramanların sayısal karşılıkları korundu.
+- Son 348 karşılaşmanın tamamı bitti; süre aşımı yok.
+
+Doğrulama
+PASS: middle-earth-balance, middle-earth-combat, historical-combat,
+crown-battle-behavior, crown-battle-charge, crown-battle ve Vite build.
+Kimlikler, karma ordu kayıtları, iki takımda emir/silme ve klasik mod
+kontrolleri geçti. Build mevcut büyük paket uyarısını vermeye devam ediyor.
+Raporlar: artifacts/middle-earth/balance-before.json, balance-after.json.
+Kontrol günlükleri: artifacts/middle-earth/balance-check-*.log.
+Derleme günlüğü: artifacts/middle-earth/balance-build.log.
+
+Sınırlar
+Testler varsayılan savaş alanında seçili eşleşmeler ve üç tohum kullanır;
+tüm haritalar/ordu birleşimleri için denge veya FPS garantisi değildir.
+Eşit asker sayısı kahraman/devler için eşit güç anlamına gelmez.
+Ekonomi/puan maliyeti sistemi eklenmedi. Açık oyunda motor profil önbelleği
+nedeniyle yeni değerleri doğrulamak için yenileme ve yeni savaş gerekir.

@@ -1,0 +1,33 @@
+Scope: ranged NPCs clearing the path of friendly swordsmen and cavalry.
+The user clarified that this concerns allies, not evasion from enemy troops.
+
+Cause: walk() requested passage only within combined body radii + 10;
+mounted archers were excluded and charges bypassed walk(). Foot archers
+also waited for their attack animation before yielding.
+
+Changes:
+- Predict passage using approach speed, shooter movement speed/fatigue,
+  body width and time to turn/clear the lane.
+- Bounded friendly sampling (40 candidates, at most five checks/second
+  per melee soldier, maximum radius 180), including active charges.
+- Include mounted ranged troops. They can shoot while moving aside.
+- Urgent passage cancels unreleased foot shots; released projectiles remain.
+- Keep the cleared lane briefly until the requesting soldier passes.
+- Reject destinations outside bounds or across impassable navigation.
+- Preserve manual orders, commander identities and lateral deployments.
+
+Validation:
+New crown-battle-early-yield.mjs: 16 mirrored infantry/cavalry and foot/mounted
+archer scenarios at 30/60Hz; four charge scenarios; edge, unreleased-shot,
+manual-order and blocked-navigation cases; bounded sampling with 1200 units.
+Measured first warning: infantry 43-49, cavalry 63-77 world units in the
+controlled scenarios; active charges warned beyond 100 world units.
+The fixture holds a commander's firing slot through a small tactics stub;
+real commander behavior is additionally covered by existing battle suites.
+
+Existing passing suites: screening, mounted-skirmish, fire-discipline,
+crossbow-fire, commander-formations, commander-strategy, alliance-coordination,
+mounted-battles (8), adaptive-battles, multi-army-tactics.
+Live Chrome screening/browser test and isolated Vite build passed.
+Vite reports its existing large-chunk warning.
+Logs/build: artifacts/early-yield-2026-10-16/.

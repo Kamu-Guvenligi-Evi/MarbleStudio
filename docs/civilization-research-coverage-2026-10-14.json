@@ -1,0 +1,1316 @@
+{
+  "date": "2026-10-14",
+  "scope": "Kılıç, mızrak ve yay ağırlıklı çağlar; süvariler dahil. Bölgesel ve hanedan bazında genişletilebilir çalışma listesi.",
+  "limitations": [
+    "Liste bütün tarihî medeniyetlerin eksiksiz sayımı değildir.",
+    "Kaynak incelemesi var: aday veya donanım hakkında en az bir kaynak incelendi; seçkinlik, tam kıyafet, görsel lisansı ve entegrasyon tamamlanmış olmayabilir.",
+    "Oyunda olması bu tur yeniden doğrulandığı anlamına gelmez.",
+    "Halk, devlet, hanedan ve askerî tarikat aynı kategori değildir; mevcut oyun grupları korundu.",
+    "Genel savaşçı, tören görevlisi, askerî aristokrasi ve adlandırılmış seçkin birlik birbirinin yerine kullanılmaz."
+  ],
+  "totals": {
+    "playableUnits": 56,
+    "playableGroups": 41,
+    "workingScopeGroups": 129,
+    "currentIntegrated": 10,
+    "thisBatchIntegrated": 8,
+    "currentCandidates": 0,
+    "reviewedCandidates": 18,
+    "representedByExistingCards": 2,
+    "excludedThisSelection": 8
+  },
+  "statusLabels": {
+    "bu_tur_eklenen": "Bu tur kaynak ve görselle oyuna eklendi",
+    "kaynak_incelemesi_var": "Aday kaynağı incelendi; eksikler araştırma dosyasında",
+    "oyunda_yeniden_denetlenmedi": "Oyunda var; bu tur tüm kayıtları yeniden denetlenmedi",
+    "henuz_taranmadi": "Sırada; araştırılmış sayılmaz",
+    "incelendi_elenen": "Aday incelendi; bu seçkide yeterli donanım/görsel kanıtı veya seçkin birlik niteliği sağlanmadı",
+    "mevcut_kartla_temsil": "İncelenen aday mevcut kartla temsil ediliyor"
+  },
+  "entries": [
+    {
+      "name": "Han Hanedanı",
+      "region": "Doğu Asya",
+      "playableUnitIds": [
+        "han_yulin"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [
+        "han_yulin"
+      ],
+      "status": "bu_tur_eklenen"
+    },
+    {
+      "name": "Tang Hanedanı",
+      "region": "Doğu Asya",
+      "playableUnitIds": [
+        "tang_xuanjia"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Song Hanedanı",
+      "region": "Doğu Asya",
+      "playableUnitIds": [
+        "song_beiwei"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [
+        "song_beiwei"
+      ],
+      "status": "bu_tur_eklenen",
+      "reviewedCandidates": [
+        {
+          "id": "song_beiwei",
+          "status": "oyuna_eklendi",
+          "integratedId": "song_beiwei",
+          "resolution": "Song Shi 365, Yue Fei’nin Beiwei süvarilerini kaydeder. Kart bu birliklerin atlı yakın dövüş temsilidir."
+        }
+      ]
+    },
+    {
+      "name": "Qin Hanedanı",
+      "region": "Doğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Sui Hanedanı",
+      "region": "Doğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Ming Hanedanı",
+      "region": "Doğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Liao / Kitan",
+      "region": "Doğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Jin / Cürcen",
+      "region": "Doğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Batı Xia / Tangut",
+      "region": "Doğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Goryeo Krallığı",
+      "region": "Doğu Asya",
+      "playableUnitIds": [
+        "goryeo_yongho_guard"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [
+        "goryeo_yongho_guard"
+      ],
+      "status": "bu_tur_eklenen",
+      "reviewedCandidates": [
+        {
+          "id": "goryeo_eungyanggun",
+          "status": "oyuna_eklendi",
+          "integratedId": "goryeo_yongho_guard",
+          "resolution": "Xu Jing’in 1123 tarihli anlatısındaki Yongho Jungmaeng askerinin temsili. Eungyang ve Yongho tek bir birlik gibi sunulmaz."
+        }
+      ]
+    },
+    {
+      "name": "Silla Krallığı",
+      "region": "Doğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "incelendi_elenen",
+      "reviewedCandidates": [
+        {
+          "id": "silla_hwarang_review",
+          "status": "bu_secide_elenen",
+          "resolution": "Gençlik ve aristokrat eğitim kurumu; tek üniformalı savaş alayı gibi gösterilemez."
+        }
+      ]
+    },
+    {
+      "name": "Goguryeo",
+      "region": "Doğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Baekje",
+      "region": "Doğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Joseon",
+      "region": "Doğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Japonya",
+      "region": "Doğu Asya",
+      "playableUnitIds": [
+        "samurai",
+        "japan_mounted_samurai"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Ryūkyū",
+      "region": "Doğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Tibet",
+      "region": "Doğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "incelendi_elenen",
+      "reviewedCandidates": [
+        {
+          "id": "tibet_early_guard_review",
+          "status": "bu_secide_elenen",
+          "resolution": "İncelenen zırh ve fotoğraflar erken Tibet dönemi muhafızını doğrulamıyor."
+        }
+      ]
+    },
+    {
+      "name": "Kıpçak / Kuman",
+      "region": "Orta Asya ve bozkırlar",
+      "playableUnitIds": [
+        "kipchak",
+        "kipchak_masked_swordsman"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Moğol İmparatorluğu",
+      "region": "Orta Asya ve bozkırlar",
+      "playableUnitIds": [
+        "mongol",
+        "mongol_keshig"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Timurlular",
+      "region": "Orta Asya ve bozkırlar",
+      "playableUnitIds": [
+        "timur"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "İlhanlı Devleti",
+      "region": "Orta Asya ve bozkırlar",
+      "playableUnitIds": [
+        "ilkhan_keshikten"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Hunlar",
+      "region": "Orta Asya ve bozkırlar",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Xiongnu",
+      "region": "Orta Asya ve bozkırlar",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Göktürkler",
+      "region": "Orta Asya ve bozkırlar",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Uygur Kağanlığı",
+      "region": "Orta Asya ve bozkırlar",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Hazar Kağanlığı",
+      "region": "Orta Asya ve bozkırlar",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Soğd şehir devletleri",
+      "region": "Orta Asya ve bozkırlar",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Harezmşahlar",
+      "region": "Orta Asya ve bozkırlar",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Karakoyunlular",
+      "region": "Orta Asya ve bozkırlar",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Akkoyunlular",
+      "region": "Orta Asya ve bozkırlar",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Gazneli Devleti",
+      "region": "Güney Asya",
+      "playableUnitIds": [
+        "ghaznavid_guard"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Çola Devleti",
+      "region": "Güney Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Babür İmparatorluğu",
+      "region": "Güney Asya",
+      "playableUnitIds": [
+        "mughal_ahadi"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [
+        "mughal_ahadi"
+      ],
+      "status": "bu_tur_eklenen",
+      "reviewedCandidates": [
+        {
+          "id": "mughal_ahadi",
+          "status": "oyuna_eklendi",
+          "integratedId": "mughal_ahadi",
+          "resolution": "Ain-i Akbari’de hükümdara doğrudan bağlı ve atları denetlenen Ahadiler. Bütün Babür süvarilerinin adı değildir."
+        }
+      ]
+    },
+    {
+      "name": "Delhi Sultanlığı",
+      "region": "Güney Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Rajput devletleri",
+      "region": "Güney Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Maurya İmparatorluğu",
+      "region": "Güney Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Gupta İmparatorluğu",
+      "region": "Güney Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Vijayanagara",
+      "region": "Güney Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Maratha devletleri",
+      "region": "Güney Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Sri Lanka / Polonnaruwa",
+      "region": "Güney Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "incelendi_elenen",
+      "reviewedCandidates": [
+        {
+          "id": "srilanka_velaikkarar",
+          "status": "bu_secide_elenen",
+          "resolution": "Yazıt muhafız görevini doğruluyor; uygun lisanslı dönem donanımı görseli bulunamadı."
+        }
+      ]
+    },
+    {
+      "name": "Pala Hanedanı",
+      "region": "Güney Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Çalukya devletleri",
+      "region": "Güney Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Khmer İmparatorluğu",
+      "region": "Güneydoğu Asya",
+      "playableUnitIds": [
+        "khmer_ranked_cavalry"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [
+        "khmer_ranked_cavalry"
+      ],
+      "status": "bu_tur_eklenen",
+      "reviewedCandidates": [
+        {
+          "id": "khmer_guard_review",
+          "status": "oyuna_eklendi",
+          "integratedId": "khmer_ranked_cavalry",
+          "resolution": "Angkor Wat, II. Suryavarman alayı kabartmasındaki rütbeli süvarinin temsili; kaynaksız bir muhafız alayı adı kullanılmaz."
+        }
+      ]
+    },
+    {
+      "name": "Đại Việt",
+      "region": "Güneydoğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Champa",
+      "region": "Güneydoğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Pagan Krallığı",
+      "region": "Güneydoğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Ayutthaya",
+      "region": "Güneydoğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Sukhothai",
+      "region": "Güneydoğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Majapahit",
+      "region": "Güneydoğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Srivijaya",
+      "region": "Güneydoğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Malakka Sultanlığı",
+      "region": "Güneydoğu Asya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Osmanlı Devleti",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [
+        "janissary",
+        "ottoman_sipah",
+        "ottoman_solak"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Büyük Selçuklu Devleti",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [
+        "seljuk_hassa"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Ahameniş İmparatorluğu",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [
+        "persian"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "mevcut_kartla_temsil",
+      "reviewedCandidates": [
+        {
+          "id": "achaemenid_melophoroi_review",
+          "status": "mevcut_kartla_temsil",
+          "resolution": "Ölümsüzler kartıyla örtüşen kraliyet muhafızı temsili; ayrı tekrar eklenmedi."
+        }
+      ]
+    },
+    {
+      "name": "Part / Arsak İmparatorluğu",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [
+        "parthian_cataphract"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Sâsânî İmparatorluğu",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [
+        "sasanian_aswaran"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "mevcut_kartla_temsil",
+      "reviewedCandidates": [
+        {
+          "id": "sasanian_pushtigban_review",
+          "status": "mevcut_kartla_temsil",
+          "resolution": "Mevcut Sasani Aswaran kartıyla donanım örtüşüyor; ayrı görsel kanıt olmadan yeni kart açılmadı."
+        }
+      ]
+    },
+    {
+      "name": "Yeni Asur İmparatorluğu",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [
+        "assyria_royal_guard"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [
+        "assyria_royal_guard"
+      ],
+      "status": "bu_tur_eklenen",
+      "reviewedCandidates": [
+        {
+          "id": "assyria_royal_guard",
+          "status": "oyuna_eklendi",
+          "integratedId": "assyria_royal_guard",
+          "resolution": "Ninova kabartmasındaki kraliyet muhafızları temel alınır; bütün Asur piyadeleri seçkin sayılmaz."
+        }
+      ]
+    },
+    {
+      "name": "Sümer şehir devletleri",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Akad İmparatorluğu",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Babil",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Hititler",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Urartu",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Elam",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Emevîler",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Abbâsîler",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Fâtımîler",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Eyyûbîler / Memlük Sultanlığı",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [
+        "mamluk_bahri"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Memlük Sultanlığı",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [
+        "mamluk",
+        "mamluk_burji",
+        "mamluk_axebearer"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [
+        "mamluk_axebearer"
+      ],
+      "status": "bu_tur_eklenen",
+      "reviewedCandidates": [
+        {
+          "id": "mamluk_axe_guard_review",
+          "status": "oyuna_eklendi",
+          "integratedId": "mamluk_axebearer",
+          "resolution": "Met 69.156 kaydı, Memlük sultan ve emirlerinin özel baltacı maiyetinden söz eder. Yaya balta kullanımı oyun temsilidir."
+        }
+      ]
+    },
+    {
+      "name": "Safevîler",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Gürcü krallıkları",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Ermeni krallıkları",
+      "region": "Batı Asya ve Kafkasya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Sparta",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "spartan"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Atina",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Thebai",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Makedonya Krallığı",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "macedon_companions",
+        "macedon_hypaspists"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Seleukos İmparatorluğu",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Roma İmparatorluğu",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "roman",
+        "rome_praetorian",
+        "rome_equites"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Bizans İmparatorluğu",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "varangian"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "İskandinavya",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "viking",
+        "norse_hird_swordsman",
+        "norse_spearman",
+        "norse_dane_axeman",
+        "norse_longbowman"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi",
+      "followup": "Viking genişletmesi: dört yeni donanım temsili eklendi; beş seçenek menüde doğrulandı. Ayrıntılar viking-expansion-2026-10-14.txt. Önceki araştırma turunun currentIntegrated sayaçları korunmuştur."
+    },
+    {
+      "name": "Anglosakson İngiltere",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "england_housecarl"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Tudor İngilteresi",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "incelendi_elenen",
+      "reviewedCandidates": [
+        {
+          "id": "tudor_gentlemen_review",
+          "status": "bu_secide_elenen",
+          "resolution": "1509 kuruluşu doğrulanıyor; modern tören üniforması erken dönem savaşçıya taşınmadı."
+        }
+      ]
+    },
+    {
+      "name": "Orta Çağ İngilteresi",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "İrlanda Gal lordlukları",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "gaelic_gallowglass"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "İskoçya",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Fransa",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Kiev Rus ve Rus Prenslikleri",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "rus_druzhina"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Polonya-Litvanya",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "hussar"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Macaristan",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Sırp devletleri",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Bulgar devletleri",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Kastilya / Aragon",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Endülüs devletleri",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "İsviçre kantonları",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Alman Toprakları",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "landsknecht"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Kutsal Roma İmparatorluğu",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "german_armoured_foot"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Orta Çağ Avrupası",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "knight"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Tapınak Tarikatı",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "templar_knight"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Hospitalier / Aziz Yuhanna Tarikatı",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "hospitaller_knight"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Töton Tarikatı / Tarikat Devleti",
+      "region": "Avrupa ve Akdeniz",
+      "playableUnitIds": [
+        "teutonic_knight"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Yeni Krallık Mısır",
+      "region": "Afrika",
+      "playableUnitIds": [
+        "egypt_sherden"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Kartaca",
+      "region": "Afrika",
+      "playableUnitIds": [
+        "carthage_sacred_band"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "Kuş / Nubya",
+      "region": "Afrika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Makuria",
+      "region": "Afrika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Mali İmparatorluğu",
+      "region": "Afrika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "incelendi_elenen",
+      "reviewedCandidates": [
+        {
+          "id": "mali_royal_retinue",
+          "status": "bu_secide_elenen",
+          "resolution": "İbn Battuta silahlı maiyeti kaydeder; belirli üniforma ve güvenilir dönem görseli eksik."
+        }
+      ]
+    },
+    {
+      "name": "Songhay",
+      "region": "Afrika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Gana / Wagadu",
+      "region": "Afrika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Etiyopya",
+      "region": "Afrika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "incelendi_elenen",
+      "reviewedCandidates": [
+        {
+          "id": "ethiopia_chewa",
+          "status": "bu_secide_elenen",
+          "resolution": "Chewa geniş askerî kurumdur; her mensubu seçkin saymak ve tek kıyafet atamak desteklenmiyor."
+        }
+      ]
+    },
+    {
+      "name": "Aksum",
+      "region": "Afrika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Benin Krallığı",
+      "region": "Afrika",
+      "playableUnitIds": [
+        "benin_warrior_chief"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [
+        "benin_warrior_chief"
+      ],
+      "status": "bu_tur_eklenen",
+      "reviewedCandidates": [
+        {
+          "id": "benin_warrior_chief",
+          "status": "oyuna_eklendi",
+          "integratedId": "benin_warrior_chief",
+          "resolution": "MARKK C2384 kabartmasındaki kalkanlı ve mızraklı savaşçı şef. Özel bir alay adı değildir."
+        }
+      ]
+    },
+    {
+      "name": "Kongo Krallığı",
+      "region": "Afrika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Kanem-Bornu",
+      "region": "Afrika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Mossi devletleri",
+      "region": "Afrika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Asante",
+      "region": "Afrika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Meksika / Mexica (Aztek)",
+      "region": "Amerika",
+      "playableUnitIds": [
+        "mexica_eagle",
+        "mexica_jaguar"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "oyunda_yeniden_denetlenmedi"
+    },
+    {
+      "name": "İnka İmparatorluğu",
+      "region": "Amerika",
+      "playableUnitIds": [
+        "inca_decorated_warrior"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [
+        "inca_decorated_warrior"
+      ],
+      "status": "bu_tur_eklenen"
+    },
+    {
+      "name": "Maya şehir devletleri",
+      "region": "Amerika",
+      "playableUnitIds": [
+        "maya_sajal"
+      ],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [
+        "maya_sajal"
+      ],
+      "status": "bu_tur_eklenen",
+      "reviewedCandidates": [
+        {
+          "id": "maya_elite_review",
+          "status": "oyuna_eklendi",
+          "integratedId": "maya_sajal",
+          "resolution": "Cleveland 1990.178 heykelciğindeki ikinci kademeden soylu sajal. Soyluluk rütbesidir; bütün Maya kentlerinde tek bir alay değildir."
+        }
+      ]
+    },
+    {
+      "name": "Mixtek devletleri",
+      "region": "Amerika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Zapotek devletleri",
+      "region": "Amerika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Taraska / Purépecha",
+      "region": "Amerika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Chimú",
+      "region": "Amerika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Moche",
+      "region": "Amerika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Tlaxcala",
+      "region": "Amerika",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Māori toplulukları",
+      "region": "Okyanusya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "incelendi_elenen",
+      "reviewedCandidates": [
+        {
+          "id": "maori_ranked_warrior_review",
+          "status": "bu_secide_elenen",
+          "resolution": "Silahın rütbe anlamı doğrulanıyor; bu seçkide tam kıyafet ve görsel kullanım dayanağı eksik."
+        }
+      ]
+    },
+    {
+      "name": "Tonga",
+      "region": "Okyanusya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Samoa",
+      "region": "Okyanusya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Fiji",
+      "region": "Okyanusya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Niue",
+      "region": "Okyanusya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "incelendi_elenen",
+      "reviewedCandidates": [
+        {
+          "id": "niue_toa_review",
+          "status": "bu_secide_elenen",
+          "resolution": "Toa genel savaşçı adıdır; incelenen geç eserler ayrı tarihî seçkin birlik kanıtı sağlamıyor."
+        }
+      ]
+    },
+    {
+      "name": "Kiribati",
+      "region": "Okyanusya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    },
+    {
+      "name": "Hawaii",
+      "region": "Okyanusya",
+      "playableUnitIds": [],
+      "currentResearchIds": [],
+      "currentIntegratedIds": [],
+      "status": "henuz_taranmadi"
+    }
+  ]
+}

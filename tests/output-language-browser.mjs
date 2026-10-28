@@ -69,7 +69,7 @@ try{
  await page.goto(origin+'/?edit=1');await page.waitForFunction(()=>window.marbleStudio);
  assert.match(await page.locator('#nav-track').textContent(),/Parkur/);
  assert.equal(await page.locator('select[name="language"] option[value="tr"]').count(),0);
- await page.goto(origin+'/factory.html');
+ await page.goto(origin+'/factory.html');await page.waitForURL('**/index.html?edit=1');await page.waitForFunction(()=>window.marbleStudio);
  assert.equal(await page.locator('select[name="language"]').inputValue(),'en');
  assert.equal(await page.locator('select[name="language"] option[value="tr"]').count(),0);
  assert.deepEqual(errors,[]);

@@ -1,0 +1,34 @@
+Tarihi imparatorluklar görsel kütüphanesi — 28 Ekim 2026
+
+16 kayıt korundu, 8 eklendi (toplam 24): Fransa, İspanya, Portekiz,
+Brezilya, Avusturya, Japonya, Etiyopya, Kore.
+Harita kullanılan Roma, Bizans, Selçuklu, Moğol, Babür, Ahameniş,
+Aztek ve Timur kayıtlarının görselleri değiştirildi. Kimlikler sabit.
+Kaynak, sanatçı, lisans ve dönem/temsil notu her kayıt içinde tutuluyor.
+Selçuklu ve Timur için yaygın modern atıflar gerçek tarihî bayrak diye
+sunulmuyor. Roma/Ahameniş yeniden çizimleri, Aztek şehir glifi,
+Avusturya-Macaristan arması ve Moğol ak tuğ çizimi açıkça ayrılıyor.
+Mevcut kullanıcı top resimleri değiştirilmez; yeni seçim yeni görseli alır.
+
+Başlıca kaynaklar:
+https://commons.wikimedia.org/wiki/File:Byzantine_imperial_flag,_14th_century.svg
+https://commons.wikimedia.org/wiki/File:Flag_of_the_Mughal_Empire.png
+https://commons.wikimedia.org/wiki/File:Flag_of_the_Seljuks.svg
+https://commons.wikimedia.org/wiki/File:TimuridFlag_attributed.svg
+https://www.iranicaonline.org/articles/flags-i/
+https://acta.bibl.u-szeged.hu/67901/1/altaica_053.pdf
+Diğer kaynaklar public/catalog/empires-*.json içinde.
+
+Kod: scripts/curate-empires.mjs, src/image-catalog.js, src/catalog.css.
+fit=flag tüm görseli daire içinde tutar; diğer kategorilerin kırpması korunur.
+Importer ve bakım komutu curated kayıtları korur.
+Küçük görseller public/catalog içinde, oynarken indirme gerektirmez.
+Kaynak API yanıtlarının yerel önbelleği: artifacts/empire-source-metadata.json.
+Önizleme: artifacts/empires-contact-sheet.png (800x600).
+
+Kontroller başarılı:
+node tests/empire-catalog-browser.mjs (24 varlık, kenar koruma, kaynak
+tutarlılığı, notlar, arama, seçim, toplu kadro, kalıcılık, mobil genişlik).
+Maç API'si testte boş yanıtla izole edildi; katalog dış istek üretmedi.
+node tests/catalog-fill.mjs (mevcut kırpma, kişisel resim ve eski kayıt geçişi).
+node node_modules/vite/bin/vite.js build (başarılı; büyük paket uyarısı var).

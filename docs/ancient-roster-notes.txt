@@ -1,0 +1,45 @@
+15 Ekim 2026 — Eksik antik dönem birlik rolleri
+
+Oyuna eklenen 6 kimlik:
+assyrian_slinger — Yeni Asur / Asur sapancısı
+egypt_middle_spearman — Orta Krallık Mısır / deri kalkanlı mızraklı
+egypt_middle_axeman — Orta Krallık Mısır / hilal baltalı piyade
+achaemenid_spear_cavalry — Ahameniş İmparatorluğu / mızraklı süvari
+han_crossbowman — Han Hanedanı / arbaletçi
+han_jian_infantry — Han Hanedanı / jian kılıçlı piyade
+
+Kayıtlar: src/ancient-roster-units.js; çizimler: src/ancient-roster-art.js.
+Katalog, savaşçı profil kaydı, çizim yönlendirmesi ve Mısır kültür menüsü entegre.
+Standart birlik motoru, kayıt/yükleme ve iki ordu seçim akışı kullanılıyor.
+Komutan presetleri ve fil kapasitesi bu değişiklikte düzenlenmedi; ilgili sekmeye bildirildi.
+
+Tarihî donanım kaynakları:
+Asur kuşatma sapancıları: https://www.britishmuseum.org/collection/object/W_1851-0902-27
+Mısır kalkan modeli: https://www.metmuseum.org/art/collection/search/546270
+Mısır bronz baltası: https://www.metmuseum.org/art/collection/search/544279
+Pers süvari donanımı: https://lexundria.com/hdt/7.84/mcly
+Pers kısa mızrak/pullu görünüm: https://lexundria.com/hdt/7.61/mcly
+Han bronz arbalet tetiği: https://asia-archive.si.edu/object/S2012.9.2116/
+Han kılıcı: https://www.britishmuseum.org/collection/object/A_1940-1214-280
+
+Bu kartlar adlandırılmış seçkin alay iddiası taşımayan donanım rolleridir.
+Kıyafet ve renk rekonstrüksiyonları kartların visualNote alanında ayrıldı.
+Han tetik nesnesi tüm asker kıyafetini kanıtlamaz. Pers başlık şekli temsilidir.
+Pers süvarisi kısa mızraklı ve üzengisizdir; Han arbaleti tek atışlıdır.
+Mısır kalkan ve balta fotoğrafları The Met Open Access/kamu malı;
+public/warrior-references/ancient-546270.jpg (186201 bayt)
+public/warrior-references/ancient-544279.jpg (14773 bayt).
+Fotoğraflar incelenerek özgün oyun çizimleri yapıldı. Dosya boyutu internet tüketim ölçümü değildir.
+
+Doğrulama:
+tests/ancient-roster.mjs: 6 birlik iki takımda gerçek hasar, doğru sapan taşı/arbalet oku,
+kayıt geri yükleme; 480 animasyon karesinde boşluk/kırpılma yok, 6 farklı siluet;
+1366 ve 390 pikselde medeniyet seçimi, iki takıma ekleme/çıkarma, savaşa geçiş ve yeniden yükleme geçti.
+Ek --node-only koşusu: iki tarafta Ahameniş süvarisinin koşu mesafesi biriktirerek
+hücuma başlaması ve hücumla gerçek hasar vermesi geçti.
+tests/historical-elite-art.mjs: 233 birlik, 11184 kare; eksik, kırpılmış ve kopya siluet yok.
+tests/historical-equipment-balance.mjs: 233 farklı savaş profili, 258 aynalı savaş geçti.
+Vite üretim derlemesi başarılı; mevcut büyük paket boyutu uyarısı devam ediyor.
+Önizleme: artifacts/ancient-roster/units.jpg
+Tarayıcı sonuçları: artifacts/ancient-roster/checks.json
+Derleme günlüğü: artifacts/ancient-roster/build.log

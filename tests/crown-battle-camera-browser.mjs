@@ -1,0 +1,135 @@
+import assert from 'node:assert/strict';
+import { chromium } from 'playwright';
+import { populateClassic } from './crown-battle-fixture.mjs';
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+try {
+  for (const width of [1366, 390]) {
+    const page = await browser.newPage({ viewport: { width, height: 844 }, isMobile: width < 900, hasTouch: width < 900 });
+    const errors = []; page.on('pageerror', e => errors.push(e.message));
+    await page.goto('http://127.0.0.1:5173/crown-battle.html?mode=classic');
+    await populateClassic(page);
+    await page.evaluate(async () => {
+      // Use the same Vite module URL as the app, including any HMR timestamp.
+      const appSource = await (await fetch('/src/crown-battle-app.js')).text();
+      const moduleUrl = appSource.match(/from ['"]([^'"]*crown-battle\.js[^'"]*)['"]/)[1];
+      const { Battle } = await import(moduleUrl);
+      const rendererUrl = appSource.match(/from ['"]([^'"]*crown-battle-renderer\.js[^'"]*)['"]/)[1];
+      const { BattleRenderer } = await import(rendererUrl);
+      const render = BattleRenderer.prototype.renderIfNeeded;
+      BattleRenderer.prototype.renderIfNeeded = function(...args) { window.cameraRenderer = this; return render.apply(this,args); };
+      const original = Battle.prototype.moveSelected;
+      Battle.prototype.moveSelected = function(x, y) { window.lastMove = { x, y }; return original.call(this, x, y); };
+      const attack = Battle.prototype.attackSelected;
+      Battle.prototype.attackSelected = function(...args) { window.attackCalls = (window.attackCalls || 0) + 1; return attack.apply(this,args); };
+    });
+    await page.waitForFunction(()=>window.cameraRenderer);
+    await page.locator('#battle').scrollIntoViewIfNeeded();
+    let initialBox = await page.locator('#battle').boundingBox();
+    const dragCamera = async (button, fraction) => {
+      const box = await page.locator('#battle').boundingBox();
+      await page.mouse.move(box.x+box.width*.5,box.y+box.height*.5);
+      await page.mouse.down({button});
+      await page.mouse.move(box.x+box.width*(.5+fraction),box.y+box.height*.5,{steps:5});
+      await page.mouse.up({button});
+    };
+    assert.equal(await page.locator('#zoom-reset').textContent(),'%100');
+    const panDistance = await page.evaluate(()=>window.cameraRenderer.viewWidth * .1);
+    const clampedPan = async (direction) => page.evaluate(direction => {
+      const r = window.cameraRenderer, half = r.viewWidth / 2;
+      return Math.max(r.bounds.left + half, Math.min(r.bounds.right - half, 300 + direction * r.viewWidth * .1));
+    }, direction);
+    const leftPan = await clampedPan(-1), rightPan = await clampedPan(1);
+    await dragCamera('middle',.1);
+    assert.ok(Math.abs(await page.evaluate(()=>window.cameraRenderer.view.x)-leftPan)<3,'Camera pans at initial 100% within map bounds');
+    assert.equal(await page.evaluate(()=>window.lastMove),undefined,'Middle drag never issues orders');
+    await page.locator('#zoom-reset').click();
+    await page.locator('#pan-view').click(); await dragCamera('left',.1);
+    assert.ok(Math.abs(await page.evaluate(()=>window.cameraRenderer.view.x)-leftPan)<3,'Explicit pan mode works at 100%');
+    await page.locator('#zoom-reset').click();
+    await page.keyboard.down('Alt'); await dragCamera('left',-.1); await page.keyboard.up('Alt');
+    assert.ok(Math.abs(await page.evaluate(()=>window.cameraRenderer.view.x)-rightPan)<3,'Alt-drag works');
+    await page.locator('#zoom-reset').click();
+    await page.keyboard.down('ArrowRight'); await page.waitForTimeout(200); await page.keyboard.up('ArrowRight');
+    assert.ok(await page.evaluate(()=>window.cameraRenderer.view.x)>320,'Arrow keys pan while paused');
+    await page.locator('#menu-setup').click(); await page.locator('#seed').focus();
+    const inputView = await page.evaluate(()=>window.cameraRenderer.view.x);
+    await page.keyboard.down('ArrowLeft'); await page.waitForTimeout(150); await page.keyboard.up('ArrowLeft');
+    assert.equal(await page.evaluate(()=>window.cameraRenderer.view.x),inputView,'Arrow keys in forms do not move camera');
+    await page.locator('#recruitment .recruit-close').click();
+    await page.locator('#menu-command').click(); await page.locator('#zoom-reset').click();
+    await page.locator('#fit-map').click();
+    assert.equal(await page.locator('#zoom-reset').textContent(),'%13');
+    assert.equal(await page.locator('#zoom-out').isDisabled(),true);
+    assert.deepEqual(await page.evaluate(()=>window.cameraRenderer.bounds),{left:-2100,right:2700,top:-3360,bottom:4320});
+    await page.locator('#zoom-reset').click();
+    if (width < 900) {
+      await page.locator('#battle').scrollIntoViewIfNeeded(); initialBox = await page.locator('#battle').boundingBox();
+      const cdp = await page.context().newCDPSession(page), x=initialBox.x+initialBox.width*.5, y=initialBox.y+initialBox.height*.5;
+      await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:x-35,y,id:1},{x:x+35,y,id:2}]});
+      await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x-65,y:y+20,id:1},{x:x+65,y:y+20,id:2}]});
+      await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+      assert.ok(await page.evaluate(()=>window.cameraRenderer.view.zoom)>1.7,'Two-finger pinch zoom works');
+      assert.equal(await page.evaluate(()=>window.lastMove),undefined,'Touch camera gesture never issues orders');
+      assert.equal(await page.evaluate(()=>window.cameraRenderer.box),null,'Pinch cancels an initial selection drag');
+      await page.locator('#zoom-reset').click();
+      await page.locator('#menu-command').click(); await page.locator('[data-unit=cavalry]').click();
+      await page.locator('#target-attack').click(); await page.locator('#return-to-field').click();
+      await page.locator('#battle').scrollIntoViewIfNeeded();
+      const enemyPoint = await page.evaluate(() => {
+        const r = window.cameraRenderer, enemy = r.battle.units.find(u=>u.team !== r.battle.activeTeam && u.hp > 0);
+        const box = document.querySelector('#battle').getBoundingClientRect();
+        return {x:box.x+box.width*(.5+(enemy.x-r.view.x)*r.view.zoom/600),y:box.y+box.height*(.5+(enemy.y-r.view.y)*r.view.zoom/960)};
+      });
+      await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{...enemyPoint,id:1}]});
+      assert.equal(await page.evaluate(()=>window.attackCalls || 0),0,'First finger waits before targeting');
+      await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{...enemyPoint,id:1},{x:enemyPoint.x+25,y:enemyPoint.y-25,id:2}]});
+      await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+      assert.equal(await page.evaluate(()=>window.attackCalls || 0),0,'Two-finger camera gesture never attacks while targeting');
+      await page.touchscreen.tap(enemyPoint.x,enemyPoint.y);
+      assert.equal(await page.evaluate(()=>window.attackCalls),1,'Single touch still attacks on release');
+      await page.evaluate(()=>window.cameraRenderer.battle.selected.clear());
+      await cdp.detach(); await page.locator('#zoom-reset').click();
+    }
+    await page.locator('#zoom-in').click();
+    assert.equal(await page.locator('#zoom-reset').textContent(), '%140');
+    await page.locator('#menu-command').click();
+    await page.locator('[data-unit=cavalry]').click();
+    if (width < 900) await page.locator('#return-to-field').click();
+    await page.locator('#battle').scrollIntoViewIfNeeded();
+    let box = await page.locator('#battle').boundingBox();
+    await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2, { button: 'right' });
+    const center = await page.evaluate(() => window.lastMove);
+    assert.ok(center, JSON.stringify({ errors, events: await page.locator('#events').textContent(), selection: await page.locator('#selection-note').textContent(), box }));
+    assert.ok(Math.abs(center.x - 300) < 2 && Math.abs(center.y - 480) < 2, 'Zoomed order maps to world center');
+    await page.locator('#pan-view').click();
+    const before = await page.locator('#events').textContent();
+    box = await page.locator('#battle').boundingBox();
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down(); await page.mouse.move(box.x + box.width * .6, box.y + box.height / 2, { steps: 5 }); await page.mouse.up();
+    assert.equal(await page.locator('#events').textContent(), before, 'Panning never issues an order');
+    await page.locator('#pan-view').click();
+    await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2, { button: 'right' });
+    const after = await page.evaluate(() => window.lastMove);
+    assert.ok(Math.abs(after.x - (300 - panDistance / 1.4)) < 3 && Math.abs(after.y - 480) < 2, 'Panned order maps to correct world location');
+    await page.locator('#zoom-reset').click();
+    assert.equal(await page.locator('#zoom-reset').textContent(), '%100');
+    assert.equal(await page.locator('#zoom-out').isDisabled(), false,'Expanded map permits zooming out below 100%');
+    await page.locator('#fit-map').click();
+    box = await page.locator('#battle').boundingBox();
+    const expandedTarget = await page.evaluate(() => {
+      const r=window.cameraRenderer;
+      return .5+(-1200-r.view.x)*r.view.zoom/r.viewWidth;
+    });
+    await page.mouse.click(box.x+box.width*expandedTarget,box.y+box.height*.5,{button:'right'});
+    assert.ok((await page.evaluate(()=>window.lastMove)).x < -900,'Orders reach the new area outside the previous expanded map');
+    assert.ok(await page.evaluate(()=>window.cameraRenderer.battle.units.some(u=>u.order?.kind==='move'&&u.order.x < -900)),'Engine retains expanded-map destinations');
+    await page.locator('#zoom-reset').click();
+    await page.locator('#zoom-in').click(); await page.locator('#zoom-in').click();
+    if (width >= 900) await page.screenshot({ path: 'artifacts/crown-battle/graphics-detail.jpg', type: 'jpeg', quality: 75 });
+    await page.locator('#zoom-reset').click();
+    await page.screenshot({ path: `artifacts/crown-battle/graphics-${width}.jpg`, type: 'jpeg', quality: 65 });
+    assert.deepEqual(errors, []);
+    console.log(`PASS ${width}px: pan at 100%, arrows/form focus, map fit, zoom, expanded-map orders, gesture isolation${width < 900 ? ', two-finger pinch' : ''}, no browser errors`);
+    await page.close();
+  }
+} finally { await browser.close(); }

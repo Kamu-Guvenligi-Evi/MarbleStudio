@@ -1,0 +1,32 @@
+﻿import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {MergeEvolution,normalizeMerge,probeMerge} from '../src/merge-evolution.js';
+import {normalizeSnapshot} from '../src/studio-transfer.js';
+const edits={fruit:[{theme:'planets',level:0,name:'Başlangıç'},{theme:'football-clubs',level:1,name:'Final'}]};
+const config=normalizeMerge({theme:'fruit',themeEdits:edits});
+assert.deepEqual(normalizeSnapshot({mode:'merge-evolution',project:config}).project.themeEdits,edits);
+assert.deepEqual(normalizeMerge({themeEdits:{fruit:[{theme:'missing',level:0},{theme:'fruit',level:0}]}}).themeEdits,{});
+const game=new MergeEvolution(config);assert.equal(game.theme.stages.length,2);assert.equal(game.theme.stages[1].imageTheme,'football-clubs');assert.equal(probeMerge(config).outcome,'final');
+const crowded=new MergeEvolution({theme:'planets'});for(let i=0;i<180;i++)crowded.add(0,270,-1000);crowded.step();assert.equal(crowded.spawned,1);assert.equal(crowded.balls.length,181);
+const b=await chromium.launch({channel:'chrome',headless:true});
+try{
+ const p=await b.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
+ await p.goto('http://127.0.0.1:5173/merge-evolution.html');await p.locator('[data-theme="fruit"]').click();
+ await p.locator('#theme-editor-panel summary').click();
+ assert.equal(await p.locator('.editor-row').count(),6);assert.equal(await p.locator('#editor-add').isDisabled(),true);
+ await p.getByLabel('1. basamak görseli',{exact:true}).selectOption('planets:0');await p.getByLabel('1. basamak adı',{exact:true}).fill('Yeni başlangıç');
+ await p.locator('#editor-apply').click();assert.equal(await p.locator('#evolution-chain li span').first().textContent(),'Yeni başlangıç');
+ assert.ok((await p.locator('#evolution-chain img').first().getAttribute('src')).includes('mercury'));
+ await p.reload();await p.waitForFunction(()=>window.mergeStudio);assert.equal(await p.locator('#evolution-chain li span').first().textContent(),'Yeni başlangıç');
+ await p.locator('[data-theme="planets"]').click();await p.locator('[data-theme="fruit"]').click();assert.equal(await p.locator('#evolution-chain li span').first().textContent(),'Yeni başlangıç');
+ await p.locator('#theme-editor-panel summary').click();
+ for(let i=0;i<4;i++)await p.locator('.editor-row').last().getByText('Kaldır',{exact:true}).click();
+ assert.equal(await p.locator('.editor-row').count(),2);assert.equal(await p.locator('.editor-row').first().getByText('Kaldır',{exact:true}).isDisabled(),true);
+ await p.locator('#editor-apply').click();const snapshot=await p.evaluate(()=>window.mergeStudio.snapshot());assert.equal(snapshot.themeEdits.fruit.length,2);
+ await p.setViewportSize({width:390,height:844});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+ await p.screenshot({path:'artifacts/merge-evolution/editor-mobile.jpg',type:'jpeg',quality:65,fullPage:true});
+ await p.goto('http://127.0.0.1:5173/factory-render.html');await p.waitForFunction(()=>window.factoryRenderer);
+ const exported=await p.evaluate(async project=>{const recipe={...project,mode:'merge-evolution'},analysis=window.factoryRenderer.probe(recipe);await window.factoryRenderer.begin({recipe,analysis,speed:1,intro:0,fps:30,width:540,height:960,template:'minimal',copy:{hook:'Merge'},channel:'LastBallStand'});window.factoryRenderer.frame(Math.ceil((analysis.simulationSeconds+1)*30));return window.factoryRenderer.result();},snapshot);assert.equal(exported.complete,true);assert.equal(exported.outcome,'final');
+ await p.goto('http://127.0.0.1:5173/merge-evolution.html');await p.locator('#theme-editor-panel summary').click();await p.locator('#editor-reset').click();assert.equal(await p.locator('#evolution-chain li').count(),6);
+ assert.deepEqual(errors,[]);console.log(JSON.stringify({editor:true,persistence:true,perTheme:true,mobile:true,stageLimits:true,customVideo:true,reset:true,noPopulationFeedCutoff:true,errors}));
+}finally{await b.close();}

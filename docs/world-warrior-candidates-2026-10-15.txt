@@ -1,0 +1,23 @@
+Ta? Muharebesi ? 15 Ekim 2026 uygulama kayd?
+
+9 yeni birlik eklendi; toplam 65 tarih? birlik.
+
+1. Moche topuzlu savaşçısı ? Moche; Topuzlu ve küçük kalkanlı piyade.
+2. İskit atlı okçusu ? İskitler; Atlı okçu.
+3. Qin arbaletçisi ? Qin Hanedanı; Arbaletli piyade.
+4. Trak peltastı ? Traklar; Hafif mızraklı piyade.
+5. Dak falx savaşçısı ? Daklar; İki elli falx piyadesi.
+6. İsviçre tebercisi ? İsviçre kantonları; Teberli piyade.
+7. Tibet lamelli süvarisi ? Tibet; Kılıçlı ağır süvari.
+8. Mixtec soylu savaşçısı ? Mixtec şehir devletleri; Baltalı ve kalkanlı piyade.
+9. Nubyalı okçu ? Nubya; Hafif yaya okçu.
+
+Hepsi ilgili medeniyet men?s?nde, kaydedilebilir ordularda ve sava? motorunda etkin. Ba?l?k, g?vde, kalkan ve silah profilleri ayr?. Qin k?sa arbalet oku atar; ?skit atl? ok?udur. Trak temsili elde m?zrak kullan?r.
+
+Kaynaklar ve yorum s?n?rlar? e?lik eden JSON ve birlik kartlar?n?n kaynak ba?lant?lar?nda. ?ki k???k Met foto?raf? (Moche 40.594 bayt, ?skit 26.703 bayt) yerel referans olarak incelendi; bunlar ?l??lm?? internet trafi?i de?ildir. Kartlarda ?zg?n canvas ?izimleri kullan?l?r. Di?er ?izimler kaynak metinleri ve yorumlanan ayr?nt?lar i?erir; t?m referans foto?raflar? incelendi denmez.
+
+Do?rulama: tests/world-warriors.mjs ? 9 birli?in canl? sava?ta hasar?, Qin bolt ba?lant?s?; 576 animasyon karesi, farkl? siluetler, k?rp?lma yok; men?den se?me, sava?a ge?i? ve kay?t yeniden y?kleme ba?ar?l?. Ok balisti?i mevcut testleri ge?ti.
+?nizleme: artifacts/world-warriors/nine-warriors.jpg
+
+So?d ?akarlar? ve Velaikkara bu uygulamada eklenmedi; ara?t?rma devam edebilir. Kiribati ge? d?nem aday? kapsam d???nda kald?.
+Son üretim derlemesi: Vite başarılı (exit 0); mevcut 500 kB üzeri paket uyarısı devam ediyor.

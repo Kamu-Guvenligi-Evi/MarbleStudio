@@ -1,0 +1,620 @@
+{
+  "date": "2026-10-15",
+  "purpose": "Ta? Muharebesi tarih? sava??? ara?t?rmas? ve uygulama kayd?.",
+  "scope": "Kılıç, mızrak ve yay ağırlıklı dönemler; yaya ve atlılar. İsimli muhafız birlikleri ile genel savaşçı türleri ayrıdır.",
+  "status": "9 yeni aday oyun katalo?una, medeniyet men?lerine ve sava?a entegre edildi. ?izimler kaynak donan?m?ndan yorumlanm?? oyun temsilleridir.",
+  "catalogueSnapshot": {
+    "historicalActiveCount": 65,
+    "source": "src/historical-catalogue.js",
+    "note": "Aday kimlikleri etkin katalogla karşılaştırılmalıdır. Soğd çakarları ve Velaikkara önceki araştırmalarda vardır.",
+    "previousHistoricalActiveCount": 56
+  },
+  "visualPolicy": "Kaynak sayfası görsel dosyası değildir. İndirilen dosya varsa ayrıca belirtilir. Müze metninden çıkarılan donanım taslağı, görselin yakından incelendiği anlamına gelmez. Fotoğraf hakları tek tek doğrulanmadan oyun varlığı olarak kullanılmaz.",
+  "sources": {
+    "moche": {
+      "title": "The Met — Warrior Bottle, Moche, 4.–7. yy",
+      "url": "https://www.metmuseum.org/art/collection/search/309439",
+      "access": "Nesne açıklaması okundu; Public Domain ibaresi doğrulandı. K???k nesne foto?raf? indirilip g?rsel olarak incelendi; kartta foto?raf kullan?lm?yor.",
+      "kind": "müze nesnesi",
+      "localReference": "artifacts/world-warriors/references/moche-bottle.jpg",
+      "license": "The Met Open Access / Public Domain"
+    },
+    "scythian": {
+      "title": "The Met — Bronze statuette of a Scythian mounted archer",
+      "url": "https://www.metmuseum.org/art/collection/search/255955",
+      "access": "Nesne açıklaması okundu; Public Domain ibaresi doğrulandı. K???k nesne foto?raf? indirilip g?rsel olarak incelendi; kartta foto?raf kullan?lm?yor.",
+      "kind": "müze nesnesi",
+      "localReference": "artifacts/world-warriors/references/scythian-statuette.jpg",
+      "license": "The Met Open Access / Public Domain"
+    },
+    "peltast": {
+      "title": "Perseus / Harvard 1959.219 — Trak kıyafetli peltast",
+      "url": "https://www.perseus.tufts.edu/hopper/artifact?name=Harvard+1959.219&object=Vase",
+      "access": "Arama dizinindeki ayrıntılı nesne açıklaması okundu; doğrudan açılış başarısız.",
+      "kind": "akademik nesne kataloğu"
+    },
+    "falx": {
+      "title": "Alin Henţ — Istoria unei arme. Falx Dacica, Sargetia 5 (2014), 109–121",
+      "url": "https://www.ceeol.com/search/article-detail?id=482800",
+      "access": "Yazar, bibliyografya ve makale özeti okundu; tam makale incelenmedi.",
+      "kind": "arkeoloji araştırması"
+    },
+    "falxImages": {
+      "title": "Sargetia — falx makalesinin PDF'si",
+      "url": "https://biblioteca-digitala.ro/reviste/sargetia/41-sargetia-seria-noua-2014-V_124.pdf",
+      "access": "Arama sonucu bulundu; görsel sayfaları henüz incelenmedi.",
+      "kind": "araştırma / görsel adayı"
+    },
+    "swiss": {
+      "title": "Swiss National Museum — The rise of the all-purpose weapon: halberd",
+      "url": "https://blog.nationalmuseum.ch/en/2022/01/the-rise-of-the-all-purpose-weapon-halberd/",
+      "access": "Müze yazısı okundu; 1470 tarihli kronik ve geç dönem çizim ayrı tutuldu.",
+      "kind": "müze araştırması"
+    },
+    "qin": {
+      "title": "NGV — Terracotta Warriors sergi etiketleri; Kneeling archer 002812",
+      "url": "https://www.ngv.vic.gov.au/wp-content/uploads/2018/12/Labels_TerracottaWarriors_Cai-Guo-Qiang-ordered.pdf",
+      "access": "Arama dizininde nesnenin tarih ve arbalet açıklaması okundu; büyük PDF indirilmedi.",
+      "kind": "müze sergi metni"
+    },
+    "qinImages": {
+      "title": "National Gallery of Art — The Golden Age of Chinese Archaeology eğitim paketi",
+      "url": "https://www.nga.gov/sites/default/files/migrate_images/content/dam/ngaweb/education/learning-resources/teaching-packets/pdfs/chinese-archaeology-tp.pdf",
+      "access": "Diz çöken okçu için görsel kaynak adayı; sayfa incelemesi bekliyor.",
+      "kind": "müze yayını"
+    },
+    "tibet": {
+      "title": "Donald J. La Rocca / The Met — Tibetan Arms and Armor",
+      "url": "https://www.metmuseum.org/essays/tibetan-arms-and-armor",
+      "access": "Yazı ve tarihlenmiş nesne başlıkları okundu.",
+      "kind": "müze araştırması"
+    },
+    "tibetLate": {
+      "title": "The Met — Armored Cavalryman, 18.–19. yy",
+      "url": "https://www.metmuseum.org/art/collection/search/35942",
+      "access": "Geç dönem birleştirilmiş süvari; Orta Çağ için doğrudan örnek alınmamalı.",
+      "kind": "dönem uyuşmazlığı kontrolü"
+    },
+    "mixtec": {
+      "title": "British Museum — Codex Zouche-Nuttall, Am1902,0308.1",
+      "url": "https://www.britishmuseum.org/collection/object/E_Am1902-0308-1",
+      "access": "Arama dizinindeki nesne açıklaması okundu; savaşçı paneli seçilmedi.",
+      "kind": "müze nesnesi"
+    },
+    "mixtecDate": {
+      "title": "British Museum / Smarthistory — Codex Zouche-Nuttall",
+      "url": "https://smarthistory.org/codex-zouche-nuttall/",
+      "access": "Arama dizinindeki tarih ve Sekiz Geyik açıklaması okundu.",
+      "kind": "müze açıklaması"
+    },
+    "nubia": {
+      "title": "Museum of Fine Arts Boston — Ancient Nubia Now",
+      "url": "https://www.mfa.org/press-release/nubia",
+      "access": "Nubya okçuluğuna ilişkin müze açıklaması okundu; Mesehti modelinin kaydı değildir.",
+      "kind": "müze açıklaması"
+    },
+    "nubiaModel": {
+      "title": "Egypt-Museum.com — Model of Nubian Archers",
+      "url": "https://egypt-museum.com/model-of-nubian-archers/",
+      "access": "Arama açıklaması incelendi. Resmî Kahire müzesi sitesi değildir; tarih ve nesne kimliği resmî kaynakla tamamlanmalı.",
+      "kind": "ikincil görsel araştırma başlangıcı"
+    },
+    "kiribati": {
+      "title": "Pitt Rivers Museum — Kiribati coconut-fibre armour",
+      "url": "https://web.prm.ox.ac.uk/weapons/index.php/tour-by-region/oceania/oceania/arms-and-armour-oceania-222/",
+      "access": "Müze açıklaması okundu; zırh 1941.2.74 ve başlık 1884.32.31.",
+      "kind": "müze nesneleri"
+    },
+    "kiribatiDate": {
+      "title": "Museums Victoria — Armour, Kiribati, pre 1890",
+      "url": "https://collections.museumsvictoria.com.au/items/160101",
+      "access": "Arama sonucu tarihlendirmesi incelendi.",
+      "kind": "müze nesnesi"
+    },
+    "cakar": {
+      "title": "Étienne de la Vaissière — ČĀKAR, Encyclopaedia Iranica",
+      "url": "https://www.iranicaonline.org/articles/cakar/",
+      "access": "Hükümdar ve soylu maiyetleri hakkındaki açıklama okundu.",
+      "kind": "akademik başvuru"
+    },
+    "sogdianArmor": {
+      "title": "Encyclopaedia Iranica — ARMOR ii",
+      "url": "https://www.iranicaonline.org/articles/armor-ii/",
+      "access": "Panjikent zırh tasvirleri hakkındaki arama açıklaması incelendi.",
+      "kind": "akademik başvuru"
+    },
+    "sogdianImages": {
+      "title": "Matteo Compareti — Heroes Fighting Snake Demons: Problems of Identification in Panjikent Paintings (2018)",
+      "url": "https://edspace.american.edu/silkroadjournal/v16_2018_compareti/",
+      "access": "Makale ve teşhis sorunu aramada doğrulandı; görsel sayfaları incelenmedi.",
+      "kind": "araştırma / dönem sanatı"
+    },
+    "velaikkara": {
+      "title": "SIDDHAM IN03103 — Polonnaruva Slab Inscription",
+      "url": "https://siddham.network/inscription/in03103/",
+      "access": "Yazıt kaydı okundu. Tarihsiz metne editörün önerisi 1137–1153; giysi tarifi içermez.",
+      "kind": "epigrafik veri tabanı"
+    },
+    "mixtecWeapons": {
+      "title": "Abtosway ve McCafferty (2019), Mixtec Militarism",
+      "url": "https://www.researchgate.net/publication/339371399_Mixtec_Militarism_Weapons_and_Warfare_in_the_Mixtec_Codices",
+      "access": "Yazar?n payla?t??? ara?t?rma metni okundu; Nuttall s.20 baltal? sava???, ?ekil9.3.",
+      "kind": "birincil ikonografi ara?t?rmas?"
+    }
+  },
+  "units": [
+    {
+      "id": "moche_mace_warrior",
+      "name": "Moche topuzlu savaşçısı",
+      "civilizationMenu": "Moche",
+      "region": "Güney Amerika / Peru",
+      "period": "MS 4.–7. yy",
+      "novelty": "new",
+      "scopeFit": true,
+      "priority": 1,
+      "status": "integrated_interpretive_art",
+      "classification": "Savaşçı tipi; isimli bir muhafız alayı olarak doğrulanmadı.",
+      "mount": "none",
+      "evidence": "Müze kabında topuz, küçük kalkan, tunik, çene bağı olan konik başlık ve hilal biçimli tepelik tasvirleri bulunur.",
+      "silhouette": "Hilal tepeli konik başlık; küçük kalkan; belden sarkan arka plaka; kısa topuz.",
+      "gameplayProposal": "Kısa menzilli kalkanlı topuz piyadesi. Darbe ve kalkan animasyonu gerekir.",
+      "cautions": [
+        "Mexica jaguar/kartal kıyafeti kopyalanmaz.",
+        "Tek kap üzerindeki savaşçıların ayrıntıları bile değişir; tek tip tarihî üniforma iddia edilmez."
+      ],
+      "sourceIds": [
+        "moche"
+      ],
+      "visualSourceIds": [
+        "moche"
+      ],
+      "researchStatusBeforeIntegration": "art_review",
+      "researchFollowups": [
+        "Nesne fotoğrafını yakından incele; seçilen figürü işaretle.",
+        "Özgün oyun çizimi ve kart/savaş alanı ölçek kontrolü."
+      ],
+      "implementation": {
+        "faction": "Moche",
+        "kind": "sword",
+        "role": "Topuzlu ve küçük kalkanlı piyade",
+        "source": "https://www.metmuseum.org/art/collection/search/309439",
+        "note": "MS 4.–7. yy · Müzedeki savaşçı kabından: hilal tepeli konik başlık, kısa topuz, küçük kalkan ve tunik. İsimli bir muhafız bölüğü değildir.",
+        "visualNote": "Kaynak donanımına dayanan özgün oyun çizimi; renkler ve tamamlayıcı giysi ayrıntıları yorumdur."
+      }
+    },
+    {
+      "id": "scythian_mounted_archer",
+      "name": "İskit atlı okçusu",
+      "civilizationMenu": "İskitler",
+      "region": "Avrasya bozkırları",
+      "period": "MÖ erken 5. yy görsel hedefi",
+      "novelty": "new",
+      "scopeFit": true,
+      "priority": 2,
+      "status": "integrated_interpretive_art",
+      "classification": "Atlı savaşçı tipi; isimli seçkin alay değil.",
+      "mount": "horse",
+      "evidence": "The Met, sivri yumuşak başlıklı ve bedene oturan ceketli atlı figürü İskit okçusu olarak tanımlar.",
+      "silhouette": "Yumuşak sivri başlık ve dar ceket; Moğol miğferli karakterden ayrı baş/gövde biçimi.",
+      "gameplayProposal": "Hafif atlı okçu. At üzerindeki yay çekişi ve yön animasyonu gerekir.",
+      "cautions": [
+        "Nesne Etrüsk/Campania yapımıdır; İskitlerin kendi yaptığı doğrudan portre değildir.",
+        "Pantolon, sadak ve at koşumu için ek nesne kontrolü yapılmalı."
+      ],
+      "sourceIds": [
+        "scythian"
+      ],
+      "visualSourceIds": [
+        "scythian"
+      ],
+      "researchStatusBeforeIntegration": "art_review",
+      "researchFollowups": [
+        "Nesne fotoğrafı ayrıntı incelemesi.",
+        "At koşumu ve eksik giysi parçaları için ikinci dönem referansı."
+      ],
+      "implementation": {
+        "faction": "İskitler",
+        "kind": "cavalry",
+        "role": "Atlı okçu",
+        "source": "https://www.metmuseum.org/art/collection/search/255955",
+        "note": "MÖ 5. yy · Etrüsk yapımı İskit okçu heykelciğindeki sivri yumuşak başlık ve dar ceket esas alınır. Üzengisiz at donanımı; genel savaşçı temsili.",
+        "visualNote": "Kaynak donanımına dayanan özgün oyun çizimi; renkler ve tamamlayıcı giysi ayrıntıları yorumdur."
+      }
+    },
+    {
+      "id": "qin_crossbowman",
+      "name": "Qin arbaletçisi",
+      "civilizationMenu": "Çin / Qin Hanedanı",
+      "region": "Doğu Asya",
+      "period": "MÖ 221–207",
+      "novelty": "new",
+      "scopeFit": true,
+      "priority": 3,
+      "status": "integrated_interpretive_art",
+      "classification": "Arbaletli asker tipi; imparator muhafızı etiketi kanıtlanmadı.",
+      "mount": "none",
+      "evidence": "NGV, 002812 numaralı diz çöken askerin el konumunu arbalet taşımasıyla ilişkilendirir.",
+      "silhouette": "Diz çöken atış pozu ve yatay arbalet; zırh, saç ve el konumu heykelden ayrıca çözümlenmeli.",
+      "gameplayProposal": "Atışlar arasında belirgin kurma/doldurma süresi; ayrı arbalet pozu ve kısa ok.",
+      "cautions": [
+        "Normal yay oku ve yay çekme animasyonu doğrudan kullanılmaz.",
+        "Pişmiş toprağın bugünkü rengi tarihî giysi veya ten rengi değildir.",
+        "Han Yulin ve Tang Xuanjia ile tarih ve donanım karıştırılmaz."
+      ],
+      "sourceIds": [
+        "qin"
+      ],
+      "visualSourceIds": [
+        "qinImages",
+        "qin"
+      ],
+      "researchStatusBeforeIntegration": "art_and_mechanic_review",
+      "researchFollowups": [
+        "Heykel görseli incelemesi ve arbalet nesnesi seçimi.",
+        "Arbalet silah/atış/doldurma desteği."
+      ],
+      "implementation": {
+        "faction": "Qin Hanedanı",
+        "kind": "ranged",
+        "role": "Arbaletli piyade",
+        "source": "https://www.ngv.vic.gov.au/exhibition/terracotta-warriors-cai-guo-qiang/",
+        "note": "MÖ 221–207 · Pişmiş toprak okçu figürlerinden zırh ve yana toplanmış saç. Ahşap arbalet yeniden kurulmuştur; heykelin toprak rengi üniforma sayılmaz.",
+        "visualNote": "Kaynak donanımına dayanan özgün oyun çizimi; renkler ve tamamlayıcı giysi ayrıntıları yorumdur."
+      }
+    },
+    {
+      "id": "thracian_peltast",
+      "name": "Trak peltastı",
+      "civilizationMenu": "Traklar",
+      "region": "Güneydoğu Avrupa",
+      "period": "MÖ yaklaşık 470–460 görsel hedefi",
+      "novelty": "new",
+      "scopeFit": true,
+      "priority": 4,
+      "status": "integrated_interpretive_art",
+      "classification": "Hafif piyade tipi; isimli seçkin alay değil.",
+      "mount": "none",
+      "evidence": "Harvard 1959.219 kaydı hilal biçimli pelta, mızrak, desenli zeira pelerini, yüksek çizmeler ve kulak/ense kapaklı başlık tarif eder.",
+      "silhouette": "Hilal kalkan, desenli uzun pelerin, yumuşak kapaklı başlık.",
+      "gameplayProposal": "Hafif mızraklı veya ek cirit kaynağıyla ciritçi; hareketli kısa menzil rolü.",
+      "cautions": [
+        "Bu vazo tek başına cirit atışını kanıtlamaz; atışlı rol ayrıca kaynaklandırılmalı.",
+        "Vazodaki donanım hoplitin yuvarlak kalkanına çevrilmez."
+      ],
+      "sourceIds": [
+        "peltast"
+      ],
+      "visualSourceIds": [
+        "peltast"
+      ],
+      "researchStatusBeforeIntegration": "art_and_mechanic_review",
+      "researchFollowups": [
+        "Vazo fotoğrafı ve kullanım hakkı kontrolü.",
+        "Cirit rolü seçilirse silah ölçüsü ve atış mekaniği araştırması."
+      ],
+      "implementation": {
+        "faction": "Traklar",
+        "kind": "spear",
+        "role": "Hafif mızraklı piyade",
+        "source": "https://www.perseus.tufts.edu/hopper/artifact?name=Harvard+1959.219&object=Vase",
+        "note": "MÖ 5. yy · Harvard 1959.219 vazosundaki hilal pelta, desenli zeira pelerini, kulaklıklı başlık ve çizme. Bu temsil elde kullanılan mızrak taşır.",
+        "visualNote": "Kaynak donanımına dayanan özgün oyun çizimi; renkler ve tamamlayıcı giysi ayrıntıları yorumdur."
+      }
+    },
+    {
+      "id": "dacian_falx_warrior",
+      "name": "Dak falx savaşçısı",
+      "civilizationMenu": "Daklar",
+      "region": "Doğu Avrupa / Karpatlar",
+      "period": "Roma fethi öncesi Dakya; kesin temsil tarihi ek kaynak bekliyor",
+      "novelty": "new",
+      "scopeFit": true,
+      "priority": 5,
+      "status": "integrated_interpretive_art",
+      "classification": "Silahıyla tanımlanan savaşçı tipi; isimli alay değil.",
+      "mount": "none",
+      "evidence": "Arkeoloji makalesi Sarmizegetusa Regia'da bulunan kıvrık Dak kılıcının kazı bağlamını ve biçimini inceler.",
+      "silhouette": "İçe kıvrılan uzun kesici silah; kabza, boy ve tek/çift el kullanımını seçilecek nesne belirleyecek.",
+      "gameplayProposal": "İki elli örnek doğrulanırsa kalkansız geniş savuruşlu yakın dövüşçü.",
+      "cautions": [
+        "Her falxı aynı boyda veya iki elli varsayma.",
+        "Silah kanıtı, zırh/giysi kanıtı değildir.",
+        "Abartılı zırh delme iddiaları tarihî gerçek olarak yazılmaz."
+      ],
+      "sourceIds": [
+        "falx"
+      ],
+      "visualSourceIds": [
+        "falxImages"
+      ],
+      "researchStatusBeforeIntegration": "equipment_review",
+      "researchFollowups": [
+        "Makaledeki nesne çizimi/ölçüsü ve tarihlendirme.",
+        "Aynı dönem kıyafet ve kalkan kullanımı kontrolü."
+      ],
+      "implementation": {
+        "faction": "Daklar",
+        "kind": "sword",
+        "role": "İki elli falx piyadesi",
+        "source": "https://www.ceeol.com/search/article-detail?id=482800",
+        "note": "MS 1.–2. yy başı · İçe bakan kesici ağızlı falxın iki elli oyun temsili. Falx buluntuları farklı boyutlardadır; her örnek iki elli değildir. Giysi tamamlaması yorumdur.",
+        "visualNote": "Kaynak donanımına dayanan özgün oyun çizimi; renkler ve tamamlayıcı giysi ayrıntıları yorumdur."
+      }
+    },
+    {
+      "id": "swiss_halberdier",
+      "name": "İsviçre tebercisi",
+      "civilizationMenu": "İsviçre kantonları",
+      "region": "Orta Avrupa",
+      "period": "15. yy; yaklaşık 1470 kronik görsel hedefi",
+      "novelty": "new",
+      "scopeFit": true,
+      "priority": 6,
+      "status": "integrated_interpretive_art",
+      "classification": "Piyade savaşçı tipi; Papalık İsviçre Muhafızı ile aynı kart değil.",
+      "mount": "none",
+      "evidence": "İsviçre Ulusal Müzesi teberin gelişimini ve Tschachtlan'ın 1470 kroniğindeki örneklerini sunar.",
+      "silhouette": "Uzun sap üzerinde kesici ağız, uç ve kanca; döneme uygun sade kıyafet/miğfer.",
+      "gameplayProposal": "Uzun erişimli kesme ve saplama; süvariye karşı oyun dengesi ayrıca ayarlanır.",
+      "cautions": [
+        "Müze yazısındaki 19. yy çizimi çağdaş Orta Çağ kaynağı değildir.",
+        "Modern Papalık Muhafızı çizgili üniforması kullanılmaz.",
+        "Mevcut Landsknecht'e yalnız renk değişimi yapılmamalı."
+      ],
+      "sourceIds": [
+        "swiss"
+      ],
+      "visualSourceIds": [
+        "swiss"
+      ],
+      "researchStatusBeforeIntegration": "art_review",
+      "researchFollowups": [
+        "1470 kroniğinde belirli figür seçimi; fotoğraf lisansı.",
+        "Teberin küçük ölçekte okunurluğu ve uzun silah animasyonu."
+      ],
+      "implementation": {
+        "faction": "İsviçre kantonları",
+        "kind": "spear",
+        "role": "Teberli piyade",
+        "source": "https://blog.nationalmuseum.ch/en/2022/01/the-rise-of-the-all-purpose-weapon-halberd/",
+        "note": "15. yy · Tschachtlan kroniği dönemi: balta ağzı, üst uç ve arka kancalı teber. Modern Papalık Muhafızları üniforması kullanılmaz.",
+        "visualNote": "Kaynak donanımına dayanan özgün oyun çizimi; renkler ve tamamlayıcı giysi ayrıntıları yorumdur."
+      }
+    },
+    {
+      "id": "tibetan_lamellar_cavalry",
+      "name": "Tibet lamelli zırhlı süvarisi",
+      "civilizationMenu": "Tibet",
+      "region": "Himalayalar",
+      "period": "16. yy tasarım hedefi; her parça ayrıca tarihlendirilmeli",
+      "novelty": "new",
+      "scopeFit": true,
+      "priority": 7,
+      "status": "integrated_interpretive_art",
+      "classification": "Donanım temelli süvari temsili; adı bilinen eski imparatorluk muhafızı değil.",
+      "mount": "horse",
+      "evidence": "Met yazısı lamelli zırh geleneğini ve 16.–17. yy olası tarihli zırh/miğfer nesnelerini listeler.",
+      "silhouette": "Birbirine bağlanan küçük levha sıraları; uzun zırh eteği; tarih uyumlu miğfer ve koşum.",
+      "gameplayProposal": "Zırhlı mızraklı veya kılıçlı süvari; silah seçimi ayrı nesneyle sabitlenecek.",
+      "cautions": [
+        "18.–19. yy birleşik müze süvarisi ve 20. yy tören fotoğrafları Orta Çağ üniforması değildir.",
+        "Farklı yüzyılların miğfer, at zırhı ve silahları tek tarihî takım diye sunulmaz."
+      ],
+      "sourceIds": [
+        "tibet",
+        "tibetLate"
+      ],
+      "visualSourceIds": [
+        "tibet"
+      ],
+      "researchStatusBeforeIntegration": "equipment_review",
+      "researchFollowups": [
+        "36.25.53a,b zırh/miğfer ve diğer parçalar için dönem eşleştirmesi.",
+        "At koşumu ve silahı tamamlayan görsel araştırma."
+      ],
+      "implementation": {
+        "faction": "Tibet",
+        "kind": "cavalry",
+        "role": "Kılıçlı ağır süvari",
+        "source": "https://www.metmuseum.org/essays/tibetan-arms-and-armor",
+        "note": "16. yy · Met koleksiyonundaki 16.–17. yy lamelli zırh ve miğferden esinlenen yeniden kurma. Daha geç tarihli tören süvarisi takımı kopyalanmaz; at koşumu yorumdur.",
+        "visualNote": "Kaynak donanımına dayanan özgün oyun çizimi; renkler ve tamamlayıcı giysi ayrıntıları yorumdur."
+      }
+    },
+    {
+      "id": "mixtec_noble_warrior",
+      "name": "Mixtec soylu savaşçısı",
+      "civilizationMenu": "Mixtec şehir devletleri",
+      "region": "Mezoamerika / Oaxaca",
+      "period": "Kodeks yaklaşık 1200–1521; anlatılan olaylar daha erken olabilir",
+      "novelty": "new",
+      "scopeFit": true,
+      "priority": 8,
+      "status": "integrated_interpretive_art",
+      "classification": "Soylu savaşçı adayı; isimli askerî birlik doğrulanmadı.",
+      "mount": "none",
+      "evidence": "Zouche-Nuttall Kodeksi hanedanları ve Sekiz Geyik'in askerî hayatını anlatır; savaşçı görünümü için belirli panel seçilmelidir. Abtosway/McCafferty, Nuttall s.20?de baltal? sava???y? inceler.",
+      "silhouette": "Henüz kesinleştirilmedi; kodeksten başlık, kalkan ve silah birlikte okunacak.",
+      "gameplayProposal": "Panel seçildikten sonra yakın dövüş veya menzilli rol belirlenecek.",
+      "cautions": [
+        "Sekiz Geyik'e özgü işaretler bütün birlik için üniforma sayılmaz.",
+        "Mexica kartal/jaguar birliğinin yeniden renklendirilmesi yapılmaz."
+      ],
+      "sourceIds": [
+        "mixtec",
+        "mixtecDate",
+        "mixtecWeapons"
+      ],
+      "visualSourceIds": [
+        "mixtec"
+      ],
+      "researchStatusBeforeIntegration": "identity_and_art_review",
+      "researchFollowups": [
+        "Savaş paneli seçimi ve uzman açıklaması.",
+        "Birlik mi lider mi olacağına görsel kanıta göre karar."
+      ],
+      "implementation": {
+        "faction": "Mixtec şehir devletleri",
+        "kind": "sword",
+        "role": "Baltalı ve kalkanlı piyade",
+        "source": "https://www.researchgate.net/publication/339371399_Mixtec_Militarism_Weapons_and_Warfare_in_the_Mixtec_Codices",
+        "note": "Geç Postklasik dönem · Nuttall kodeksi s. 20’deki baltalı savaşçı ve Mixtec soylu tasvirlerinden yorumlanır. Tek bir hükümdarın portresi veya ayrı bir askerî tarikat değildir; donanım birleştirmesi yeniden kurmadır.",
+        "visualNote": "Kaynak donanımına dayanan özgün oyun çizimi; renkler ve tamamlayıcı giysi ayrıntıları yorumdur."
+      }
+    },
+    {
+      "id": "nubian_archer_middle_kingdom",
+      "name": "Nubyalı okçu",
+      "civilizationMenu": "Nubya",
+      "region": "Afrika / Nil vadisi",
+      "period": "Yaklaşık MÖ 2000 model adayı; resmî nesne kaydıyla doğrulanmalı",
+      "novelty": "new",
+      "scopeFit": true,
+      "priority": 9,
+      "status": "integrated_interpretive_art",
+      "classification": "Okçu tipi; seçkin muhafız etiketi doğrulanmadı.",
+      "mount": "none",
+      "evidence": "MFA, Nubya okçuluk geleneğini açıklar. Mesehti mezarından model askerler, görünüm için ayrı araştırma adayıdır.",
+      "silhouette": "Modeldeki saç, giysi, yay ve ok taşıma biçimi doğrulanınca belirlenecek.",
+      "gameplayProposal": "Hafif yaya okçu; diğer okçu kartlarından donanımla ayrılmalı.",
+      "cautions": [
+        "Mesehti modeli Mısır hizmeti bağlamındadır; bütün Nubya tarihi için tek üniforma değildir.",
+        "Bu erken modeli çok daha geç Kuş 25. Hanedanı ordusuna doğrudan taşıma.",
+        "Egypt-Museum.com resmî müze kaydı olarak gösterilmez."
+      ],
+      "sourceIds": [
+        "nubia",
+        "nubiaModel"
+      ],
+      "visualSourceIds": [
+        "nubiaModel"
+      ],
+      "researchStatusBeforeIntegration": "primary_object_record_needed",
+      "researchFollowups": [
+        "Kahire koleksiyonunda nesne numarası/tarih ve fotoğraf kaydı.",
+        "Görsel lisansı ve dönem kıyafeti incelemesi."
+      ],
+      "implementation": {
+        "faction": "Nubya",
+        "kind": "ranged",
+        "role": "Hafif yaya okçu",
+        "source": "https://aaeportal.com/images/26817/troop-of-nubian-archers-detail",
+        "note": "Yaklaşık MÖ 2000 · Mesehti mezarındaki okçu modellerinden kısa saç, açık gövde, kısa bel giysisi ve yay. Mısır hizmetindeki Nubyalı savaşçı; daha geç Medjay teşkilatıyla eşitlenmez.",
+        "visualNote": "Kaynak donanımına dayanan özgün oyun çizimi; renkler ve tamamlayıcı giysi ayrıntıları yorumdur."
+      }
+    },
+    {
+      "id": "sogdian_cakar",
+      "name": "Soğd çakar maiyet savaşçıları",
+      "civilizationMenu": "Soğd şehir devletleri",
+      "region": "Orta Asya",
+      "period": "7.–8. yy temsil hedefi",
+      "novelty": "existing_research_followup",
+      "scopeFit": true,
+      "priority": 10,
+      "status": "equipment_review",
+      "classification": "Hükümdar ve soylu maiyeti; seçkin birlik araştırmasına uygun.",
+      "mount": "candidate_horse",
+      "evidence": "Iranica, çakarları hükümdar ve soyluların kişisel askerleri olarak açıklar. Panjikent tasvirleri dönem donanımı için ek kanıttır.",
+      "silhouette": "Lamelli/zincir zırh ve baş koruması için belirli Panjikent figürü seçilmeli.",
+      "gameplayProposal": "Atlı temsil ancak seçilen kaynakla desteklenirse; mevcut ağır süvariden farklı siluet gerektirir.",
+      "cautions": [
+        "Dönem kahramanı resmi doğrudan çakar portresi değildir.",
+        "Panjikent sahnelerindeki destan kişileri ve gerçek askerler ayrılmalıdır."
+      ],
+      "sourceIds": [
+        "cakar",
+        "sogdianArmor"
+      ],
+      "visualSourceIds": [
+        "sogdianImages"
+      ],
+      "existingResearchFile": "docs/elite-research-tang-sogdiana-2026-10-14.json",
+      "remaining": [
+        "Belirli figürün kimlik/donanım incelemesi.",
+        "Kaynak fotoğrafı lisansı ve özgün çizim."
+      ]
+    },
+    {
+      "id": "srilanka_velaikkarar",
+      "name": "Velaikkara muhafızları",
+      "civilizationMenu": "Sri Lanka / Tamil askerî toplulukları",
+      "region": "Güney Asya",
+      "period": "11.–12. yy; yazıt için editörün tahmini 1137–1153",
+      "novelty": "existing_research_followup",
+      "scopeFit": true,
+      "priority": 11,
+      "status": "visual_evidence_missing",
+      "classification": "Belgelenmiş muhafız topluluğu; tapınak koruma yükümlülüğü.",
+      "mount": "undetermined",
+      "evidence": "Polonnaruva Tamil yazıtı, Velaikkaraların Diş Emaneti Tapınağı'nı koruma taahhüdünü kaydeder.",
+      "silhouette": "Doğrulanmış birlik kıyafeti bulunmadı.",
+      "gameplayProposal": "Görsel kanıt tamamlanmadan rol ve çizim sabitlenmez.",
+      "cautions": [
+        "Chola kökeni ile Sri Lanka hizmet bağlamı birbirinin yerine kullanılmaz.",
+        "Yazıt fotoğrafı savaşçı kıyafeti için görsel kanıt değildir.",
+        "Yazıtta kesin tarih yoktur; 1137–1153 editör önerisidir."
+      ],
+      "sourceIds": [
+        "velaikkara"
+      ],
+      "visualSourceIds": [],
+      "existingResearchFile": "docs/elite-research-world-2026-10-14.json",
+      "remaining": [
+        "Dönem heykeli/duvar resmi ve güvenilir savaşçı teşhisi."
+      ]
+    },
+    {
+      "id": "kiribati_coir_warrior",
+      "name": "Kiribati hindistan cevizi lifli zırhlı savaşçı",
+      "civilizationMenu": "Kiribati / Gilbert Adaları",
+      "region": "Okyanusya",
+      "period": "19. yy müze örnekleri",
+      "novelty": "new",
+      "scopeFit": false,
+      "priority": 12,
+      "status": "outside_current_period_scope",
+      "classification": "Yerel zırhlı savaşçı tipi; isimli seçkin alay değil.",
+      "mount": "none",
+      "evidence": "Pitt Rivers zırhı, köpekbalığı dişli silahı ve kirpi balığından başlığı açıklar; Museums Victoria örneği 1890 öncesine tarihler.",
+      "silhouette": "Kalın lifli gövde, yüksek arka koruma; balık derisi başlık; dişli ahşap silah.",
+      "gameplayProposal": "Yalnız ileride geç dönem geleneksel silah kapsamı açılırsa düşünülecek.",
+      "cautions": [
+        "Ateşli silah kullanmaması onu Orta Çağ birliği yapmaz.",
+        "Mevcut döneme uygun aday sayısına dahil edilmez."
+      ],
+      "sourceIds": [
+        "kiribati",
+        "kiribatiDate"
+      ],
+      "visualSourceIds": [
+        "kiribati"
+      ],
+      "remaining": [
+        "Şimdilik kapsam dışı; entegrasyon önerilmiyor."
+      ]
+    }
+  ],
+  "integration": {
+    "date": "2026-10-15",
+    "ids": [
+      "moche_mace_warrior",
+      "scythian_mounted_archer",
+      "qin_crossbowman",
+      "thracian_peltast",
+      "dacian_falx_warrior",
+      "swiss_halberdier",
+      "tibetan_lamellar_cavalry",
+      "mixtec_noble_warrior",
+      "nubian_archer_middle_kingdom"
+    ],
+    "code": [
+      "src/world-warrior-units.js",
+      "src/world-warrior-art.js"
+    ],
+    "preview": "artifacts/world-warriors/nine-warriors.jpg",
+    "test": "tests/world-warriors.mjs",
+    "checks": "9 canl? sava? hasar?; Qin bolt; 576 sprite karesi; 9 farkl? siluet; k?rp?lma yok; ?lke men?leri ve kay?t yeniden y?kleme ba?ar?l?.",
+    "limits": "G?rsel referanslar?n tamam? yak?ndan incelenmedi. Moche ve ?skit nesne foto?raflar? incelendi; di?er taslaklar kaynak metinleri/donat?m kay?tlar? ve yorumlanan ayr?nt?lar i?erir. Trak m?zra?? elde kullan?l?r; cirit at??? yok. Qin ayakta at?? yapar. Tam tarih? ?niforma do?rulu?u iddias? yok."
+  }
+}

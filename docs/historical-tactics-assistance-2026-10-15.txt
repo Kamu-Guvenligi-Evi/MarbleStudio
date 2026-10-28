@@ -1,0 +1,33 @@
+Taktik entegrasyonu destek kontrolü — 15 Ekim 2026
+
+Dosya paylaşımı: Taktik sekmesi historical-civilization-tactics.js, historical-tactics.js,
+taktik görselleri ve yeni davranış testlerini; ana sekme crown-battle.js ve komutan
+hareketlerini düzenledi. Bu destek çalışması kaynak dosyalarına dokunmadı.
+Eklenenler: artifacts/tactics-browser-assist.mjs ve bu kısa not.
+
+Bulgu ve düzeltme:
+10 doktrin x iki takım, seed 42, gereken rol sayıları x2, rakip roman:24 ile
+varsayılan yerleşimden gerçek savaşlar çalıştırıldı. Qin ve Ming ilk sürümde
+düzen kuramadan çıkıyordu. Taktik sekmesine yeniden üretim verildi; sekme safa
+erişim toleransını düzeltti ve Qin'e yaklaşan düşmana erken geri çekilme ekledi.
+Hareketli rakiple 20 senaryo kalıcı historical-civilization-tactics testine eklendi
+ve destek sekmesinde de PASS sonucu alındı.
+
+Doğrulama:
+- historical-tactics, historical-commander-tactics, crown-battle-tactical-visuals,
+  historical-combat: PASS. Ricat, komutan şartı/kaybı, emir önceliği, deterministik
+  savaşlar, klasik mod ayrımı ve 2501 asker kayıt kontrolü korundu.
+- historical-civilization-tactics: PASS; 10 doktrin iki takımda, gerçek hareket,
+  Qin geri çekilmesi, Fransız açık/korunan hedef ayrımı, süre sınırı, komutan ve
+  oyuncu emirleri; varsayılan yerleşimde ilerleyen düşmanla 20 ek senaryo.
+- Eski tarayıcı testi: 480 hücum karesi, 0 kırpılma, 3 gerçek ricat rotası.
+- artifacts/tactics-browser-assist.mjs: 20 senaryo, 600 kare, 1100x720 PC ve
+  390x844 telefon, normal/katmanlı çizim, 0 sayfa hatası, etiketler doğru,
+  çizilen rotalar takım başına en fazla 3; duraklatılmış tekrar çizimde önbellek
+  korunuyor. Birlikler hedefe yakınken rota çıkmaması beklenen davranış.
+- Güncel düzeltmeler sonrası artifacts/tactics-assist-build: PASS.
+
+Sınırlar: Bunlar hareket ve entegrasyon kontrolleridir; tarihsel zafer garantisi
+veya kapsamlı FPS ölçümü değildir. Derlemede mevcut 500 KB paket boyutu uyarısı
+devam ediyor. PC/telefon kontrolü otomatik tarayıcıda yapıldı; fiziksel telefon
+performansı ölçülmedi. Destek kontrolünde paket kurulmadı veya görsel indirilmedi.

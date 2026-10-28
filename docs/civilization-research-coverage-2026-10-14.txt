@@ -1,0 +1,25 @@
+14 Ekim 2026 — seçkin birlik ekleme partisi tamamlandı
+
+Oynanabilir katalog: 52 birlik, 41 medeniyet grubu.
+Bu parti: 8 yeni birlik. Dünya araştırma dosyasının toplam entegrasyonu: 10 (önceki Han Yulin ve İnka dahil).
+18 aday sonuçlandırıldı: 8 eklendi, 2 mevcut kartla temsil edildi, 8 bu seçkide elendi.
+Çalışma listesi 129 grup içerir; tüm grupların araştırması bitmiş değildir.
+
+Yeni birlikler:
+assyria_royal_guard: Yeni Asur — Kraliyet muhafızı
+goryeo_yongho_guard: Goryeo Kore — Yongho muhafızı
+song_beiwei: Song Hanedanı — Beiwei süvarisi
+mughal_ahadi: Babür İmparatorluğu — Ahadi süvarisi
+khmer_ranked_cavalry: Khmer İmparatorluğu — Rütbeli Khmer süvarisi
+maya_sajal: Maya şehir devletleri — Sajal · Soylu savaşçı
+benin_warrior_chief: Benin Krallığı — Savaşçı şef
+mamluk_axebearer: Memlük Sultanlığı — Baltalı maiyet askeri
+
+Yerel kaynak görselleri, lisans/atıf ve rekonstrüksiyon sınırları kartlarda kayıtlı.
+Song ve Babür görselleri doğrudan birlik üniforması kanıtı sayılmadı.
+Sajal, Khmer rütbeli süvarisi ve Benin savaşçı şefi adlandırılmış muhafız alayı olarak sunulmadı.
+
+Doğrulama: historical-combat geçti; historical-elite-art 2496 kare geçti; verify-batch 8 birliğin kaynak görsellerini, seçimini ve savaşını doğruladı.
+Sonuç: artifacts/elite-research/batch-checks.json
+Önizleme: artifacts/elite-research/batch-preview.jpg
+Derleme günlüğü: artifacts/elite-research/final-build.log

@@ -1,0 +1,49 @@
+Tarihî lider entegrasyonu — 14 Ekim 2026
+
+9 lider: Fatih Sultan Mehmed, Timur, Attila, Cengiz Han, Büyük İskender,
+Jül Sezar, Alp Arslan, Selahaddin Eyyubi ve Hannibal Barca.
+Kaynak veri/görseller: historical-commanders.json ve public/warrior-references.
+Hannibal görseli portre değil; tarihî sahne etiketi ve alt metni kullanılır.
+Tarihçe, temsil sınırlamaları, eser/fotoğraf atıfları ve lisanslar ayrıntıda korunur.
+
+historical-commanders.js/.css: iki orduya ayrı lider seçimi, medeniyet grupları,
+yerel görsel, hata durumunda baş harfler, tarihçe/kaynak ve sekmeler arası kayıt.
+Atölye ve tarihî savaşın komuta menüsü aynı modülü kullanır.
+Kayıt anahtarı: marble-historical-commanders-v1 (iki kimlik veya null).
+Ordu planı JSON'unda armies[].commander: {id,name,faction} veya null.
+Birlik sayıları ve eski ordu kayıt biçimi değişmedi. Klasik modda lider UI yok.
+Seçilen lider tarihî savaşta taraf başına bir ayrı atlı komutan olarak doğar.
+historical-commander-types.js: tüm liderlere eşit kurmaca oyun dengesi:
+220 can, 26 saldırı, 36 hız, %12 zırh; orduya bonus veya moral sistemi yok.
+Birlik girişleri normal asker sayılarıdır; başlangıç/canlı sayımına komutan eklenir.
+Klasik mod liderleri yok sayar; lider seçilmezse önceki davranış korunur.
+Sahada ad, altın sancak/işaret ve can çubuğu; ölümde DÜŞTÜ etiketi görünür.
+Komutan menüden tek başına seçilebilir; ilerle, dur, hedefe saldır ve serbest
+hücum emirlerini uygular. Ölümü seçimden çıkarır, olay günlüğüne ve zafere yansır.
+Lider seçimini değiştirmek mevcut savaşı değiştirmez; Liderleri uygula düğmesi
+meydanı yeniden kurar. Kayıt sürerken seçim ve uygulama kilitlenir.
+Menüde tarihî tasvirler kullanılır; bunlar kesin yüz rekonstrüksiyonları değildir.
+Meydanda henüz kişiye özel kostüm/yüz yok; ortak stilize atlı sprite kullanılır.
+
+Doğrulama: tests/historical-commanders-browser.mjs — PASS (9 görsel;
+iki ordu, kayıt, JSON, oyun geçişi, sekme senkronu, 320/390px,
+geçersiz kayıt, eksik görsel, klasik mod, sayfa hatası/dış ağ isteği yok).
+tests/historical-commanders-combat.mjs — PASS (9 lider, eşit değerler,
+bonus yok, tek birim/kimlik, emirler, hasar, ölüm, zafer, determinizm, klasik uyum).
+tests/historical-commanders-battle-browser.mjs — PASS (toplamlar, tekli seçim,
+hareket/dur, ertelenen seçim, tekrar uygulama, kaldırma, mobil ve canlı can).
+tests/crown-battle.mjs, historical-combat.mjs, crown-battle-behavior.mjs — PASS.
+tests/historical-portraits.mjs — PASS (34 birlik referansı, iki kullanım yeri,
+seçim, mobil, bozuk görsel alternatifi, klasik mod).
+tests/historical-armies-browser.mjs — PASS (46 kart, sayılar, kayıt,
+filtre/arama, JSON, sıfırlama, 390px, sayfa hatası/dış ağ isteği yok).
+34 görselli birlik, 34 benzersiz resim anlamına gelmez; beş Osmanlı atlı
+bölüğü aynı sipahi dönem referansını paylaşır. Kesin bölük üniforması değildir.
+UI önizleme: artifacts/historical-commanders/selection.jpg (yerel).
+Meydan önizleme: artifacts/historical-commanders/battlefield.jpg (yerel).
+Build günlüğü: artifacts/historical-commanders/build.log.
+Komutan savaş entegrasyonu Vite build PASS (3.58s); mevcut 500 kB uyarısı sürüyor.
+historical-combat-browser.mjs — PASS: atölye aktarımı, 46 katalog tipi,
+emirler, sayı/kayıt/kurulum, başlat/duraklat, telefon, klasik ve yerel varlıklar.
+Davranış sekmesinin devam eden zoom/sprite görsel işi bu doğrulamanın dışındadır;
+o değişiklikler tamamlanınca ilgili tarayıcı testleri yeniden çalıştırılmalıdır.

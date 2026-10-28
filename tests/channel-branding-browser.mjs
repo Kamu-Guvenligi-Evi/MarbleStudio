@@ -7,27 +7,32 @@ const browser=await chromium.launch({channel:'chrome',headless:true});
 try{
   const page=await browser.newPage(),errors=[],queued=[];
   page.on('pageerror',e=>errors.push(e.message));
-  await page.route('http://127.0.0.1:5180/api/**',async route=>{
+  await page.route('**/api/**',async route=>{
     const url=new URL(route.request().url());
     if(url.pathname==='/api/queue')queued.push(route.request().postDataJSON());
     const value=url.pathname.endsWith('/accounts')?{accounts:[]}:
-      url.pathname==='/api/factory'?{apiVersion:4,capabilities:['studio-workbench','automatic-diversity','long-term-repetition','episode-formats'],jobs:[],summary:{done:0,pending:0},total:0}: {ok:true};
+      url.pathname==='/api/factory'?{apiVersion:5,capabilities:['studio-workbench','temporary-downloads'],jobs:[],summary:{done:0,pending:0},total:0}: {ok:true};
     await route.fulfill({json:value});
   });
-  await page.goto('http://127.0.0.1:5173');
-  await page.locator('#automatic-create').click();
+  await page.goto('http://127.0.0.1:5173?edit=1&mode=pi');
+  await page.waitForFunction(()=>window.marbleStudio);
+  await page.locator('#studio-export').click();
+  await page.waitForFunction(()=>document.querySelector('#video-submit')?.textContent==='Videoyu hazırla');
+  await page.locator('#video-submit').click();
   await page.locator('#channel-choice').waitFor();
   assert.equal(queued.length,0);
+  await page.locator('#channel-choice select').selectOption('');
   await page.locator('#channel-choice button[type=submit]').click();
   assert.equal(queued.length,0);assert.ok(await page.locator('#channel-choice').isVisible());
   await page.locator('#channel-choice-cancel').click();
-  await page.locator('#automatic-create').click();
+  await page.locator('#video-submit').click();
   await page.locator('#channel-choice select').selectOption('VortexBallSpiral');
   await page.locator('#channel-choice button[type=submit]').click();
   await page.waitForFunction(()=>document.querySelector('#videos-dialog').open);
   assert.equal(queued.length,1);assert.equal(queued[0].channel,'VortexBallSpiral');
 
-  await page.goto('http://127.0.0.1:5173?edit=1');
+  await page.goto('http://127.0.0.1:5173?edit=1&mode=pi');
+  await page.waitForFunction(()=>window.marbleStudio);
   await page.locator('#studio-export').click();
   await page.waitForFunction(()=>document.querySelector('#video-submit').textContent==='Videoyu hazırla');
   await page.locator('#video-submit').click();
@@ -36,12 +41,14 @@ try{
   await page.waitForFunction(()=>document.querySelector('#videos-dialog').open);
   assert.equal(queued.length,2);assert.equal(queued[1].channel,'LastBallStand');
   await page.locator('#videos-dialog [data-wb-close]').click();
-  await page.locator('#webm-options').evaluate(el=>el.open=true);
+  await page.goto('http://127.0.0.1:5173?edit=1');
+  await page.waitForFunction(()=>window.marbleStudio);
+  await page.locator('#webm-options').evaluate(el=>{for(let node=el;node;node=node.parentElement)if(node.tagName==='DETAILS')node.open=true;});
   await page.locator('#record').click();
   await page.locator('#channel-choice-cancel').click();
   assert.equal(await page.evaluate(()=>window.marbleStudio.getState().recording),false);
   await page.locator('#nav-statistics').click();
-  await page.locator('#statistics-webm-options').evaluate(el=>el.open=true);
+  await page.locator('#statistics-webm-options').evaluate(el=>{for(let node=el;node;node=node.parentElement)if(node.tagName==='DETAILS')node.open=true;});
   await page.locator('#statistics-record').click();
   await page.locator('#channel-choice-cancel').click();
   assert.equal(await page.evaluate(()=>window.marbleStudio.getStatisticsState().recording),false);
@@ -92,11 +99,11 @@ try{
   });
   for(const sample of samples){
     assert.equal(sample.marks.length,1,JSON.stringify(sample));
-    assert.equal(sample.marks[0].text,sample.channel+'™');
+    assert.equal(sample.marks[0].text,'@'+sample.channel+'™');
     assert.ok(sample.marks[0].alpha>0&&sample.marks[0].alpha<.2);
     assert.ok(sample.changed,`${sample.mode}: watermark must survive output composition`);
     if(sample.image)fs.writeFileSync(`artifacts/channel-watermark-${sample.mode}.png`,Buffer.from(sample.image.split(',')[1],'base64'));
   }
   assert.deepEqual(errors,[]);
-  console.log('PASS: required channel choice, cancel without queueing, chosen channel in automatic queue, both translucent brands in exported JPEG frames for all five modes.');
+  console.log('PASS: required channel choice, cancel without queueing, chosen channel in manual export, both translucent brands in exported JPEG frames for all five modes.');
 }finally{await browser.close();}

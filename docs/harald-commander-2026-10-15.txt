@@ -1,0 +1,25 @@
+Viking komutanı: Harald Hardrada
+
+Katalog kimliği: harald_hardrada. Norveç Krallığı (Vikingler).
+Mevcut komutan seçimi ve tarihî ordular ekranına otomatik katılır.
+Yerel Canvas portresi ve atlı savaş çizimi: boynuzsuz burunluklu miğfer,
+zincir zırh, kırmızı pelerin, yuvarlak kalkan. Yüz sanatsal yorumdur.
+Kaynak: English Heritage, Fulford and Stamford Bridge: The Northern Battles of 1066.
+
+Hazır ordu çekirdeği: 8 hird kılıçlısı, 8 mızraklı, 4 Dan baltacısı,
+4 yaya okçu. Oranlar oyun düzenidir, kesin tarihî asker sayıları değildir.
+Mevcut diğer komutanlarla aynı denge değerleri ve geriden yönetim davranışı.
+Genel açılış dizilişi kullanılır; özel medeniyet doktrini eklenmedi.
+
+Doğrulama:
+- historical-commanders-combat: 20 komutan geçti.
+- historical-commander-art: 20 özgün çizim, 960 kare geçti.
+- historical-army-presets: 20 ordu geçti.
+- harald-commander-browser: 1440 ve 390 pikselde Viking araması, portre,
+  96 asker üretimi, komutan/ordu uygulama ve yenilemede kalıcılık geçti.
+- Vite üretim derlemesi geçti; mevcut büyük paket uyarısı sürüyor.
+- historical-army-history: 20 tarihçe/kaynak paneli geçti. Diğer sekme
+  fil kapasitesine ilişkin eski test değerini düzeltti; yeniden doğrulandı.
+
+Değişiklik sınırı: komutan JSON kaydı, çizim profili/miğfer dalı,
+ordu tarihçe kaydı ve hazır ordu kaydı. Kapasite/UI çalışmasına dokunulmadı.

@@ -1,0 +1,19 @@
+15 Ekim 2026 — Yeni antik birliklerin hazır ordu bağlantısı
+
+Araştırma sekmesinin eklediği beş kayıt katalogda, çizimlerde ve seçim menüsünde zaten mevcut. Yinelenen kayıt oluşturulmadı.
+İskender'in hazır ordusuna agrianian_javelineer ve thessalian_cavalry eklendi. Temel 24 kapasite dağılımı: 10 sarissa, 4 hypaspist, 3 hetairoi, 3 Tesalya süvarisi, 2 Agrian ciritçisi, 2 yaya okçu. Oranlar oyun düzenidir, tarihî mevcut iddiası değildir.
+96 kapasiteli ordu: 40/16/12/12/8/8. Mevcut dört birlik türü ve 24 kapasite alt sınırı korundu. Komutan otomatik ordu oluşturduğunda iki yeni destek de gelir; kayıtlı ordular kendiliğinden değiştirilmez.
+Ordu bilgi metni müttefikleri ve katalogda bulunan Arrianos kaynak bağlantısını içerir.
+
+Dönem sınırı:
+- Triarii ve velites katalogda MÖ 3–2. yüzyıl; Sezar'ın MÖ 1. yüzyıl hazır ordusuna eklenmedi.
+- Hint okçusunun katalog dayanağı Kserkses ordusudur; I. Darius hazır ordusuna varsayımla eklenmedi.
+- Bu üç birlik seçim menüsünden elle eklenebilir. Uygun yeni komutan eklemek bu değişikliğin kapsamına alınmadı.
+
+Dosyalar: src/historical-army-presets.js, src/historical-army-history.js, tests/historical-army-presets.mjs, bu not.
+Ana sekmeyle sahiplik koordine edildi; savaş motoru, kondisyon/moral, katalog, çizim ve arayüz dosyalarına dokunulmadı.
+
+Doğrulama:
+- historical-army-presets.mjs PASS: 20 hazır ordunun alt sınır–1000 kapasite taraması, taktik eşiği, iki takımda dört büyüklük, eklenen iki birliğin gerçek oluşturulması, yanlış dönemli üç kaydın hariç kalması.
+- İskender'in 48 kişilik yeni ordusuyla iki takım x iki tohum (42,93): dört doğal bitiş, 21,2–22,5 saniye, sonlu koordinat/can. Sonuçlar artifacts/classical-presets/battles.json. Tek rakipli test genel denge garantisi değildir.
+- historical-army-presets-browser.mjs PASS: 1440, 390 ve 320 pikselde tüm hazır orduların oluşturulması, ölçekleme, takım ayrımı, doğrulama, uygulama ve kayıt; tarayıcı hatası yok.

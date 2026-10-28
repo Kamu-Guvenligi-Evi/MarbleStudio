@@ -1,0 +1,23 @@
+Komutanların geriden izleme davranışı — 15 Ekim 2026
+
+İstek: Komutan saldırmasın; sabit durmadan ordunun gerisinden savaşı izlesin.
+
+Uygulama:
+- src/historical-commander-movement.js: iki komutan için ortak 0,25 saniyelik ordu konumu taraması; arka sıranın 72 birim gerisinde yavaş gözlem hareketi ve ilerleyen orduyu takip.
+- Tehdit değerlendirmesi 0,2 saniyede bir, uzamsal 48 aday sınırıyla yapılır. Yakın düşmanda kaçınma, harita kenarında yana çıkma, mevcut engel/yol sistemiyle hareket.
+- Elle taşıma korunur; varıştan sonra otomatik takip sürer. Açık dur emri güvenliyken korunur; tehlike emri geçici keser.
+- crown-battle.js normal süvari AI yerine bu davranışı çağırır. Komutan saldırı/charge/resolveAttack engelleri; karma saldırı seçiminde askerler saldırır, komutan katılmaz. COMMANDER_BALANCE.damage artık 0.
+- Can ve hedef alınabilirlik korunur; canlı komutan/taktik eşleştirme kapısına dokunulmadı.
+- Sonuç savaşçı sayısına göre belirlenir. Yalnız komutanı kalan taraf yenilir; her iki tarafta savaşçı kalmazsa beraberlik. Komutanlar yapay olarak öldürülmez. counts() görünür canlı komutanları hâlâ içerir.
+- historical-commanders.js açıklaması yeni davranışı ve sonuç kuralını belirtir.
+
+Doğrulama PASS:
+- tests/historical-commander-movement.mjs: iki yön, geride gezinme, cepheyi takip, tehlikeden kaçma, harita kenarı, elle taşıma/dur, karma seçim, eski saldırının iptali, kale engelleri.
+- tests/historical-commanders-combat.mjs: 19 lider, saldırmama, hasar alabilme/ölüm, savaşçı bazlı sonuç, determinizm, klasik mod.
+- tests/historical-commander-tactics.mjs: yaşayan komutan kapısı, kayıp sonrası taktik iptali, iki taraf bağımsızlığı.
+- tests/crown-battle-behavior.mjs: mevcut savaş davranışları; 2400 asker/60 adım 462 ms.
+- tests/historical-commanders-battle-browser.mjs: 19 lider seçimi, sayılar, elle hareket/dur, yeniden kurma, kaldırma, mobil düzen, canlı oyunda 10 simülasyon saniyesi boyunca iki liderin hareket edip saldırmaması; sayfa hatası yok.
+- Vite üretim derlemesi PASS (6,84 saniye); mevcut 500 kB chunk uyarısı sürüyor.
+- Ayrı yerel Node ölçümü: 2400 asker + 2 komutan, 30 ısınma + 120 ölçüm adımı; toplam 694,1 ms; yalnız yeni komutan survey/steer maliyeti ortalama 0,0364 ms/adım. Bu tarayıcı FPS ölçümü değildir.
+
+Koordinasyon: İki mevcut sekmeye motor dosyası sahipliği ve sonuç/taktik entegrasyonu bildirildi. Taktik gate ve yeni medeniyet modülleri değiştirilmedi. Yeni alt ajan açılmadı; indirme yapılmadı.

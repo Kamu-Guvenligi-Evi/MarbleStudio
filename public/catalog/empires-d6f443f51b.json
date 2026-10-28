@@ -1,1 +1,15 @@
-{"id": "empires-d6f443f51b", "category": "empires", "name": "Roma İmparatorluğu", "source": "https://commons.wikimedia.org/wiki/File:Roman_Empire_Trajan_117AD.png", "credit": "Tataryn", "license": "CC BY-SA 3.0", "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0", "fit": "contain", "src": "/catalog/empires-d6f443f51b.png", "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Roman_Empire_Trajan_117AD.png/330px-Roman_Empire_Trajan_117AD.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"}
+{
+  "id": "empires-d6f443f51b",
+  "category": "empires",
+  "name": "Roma İmparatorluğu",
+  "source": "https://commons.wikimedia.org/wiki/File:Vexilloid_of_the_Roman_Empire.svg",
+  "credit": "Ssolbergj",
+  "license": "CC BY 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+  "fit": "flag",
+  "src": "/catalog/empires-d6f443f51b-historical.png",
+  "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Vexilloid_of_the_Roman_Empire.svg/330px-Vexilloid_of_the_Roman_Empire.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "fileOverride": "Vexilloid of the Roman Empire.svg",
+  "historicalNote": "Roma vexillum yorumu · modern temsili sancak",
+  "curated": true
+}

@@ -1,0 +1,15 @@
+{
+  "id": "empires-e5352dc138",
+  "category": "empires",
+  "name": "Portekiz İmparatorluğu",
+  "src": "/catalog/empires-e5352dc138-historical.png",
+  "source": "https://commons.wikimedia.org/wiki/File:Flag_of_Portugal_(1830%E2%80%931910).svg",
+  "credit": "Tonyjeff, based on ancient national symbol. ",
+  "license": "Public domain",
+  "licenseUrl": "",
+  "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Flag_of_Portugal_%281830%E2%80%931910%29.svg/330px-Flag_of_Portugal_%281830%E2%80%931910%29.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "fileOverride": "Flag of Portugal (1830–1910).svg",
+  "fit": "flag",
+  "historicalNote": "1830–1910 · Portekiz Krallığı bayrağı",
+  "curated": true
+}

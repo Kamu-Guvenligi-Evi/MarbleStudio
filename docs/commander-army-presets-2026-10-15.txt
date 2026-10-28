@@ -1,0 +1,36 @@
+Komutana bağlı otomatik ordu — 15 Ekim 2026
+
+Kullanım: Komuta > Komutan seçimi ve ayrıntılar > komutan seç > asker sayısı >
+Otomatik ordu oluştur > Komutan ve orduları uygula > savaşı başlat.
+Aynı oluşturma arayüzü historical-armies.html atölyesinde de bulunur.
+
+11 desteklenen komutan: Fatih, Alp Arslan, Frundsberg, Harold, VII. Charles,
+Sforza, Leonidas, Darius, Takeda, Qin Shi Huang, Qi Jiguang.
+Diğer komutanlarda şablon eksikliği açıkça gösterilir; uygun olmayan tarihî
+birlikler otomatik atanmaz. Hiçbir mevcut asker komutanı seçmekle silinmez;
+yalnız oluşturma düğmesi ilgili tarafın asker listesini değiştirir.
+
+Sayı: varsayılan 24, Ming 40; +/− başlangıç büyüklüğü kadar değiştirir.
+Tam sayı alanı 97 gibi farklı toplamları da kabul eder. En büyük kalan
+yöntemi oranları yaklaşık korur, toplamı tam tutar. Komutan ayrıca +1 kişidir.
+Minimum, başlangıç ordusudur; tek tek kartlardan sonradan değiştirilebilir.
+Taktik şartları doğrudan mevcut doctrine required/roles verilerinden alınır.
+Selçuklu ayrı profili 24 Hassa süvarisiyle başlar. Taktik dosyaları değiştirilmedi.
+
+Dosyalar: src/historical-army-presets.js, historical-army-preset-ui.js;
+historical-commanders.js/css; crown-battle-app.js; historical-armies.js.
+Oluşturma bir taslak değişikliğidir; savaş ekranında uygulama gerekir.
+Kayıt sırasında kilitlenir. Atölye yerel kaydını günceller.
+
+Doğrulama:
+- tests/historical-army-presets.mjs: 11 şablon, 4 büyüklük, iki taraf;
+  motor içinde gerçek taktik başlangıcı, tam toplam ve geçersiz girişler PASS.
+- tests/historical-army-presets-browser.mjs: 1440/390/320 px; seçim,
+  ölçekleme, takım bağımsızlığı, uygulama, yerel kayıt ve atölye PASS.
+- tests/crown-battle-recruitment-browser.mjs: mevcut ordu düzenleme,
+  geri alma, filtreler, mobil/masaüstü, geçersiz giriş davranışları PASS.
+- Vite build: PASS; mevcut büyük paket uyarısı sürüyor.
+
+Not: Açık alan, yaşayan uyumlu komutan, uygun düşman/mesafe ve oyuncu
+emri olmaması gibi motor koşulları ayrıca geçerlidir. Otomatik oluşturma
+bu koşulları veya rakibe bağlı kararları atlamaz.

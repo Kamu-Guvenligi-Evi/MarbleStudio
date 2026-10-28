@@ -1,0 +1,53 @@
+Liderler — kültür grupları, 15 Ekim 2026
+
+Kapsam: Kullanıcı her devlete ayrı lider istemedi; aynı kültür grubunda ortak
+lider seçimini kabul etti. Mevcut 9 lider korunarak 10 lider eklendi, toplam 19.
+Menü cultureId/cultureName ile gruplanır. faction/civilizations tarihî aidiyeti
+gösterir; kültür grubu, o liderin listedeki bütün devletleri yönettiği anlamına gelmez.
+Ordu seçimi hiçbir lideri otomatik eklemez. Lider seçmek isteğe bağlıdır.
+
+Yeni kimlikler ve hazırlanan taktik eşleşmeleri:
+georg_frundsberg        DE_PIKE
+harold_godwinson        EN_SHIELDWALL
+charles_vii             FR_OPPORTUNITY
+francesco_sforza        IT_CONDOTTA
+leonidas               GR_HOPLITE
+darius_i               PE_ACHAEMENID
+takeda_shingen         JP_INFANTRY
+qin_shi_huang          CN_QIN
+qi_jiguang             CN_MING
+nikephoros_ii_phokas    henüz taktik eşleşmesi yok
+Mevcut: alp_arslan/TR_SELJUK, mehmed_ii/TR_OTTOMAN.
+
+doctrineIds izin kaydıdır, tek başına taktik motoru uygulamaz. Bu teslimde
+mevcut Selçuklu ricatının yaşayan/uygun komutan şartı diğer sekmeyle doğrulandı.
+Diğer doktrinlerin uygulanması ayrı sekmenin işidir; hepsi etkin diye sunulmadı.
+Kültür ortaklığı doctrineIds kontrolünü genişletmez.
+
+Çizimler: 10 yeni yerel Canvas portre ve atlı savaş profili; mevcut 9 profil/görsel
+korundu. Başlık, zırh, pelerin, kalkan, at ve renk kombinasyonları ayrıştırıldı.
+Bunlar doğrulanmış yüzler değil, dönem esintili oyun tasvirleridir. Kartta açıkça
+belirtilir. Portre yalnız seçim değişince çizilir; savaşın kare döngüsüne iş eklemez.
+Dış görsel/paket indirilmedi. Kart kaynakları JSON'da; müze/kurum bağlantıları
+sadece kullanıcı tıklarsa açılır. Kaynaklar kıyafet/yüzün birebir doğrulandığı iddiası değildir.
+
+Dosyalar: src/historical-commanders.json, historical-commanders.js/.css,
+historical-commander-art.js. scripts/expand-historical-commanders.mjs tek seferlik,
+tekrarlanabilir katalog ekleme aracı. Mevcut girdileri silmez.
+
+Doğrulama:
+- historical-commander-art: 19 farklı siluet, 912 animasyon karesi; boş/kırpılan yok.
+  10 yeni menü portresi farklı. Yerel önizlemeler görsel olarak incelendi.
+- historical-commanders-battle-browser: bütün 19 lideri ekleme/seçme/hareket/dur,
+  yeniden kurma, çoğalmama, kaldırma, 320/390px görünüm ve canlı can güncellemesi PASS.
+- historical-commanders-combat, historical-commander-tactics, historical-tactics:
+  diğer çalışan sekme 19 lider kataloğuyla PASS bildirdi.
+- Üretim build PASS (11.48s); mevcut >500kB paket uyarısı devam ediyor.
+- historical-commanders-browser PASS: 19 portre, kültür grupları, iki ordunun bağımsız
+  seçimi, eski/yeni liderlerin yenilemede korunması, JSON dışa aktarımı, sekmeler
+  arası eşitleme, 320/390px görünüm, bozuk kayıt/görsel yedeği, klasik mod.
+  Sayfa hatası ve haricî ağ isteği yok. Eski testin klasik mod adresi ile kapalı
+  komutan paneli ve formasyon intikali mesajı güncel oyuna uyarlandı.
+
+Önizlemeler: artifacts/historical-commanders/commander-game-art.jpg (19 lider),
+new-leader-portraits.jpg (10 portre), art-checks.json, build.log.

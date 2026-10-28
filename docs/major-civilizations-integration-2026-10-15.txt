@@ -1,0 +1,55 @@
+Taç Muharebesi — medeniyet boşlukları, 15 Ekim 2026
+
+Bu turda 14 birlik eklendi. Mevcut tarihî ailelerin 44'ü rol dağılımı bakımından
+artifacts/major-civilizations/civilization-audit.json dosyasında incelendi.
+Bu sayı bütün dünya birliklerinin araştırılıp tamamlandığı anlamına gelmez.
+
+MENÜLER VE BİRLİKLER
+Persler / Ahameniş: achaemenid_archer — Susa tasvirine dayalı yaylı savaşçı.
+Asurlular / Yeni Asur: assyrian_foot_archer — sivri miğferli yaya okçusu.
+İnkalar: inca_slinger — dokuma sapanlı piyade.
+Kartacalılar: carthage_balearic_slinger — Kartaca hizmetinde Balear sapancısı.
+İsviçreliler: swiss_pikeman — uzun mızraklı piyade.
+İngilizler: english_mail_knight — 13. yüzyıl zincir zırhlı atlı şövalye.
+Moğollar: mongol_hook_lancer — kancalı mızraklı süvari.
+Çinliler / Qin: qin_ji_infantry — ji silahlı piyade.
+Koreliler / Goryeo: goryeo_gyeonggung — büyük, güçlü yay kullanan okçu.
+İspanyollar / León-Kastilya: castilian_crossbowman — arbaletçi.
+İtalyanlar / Roma: roman_syrian_archer — Roma hizmetinde Suriyeli okçu.
+Mısırlılar / Eski Krallık Mısır: egypt_old_kingdom_archer — yaya okçusu.
+Araplar / Medine Arapları: medina_foot_archer — Uhud bağlamında yaya okçusu.
+Khmerler: khmer_foot_archer — Bayon kabartmalarına dayalı yaya okçusu.
+
+KAYNAK VE GÖRSELLER
+Her kartın tarih ve donanım kaynakları src/major-civilization-units.js içindedir.
+Adlandırılmış seçkin teşkilat olmayan roller açıkça belirtilir. Tam üniforması
+bilinmeyen birliklerde renk, giysi ve animasyon yorum olduğu açıklanır.
+Mısır kabartması Eski Krallık'a aittir; sonraki Lisht kullanımıyla karıştırılmadı.
+Moğol mızrağının kancası görseldir; özel attan düşürme mekaniği eklenmedi.
+Met kamu malı iki nesne fotoğrafı yerel kaynak görünümüne bağlandı:
+public/warrior-references/inca-sling-met-314615.jpg (23.387 bayt)
+public/warrior-references/egypt-archers-met-543895.jpg (225.476 bayt).
+Bu boyutlar yerel dosya boyutudur, ölçülmüş internet tüketimi değildir.
+Diğer kaynaklara bağlantı verildi; telifli fotoğraflar kopyalanmadı.
+Toplu çizim önizlemesi: artifacts/major-civilizations/fourteen-warriors.jpg.
+
+ENTEGRASYON
+Yeni veri/çizim: src/major-civilization-units.js, src/major-civilization-art.js.
+Bağlantılar: historical-catalogue.js, historical-art-profiles.js,
+historical-warrior-art.js, historical-culture-groups.js.
+crown-battle-projectiles.js sapanı combatProfile.config.projectile üzerinden
+tanır; yeni sapancılar ok yerine mevcut taş çizimini kullanır.
+crown-battle.js ve crown-battle-renderer.js bu iş kapsamında değiştirilmedi.
+
+DOĞRULAMA
+tests/major-civilizations.mjs: 14 kimlik/profil/medeniyet, canlı saldırı hasarı,
+ok/arbalet/taş türleri, menü seçimi, savaşa aktarım, kayıt sonrası yeniden yükleme,
+iki müze fotoğrafı çözümleme geçti. 1.120 kare boşluk/kenar kesilmesi olmadan
+çizildi; 14 farklı alfa silueti. Tarayıcı JavaScript hatası yok.
+tests/crown-battle-projectiles.mjs geçti.
+tests/rus-french.mjs --node-only geçti.
+Vite üretim derlemesi geçti; mevcut büyük paket boyutu uyarısı devam ediyor.
+Eski tests/historical-civilizations.mjs güncel Osmanlı kadrosuna, Roma okçusuna
+ve ülke düğmelerine uyarlandı ve geçti: 179 katalog girdisi, 89 grup, filtreler,
+ordu aktarımı, kayıt, çizimler ve mobil taşma. Bunlar fantastik girdileri de
+içeren genel katalog sayılarıdır. Kayıt: civilization-test.log.

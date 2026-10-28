@@ -1,6 +1,8 @@
 import {VOICES} from './sound-plan.js';
 
 export const SOUND_EVENTS={
+  'goal-arena':{wall:'Wall / post',bounce:'Ball collision',goal:'Goal',complete:'Full time'},
+  'ball-multiplier':{wall:'Wall bounce',bounce:'Ball collision',multiply:'New ball',complete:'Complete'},
   'rock-paper-scissors':{wall:'Duvara çarpma',bounce:'Aynı türlerin çarpışması',hit:'Tür dönüşümü',win:'Zafer',timeout:'Süre doldu'},
   'spiral-breaker':{brick:'Duvara çarpma',paddle:'Çubuktan sekme',break:'Blok kırılma',finish:'Yolu tamamlama',multiply:'×3 bonusu',bonus:'Diğer bonuslar',lost:'Topların bitmesi',won:'Harita tamamlandı'},
   'glass-breaker':{ice:'Cam kırılma',wave:'Yeni dalga',won:'Final'},

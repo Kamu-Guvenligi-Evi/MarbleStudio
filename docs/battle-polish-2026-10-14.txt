@@ -1,0 +1,41 @@
+Taç Muharebesi — sahne ve savaş sunumu, 14 Ekim 2026
+
+Kullanıcı: oyun basit görünüyor; sahneyi, hareketleri ve kullanımını iyileştir.
+Binalar/köprüler ertelendi. FPS sekmesi renderer/cache/batch/engine sahibi.
+Orta Dünya sekmesi middle-earth-art/units sahibi. Bu çalışma o dosyalara dokunmaz.
+
+Başlangıç bulgusu: 1440×900 ekranda tuval yalnız 1070×390. Alt komutlar,
+formasyon, oynatma ve ses satırları çok yer kaplıyor. PC zemini portre
+bitmapten kesilip genişletildiği için ayrıntı bulanıklaşıyor.
+
+Uygulama:
+- crown-battle-polish.css, crown-battle.html: masaüstü komut masası kompakt.
+  Takım seçimi ve emirler tek satır, formasyon ayrı satır. 1200+ genişlikte
+  ses ile oynatma aynı satır. Mobil dokunma hedefleri ve sinema açılır menüsü
+  korunur. Yeni CSS yalnız body:not(.cinema) üzerinde çalışır.
+- crown-battle-ground.js, maps.js, pc-scene.js: altı harita için ekran oranına
+  göre hazırlanan deterministik toprak, aşınma izleri, ot ve çakıl dokusu.
+  Klasik mobil portre zemini korunur. Bina/engel yok. Bitmap en fazla
+  2560×1600; zemin harita/resize sırasında hazırlanır, frame sırasında değil.
+- crown-battle-feedback.js: hazırlık/temas/toparlanma beden kayması, atış
+  sonrası geri tepme, kısa konik kılıç izi, dağılan darbe parçacıkları.
+  Simülasyon verisini değiştirmez. Mevcut 96 efekt ve hücre sınırı korunur.
+
+Doğrulama:
+- tests/crown-battle-feedback.mjs PASS: saldırı/temas zamanlaması, etki sınırı,
+  seed eşitliği, iki yöne beden hareketi ve atıştan önce geri tepme olmaması.
+- scripts/battle-polish-preview.mjs: görsel ve responsive kontrolleri için.
+  Önceki görsel: artifacts/battle-polish/before.jpg (127661 bayt).
+  Sonraki görsel: artifacts/battle-polish/after.jpg (127664 bayt).
+  PASS: 1440/1000/390 px yerleşim, sinema açılır kontrolleri, altı farklı
+  harita ve seed tekrarlanabilirliği; tarayıcı hatası yok. 1440x900 ekranda
+  tuval 1070x390'dan 1070x580'e çıktı. Görsel elle incelendi.
+- tests/crown-battle-formations-browser.mjs PASS: masaüstü/mobil, sıfır
+  ordular, iki taraf, yerleştirme, yön, iptal ve hareket.
+- Vite production build PASS (4.08 sn). Mevcut 500 kB chunk uyarısı sürüyor.
+  Log: artifacts/battle-polish/build.log.
+
+Sınır: Bunlar 2D sahne ve sunum iyileştirmeleri. FPS sekmesinin WebGL/motor
+ölçümleri ayrı sürüyor; bu kontroller 60 FPS veya donma çözümü kanıtı değildir.
+
+Yeni indirme/paket/görsel üretimi yok; değişiklikler mevcut yerel oyunda.

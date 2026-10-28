@@ -1,0 +1,47 @@
+2026-10-14 — Savaş mekaniği / animasyon eşleştirmesi
+
+Ana sekme: src/crown-battle.js ve combat/behavior testleri.
+Kamera sekmesi: crown-battle-camera.js, renderer.js, app.js, CSS; geniş harita ve FPS.
+Görsel sekmesi: katalog/sprite profilleri ve yeni medeniyet birlikleri.
+
+Tamamlanan motor değişiklikleri:
+- Saldırı toplam .24 saniye; başlangıç hazırlık, .12 eşiği temas/atış.
+  Renderer'ın 8 kare sözleşmesi korunur: hasar/mermi 4. karede çıkar.
+- Bekleyen saldırı ölüm, kaldırma, hareket/dur/hedef emriyle iptal olur.
+  Hedef menzilden çıkarsa vuruş boşa gider. Yakın dövüşte savuruş sırasında
+  yürüyüş durur; atlı okçular hareket ederek atış yapabilir.
+- Salınan ok/mermi hasarı uçuş sonunda oluşur; atan asker sonradan ölürse
+  havadaki atış devam eder. p.angle gerçek kare hareketinden hesaplanır.
+- Kamera sekmesi renderer'da atış yönünü ve .3sn ölüm geçişini ekledi.
+  Duraklatma ölüm pozunu dondurur; savaş sonu son düşüş tamamlanmış gösterilir.
+- Battle({expandedMap:true}) bounds: -300..900 x -480..1440.
+  Varsayılan alan/spawn korunur. Hareket, emir, kaçınma sınırları bounds'a bağlı.
+  Grid negatif/geniş koordinatlarda çalışır, hedef taraması harita çaprazını kapsar.
+  Hücre halkaları yalnız çevreyi tarar; hücre başına örnek/sonuç sınırı korunur.
+
+Doğrulama:
+- crown-battle-impact.mjs PASS: 20/30/60/120Hz temas zamanı, tek vuruş,
+  iptal/kaçış, atış uçuşu/yönü, atan askerin ölümü, geniş alan komut/hedef/dövüş.
+- crown-battle.mjs, crown-battle-behavior.mjs, historical-combat.mjs,
+  historical-commanders-combat.mjs, crown-battle-removal.mjs PASS.
+- crown-battle-impact-browser.mjs PASS: 34 kontrol, samurai/janissary/timur/
+  hussar/mongol; PC önbelleği ve portrait çiziminde temas karesi; ölüm/duraklatma.
+- Yerel 50KB temas şeridi incelendi:
+  artifacts/crown-battle/attack-contact-sheet.png
+
+Son entegrasyon:
+- Görsel sekmesi tarihî/classic sprite'larda musket alevini 4–5. kareye,
+  yay bırakmayı 4. kareye taşıdı. Son sprite'larla 34 tarayıcı kontrolü tekrar PASS.
+- Görsel sekmesi Tang Xuanjia dahil 2016 sprite karesi ve Vite build PASS bildirdi.
+- Kamera sekmesinin final izole Chrome ölçümü, geniş harita 1000x540 DPR1,
+  yoğunluk başına ayrı sayfa: 320 asker144FPS, 2000 asker18FPS, 4000 asker11.6FPS.
+  4000 askerde adım58.9ms/çizim36.1ms. performance-map-final.json.
+  Süreler oynak; binlerce askerde akıcılık sorunu çözülmüş değildir.
+- Motorun tekrar eden yarıçap/rol ve hücre örnek indeks hesapları azaltıldı;
+  4000 karma birlik / 120 adım: 3 önce + 3 sonra durum hash'leri birebir aynı.
+  artifacts/crown-battle/engine-optimization.json. Ardışık Node süreleri değişken
+  (önce105.9/211.1/212.8, sonra148.1/168.0/162.2 ms/adım); FPS kazanımı iddia edilmez.
+  Son motor+atlas ile impact, behavior ve 34 tarayıcı kontrolü yeniden PASS.
+
+Sınırlar: Atışlar mevcut hedef takip davranışını korur. Yeni fiziksel balistik,
+engel çarpışması veya moral sistemi eklenmedi. Sprite'lar mevcut 2B çizimlerdir.

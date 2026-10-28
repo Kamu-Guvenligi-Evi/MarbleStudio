@@ -1,0 +1,46 @@
+Medeniyet taktikleri — 15 Ekim 2026
+
+Teslim: mevcut Selçuklu sahte ricadına ek 10 çalışan savaş davranışı.
+Araştırma haritasındaki 29 taslak, 29 uygulanmış taktik anlamına gelmez.
+
+TR_OTTOMAN / Fatih: merkezde yaylı birlikler, iki yanda Sipahi dolaşması.
+DE_PIKE / Frundsberg: Landsknecht mızrak safları, mevcut destek birlikleri.
+EN_SHIELDWALL / Harold: Housecarl savunma hattını tutar; kalkan/hasar bonusu verilmez.
+FR_OPPORTUNITY / VII. Charles: açıkta kalan menzilli hedef için fırsat bekler;
+  hedef yakını veya yaklaşma koridoru yakın dövüş askerleriyle korunuyorsa toplu hücum başlatmaz.
+IT_CONDOTTA / Sforza: süvarinin üçte biri ihtiyat; ön grup temasa girince uygun kanada gider.
+GR_HOPLITE / Leonidas: Spartalılar ortak saflarla ilerler.
+PE_ACHAEMENID / I. Darius: mızrak hattı ve yanlarda yay desteği.
+JP_INFANTRY / Takeda: yari önü, yumi desteği; düşman yaklaşınca yaylar geriye alınır.
+CN_QIN / Qin Shi Huang: öndeki arbalet hattı, yaklaşan düşman karşısında geriye çekilir.
+CN_MING / Qi Jiguang: mevcut beş silah sınıfından on savaşçılı karma hücreler.
+  Tarihteki komutan/lojistik personeli hayali savaş birimi olarak çoğaltılmaz.
+
+Koşullar: açık alan, uyumlu canlı komutan, en az 12 uygun asker, ordunun
+komutan dışındaki askerlerinin en az %60'ının doktrine uygun olması.
+Kesin birlik ve rol minimumları src/historical-civilization-tactics.js içindedir.
+Ming en az 20 savaşçı ve 1:1:2:4:2 rol oranıyla tam hücre gerektirir.
+Dönemi/teçhizatı uyuşmayan aynı kültür askerleri otomatik kapsamda değildir.
+Oyuncunun emirleri anında üstündür. Komutan kaybı, yetersiz kuvvet, harita
+sınırı veya 32 saniyelik süre sonunda normal savaş davranışı devam eder.
+Takım kararları saniyede iki kez; bir askerin kararı için bütün ordu taranmaz.
+Başlangıç saf eşleştirmesi sıralama kullanır; yeniden konumlandırma/ışınlanma yoktur.
+Birlik hızları, silahları, atış aralıkları ve hasarları değiştirilmez.
+
+Bağlantılar: historical-tactics.js wrapper; crown-battle-tactical-visuals.js
+gerçek hedeflerden en fazla üç grup rotası ve kısa faz etiketi.
+Tam doktrin adı ve faz savaş günlüğüne yazılır.
+
+Doğrulama: tests/historical-civilization-tactics.mjs
+- 10 profil, iki takım: gerçek diziliş/hareket, etiket, emir önceliği, komutan kaybı.
+- Eksik/yanlış komutan, Fransız açık/korunan hedef, fiziksel Qin geri çekilişi.
+- Süre sınırı ve kale haritası bypass.
+- Varsayılan yerleşimde hareket eden düşmana karşı 10 x 2 senaryo.
+Mevcut Selçuklu, komutan, taktik görselleri ve tarihî savaş regresyonları PASS.
+Son birleşik derleme PASS; mevcut büyük paket uyarısı devam ediyor.
+Tarayıcı: 10 profil x 2 takım, 600 kare, masaüstü/mobil/katmanlı çizim,
+sıfır sayfa hatası; kısa etiketler, en fazla üç rota ve örnekleme önbelleği PASS.
+Tekrarlanabilir tarayıcı kontrolü: artifacts/tactics-browser-assist.mjs.
+Kaynak/yorum sınırları: historical-tactics-research-2026-10-15.txt.
+Bu davranışlar tarihî düzenlerden esinlenen sonlu oyun uygulamalarıdır;
+her dönemde bütün medeniyet ordularının aynı davranışı yaptığı iddiası yoktur.

@@ -1,0 +1,26 @@
+Viking genişletmesi — 14 Ekim 2026
+
+İskandinavlar → İskandinavya: 1 seçenekten 5 seçeneğe çıktı.
+Mevcut viking korundu. Eklenenler:
+- norse_hird_swordsman: Hird kılıçlısı; dayanıklı, kılıç/kalkan, zincir zırh, gözlüklü miğfer.
+- norse_spearman: Viking mızraklısı; uzun erişim, mızrak/kalkan, yün tunik.
+- norse_dane_axeman: Dan baltacısı; yavaş güçlü vuruş, iki elli uzun saplı geniş balta.
+- norse_longbowman: Viking uzun yaylısı; mesafeli saldırı, uzun ahşap yay ve sadak.
+
+Tarihsel sınırlar: Bunlar dört ayrı seçkin alay değildir. Hird bir maiyettir; diğer üçü donanım türü temsilidir. 13. yüzyıl hird teşkilatı Viking çağına aynen uygulanmadı. Atlı birlik uydurulmadı. Sayısal savaş değerleri oyun dengesi içindir.
+Kaynaklar: Danimarka Ulusal Müzesi silah/balta yayınları, Oslo Historical Museum Gjermundbu rehberi, Viking Ship Museum Haithabu yay yayını, Håkon Haugland'ın hird maddesi.
+Kaynak URL'leri ve ayrıntılar: docs/historical-elite-research-2026-10-14.json.
+Dört lisanslı arkeolojik donanım fotoğrafı: public/warrior-references/norse-{sword,spear,axe,bow}.jpg.
+Fotoğraf kredi/lisans/kapsam notları: src/historical-unit-visuals.json. Okçu kartındaki fotoğraf Birka ok uçlarıdır; yay biçiminin dayanağı ayrı müze yayınıdır.
+Toplam fotoğraf yerel boyutu 201593 bayt; bu ölçülmüş ağ trafiği değildir.
+
+Entegrasyon: historical-catalogue.js, historical-combat.js, historical-art-profiles.js, historical-warrior-art.js. Dört farklı donanım/siluet, bacak sargıları, uygun silah animasyonları.
+Doğrulama:
+- tests/historical-elite-art.mjs: 2688 kare geçti; iki takım, idle/walk/attack, boş/kesik kare yok, tarayıcı hatası yok.
+- tests/historical-combat.mjs: geçti.
+- artifacts/elite-research/verify-vikings.mjs: geçti; kültür/ülke menüsünde 5 kart, 4 fotoğraf erişilebilir, ordu aktarımı, ayrı birlik seçimi, savaş saati ve hasar.
+- artifacts/elite-research/viking-preview.jpg: beş birliğin duruş/saldırı çizimleri görsel olarak incelendi.
+- Vite üretim derlemesi: geçti; mevcut büyük paket uyarısı var.
+Son sayım: 56 tarihî birlik, 41 medeniyet grubu. Önceki 8 birliklik araştırma turu sayaçları ayrı tutuldu.
+
+Diğer sekmeler: motorun sprite-cache/willReadFrequently iyileştirmeleri korundu. Orta Dünya manifest ve entegrasyonu ilgili sekmede; bu Viking işine dahil değil. Silah yönü incelemesi kamera sekmesinde devam ediyor.

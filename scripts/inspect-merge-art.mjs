@@ -1,0 +1,11 @@
+import fs from 'node:fs/promises';
+import {chromium} from 'playwright';
+import {MERGE_IMAGES} from '../src/merge-image-manifest.js';
+const h=await fs.readFile('artifacts/png-index.json','utf8');
+const categories=[...h.matchAll(/href="([^"]+)"[^>]*>([^<]+)/g)].filter(x=>x[1].includes('/images/')).map(x=>[x[1],x[2]]);
+await fs.writeFile('artifacts/png-categories.json',JSON.stringify(categories));
+console.log('Categories:',categories.map(x=>x[0].split('/').at(-1)).join(','));
+const browser=await chromium.launch({channel:'chrome',headless:true});const page=await browser.newPage();await page.goto('http://127.0.0.1:5173');
+const audit=await page.evaluate(async manifest=>{const result={};for(const [theme,entries] of Object.entries(manifest)){result[theme]=[];for(const item of entries){if(!item?.src){result[theme].push(null);continue;}const im=new Image();im.src=item.src;try{await im.decode();}catch{result[theme].push({error:true});continue;}const c=document.createElement('canvas');c.width=96;c.height=96;const ctx=c.getContext('2d');ctx.drawImage(im,0,0,96,96);const d=ctx.getImageData(0,0,96,96).data;let clear=0,edge=0;for(let y=0;y<96;y++)for(let x=0;x<96;x++){const a=d[(y*96+x)*4+3];if(a<10)clear++;if((x===0||y===0||x===95||y===95)&&a>240)edge++;}result[theme].push({clear:clear/9216,edge:edge/380,src:item.src});}}return result;},MERGE_IMAGES);
+await fs.writeFile('artifacts/merge-alpha-audit.json',JSON.stringify(audit,null,2));await browser.close();
+console.log('Existing fully opaque:',Object.values(audit).flat().filter(x=>x&&x.clear<.05).length);

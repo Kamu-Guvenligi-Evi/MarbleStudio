@@ -1,4 +1,5 @@
 import {drawChannelTitle} from './channel-branding.js';
+import {canvasLayer} from './canvas-layer.js';
 import {ARENA,TYPES,randomFrom} from './rock-paper-scissors.js';
 export const COLORS={rock:'#9d8aff',scissors:'#f281ce',paper:'#e5deff'};
 function path(ctx,points){ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();}
@@ -34,12 +35,12 @@ export function drawRpsIcon(ctx,type,x,y,size){
   }
   ctx.restore();
 }
-const sprites=new Map(),backgrounds=new Map();
-function sprite(type){if(!sprites.has(type)){const c=document.createElement('canvas');c.width=c.height=128;drawRpsIcon(c.getContext('2d'),type,64,64,100);sprites.set(type,c);}return sprites.get(type);}
-function icon(ctx,type,x,y,size){ctx.drawImage(sprite(type),x-size*.64,y-size*.64,size*1.28,size*1.28);}
-function background(mode){
-  if(backgrounds.has(mode))return backgrounds.get(mode);
-  const c=document.createElement('canvas');c.width=540;c.height=960;const ctx=c.getContext('2d');ctx.fillStyle='#050409';ctx.fillRect(0,0,540,960);
+const sprites=new Map();
+function sprite(type,pixels){const key=`${type}:${pixels}`;if(!sprites.has(key)){const c=document.createElement('canvas');c.width=c.height=pixels;drawRpsIcon(c.getContext('2d'),type,pixels/2,pixels/2,pixels/1.28);sprites.set(key,c);}return sprites.get(key);}
+function icon(ctx,type,x,y,size){const t=ctx.getTransform(),scale=Math.max(Math.hypot(t.a,t.b),Math.hypot(t.c,t.d)),pixels=Math.max(128,2**Math.ceil(Math.log2(size*1.28*scale)));ctx.drawImage(sprite(type,pixels),x-size*.64,y-size*.64,size*1.28,size*1.28);}
+function background(context,mode){
+  return canvasLayer(context,mode,540,960,ctx=>{
+  ctx.fillStyle='#050409';ctx.fillRect(0,0,540,960);
   if(mode!=='minimal'){
     const random=randomFrom(7283);
     for(let i=0;i<75;i++){
@@ -49,7 +50,7 @@ function background(mode){
     for(let i=0;i<135;i++){ctx.globalAlpha=.08+random()*.36;ctx.fillStyle='#e2d5ff';ctx.beginPath();ctx.arc(random()*540,random()*960,.3+random()*.65,0,Math.PI*2);ctx.fill();}ctx.globalAlpha=1;
     const vignette=ctx.createRadialGradient(270,480,90,270,480,570);vignette.addColorStop(0,'#00000000');vignette.addColorStop(1,'#000000bd');ctx.fillStyle=vignette;ctx.fillRect(0,0,540,960);
   }
-  backgrounds.set(mode,c);return c;
+  });
 }
 function text(ctx,value,x,y,size,color='#f4efff',weight=500){ctx.font=`${weight} ${size}px "Segoe UI", Arial, sans-serif`;ctx.fillStyle=color;ctx.fillText(value,x,y);}
 export function drawRpsObstacles(ctx,obstacles){
@@ -92,7 +93,7 @@ export function drawRpsMapPreview(ctx,game){
 }
 let fittedTitle, fittedTitleSize=25;
 export function renderRps(ctx,game,settings,{paused=false,channel}={}){
-  const {width,height}=ctx.canvas;ctx.save();ctx.scale(width/540,height/960);ctx.drawImage(background(settings.background),0,0);ctx.textAlign='center';ctx.textBaseline='middle';
+  const {width,height}=ctx.canvas;ctx.save();ctx.scale(width/540,height/960);ctx.drawImage(background(ctx,settings.background),0,0,540,960);ctx.textAlign='center';ctx.textBaseline='middle';
   drawChannelTitle(ctx,channel,270,58);
   const counts=game.counts(),total=game.pieces.length;
   TYPES.forEach((type,i)=>{

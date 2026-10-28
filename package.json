@@ -4,6 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test:collapse": "node tests/collapse-arena.mjs --matrix && node tests/collapse-arena-browser.mjs",
+    "test:collapse:video": "node tests/collapse-arena-video.mjs",
+    "test:battle-behavior": "node tests/historical-battle-behavior-suite.mjs",
+    "test:goal": "node tests/goal-arena.mjs",
+    "test:goal:video": "node tests/goal-arena-video.mjs",
+    "test:manual-export": "node tests/manual-export-download.mjs",
+    "test:multiplier": "node tests/ball-multiplier.mjs",
+    "test:multiplier:video": "node tests/ball-multiplier-video.mjs",
     "test:rps": "node tests/rock-paper-scissors.mjs && node tests/rock-paper-scissors-browser.mjs",
     "test:manual-sounds": "node tests/manual-game-sounds.mjs && node tests/manual-game-sounds-browser.mjs",
     "test:sound-director": "node tests/sound-director.mjs && node tests/game-sound-director.mjs && node tests/sound-director-browser.mjs && node tests/game-sound-director-browser.mjs",
@@ -44,7 +52,8 @@
     "test:production-browser": "node tests/production-browser.mjs",
     "test:output-language": "node tests/output-language.mjs",
     "test:output-language-browser": "node tests/output-language-browser.mjs",
-    "test:branding": "node tests/channel-branding-browser.mjs"
+    "test:branding": "node tests/channel-branding-browser.mjs",
+    "test:merge": "node tests/merge-sound.mjs && node tests/merge-evolution.mjs && node tests/merge-evolution-browser.mjs && node tests/merge-theme-editor.mjs && node tests/merge-finale.mjs"
   },
   "dependencies": {
     "matter-js": "0.20.0",

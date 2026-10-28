@@ -1,0 +1,71 @@
+TAÇ MUHAREBESİ — KOMUTAN ARAŞTIRMASI VE GÖRSELLER — 14 EKİM 2026
+
+TESLİM
+src/historical-commanders.json: kök dizi, 9 kayıt.
+public/warrior-references/commander-*: 9 etkin yerel görsel.
+Kimlikler: mehmed_ii, timur, attila, genghis_khan, alexander_great,
+julius_caesar, alp_arslan, saladin, hannibal_barca.
+
+ŞEMA
+id, name, faction, life, rule, role, historicalNote, gameplaySuggestion,
+sources=[{title,url}], image, credit, source, visualNote, license.
+Hannibal'da ayrıca imageType=historical_scene var; görsel portre değildir.
+Tarihler görüntüleme metnidir; kronoloji hesabında doğrudan sayıya çevrilmez.
+Kişinin id'si ile birlik kataloğundaki id birbirine karıştırılmamalıdır.
+
+KAPSAM VE TARİH NOTLARI
+Sezar Roma Cumhuriyeti generali/diktatörüdür; kral veya imparator değildir.
+Timur emîrdir; Cengiz Han büyük handır. Hannibal general olarak kaydedildi.
+Attila'nın doğum yılı kesin bilinmiyor. Cengiz'in doğumu yaklaşık verildi.
+Alp Arslan için 1029 tercihinin ve kaynak farkının notu var.
+Fatih'in dönemi topçuluğu da kapsar; dönem hakkında yanlış açıklama yapılmadı.
+gameplaySuggestion yalnız tasarım önerisidir. İstatistik veya uygulanmış
+yetenek değildir; tarihsel liderler arasında nesnel güç sıralaması değildir.
+
+GÖRSELLER
+Fatih: Bellini'ye atfedilen 1480 portresi, sonraki onarımlar belirtilir.
+Timur: 1405–1409 şecere tasviri, erken ölüm sonrası dönem.
+Attila: 1575 hayalî gravür; 5. yüzyıl donanım belgesi değildir.
+Cengiz: 14. yüzyıl Yuan albümü, ölüm sonrası.
+İskender: Pompeii İskender Mozaiği ayrıntısı, yaklaşık MÖ 100.
+Sezar: Rubens'in yaklaşık 1625–1626 portresi.
+Alp Arslan: yaklaşık 1425 Mecmau't-tevârîh minyatürü.
+Selahaddin: Cristofano dell'Altissimo'nun 1568 öncesi portresi;
+fotoğraf Sailko, kırpma Amandajm. CC BY-SA 3.0 atfı ve bağlantısı JSON'da.
+Hannibal: Ridpath, Universal History, 1897 kitap çizimindeki Alp geçişi.
+Yüz portresi bulunmuş gibi sunulmamalıdır; sahne olarak gösterilir.
+Her kayıtta ayrı kaynak, atıf, lisans ve görselin sınırlılık notu vardır.
+
+ELENEN ADAYLAR
+artifacts/elite-visual-research/review-alexander-lion-hunt.jpg:
+Alexander Mosaic.jpg adlı aday aslında Pella aslan avı sahnesiydi; kullanılmadı.
+artifacts/elite-visual-research/review-hannibal-unclear-origin.jpg:
+Commons'ta author=sdf/source=sdffd; kaynak güvenilirliği yetersiz, kullanılmadı.
+elite-praetorians.jpg: AD41 resmi ayrıntısı küçük kartta çoğunlukla alt beden
+gösterdiği için manifestte kullanılmadı; elite-praetorian-guard.jpg seçildi.
+elite-dura-cataphract.jpg: Dura-Europos arkeolojik çizimi; Part/Sasani
+eşlemesi netleştirilmeden birlik kartına bağlanmadı.
+
+DOĞRULAMA
+9 benzersiz id, zorunlu alanlar, kaynak URL'leri ve yerel görsel yolları PASS.
+9 görsel System.Drawing ile sorunsuz açıldı; küçük temas sayfalarında incelendi.
+UTF-8 bozuk karakter kontrolü PASS. 9 görselin yerel toplamı 1.106.315 bayt.
+Bu yerel boyuttur; ölçülmüş internet aktarımı değildir.
+
+SEKMELER
+Oyun sekmesi 01a13b10-7f99-7a70-b113-bba2c705c791:
+historical-commanders.js/.css, lider seçimi ve kayıt entegrasyonu onda.
+İlk 6 liderin portre, iki ordu seçimi, kalıcı kayıt, JSON, sayfalar arası
+senkron, 320/390 mobil ve görsel hata alternatifi testlerini geçtiğini bildirdi.
+9 kayıtlık son liste teslim edildi; son genişletilmiş UI kontrolü PASS.
+Oyun sekmesi 9 lider, 32 birlik referansı, 44 kart, JSON ve mobil kontrollerini
+doğruladı. Son Vite build başarılı (6.18s); mevcut paket boyutu uyarısı sürüyor.
+Ayrıntı: docs/historical-commander-integration.txt.
+Araştırma sekmesi savaş mekaniğini değiştirmedi.
+
+DEVAM
+Eksik 12 birlik görseli ve beş Osmanlı bölüğüne özgü tasvir araştırması sürer.
+Komutan kataloğu genişletilebilir; bu teslim tüm dünya liderlerini kapsamaz.
+Genişleme adayları: Mete, Subutay, Baybars, Halid bin Velid, Aslan Yürekli
+Richard, Büyük Kiros, Belisarius, Şarlman, Yi Sun-sin. Her aday için ayrı
+tarih kaynağı ve kullanılabilir görsel doğrulanmadan hazır sayılmamalıdır.

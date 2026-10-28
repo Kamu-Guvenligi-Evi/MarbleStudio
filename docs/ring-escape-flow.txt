@@ -27,3 +27,20 @@ tests/ring-escape-browser.mjs (mobil ve sesli WebM) ve Vite build.
 Yerel görsel: artifacts/ring-flow-presets.jpg.
 Önizleme: http://127.0.0.1:5174/ring-escape.html
 Bu kontroller izlenme oranı veya izleyici memnuniyeti ölçümü değildir.
+
+14 Ekim 2026 - Halka Kacisi gorsel yenileme
+Dosya: src/ring-escape-renderer.js. Neon renk bantlari, yonlu halka
+parlamasi, belirgin gecit uclari, isikli kuyruk ve kure, kivilcimlar,
+cevre ilerleme gostergesi, yeni sayac paneli ve zafer kompozisyonu.
+Fizik ve kayit hizi degismedi. Onizleme ve yerel video kaydi ayni
+renderRingEscape fonksiyonunu kullaniyor; baslik ve ozel renkler korunur.
+Sabit arka plan onbellekte; yogun akislarda ~65 gorunur halka siniri.
+Dogrulama: ring-escape.mjs, ring-flow-browser.mjs, Vite build gecti.
+Chrome: 72 tema/sekil/harita kombinasyonu, 1080x1920 cizim, oyun
+durumunun degismemesi ve canvas durumunun korunmasi kontrol edildi.
+390px mobilde tasma ve tarayici hatasi yok. Tam video export testi
+bu gorsel degisiklik icin tekrar calistirilmadi.
+Yerel 30 cizimlik karsilastirma (FPS degil): 540px eski 3.4/yeni 4.2 ms;
+1080px eski 5.3/yeni 9.9 ms. Donanim ve tarayiciya gore degisebilir.
+Gorsel: artifacts/ring-neon-review.jpg (103416 bayt, yerel dosya).
+Onizleme: http://127.0.0.1:5173/ring-escape.html

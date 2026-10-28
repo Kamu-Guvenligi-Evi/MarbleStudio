@@ -1,0 +1,31 @@
+.alliance-live{display:grid;gap:7px;margin:10px 0}.alliance-open{width:100%;padding:10px 12px!important;text-align:left}.alliance-live-list{display:grid;gap:4px}.alliance-live-row{display:grid;grid-template-columns:minmax(0,1fr) 72px;gap:4px}.alliance-live-list button{font-size:11px;text-align:left;padding:8px;border-left:3px solid #6093b6}.alliance-live-list button[data-team="1"]{border-left-color:#bc7769}
+#alliance-planner,.leader-picker{box-sizing:border-box;width:min(1020px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:0;background:#222b25;color:#ede4cd;border:1px solid #a28b5d;border-radius:8px;font-family:inherit;box-shadow:0 24px 100px #000b}
+#alliance-planner::backdrop,.leader-picker::backdrop{background:#080e0bce}
+#alliance-planner *, .leader-picker *{box-sizing:border-box}
+#alliance-planner header,.leader-picker header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 24px;border-bottom:1px solid #5c5946;background:#1a231e}
+#alliance-planner header span,.leader-picker header span{font-size:10px;letter-spacing:2px;color:#c9ae76}
+#alliance-planner h2,.leader-picker h2{margin:6px 0 0;font:normal 26px Georgia,serif;color:#f1e2bd}
+#alliance-planner button,.leader-picker button,#alliance-planner input,#alliance-planner select,.leader-picker input,.leader-picker select{font:inherit;border:1px solid #69664e;border-radius:4px;background:#303b30;color:#ede4cd;padding:10px;min-height:40px}
+#alliance-planner button,.leader-picker button{cursor:pointer}
+#alliance-planner button:disabled{opacity:.4;cursor:default}
+#alliance-planner :focus-visible,.leader-picker :focus-visible{outline:2px solid #f4cf82;outline-offset:3px}
+#alliance-planner [data-close],.leader-picker [data-close]{font-size:24px;min-width:44px;flex-shrink:0}
+.alliance-intro{margin:18px 24px;color:#c1c2af;font-size:13px;line-height:1.6}
+.alliance-columns{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:0 24px 24px}
+.alliance-columns h3{margin:0;padding:12px 0;border-top:3px solid #6a9fc4;font-size:16px}.alliance-columns [data-alliance="1"] h3{border-color:#c78773}
+.alliance-army-card{display:grid;gap:10px;padding:16px;background:#29352b;border:1px solid #515b45;border-radius:5px;margin-bottom:12px;min-width:0}
+.alliance-army-card>input{width:100%;font-weight:bold!important;font-size:16px!important}
+.alliance-army-card>select{font-size:12px!important}.alliance-army-card>p{margin:0;font-size:12px;color:#d8ca9e}
+.alliance-choose-leader{display:flex;align-items:center;gap:13px;text-align:left;padding:10px!important;background:#19271f!important;border-color:#a38b58!important;min-height:96px}
+.alliance-choose-leader>span:last-child{display:grid;gap:5px}.alliance-choose-leader small{color:#b1b9a5;font-size:11px;line-height:1.4}
+.leader-portrait{display:grid;place-items:center;position:relative;flex-shrink:0;overflow:hidden;width:64px;height:76px;background:radial-gradient(ellipse,#6e7056,#252c23);border:1px solid #a28b5d;border-radius:4px;font:24px Georgia,serif}
+.leader-portrait img,.leader-portrait canvas{width:100%;height:100%;object-fit:cover}
+.alliance-card-actions{display:flex;flex-wrap:wrap;gap:6px}.alliance-card-actions button{font-size:12px!important;flex:1}
+.alliance-army-card summary{font-size:12px;color:#d2c19a;cursor:pointer;padding:8px 0}.alliance-army-card .commander-auto-army{margin:0}.alliance-add{width:100%;border-style:dashed!important}
+#alliance-planner footer{position:sticky;bottom:0;display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:14px 24px;background:#1a231ef5;border-top:1px solid #5c5946}
+#alliance-planner footer p{flex:1;min-width:160px;font-size:12px;color:#cfc4a8;margin:0}#alliance-planner [data-apply]{background:#c7ac72;color:#18221b;font-weight:bold}
+.leader-picker{width:min(940px,calc(100vw - 24px))}.leader-filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:20px 24px 8px}.leader-filters>*{width:100%;min-width:0}.leader-picker-note,.leader-results{font-size:12px;color:#bfc6b1;margin:8px 24px;line-height:1.5}
+.leader-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:10px 24px 24px}.leader-option{display:flex;align-items:center;gap:10px;text-align:left;min-width:0;background:#2a352a!important}.leader-option:hover{border-color:#dac085!important;background:#394432!important}.leader-option[aria-pressed="true"]{outline:2px solid #e5c583;border-color:#e5c583!important;background:#3d4932!important}.leader-option-copy{display:grid;gap:5px;min-width:0}.leader-option-copy strong{font-size:14px;color:#f1e4c1}.leader-option-copy>span{font-size:11px;color:#bac5af}.leader-option-copy small{font-size:10px;line-height:1.4;color:#c1b79e}
+.alliance-roster-choice{display:grid;gap:6px;font-size:11px;color:#c6bf9f;margin-bottom:10px}.alliance-roster-choice select{width:100%;padding:8px;background:#273429;color:#eee3c5;border:1px solid #828064}.alliance-editing-note{padding:8px 0 12px;font-size:12px;color:#e6cf9a;line-height:1.5}
+@media(max-width:760px){.leader-cards{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px}.alliance-columns{gap:12px;padding:0 12px 16px}.alliance-army-card{padding:10px}.alliance-choose-leader{gap:8px}.leader-option{align-items:flex-start}.leader-option .leader-portrait{width:48px;height:62px}}
+@media(max-width:520px){.alliance-columns{grid-template-columns:1fr}.leader-filters{grid-template-columns:1fr;padding:12px}.leader-cards{grid-template-columns:1fr}.leader-option .leader-portrait{width:58px;height:72px}#alliance-planner header,.leader-picker header{padding:14px}#alliance-planner h2,.leader-picker h2{font-size:22px}#alliance-planner footer{padding:12px}.alliance-intro{margin:12px}#recruitment .recruit-heading{flex-wrap:wrap;gap:6px;padding:10px}#recruitment .recruit-heading>div{flex:1 1 60%}#recruitment .recruit-heading button{padding:6px 8px;font-size:11px}}

@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {readFile,stat,mkdir} from 'node:fs/promises';
+import path from 'node:path';
+import {randomUUID} from 'node:crypto';
+import {spawnSync} from 'node:child_process';
+import ffmpeg from 'ffmpeg-static';
+import {validateBatch} from '../src/factory-recipes.js';
+import {produce} from '../scripts/factory-worker.mjs';
+const root=path.resolve('artifacts/collapse-arena/video');await mkdir(root,{recursive:true});
+const options=validateBatch({source:{mode:'collapse-arena',project:{seed:42,growth:10,fragments:8,playbackSpeed:3,sound:true}},strategy:'exact',resolution:720,fps:12,orientation:'portrait',audio:'effects',channel:'Marble Studio'});
+const job={id:randomUUID(),mode:'collapse-arena',ordinal:0,options};
+await produce(job,{root,origin:process.env.TEST_ORIGIN||'http://127.0.0.1:5173',history:[],cancelled:()=>false,update:async patch=>Object.assign(job,patch)});
+const metadata=JSON.parse(await readFile(path.join(root,job.id,'metadata.json'),'utf8'));
+assert.ok(metadata.analysis.complete);assert.ok(metadata.analysis.finite);assert.equal(metadata.video.fps,12);assert.equal(metadata.recipe.mode,'collapse-arena');
+for(const file of ['video.mp4','cover.jpg','metadata.json','upload.txt'])assert.ok((await stat(path.join(root,job.id,file))).size>0);
+const decoded=spawnSync(ffmpeg,['-v','error','-i',path.join(root,job.id,'video.mp4'),'-f','null','-'],{windowsHide:true,encoding:'utf8'});assert.equal(decoded.status,0,decoded.stderr);
+console.log(JSON.stringify({mp4:'passed',duration:metadata.video.duration,path:path.join(root,job.id,'video.mp4')}));

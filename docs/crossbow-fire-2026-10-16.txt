@@ -1,0 +1,28 @@
+German crossbow firing investigation - 2026-10-16
+
+User: crossbowmen seem not to fire; identified German pavise crossbowman.
+All 12 current bolt types fired and damaged a target in an open-lane 10s test.
+German 40v40 against Norse longbowmen: all 40 shooters fired, 134 releases.
+Reproduction: shooter (250,400), allied stationary roman (275,400), enemy
+stationary roman (380,400). Autonomous shooter, enemies cooldown 100.
+Before: 10 seconds, 0 arrows, 21 withheld shots, no movement or damage.
+Cause: bolts cannot loft over allies; friendly fire discipline cancels the
+release but previously provided no alternate firing position.
+
+Fix: requestClearShotLane in crown-battle-screening.js; called only after
+an actual allied obstruction in Battle.resolveAttack. Foot crossbows request
+a short lateral move using existing screenYield movement. Opposite side is
+used at map edges. No extra neighbour scan or ballistic query. Explicit
+player orders and emergency screening remain authoritative.
+After: same scenario 4 releases, 1 withheld shot, 81 enemy damage, ally unharmed.
+
+PASS tests:
+- crown-battle-crossbow-fire: 12 types release/damage; 12 German obstruction
+  cases (both sides, 30/60Hz, upper/lower edge); direct orders preserved.
+- crown-battle-screening: rank exchange, retreat behind guards, manual orders.
+- crown-battle-projectiles: trajectory/contact/misses/walls/lifetime.
+- crown-battle-projectiles-browser: 96 visibility/direction/canvas checks.
+
+Scope: crown-battle.js import + withheld-shot call; screening helper; new
+crossbow regression test. No unit stats, commander or doctrine changes.
+This reproduces a blocking condition, not the user's exact saved battle.

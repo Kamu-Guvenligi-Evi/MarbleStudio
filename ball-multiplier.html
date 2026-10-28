@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b0c12"><title>Ball Multiplier · Marble Studio</title></head>
+<body>
+<header class="multiplier-header"><a href="/index.html" class="brand">◉ MARBLE STUDIO</a><nav><button id="studio-videos" class="button">My videos</button><button id="studio-export" class="button primary">Create video</button></nav></header>
+<main class="multiplier-layout">
+<aside class="multiplier-controls"><p class="eyebrow">BALL MULTIPLIER</p><h1>One collision.<br><span>One more ball.</span></h1>
+<fieldset id="settings"><legend class="sr-only">Game settings</legend>
+<label>Title<input id="title" maxlength="70" value="Every bounce = new ball 🤯"></label>
+<label>New ball on<select id="spawnOn"><option value="balls">Ball collisions</option><option value="every-bounce">Every bounce (balls + wall)</option></select></label>
+<div class="setting-row"><label>Starting balls<select id="count"><option>2</option><option selected>5</option><option>10</option><option>20</option></select></label><label>Ball size<select id="radius"><option value="5">Small</option><option value="7" selected>Original</option><option value="10">Large</option></select></label></div>
+<div class="setting-row"><label>Ball limit<select id="limit"><option>100</option><option>250</option><option>500</option><option>800</option><option>1500</option><option selected>2000</option><option>3000</option></select></label><label>Duration<select id="duration"><option value="15">15 seconds</option><option value="30">30 seconds</option><option value="45" selected>45 seconds</option><option value="60">60 seconds</option></select></label></div>
+<div class="setting-row"><label>Speed<select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label><label>Gravity<select id="gravity"><option value="0">Zero gravity</option><option value="180" selected>Gentle</option><option value="320">Strong</option></select></label></div>
+<label>Seed<input id="seed" type="number" min="0" max="4294967295" step="1" value="42"></label>
+</fieldset>
+<details class="music-menu" open><summary>Background music</summary>
+<label>Background music<select id="music-track"><option value="">No music</option></select></label>
+<label>Music volume <output id="music-level">35%</output><input id="music-volume" type="range" min="0" max="100" value="35"></label>
+<button id="music-preview" class="button" type="button">Preview music</button>
+<p id="music-credit"></p><audio id="music-audio" loop preload="none"></audio>
+</details>
+<div class="actions"><button id="new-game" class="button primary">New game</button><button id="replay" class="button">Replay</button></div>
+<p id="status" role="status" aria-live="polite"></p>
+</aside>
+<section class="multiplier-preview" aria-label="Game preview"><div class="multiplier-stage" id="stage"><canvas id="multiplier-canvas" width="810" height="1440" aria-label="Colored balls multiplying inside a circle"></canvas></div>
+<div class="playback"><button id="pause" class="button">Pause</button><button id="sound" class="button" aria-pressed="true">Sound on</button><button id="fullscreen" class="button">Full screen</button></div><p id="match-state" aria-live="off"></p></section>
+</main><script type="module" src="/src/ball-multiplier-app.js"></script>
+</body></html>

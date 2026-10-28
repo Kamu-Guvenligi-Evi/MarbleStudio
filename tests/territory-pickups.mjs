@@ -60,17 +60,20 @@ for(const reason of ['taken','expired']){
   for(let i=0;i<8;i++)tick(race,b);
   assert.equal(b.pickupTarget,null,`${reason}: stop chasing a pickup that is gone`);
   for(let i=0;i<80;i++)tick(race,b);
-  assert.equal(b.cell,start-8,'Resume the original land-taking route');
+  assert.equal(b.cell,start,'Bank the return home before choosing a new land-taking route');
+  assert.equal(b.route.length,0,'A completed return discards the obsolete route');
 }
 {
   const {race,b}=setup();race.setOwner(start,-1);b.trail=Array.from({length:12},(_,i)=>start+i);
   b.route=Array.from({length:16},(_,i)=>start+i+1);
   const shield={type:'shield',cell:start-10*80,expiresAt:10};
+  const original=[...b.route];
   race.pickups=[{type:'speed',cell:start-8,expiresAt:10},shield];race.seekPickup(b);
-  assert.equal(b.pickupTarget.item,shield,'An exposed player prefers a nearby shield');
+  assert.ok(!b.pickupTarget,'An open claim is not abandoned for a buff');
+  assert.deepEqual(b.route,original,'Keep the committed land-taking route');
 }
 {
-  const {race,b}=setup();b.trail=Array.from({length:31},(_,i)=>start+i);b.route=[start-1];
+  const {race,b}=setup();b.trail=Array.from({length:31},(_,i)=>start+i);b.route=Array.from({length:6},(_,i)=>start-(i+1)*80);
   race.pickups=[{type:'shield',cell:start-6*80,expiresAt:10}];
   for(let i=0;i<40&&race.pickups.length;i++)tick(race,b);
   assert.equal(race.pickups.length,0,'A long trail does not forbid an immediately useful nearby buff');

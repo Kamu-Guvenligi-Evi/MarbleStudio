@@ -1,0 +1,38 @@
+Kartaca savaş fili — 15 Ekim 2026
+
+Kullanıcı Kartacalılar için fil tasarımı istedi. carthage_war_elephant eklendi.
+Kartaca kültür menüsü ve Hannibal hazır ordusunda. Önceki 24 asker korunur;
+1 fil eklendi: 25 gerçek birlik / 34 kapasite. Fil 10 kapasite, komutan ayrıca.
+Eski kayıtlara zorla fil eklenmez; Hannibal hazır ordusunu yeniden oluştur.
+
+Kaynak: Polybios 15.12 (Zama'da Hannibal'ın fil hücum emri).
+https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0234%3Abook%3D15%3Achapter%3D12
+Hannibal açıklaması İkinci Pön Savaşı kapsamındaki oyun bileşimi olarak
+düzeltildi; Cannae/Zama tam kadrosu iddiası yok. Oranlar oyun içindir.
+
+Özgün Canvas çizimi: geniş kulak, açık deri, fildişleri, küçük örtü ve kayış,
+tek sürücü, kısa sürme çubuğu. Kulesiz tasarım bir canlandırma tercihidir;
+kesin takson veya tüm Kartaca fillerinin donanımı olarak sunulmaz.
+Timur'un Asya tipi kuleli fil çizimi ayrı kaldı. Model mevcut yakın alan
+saldırısı/splash sistemini kullanır; özel fil paniği veya yeni hücum AI yok.
+Yorgunluk, moral, taktik ve savaş motoruna dokunulmadı.
+
+Dosyalar: src/carthaginian-elephant-art.js, historical-battle-art.js,
+commander-reinforcement-units.js, historical-army-capacity.js,
+historical-army-presets.js, historical-army-history.js.
+Testler: commander-reinforcements.mjs, historical-army-capacity.mjs,
+historical-army-presets.mjs güncellendi. Temas testinde düşman konumu iki
+takım için aynalandı; filin ters yöne bakması test kurulumunda düzeltildi.
+
+PASS: 8 birlik, 16 tam savaş + 10 komutan savaşı; 640 animasyon karesi;
+PC/telefon iki takım ekle/sil, başlat, yenile ve kayıt.
+PASS: 20 preset, minimum–1000 kapasite taraması, gerçek birim doğumu;
+fil kapasitesi 100000'e kadar; 20 tarih/kaynak paneli.
+PASS: tüm presetler 1440/390/320px; 296 farklı muharebe profili ve
+258 aynalanmış denge savaşı. Build geçti; mevcut chunk boyutu uyarısı var.
+Önizleme: artifacts/commander-reinforcements/units.jpg (43183 bayt).
+Günlükler aynı klasör: latest.log, history.log, presets-browser.log,
+balance.log, build.log. Boyut internet tüketimi ölçümü değildir.
+
+Önceki araştırma bekliyor: Phokas'ın akontistai/sapancı/prokoursatores
+destekleri bu isteğe geçildiği için henüz uygulanmadı; eklenmiş sayılmamalı.

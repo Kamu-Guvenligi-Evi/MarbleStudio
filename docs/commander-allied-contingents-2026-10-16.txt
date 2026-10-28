@@ -1,0 +1,51 @@
+Komutan müttefik birlikleri — 16 Ekim 2026
+
+Eklenen dört birlik:
+- alexander_greek_mercenary_infantry: İskender’in Yunan paralı piyadesi.
+- alexander_greek_mercenary_cavalry: İskender’in Yunan paralı süvarisi.
+- alexander_odrysian_cavalry: Odris müttefik süvarisi.
+- hannibal_ligurian_infantry: Hannibal’ın Ligur piyadesi.
+
+İlk üç birlik Arrianos Anabasis 3.12’deki Gaugamela tertibine dayanır.
+Menidas ve Andromakhos’un süvarileri ayrı kopya kartlara bölünmedi.
+Ligur piyadesi Polybios 15.11’de Zama’daki paralı askerler arasındadır.
+Diodoros 5.39.7’deki Ligur donanımı daha geç tarihlidir; Zama’da aynı
+teçhizatın kesin kullanıldığı iddia edilmez. Kartların visualNote alanları
+belgelenen birlik ile yorumlanan donanım/renk ayrımını açıklar.
+
+Kaynaklar:
+https://en.wikisource.org/wiki/The_Anabasis_of_Alexander/Book_III/Chapter_XII
+https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Polybius/15*.html
+https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Diodorus_Siculus/5B*.html
+
+Entegrasyon:
+- Antik Medeniyetler altında Yunan şehir devletleri, Traklar ve Ligurlar.
+- İskender hazır ordusu 13 tür / 24 kapasite.
+- Hannibal hazır ordusu 9 tür / 34 kapasite (fil dahil 25 savaşçı).
+- Her ikisi farklı seferlerden seçilmiş karma ordulardır, tek savaşın tam
+  tarihsel sayısal rekonstrüksiyonu değildir.
+- En küçük hazır ordu boyutunda da dört yeni birlik temsil edilir.
+- Tarih açıklamaları, kayıt/yükleme ve iki takımda seçim bağlandı.
+
+Görseller:
+src/commander-allied-contingents-art.js yerel Canvas çizimleri.
+Yuvarlak aspis, açık Boeotia miğferi, Trak başlığı/desenli pelerin,
+Ligur uzun kalkanı ve omuz postu birbirinden ayrılır.
+ally* ekipman adları kullanılır. ac* öneki Ahameniş çizicisiyle çakıştığı
+için kullanılmaz. Son önizleme görsel olarak kontrol edildi:
+artifacts/commander-allied-contingents/units.jpg
+
+Doğrulama:
+- historical-army-presets.mjs: 22 ordu, minimum–1000 kapasite taraması.
+- historical-army-history.mjs: 22 tarih paneli ve kaynakları.
+- historical-army-presets-browser.mjs: 1440/390/320 px seçim, ölçek,
+  takım ayrımı, uygulama ve kalıcılık geçti.
+- commander-allied-contingents.mjs: 8 doğal savaş; 320 animasyon karesi;
+  kırpılma/boş çizim, farklı silüet, özel ekipman rengi, PC/telefon,
+  iki takımda ekleme/çıkarma, savaşa aktarım ve yeniden yükleme kontrolü.
+  Renk kontrolü SpriteLibrary ışık katmanından önceki çizime uygulanır.
+- Vite üretim derlemesi başarılı; mevcut büyük paket uyarısı sürüyor.
+
+Sınır: Bu çalışma tüm tarihsel birliklerin tamamlandığı anlamına gelmez.
+Diğer sekmenin Mısır/Rus komutan eklemelerine müdahale edilmedi.
+crown-battle.js, yorgunluk ve moral sistemi değiştirilmedi.

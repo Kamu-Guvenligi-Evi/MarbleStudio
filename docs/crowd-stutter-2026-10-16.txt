@@ -1,0 +1,46 @@
+Crowded armies: 3,000–10,000 soldiers (2026-10-16)
+
+Changed src/crown-battle.js, src/crown-battle-app.js and
+src/crown-battle-renderer.js. Large battles (>=2500 units) now advance one
+simulation tick cooperatively across animation frames with a soft 6ms budget.
+Movement, separation and projectiles yield between small groups. Resuming
+continues the same tick in the original order; no soldiers or attacks are skipped.
+Synchronous step/updateUnits behavior remains available to export and tests.
+Rendering uses a simulation revision so partial movement redraws even while
+simulation time stays at the same tick. Small battles avoid starting another
+catch-up tick when its estimated cost would exceed the existing frame budget.
+No change to army sizes, sprite resolution or animation frame counts.
+
+Validation:
+- tests/crown-battle-sliced-simulation.mjs: 320, 3000, 10000 soldiers, 45 ticks
+  each; full unit/projectile/effect/stat/outcome hashes match the pre-change
+  engine at three checkpoints. Partial-to-synchronous transition, empty battle
+  and invalid timestep cleanup pass. Optional snapshot argument; default uses
+  current synchronous engine, so the test does not require local artifacts.
+- tests/crown-battle-crowd-controls-browser.mjs: real app with 10000 soldiers,
+  zoom, pause specifically mid-tick, resume, restart and no page errors pass.
+- Contact-query oracle, physical contact, projectiles and complete classic
+  battle tests pass. Frame-budget/atlas/browser checks also pass.
+- Local production build passes. Existing large-bundle warning remains.
+
+Local Chrome/headless 1100x500 layered-render benchmark, 180 animation frames:
+  Before: frame median 201.4ms, p95 402.9ms, 179 intervals over 100ms.
+  Final:  frame median 27.8ms, p95 48.6ms, 5 intervals over 100ms.
+  Final simulation slice median 6.1ms, p95 8.3ms, max 31.1ms.
+  Final draw median 20.7ms, p95 34.9ms; no WebGL or page errors.
+  Final kept 10000 soldiers; overview/zoom continued GPU batching.
+
+Limits: this measures responsiveness, NOT equivalent simulation throughput.
+The before run completes 180 ticks (6 simulated seconds); the sliced run
+completes 7 ticks with an eighth pending (clock 0.2667s). Combat phases differ.
+Other local CPU-heavy tests ran concurrently, so these are indicative timings,
+not a controlled speedup ratio or a 60fps guarantee. Dense combat still slows
+simulation time. Grid/tactics setup and a single group can exceed the soft
+budget; drawing still has occasional >100ms frames. Further throughput work
+must target neighbor queries and rendering rather than merely raising budget.
+
+Raw logs, before snapshots, benchmark JSON and verification runner:
+artifacts/crowd-stutter/. Experimental shape/neighbor helper changes were
+removed; the final change keeps the existing neighbor query implementation.
+No downloads, package installation, generated image transfers or uploads.
+No measured network-byte reduction is claimed.

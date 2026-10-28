@@ -1,0 +1,40 @@
+Kırmızı ordu seçimi ve kaldırma — 14 Ekim 2026
+
+Bulunan sorunlar:
+- Meydana normal tıklama yalnız etkin takımda asker arıyordu. Mavi seçiliyken
+  kırmızıya tıklamak seçim yerine saldırı emrine dönüşebiliyordu.
+- Muharebe başladıktan sonra maviyi tamamen kaldırmak sonuç durumunu açıyor,
+  kalan kırmızının seçimini ve kaldırılmasını uygulamada kilitliyordu.
+
+Uygulama ve dosya paylaşımı:
+- src/crown-battle-hit-test.js: null takım filtresi iki takımdaki görünür
+  askerleri aynı çizim sırasıyla arar; açık takım filtresi korunur.
+- src/crown-battle-selection.js/css: meydanın yanında Maviyi seç/Kırmızıyı
+  seç düğmeleri, canlı asker sayıları ve seçim göstergeleri. Takım seçimi
+  önceki seçimi temizler; telefon için en az 44px düğme yüksekliği.
+- Ana sekme src/crown-battle-app.js değişikliklerini kendi dosyasına birleştirdi:
+  normal tıklama karşı takımı da seçer, etkin takım kendiliğinden değişir;
+  açık saldırı modu ve sağ tıklamayla verilen emirler korunur. Muharebe
+  sonucunda seçim/kaldırma açık, savaş emirleri kapalı kalır.
+- tests/crown-battle-teams-browser.mjs ve hit-test-browser.mjs genişletildi.
+  Klasik test açık ?mode=classic kullanır; varsayılan tarihî mod korunur.
+
+Doğrulama:
+- teams-browser: 1366px PC ve 390px telefon PASS. Mavi seçiliyken kırmızıya
+  doğrudan tıklama, iki takım düğmesi, kırmızı hareket/durma/saldırı emirleri,
+  tüm kırmızıyı kaldırma ve yeniden kurma; muharebe sonucu sonrası kalan
+  kırmızıyı kaldırma; tarihî birlik/komutan kaldırma ve kalıcı kayıt kontrolü.
+- hit-test-browser: 168 kontrol PASS; PC/telefon, DPR1/2, zoom1/3,
+  iki takım ve yönleri, şeffaf alanlar ve kaldırılmış askerler.
+- camera-browser: PC1366/telefon390 PASS; pan, zoom, geniş harita emirleri,
+  iki parmak hareketi ve kamera/emir ayrımı.
+- layout-browser: 1366x768,1920x1080,900x700,390x844,320x568,844x390 PASS;
+  menü/ekran sınırları, durma/saldırı tuşları ve dokunmatik emirler.
+- Ana sekmenin bildirdiği üretim build PASS (6.83s), 6 motor regresyon grubu PASS.
+
+Kullanım ve sınırlar:
+- Kırmızıyı seç -> Seçilenleri kaldır bütün canlı kırmızı orduyu kaldırır.
+  Meydanda tek askere normal tıklama mevcut aynı türü seçme davranışını korur.
+- Sonuç sonrasında silme mümkündür; sonuç ekranı yeni muharebeye kadar korunur.
+- Bu düzeltme FPS performans iddiası içermez; mevcut ölçüm/sınırlar
+  docs/camera-map-notes.txt içinde. Birlik kimlikleri ve kayıt biçimi değişmedi.

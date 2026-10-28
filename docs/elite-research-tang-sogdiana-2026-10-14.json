@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-14",
+  "sources": {
+    "tang_zizhi_188": {"title":"Sima Guang — Zizhi Tongjian, cilt 188, 621 yılı kaydı","url":"https://zh.wikisource.org/wiki/資治通鑑/卷188","kind":"tarihî anlatı, dijital metin","access":"Li Shimin'in seçtiği bini aşkın kara giysili ve kara zırhlı atlılar hakkındaki pasaj incelendi; eser olaylardan yüzyıllar sonra derlenmiştir"},
+    "tang_met_45865": {"title":"The Met — Warrior, 7.–8. yy, 10.221.6","url":"https://www.metmuseum.org/art/collection/search/45865","kind":"müze nesnesi ve kamu malı fotoğraf","access":"Nesne kaydı ve indirilen görsel incelendi; Xuanjia teşhisi bulunmuyor"},
+    "tang_saluzi_penn": {"title":"Penn Museum — Saluzi, C395","url":"https://www.pennmuseum.org/collections/object/167942","kind":"müze nesnesi","access":"621 Luoyang seferiyle ilişkili at kabartmasının müze açıklaması incelendi"},
+    "tang_saluzi_photo": {"title":"Mary Harrsch — The Horses of Emperor Taizong, 2005","url":"https://commons.wikimedia.org/wiki/File:The_Horses_of_Emperor_Taizong_Tang_Dynasty_Limestone_(305761810).jpg","kind":"müze nesnesinin fotoğrafı","access":"CC BY 2.0 lisansı ve indirilen görsel incelendi"},
+    "sogdian_cakar_iranica": {"title":"Étienne de la Vaissière — ČĀKAR, Encyclopaedia Iranica","url":"https://www.iranicaonline.org/articles/cakar/","kind":"akademik","access":"Soğd hükümdar ve soylularının kişisel askerleri hakkındaki açıklama incelendi"},
+    "sogdian_art_iranica": {"title":"Encyclopaedia Iranica — SOGDIANA iv. SOGDIAN ART","url":"https://www.iranicaonline.org/articles/sogdiana-vi-sogdian-art/","kind":"akademik","access":"Mugh kalkanındaki atlı kahraman tasviri doğrulandı; fotoğraf lisansı ve ayrıntılı donanım incelemesi tamamlanmadı"}
+  },
+  "units": [
+    {
+      "id":"tang_xuanjia", "faction":"Tang Hanedanı", "name":"Kara zırhlı süvariler · Xuanjia", "period":"621; erken Tang dönemi", "kind":"seçilmiş öncü süvari", "mount":"horse", "status":"ana",
+      "historicalNote":"Zizhi Tongjian, Li Shimin'in kara giysili ve kara zırhlı bini aşkın seçilmiş atlıya öncülük ettiğini anlatır. Xuanjia burada betimleyici addır; sürekli ve değişmez bir alay teşkilatı varsayılmaz.",
+      "equipmentDraft":"Koyu giysi ve zırh metinle desteklenir. Miğfer, gövde ve etek zırhı The Met 10.221.6 dönem heykelinden; eyer ve koşum Saluzi kabartmasından esinlenir. Mızrak seçimi oyun rekonstrüksiyonudur; bu pasajda silah türü belirtilmez. Tam at zırhı, kanat, maske veya samuray miğferi eklenmez.",
+      "sourceIds":["tang_zizhi_188","tang_met_45865","tang_saluzi_penn"], "visualSourceIds":["tang_met_45865","tang_saluzi_photo"]
+    },
+    {
+      "id":"sogdian_cakar", "faction":"Soğd şehir devletleri", "name":"Çakar maiyet savaşçıları", "period":"7.–8. yy temsil hedefi", "kind":"hükümdar ve soylu maiyeti", "mount":"mixed", "status":"donanim_dogrulamasi",
+      "historicalNote":"Çakarlar, İslam öncesi Soğd hükümdar ve soylularının kişisel askerleridir. Tek bir birleşik Soğd imparatorluğunun standart alayı olarak sunulmamalıdır.",
+      "equipmentDraft":"Atlı temsil araştırılıyor. Mugh kalkanı üzerindeki atlı kahraman dönem sanatı referansıdır; doğrudan çakar üniforması teşhisi değildir. Görsel inceleme ve yeniden kullanım hakkı tamamlanmadan oyuna eklenmez.",
+      "sourceIds":["sogdian_cakar_iranica"], "visualSourceIds":["sogdian_art_iranica"]
+    }
+  ],
+  "visuals": {
+    "tang_xuanjia": {
+      "image":"/warrior-references/tang-warrior-met-45865.jpg",
+      "credit":"The Metropolitan Museum of Art, Warrior, 10.221.6; Rogers Fund, 1910",
+      "source":"https://www.metmuseum.org/art/collection/search/45865",
+      "visualMatch":"period_reference",
+      "visualNote":"7.–8. yy Tang mezar heykeli; Xuanjia mensubu olduğu bilinmiyor. Oyun çiziminde koyu zırh tarihî metne dayanır; miğfer ve gövde biçimi dönem heykelinden esinlenir. Mızrak tercihi rekonstrüksiyondur. At koşumu için Saluzi kabartması kullanılmıştır.",
+      "license":"Kamu malı / The Met Open Access. Web görseli değiştirilmeden kaydedildi."
+    }
+  },
+  "secondaryVisual": {
+    "image":"/warrior-references/tang-saluzi-mary-harrsch.jpg",
+    "sourceId":"tang_saluzi_photo",
+    "credit":"Mary Harrsch, 2005, The Horses of Emperor Taizong Tang Dynasty Limestone; Penn Museum",
+    "license":"CC BY 2.0",
+    "licenseUrl":"https://creativecommons.org/licenses/by/2.0/",
+    "changes":"Yok; 800 × 600 kaynak fotoğrafı",
+    "use":"Atın kısa yelesi, eyer örtüsü ve koşum kayışları için dönem referansı; bütün Xuanjia atlarının aynı donanımı taşıdığı iddia edilmez."
+  },
+  "pending": [
+    {"faction":"Chola / Sri Lanka","candidate":"Velaikkarar","needed":"Polonnaruwa yazıtının akademik edisyonu, farklı hizmet bağlamlarının ayrılması ve dönem savaşçı görseli gerekiyor; şimdilik oyuna eklenmedi."}
+  ]
+}

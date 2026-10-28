@@ -13,6 +13,7 @@
       <button id="nav-track" aria-pressed="true"><span aria-hidden="true">↘</span> Parkur</button>
       <button id="nav-arena" aria-pressed="false"><span aria-hidden="true">◉</span> Arena</button>
       <button id="nav-territory" aria-pressed="false"><span aria-hidden="true">⬡</span> Alan Savaşı</button>
+      <a href="/crown-battle.html"><span aria-hidden="true">♛</span> Taç Savaşı</a>
       <button id="nav-pi" aria-pressed="false"><span aria-hidden="true">π</span> Pi Çarpışmaları</button>
       <button id="nav-statistics" aria-pressed="false"><span aria-hidden="true">▥</span> İstatistik</button>
       <button id="nav-spiral" aria-pressed="false"><span aria-hidden="true">◎</span> Spiral</button>
@@ -20,6 +21,9 @@
       <a href="/glass-breaker.html"><span aria-hidden="true">◇</span> Cam Kırıcı</a>
       <a href="/ball-duel.html"><span aria-hidden="true">⚔</span> Top Düellosu</a>
       <a href="/ring-escape.html"><span aria-hidden="true">◌</span> Halka Kaçışı</a>
+      <a href="/goal-arena.html"><span aria-hidden="true">⚽</span> Gol Arenası</a>
+      <a href="/collapse-arena.html"><span aria-hidden="true">◉</span> Çöken Arena</a>
+      <a href="/ball-multiplier.html"><span aria-hidden="true">✦</span> Top Çoğalma</a>
       <a href="/rock-paper-scissors.html"><span aria-hidden="true">✂</span> Taş Kâğıt Makas</a>
     </nav>
   </header>
@@ -35,6 +39,7 @@
         <label id="race-title-field" for="race-title">Başlık<input id="race-title" type="text" maxlength="80" placeholder="Örn. Galatasaray vs Barcelona"></label>
         <label id="track-preset-field" for="track-preset">Hazır parkur<select id="track-preset"><option value="saved">Mevcut parkur</option><option value="cascade">Neon Cascade</option><option value="pinball">Pinball Garden</option><option value="velocity">Velocity</option><option value="clockwork">Clockwork</option></select></label>
         <label id="spiral-theme-field" for="spiral-theme" hidden>Spiral teması<select id="spiral-theme"></select></label>
+        <label id="spiral-background-field" class="switch-label" hidden><input id="spiral-background" type="checkbox" role="switch" checked><span>Hareketli arka planı göster</span></label>
         <button id="spiral-randomize" class="button secondary" hidden>Çarpanları yenile</button>
         <label id="spiral-hypnotic-field" class="switch-label" hidden><input id="spiral-hypnotic" type="checkbox" role="switch"><span>Hipnotik ses</span></label>
         <button id="spiral-hypnotic-mute" class="button secondary" type="button" hidden aria-pressed="false">Sesi kapat · M</button>
@@ -49,7 +54,7 @@
         <label id="arena-initial-links-field" hidden>Top başına başlangıç bağı <input id="arena-initial-links" type="number" min="1" max="150" step="1" value="15"></label>
         <button id="arena-fan-preset" type="button">Üçlü ip yelpazesi</button>
         <label id="arena-shape-field" hidden>Harita / şekil <select id="arena-shape"><option value="triangle">Üçgen</option><option value="square">Kare</option><option value="hexagon">Altıgen</option><option value="star">Yıldız</option><option value="circle">Daire</option></select></label>
-        <label id="territory-duration-field" hidden>Süre <select id="territory-duration"><option value="30">30 saniye</option><option value="45" selected>45 saniye</option><option value="60">60 saniye</option></select></label>
+        <label id="territory-duration-field" hidden>Süre <select id="territory-duration"><option value="30">30 saniye</option><option value="45">45 saniye</option><option value="60" selected>60 saniye</option><option value="90">90 saniye</option></select></label>
       </div>
       <p id="arena-rules" class="workspace-rules" hidden>Her top 3 bağla başlar. Duvara çarptıkça bağ kurar, rakiplerinin bağlarını keser. Bağı kalmayan elenir; son bağlı top kazanır.</p>
       <p id="spiral-rules" class="workspace-rules" hidden>Buza çarpan top bir parça kırıp kaybolur; toplar bitince dışarıdan yeni bir top gelir. Girişteki çarpana ek olarak spiralde rastgele yerlerde 4–6 çarpan (×2–×5) bulunur. Geçen toplar çoğalır. Yeni yarış ve Çarpanları yenile yerleri ve değerleri değiştirir. Buzun tamamı kırılınca kayıt tamamlanır.</p>

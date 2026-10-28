@@ -1,0 +1,127 @@
+Asker seçim ekranı — 15 Ekim 2026
+
+Sorun: Birlik kataloğu harita/ayarların altında dar yan panele sıkışıyordu.
+Ülke filtreleri arama sonucunu gizleyebiliyor, iki orduyu görmek ve kırmızı
+taraftan kaldırmak uzun liste içinde zorlaşıyordu.
+
+Uygulama:
+- Orduları kur sekmesi geniş bir ordu hazırlama ekranı açar. Başlangıçta
+  kendiliğinden açılmaz; ayarlarda Orduları düzenle düğmesi de bulunur.
+- Halk/kültür solda, ülke alt sekmeleri kartların üstünde, birlik kartları
+  ortada, mavi ve kızıl orduların bağımsız özetleri sağdadır.
+- Mevcut portreler, sıcak parşömen kartları, koyu zeytin zemin ve sade
+  pirinç vurgular kullanıldı. Yeni görsel/ağ paketi indirilmedi.
+- Arama yazılınca ülke filtresi sıfırlanır. Tür ve yalnız ordudakiler
+  filtreleri, filtre temizleme ve sonuç sayısı görünür.
+- İki tarafta bağımsız sayı, ekle/azalt/kaldır kontrolleri vardır.
+  Özetten birlik çıkarma/orduyu boşaltma son işlem için geri alınabilir.
+- Telefonda Birlikler/Ordular sekmeleri, yatay halk/ülke şeritleri ve
+  sabit uygulama düğmesi vardır. Harita ve ayarlar ayrı düğmeyle açılır.
+- Canlı mevcut inputlar yeniden kullanılır; ikinci kayıt modeli yoktur.
+  Escape/kapama taslağı korur; Orduları uygula mevcut doğrulama/kayıt
+  yolunu kullanır. Dialog klavye olayları savaş kısayollarına sızmaz.
+  Özet yalnız düzenleme/açılma olaylarında yenilenir; kare başına iş yoktur.
+
+Değişen dosyalar:
+src/crown-battle-recruitment.js (yeni)
+src/crown-battle-recruitment.css (yeni)
+src/crown-battle-app.js (menü bağlantıları; ortak dosyada kamera kodu korundu)
+src/crown-battle-selection.js (tür filtresi, sonuç sayısı)
+tests/crown-battle-recruitment-browser.mjs (yeni)
+tests/historical-cultures-browser.mjs (DOM grupları ve güncel katalog sayıları)
+Bu proje notu.
+
+Doğrulama:
+- crown-battle-selection-browser: PASS 1366/390; klasik ve tarihî arama,
+  ekleme, iki ordudan bağımsız silme, uygulama ve komuta seçimi.
+- crown-battle-recruitment-browser: PASS 1440/390/320; ülke, genel arama,
+  rol filtresi, kırmızıdan bağımsız kaldırma, boşalt/geri al, taslak,
+  uygula/kaydet/yenile, haritaya dön, taşma ve sayfa hata kontrolleri.
+- historical-cultures-browser: PASS 1366/390; 40 halk/78 ülke, gerçek
+  alt sekmeler, klavye, her iki ordu, atölyeden aktarım ve kayıt/yenile.
+- Vite production build PASS; mevcut büyük chunk uyarısı sürüyor.
+- Masaüstü ve telefon ekran görüntüleri görsel olarak incelendi:
+  artifacts/recruitment/menu-1440.jpg, menu-390.jpg, menu-320.jpg;
+  ordu sekmesi armies-390.jpg / armies-320.jpg. Test günlükleri aynı yerde.
+- İlk çalışmalarda diğer sekme dosya yazarken HMR test sayfasını yeniledi;
+  yazımlar durduktan sonra ilgili testler tekrar çalıştırılarak geçti.
+
+Sınırlar: Geri al tek seviyelidir; karttan ve ordu özetinden çıkarma ile
+orduyu boşaltmayı kapsar. Sonraki elle sayı değişikliği geri al kaydını siler.
+Bu değişiklik oyun içi seçim ekranınadır; historical-armies.html atölyesinin
+görünümü ayrı kalır. Yeni birlik çizimi, savaş dengesi veya FPS düzeltmesi
+bu menü değişikliğinin kapsamına dahil değildir.
+
+İncelenen örnekler: Total War birlik kartları ve Age of Empires medeniyet
+gezinmesi. Kendi oyunumuzun iki ordu kurma akışına uyarlandı.
+https://academy.totalwar.com/category/basics/
+https://www.ageofempires.com/games/age-of-empires-iv/civilizations/
+https://explorer-preview.aoe4world.com/civs
+
+İkinci kullanım turu — 15 Ekim 2026:
+- Ordu özetindeki birlik adı tıklanabilir ve klavyeyle kullanılabilir.
+  İlgili kartı açar, gerekiyorsa gizleyen filtreleri temizleyip birliği arar,
+  doğru takımın sayı alanına odaklanır ve mevcut sayıyı seçer.
+- Karttaki kaldır düğmesi de son çıkarma işlemini geri almaya dahil edildi.
+  Geri al düğmesi sabit alt alanda, telefonun her iki sekmesinden erişilir.
+- Telefonda Birlikler/Ordular geçişi liste kaydırma konumunu korur.
+  Arama veya filtre değişince sonuç listesi başa döner.
+- Düzenlenen sayı alanının klavye odağı daha belirgin hale getirildi.
+- Bu turdaki dosyalar: src/crown-battle-recruitment.js,
+  src/crown-battle-recruitment.css,
+  tests/crown-battle-recruitment-browser.mjs ve bu not.
+- Recruitment browser PASS 1440/390/320: kart/özet kaldırma ve geri alma,
+  gizli karta klavyeyle erişim, doğru takım odağı, kaydırma konumu,
+  kayıt/yenileme, taşma ve sayfa hataları. Telefon ordu görünümü incelendi.
+- Selection browser yeniden PASS 1366/390: klasik/tarihî seçim, arama,
+  bağımsız kaldırma ve uygulama. Vite build PASS (44 sn); mevcut büyük
+  chunk uyarısı sürüyor. Günlükler: artifacts/recruitment/
+  selection-refinement-test.log ve refinement-build.log.
+
+Eksik kontrolü — 15 Ekim 2026:
+- 844x390 yatay ekranda araç çubuğu 241px, kart alanı yalnız 12px kalıyor,
+  kart kontrollerine erişilemiyordu. 650px ve altı yüksekliğe sahip geniş
+  ekranlarda filtre ve kartlar aynı kaydırılabilir sütuna alındı.
+  Filtre değişimi bu sütunun kaydırma konumunu da sıfırlar.
+- Negatif/kesirli/boş sayı girip başka birliği aradıktan sonra Uygula,
+  hatalı kartı gizli bırakıyordu. Mevcut doğrulama çalışmadan önce ilgili
+  kart açılır, telefonda Birlikler sekmesine geçilir ve doğru takımın
+  sayı alanına odaklanılır. Hatalı taslak mevcut savaşı değiştirmez.
+- Bu tur yalnız recruitment.js/css, recruitment-browser testi ve bu not
+  değiştirildi; grup/formasyon ve motor dosyalarına dokunulmadı.
+- Groups browser ve formations browser PASS 1366/390; seçim/grup kısayolları,
+  iki ordu ayrımı, formasyon önizlemesi/iptali ve mobil hareket korunuyor.
+- Build PASS (17 sn), artifacts/recruitment/build-check çıktısıyla doğrulandı.
+  İlk ortak dist denemesi EPERM ile durdu; diğer sekme de build çalıştırıyordu.
+  Ayrı çıktı dizininde tekrar başarılı. Mevcut büyük chunk uyarısı sürüyor.
+- Recruitment browser PASS 1440/390/320 ve ek 844x390, 1024x768, 390x640
+  senaryoları: negatif/kesirli/boş alanın filtre ve sekmeler arkasından
+  açılması, hata sırasında savaşın korunması, düzeltmeden sonra uygulama,
+  kısa ekranda kart düğmelerine erişim ve filtreyle kaydırma sıfırlama.
+  Testte İngilizce dahili kimlik yerine görünen Türkçe birlik adıyla arandı.
+  artifacts/recruitment/landscape-844.jpg görsel olarak incelendi.
+
+Klavye ve geri alma — 15 Ekim 2026:
+- Özet satırı silindiğinde, Boşalt düğmesi devre dışı kaldığında veya
+  yalnız seçililer filtresinde son asker kaldırılıp kart gizlendiğinde
+  odak Geri al düğmesine geçer. Geri almadan sonra ilgili düğmeye döner.
+- Menüde Ctrl+Z / Cmd+Z son çıkarmayı geri alır. Sayı, arama ve diğer
+  düzenleme alanlarının kendi geri alma davranışına müdahale edilmez.
+  Kısayol düğme açıklamasında ve aria-keyshortcuts niteliğinde yer alır.
+- Menü dışında olay göndermeden yapılan ordu değişiklikleri eski geri alma
+  kaydını geçersiz kılar. Hem yeniden açılışta hem geri alma anında sayılar
+  karşılaştırılır. Değişmeyen taslakta kapatıp açmak geri almayı korur.
+  Bu kontroller kullanıcı işlemlerinde yapılır; kare döngüsüne iş eklenmedi.
+- Değişen dosyalar: src/crown-battle-recruitment.js,
+  tests/crown-battle-recruitment-browser.mjs ve bu not.
+- Recruitment PASS: 1440/390/320 genişliklerinde odak dönüşü, Ctrl/Cmd+Z,
+  metin düzenleme ayrımı, gizlenen kart ve eski kayıt koruması; 844x390,
+  1024x768, 390x640 ekranlarında mevcut doğrulama ve erişim kontrolleri.
+- Selection PASS 1366/390: klasik/tarihî seçim, arama, iki ordudan bağımsız
+  çıkarma ve uygulama. Sayfa hatası yok. Vite build PASS (18.19 sn), ayrı
+  artifacts/recruitment/build-check çıktısı. Mevcut büyük chunk uyarısı sürüyor.
+- Günlükler: artifacts/recruitment/keyboard-test.log,
+  keyboard-selection-test.log, keyboard-build.log.
+- Sınır: geri alma hâlâ tek çıkarma işlemini kapsar; sayı değişikliği yeni
+  taslak kabul edilir. Çok adımlı geçmiş eklenmedi. Mobil kontroller Chrome
+  cihaz benzetiminde test edildi; fiziksel telefon testi yapılmadı.

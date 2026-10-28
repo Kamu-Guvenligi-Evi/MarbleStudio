@@ -1,0 +1,16 @@
+15 Ekim 2026 — Yatağanlı Yeniçeri
+
+Kullanıcının açık isteğiyle janissary_yatagan eklendi. Menü: Türkler > Osmanlı Devleti. Mevcut janissary menzilli seçeneği korunuyor. Yeni kart ayrı bir tarihî orta iddia etmiyor; Yeniçerinin yakın dövüş donanımını temsil ediyor. Dönem 18. yy–1826; önceki erken dönem tercihiyle karıştırılmaması için katalogda açık yazıldı.
+
+Kaynak: https://www.metmuseum.org/art/collection/search/24329
+Foça, 1822; 36.25.1617a, b. The Met, yatağanın 18.–19. yy Yeniçerilerde yan silah olarak kullanımını, çift kavisli namlu ve kulaklı kabzayı açıklıyor. Eser muhtemelen sunum silahı; süslemeleri standart asker donanımı olarak kopyalanmadı. Renkler oyun yorumudur.
+Yerel kamu malı müze fotoğrafları: public/warrior-references/yatagan-met-24329-full.jpg (45499 bayt), yatagan-met-24329.jpg (42713 bayt, kabza ayrıntısı). İkisi de incelendi. Bunlar dosya boyutlarıdır, ölçülmüş ağ trafiği değildir.
+
+src/janissary-yatagan.js: katalog, profil ve özgün kaftan/kuşak/kın çizimi.
+historical-catalogue.js ve historical-art-profiles.js: bağlantılar.
+historical-warrior-art.js: kaftan kancası ve balçaksız, kulaklı kabzalı yatağan çizimi. Var olan kılıç savurma animasyonuyla çalışıyor; iki takım rengi korunuyor.
+Yakın dövüş tipi: 125 can, 25 hasar, 16 erişim, .95 bekleme, 26 hız, .07 zırh. Bunlar oyun denge değerleri; tarihî performans sıralaması değil. ranged:false. Ana savaş motoru ve renderer değiştirilmedi.
+
+tests/janissary-yatagan.mjs geçti: iki Yeniçeri seçeneği, 128 kare, ayrı siluetler, boş/kesilen kare yok, fotoğraflar yükleniyor; ülke menüsünden seçme, canlı savaş hasarı, savaş başlatma ve kayıt sonrası yeniden yükleme başarılı. Tarayıcı JS hatası yok.
+Vite üretim derlemesi geçti; mevcut büyük paket uyarısı sürüyor.
+Önizleme artifacts/janissary-yatagan/janissaries.jpg (11294 bayt), gözle incelendi. checks.json ve build.log aynı dizinde.

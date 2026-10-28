@@ -1,0 +1,92 @@
+Adaptive battle openings — 2026-10-16
+
+Problem: Milan's front cavalry used eight fixed files and its reserve six.
+Increasing the army added depth without frontage, producing the long marching
+columns shown in the user's screenshot. Several other doctrines used the same
+fixed-grid helper. This helper has been removed from civilization layouts.
+
+Implementation:
+- historical-civilization-tactics.js uses corpsBuilder/formationLayout for
+  scalable cavalry wings, reserves, infantry fronts and missile sections.
+  Reserve depth and intervals derive from occupied soldier extents.
+- historical-formation-policy.js selects existing player formations from
+  equipment, enemy composition, flank and missile pressure. It contains no
+  civilization whitelist. Shared generic and auxiliary deployments use it too.
+- historical-french-deployment.js separates foot, missiles, gendarmes and
+  coutiliers, with independent wing lanes. Mounted ordonnance archers are
+  represented by the catalogue's foot archers in battle, not by a new dismount
+  mechanic. The preset scales the 1445 lance's combatant proportions.
+- Specialized Ottoman, Ming and Landsknecht cores keep their equipment-based
+  geometry. Supporting corps can use the shared formation policy.
+- Seljuk preparation now measures health loss across the whole army as well
+  as the mounted trap group. Milan exposed a case where auxiliary troops died
+  while the untouched cavalry waited for another ten seconds. Both team
+  positions are covered by a natural-battle regression in the horse-archer test.
+
+Verification scope:
+- historical-adaptive-openings.mjs: every catalogue civilization at capacity
+  48/240/960 on both sides; soldier-body clearance and commander assignment;
+  no long narrow combat corps. French/Milan variants additionally reach 2400
+  capacity against infantry, pikes, cavalry and missiles. Generic leaders are
+  checked with identical mixed equipment in four directions and four plans.
+- The centre-support regression now uses a fixed direct cavalry assault.
+  The adaptive French commander attacks the outer wings, so demanding a
+  centre-support flag in that matchup no longer exercises the intended case.
+  The direct-assault test still requires dispatch before 10% centre health
+  loss, at least 75% centre survival at 20 seconds, and half the dispatched
+  soldiers attacking within 15 seconds. Its browser counterpart checks the
+  same 20-second centre-survival and dispatch conditions.
+- The battle-matrix runner accepts BATTLE_FILTER='Milano|Fransa' to test both
+  against every catalogue civilization in both team positions. Zero matches
+  now fail rather than reporting an empty success.
+
+Initial validation artifacts: artifacts/tactical-responsiveness/adaptive-snapshot/.
+This snapshot isolates concurrent engine/catalogue changes. The earlier live
+suite was invalidated by a concurrent crown-battle.js edit. Its two support
+failures also used the old French central-attack assumption described above.
+Initial frozen suite: 13/13 PASS, no changed source files. Its 536-match matrix
+found one failure (Milan vs Seljuk: ten seconds of ordered idle majority after
+25% army casualties). The whole-army health fix above addresses that failure.
+Final validation: artifacts/tactical-responsiveness/adaptive-final-snapshot/.
+This includes the latest engine version without packed spatial coordinates.
+Final combined suite: 13/13 PASS, including both browser checks; source files
+unchanged during the run. Targeted matrix: 536/536 PASS over 135 civilizations,
+48 capacity, 30 Hz, seed 42. All battles ended by elimination; no measured
+prolonged stationary formation majority under army losses.
+
+Final catalogue integration: artifacts/tactical-responsiveness/adaptive-catalogue-snapshot/.
+Concurrent catalogue work added Uzlar and changed the Seljuk roster. The delta
+matrix ran eight affected ordered matches, all PASS. Combining those results
+by civilization name with the preceding matrix covers 540 unique French/Milan
+matchups across 136 civilizations (544 executions including replaced matches).
+The merged report is artifacts/tactical-responsiveness/adaptive-combined-matrix.json.
+Its 61 advisory flags identify troops that have not attacked after army losses;
+these are not all stationary troops. Maximum measured formation stall is zero.
+The delta flags involve moving units, including Seljuk troops already released
+from formation orders. No battle exceeded the quiet-period warning threshold.
+These diagnostics do not prove optimal support or tactical decisions.
+
+Latest catalogue opening checks: 816 openings across 136 civilizations,
+48 large French/Milan variants, and 368 generic opponent-aware layouts PASS.
+New-unit formation and mounted-archer regression tests also PASS.
+The concurrent engine change adds classic crowd deployment outside historical
+battles. Twelve complete historical battles using the preceding rosters match
+the final-suite snapshot exactly at 91 sampled state checkpoints. This is a
+bounded compatibility check, not exhaustive equivalence proof. Results:
+artifacts/tactical-responsiveness/adaptive-live-equivalence.json.
+Both test snapshots are immutable copies; subsequent concurrent edits are not
+covered by these results.
+Final live-source comparison found one later edit in crown-battle-npc-routing.js:
+the route interruption threshold changed from .2 to Math.max(.2, dt * 1.5).
+At the matrix's 1/30-second step these expressions are equal. Larger accelerated
+steps were not revalidated as part of this formation fix.
+
+Rendered previews: artifacts/tactical-responsiveness/francesco_sforza-opening.jpg
+and charles_vii-opening.jpg. Both inspected visually; no marching-column fronts.
+
+Historical scope: formation dimensions, distances, chosen wedge/echelon shapes
+and exact ratios are game interpretations, not a universal historical diagram.
+French ordonnance reference consulted:
+https://www.musee-armee.fr/ExpoChevaliersBombardes/temps-des-reformes.html
+Passing these checks does not establish every possible battle as historically
+accurate, or cover every seed, map, manual order and custom army composition.

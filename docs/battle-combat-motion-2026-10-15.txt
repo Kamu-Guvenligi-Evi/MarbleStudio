@@ -1,0 +1,34 @@
+Combat visuals — 2026-10-15
+
+Request: improve poor hit effects and death animations without crowd slowdown.
+Shared crown-battle-combat-motion.js supplies Canvas and GPU poses: directional
+hit reaction, staged infantry knee buckle/fall/settle, slower mounted collapse.
+Infantry uses four connected texture strips; living soldiers remain one quad.
+Removed yellow cross hit overlays. Contacts use small material-colored particles
+at target body height. Ground dust starts at landing, not at the killing blow.
+Dead sprite cache entries omit the standing contact shadow and have independent
+fallback identities. A capped 1.4s visual clock completes the final death after
+victory; simulation time/results and ordinary pause remain unchanged.
+
+Changed: crown-battle-{combat-motion,renderer,sprite-batch,sprite-cache,feedback}.js.
+No artwork, balance profiles, simulation rules or audio recordings changed.
+Limit: these are deformations of existing sprites, not skeletal ragdolls or
+separate rider/horse bodies. Mounted collapse still uses silhouette compression.
+
+Verification:
+- feedback.mjs and feedback-realism.mjs passed; delayed dust cleanup covered.
+- combat-motion-browser.mjs: pause, final death clock, reset, mirrored fall,
+  stable settled body and separate corpse cache identities passed.
+- sprite-batch-browser.mjs: 30 GPU/Canvas comparisons; maximum mean channel
+  difference 0.06945; GL error 0, missing atlas/context fallback passed.
+- sprite-crop-browser.mjs: 972 checks passed.
+- frame-budget-browser.mjs passed.
+- feedback-browser.mjs: 752 units, 2985 events, max 93 effects / 8 voices,
+  GL error 0. Draw median 9.2ms, p95 21.8ms in this headless local run.
+  These are render timings, not a measured user-session FPS improvement.
+- Vite build passed (existing chunk-size warning).
+
+Preview inspected: artifacts/battle-combat-motion/fall-sequence.png (122612 B).
+Build log: artifacts/battle-combat-motion/build.log.
+Local game: http://127.0.0.1:5173/crown-battle.html
+Other thread is editing equipment/combat balance; its files left alone.

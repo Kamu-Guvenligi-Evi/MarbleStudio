@@ -1,1 +1,15 @@
-{"id": "empires-9c75ec2643", "category": "empires", "name": "Bizans İmparatorluğu", "source": "https://commons.wikimedia.org/wiki/File:Eastern_Roman_Empire_565_CE.svg", "credit": "Mnohohrishnyi", "license": "CC0", "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en", "fit": "contain", "src": "/catalog/empires-9c75ec2643.png", "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Eastern_Roman_Empire_565_CE.svg/330px-Eastern_Roman_Empire_565_CE.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"}
+{
+  "id": "empires-9c75ec2643",
+  "category": "empires",
+  "name": "Bizans İmparatorluğu",
+  "source": "https://commons.wikimedia.org/wiki/File:Byzantine_imperial_flag,_14th_century.svg",
+  "credit": "Cplakidas\n\nThis file was derived from:  Byzantine imperial flag, 14th century (firesteels vesion).svg",
+  "license": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "fit": "flag",
+  "src": "/catalog/empires-9c75ec2643-historical.png",
+  "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Byzantine_imperial_flag%2C_14th_century.svg/330px-Byzantine_imperial_flag%2C_14th_century.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "fileOverride": "Byzantine imperial flag, 14th century.svg",
+  "historicalNote": "14. yüzyıl · Palaiologos deniz sancağı",
+  "curated": true
+}

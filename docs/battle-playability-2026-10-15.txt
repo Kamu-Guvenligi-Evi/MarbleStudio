@@ -1,0 +1,24 @@
+Savaş motoru ve kontrol iyileştirmeleri — 15 Ekim 2026
+
+Kapsam
+- Aynı noktadaki bekleyen askerler ayrılıyor; ön safta duran/saldıran dostların arkasındaki otomatik ilerleme yavaşlıyor. Açık hareket emirleri ve formasyon yerleşimi korunuyor.
+- İsabet ve ölüm yönü saldırının geldiği tarafa göre hesaplanıyor; küçük geri tepme ve yönlü düşüş hem normal hem WebGL çiziminde uygulanıyor.
+- Yaya okçular ve tüfekçiler atış sırasında duruyor; atlı okçular hareketli atışı koruyor. Atış yapan asker ölse de fırlatılmış mermi/ok hedefe ulaşabiliyor.
+- Süvari, yaklaşırken hazır mızrak cephesinin yanını arıyor ve açıkta kalan menzilli hedefleri tercih ediyor. Açık saldırı emirleri öncelikli; filler bu yan yaklaşım kuralından hariç.
+- Komşuluk tarama yarıçapı sahadaki en büyük askere göre daraltıldı; tarama üst sınırları korundu.
+- Tek tık tek asker, Shift/Ctrl ile ekleme/çıkarma, çift tık aynı tür seçimi.
+- Her ordu için beş grup: Ctrl+1–5 kaydet, 1–5 seç. Dokunmatik kullanım için grup düğmeleri ve Gruba kaydet düğmesi eklendi. Ölen/kaldırılan üyeler ayıklanıyor, yeni savaş grupları sıfırlıyor.
+
+Doğrulama
+Motor: frontline, behavior, impact, charge, projectiles, feedback, formations geçti.
+Tarayıcı: groups, selection, formations, director masaüstü 1366 ve mobil 390 pikselde geçti. Impact tarayıcı testi 34 çizim kontrolünü geçti.
+Formations tarayıcı testi yeni asker ekleme menüsünü açacak şekilde güncellendi.
+Son üretim derlemesinin çıktısı: artifacts/battle-playability/build-final.log.
+
+Yerel performans karşılaştırması
+2400 kılıçlı asker, 60 simülasyon adımı, 7 dönüşümlü örnek: önce medyan 965.3121 ms, sonra 868.5605 ms (yaklaşık yüzde 10 daha kısa).
+Bu tarayıcı FPS ölçümü değildir. Paylaşılan makinede örnekler değişken; gerçek FPS için sahne/çizim yükü ayrıca ölçülmelidir.
+Karşılaştırma aracı ve sonuç: artifacts/battle-playability/compare-engine.mjs ve performance-final.json.
+
+Entegrasyon
+Diğer kullanıcı sekmesi recruitment js/css ve menü testleri üzerinde çalışıyor; bu değişiklikler o dosyalara dokunmuyor. Motor/grup tarafındaki doğrulama sonucu ilgili sekmeye iletildi.

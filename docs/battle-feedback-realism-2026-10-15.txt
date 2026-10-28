@@ -1,0 +1,34 @@
+Battle sound and contact effects, 2026-10-15
+
+Reused the nine existing local CC0 Foley clips; no new downloads.
+Metal/body contact mixes now favor the recordings and preserve their tails.
+Bow and gun reports remain synthesized. Speaker listening was not verified.
+Sound placement follows camera pan and distance; heavier units lower pitch.
+Existing eight-voice cap, burst budgets and queue-free playback are retained.
+
+Feedback separates armored melee, unarmored and projectile impacts.
+Armor routing uses UNIT_TYPES armor >= 0.14 as a cosmetic approximation.
+Projectile arrival carries launch origin and projectile kind to feedback.
+Directional sparse sparks, matte impact particles, restrained blade traces,
+short muzzle flashes and longer drifting smoke replace bright generic effects.
+Damage, RNG and combat decisions are unchanged by this work.
+
+Validation passed:
+- crown-battle-feedback.mjs: timing, roles, wall checks, bounds, seed parity.
+- crown-battle-effect-budget.mjs: real hits retained, 96 effect cap, expiry.
+- crown-battle-feedback-realism.mjs: contact routing, camera placement,
+  projectile arrival timing and origin.
+- crown-battle-audio-mix.mjs: burst budget, no queue, voice cap, perspective.
+- crown-battle-audio-design-browser.mjs: 15 variants, worker/fallback parity,
+  loudness/edge checks and preview controls; full mix peak 0.665.
+- crown-battle-audio-browser.mjs: recording audio/video, decode, fallback,
+  unlock, mute, cleanup, mobile fit and 20 effect/pause checks.
+- crown-battle-feedback-browser.mjs: 752 mixed historical/Middle-earth units,
+  2965 events; maxima 93 feedback effects, 66 engine effects, 5 audio voices.
+  Draw median 7 ms / p95 16.9 ms in this run; no before/after FPS comparison.
+  Feedback cleanup/update median 0 / p95 0.1 ms excludes event and draw cost.
+- Vite production build passed; existing chunk size warning remains.
+
+Artifacts: artifacts/battle-feedback/load.json and effects.png.
+The small local effect contact sheet was inspected visually.
+Other thread owns historical balance/equipment and Europe unit combat stats.

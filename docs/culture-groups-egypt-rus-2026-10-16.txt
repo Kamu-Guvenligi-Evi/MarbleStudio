@@ -1,0 +1,59 @@
+16 Ekim 2026 — Medeniyet menüsü ve Mısır/Rus komutanları
+
+Menü: Antik Medeniyetler, Amerika Medeniyetleri, Afrika Medeniyetleri ve
+Okyanusya üst grupları. Her devlet kendi alt sekmesinde; her medeniyet yalnız
+bir grupta. Antik Afrika uygarlıkları Antik grubunda kalır. Afrika: Nubya,
+Benin, Eyyûbî/Memlük kartları. Okyanusya: Māori ve Hawaii. Eski aile adları
+(ör. Farslar, Māoriler) aramada korunur. Uzun alt sekmeler kaydırılabilir.
+Son katalog: 37 üst grup, 117 medeniyet; eşzamanlı katalog eklemeleri sürebilir.
+
+Komutanlar: II. Ramses (ramesses_ii), Aleksandr Nevski (alexander_nevsky).
+Özgün yerel Canvas çizimleri, kaynaklı kartlar, dönem kapsamı açıklamaları
+ve iki takımda kullanılabilen 24 kapasiteli ölçeklenebilir hazır ordular.
+Ramses: 6 Sherden, 8 Yeni Krallık khopesh piyadesi, 10 bileşik yaylı okçu.
+Nevski: 6 drujina, 4 hryd muhafızı, 8 maiyet mızraklısı, 6 yaya okçu.
+Eski kimlikler, kayıtlar ve klasik mod korunur. Savaş motoru değiştirilmedi.
+
+Değiştirilen kaynaklar:
+src/historical-culture-groups.js
+src/historical-civilization-ui.js
+src/historical-culture-picker.css
+src/historical-armies.js (arama terimleri)
+src/crown-battle-selection.js (arama terimleri)
+src/historical-commanders.json
+src/historical-commander-art.js
+src/historical-army-presets.js (yalnız yeni iki komutan satırı)
+src/historical-army-history.js (yalnız yeni iki komutan satırı)
+
+Test değişiklikleri:
+tests/historical-cultures-browser.mjs
+tests/mexica-ranks.mjs (yeni grup ve genişleyen katalog beklentileri)
+tests/historical-army-presets.mjs
+tests/historical-commanders-browser.mjs (güncel ittifak arayüzü)
+tests/egypt-rus-commanders.mjs (yeni, sabit seed 42)
+
+Doğrulama:
+- historical-cultures-browser: 1366/390px, 37 grup/117 medeniyetin tüm
+  alt sekmeleri, arama, klavye, iki ordu, aktarım ve kaydet/yükle geçti;
+  yatay taşma veya sayfa hatası yok.
+- historical-army-presets: 22 ordu, minimum–1000 kapasite, iki takım,
+  dört boyutta komutan formasyonu/doktrin koşulları geçti.
+- historical-army-presets-browser: 1440/390/320px oluşturma, arama,
+  takım bağımsızlığı, ölçekleme, kayıt ve atölye aktarımı geçti.
+- historical-commanders-browser: 22 portre, yeni komutanları kaydet/yükle,
+  JSON dışa aktarma, sekmeler arası eşitleme, 320/390px, bozuk kayıt,
+  klasik mod ve dış ağ isteği olmaması geçti.
+- historical-commander-art: 22 ayrı çizim, 1056 animasyon karesi;
+  boş, kesilmiş veya aynı siluet yok. İki yeni çizim küçük yerel önizlemede incelendi.
+- historical-army-history: 22 kaynak/dönem paneli ve gerçek ordu oluşturma geçti.
+- egypt-rus-commanders: iki komutanın 48 kapasiteli ordusu, iki yönde
+  48 Romalıya karşı; dört savaş doğal eleme ile bitti (22.4–46.5 simülasyon sn).
+  Bu bir denge eşitliği testi değildir. artifacts/historical-commanders/egypt-rus-battles.json
+- mexica-ranks --node-only geçti.
+- Vite üretim derlemesi geçti; büyük çıktı parçası uyarısı sürüyor.
+
+Sınırlar: Yeni komutanlara ayrı tarihî taktik eklenmedi; mevcut ortak komutan
+formasyonunu kullanırlar. Mısır savaş arabası katalogda yok; Ramses ordusu
+piyade çekirdeğidir. Ortak atlı komutan çizimi tarihî savaş arabası değildir.
+Bu eksik donanım araştırma sekmesine bildirildi. Diğer sekmenin Alexander/
+Hannibal ordu ve birlik eklemeleri bu çalışma kapsamında değiştirilmedi.

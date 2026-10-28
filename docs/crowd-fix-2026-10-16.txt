@@ -1,0 +1,44 @@
+Crowd playback fix, 2026-10-16 (supersedes the previous crowd-speed note)
+Workspace: C:/Users/yigit/Desktop/Products/MarbleStudio
+
+Changes in this continuation:
+- LocalBattleGrid: 16-unit cells for walking/body separation, bounded dense
+  sampling. Existing 40-unit grid remains authoritative for swept projectiles
+  and cavalry contacts. Smaller cells reduce irrelevant neighbour work.
+- Large crowds use dedicated allied ranged grids for lane warnings, avoiding
+  repeated scans through melee ranks. Small battles retain previous lookup.
+- At 6000+ total soldiers and 4x, request 10 simulation updates per playback
+  second (400ms simulated per tick). Other crowds retain 20 updates/second.
+  GPU interpolation continues between completed ticks. Keep the 9ms frame
+  work budget, pending-tick completion and bounded catch-up.
+- Carry a coarse tick's cooldown overrun into the next attack so sustained
+  weapon cadence does not round up by 400ms on every swing. No idle banking.
+- Synchronous replay/export retains its previous step limit. Coarse live
+  stepping trades temporal precision for responsiveness; battle outcomes
+  are not guaranteed identical to fixed 50ms simulation.
+
+Actual-app local headless Chrome measurements, 1366x900, mixed classic armies,
+selected 4x; 10s opening followed by 20s sample; no concurrent test workers:
+- paired-large-step.json: 10000 total, 3.820x, RAF p95 14ms, max 27.7ms.
+- paired-final-10000.json: 10000 total, opening 3.798x, sample 3.860x;
+  living 6505 -> 2064 during sample. RAF median/p95 7/13.9ms, max 21ms,
+  zero frames >50ms, no JS errors. This includes cooldown preservation.
+- paired-final-3000.json: 3000 total, opening/sample 3.999x/4.000x;
+  living 1355 -> 239 during sample. RAF p95 7.3ms, max 14.1ms,
+  zero frames >50ms, no JS errors.
+Results are in artifacts/crowd-speed/. RAF timings are not measured physical
+display FPS. Hardware load, deployments and casualties affect throughput;
+these measurements do not establish exact 4x in every 10000-soldier battle.
+Earlier 1.12x actual-app result is preserved in the previous note as history.
+
+Final validation: artifacts/crowd-fix/checks-final.log, all 8 suites PASS:
+timing (including 6000 boundary and overloaded frame budget), deployment,
+accelerated contacts at 200/400ms and sustained attack cadence, NPC routing,
+physical contacts, sliced simulation, sliced renderer, real-app controls.
+Frontline and screening suites separately PASS; production build PASS.
+Pause/resume during partial updates, camera, restart and GPU intermediate
+frames were checked in the actual 10000-soldier app.
+
+No dependencies, downloads, uploads, subagents, commits or broad resets.
+Starting snapshots for this continuation: artifacts/crowd-fix/crown-battle*.js.
+Vite serves the current sources at http://127.0.0.1:5173/crown-battle.html.

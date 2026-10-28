@@ -1,0 +1,36 @@
+14 EKİM 2026 / TARİHÎ ORDU ATÖLYESİ
+
+İstek: Müze nesnesi fotoğrafları yerine hazır, tam figür savaşçı çizimleri bul.
+Timur'un savaş fillerini, Spartalıları ve diğer tarihî birlikleri ekle.
+Kullanıcı araştırmayla birlikte tasarıma başlamayı da istedi.
+
+historical-armies.html: 14 tür, iki ordu için ayrı ve keyfî üst sınırı olmayan
+adet alanları, tür filtresi, Türkçe arama, tarayıcıya kayıt ve JSON plan indirme.
+crown-battle.html üzerinden bağlantı var. Vite üretim girişine eklendi.
+src/historical-units.json: birlik adları, önerilen oyun rolleri ve kaynaklar.
+public/warrior-references: küçük yerel JPG önizlemeler; kaynak URL'leri JSON'da.
+Kıpçak ana çizimi maskeli ve at üzerinde; ikinci örnek ayakta.
+Timur kartının çizimi genel savaş fili referansı; özgün Timurlu teçhizatını
+doğrulayan bir kaynak olarak sunulmamalı. Farklı çağlar serbestçe eşleştiriliyor.
+Bazı çizimler yeniden paylaşım kaynaklı; sanatçı ve lisans doğrulaması eksik.
+Üçüncü taraf çizimler ticari oyun sprite'ı olarak lisanslanmış sayılmaz.
+
+artifacts/warrior-illustrations/index.html: çevrimdışı referans galerisi.
+scripts/export-warrior-gallery.mjs: yerel galeriyi yeniden oluşturur.
+scripts/fetch-warrior-references.mjs: kaynaklardan boyut sınırlı indirme;
+önceden bulunan dosyaları indirmez. Trafik bayt cinsinden ölçülmedi.
+
+DOĞRULAMA
+tests/historical-armies-browser.mjs: 14 görsel, ayrı sayılar, 2500 atlı,
+kalıcı kayıt, filtre, Türkçe arama, geçersiz giriş, JSON, sıfırlama,
+390px görünüm ve dış ağ isteği olmadan açılış başarılı.
+artifacts/historical-armies: ekran görüntüleri, temas sayfası, build günlüğü.
+
+MOTOR BAĞLANTISI / 14 EKİM 2026
+14 tarihî birlik artık Battle sınıfına bağlı. Atölyede “Orduları meydana çıkar”
+iki ordunun kesin sayılarını yerel kayıt üzerinden savaşa taşır.
+Hazır deneme: /crown-battle.html?historical=demo
+Kayıtlı ordu: /crown-battle.html?historical=1
+Klasik dört sınıflı mod: /crown-battle.html
+Ayrıntılar ve doğrulama: docs/historical-combat-notes.txt
+Görsel araştırma kullanıcı tarafından diğer sekmeye devredildi.

@@ -1,0 +1,64 @@
+Tac Savasi crowd motion, 2026-10-16
+
+Problem: the previous adaptive renderer left soldiers frozen between expensive
+scene refreshes (up to 150 ms). Simulation throughput alone did not establish
+visible smoothness.
+
+Changes:
+- src/crown-battle-sprite-batch.js uses instanced GPU strips, with one compact
+  record per body / four strips for folding casualties. Corner expansion and
+  world-to-screen transforms now run in the vertex shader.
+- Layered crowded battles interpolate soldier origins between uploaded samples.
+  Intermediate draws update only a uniform and reuse geometry and texture data.
+  They do not loop over soldiers or mutate the simulation. Identity is tracked
+  by WeakMap; reappearing units snap to their current position.
+- src/crown-battle-renderer.js calls those GPU draws between full refreshes.
+  Pause, camera, selection and resize invalidations still render immediately.
+  Direct rendering/export and Canvas2D fallback retain their existing behavior.
+- No simulation, army-count, damage, effects or audio changes in this turn.
+
+Validation:
+- crown-battle-sprite-batch-browser: PASS, 30 GPU/Canvas image comparisons;
+  maximum mean pixel difference 0.0607, no GL errors; missing atlas / context
+  loss fallback included.
+- crown-battle-smooth-motion-browser: PASS. Actual GPU readPixels centroids
+  verify intermediate movement, continuity when samples overlap, identity,
+  pause, camera, reentry and context loss; simulation remains untouched.
+- Production Vite build: PASS, existing large chunk warning remains.
+- crown-battle-crowd-controls-browser: PASS with 10,000 soldiers: intermediate
+  GPU frames, camera response, partial-tick / animation pause-resume, restart,
+  and no browser errors. Disabled test-page WebSockets after unrelated Vite
+  HMR invalidated the first run's injected test hooks; rerun passed.
+- crown-battle-render-pacing: PASS, including intermediate draws and pause.
+- crown-battle-frame-budget-browser: PASS, bounded pose generation, atlas
+  reuse / upgrade, packed cells, six maps and legacy map migration.
+- Detailed results: artifacts/crowd-motion/controls.log, pacing.log and
+  frame-budget.log.
+
+Paired local Chrome benchmark (5 s warm-up, ~13 s measured, artificial densely
+overlapping mixed armies, all soldiers retained):
+  3,000: full refresh median 23.6 -> 10.5 ms; GPU draw submissions/sec
+    12.64 -> 71.55; completed simulation rate 0.990 -> 0.993x.
+  10,000: full refresh median 71.9 -> 36.4 ms; GPU draw submissions/sec
+    6.27 -> 36.45; completed simulation rate 0.214 -> 0.293x.
+  Intermediate draw CPU cost ~0.1 ms, p95 <=0.2 ms.
+  Later 10,000 run: 33.96 GPU submissions/sec, simulation 0.178x,
+    full refresh median 52.6 ms, p95 79.4 ms.
+
+Limits: submitted GPU draws (the benchmark's presentedFps field) are NOT
+measured physical display FPS or completed GPU work. Headless Chrome reported
+Intel UHD / D3D11. Other independent project tests were running on this shared
+machine, including CPU-heavy battle suites; the later run was separate from
+our other measurements but was NOT isolated from those external tests.
+These timings do not establish a universal speedup or 60 FPS guarantee.
+The extreme 10,000-body stress case still runs below real-time. Its CPU profile
+points to local neighbor queries; this change addresses drawing and motion.
+Interpolation adds up to roughly one refresh interval of visual delay, and
+sprite texture frames / overlays still update at the full-scene cadence.
+
+Evidence: artifacts/crowd-motion/browser.log (paired results),
+isolated-10000.log (name refers only to our own tests, see limitation above),
+batch.log, interpolation.log, engine-profile.log, build.log. Baseline copies
+of the renderer, batch and timing modules are in the same local directory;
+the before/after benchmark requires them and the local Vite server.
+No packages downloaded or cloud uploads performed for this work.

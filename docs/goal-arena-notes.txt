@@ -1,0 +1,63 @@
+Reference: https://www.youtube.com/shorts/TopYE1237o8 (BalShortsTV, LASK vs Liverpool | Champions League).
+Inspected all 41 one-second storyboard frames; not continuous video/audio. Five JPEG sheets total 69,565 bytes in .cache/reference-storyboard-{0..4}.jpg.
+Observed: two labeled team balls, one clockwise orbiting net, goal scored by entering own team's ball, last scorer colors the ring, 90-minute clock over ~38 seconds, score 2-3 then FULL TIME / LIV WINS. No half-time interruption. Small trails, dark portrait canvas, scorer/minute markers, brief GOAL flash.
+Implementation decisions requiring tests: elastic physics, rotating post collisions, whole-ball goal crossing, 0.7-second celebration then seeded kickoff. Outcomes are simulated, not copied from reference. Match length 37.5 seconds plus 2-second export ending by default.
+New mode: goal-arena. Shared channel, sound effects, local music library, exact video export at default 144 FPS. Primary controls and all canvas labels English; reused sound and export dialogs retain existing Studio language.
+
+Validation: tests/goal-arena.mjs PASS, 300 matches (including extreme settings), 1409 goals, no escaped/invalid balls or repeated completion; deterministic default 3-5.
+Browser/video test PASS: pause, mobile overflow, music preview, sound override, channel selection, 144 FPS export defaults, preview/render parity. Real 720x1280 12 FPS MP4 with music/goal sound encoded and decoded, 10 seconds. Artifacts: artifacts/goal-arena-video-1791983836845.
+Production smoke PASS on 5180: goal-production capability, navigation, new match/replay, team persistence, export readiness. Build PASS (existing large chunk warning). Shared game-sound-director test PASS. Legacy tests/factory.mjs fails on deleted #output UI (factory.html is an existing redirect); unrelated to new mode.
+
+2026-10-14 watchability / image-library update:
+- Ball radius 12 -> 24, readable fallback labels and circular catalog artwork. Ring radius 202, net depth 58, opening 132 (112-156); old narrower saved goals migrate to 132. Whole-ball crossing measured against the flat goal mouth, with enough net depth and full rotating-net visibility.
+- Existing local image catalog now available independently for home/away, automatic team name/code, remove image, saved/reopened selections. Preview and video renderer preload selected images; exported snapshots preserve them.
+- Physics PASS: 300 matches, 2341 goals, max radial distance 226.859, deterministic default 1-4. Includes post strikes, partial/full crossings, overlap resolution and net bounds.
+- Browser + real MP4 PASS with catalog choices, removal/reselection, persistence, both images in export, first-frame decode, sound/music/channel and mobile layout. Artifacts: artifacts/goal-arena-video-1791984985666 (10s 720x1280 12 FPS test video). Match contact sheet inspected.
+- Production 5180 smoke PASS: catalog selection and image decode, width132, no page errors. Build PASS, existing chunk-size warning. UI screenshot .cache/goal-enlarged-studio.png.
+
+2026-10-14 goal celebration update
+- Added 1.6-second goal hold and 0.45-second kickoff transition at normal playback speed.
+- Balls, rotating net and match clock pause during celebration; playing time excludes pauses.
+- Goal overlay shows scorer crest/name, GOAL!, score and lead/equalizer context. Added one impact wave, 40 short-lived particles and score emphasis. Existing selected goal sound is preserved.
+- Preview and exported video share the same phases and renderer. Last-tick goals finish celebrating before full time.
+- Validation: 300 matches passed (2656 goals, default 2-4), duplicate-score/frozen-clock/kickoff/last-tick assertions passed. Browser/mobile/image/music/channel/export checks passed; actual 13-second 720p MP4 encoded and decoded at test FPS 12 (default remains 144). Production 5180 goal freeze/resume passed with no browser errors. Vite build passed (existing large-chunk warning).
+- Reviewed 4 celebration/restart frames: artifacts/goal-arena-video-1791985383858/match-review.png. Same directory contains export artifacts.
+
+2026-10-14 goal mouth rotation lock
+- Goal rotation now stops when any ball starts entering the net mouth, before the full-ball goal threshold. Stationary posts/net use zero angular velocity in collision response. Goal-frame interpolation is frozen on scoring.
+- Rotation resumes when an unscored ball leaves the mouth or kickoff ends.
+- Regression checks cover partial entry, full goal, celebration, restart and retreat. 300 matches passed (2581 goals, default 4-4). Production build passed.
+
+2026-10-14 opening rally
+- Closed goal mouth for the first 3 seconds of playing time (normal playback speed), with a visible ring segment. Shots rebound normally; the mouth opens automatically afterwards. This only applies to match opening, not subsequent kickoffs.
+- Closed-mouth posts do not impart moving-post impulses; early score calls are rejected. Existing entry rotation lock and goal celebration remain active after opening.
+- 300-match regression passed (2477 goals, default 4-3), including direct opening shot rejection, timed unlock and no early goals across all seeds. Production build passed.
+
+2026-10-14 opening rally rollback (user request)
+- Removed the latest 3-second closed-mouth rule, score gate and visible closing arc.
+- Goal mouth and posts work from match start again. Entry rotation lock, celebration,
+  enlarged balls and image library remain as before the opening-rally update.
+- Updated existing checks to run goal entry at match start; removed timed-lock assertions.
+- 300-match regression PASS: 2581 goals, default 4-4, matching the pre-opening update.
+- Production build PASS (existing chunk-size warning); refresh and start a new match.
+
+2026-10-14 post contact rotation and recorded goal sound
+- Entry lock now requires the full ball to fit laterally and clear both physical posts. Post contacts keep rotating; actual entry, celebration and kickoff behavior are preserved.
+- Added 48 post-contact cases across both posts, three widths and four angles, including a ball that fits between post centers but overlaps the post radius.
+- Replaced synthetic brass with a 1.55-second CC0 recording of a crowd shouting GOL. Source/processing metadata: public/audio/goal-arena/source.json. Local regeneration: scripts/import-goal-crowd.mjs (cached MP3, no network).
+- Kept saved voice ID goal-horn compatible; menu now displays Goal crowd / recorded. Shared PCM serves preview and exported video; manual overrides and mute still work.
+- PASS: 300 matches, 2658 goals, default 3-3; entry/retreat/celebration/restart and post regression tests.
+- PASS: game-sound-director tests, sample-exact video audio, mute and manual choices; browser preview on both 5174 and 5180 (1.55 seconds, peak 0.61, no page errors).
+- Production build passed with the existing chunk-size warning. Refresh Goal Arena to load this build.
+
+2026-10-14 Mackolik goal notification
+- Replaced the crowd clip with the complete 1.046-second community-uploaded Mackolik notification (PHONEKY m972027), requested by the user. Official app identity is not independently verified. Source and stated personal-use terms recorded in public/audio/goal-arena/source.json.
+- Cached original: artifacts/mackolik-goal-source.mp3 (6679 bytes). Rebuild with scripts/import-goal-crowd.mjs; original speed, 3 ms / 10 ms edge fades.
+- Saved voice ID goal-horn retained; menu label Mackolik goal alert. Shared PCM used for playback and video audio. No physics changes.
+- PASS: game-sound-director suite including export PCM parity and mute; browser preview on 5174 and 5180 (duration 1.046 seconds, peak 0.6175, no page errors); production build (existing chunk-size warning).
+
+2026-10-14 Correct goal shout after user feedback
+- User identified PHONEKY m972027 as the match-end sound, not the goal shout. Replaced it with https://im.mackolik.com/img5/goal_sound.mp3 from the official live scores page.
+- Verified locally fetched official HTML goal_sound_player source and Mackolik.LiveScore.playSound in official livescore-go.js. Cached evidence: artifacts/mackolik-official.html and artifacts/mackolik-live-0.js.
+- Full 3.004-second recording preserved at original speed; original MP3 cached at artifacts/mackolik-official-goal.mp3 (14957 bytes). Updated provenance; no reuse license asserted. Physics and kickoff timing unchanged.
+- PASS: audio director tests including complete clip export PCM parity; browser preview on 5174 and 5180 (3.004 s, peak 0.6175, no page errors); production build with existing chunk-size warning.

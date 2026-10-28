@@ -1,0 +1,32 @@
+15 Ekim 2026 — Alman, Rus ve Fransız eklemeleri
+
+Oyuna eklenen 5 kayıt:
+- german_doppelsoldner: çift maaşlı Landsknechtlerin iki elli kılıç çeşidi; tüm Doppelsöldnerlerin aynı silahı taşıdığı ileri sürülmez.
+- german_ministerial: 11.–13. yy atlı hizmet şövalyesi; askerî hizmet sınıfıdır, adı bilinen ayrı bir muhafız alayı değildir.
+- rus_hryd_guard: Drujina'nın genç kolundan knez muhafızı. Yaya kılıç-kalkan çeşidi oyun yorumudur; ayrı bir ordu sayılmaz.
+- french_ordonnance_gendarme: 1445 düzenlemesindeki sürekli bölüklerin ağır silahlı süvarisi; tek kart bütün lance örgütünü temsil etmez.
+- french_scots_guard: Fransız kralına hizmet eden İskoç kökenli muhafız okçusu. Fransa Krallığı altında, yeni Fransızlar kültür menüsünde.
+
+Kaynaklar:
+https://resources.metmuseum.org/resources/metpublications/pdf/The_Metropolitan_Museum_Journal_v_41_2006.pdf
+https://historisches-lexikon.li/Ministerialit%C3%A4t_%28Dienstmannschaft%29
+https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CD%5CR%5CDruzhynaIT.htm
+https://www.musee-armee.fr/ExpoChevaliersBombardes/time-of-refom.html
+https://larevuedhistoiremilitaire.fr/2024/07/24/la-genese-des-archers-du-corps-lelite-de-la-garde-ecossaise-et-les-precurseurs-des-gardes-de-la-manche/
+https://www.metmuseum.org/essays/arms-and-armor-in-medieval-europe
+
+Görseller:
+Yeni raster indirmesi yapılmadı. Kaynaklardaki kurum ve dönem donanımı bilgileriyle yerel canvas çizimleri oluşturuldu. Kaynak görsellerinin birebir kopyası veya kesin üniforma rekonstrüksiyonu değildir. İki elli kılıçta uzun kabza ve koruma çıkıntıları; Fransız süvarisinde armet ve zambaklı at örtüsü; muhafız okçusunda geniş kenarlı miğfer ve açık renkli üst giysi var. Renkler/işaretler ve bazı savaş rolleri oyun yorumudur; katalogda bu sınır belirtilir.
+
+Dosyalar:
+src/european-elite-units.js: kayıtlar, kaynaklar, denge, görünüm profilleri.
+src/european-elite-art.js: özgün canvas ekipman ayrıntıları.
+historical-catalogue, historical-art-profiles, historical-culture-groups, historical-warrior-art: bağlantılar.
+tests/european-elite.mjs: gerçek savaş hasarı, menüler, kayıt yükleme, 400 animasyon karesi, kenar kırpılması ve 5 farklı siluet.
+
+Doğrulama:
+Yeni test geçti: 5 birim, 400 kare, menüden savaş başlatma ve sayfa yenilemede ordu korunması; tarayıcı hatası yok.
+artifacts/european-elite/five-warriors.jpg: 37.320 bayt; görsel kontrol yapıldı.
+Vite build geçti (6,81 sn). Mevcut büyük paket boyutu uyarısı sürüyor.
+Savaş motoru, renderer, ses ve Orta Dünya dosyaları değiştirilmedi.
+Ek regresyon: önceki 8 birlik de 512 kare, savaş, menü ve kayıt testinden geçti. Paylaşılan geliştirme sunucusundaki dosya değişikliklerinin test sayfasını yenilemesini önlemek için iki testin tarayıcı bağlamında HMR WebSocket kapatıldı; gerçek oyunun canlı yenilemesi değiştirilmedi. Savaş ekranında başlangıç HTML sayısı yerine yüklenen ordu sayısını bekleyen kontrol eklendi.

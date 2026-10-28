@@ -1,0 +1,215 @@
+TAÇ MUHAREBESİ — TARİHÎ TAKTİK ARAŞTIRMASI / UYGULAYICI SEKMEYE DEVİR
+Tarih: 15 Ekim 2026
+Kapsam: Kullanıcının son isteğiyle 9 kültür: Türk, Pers, Alman, İngiliz, Fransız, İtalyan, Yunan/Bizans, Japon, Çin. Mevcut katalogda bunlara bağlı 35 devlet/dönem grubu bulunuyor.
+Bu belge motor değişikliği değildir. Davranış tasarımı ve kaynak devridir. Kadro eksikleri ilk araştırma anını gösterir; uygulayıcı sekme aynı gün Part atlı okçusu ve Ming uzun mızraklısını eklemeye başladı. Güncel kimlikler eşleştirme JSON'unda ayrıca listelenir; katalogda bulunmaları savaş davranışlarının doğrulandığı anlamına gelmez.
+
+NASIL OKUNMALI
+A = Kaynakta ilgili savaş davranışı veya düzeni anlatılıyor. Oyundaki durum makinesi yine tasarım önerisidir.
+B = Kaynak donanımı/örgütlenmeyi destekliyor; önerilen hareketlerin tarihî standart doktrin olduğu doğrulanmış değildir.
+C = Bu teslimde alt devlet/birliğe özgü taktik doğrulanamadı. Mevcut rol davranışı kullanılabilir; tarihî özel taktik etiketi verilmemeli.
+EKSİK = Tarihî örnek var, mevcut kadro veya motor gerekli yeteneği karşılamıyor. Otomatik tam uygulama yapılmamalı.
+Kaynak katalogdaki resim bağlantısı değil, aşağıdaki S numaralı metindir. B/C kayıtları için katalog donanımı yalnız eşleme girdisidir; yeni tarihî kanıt değildir.
+Hiçbir A/B etiketi belirli asker sayısı, saniye, hasar yüzdesi ya da kusursuz manevra doğrulamaz. Sayısal eşikler oyun dengelemesidir.
+
+ORTAK UYGULAMA SÖZLEŞMESİ
+1. Kültür menüsü yalnız gezinme grubu. Ülke + dönem + gerçekten sahaya çıkan birliklerin yetenekleri birlikte kontrol edilmeli. Roma'ya condottieri, Bizans'a Sparta, Ming'e Qin düzeni otomatik atanmaz.
+2. Kullanıcının hareket, saldırı, dur ve tut emirleri otomatik planı iptal/askıya alır. Oyuncu emri tamamlanmadan AI aynı planı yeniden başlatmaz.
+3. Hareket yalnız yürünebilir rota ve boş yer üzerinden olur. Arkaya geçmek duvar, müttefik ya da düşman içinden geçmek değildir. Pusu, görüş sistemi yoksa görünmezlik vermez; görünür ihtiyat olarak modellenir.
+4. Her planın toplanma, uygulama ve vazgeçme aşaması olmalı. Takip yoksa sahte ricat kapanmaz. Geri çekilme, toparlanma ve tekrar deneme süre/mesafe açısından sınırlanmalı.
+5. Mızraklıya kılıç, kılıçlı süvariye yay ekleyen gizli davranış kullanılmaz. Gerçek atış yeteneği, hedef mesafesi, atış doğrultusu ve mevcut mühimmat kuralları geçerlidir.
+6. Düzen uyumu kırıldığında mevcut normal çatışmaya dönülür. Irka göre ücretsiz hasar, isabet, moral veya zırh çarpanı önerilmiyor. Kalkan/pavis desteği gerçek ekipman ve yön hesabına bağlıdır.
+7. Performans: kararları birlik grubu seviyesinde mevcut zamanlanmış AI güncellemesine bağla; her askerde her kare tüm düşmanları yeniden tarama. Bu bir entegrasyon önerisidir; bu sekmede performans ölçümü yapılmadı.
+8. Karma çağlı serbest savaşta rol davranışları kullanılabilir; bunun tarihî ordu canlandırması olmadığı korunmalı.
+
+1) TÜRKLER
+
+TR_SELJUK — A — Büyük Selçuklu, Malazgirt 1071 [S01]
+Birlik: seljuk_hassa. Kaynak merkezdeki saldırı/geri çekilme ile pusudaki atlıların devreye girişini anlatır. Her Türk ordusunun aynı düzenle savaştığı anlamına gelmez.
+Tetik: bağımsız yem ve karşı saldırı grupları ayrılabiliyor; geri rota ve iki kanattan en az bir ulaşılabilir müdahale yolu var.
+Akış: sınırlı temas -> kontrollü ricat -> düşmanın gerçekten mevzisinden ayrılıp takip ettiğini gözle -> ihtiyat/kanat müdahalesi -> yem grubunun dönmesi.
+İptal: düşman tutuyor, yem sarılıyor, kaçış kapanıyor, kanat grubu yetişemiyor veya süre/mesafe sınırı doluyor. Karşı hamle: düzeni korumak, takip etmemek, kanatları gözetlemek.
+Not: tek küçük süvari grubunu yapay olarak üç görünmez orduya bölme. seljuk_hassa mızraklıdır; ricat sırasında ok atması önerilmiyor. Menü adı 'Sahte ricat'; 'Turan' adı evrensel değişmez bir tarihî kural olarak sunulmamalı.
+
+TR_OTTOMAN — A/B — Osmanlı, ağırlıkla 15–16. yy [S02,S03]
+Birlikler: merkez/menzil janissary, ottoman_solak, ottoman_azap_archer; süvari ottoman_sipah; öncü ottoman_akinci, ottoman_deli.
+Kaynak: kapıkulu merkez kuvveti ve yanlardan süvari hücumu; akıncıların keşif/öncülük görevleri. Bütün bunların her savaşta tek sabit şema olması iddia edilmiyor.
+Öneri: merkez hedefi karşılasın; öncü yalnız erişilebilir dış kanadı yoklasın; sipahiler güvenli kanat açılınca hücum etsin. Tetik: merkez + kullanılabilir süvari birlikte mevcut. İptal: merkez çökmesi, kanatta sık mızrak hattı, dar geçit; öncü destekten uzaklaşınca toparlansın.
+Eksik/dönem: janissary_yatagan 18. yy–1826 seçkisidir; 15. yy okçu düzenine tarihî kanıt diye bağlanmaz. Ona normal yakın dövüş/ihtiyat rolü. janissary'nin gerçek silahını motordan kontrol et; bu belge tüfek/top önermiyor. Kapıkulu sipahisini tımarlı sipahi diye yeniden adlandırma.
+
+TR_KIPCHAK — B/C — Kıpçak/Kuman, katalog 12–14. yy seçkisi
+Birlikler: kipchak atlı okçu; kipchak_masked_swordsman kılıçlı; kipchak_lancer mızraklı.
+Öneri: yalnız kipchak menzilli taciz yapabilir; iki yakın dövüş süvarisi atış koridorunun yanında ihtiyat tutup dağılmış hedefe gider. Tetik: gerçek atlı okçu ve boş dönüş alanı. İptal: sınır/engel, kuşatma, destekten kopma. Karşı hamle: korunan okçular ve sabit mızrak cephesi.
+Bu teslimde Kıpçaklara özgü sahte ricat kaynağı doğrulanmadı: Selçuklu A etiketi buraya taşınmaz. Maskeli buluntuların atfı da katalogda tartışmalı; maske taktik yetenek oluşturmaz.
+
+TR_GHAZNAVID — B — Gazneli 10–11. yy [S04]
+Birlik: ghaznavid_guard. Kaynak saray gulâmları ve çeşitli silahları doğrular; bütün ordu tek atlı okçu sınıfı değildir.
+Öneri: katalogdaki gerçek atış yeteneği varsa mesafeli kanat koruması; kendi destek grubuna dönen sınırlı taciz. İptal: güvenli geri rota yok, yakın tehdit yay kullanımını engelliyor. Gazneli filleri tarihî kaynakta bulunsa da timur birliğini bu ülkeye aktarma.
+
+TR_GUARD_FALLBACK — C — Anadolu Selçuklu, Göktürk, Karahanlı, Harezmşah
+rum_halka_guard: 12–13. yy kılıçlı yaya; merkezde boşluk kapatan yakın muhafız önerisi.
+gokturk_bori: 6–8. yy kılıçlı süvari; normal süvari ihtiyatı, yay ve Selçuklu ricadı otomatik verilmez.
+karakhanid_palace_guard: 11–12. yy mızraklı muhafız; cephe/okçu koruması. karakhanid_hassa: atlı okçu; yalnız gerçek atış yeteneğiyle sınırlı taciz.
+khwarazm_hassa: 12. yy–1231 mızraklı süvari; ulaşılabilir kanat karşı saldırısı önerisi.
+Bunlar güvenli rol eşlemeleridir; devletlere özgü yeni tarihî taktik bulunduğu iddia edilmiyor. Tetik: role uygun hedef ve destek. İptal: rota kapanması, dağılma veya oyuncu emri. Karşı hamle ilgili silahın genel karşılığıdır.
+
+TR_TIMUR_FALLBACK — C/EKSİK — Timurlular
+Katalogdaki timur bir lider kimliği değil 'Savaş Fili' birliğidir. Bu kadrodan Timur'un çok parçalı süvari ordusu türetilemez. Normal fil hücumu dışında Timurlu çevirmesi otomatik açılmasın. İptal: dostların kapattığı koridor veya ulaşılamayan hedef. Tarihî Timurlu ordu şeması bu teslimde doğrulanmadı.
+
+2) ALMANLAR
+
+DE_PIKE — A/B — Landsknecht, 15. yy sonu–16. yy [S05]
+Birlikler: landsknecht ana uzun mızrak grubu; german_halberdier ve german_doppelsoldner yakın destek. german_pavise_crossbowman ayrı menzilli destek olabilir.
+Kaynak uzun mızrak/teber donanımını ve İsviçre örneğini izleyen bağımsız piyade kütlesini doğrular. Öneri: toparlanmış mızrak cephesi birlikte ilerlesin; kısa menzilli destek açık kanadı/gediği kapatsın; okçu için ateş hattı bırak.
+Tetik: yeterli uzun mızraklı ve düz/boş yaklaşma alanı. İptal: dar engelde sıkışma, arka/yan kuşatma, mızrak sayısı azalması. Karşı: yandan menzil baskısı ve düzeni bölen arazi.
+Doppelsöldner her zaman iki elli kılıç demek değildir; katalog bunu belirli bir kılıçlı varyant olarak sunuyor. 'Kesin mızrak kesme' veya herkese özel zırh delme bonusu için kanıt yok.
+
+DE_CAVALRY — B/C — Kutsal Roma ve Töton
+imperial_gothic_knight (15. yy sonu), german_ministerial (katalog dönemi ayrı), german_armoured_foot; teutonic_knight kendi ülkesinde kalır.
+Öneri: ağır süvari önce hizalanır, erişilebilir açık kanada birlikte gider, temas sonrası kendi desteğine toparlanır; yaya olan german_armoured_foot süvari hücumuna sokulmaz.
+Tetik: açık hücum koridoru ve yeterli yakın süvari. İptal: sağlam mızrak cephesi, dar geçit, dağılmış birlik. Bu genel role dayalı tasarımdır; tüm Almanlara/Tötonlara kanıtlanmış tek 'kama düzeni' olarak verilmez. Kış veya haç simgesinden hasar bonusu türetilmez.
+
+3) İNGİLİZLER
+
+EN_SHIELDWALL — A — Anglosakson 11. yy [S06]
+Birlik: england_housecarl. Hastings anlatısında korunan hat ve merkezde housecarllar var.
+Öneri: savunma çizgisini tut; yakındaki gedikleri kapat; kaçan düşmanı takip ederken hattı parçalama. Tetik: savunulabilir cephe, bitişik dost piyade. İptal: çevrilme veya mevzinin tutulamaz olması; kontrollü toplu gerileme.
+Önemli: iki elli balta vuruşu sırasında aynı askere aktif kalkan duvarı koruması tanımlama. Katalog donanımı kalkan göstermiyorsa yakın hat davranışı kullanılabilir, fiziksel kalkan bonusu uygulanamaz. Okçu baskısı ve kanat dolaşması karşı hamledir.
+
+EN_ARCHER_LINE — A/B — İngiltere, geç Orta Çağ [S07]
+Birlikler: english_cheshire_guard; destek english_billman ve english_dismounted_man_at_arms. Dönem farkı: Cheshire seçkisi 1397–1399, diğerleri 15. yy; bu üçlü tam tarihî tek ordu diye sunulmaz.
+Öneri: okçuların görüş/atış hattı açık olsun, yakın piyade yaklaşan düşmanı karşılasın, okçu piyade desteğine çekilsin. Tetik: okçu + piyade ve temiz atış koridoru. İptal: dostlar atışı kapatıyor, kanat çevriliyor, güvenli geri alan yok.
+Kazık yerleştirme motor özelliği yoksa kazık varmış gibi süvariyi durdurma. english_mail_knight (13. yy) genel süvari profili, english_yeoman_guard (1485–1509) yakın muhafız profili kullanır; ikisine uzun yay rolü verilmez. Döneme göre ayrı seçki gerekir.
+
+4) FRANSIZLAR
+
+FR_OPPORTUNITY — A/B — Patay 1429 örneğinden koşullu hücum; ordonnance 1445 sonrası [S08,S09]
+Birlikler: french_ordonnance_gendarme; french_dismounted_man_at_arms; french_scots_guard, french_franc_archer, french_royal_crossbow_guard kendi gerçek silahlarıyla destek.
+Kaynak Patay'da İngiliz hazırlığı tamamlanmadan süvari baskısını; ayrı kaynak 1445'ten itibaren ordonnance örgütlenmesini destekler. 1429'da henüz bu isimdeki 1445 teşkilatı varmış gibi yazılmaz.
+Öneri: düşman okçusu açıkta/korumasız veya yer değiştirirken ve hücum yolu boşsa gendarmeler toplu hücum eder; hazır mızrak hattına önden sürekli saldırmaz. Piyade teması korur, menzilliler açık koridoru kullanır.
+İptal: hedef savunma hattının arkasına giriyor, yol kapanıyor, süvari dağılıyor. Karşı hamle: okçuları piyadeyle örtmek, hazır cepheyi tutmak. Hücumdan önce toparlanma tarihî kesin saniye değil oyun önerisidir.
+
+5) İTALYANLAR
+
+IT_ROMAN — A/B — Roma İmparatorluğu [S10]
+Birlikler: roman, rome_praetorian; destek rome_equites, roman_syrian_archer.
+Kaynak düzenli piyade ve duruma göre savunma oluşumlarını ele alır. Öneri: merkezde uyumlu piyade, yandaki tehdide ayrılmış küçük ihtiyat; okçuların önünü açan aralıklar, süvariyle açık kanat koruması.
+Tetik: piyade çekirdeği ve ihtiyat ayıracak kadro. İptal: düzeni koruyacak asker/alan kalmaması. Karşı: kanat baskısı ve ayrık grupları izole etmek. Cumhuriyetin hastati/principes/triarii sistemini bu imparatorluk kadrosuna otomatik yapıştırma; kalıcı testudo önerilmiyor.
+
+IT_GENOESE — B — Ceneviz [S11]
+Birlik: genoese_crossbowman. Kaynak Ceneviz arbaletçilerini ve Crécy anlatılarının tartışmalı yönlerini ele alıyor; tek savaştan değişmez ateş düzeni çıkarılmaz.
+Öneri: gerçek pavis/kalkan mekanizması varsa yeniden doldururken korunan konum; atarken açık görüş. Tetik: uygun menzil, koruma ve çekilme rotası. İptal: yakın hücum, yandan tehdit, görüş kapanması. Pavis desteklenmiyorsa normal arbaletçi davranışı; görünmez pavis yok.
+
+IT_CONDOTTA — B — Milano/Floransa, geç Orta Çağ [S12]
+Birlikler: milan_ducal_cavalry, italian_condotta_lancer kendi şehir devletleri altında.
+Condottieri profesyonel ücretli birlik önderleri/şirketleriyle ilişkilidir; tek bir silah ya da bütün İtalya'nın değişmez taktiği değildir.
+Öneri: bir süvari grubu temas ederken diğeri ihtiyatta kalsın; ancak boş dış yol varsa ikinci grup kanada geçsin. Tetik: iki kullanılabilir grup ve alan. İptal: destekten kopma, mızrak duvarı veya ikinci rotanın kapanması. Karşı: kanatları emniyete almak. Bu sırayla ihtiyat kullanımı kaynakta evrensel condottieri kuralı diye doğrulanmadı.
+
+IT_VENICE_FALLBACK — C — Venedik
+venetian_stradiot için katalogdaki hafif süvari rolüyle sınırlı yoklama, açık kanat ve geri toparlanma önerilebilir. Bu teslimde özel stradiot sahte ricadı doğrulanmadı. Ağır condotta hücumu ve görünmez pusu otomatik verilmesin. Tetik açık kenar; iptal yakın destekten uzaklaşma/kaçışın kapanması.
+
+6) YUNANLAR / BİZANS
+
+GR_HOPLITE — B — Sparta
+spartan: kalkanlı mızrak hattı; ancak mevcut fiziksel erişim, kalkan yönü ve yol bulma ile. Toplu ilerleme ve açık kanadı kapatma önerisi. Tetik bitişik piyade; iptal engelli arazi/çevrilme. Sparta'ya Makedon sarissa boyu ve Bizans süvari taktiği verilmez. Bu teslimde Sparta'ya özel hareket düzeni ayrıca doğrulanmadı.
+
+GR_MACEDON — A/B — Makedonya [S13,S14]
+macedon_sarissa_phalangite cephede bağlar; macedon_hypaspists bağlantıyı korur; macedon_companions boş kanada yönelir. Kaynaklar falanksın açık/düz zemin ihtiyacını ve İskender ordusundaki farklı rollerin birlikte kullanımını destekler.
+Tetik: uzun mızrak hattı + gerçek süvari grubu + açık flank rotası. İptal: falanks dağılması, kesintili arazi, kanat rotasının kapanması. Karşı: yan/arka tehdit, hattı engeller arasında bölme.
+Dönem notu: mevcut sarissa seçkisi MÖ 3–2. yy, diğer iki seçki MÖ 4. yy. İskender senaryosu için dönem uyumlu sarissa varyantı gerekir. Mevcut karışık kadro ancak genel Makedon rol örneği olarak kullanılabilir.
+
+GR_THEBES — A/B — Leuktra MÖ 371 [S15]
+thebes_sacred_band: kuvveti bir kanatta toplama fikri; seçkin birliği ana baskı yönüne koyma önerisi. Tetik: diğer cepheyi tamamen boşaltmadan yoğunlaşabilecek kadro. İptal: ince kalan kanat kuşatılıyor, ana hücum sıkışıyor. Karşı: derin kanadı oyalayıp zayıf tarafa baskı.
+Kaynaklar derin sol kanadı anlatır; bütün ordunun 50 sıra sayısını küçük oyun grubuna bire bir kopyalama. Tek seçkin birlikten tam Thebai ordusu üretilemez; geri kalan hat yoksa özel plan açılmaz.
+
+GR_SKIRMISH — A/B — Rodos/Girit, MÖ 401 [S16]
+greek_rhodian_slinger ve greek_cretan_archer: destekli karşı atış, yakın piyadenin koruduğu konuma dönme. Anabasis menzil ve koruma ihtiyacını anlatır.
+Tetik: gerçek menzil içinde hedef ve kaçış alanı. İptal: yakın tehdit/hat kapanması. Her düşmana otomatik üstün menzil, yüzde yüz isabet ya da genel 'iki kat menzil' verilmez. Rodos sapancı, Girit okçudur; silahları aynılaştırma.
+
+GR_BYZANTINE — B/C — Bizans, 10–11. yy [S17]
+byzantine_menavlatos anti-süvari yaya rolü, byzantine_kataphraktos ağır süvari, varangian yakın muhafız.
+Öneri: ağır mızraklıyı gözlenen süvari tehdidine yönlendir; zırhlı süvariyi açık karşı hücum için tut; muhafız merkezde boşluk kapatsın. Tetik doğru rol bileşimi; iptal düşman yön değiştirmesi, koridor kapanması, yaya hattı kopması.
+S17 onuncu yüzyıl askerî el kitabının bağlamını doğrular; bu erişilebilir tanıtım kesin kama geometrisini doğrulamaz. Dolayısıyla burada özel tarihî kama değil donanım temelli koordinasyon öneriliyor. Varangların dönemini ayrıca seç; tüm Bizans yüzyılları birleştirilmesin.
+
+7) PERSLER
+
+PE_ACHAEMENID — A/B — Ahameniş [S18]
+persian kalkan/mızrak cephesi; achaemenid_archer geride/yan aralıklarda menzilli destek. Kaynak Ahameniş okçu ağırlığını ele alır. Öneri: yakın koruma ile atış alanını birlikte koru.
+Tetik iki rol + açık atış hattı. İptal: piyade örtüsü delinmesi, okçunun çevrilmesi. Önündeki dostun içinden ok geçirme, her Ölümsüze otomatik büyük sabit kalkan bariyeri yaratma. Karşı: destekten ayrılmış okçuya kanat baskısı.
+
+PE_PARTHIAN — A/EKSİK — Part/Arsak, Carrhae MÖ 53 [S19]
+Kaynak atlı okçu tacizi ile ağır süvarinin birlikte etkisini anlatır. Mevcut parthian_cataphract yalnız mızraklı ağır süvaridir.
+Tam Part atışı planı için ayrı, doğrulanmış atlı okçu birliği ve hareket hâlinde geriye atış yeteneği gerekir. Şimdilik yalnız genel ağır süvari karşı hücumu. Tam planın tetikleri: iki rol, gerçek atış açısı, açık manevra alanı. İptal: çıkış kapanması/yakın temas/okçu desteği kaybı. Katafrakta gizlice yay ekleme.
+
+PE_SASANIAN — A/B — Sâsânî, 4–7. yy [S18]
+sasanian_aswaran katalogda mızraklı süvari. Kaynak süvari ağırlığını ve destek unsurlarını anlatır; tarihî çok silahlı atlılar oyundaki tek silah profilini kendiliğinden değiştirmez.
+Öneri: grup hâlinde açık yaklaşma, uygun hedefe hücum, engellenirse dost desteğine toparlanma. Tetik yol ve grup uyumu; iptal sağlam mızrak cephesi/kuşatma. Tarihî okçu/piyade düzeninin tamamı kadroda yoksa açılmasın. Ahameniş piyade doktriniyle aynı profil kullanma.
+
+8) JAPONLAR
+
+JP_MOUNTED — B — Orta Çağ samuray atlı okçuluğu [S20]
+japan_mounted_samurai: gerçek atış yeteneğiyle açık kanattan menzilli taciz; yakın tehditte destek yönüne toparlanma. Tetik manevra alanı; iptal kuşatma/engel/yay kullanılamaması. Kaynak samurayların erken askerî rollerinde binicilik ve okçuluğu destekler; bu önerideki daire yarıçapı ve ricat düzeni tarihî kanıt değildir.
+
+JP_INFANTRY — B — Yari/yumi ashigaru, 16–17. yy seçkisi [S21]
+japan_yari_ashigaru piyade örtüsü; japan_yumi_ashigaru açık görüşten atış. samurai ve japan_odachi_samurai gerçek yakın dövüş rolleriyle sınırlı destek; japan_sohei ayrı 12–14. yy seçkisidir.
+Öneri: mızraklı cepheyi tutar, okçu yanda/geride açık koridordan atar, yakın destek gedik kapatır. Tetik rol bileşimi; iptal hat kopması veya atışın kapanması. Kaynak ashigaru eğitim/disiplin ve silahlarını anlatır; bu geometrinin değişmez Japon doktrini olduğu iddia edilmez.
+Heian/Kamakura atlı okçuluğu, tapınak savaşçıları ve Sengoku ashigaru tarihî tek ordu yapılmasın. Nagashino'nun tüfek atışlarını yaylılara aktarma; ateşli silah eklenmesi bu kapsamda yok.
+
+9) ÇİNLİLER
+
+CN_QIN — A/B — Qin MÖ 3. yy [S22]
+qin_crossbowman ve qin_ji_infantry. Terracotta araştırması ön/yanlardaki arbaletçi yerleşimini tartışır; mezar ordusu her gerçek savaşın kusursuz fotoğrafı değildir.
+Öneri: arbaletçiler başlangıçta ön/yan ateş çizgisi kursun; yakın temas yaklaşınca ji hattının koruduğu boş alana çekilsin. Tetik gerçek menzil ve geri geçiş koridoru; iptal geri yol kapanması/kuşatma. Dönüşümlü üç sıra atış bu kaynakla doğrulanmadı; otomatik eklenmesin.
+
+CN_MING — A/EKSİK — Qi Jiguang, 16. yy [S23]
+ming_rattan_shield ve ming_langxian birbirini tamamlayan yakın koruma/bambu destek rolleridir. Jixiao Xinshu ve modern araştırma kalkan, langxian, uzun mızrak ve başka destek silahlarının birlikte düzenini ele alır.
+Öneri: mevcut iki sınıf birlikte ilerlesin; kalkanlı ön/yan koruma, langxian hemen destek mesafesinde. Tetik her iki rol ve birbirine erişim; iptal ayrılma, kanat kuşatması, dar alanda kilitlenme.
+Eksik: uzun mızrak ve diğer görevler kadroda yok. İki sınıflı uyarlama 'tam 12 kişilik mandarin ördeği düzeni' diye gösterilmemeli; bambuya gerçek dışı alan kilidi/yay durdurma bonusu verilmemeli. Tam düzen için ek rol + formasyon desteği gerekir.
+
+CN_DYNASTY_FALLBACK — C — Han, Tang, Song
+han_yulin: Han dönemi atlı okçu; gerçek atışla sınırlı menzil koruması.
+tang_xuanjia: 621 seçkisi mızraklı süvari; genel grup hücumu ve toparlanma.
+song_beiwei: 12. yy kılıçlı süvari; kanat/ihtiyat yakın dövüş rolü.
+Bu teslimde bu adlandırılmış birliklere ait belirli tarihî formasyon doğrulanmadı. Qin arbalet düzeni veya Ming mandarin ördeği aktarılmaz. Ortak tetik: silaha uygun hedef ve boş rota; iptal: engel, kuşatma, desteksiz kalma. Tarihî özel taktik varsayılanı kapalı kalabilir.
+
+KAYNAKLAR — 15 EKİM 2026 METİN TARAMASI
+S01 TDV, Ali Sevim, Malazgirt Muharebesi: https://islamansiklopedisi.org.tr/malazgirt-muharebesi
+S02 TDV, Ordu: https://islamansiklopedisi.org.tr/ordu
+S03 TDV, Akıncı: https://islamansiklopedisi.org.tr/akinci
+S04 Encyclopaedia Iranica, Army ii: https://www.iranicaonline.org/articles/army-ii/
+S05 Historisches Lexikon Bayerns, Reinhard Baumann, Landsknechte: https://www.historisches-lexikon-bayerns.de/Lexikon/Landsknechte
+S06 English Heritage, Battle Abbey and Battlefield history: https://www.english-heritage.org.uk/visit/places/1066-battle-of-hastings-abbey-and-battlefield/history-and-stories/history/
+S07 Royal Armouries, The Hundred Years' War: https://royalarmouries.org/objects-and-stories/stories/the-hundred-years-war-1337-1453
+S08 Ville de Patay, Quelques grandes dates: https://www.patay.fr/quelques-grandes-dates-de-lhistoire-de-patay/
+S09 Musée de la Cavalerie, Chevauchée historique: https://musee-cavalerie.fr/le-musee/chevauchee-historique/
+S10 World History Encyclopedia, Roman Army: https://www.worldhistory.org/Roman_Army_/
+S11 Cambridge University Press, The Genoese Crossbowmen at Crécy, erişilebilir bölüm özeti (tam bölüm okunmadı): https://www.cambridge.org/core/books/abs/battle-of-crecy/genoese-crossbowmen-at-crecy/34B83B798FAAB82AE6F69FB89F626086
+S12 Store norske leksikon, Condottieri: https://snl.no/condottieri
+S13 Polybios, Histories 18, özellikle 29–32: https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Polybius/18%2A.html
+S14 World History Encyclopedia, The Army of Alexander the Great: https://www.worldhistory.org/article/676/the-army-of-alexander-the-great/
+S15 Britannica 1911, Leuctra (eski ikincil anlatım; yorumları kesin geometriye dönüştürme): https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Leuctra
+S16 Xenophon, Anabasis III.3–4, çeviri: https://cais-soas.com/CAIS/History/hakhamaneshian/xenophon/anabasis/xeno_anbs_book_3.htm ; Perseus III.4: https://www.perseus.tufts.edu/hopper/text?doc=Xen.+Anab.+3.4&lang=original
+S17 Mary Jaharis Center, A Tenth-Century Byzantine Military Manual (kitap tanıtımı, tam el kitabı değil): https://archives.maryjahariscenter.org/blog/a-tenth-century-byzantine-military-manual
+S18 Encyclopaedia Iranica, Army i, Pre-Islamic Iran: https://www.iranicaonline.org/articles/army-i/
+S19 Encyclopaedia Iranica, Carrhae: https://www.iranicaonline.org/articles/carrhae-harran-town-in-mesopotamia-where-in-may-53-b/
+S20 Metropolitan Museum, Samurai: https://www.metmuseum.org/es/essays/samurai
+S21 Japan Tourism Agency, Training and Education of Ashigaru: https://www.mlit.go.jp/tagengo-db/en/H30-00668.html
+S22 UCL, Crossbow triggers and imperial craft organisation: https://www.ucl.ac.uk/terracotta-army/news/2014/mar/crossbow-triggers-and-imperial-craft-organisation
+S23 Qi Jiguang, Jixiao Xinshu, cilt 11 (birincil metin, Çince): https://zh.wikisource.org/zh/紀效新書/卷十一 ; Cho/Hong/Yang 2025, silah işbirliği üzerine makale özeti: https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003233595
+
+UYGULAYICI İÇİN KABUL SENARYOLARI (BU SEKMEDE ÇALIŞTIRILMADI)
+- Selçuklu: düşman duruyorsa ricat sona ermeli; takip varsa kanat müdahalesi ancak ulaşılabilir rota üzerinden olmalı.
+- Mızrak/falanks: dar geçitte kilitlenmemeli; eksilen birlikle hayalet cephe korunmamalı.
+- Okçu-piyade: dost gövdesi içinden atış ve sınırsız geri kaçış olmamalı.
+- Süvari: karşıdaki hazır mızrak cephesini tekrar tekrar körlemesine hedeflememeli; emir verince otomatik plan bırakılmalı.
+- Tarih/kadro: Part katafraktı yay kullanmamalı; timur filinden komutan türetilmemeli; Qin/Ming, Roma/Floransa profilleri karışmamalı.
+- Eksik kadro: tam Ming düzeni ve tarihî Part atışı sessizce açılmamalı.
+- Kapsam eşlemesi: beraberindeki historical-tactics-mapping-2026-10-15.json yalnız araştırma indeksi; runtime import edilmez.
+
+EK DEVİR — EKSİK BİRLİKLER / 15 EKİM
+Uygulayıcı sekmenin eksik birlik talebi üzerine birincil metin tekrar kontrol edildi.
+S24 Qi Jiguang, Jixiao Xinshu, cilt 1, 原授器: https://zh.wikisource.org/zh/紀效新書/卷一
+Bu bölüm uzun kalkanlı, rattan kalkanlı, langxian, uzun mızraklı ve kısa silahlı askerleri ayrı görevlerle tanımlar: sırasıyla 1, 1, 2, 4, 2. Liderlik ve lojistik ayrıca belirtilir. Bu sayılar oyun kadrosu için zorunlu üretim oranı değildir; verilen tarihî ekip tarifidir. 火兵 bu bağlamda yük/yemek işlerini yapan görevlidir; ateşli silahlı asker diye eklenmemeli.
+Ming'de mevcut langxian ve rattan kalkana ek roller: uzun kalkanlı yaya (長牌), uzun mızraklı yaya (長槍), kısa silahlı destek (短兵). Cilt 11, langxian için kalkan, mızrak ve 釵鈀大刀 desteğini anlatır. Bu iki bölüm kısa silahlıların hepsinin yalnız sanjiaocha taşıdığını kanıtlamaz; kesin silah alt tipi için ek kaynak gerekir. Rattan kalkancıya ikinci özdeş ad vermek uzun kalkan rolünü karşılamaz.
+Part: S19, yaylı süvari ile zırhlı süvarinin birlikte kullanımına dayanır. Part atlı okçusu mevcut katafraktın eksik ortağıdır. Ok atarak geri çekilme gerçek yay, yön ve menzil desteği gerektirir.
+Selçuklu: TR_SELJUK manevrasının çalışması için mutlaka yeni yaylı asker gerekmez. Mızraklı mevcut süvari temas edip çekilebilir. Ok atarak ricat isteniyorsa ayrıca dönemine uygun atlı okçu araştırılmalıdır; bu teslim Türkmen birliğinin kesin donanımını doğrulamaz.
+Doğrulama anı: eşleştirme JSON'unda 9 kültür, 35 devlet/dönem, 74 mevcut birlik kimliği, 29 profil başlığı. Bunlar 29 doğrulanmış özel millî doktrin değildir: A/B/C kanıt düzeyleri ve rol temelli yedek davranışlar ayrı tutulmuştur. parthian_horse_archer ve ming_long_spearman uygulayıcı sekmenin yeni katalog kayıtları olarak görüldü; motor ve görsel testleri bu araştırma sekmesinde yapılmadı.

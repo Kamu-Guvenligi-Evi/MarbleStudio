@@ -1,0 +1,9 @@
+.battle-map-picker{margin:0 0 18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.battle-map-picker h3{margin:0 0 9px;font-size:14px;color:#e1d6b4}
+.battle-map-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.battle-map-grid button{display:flex;flex-direction:column;gap:6px;align-items:stretch;min-width:0;min-height:76px;padding:5px 5px 7px;border:1px solid #52604d;border-radius:6px;background:#1f2922;color:#e6e4d3;font:inherit;font-size:12px;cursor:pointer;text-align:center}
+.battle-map-grid button canvas{display:block;width:100%;height:43px;min-height:0;max-height:none;aspect-ratio:auto;object-fit:cover;border-radius:3px;pointer-events:none}
+.battle-map-grid button[aria-pressed=true]{border-color:#ead399;box-shadow:inset 0 0 0 1px #ead399;background:#39432c;color:#fff1c9}
+.battle-map-grid button:focus-visible{outline:2px solid #fff1c9;outline-offset:2px}
+#battle-map-description{font-size:12px;line-height:1.5;margin:9px 0 5px;color:#ded8c2}
+.battle-map-picker .small-note{margin:5px 0 0}

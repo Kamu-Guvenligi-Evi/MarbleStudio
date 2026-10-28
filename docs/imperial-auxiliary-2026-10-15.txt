@@ -1,0 +1,36 @@
+15 Ekim 2026 — Mısır, Likya, Baktriya ve Geç Roma donanım rolleri
+
+Eklenenler: egypt_achaemenid_marine, lycian_cornel_archer,
+bactrian_short_spearman, late_roman_plumbatarius, late_roman_slinger.
+Menüler: Mısır, yeni Likya ve Baktriya kültürleri, İtalyan/Roma altında Geç Roma.
+
+Kaynaklar:
+https://lexundria.com/hdt/7.89/mcly — Mısırlı donanma askerleri.
+https://lexundria.com/hdt/7.92/mcly — Likyalıların yay, başlık, post ve zırhı.
+https://lexundria.com/hdt/7.64/mcly — Baktriyalıların başlık ve kısa mızrakları.
+https://www.thelatinlibrary.com/vegetius1.html — I.16 sapan, I.17 plumbata.
+https://museum.wales/collections/online/object/cdb92b99-8b78-3f50-a22c-29cf011a2200/Roman-iron-javelin-head/
+— Segontium plumbata buluntusu; demir uç, kurşun ağırlık.
+
+Beş kart bağımsız seçkin alay iddiası taşımaz; kaynaklardaki donanımı oyun
+rollerine ayırır. Deniz savaşı, beş dartlık mühimmat veya otomatik kılıca
+geçiş eklenmedi. Giysi rengi, bazı biçimler ve kayıp organik parçalar
+yorumdur; sınırlar kartlarda belirtilmiştir. Çizimler özgün Canvas artıdır,
+internetten alınmış görsel değildir. Yeni kaynak bağlantıları kartlardadır.
+
+Dosyalar: src/imperial-auxiliary-units.js, src/imperial-auxiliary-art.js;
+historical-catalogue, historical-art-profiles, historical-warrior-art ve
+historical-culture-groups bağlantıları. crown-battle.js değiştirilmedi.
+
+Doğrulama: tests/imperial-auxiliary.mjs geçti. 400 animasyon karesi,
+5 farklı görünüm, 10 tam 12v12 savaş (en uzun 36,43 simülasyon saniyesi),
+1366 ve 390 piksel ekranlarda iki takım, menü, ekleme/silme, başlatma ve
+kayıttan yükleme; tarayıcı hatası yok. units.jpg görsel olarak incelendi.
+historical-equipment-balance: 284 profil, 258 aynalı savaş; zaman aşımı yok.
+Vite üretim derlemesi geçti.
+
+Çıktılar: artifacts/imperial-auxiliary/ altında checks.json,
+full-battles.json, units.jpg, equipment.log, elite-art.log, build.log.
+Genel animasyon kontrolü geçti: 13.632 kare; boş/kırpılmış çizim, yinelenen
+görünüm/siluet veya tarayıcı hatası yok. Sonuç elite-art.log içindedir.
+Derlemede mevcut büyük paket uyarısı sürüyor; hata yok.

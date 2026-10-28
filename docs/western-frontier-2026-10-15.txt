@@ -1,0 +1,73 @@
+Taç Muharebesi — Batı Avrupa ve Sarmat askerleri, 15 Ekim 2026
+
+Eklenen 5 kayıt:
+- flemish_goedendag — Flandre goedendag milisi; Flamanlar / Flandre şehir milisleri.
+- frankish_axeman — Frank baltacı; Franklar / Merovenj Frank Krallıkları.
+- frankish_angon — Frank angon ciritçisi; aynı Frank menüsü.
+- sarmatian_noble_lancer — Sarmat soylu mızraklısı; Sarmatlar / Roksolan / Sarmat toplulukları.
+- spanish_rodelero — İspanyol rodela kılıçlısı; İspanyollar / İspanyol İtalya Seferi Orduları.
+
+Kaynaklar ve temsil sınırları:
+1. Nationaal Militair Museum, goedendag ve Oxford sandığı:
+   https://collectie.nmm.nl/nl/collectie/detail/255241/
+   Demir uçlu kalın sopa, Flaman şehir milisi; seçkin tarikat askeri değil.
+   Tam özgün sap korunmadığından uzunluk, giysi ve renkler yorumdur.
+2. British Museum, francisca 1856,0701.1416:
+   https://www.britishmuseum.org/collection/object/H_1856-0701-1416
+   Merovenj mezarından 6. yy demir balta; kısa sap ve kıvrık baş çizimi.
+   Saç, tunik ve kalkan rekonstrüksiyondur. Tarihte atılabilen francisca,
+   bu kartta yalnız yakın dövüşte kullanılır; balta atma mekaniği eklenmedi.
+3. INRAP ve British Museum, Frank angonu:
+   https://galeriemuseale.inrap.fr/index.php/Expositions/Show/Details/id/47?lang=en_US
+   https://www.britishmuseum.org/sites/default/files/2021-05/large_print_guide_room_41.pdf
+   Kısa ahşap sap, uzun demir boyun, geriye bakan kancalar.
+   Donanıma göre oyun rolü; standart bir angon alayı iddiası yok.
+   Mevcut dart fiziği kullanılır, kalkan kilitleme simülasyonu uygulanmaz.
+4. Tacitus, Historiae 1.79, Roksolan süvarisi:
+   https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Tacitus/Histories/1B%2A.html#79
+   Uzun mızrak, soyluların demir/sert deri zırhı ve kalkan kullanmaması.
+   Uzun pul zırh, iki elli kontos, zırhsız at. Miğfer biçimi yorumdur.
+   Antik metnin zırh dayanıklılığını abartan ifadesi oyun kuralı değildir.
+5. Machiavelli, Savaş Sanatı II ve Prens XXVI:
+   https://constitution.org/2-Authors/mac/artofwar2.htm
+   https://thephilosopher.net/machiavelli/tvorchestvo/the-prince/pagen/21/
+   İspanyol kılıçlılarının mızrak düzeninin yakınına girmesi ve kalkanları.
+   Rodela, düz kılıç, göğüslük ve erken açık miğfer yorumu; ateşli silah yok.
+   Her mızraklıyı otomatik yenme özelliği verilmedi.
+
+Görseller kaynak donanımlarına dayanan özgün Canvas çizimleridir; fotoğraf
+veya dış görsel dosyası indirilmedi. Her savaşçının ayrı silah, başlık,
+zırh ve silueti var. Bütün istatistikler oyun tasarımıdır, tarihî ölçüm değil.
+Yeni yorgunluk/moral veya taktik mekaniği eklenmedi; savaş motoruna dokunulmadı.
+
+Dosyalar:
+src/western-frontier-units.js — kayıtlar, kaynaklar, savaş değerleri ve profiller.
+src/western-frontier-art.js — dört çizim kancası.
+src/historical-catalogue.js, historical-art-profiles.js,
+historical-warrior-art.js, historical-culture-groups.js — entegrasyon.
+tests/western-frontier.mjs — hasar, mermi, savaş, görsel ve menü kontrolleri.
+
+Hedefli doğrulama:
+- İki takımda gerçek hasar, doğru cirit türü ve ordu kaydı geçti.
+- 10 adet 12'ye 12 savaş doğal sonuca ulaştı; en uzunu 21,27 simülasyon saniyesi.
+- 400 karede boş/kenarı kesilmiş çizim yok; beş farklı siluet.
+- Sarmat kontosu ilk kontrolde taştı; dinlenme ve hücuma hazırlık açısı
+  değiştirilerek silah kısaltılmadan düzeltildi; tekrar tarama geçti.
+- PC 1366 px ve telefon 390 px: iki tarafa ekleme, silme, savaşa geçiş ve
+  yeniden yükleme geçti; tarayıcı hatası yok.
+- artifacts/western-frontier/units.jpg gözle incelendi (23.758 bayt).
+  Bu yerel dosya boyutudur; internet trafiği ölçümü değildir.
+- Sonuçlar: checks.json ve full-battles.json aynı artifacts klasöründe.
+
+Genel doğrulama:
+- Donanım denge testi: 279 farklı profil, varsayılan profile düşen kayıt yok;
+  258 mevcut karşılaşma zaman aşımı olmadan tamamlandı.
+- Vite derlemesi başarılı (çıkış 0, 1 dk 3 sn); mevcut 500 kB paket
+  boyutu uyarısı sürüyor. Log: artifacts/western-frontier/build.log.
+- Tam katalog çizim taraması başarılı (çıkış 0): 13.392 karede boş/kesilmiş
+  çizim, eksik profil, aynı çizim veya aynı siluet yok. Tarayıcı hatası yok.
+  Log: artifacts/western-frontier/all-art.log.
+- Motor ve komutan/preset sekmelerine kimlik, dönem ve roller bildirildi.
+  Motor sekmesi kendi condition-roster testine beş kaydı eklediğini ve
+  21 birlik / 42 doğal biten savaşın geçtiğini bildirdi. Bu test ayrı sekmede
+  çalıştırıldı; bu değişiklikte yeni kondisyon mekaniği uygulanmadı.

@@ -1,0 +1,107 @@
+Taç Muharebesi — donanım ve güç dengesi, 15 Ekim 2026
+
+Kapsam ve bulgular
+- 159 mevcut profil incelendi: 114 insan, 36 Orta Dünya, 9 mitolojik.
+- 29 eski insan birliği tamamen genel rol presetinde kalmıştı: 12 yakın dövüş
+  süvarisi, 5 atlı okçu, 1 yaya okçu, 6 mızraklı ve 5 yakın dövüş piyadesi.
+- Aynı sürümde, aynı seed/iki taraf ile eski değerler yeniden çalıştırıldı.
+  12 Varang / 18 Roma: 1/6; Alman zırhlı piyade: 3/6; İngiliz zırhlı yaya: 1/6.
+  Gondor seçkin / Varang 12'şer: 3/6; Demir Tepeler cücesi / Varang: 0/6.
+  Son iki sonuç mevcut Orta Dünya regresyon beklentilerini zaten karşılamıyordu.
+
+Uygulama: 34 profil değişti (32 insan + 2 Orta Dünya)
+- 29 genel profil src/historical-equipment-balance.js içinde donanıma göre ayrıldı.
+  Zırh-can-hız, silah erişimi, vuruş/doldurma temposu ve hücum gücü birlikte ele alındı.
+- Mızraklı süvariler ile kılıç/balta kullanan süvariler aynı hücum bonusunu almıyor.
+  Sipah 185 can, 39 hız, 26 hasar, 25 erişim, 1.25 aralık, .14 zırh, 52 hücum.
+  İlk denemede 29 erişim hafif mızraklıların karşı koymasını bozduğu için azaltıldı.
+- Japon atlı okçusu daha korunaklı/yavaş; mevcut Han çizimindeki zırhsız atlı daha
+  kırılgan/hareketli. Atlı yaylıların tümünde ranged/skirmish korunuyor, hücum 0.
+- Solak menzil/tempo; kalkan-mızrak piyadesi koruma/erişim; macuahuitl, topuz ve
+  baltalar vuruş gücü/tempo açısından ayrıldı. İlk geçişte ortak donanım geleneği
+  nedeniyle aynı kalan profiller aşağıdaki ikinci geçişte oyun rolleriyle ayrıldı.
+- Varang saldırı aralığı 1.40 -> 1.45; Alman zırhlı piyade hasarı 31 -> 29;
+  İngiliz zırhlı yaya aralığı 1.30 -> 1.35. Zırh ve ağır piyade rolleri korundu.
+- Gondor seçkin hasarı 28 -> 29; Demir Tepeler cücesi hasarı 28 -> 34, aralığı
+  1.15 -> 1.25. Cüce, daha ağır ama daha seyrek vuruyor; seçkin cüce daha dayanıklı.
+- ID, kayıt biçimi, iki takımın sayıları, görseller, ölçekler ve klasik değerler
+  değişmedi. unit.combat önceliği ve gelecekteki eklemeler için fallback korundu.
+  Kare başına yeni hesap veya asker çiftlerini karşılaştıran döngü eklenmedi.
+
+Doğrulama (son değerlerle; başarısız ara kalibrasyonlar sonuç sayılmadı)
+- tests/historical-balance.mjs: 114 insan, 1416 savaş PASS.
+- tests/historical-equipment-balance.mjs: 159 profil, 0 genel preset kalıntısı,
+  kayıt gidiş-dönüşü, 204 savaş PASS. 24/36 kişilik karşı birlikler, 5 atlı okçu
+  kovalamacası, gerçek mızrak karşılaması/ok atışı ve seed tekrarı kapsandı.
+- tests/middle-earth-balance.mjs: 36 Orta Dünya, 348 savaş PASS.
+- tests/turkic-cavalry-balance.mjs: 72 savaş PASS.
+- Toplam 2040 senaryolu savaş; seed 5/39/1066 ve iki taraf, 1/30 adım,
+  240 saniye sınırında hiçbir savaş zaman aşımına uğramadı.
+- Üç insan ağır piyadesi artık 18 Roma karşısında 0/6, 12 Roma karşısında 6/6.
+  Gondor seçkin ve Demir Tepeler cücesi 12 Varang karşısında 6/6; ortalama kalan
+  can sırasıyla %12.1 / %8.1. Mevcut kahraman/dev ve süvari karşılıkları geçiyor.
+- historical-combat, crown-battle-behavior, crown-battle-charge,
+  crown-battle-tactics, crown-battle, mythological-combat: PASS.
+  2501 asker kaydı, seçim/emir, yakın dövüş yığılması, hücum, menzilli saldırı,
+  fil alan vuruşu ve klasik oyun kontrolleri bunların içinde.
+- Vite build: PASS; büyük paket uyarısı mevcut. Ayrı çıktı:
+  artifacts/equipment-balance/build-check (çalışan dist üzerine yazılmadı).
+
+Değişen dosyalar
+  src/historical-equipment-balance.js (yeni)
+  src/historical-combat.js (yeni tablo + 2 ağır piyade)
+  src/europe-crusader-units.js (yalnız İngiliz zırhlı yaya combat aralığı)
+  src/middle-earth-units.js (yalnız yukarıdaki 2 combat profili)
+  tests/historical-equipment-balance.mjs (yeni)
+  docs/historical-equipment-balance-2026-10-15.txt (bu not)
+Raporlar: artifacts/equipment-balance/changes.json, before-types.json,
+  after-types.json, full-before-battles.json, full-after-battles.json,
+  middle-earth-before.json, middle-earth-after.json, regression.json ve test logları.
+
+Kaynak ve sınırlar
+- Proje savaş/medeniyet notları ve historical-elite-research-2026-10-14.json esas.
+  Donanım kontrolü: Met Memlük mızrak başı (~1500):
+  https://www.metmuseum.org/art/collection/search/22212
+  Met yoroi / 12–14. yy atlı okçu zırhı:
+  https://www.metmuseum.org/exhibitions/listings/2009/art-of-the-samurai/photo-gallery
+- Tarih ve donanım rol seçimini destekler; sayılar tarihî performans ölçümü değildir.
+  Daha yeni tarih, elit adı veya medeniyet tek başına güç bonusu sayılmadı.
+- Selçuk/Gazne muhafızlarının kesin zırhı, Kipçak maskesinin savaşta kullanımı,
+  Song Beiwei üniforması, Ahadi görselinin geç kaynak niteliği ve Sajal donanım
+  rekonstrüksiyonu belirsiz. Ana sekmeye bildirildi; ek kanıt olmadan ağır zırh,
+  zırhlı at ya da özel yetenek uydurulmadı. Donanım araştırması devam edebilir.
+- Motorun ayrı silah-zırh delme veya özel topuz sersemletmesi yok; bu yetenekler
+  varmış gibi gösterilmedi. İstatistik ayarı mevcut motor yeteneklerini kullanır.
+- Testler sabit harita/seed ve belirli dizilimler içindir; tüm karışık orduların,
+  arazi ve oyuncu taktiklerinin eşit sonucu garanti edilmez. FPS artışı ölçülmedi.
+
+İkinci geçiş — hız, güç ve dayanıklılık uzmanlaşmaları (15 Ekim 2026)
+- Güncel katalog 179 birliğe çıkmıştı. Dört gruptaki 9 birliğin tüm savaş değerleri
+  aynıydı. Yalnız bu 9 profil değiştirildi; artık 179 profilin hiçbiri birebir aynı
+  değil. Tek bir özelliğin ortak olması normal; her sayıyı farklı yapma hedefi yok.
+- Bahriyye: hız 41, hücum 60; Burciyye: hız 37, hücum 50, daha fazla can/zırh
+  ve tek vuruş gücü. İkisi de mevcut mızraklı süvari rolünde kaldı.
+- Keşik: hız 47, hasar 16, atış aralığı 1.45; İlhanlı: hız 41, hasar 20,
+  aralık 1.8, daha fazla can/zırh. İkisi de hareketli yaylı süvari.
+- Kartal: hız 30, hasar 25, aralık 1.05; Jaguar: hız 25, hasar 32,
+  aralık 1.4, daha dayanıklı. Çeviklik/tempo ile ağır vuruş arasında tercih var.
+- Tapınakçı: hız 38, hücum 64, can 210, zırh .20. Hospitalier: hız 34,
+  hücum 48, can 230, zırh .24. Töton: hasar 32, aralık 1.45; diğer ikisinin
+  hasarı 28/29, aralığı 1.3. Hücum, dayanıklılık ve ağır vuruş birbirinden ayrıldı.
+- Bunlar ortak donanım sınıfındaki oyun uzmanlaşmalarıdır; kaynakların bu
+  tarikatların/hanedanların kesin hız veya güç sıralamasını kanıtladığı söylenmez.
+  Yerel araştırmadaki donanım belirsizlikleri sürüyor; silah sınıfı değiştirilmedi.
+- Testler: historical-balance 134 insan/1656 savaş; equipment-balance tüm 179
+  profil/258 savaş; turkic-cavalry-balance 72 savaş: PASS, toplam 1986, timeout 0.
+  Üç seed (5/39/1066), iki takım yönü. Profil çakışması, güçlü/zayıf yönler,
+  süvari-mızraklı, atlı okçu kovalamacası, benzer birlikler ve büyük dizilimler.
+  historical-combat PASS: 2501 asker kaydı, seçim/emir, alan vuruşu, menzilli
+  ateş ve tekrarlanabilir sonuçlar. İlk şövalye ayarı ağır süvariye karşı fazla
+  zayıftı; değerler düzeltildi, test eşikleri gevşetilmedi.
+  Vite build PASS (doğrudan Node çıkışı 0); mevcut büyük paket uyarısı sürüyor.
+  Ayrı çıktı: artifacts/unit-specialization/build-check.
+- İkinci geçiş dosyaları: src/historical-equipment-balance.js,
+  src/historical-combat.js, tests/historical-equipment-balance.mjs ve bu not.
+  Önce/sonra profilleri, 9 fark ve test raporları: artifacts/unit-specialization/.
+  Motor, arayüz, görseller, birlik kimlikleri ve kayıt formatı değiştirilmedi.
+  Canlı mevcut savaş eski değerleri tutabilir; yenileyip yeni savaş başlatılmalı.

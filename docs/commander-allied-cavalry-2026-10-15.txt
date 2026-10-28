@@ -1,0 +1,44 @@
+Komutanların kullanacağı birlikler — 15 Ekim 2026
+
+Bu tur 4 yeni birlik eklendi; genel kataloğa ilgisiz birlik eklenmedi.
+Hannibal: hannibal_iberian_cavalry, hannibal_gallic_cavalry.
+Sezar: caesar_germanic_cavalry, caesar_germanic_light_infantry.
+
+Kaynaklar:
+Polybios 3.113–116, Cannae: İber ve Kelt süvarisi sol kanatta, Numidya süvarisi ayrı kanatta.
+https://sourcebooks.web.fordham.edu/ancient/polybius-cannae.asp
+Sezar, Galya Savaşı 7.65: Ren ötesinden çağrılan atlılar ve onların arasında savaşan hafif piyade.
+https://www.lateinlex.de/?call=Puc&permalink=Caes_Gall_VII_65
+Sezar desteği MÖ 52 bağlamındadır; hazır ordu Galya seferleri genelini temsil eder.
+
+Sınırlar:
+Kaynaklar kesin süvari üniforması vermez. Kıyafetler, renkler, zırh seçimi dönemsel yorum olarak kartlarda açıklanır.
+İber tunik kenarı piyade anlatımından alınan görsel yorumdur; süvari üniforması olarak doğrulanmış sayılmaz.
+Galya zincir gömleği varlıklı bir savaşçı yorumu; bütün süvarinin standart zırhı değildir.
+Polybios'un attan inerek dövüşme anlatımı ve Cermen yayanın belirli atlıya eşlenmesi bu turda motor davranışı olarak uygulanmadı.
+Savaş değerleri oyun dengesidir. Cermen piyadesi at hızında koşmaz.
+
+Hazır ordu dağılımları (24 kapasite; eski notların bu iki dağılımını günceller):
+Sezar: lejyoner 12, Galya süvarisi 4, Girit okçusu 2, Balear sapancısı 2, Cermen süvarisi 2, Cermen hafif piyadesi 2.
+Hannibal: Libya piyadesi 6, İber kılıçlı 4, Galya kılıçlı 4, Numidya süvarisi 4, Balear sapancısı 2, İber süvarisi 2, Galya süvarisi 2.
+Önceki destek türleri korunur. Kayıtlı eski ordular otomatik değiştirilmez; komutanın hazır ordusunu yeniden oluşturmak gerekir.
+
+Menü: Antik İberler / İberya–Kartaca hizmeti; Galya Keltleri / Galya–Kartaca hizmeti; Antik Cermenler / Ren ötesi Cermenler–Roma hizmeti.
+Çizimler mevcut Canvas sisteminde özgün donanım siluetleriyle eklendi; üç atlıda üzengi yok.
+Motor/taktik/kondisyon dosyaları değiştirilmedi.
+
+Değişen dosyalar:
+src/commander-reinforcement-units.js, src/commander-reinforcement-art.js
+src/historical-culture-groups.js, src/historical-army-presets.js, src/historical-army-history.js
+tests/commander-reinforcements.mjs, tests/historical-army-presets.mjs
+
+Doğrulama:
+commander-reinforcements: 7 birlik (önceki 3 dahil), iki takım hasar/kayıt, 14 tam birlik savaşı + 10 komutan savaşı; tümü doğal bitti.
+560 karede boş/kesilmiş görüntü veya aynı boşluk silueti yok. PC/telefon, iki takım seçim/silme/kayıt/yükleme başarılı.
+historical-army-presets: 20 komutan, kapasite/yuvarlama/doctrine kontrolleri başarılı.
+historical-army-history: 20 kapsam/kaynak paneli ve gerçek ordu oluşturma başarılı.
+historical-army-presets-browser: 1440/390/320 px tüm komutanlar, ölçekleme, takım ayrımı, uygulama/kayıt ve atölye başarılı.
+historical-equipment-balance: 295 ayrı profil, 258 aynalı savaş, zaman aşımı yok.
+Vite build başarılı; mevcut 500 kB paket uyarısı sürüyor.
+Önizleme: artifacts/commander-reinforcements/units.jpg (38.408 bayt); yerelde bir kez görsel olarak incelendi.
+Test ayrıntıları: artifacts/commander-reinforcements/ altındaki log ve JSON dosyaları.

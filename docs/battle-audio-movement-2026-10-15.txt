@@ -1,0 +1,48 @@
+Battle movement audio / distance acoustics — 2026-10-15
+
+Continues the recorded weapon banks described in battle-audio-recordings-2026-10-15.txt.
+Added three Kenney CC0 footsteps and two CC0 gallop effects. The horse pack is
+mixed-licence; only its grass and ground CC0 entries were copied. Attribution
+and originals are documented in public/audio/battle/SOURCES.txt. Full archive
+credits: artifacts/battle-audio-recordings/horse-credits.txt.
+Five new audio files total 44,437 local bytes; this is NOT measured network usage.
+
+Implementation:
+- src/crown-battle-movement-sound.js samples at most 96 array positions plus two
+  previous representatives every 0.12 seconds, selecting nearby moving infantry
+  and horse cavalry. Mounted archers are included. Elephants, giants and known
+  non-horse fantasy mounts are excluded pending matching recordings.
+- src/crown-battle-feedback.js integrates movement sampling with the listener.
+- src/crown-battle-audio.js decodes movement once, shares the existing worker,
+  limits movement to two voices within the eight total, reserves foreground
+  capacity and changes playback pace with movement speed. Pause/mute stop it.
+  Missing movement recordings remain silent. No engine RNG/state changes.
+- A shared 2200 Hz low-pass bus muffles distant movement and weapon contacts;
+  camera-relative gain/pan remain active. No additional per-hit filters.
+- src/crown-battle-sound-design.js caps prepared feet at 0.32s and hoof at 0.6s.
+
+Validation passed:
+- crown-battle-movement-sound.mjs: moving/stopped/dead/removed/winner/mute,
+  camera, cavalry and charge pace, bounded 100,000-unit sampling, seeded parity.
+- crown-battle-movement-audio-browser.mjs: five decoded movement assets, audible
+  approach, eight total/two movement voices, natural end/pause/mute/restart,
+  frequency attenuation and missing-file behaviour.
+- crown-battle-audio-mix.mjs; crown-battle-feedback.mjs;
+  crown-battle-feedback-realism.mjs; crown-battle-audio-design-browser.mjs;
+  crown-battle-audio-crowd-browser.mjs.
+- crown-battle-audio-browser.mjs: passed including non-silent downloaded WebM,
+  weapon banks/fallback, mobile fit and effect visibility. Initial concurrent
+  run timed out awaiting encoded video; isolated retry passed. Logs:
+  artifacts/battle-audio-recordings/browser-movement.log and
+  artifacts/battle-audio-recordings/browser-movement-retry.log.
+- crown-battle-feedback-browser.mjs: 752 units, 2,985 events, max eight voices,
+  feedback update median 0.1ms/p95 0.3ms; draw median 23.9ms/p95 47.1ms,
+  WebGL error 0. Rendering remains much slower than a previous run; these data
+  do NOT establish an overall FPS improvement. Log: feedback-movement.log in
+  artifacts/battle-audio-recordings/.
+- Vite production build passed with existing large-chunk warning; log:
+  artifacts/battle-audio-recordings/build-movement.log.
+
+Subjective listening has not been performed by the assistant. User should
+reload the live game and compare army approach, charge and distant combat.
+No historical unit balance or combat engine changes in this audio iteration.

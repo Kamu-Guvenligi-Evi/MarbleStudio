@@ -1,0 +1,71 @@
+15 Ekim 2026 — Antik orduların eksik savaşçı rolleri
+
+Eklenen beş kayıt:
+- Roma Cumhuriyeti: roman_triarius — Roma triarii mızraklısı.
+- Roma Cumhuriyeti: roman_veles — Roma velites ciritçisi.
+- Makedonya Krallığı: agrianian_javelineer — Agrian ciritçisi.
+- Makedonya Krallığı: thessalian_cavalry — Tesalya müttefik süvarisi.
+- Ahameniş İmparatorluğu: achaemenid_indian_archer — Pers hizmetinde Hint okçusu.
+
+Menüler: İtalyanlar / Roma, Yunanlar / Bizans, Farslar.
+Agrian ve Tesalya kayıtları Makedon ordusundaki hizmete göre yerleştirildi.
+Hint okçusu Pers hizmetindeki yardımcı birliktir; etnik Pers diye sunulmaz.
+Bunlar askerî roller ve tarihî topluluklardır; hepsi seçkin alay değildir.
+
+Araştırma ve donanım sınırları:
+1. Polybios, Tarihler 6.21–23:
+   https://sourcebooks.web.fordham.edu/ancient/polybius6.asp
+   Triarii kıdemli mızrak piyadesidir. Velites küçük kalkan ve cirit taşır;
+   kurt postu olası baş örtülerinden biridir. Üç tüy ve scutum ağır piyade
+   donanımına dayanır. Zincir zırh varlıklı asker seçeneğidir, herkese zorunlu değil.
+2. Arrianos, Anabasis 2.9, 3.13, 3.15:
+   https://www.gutenberg.org/files/46976/46976-h/46976-h.htm
+   Agrian ciritçileri Gaugamela'da tırpanlı savaş arabalarına karşı görev yapar.
+   Tesalya süvarileri İssos ve Gaugamela sol kanat anlatılarında yer alır.
+   Agrian giysisi, keçe başlık ve kalkan biçimi temsili rekonstrüksiyondur.
+3. Ksenophon, Atçılık 12:
+   https://www.gutenberg.org/files/1176/1176-h/1176-h.htm
+   Boiotia tipi miğfer ve göğüslük çağdaş Yunan süvari donanımı referansıdır;
+   bütün Tesalyalıların giydiği standart üniformanın kanıtı değildir.
+4. Herodotos, Tarihler 7.65:
+   https://classics.mit.edu/Herodotus/history.7.vii.html
+   Kserkses ordusundaki Hint askerlerinin pamuk giysileri, kamış yayları ve
+   demir uçlu kamış okları. Giysi kesimi, saç ve ok kılıfı temsili.
+5. Görsel bağlam, modern rekonstrüksiyon (birincil kanıt değil):
+   https://exarc.net/issue-2023-1/mm/2500th-anniversary-battle-plataea
+
+Görseller yazılı donanım kaynaklarıyla hazırlanan özgün Canvas çizimleridir.
+Kaynak görselleri oyuna kopyalanmadı. Kesinleşmeyen renk ve giysi ayrıntıları
+kartların açıklamalarında belirtildi. Oyun istatistikleri tarihî ölçüm değildir.
+Kısa menzilli ciritçiler mevcut dart fiziğini, Hint okçusu ok fiziğini kullanır.
+Tesalya atlısı mevcut süvari ve hücum davranışına bağlandı.
+
+Dosyalar:
+src/classical-support-units.js — kaynaklar, beş kayıt, savaş değerleri, profiller.
+src/classical-support-art.js — başlık, zırh, kalkan ve silah çizimleri.
+src/historical-catalogue.js, historical-art-profiles.js, historical-warrior-art.js — bağlantılar.
+tests/classical-support.mjs — hasar, mermi, savaş, animasyon ve menü testi.
+
+Tamamlanan hedefli doğrulama:
+- İki takımda beş rolün gerçek hasarı; cirit ve ok türleri; kayıt/yükleme geçti.
+- 10 adet 12'ye 12 savaş doğal sonuca ulaştı; en uzunu 24,2 simülasyon saniyesi.
+- 400 kare: boş veya kenardan kesilmiş çizim yok, beş farklı siluet.
+- PC 1366 px ve telefon 390 px: iki takıma ekleme/silme, savaşa geçiş ve
+  yeniden yükleme geçti. Tarayıcı hatası yok.
+- artifacts/classical-support/units.jpg gözle incelendi (24.346 bayt).
+  Bu yerel dosya boyutudur, internet trafiği ölçümü değildir.
+
+Genel doğrulama:
+- Katalog toplamı 274 kayıt (tarihî ve fantastik kayıtlar birlikte).
+- Denge testi: 274 farklı profil, varsayılan profile düşen kayıt yok;
+  mevcut 258 karşılaşma zaman aşımı olmadan tamamlandı.
+- Vite derlemesi tamamlandı (6,19 sn). Mevcut 500 kB paket boyutu uyarısı
+  sürüyor; PowerShell stderr çıktısını NativeCommandError olarak kaydetti.
+- Tüm katalog çizim taraması geçti (çıkış kodu 0): all-art.log.
+- Diğer motor ve komutan/preset sekmelerine kimlikler ve roller bildirildi.
+- Motor sekmesi tests/crown-battle-condition-roster.mjs içine bu beş kaydı
+  eklediğini ve toplam 16 birlik / 32 doğal bitişli savaşın geçtiğini bildirdi.
+  Testteki beş kimlik yerelde doğrulandı; test bu sekmede tekrar çalıştırılmadı.
+
+Çıktılar: artifacts/classical-support/{checks.json,full-battles.json,
+units.jpg,balance.log,all-art.log,build.log}.

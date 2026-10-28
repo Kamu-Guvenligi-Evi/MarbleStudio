@@ -1,0 +1,85 @@
+Yorgunluk ve moral — 15 Ekim 2026
+
+Amaç: Atlı okçunun başarılı vuruşlarla sınırsız kaçış sürdürememesi.
+Uygulama: src/crown-battle-condition.js; motor, mounted-skirmish, app ve CSS bağlantıları.
+
+Hareket, saldırı ve hücum yorgunluk biriktirir. Hareketli atlı atışı +4,
+diğer menzilli atış +0.9, yakın dövüş +1.3; hücum +8. Yorgunluk 30'dan
+sonra hız ve saldırı temposunu azaltır. Atlı okçu 80'de menzilli atışı
+bırakır, güvenli mesafede durup dinlenir; 40'ta tekrar atabilir.
+Sessiz ve hareketsiz dinlenme saniyede 3 azaltır; son saldırı/hasardan
+sonra 4 saniye beklenir. Emirler ve başarılı vuruşlar yorgunluğu sıfırlamaz.
+
+Hasar, kendi ordusundaki kayıplar ve kendi komutanının ölümü morali düşürür.
+Yakındaki yaşayan komutan toparlanmayı hızlandırır. Moral 20 altına düşünce
+8 saniyelik kısa geri çekilme; sonra en az 40 moral, yeniden tetikleme için
+20 saniye bekleme. Kullanıcının emri korunur. Teslim olma/firar sistemi değildir.
+İttifaktaki başka ordunun kaybı yanlış ordunun moraline yazılmaz.
+
+Arayüz: takım veya seçili birliklerin ortalama yorgunluk/morali.
+Dinlen emri saldırıyı durdurur; Serbest hücum tekrar savaştırır.
+Sinema modunda ek satır gizlidir. Masaüstü ve 390px mobilde taşma yok.
+
+Doğrulama: condition, condition-browser, behavior, crown-battle, frontline,
+screening, screening-browser, mounted-skirmish, mounted-battles,
+mounted-browser, historical-commander-tactics, historical-multi-army-tactics,
+historical-civilization-tactics geçti. Vite build geçti.
+Loglar: artifacts/condition/. Davranış testinin eski sonsuz mesafe koruma
+beklentisi, başlangıçta kaçıp ateş etme ve sonradan yorulma beklentisine çevrildi.
+Dayanıklı hedefli uzun takip testinde iki yön ve 30/60Hz'de piyade 47–53
+saniyede yetişti. Bu süre tüm gerçek savaşlar için garanti değildir.
+
+Deterministik motor ölçümü geçti; değerler ms/simülasyon adımı, ekran FPS'i değil:
+320 ayrık: medyan 0.56–0.85; 2000 ayrık: 4.26–4.29;
+1800 yoğun: 5.44–6.16; 4000 yoğun: 48.73–51.55;
+1800 tarihî yoğun: 30.47–32.18. Önce/sonra kontrollü karşılaştırma yapılmadı.
+Yoğun büyük ordularda performans sınırı sürüyor. Denge gerçek oyunla izlenmeli.
+
+Devam düzeltmeleri:
+- Menzilli atış maliyeti gerçek mermi/ok çıkışına taşındı. Dost birliğin
+  engellediği ve iptal edilen atışlar yorgunluk biriktirmiyor. Yakın dövüş
+  savuruşları isabet etmese de efor harcıyor; atlı okçunun yakın dövüşü +1.3.
+- Durum satırı manuel/otomatik dinlenenleri ve hareket ederek dinlenme
+  mesafesi arayanları ayrı sayıyor. Moral geri çekilmesi öncelikli gösteriliyor.
+- condition, behavior, physical-contact, mounted-battles, screening,
+  historical-commander-tactics, historical-multi-army-tactics ve
+  condition-browser bu düzeltmelerden sonra yeniden geçti.
+- condition-roster: 11 yeni birimin her iki takımda 16 kişilik orduları,
+  16 Romalıya karşı 22 doğal bitişli savaş; konum, moral ve yorgunluk sınırları
+  doğrulandı. Sonuçlar artifacts/condition/crown-battle-condition-roster.log.
+
+Komutan / toparlanma entegrasyonu:
+- Hata yeniden üretildi: Alparslan'ın düzen emrindeki %82 yorgun atlı okçu,
+  güvenli mesafede 14 saniye yürüyerek %84.7'ye çıktı; dinlenmeye geçemiyordu.
+- Otomatik komutan hareketi, toparlanan atlı okçuda yerel dinlenme/kaçınmaya
+  geçici olarak bırakılıyor. Ordu üyeliği ve plan silinmiyor; %40 eşiğinde
+  normal komutan yönetimi sürüyor. Doğrudan oyuncu hareket emri öncelikli.
+- condition-tactics: iki takım, 30/60 Hz; güvenli yerde durma/toparlanma,
+  komutan planına dönüş, yaklaşan düşmandan mesafe alma, oyuncunun hareket
+  emrini koruma ve 8 saniyelik moral geri çekilmesinden plana dönüş geçti.
+- condition, turan-horse-archers (12 karma süvari savaşı), commander-tactics,
+  multi-army-tactics, mounted-battles ve screening yeniden geçti.
+- Masaüstü/mobil condition-browser kontrolleri ve Vite derlemesi geçti.
+- Son katalog entegrasyonu: roman_triarius, roman_veles, agrianian_javelineer,
+  thessalian_cavalry ve achaemenid_indian_archer koşul testine eklendi.
+  condition-roster artık 16 birlik / 32 tam savaş: tümü doğal bitiş,
+  geçerli konum/yorgunluk/moral değerleri. Güncel log aynı dosyada.
+- Batı sınır birlikleri entegrasyonu: flemish_goedendag, frankish_axeman,
+  frankish_angon, sarmatian_noble_lancer ve spanish_rodelero eklendi.
+  Güncel condition-roster: 21 birlik / 42 doğal bitişli savaş geçti;
+  her iki tarafta konum ve kondisyon değerleri doğrulandı.
+- İmparatorluk yardımcı birlikleri: egypt_achaemenid_marine,
+  lycian_cornel_archer, bactrian_short_spearman, late_roman_plumbatarius ve
+  late_roman_slinger eklendi. condition-roster: 26 birlik / 52 doğal bitişli
+  savaş geçti; iki takımda konum ve 0–100 yorgunluk/moral aralıkları geçerli.
+- Ahameniş kontenjanları: paphlagonian_short_spearman, colchian_hide_spearman,
+  libyan_fire_javelineer ve aithiopian_palm_archer koşul testine eklendi.
+  Güncel condition-roster: 30 birlik / 60 doğal bitişli savaş; iki takımda
+  konum, yorgunluk ve moral kontrolleri geçti. Log aynı dosyada güncellendi.
+- Komutan takviyeleri: caesar_balearic_slinger, macedon_prodromos,
+  qin_bow_cavalry ve Darius'a bağlanan mevcut achaemenid_spear_cavalry
+  kontrol listesine alındı. Güncel condition-roster 34 birlik / 68 doğal
+  bitişli savaş: konum, yorgunluk/moral kontrolleri geçti. condition ve
+  condition-tactics tekrar geçti; Qin atlı okçusu genel yorgunluk/hız ve
+  dinlenirken atış yapmama kontrollerine dahil. Hazır orduların görsel/preset
+  testleri diğer sekmenin commander-reinforcements notunda.

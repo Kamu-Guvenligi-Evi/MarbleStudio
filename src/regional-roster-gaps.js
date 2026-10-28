@@ -1,0 +1,40 @@
+// Equipment-based reconstructions; these names do not imply standing elite regiments.
+const make = (id, name, faction, period, kind, role, source, note, visualNote, combat) => ({
+  id, name, faction, period, kind, role, source, note: `${period} · ${note}`, visualNote, combat,
+  color: '#927959', credit: 'Kaynak donanımından özgün oyun çizimi; giysi tamamlamaları ve renkler temsili',
+  sources: [{ title: `${name} — tarihî dayanak`, url: source }],
+});
+export const REGIONAL_ROSTER_GAPS = [
+  make('thracian_rhomphaia_warrior', 'Trak rhomphaia piyadesi', 'Traklar', 'MÖ 4–3. yy', 'spear', 'İki elle uzun silah kullanan piyade',
+    'https://naim.bg/issuesFiles/_HEROS_HEPHAISTOS.pdf',
+    'E. Paunov, Heros Hephaistos (2005): Kochan rhomphaia örneği 128 cm uzunluğunda, düz ve tek ağızlıdır; uzun kabzasıyla iki elle kullanılan saplama silahı olarak değerlendirilir. Özel alay adı değildir.',
+    'Uzun kabzalı düz demir ağız, bronz Frig tipi miğfer, kısa kollu tunik ve baldır korumaları. Miğfer ve giysi, farklı Trak buluntularından yorumlandı; tek bir buluntu takımını temsil etmez.',
+    { hp: 137, damage: 34, reach: 32, cooldown: 1.45, speed: 25, armor: .14 }),
+  make('maori_patu_warrior', 'Māori patu paraoa savaşçısı', 'Aotearoa / Māori toplulukları', '18. yy', 'sword', 'Kısa patu ile yakın dövüş piyadesi',
+    'https://web.prm.ox.ac.uk/cookvoyages/index.php/en/the-objects/102-objects/new-zealand/337-1887-1-387.html',
+    'Pitt Rivers Museum Cook seferleri koleksiyonundaki Banks bağlantılı patu paraoa, balina kemiğinden kısa el silahıdır. Donanım temelli savaşçı rolüdür; bağımsız seçkin alay iddiası taşımaz.',
+    'Geniş ve yassı, açık renk balina kemiği patu, dar kabza ve bilek bağı. Keten lifli bel giysisi ve toplu saç temsili; taiaha veya yeşil taş mere ile aynı silah değildir.',
+    { hp: 117, damage: 24, reach: 17, cooldown: .8, speed: 30, armor: .03 }),
+  make('hawaiian_slinger', 'Hawaiili māʻa sapancısı', 'Hawaiʻi şeflikleri', 'Ateşli silahlar öncesi gelenek', 'ranged', 'Taş atan hafif piyade',
+    'https://www.hawaiialive.org/resource/mea-kaua',
+    'Bishop Museum Hawaiʻi Alive, Kamakau anlatısında Māui ve Kaeleku sapancılarının becerisini aktarır. Sayfadaki sapan görseli modern rekonstrüksiyondur; tarihî üniforma kanıtı olarak kullanılmadı.',
+    'İki kordonlu ve taş yuvalı māʻa, belde taş kesesi, sade malo bel örtüsü ve çıplak ayak. Şeflere özgü tüylü miğfer kullanılmadı; giysi ayrıntıları yorumdur.',
+    { hp: 88, damage: 22, reach: 158, cooldown: 1.75, speed: 29, armor: .02, projectile: 'sling' }),
+  make('irish_kern_archer', 'İrlanda kern okçusu', 'İrlanda Gal lordlukları', '16. yy sonu', 'ranged', 'Hafif yaya okçu',
+    'https://celt.ucc.ie/published/E590000-001.html',
+    'John Dymmok, A Treatise of Ireland: kern donanımı arasında yay ve dikenli uçlu ok demeti sayar. Dış gözlemcinin dönem anlatısıdır; bütün kernlerin okçu olduğunu veya standart üniforma kullandığını göstermez.',
+    'Yay, belde ok demeti, kısa açık renk léine, omuz örtüsü ve uzun perçem. Giysi renkleri ve kesimi temsili; mızraklı kernin silahı değiştirilmiş kopyası yerine okçu duruşu kullanıldı.',
+    { hp: 92, damage: 21, reach: 184, cooldown: 1.65, speed: 28, armor: .04 }),
+  make('dacian_shield_spearman', 'Dak kalkanlı mızraklısı', 'Daklar', 'MS 1–2. yy', 'spear', 'Kalkanlı hat piyadesi',
+    'https://arts.st-andrews.ac.uk/trajans-column/the-project/the-human-figure-types/',
+    'St Andrews Trajan Sütunu incelemesindeki Dak figürlerinin oval kalkanları ve saplı silah tutuşlarına dayalı mızraklı rekonstrüksiyon. Kayıp silah parçaları ve Roma tasvir geleneği nedeniyle ayrıntılar kesin üniforma değildir.',
+    'Oval kalkan, uzun kollu kemerli ve yanları yırtmaçlı tunik, pantolon, kapalı ayakkabı, pelerin ve yumuşak başlık. Kalkan bezemesi sadeleştirilmiş, renkler temsili.',
+    { hp: 142, damage: 23, reach: 35, cooldown: 1.3, speed: 23, armor: .18 }),
+];
+export const REGIONAL_GAP_PROFILES = {
+  thracian_rhomphaia_warrior: { head: 'rggPhrygianHelm', armor: 'rggThracianTunic', weapon: 'rggRhomphaia', cloth: '#a45d4b', skin: '#c69a76', bareLegs: true },
+  maori_patu_warrior: { head: 'rggMaoriKnot', armor: 'rggFlaxWrap', weapon: 'rggPatu', cloth: '#a08b61', skin: '#a87956', bareLegs: true, bareFeet: true },
+  hawaiian_slinger: { head: 'rggHawaiianHair', armor: 'rggMalo', weapon: 'rggSling', cloth: '#c5a578', skin: '#ad7953', bareLegs: true, bareFeet: true },
+  irish_kern_archer: { head: 'rggGlibHair', armor: 'rggLeineMantle', weapon: 'bow', cloth: '#c3ad70', skin: '#c6a17d', bareLegs: true },
+  dacian_shield_spearman: { head: 'rggDacianCap', armor: 'rggDacianTunic', weapon: 'rggSpear', shield: 'rggOvalShield', cloth: '#a7a08a', skin: '#b98f6b' },
+};

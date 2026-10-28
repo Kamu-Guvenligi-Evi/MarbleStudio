@@ -1,0 +1,41 @@
+Taç Muharebesi — savaş mekaniği incelemesi, 16 Ekim 2026
+
+Doğrulanan ve düzeltilen sorunlar
+
+1. Dost asker arkasındaki tüfekçiler atış açısı aramıyordu.
+   Yeniçeri 10 saniyelik sabit senaryoda 21 atışı iptal etti, hiç ateş edemedi.
+   Arbaletçiler için mevcut sınırlı yana adım davranışı bullet kullanan yaya
+   birliklere de uygulandı. Oyuncunun açık emirleri önceliğini koruyor.
+   Dosya: src/crown-battle-screening.js
+
+2. Mevzi tutan birlikler duvar arkasındaki yakın hedefe takılıyordu.
+   Kale haritasında menzilde ve açıkta başka düşman bulunmasına rağmen
+   yeniçeri 10 saniye boyunca ateş etmedi. Tutulan mevziden vurulamayan
+   hedefler seçimden ve eski hedefi koruma kontrolünden çıkarıldı.
+   Dosya: src/crown-battle.js
+
+Doğrulama
+
+- tests/crown-battle-fire-discipline.mjs: 32 senaryo. Düzeltmeden önce
+  4 başarılı / 28 başarısız; düzeltmeden sonra 32 başarılı / 0 başarısız.
+  Yeniçeri ve Ming tüfekçisi; iki takım; 30/60 Hz; üst/orta/alt konumlar;
+  dost askerin zarar görmemesi, sınırlı yana adım, açık tut/saldır emirlerinin
+  korunması; tüfekçi ve okçu için duvar arkasındaki hedefi değiştirme.
+- Mevcut 15 test betiği geçti: crown-battle, behavior, charge, condition,
+  physical-contact, projectiles, removal, screening, outcome-separation,
+  frontline, mounted-battles, crossbow-fire, fortress, tactics,
+  formation-movement (tam adlarda crown-battle öneki bulunur).
+- Kale testi başlangıçta eski geniş harita ölçüleri nedeniyle başarısızdı.
+  İki motor düzeltmesi yükleme sırasında geri alınarak aynı hata doğrulandı.
+  tests/crown-battle-fortress.mjs artık createBattleBounds(true) kullanıyor;
+  köprü kontrol koordinatları da güncel ölçülerden hesaplanıyor. Geçiş,
+  engeller ve karma orduların çatışmaya ulaşma kontrolleri geçti.
+- Vite üretim derlemesi başarılı. 500 kB üzeri paket boyutu uyarısı var.
+- Ayrıntılı yerel çıktılar: artifacts/mechanics-audit/
+
+Kapsam ve sınırlar
+
+Bu tur hedef seçimi, atış güvenliği ve mevcut savaş regresyonlarını kapsar.
+Tarayıcıda görsel kontrol ve kapsamlı birlik dengesi/performance ölçümü
+yapılmadı. Sonraki incelemede kalabalık ordu performansı ve farklı birlik
+eşleşmelerinin dengesi ayrıca ölçülmeli; bunlar bu tur doğrulanmış hata değil.

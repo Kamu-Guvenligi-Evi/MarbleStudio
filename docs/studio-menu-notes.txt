@@ -1,0 +1,31 @@
+2026-10-19 — Taç Savaşı restored to the studio menu at the user's request.
+The shared menu now has 15 destinations. Taç Savaşı opens the existing
+/crown-battle.html game, retaining its army workshop and studio return link.
+Historical Armies remains accessible from the game. No game data was moved.
+Validation: Vite production build passed. Local Chrome checks passed at
+1440px and 390px: studio -> game -> army workshop -> game -> studio.
+The shared link also appeared in Top Duellosu; no JavaScript errors.
+Logs: artifacts/studio-crown-build.log and artifacts/studio-crown-smoke.log.
+Remote browser requests were blocked during these checks.
+
+2026-10-14 — Studio menu (historical notes; separation superseded above)
+
+All 14 studio destinations use the shared navigation. Goal Arena, Ball
+Multiplier, Bounce Waves and Rock Paper Scissors now include the menu,
+reuse their existing toolbar and retain one channel selector each.
+
+User requested Crown Battle and Historical Armies remain separate from
+the studio. Neither appears in the studio menu. Their existing standalone
+pages and mutual links are retained: /crown-battle.html and
+/historical-armies.html. Source files and saved army plans are preserved.
+
+Navigation regression: tests/studio-navigation-browser.mjs, TEST_ORIGIN
+selects the local server. Checks game links, main modes, desktop/mobile,
+toolbar controls, video renderer isolation and separate army pages.
+
+Validation: Vite build passed. Browser checks passed through main modes,
+controls, mobile selection and video renderer isolation on port 5180.
+The final army-link assertion needed .first() because Crown Battle has
+two valid links to the army editor; the corrected army segment passed
+separately. Use /index.html?mode=... for direct-mode checks: the production
+server redirects / to /index.html without preserving the query string.

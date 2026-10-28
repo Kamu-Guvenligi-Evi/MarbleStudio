@@ -1,0 +1,54 @@
+﻿DÜZELTME: Kullanıcı bu revizyonu bulanık/kaba buldu. Aşağıdaki tamamlanma ve runtime bilgileri eski durumdur; güncel sonuç için middle-earth-sharpness-2026-10-15.txt dosyasına bakın.
+
+Orta Dünya / orta ayrıntılı çizim revizyonu — 15 Ekim 2026
+
+Gerekçe: Kullanıcı önceki gerçekçi seti oyunla uyumsuz, son üç düz kahramanı
+ise fazla basit buldu. Hedef; belirgin anatomi, karaktere özgü donanım, temiz
+kontur ve az sayıda renk/gölge düzeyi. Fotoğraf dokusu ve yoğun ışık efekti yok.
+
+Kapsam: 36 Orta Dünya karakteri, altı pozlu yerel atlas ve portreler.
+Kaynaklar: src/middle-earth-stylized-base.js, middle-earth-stylized-expansion.js.
+Araçlar: scripts/preview-middle-earth-balanced-art.mjs,
+scripts/bake-middle-earth-balanced-art.mjs, apply-middle-earth-balanced-art.mjs.
+Entegrasyon: middle-earth-art.js, painted-art.js, visual-profiles.js, units.js.
+Renderer/cache/app ve savaş motoru ana sekmeye ait; bu çalışmada değiştirilmiyor.
+
+Ölçek hedefleri before-balanced-style/size-checks.json yedeğinde korunuyor.
+Birlik kimlikleri, roller, donanım anahtarları ve savaş istatistikleri değişmeyecek.
+Kaynak/atlas ölçüleri büyütülmüyor. FPS artışı ölçülmeden iddia edilmeyecek.
+Görseller yerelde hazırlanıyor; dış görsel indirme/üretim servisi kullanılmıyor.
+
+Durum: Tamamlandı. 36 birlik için yerel altı pozlu atlas ve portreler uygulandı.
+Tarihî Viking ve Kıpçak çizimleriyle yan yana görsel kontrol yapıldı. Kaynaklar
+temiz kontur, iki renk/gölge düzeyi, ayırt edilebilir donanım ve yüz detayları kullanıyor.
+Elrond/Haldir dış hatları ayrıştırıldı; Dáin'in bineği daraltıldı. Koçlu cüce miğferli.
+Tüm ME runtime yüzeyleri diğer askerler gibi 240x228; atlaslar 1536x1024 kaldı.
+Değişen varlıklar: public/warrior-sprites/middle-earth/{birlik}.webp ve
+{birlik}-portrait.webp (36+36). Diğer medeniyet görselleri değiştirilmedi.
+
+Doğrulama:
+- Bake: 36 atlas + 36 portre, kaynak siluetlerinde kesilme yok.
+- apply-middle-earth-balanced-art.mjs: kimlik, rol, savaş istatistikleri ve
+  36 yerel portre yolu doğrulandı; yalnız görsel ölçek/metadata değişti.
+- tests/middle-earth.mjs PASS: 36 özgün siluet, 16 kahraman, 1728 poz,
+  iki takım animasyonu, kayıt/yükleme/başlatma, PC ve mobil katalog, kırmızı
+  kahraman kaldırma; browser hatası/dış ağ isteği yok. İçerdiği combat testi de PASS.
+- tests/middle-earth-size.mjs PASS: 36 tarihî yaya/atlı karşılaştırması,
+  cüce/dev oranları, yüklenemeyen atlaslarda native fallback ölçek uyumu.
+- tests/middle-earth-revision-browser.mjs PASS: 36 atlas, 12 dev seçme testi,
+  ekran dışında eleme, mobil çizim ve atlas sınırı. Test 24 yerine 36 atlası ve
+  240x228 yüzeye orantılı tarama alanını kontrol edecek biçimde güncellendi.
+- Vite build PASS (7.03s); mevcut 500 kB paket büyüklüğü uyarısı sürüyor.
+- İlk boyut çalışmasında SpriteLibrary gölge payı düzeltildi. Bir tarayıcı açılışı
+  30sn timeout verdi; sıralı temiz tekrar geçti. Test tarayıcıları kapatıldı.
+
+Kanıt: artifacts/middle-earth/{checks.json,size-checks.json,revision-checks.json,
+size-lineup.jpg,balanced-source-preview.jpg,balanced-full-test.log,balanced-build.log}.
+Boyut örnekleri (oyun birimi): Viking 34.7, Aragorn 33.6, Legolas 36, Gimli 23,
+Kıpçak 54, koçlu cüce 38, Dáin 39, Balrog 116.9, Ent 108, Mûmakil 148.9.
+Sınırlamalar: Altı ana poz sekiz animasyon karesine eşleniyor; iskelet animasyonu
+değil. Boyut ölçümü silah/miğfer ve kenar gölgesini de içerir. Sanatsal beğeni
+kullanıcının oyun içi değerlendirmesine açık. Bu revizyon için FPS kazancı ölçülmedi.
+Ana oyun sekmesine değişen kapsam ve test sonuçları bildirildi.
+Önceki çalışma yedeği: artifacts/middle-earth/before-balanced-style/.
+

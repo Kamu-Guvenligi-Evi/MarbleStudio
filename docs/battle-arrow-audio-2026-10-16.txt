@@ -1,0 +1,29 @@
+Ok sesi revizyonu - 2026-10-16
+
+Kullanici: ok atisi veya isabet sesi kotu, degistir.
+Yay: mevcut yerel kaynak 160 ms kuru salim profiline alindi; kuyruk,
+bas govdesi ve tiz azaltildi. Gain .28 -> .23.
+Ok/arbalet: projectileKind feedback uzerinden sese aktariliyor. Zirh ve
+kumas icin ayri hazirlanan 3'er varyant, 115/145 ms; hafif mermi agirliginin
+uyguladigi yapay tizlestirme kaldirildi. Yakindovus ve kursun profilleri ayni.
+Hazirlama unlock sirasinda; olay basina ekstra filtre/katman/indirme yok.
+Sekiz ses siniri, ortak isabet cooldown'u ve durdurma davranisi korunuyor.
+Sesi dene: ilk uc tik yay / kumas ok isabeti / zirh ok isabeti.
+
+Dogrulama: audio-mix (10.000 olay), contact-audio-browser (ok, bolt,
+kursun, malzeme, varyant, sessize alma, eksik dosya), audio-design-browser
+(7 onizleme, sinyal/kuyruk/headroom, worker esligi) PASS.
+Isitme yoluyla oznel gercekcilik onayi yapilmadi; kullanici oyundan dinleyebilir.
+
+Takip: kullanici boncuk benzeri sesi okcular arbaletcilere vururken duyuyor.
+Zirhli arbaletciler armor temasina yonleniyor; onceki kisa metal kaynak
+tamamen kaldirildi (yalniz ok/bolt icin). Yereldeki Kenney CC0 arsivinden
+impactSoft_heavy_000/001/002.ogg eklendi, yaklasik 20 KB; indirme yok.
+Yeni ok profilleri: zirh 180 ms, kumas 200 ms, 4/5 ms yumusak baslangic.
+Eksik ok dosyasinda eski punch sesine donus yok, temas sessiz kalir.
+Contact-audio-browser PASS: metal dosyalari eksikken ok zirh sesi calisir;
+ok kaynaklari eksikken eski tik sesine donmez; 8 ses/cooldown sinirlari korunur.
+Ek dogrulama PASS: gercek ok ucusu ile Norvec okcusu -> Ceneviz zirhli
+arbaletci ve Hacli hafif arbaletci, isabet sonrasi dogru ses malzemesi.
+Audio-mix 10.000 olay ve audio-design-browser (7 onizleme, worker esligi,
+ses seviyesi/kuyruk) tekrar PASS. Oznel dinleme onayi yapilmadi.

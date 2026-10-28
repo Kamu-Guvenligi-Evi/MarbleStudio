@@ -290,6 +290,98 @@
       [
         "Ekvador",
         "ec"
+      ],
+      [
+        "Küba",
+        "cu"
+      ],
+      [
+        "Jamaika",
+        "jm"
+      ],
+      [
+        "Kosta Rika",
+        "cr"
+      ],
+      [
+        "Panama",
+        "pa"
+      ],
+      [
+        "Bolivya",
+        "bo"
+      ],
+      [
+        "Paraguay",
+        "py"
+      ],
+      [
+        "Venezuela",
+        "ve"
+      ],
+      [
+        "Kenya",
+        "ke"
+      ],
+      [
+        "Gana",
+        "gh"
+      ],
+      [
+        "Etiyopya",
+        "et"
+      ],
+      [
+        "Tanzanya",
+        "tz"
+      ],
+      [
+        "Kamerun",
+        "cm"
+      ],
+      [
+        "Fildişi Sahili",
+        "ci"
+      ],
+      [
+        "Estonya",
+        "ee"
+      ],
+      [
+        "Letonya",
+        "lv"
+      ],
+      [
+        "Litvanya",
+        "lt"
+      ],
+      [
+        "Slovakya",
+        "sk"
+      ],
+      [
+        "Slovenya",
+        "si"
+      ],
+      [
+        "Nepal",
+        "np"
+      ],
+      [
+        "Filipinler",
+        "ph"
+      ],
+      [
+        "Singapur",
+        "sg"
+      ],
+      [
+        "Sri Lanka",
+        "lk"
+      ],
+      [
+        "Maldivler",
+        "mv"
       ]
     ]
   },
@@ -874,6 +966,18 @@
       [
         "Zendaya",
         "Zendaya"
+      ],
+      [
+        "Tarık Akan",
+        "Tarık Akan"
+      ],
+      [
+        "Türkan Şoray",
+        "Türkan Şoray"
+      ],
+      [
+        "Hülya Koçyiğit",
+        "Hülya Koçyiğit"
       ]
     ]
   },
@@ -972,6 +1076,186 @@
       [
         "Mao Zedong",
         "Mao Zedong"
+      ],
+      [
+        "İsmet İnönü",
+        "İsmet İnönü"
+      ],
+      [
+        "Bülent Ecevit",
+        "Bülent Ecevit"
+      ],
+      [
+        "Süleyman Demirel",
+        "Süleyman Demirel"
+      ],
+      [
+        "Turgut Özal",
+        "Turgut Özal"
+      ],
+      [
+        "Necmettin Erbakan",
+        "Necmettin Erbakan"
+      ],
+      [
+        "Adnan Menderes",
+        "Adnan Menderes"
+      ],
+      [
+        "Deniz Baykal",
+        "Deniz Baykal"
+      ],
+      [
+        "Tansu Çiller",
+        "Tansu Çiller"
+      ],
+      [
+        "Ahmet Davutoğlu",
+        "Ahmet Davutoğlu"
+      ],
+      [
+        "Ali Babacan",
+        "Ali Babacan"
+      ],
+      [
+        "Fatih Erbakan",
+        "Fatih Erbakan"
+      ],
+      [
+        "Ümit Özdağ",
+        "Ümit Özdağ"
+      ],
+      [
+        "Muharrem İnce",
+        "Muharrem İnce"
+      ],
+      [
+        "Winston Churchill",
+        "Winston Churchill"
+      ],
+      [
+        "Margaret Thatcher",
+        "Margaret Thatcher"
+      ],
+      [
+        "Charles de Gaulle",
+        "Charles de Gaulle"
+      ],
+      [
+        "Mihail Gorbaçov",
+        "Mikhail Gorbachev"
+      ],
+      [
+        "Vladimir Lenin",
+        "Vladimir Lenin"
+      ],
+      [
+        "Josef Stalin",
+        "Joseph Stalin"
+      ],
+      [
+        "Fidel Castro",
+        "Fidel Castro"
+      ],
+      [
+        "John F. Kennedy",
+        "John F. Kennedy"
+      ],
+      [
+        "Ronald Reagan",
+        "Ronald Reagan"
+      ],
+      [
+        "Bill Clinton",
+        "Bill Clinton"
+      ],
+      [
+        "George W. Bush",
+        "George W. Bush"
+      ],
+      [
+        "Shinzo Abe",
+        "Shinzo Abe"
+      ],
+      [
+        "Jacinda Ardern",
+        "Jacinda Ardern"
+      ],
+      [
+        "Justin Trudeau",
+        "Justin Trudeau"
+      ],
+      [
+        "Benazir Butto",
+        "Benazir Bhutto"
+      ],
+      [
+        "İndira Gandhi",
+        "Indira Gandhi"
+      ],
+      [
+        "Abdullah Gül",
+        "Abdullah Gül"
+      ],
+      [
+        "Ahmet Necdet Sezer",
+        "Ahmet Necdet Sezer"
+      ],
+      [
+        "Cemal Gürsel",
+        "Cemal Gürsel"
+      ],
+      [
+        "Cevdet Sunay",
+        "Cevdet Sunay"
+      ],
+      [
+        "Ellen Johnson Sirleaf",
+        "Ellen Johnson Sirleaf"
+      ],
+      [
+        "Kwame Nkrumah",
+        "Kwame Nkrumah"
+      ],
+      [
+        "Julius Nyerere",
+        "Julius Nyerere"
+      ],
+      [
+        "Patrice Lumumba",
+        "Patrice Lumumba"
+      ],
+      [
+        "Lee Kuan Yew",
+        "Lee Kuan Yew"
+      ],
+      [
+        "Sukarno",
+        "Sukarno"
+      ],
+      [
+        "Muhammed Ali Cinnah",
+        "Muhammad Ali Jinnah"
+      ],
+      [
+        "Cevahirlal Nehru",
+        "Jawaharlal Nehru"
+      ],
+      [
+        "Golda Meir",
+        "Golda Meir"
+      ],
+      [
+        "Yaser Arafat",
+        "Yasser Arafat"
+      ],
+      [
+        "Cemal Abdünnasır",
+        "Gamal Abdel Nasser"
+      ],
+      [
+        "Thomas Sankara",
+        "Thomas Sankara"
       ]
     ]
   },
@@ -1042,6 +1326,102 @@
       [
         "Timur İmparatorluğu",
         "Timurid Empire"
+      ],
+      [
+        "Fransız İmparatorluğu",
+        "First French Empire"
+      ],
+      [
+        "İspanyol İmparatorluğu",
+        "Spanish Empire"
+      ],
+      [
+        "Portekiz İmparatorluğu",
+        "Portuguese Empire"
+      ],
+      [
+        "Brezilya İmparatorluğu",
+        "Empire of Brazil"
+      ],
+      [
+        "Avusturya İmparatorluğu",
+        "Austrian Empire"
+      ],
+      [
+        "Japon İmparatorluğu",
+        "Empire of Japan"
+      ],
+      [
+        "Etiyopya İmparatorluğu",
+        "Ethiopian Empire"
+      ],
+      [
+        "Kore İmparatorluğu",
+        "Korean Empire"
+      ],
+      [
+        "Kutsal Roma İmparatorluğu",
+        "Holy Roman Empire"
+      ],
+      [
+        "İsveç İmparatorluğu",
+        "Swedish Empire"
+      ],
+      [
+        "Danimarka Sömürge İmparatorluğu",
+        "Danish colonial empire"
+      ],
+      [
+        "Hollanda Sömürge İmparatorluğu",
+        "Dutch Empire"
+      ],
+      [
+        "Belçika Sömürge İmparatorluğu",
+        "Belgian colonial empire"
+      ],
+      [
+        "İtalyan Sömürge İmparatorluğu",
+        "Italian Empire"
+      ],
+      [
+        "İkinci Fransız İmparatorluğu",
+        "Second French Empire"
+      ],
+      [
+        "Birinci Meksika İmparatorluğu",
+        "First Mexican Empire"
+      ],
+      [
+        "İkinci Meksika İmparatorluğu",
+        "Second Mexican Empire"
+      ],
+      [
+        "Sih İmparatorluğu",
+        "Sikh Empire"
+      ],
+      [
+        "Sasani İmparatorluğu",
+        "Sasanian Empire"
+      ],
+      [
+        "Abbasi Halifeliği",
+        "Abbasid Caliphate"
+      ],
+      [
+        "Emevi Halifeliği",
+        "Umayyad Caliphate"
+      ],
+      [
+        "Fatımi Halifeliği",
+        "Fatimid Caliphate"
+      ],
+      [
+        "Sovyetler Birliği",
+        "Soviet Union"
+      ],
+      [
+        "Nazi Almanyası (sansürlü)",
+        "Nazi Germany"
       ]
     ]
   },
@@ -1356,6 +1736,66 @@
       [
         "Michael Schumacher",
         "Michael Schumacher"
+      ],
+      [
+        "Halil Mutlu",
+        "Halil Mutlu"
+      ],
+      [
+        "Neslihan Demir",
+        "Neslihan Demir"
+      ],
+      [
+        "Eda Erdem",
+        "Eda Erdem"
+      ],
+      [
+        "Vargas",
+        "Melissa Vargas"
+      ],
+      [
+        "Busenaz Sürmeneli",
+        "Busenaz Sürmeneli"
+      ],
+      [
+        "Buse Naz Çakıroğlu",
+        "Buse Naz Çakıroğlu"
+      ],
+      [
+        "Yasemin Adar",
+        "Yasemin Adar"
+      ],
+      [
+        "Pelé",
+        "Pelé"
+      ],
+      [
+        "Diego Maradona",
+        "Diego Maradona"
+      ],
+      [
+        "Zinedine Zidane",
+        "Zinedine Zidane"
+      ],
+      [
+        "Ronaldinho",
+        "Ronaldinho"
+      ],
+      [
+        "Simone Biles",
+        "Simone Biles"
+      ],
+      [
+        "Michael Phelps",
+        "Michael Phelps"
+      ],
+      [
+        "Naomi Osaka",
+        "Naomi Osaka"
+      ],
+      [
+        "Yuzuru Hanyu",
+        "Yuzuru Hanyu"
       ]
     ]
   },
@@ -1426,6 +1866,366 @@
       [
         "İbn Sina",
         "Avicenna"
+      ],
+      [
+        "Osman Gazi",
+        "Osman I"
+      ],
+      [
+        "Orhan Gazi",
+        "Orhan"
+      ],
+      [
+        "Yıldırım Bayezid",
+        "Bayezid I"
+      ],
+      [
+        "Yavuz Sultan Selim",
+        "Selim I"
+      ],
+      [
+        "II. Abdülhamid",
+        "Abdul Hamid II"
+      ],
+      [
+        "Alp Arslan",
+        "Alp Arslan"
+      ],
+      [
+        "Melikşah",
+        "Malik-Shah I"
+      ],
+      [
+        "Timur",
+        "Timur"
+      ],
+      [
+        "Babür Şah",
+        "Babur"
+      ],
+      [
+        "Ekber Şah",
+        "Akbar"
+      ],
+      [
+        "Şah İsmail",
+        "Ismail I"
+      ],
+      [
+        "Selahaddin Eyyubi",
+        "Saladin"
+      ],
+      [
+        "Barbaros Hayreddin Paşa",
+        "Hayreddin Barbarossa"
+      ],
+      [
+        "Piri Reis",
+        "Piri Reis"
+      ],
+      [
+        "Mimar Sinan",
+        "Mimar Sinan"
+      ],
+      [
+        "Sabiha Gökçen",
+        "Sabiha Gökçen"
+      ],
+      [
+        "Halide Edib Adıvar",
+        "Halide Edib Adıvar"
+      ],
+      [
+        "Nene Hatun",
+        "Nene Hatun"
+      ],
+      [
+        "Mevlânâ",
+        "Rumi"
+      ],
+      [
+        "Yunus Emre",
+        "Yunus Emre"
+      ],
+      [
+        "Hacı Bektaş Veli",
+        "Haji Bektash Veli"
+      ],
+      [
+        "İbn Haldun",
+        "Ibn Khaldun"
+      ],
+      [
+        "Farabi",
+        "Al-Farabi"
+      ],
+      [
+        "Harezmi",
+        "Al-Khwarizmi"
+      ],
+      [
+        "Biruni",
+        "Al-Biruni"
+      ],
+      [
+        "Uluğ Bey",
+        "Ulugh Beg"
+      ],
+      [
+        "Ömer Hayyam",
+        "Omar Khayyam"
+      ],
+      [
+        "İbn Rüşd",
+        "Averroes"
+      ],
+      [
+        "Sokrates",
+        "Socrates"
+      ],
+      [
+        "Platon",
+        "Plato"
+      ],
+      [
+        "Aristoteles",
+        "Aristotle"
+      ],
+      [
+        "Arşimet",
+        "Archimedes"
+      ],
+      [
+        "Konfüçyüs",
+        "Confucius"
+      ],
+      [
+        "Sun Tzu",
+        "Sun Tzu"
+      ],
+      [
+        "Augustus",
+        "Augustus"
+      ],
+      [
+        "Marcus Aurelius",
+        "Marcus Aurelius"
+      ],
+      [
+        "Hannibal",
+        "Hannibal"
+      ],
+      [
+        "II. Ramses",
+        "Ramesses II"
+      ],
+      [
+        "Hatşepsut",
+        "Hatshepsut"
+      ],
+      [
+        "Büyük Kiros",
+        "Cyrus the Great"
+      ],
+      [
+        "Aşoka",
+        "Ashoka"
+      ],
+      [
+        "Qin Shi Huang",
+        "Qin Shi Huang"
+      ],
+      [
+        "Wu Zetian",
+        "Wu Zetian"
+      ],
+      [
+        "Kubilay Han",
+        "Kublai Khan"
+      ],
+      [
+        "Jeanne d’Arc",
+        "Joan of Arc"
+      ],
+      [
+        "I. Elizabeth",
+        "Elizabeth I"
+      ],
+      [
+        "Büyük Katerina",
+        "Catherine the Great"
+      ],
+      [
+        "Büyük Petro",
+        "Peter the Great"
+      ],
+      [
+        "George Washington",
+        "George Washington"
+      ],
+      [
+        "Simón Bolívar",
+        "Simón Bolívar"
+      ],
+      [
+        "Mahatma Gandhi",
+        "Mahatma Gandhi"
+      ],
+      [
+        "Nelson Mandela",
+        "Nelson Mandela"
+      ],
+      [
+        "Martin Luther King Jr.",
+        "Martin Luther King Jr."
+      ],
+      [
+        "Rosa Parks",
+        "Rosa Parks"
+      ],
+      [
+        "Harriet Tubman",
+        "Harriet Tubman"
+      ],
+      [
+        "Frederick Douglass",
+        "Frederick Douglass"
+      ],
+      [
+        "Galileo Galilei",
+        "Galileo Galilei"
+      ],
+      [
+        "Johannes Kepler",
+        "Johannes Kepler"
+      ],
+      [
+        "Charles Darwin",
+        "Charles Darwin"
+      ],
+      [
+        "Ada Lovelace",
+        "Ada Lovelace"
+      ],
+      [
+        "Alan Turing",
+        "Alan Turing"
+      ],
+      [
+        "Rosalind Franklin",
+        "Rosalind Franklin"
+      ],
+      [
+        "Louis Pasteur",
+        "Louis Pasteur"
+      ],
+      [
+        "Florence Nightingale",
+        "Florence Nightingale"
+      ],
+      [
+        "Dmitri Mendeleyev",
+        "Dmitri Mendeleev"
+      ],
+      [
+        "Katherine Johnson",
+        "Katherine Johnson"
+      ],
+      [
+        "Ludwig van Beethoven",
+        "Ludwig van Beethoven"
+      ],
+      [
+        "Wolfgang Amadeus Mozart",
+        "Wolfgang Amadeus Mozart"
+      ],
+      [
+        "Johann Sebastian Bach",
+        "Johann Sebastian Bach"
+      ],
+      [
+        "William Shakespeare",
+        "William Shakespeare"
+      ],
+      [
+        "Fyodor Dostoyevski",
+        "Fyodor Dostoevsky"
+      ],
+      [
+        "Lev Tolstoy",
+        "Leo Tolstoy"
+      ],
+      [
+        "Jane Austen",
+        "Jane Austen"
+      ],
+      [
+        "Mary Shelley",
+        "Mary Shelley"
+      ],
+      [
+        "Rabindranath Tagore",
+        "Rabindranath Tagore"
+      ],
+      [
+        "Frida Kahlo",
+        "Frida Kahlo"
+      ],
+      [
+        "Vincent van Gogh",
+        "Vincent van Gogh"
+      ],
+      [
+        "Michelangelo",
+        "Michelangelo"
+      ],
+      [
+        "İbn Battuta",
+        "Ibn Battuta"
+      ],
+      [
+        "Marco Polo",
+        "Marco Polo"
+      ],
+      [
+        "Aziz Sancar",
+        "Aziz Sancar"
+      ],
+      [
+        "Safiye Ali",
+        "Safiye Ali"
+      ],
+      [
+        "Afet İnan",
+        "Afet İnan"
+      ],
+      [
+        "Osman Hamdi Bey",
+        "Osman Hamdi Bey"
+      ],
+      [
+        "Nâzım Hikmet",
+        "Nâzım Hikmet"
+      ],
+      [
+        "Sabahattin Ali",
+        "Sabahattin Ali"
+      ],
+      [
+        "Wangari Maathai",
+        "Wangari Maathai"
+      ],
+      [
+        "Katherine Mansfield",
+        "Katherine Mansfield"
+      ],
+      [
+        "Srinivasa Ramanujan",
+        "Srinivasa Ramanujan"
+      ],
+      [
+        "Chien-Shiung Wu",
+        "Chien-Shiung Wu"
       ]
     ]
   },

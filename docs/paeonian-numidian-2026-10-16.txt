@@ -1,0 +1,43 @@
+Taç Muharebesi — Paion süvarisi ve Numidya cirit düzeltmesi
+16 Ekim 2026
+
+Yeni birlik: paeonian_cavalry / Paion müttefik süvarisi.
+Makedonya Krallığı menüsünde; Paion müttefik kimliği metinde korunur.
+İskender'in 24 kişilik temel ordusunda 2 Paion süvarisi: Tesalya 3→2,
+prodromos 2→1. Diğer roller ve toplam korunur; ölçekleme test edildi.
+Arrianos 3.8, 3.12–13: keşif ve Gaugamela kanat muharebesi.
+https://www.gutenberg.org/files/46976/46976-h/46976-h.htm
+KBR SILVER Patraos sikkesi: sorguçlu, zırhlı ve mızraklı atlı.
+https://silver.kbr.be/Paeonia_(uncertain_mint)_(Patraus),_silver,_tetradrachms_(331-315_BCE)
+Bu kraliyet tasviri standart üniforma kanıtı sayılmadı. Zırh kesimi,
+etek şeritleri ve renkler açıkça temsili. Üzengi yok.
+
+Düzeltilen mevcut birlik: numidian_light_cavalry.
+Eski kayıt kimliği korunuyor. Yalnız yakın dövüş yerine kısa menzilli
+atlı cirit atışı, dart mermisi ve mevcut hareketli taciz davranışı.
+Menzil 130, atış aralığı 1.7, hasar 19; bunlar oyun denge değerleridir.
+Yeni kısa tunik, saç, yedek cirit ve fırlatma animasyonu; dizgin çizilmez.
+Livius 21.54: Trebia öncesi atışlarla kışkırtma ve geri çekilme.
+https://www.yorku.ca/pswarney/Texts/livy-21.htm
+Livius 35.11: ciritler ve dizginsiz atlar, daha geç hizmet örneği.
+https://www.swartzentrover.com/cotor/E-Books/misc/Livy/HOR_35.htm
+Daha geç tarif Hannibal döneminin kesin üniforması diye sunulmadı.
+Mevcut battle motoruna, taktiklere ve kondisyon sistemine dokunulmadı.
+
+Doğrulama:
+- commander-reinforcements: 12 birlik, 24 doğal savaş, 12 komutan savaşı;
+  iki takım, hasar/mermi, en uzun doğal savaş 89 sn; 960 kare.
+- commander-army-units: 27 birlik, iki takımda hasar; Numidya için ayrıca
+  doğal 12v12 savaşta dart isabetleri ve tamamlanma; 2160 kare.
+- Her iki paket: PC/telefon, iki takım ekle-sil, savaş açma ve yeniden yükleme.
+- historical-army-presets: 20 ordu, minimum–1000 ölçekleme/rol taraması.
+- historical-army-history: 20 dönem/kaynak paneli ve gerçek ordu oluşturma.
+- historical-army-presets-browser: 1440, 390 ve 320 px; komutan seçimi,
+  bütün hazır ordular, sayı ayarı, takım ayrımı, uygulama ve kayıt geçti.
+- historical-equipment-balance: 304 profil, 258 aynalı savaş; süre aşımı yok.
+- Vite build başarılı, çıkış kodu 0; mevcut büyük paket uyarısı sürüyor.
+
+Önizleme: artifacts/paeonian-numidian.jpg (27 KB), görsel olarak incelendi.
+Test günlükleri: artifacts/paeonian-*.log, artifacts/numidian-supports.log.
+Artık bütün tarihî birliklerin tamamlandığı iddia edilmez; bu paket
+1 yeni birlik ve 1 mevcut birlik düzeltmesidir.

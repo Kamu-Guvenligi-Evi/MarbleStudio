@@ -10,8 +10,14 @@ import {GameSoundPlayer,createGameSoundDirector} from './game-sound-director.js'
 import {mountGameSoundPanel,savedSoundStyle,savedSoundOverrides} from './game-sound-panel.js';
 let videoChannel='';
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d');
+const requestedWidth=Number(new URLSearchParams(location.search).get('render-width'));
+const renderWidth=videoRenderMode?(Number.isFinite(requestedWidth)&&requestedWidth>0?Math.min(2160,Math.ceil(requestedWidth)):1080):WIDTH;
+canvas.width=renderWidth;canvas.height=Math.round(renderWidth*HEIGHT/WIDTH);
+const renderScaleX=canvas.width/WIDTH,renderScaleY=canvas.height/HEIGHT;
+ctx.setTransform(renderScaleX,0,0,renderScaleY,0,0);
 window.addEventListener('studio-channel-change',()=>draw());
-const pane=document.createElement('canvas');pane.width=WIDTH;pane.height=HEIGHT;const glass=pane.getContext('2d');
+const pane=document.createElement('canvas');pane.width=canvas.width;pane.height=canvas.height;const glass=pane.getContext('2d');
+glass.setTransform(renderScaleX,0,0,renderScaleY,0,0);
 const paneRenderer=new GlassPaneRenderer(glass);let speed=1,lastTime=0,lastUi=-1,muted=true;
 const soundtrack=new GameSoundPlayer('glass-breaker',savedSoundStyle('glass-breaker'),savedSoundOverrides('glass-breaker'));
 const soundEvent=event=>{if(!muted)soundtrack.event(event);};
@@ -47,11 +53,12 @@ function ballSprite(ball,colorShift){
   const hue=(Math.round((ball.hue+colorShift)/3)*3%360+360)%360,key=`${hue}:${ball.radius}`;
   if(ballSprites.has(key))return ballSprites.get(key);
   const sprite=document.createElement('canvas'),r=ball.radius,center=r+12;
-  sprite.width=sprite.height=center*2;const paint=sprite.getContext('2d');
+  sprite.width=sprite.height=Math.ceil(center*2*Math.max(renderScaleX,renderScaleY));const paint=sprite.getContext('2d');
+  const spriteScale=sprite.width/(center*2);paint.scale(spriteScale,spriteScale);
   const fill=theme.metal?paint.createLinearGradient(center-r,center-r,center+r,center+r):paint.createRadialGradient(center-r*.3,center-r*.3,.3,center,center,r);
   const stops=theme.metal?[[0,94],[.24,79],[.44,61],[.52,30],[.76,73],[1,35]]:[[0,98],[.32,76],[1,43]];
   for(const [position,light] of stops)fill.addColorStop(position,themeColor(theme,hue+(position-.5)*(theme.hue===null?40:100),light));
-  paint.shadowColor=themeColor(theme,hue,65,.65);paint.shadowBlur=6;paint.fillStyle=fill;paint.beginPath();paint.arc(center,center,r,0,Math.PI*2);paint.fill();paint.shadowBlur=0;
+  paint.shadowColor=themeColor(theme,hue,65,.65);paint.shadowBlur=6*spriteScale;paint.fillStyle=fill;paint.beginPath();paint.arc(center,center,r,0,Math.PI*2);paint.fill();paint.shadowBlur=0;
   paint.strokeStyle=themeColor(theme,hue,90,.45);paint.lineWidth=.65;paint.stroke();
   if(theme.metal){paint.fillStyle='#fff8';paint.beginPath();paint.ellipse(center-r*.28,center-r*.45,r*.3,r*.13,-.5,0,Math.PI*2);paint.fill();}
   ballSprites.set(key,sprite);return sprite;
@@ -64,7 +71,7 @@ function draw(){
 }),0,0,WIDTH,HEIGHT);
   ctx.textAlign='center';ctx.fillStyle='#91a8a0';ctx.font='10px Segoe UI';ctx.letterSpacing='3px';ctx.fillText(channelHandle(videoChannel||getSelectedChannel()),CX,133);ctx.letterSpacing='0px';
   ctx.fillStyle='#eff4f2';ctx.font='500 26px Segoe UI';ctx.fillText('Will all the glass break?',CX,177);
-  paneRenderer.update(game.cells,game.revision);ctx.drawImage(pane,0,0);
+  paneRenderer.update(game.cells,game.revision);ctx.drawImage(pane,0,0,WIDTH,HEIGHT);
   ctx.strokeStyle=theme.wall;ctx.lineWidth=1.3;ctx.beginPath();WALL.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();
   ctx.beginPath();ctx.arc(500,325,16,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#d5e3dd';ctx.font='10px Segoe UI';ctx.fillText(`${game.wave}×`,500,329);
   for(const s of game.shards){
@@ -73,7 +80,7 @@ function draw(){
   for(const b of game.balls){
     ctx.globalAlpha=b.opacity??1;
     for(let i=1;i<b.trail.length;i+=2){const p=b.trail[i];ctx.beginPath();ctx.arc(p.x,p.y,b.radius*(i/b.trail.length)*.85,0,Math.PI*2);ctx.fillStyle=themeColor(theme,b.hue+colorShift,66,i/b.trail.length*.18);ctx.fill();}
-    const sprite=ballSprite(b,colorShift);ctx.drawImage(sprite,b.x-sprite.width/2,b.y-sprite.height/2);
+    const sprite=ballSprite(b,colorShift),size=(b.radius+12)*2;ctx.drawImage(sprite,b.x-size/2,b.y-size/2,size,size);
   }
   ctx.globalAlpha=1;
   ctx.textAlign='center';ctx.fillStyle='#d5e3dd';ctx.font='15px Segoe UI';ctx.fillText('Glass broken',CX,728);ctx.font='500 39px Segoe UI';ctx.fillStyle=theme.accent;ctx.fillText(`${(game.progress*100).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1})}%`,CX,779);

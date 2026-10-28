@@ -42,44 +42,26 @@ Görsel kütüphanesinde **Mısır Mitolojisi**, **Yunan Mitolojisi** ve **İska
 
 Studio doğrudan manuel stüdyoyla açılır. Üstteki sekmelerden Parkur, Arena, Alan Savaşı, Pi Çarpışmaları, İstatistik veya Spiral seç; kadronu ve ayarlarını düzenle, **Video oluştur** ile açık çalışmanı dışa aktar. **Çalışmalarım**, **Videolarım** ve **Yedekler** bu stüdyodan erişilir.
 
-**Otomatik üretim** isteğe bağlı bir ekrandır. **Bana bırak → Videomu oluştur** veya seçtiğin içerik türüyle düzen, kadro, müzik, süre ve çıktı ayarları otomatik hazırlanır. Yarışlar doğal hızda, 30–180 saniyelik dikey 1080p ve 144 FPS MP4; istatistikler kaynaklı kütüphaneden bir konuyla yaklaşık 30 saniyelik sessiz yatay MP4 olarak hazırlanır. **Manuel stüdyoya dön** açık çalışmanı ve ayarlarını korur; **Bu türü stüdyoda düzenle** seçtiğin türün editörünü açar. Marble Studio logosu da manuel stüdyoya döner. **Videolarım** üretim durumunu, izlemeyi ve indirmeyi açar. Otomatik üretim mevcut taslakları değiştirmez.
+**Rastgele otomatik üretim, seri üretim ve günlük görevler kaldırıldı.** Videolar yalnız açık çalışmadan **Video oluştur** ile hazırlanır. GitHub video arşivi ve video yükleyerek arşivleme kapalıdır. Yeni render dosyası indirme tamamlanınca silinir; yarım indirme ve önizleme silmez. Önceden üretilmiş videolar otomatik silinmez.
 
-Masaüstü kısayolu Studio ve video hizmetini birlikte başlatır. Video hizmeti güncellendiyse bir kez yeniden başlatılmalıdır. **Çalışmalarım** isimli kayıtları korur; editördeki **Yedekler** menüsünden yedek alıp yükleyebilirsin. Üretilmiş videolar için ayrıca `output/` klasörünü yedekle.
+Masaüstü kısayolu Studio ve video hizmetini birlikte başlatır. Video hizmeti güncellendiyse bir kez yeniden başlatılmalıdır. **Çalışmalarım** isimli kayıtları korur; editördeki **Yedekler** menüsünden yedek alıp yükleyebilirsin. Yeni videoları **Videolarım → İndir** ile kendi cihazına kaydet; uygulama indirmeden sonra ek video kopyası tutmaz.
 
 Editörde **Hazır parkur → Rastgele parkur** yeni seed ve engel dizilimi oluşturur. Bu seçenek açıkken **Yeni yarış** tüm parkuru yeniden üretir; seed kayıtta korunur. Kontroller: `node tests/course-variety.mjs`, Studio açıkken `node tests/course-variety-browser.mjs`.
 
-## Otomatik yarış bölümleri
-
-Otomatik **Parkur** üretimi dört gerçek yarış kuralından birini geçmişe göre seçer. Ana ekranda ek ayar gerekmez:
-
-- **Sprint:** 12 yarışmacı; ilk finiş kazanır.
-- **Eleme kupası:** üç farklı parkurda 12 → 8 → 4 yarışmacı; finalde ilk finiş kazanır.
-- **Takım mücadelesi:** A/B/C takımlarında dörder yarışmacı; ilk altı finiş sırasıyla 6–1 puan getirir. En yüksek takım toplamı kazanır.
-- **Üç etaplı şampiyona:** aynı 12 yarışmacı üç farklı parkurda yarışır. Her etapta ilk altı 6–1 puan alır; toplam puan kazanır. Eşitlikte son etaptan geriye doğru finiş sıraları karşılaştırılır.
-
-Otomatik üretimde bölüm sayısı hedef süreye göre belirlenir ve etap başına en fazla 24 bölüm kullanılır. Kütüphane 16 hazır parkur ve 16 engel türü içerir; otomatik üretim tüm türleri kullanır. Seed rastgele seçilir ve üretim bilgileriyle saklanır. Parkur MP4 çıktıları doğal hızda 30–180 saniye içinde hazırlanır. Video kodlamasından önce aynı seed üzerinde bölüm sayısı kısa fizik simülasyonlarıyla ayarlanır (en fazla altı geçiş); ilk süre ve kalite onaylı parkur doğrudan kodlanır. Hedef süre seçim rehberidir; gerçek finiş süresi kullanılır. Yeni seed aramak için süre nedeniyle aday elemesi yapılmaz. Aynı çalışma aktarımı bu sınır dışındaysa açıklayıcı hata gösterir. Tur bilgisi, eleme kuralı, puan tablosu ve sonuç videoda görünür. Katılımcı adı, rengi ve numarası turlar boyunca korunur. Takım yarışında renk takımını gösterir. Etap finişinde yarışmacıların tamamı beklenmez; elemede gereken kontenjan veya puanlı yarışta ilk altı finiş tamamlanınca etap kapanır.
-
-Planlayıcı son 300 parkur üretiminde daha az kullanılan formatı tercih eder. Format geçmişi tekrar hafızasında saklanır; iş arşivi temizlense de yeni kayıtların format geçmişi korunur. Tekrar kimliği bütün etapları ve kuralları kapsar. Eski hizmet sürümü yeni otomatik iş kabul etmez: video hizmetini yeniden başlatmak gerekir.
-
-Bu dört format yalnızca otomatik parkura eklenmiştir; Arena, Spiral ve İstatistik havuzlarını genişletmez. Yeni anlatım veya rövanş üretimi bu sürümde yoktur. Görsel kalite kontrolleri izleyici ilgisi ya da YouTube para kazanma garantisi değildir.
-
-Kontroller: `node tests/episode-formats.mjs`, Studio açıkken `node tests/episode-browser.mjs`; dört gerçek MP4 için `node tests/episode-export.mjs`. Son komut çıktıları ayrı bir `artifacts/episode-exports-*` klasörüne yazar.
-
-## Studio → MP4 / seri üretim
+## Studio → MP4
 
 Üstteki **Video oluştur** düğmesi açık çalışmayı aynı pencereden üretim kuyruğuna gönderir. Kadro, yüklenmiş görseller, isimler, müzik tercihi ve lider müziği eşleştirmeleri korunur. İstatistik ekranında uygulanan tablo, başlık, kaynak ve sunum seçenekleri kullanılır. Studio 5173, video hizmeti 5180 adresinde çalışır; masaüstü kısayolu ikisini birlikte başlatır.
 
 - **Aynı çalışmayı dışa aktar:** mevcut düzen numarası ve hız 1× korunur. Parkurda bütün topların bitişi, ayarlı geri sayım ve sonuç süresi kaydedilir. İstatistik tablosu kendi süresinde oynatılır ve iki saniye son sonuç gösterilir. Tamamlama sınırı simülasyonda 10 dakikadır.
-- **Yeni düzenler:** kadro ve parkur/tema korunur, başlangıç düzeni değişir. Bitiş ve süre kontrollerinden geçen adaylar seçilir. İstatistikler için bu seçenek kapalıdır.
-- MP4 için dikey / yatay / kare, 720p / 1080p, ses ve üç sunum seçeneği bulunur. Otomatik üretim ve dışa aktarma varsayılan olarak **144 FPS** kullanır; gelişmiş seçeneklerden herhangi bir pozitif tam sayı FPS girilebilir. Önceki sürümün kaydettiği kare hızı bir kez yeni varsayılana geçirilir; diğer ayarlar korunur. Görüntü seçilen çerçeveye kesilmeden sığdırılır; farklı yönlerde boş alan kalabilir. Giriş ve kapanış metni düzenlenebilir. Eski **Videoya kaydet** düğmeleri doğrudan tarayıcıdan ekranın yenileme hızına bağlı WebM kaydı ister.
+- MP4 için dikey / yatay / kare, 720p / 1080p, ses ve üç sunum seçeneği bulunur. Dışa aktarma varsayılan olarak **144 FPS** kullanır; gelişmiş seçeneklerden herhangi bir pozitif tam sayı FPS girilebilir. Önceki sürümün kaydettiği kare hızı bir kez yeni varsayılana geçirilir; diğer ayarlar korunur. Görüntü seçilen çerçeveye kesilmeden sığdırılır; farklı yönlerde boş alan kalabilir. Giriş ve kapanış metni düzenlenebilir. Eski **Videoya kaydet** düğmeleri doğrudan tarayıcıdan ekranın yenileme hızına bağlı WebM kaydı ister.
 - **Yedek indir** bütün Studio ayarlarını, tabloları ve görselleri JSON dosyasına kaydeder. **Yedek yükle** önce mevcut ayarların kopyasını indirir, sonra yedeği uygular. Hatalı dosya mevcut çalışmayı değiştirmez. Yedek video dosyalarını ve Atölye iş geçmişini içermez; bunlar `output/` klasöründedir.
 
 **Kontroller:** `npm.cmd test` veri/fizik kontrollerini ve derlemeyi; `npm.cmd run check` bunlara güncel tarayıcı testlerini ekler. `npm.cmd run check:export` ayrıca dört formatı gerçek MP4 olarak üretir ve çözer; birkaç dakika sürebilir. Test Atölyesi ayrı bir portta ve `artifacts/` altında çalışır, gerçek üretim kuyruğuna iş eklemez. Eski editör senaryoları tarihsel dosyalardır; güncel ana test listesine dahil değildir.
 
 
-Spiral için düşüş, kırılma, çoğalma ve bitiş efektleri canlı oynatmada ve otomatik videolarda bulunur. İçerik Atölyesi'nin v2 üreticisi altı parkur profili, üç tempo akışı, 4–8 bölüm ve dört spiral davranışı kullanır. Ayrıntılar ve test komutları: [FACTORY.md](FACTORY.md).
+Spiral için düşüş, kırılma, çoğalma ve bitiş efektleri canlı oynatmada ve videolarda bulunur.
 
-**Toplu video üretimi:** `Start-Factory.cmd` ile hizmeti başlat, [İçerik Atölyesi](http://127.0.0.1:5180) panelinden seri oluştur. Değişken parkurlar, otomatik bitiş kontrolü, MP4 ve paylaşım metinleri üretir. Kurulum ve günlük üretim açıklamaları: [FACTORY.md](FACTORY.md).
+**Video hizmeti:** `Start-Factory.cmd` hizmeti başlatır ve manuel stüdyoyu açar. İndirme ve geçici dosya davranışı: [FACTORY.md](FACTORY.md).
 
 Spiral çoğalma ekranındaki **Spiral teması** menüsünde Buz Kıran, Lav Çekirdeği, Kutup Işıkları, Altın Kasa, Şeker Sarmalı ve Kozmik Kristal bulunur. Temalar spiral malzemesini, arka planı, top paletini ve kırılma parçalarını değiştirir. Seçim otomatik saklanır ve video kaydında kullanılır; kayıt sırasında tema değiştirilemez. Tema kontrolleri: `node tests/spiral-themes.mjs`.
 

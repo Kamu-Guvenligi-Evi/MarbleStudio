@@ -1,0 +1,1164 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-15",
+  "researchOnly": true,
+  "runtimeImport": false,
+  "report": "historical-tactics-research-2026-10-15.txt",
+  "usage": "Navigation index only. Candidate profiles are not unconditional unit assignments. Apply country, period, weapon, formation, trigger and abort constraints from the report. A/B/C describe historical evidence, not implementation or test status.",
+  "counts": {
+    "cultures": 9,
+    "countries": 35,
+    "units": 74,
+    "profiles": 29
+  },
+  "profiles": [
+    {
+      "id": "TR_SELJUK",
+      "evidence": "A",
+      "sourceIds": [
+        "S01"
+      ],
+      "heading": "TR_SELJUK — A — Büyük Selçuklu, Malazgirt 1071 [S01]"
+    },
+    {
+      "id": "TR_OTTOMAN",
+      "evidence": "A/B",
+      "sourceIds": [
+        "S02",
+        "S03"
+      ],
+      "heading": "TR_OTTOMAN — A/B — Osmanlı, ağırlıkla 15–16. yy [S02,S03]"
+    },
+    {
+      "id": "TR_KIPCHAK",
+      "evidence": "B/C",
+      "sourceIds": [],
+      "heading": "TR_KIPCHAK — B/C — Kıpçak/Kuman, katalog 12–14. yy seçkisi"
+    },
+    {
+      "id": "TR_GHAZNAVID",
+      "evidence": "B",
+      "sourceIds": [
+        "S04"
+      ],
+      "heading": "TR_GHAZNAVID — B — Gazneli 10–11. yy [S04]"
+    },
+    {
+      "id": "TR_GUARD_FALLBACK",
+      "evidence": "C",
+      "sourceIds": [],
+      "heading": "TR_GUARD_FALLBACK — C — Anadolu Selçuklu, Göktürk, Karahanlı, Harezmşah"
+    },
+    {
+      "id": "TR_TIMUR_FALLBACK",
+      "evidence": "C/EKSİK",
+      "sourceIds": [],
+      "heading": "TR_TIMUR_FALLBACK — C/EKSİK — Timurlular"
+    },
+    {
+      "id": "DE_PIKE",
+      "evidence": "A/B",
+      "sourceIds": [
+        "S05"
+      ],
+      "heading": "DE_PIKE — A/B — Landsknecht, 15. yy sonu–16. yy [S05]"
+    },
+    {
+      "id": "DE_CAVALRY",
+      "evidence": "B/C",
+      "sourceIds": [],
+      "heading": "DE_CAVALRY — B/C — Kutsal Roma ve Töton"
+    },
+    {
+      "id": "EN_SHIELDWALL",
+      "evidence": "A",
+      "sourceIds": [
+        "S06"
+      ],
+      "heading": "EN_SHIELDWALL — A — Anglosakson 11. yy [S06]"
+    },
+    {
+      "id": "EN_ARCHER_LINE",
+      "evidence": "A/B",
+      "sourceIds": [
+        "S07"
+      ],
+      "heading": "EN_ARCHER_LINE — A/B — İngiltere, geç Orta Çağ [S07]"
+    },
+    {
+      "id": "FR_OPPORTUNITY",
+      "evidence": "A/B",
+      "sourceIds": [
+        "S08",
+        "S09"
+      ],
+      "heading": "FR_OPPORTUNITY — A/B — Patay 1429 örneğinden koşullu hücum; ordonnance 1445 sonrası [S08,S09]"
+    },
+    {
+      "id": "IT_ROMAN",
+      "evidence": "A/B",
+      "sourceIds": [
+        "S10"
+      ],
+      "heading": "IT_ROMAN — A/B — Roma İmparatorluğu [S10]"
+    },
+    {
+      "id": "IT_GENOESE",
+      "evidence": "B",
+      "sourceIds": [
+        "S11"
+      ],
+      "heading": "IT_GENOESE — B — Ceneviz [S11]"
+    },
+    {
+      "id": "IT_CONDOTTA",
+      "evidence": "B",
+      "sourceIds": [
+        "S12"
+      ],
+      "heading": "IT_CONDOTTA — B — Milano/Floransa, geç Orta Çağ [S12]"
+    },
+    {
+      "id": "IT_VENICE_FALLBACK",
+      "evidence": "C",
+      "sourceIds": [],
+      "heading": "IT_VENICE_FALLBACK — C — Venedik"
+    },
+    {
+      "id": "GR_HOPLITE",
+      "evidence": "B",
+      "sourceIds": [],
+      "heading": "GR_HOPLITE — B — Sparta"
+    },
+    {
+      "id": "GR_MACEDON",
+      "evidence": "A/B",
+      "sourceIds": [
+        "S13",
+        "S14"
+      ],
+      "heading": "GR_MACEDON — A/B — Makedonya [S13,S14]"
+    },
+    {
+      "id": "GR_THEBES",
+      "evidence": "A/B",
+      "sourceIds": [
+        "S15"
+      ],
+      "heading": "GR_THEBES — A/B — Leuktra MÖ 371 [S15]"
+    },
+    {
+      "id": "GR_SKIRMISH",
+      "evidence": "A/B",
+      "sourceIds": [
+        "S16"
+      ],
+      "heading": "GR_SKIRMISH — A/B — Rodos/Girit, MÖ 401 [S16]"
+    },
+    {
+      "id": "GR_BYZANTINE",
+      "evidence": "B/C",
+      "sourceIds": [
+        "S17"
+      ],
+      "heading": "GR_BYZANTINE — B/C — Bizans, 10–11. yy [S17]"
+    },
+    {
+      "id": "PE_ACHAEMENID",
+      "evidence": "A/B",
+      "sourceIds": [
+        "S18"
+      ],
+      "heading": "PE_ACHAEMENID — A/B — Ahameniş [S18]"
+    },
+    {
+      "id": "PE_PARTHIAN",
+      "evidence": "A/EKSİK",
+      "sourceIds": [
+        "S19"
+      ],
+      "heading": "PE_PARTHIAN — A/EKSİK — Part/Arsak, Carrhae MÖ 53 [S19]"
+    },
+    {
+      "id": "PE_SASANIAN",
+      "evidence": "A/B",
+      "sourceIds": [
+        "S18"
+      ],
+      "heading": "PE_SASANIAN — A/B — Sâsânî, 4–7. yy [S18]"
+    },
+    {
+      "id": "JP_MOUNTED",
+      "evidence": "B",
+      "sourceIds": [
+        "S20"
+      ],
+      "heading": "JP_MOUNTED — B — Orta Çağ samuray atlı okçuluğu [S20]"
+    },
+    {
+      "id": "JP_INFANTRY",
+      "evidence": "B",
+      "sourceIds": [
+        "S21"
+      ],
+      "heading": "JP_INFANTRY — B — Yari/yumi ashigaru, 16–17. yy seçkisi [S21]"
+    },
+    {
+      "id": "CN_QIN",
+      "evidence": "A/B",
+      "sourceIds": [
+        "S22"
+      ],
+      "heading": "CN_QIN — A/B — Qin MÖ 3. yy [S22]"
+    },
+    {
+      "id": "CN_MING",
+      "evidence": "A/EKSİK",
+      "sourceIds": [
+        "S23"
+      ],
+      "heading": "CN_MING — A/EKSİK — Qi Jiguang, 16. yy [S23]"
+    },
+    {
+      "id": "CN_DYNASTY_FALLBACK",
+      "evidence": "C",
+      "sourceIds": [],
+      "heading": "CN_DYNASTY_FALLBACK — C — Han, Tang, Song"
+    },
+    {
+      "id": "KAYNAKLAR",
+      "evidence": "15 EKİM 2026 METİN TARAMASI",
+      "sourceIds": [],
+      "heading": "KAYNAKLAR — 15 EKİM 2026 METİN TARAMASI"
+    }
+  ],
+  "cultures": [
+    {
+      "id": "turkic",
+      "name": "Türkler",
+      "countries": [
+        {
+          "name": "Osmanlı Devleti",
+          "candidateProfileIds": [
+            "TR_OTTOMAN"
+          ],
+          "units": [
+            {
+              "id": "janissary",
+              "name": "Yeniçeri",
+              "period": null,
+              "kind": "ranged",
+              "role": "Menzilli piyade",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "janissary_yatagan",
+              "name": "Yatağanlı Yeniçeri",
+              "period": "18. yy–1826",
+              "kind": "sword",
+              "role": "Yatağanlı yakın dövüş piyadesi",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "ottoman_sipah",
+              "name": "Kapıkulu süvarileri",
+              "period": "15.–16. yy seçkisi",
+              "kind": "cavalry",
+              "role": "Mızraklı süvari",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "ottoman_solak",
+              "name": "Solak muhafızları",
+              "period": "15.–16. yy seçkisi",
+              "kind": "ranged",
+              "role": "Yaya okçu",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "ottoman_deli",
+              "name": "Deli — serhad süvarisi",
+              "period": "16. yy",
+              "kind": "cavalry",
+              "role": "Mızraklı öncü süvari",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "ottoman_akinci",
+              "name": "Akıncı",
+              "period": "14–16. yy",
+              "kind": "cavalry",
+              "role": "Hafif kılıçlı süvari",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "ottoman_azap_archer",
+              "name": "Azap okçusu",
+              "period": "16. yy tasviri / 1664 baskısı",
+              "kind": "ranged",
+              "role": "Hafif yaya okçu",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Büyük Selçuklu Devleti",
+          "candidateProfileIds": [
+            "TR_SELJUK"
+          ],
+          "units": [
+            {
+              "id": "seljuk_hassa",
+              "name": "Hassa gulâm süvarileri",
+              "period": "11.–12. yy",
+              "kind": "cavalry",
+              "role": "Mızraklı süvari",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Anadolu Selçuklu Devleti",
+          "candidateProfileIds": [
+            "TR_GUARD_FALLBACK"
+          ],
+          "units": [
+            {
+              "id": "rum_halka_guard",
+              "name": "Halka-i hâs — Selçuklu muhafızı",
+              "period": "12–13. yy",
+              "kind": "sword",
+              "role": "Zırhlı kılıçlı hassa muhafızı",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Gazneli Devleti",
+          "candidateProfileIds": [
+            "TR_GHAZNAVID"
+          ],
+          "units": [
+            {
+              "id": "ghaznavid_guard",
+              "name": "Gulâmân-ı saray",
+              "period": "10.–11. yy",
+              "kind": "cavalry",
+              "role": "Atlı okçu",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Kıpçak / Kuman",
+          "candidateProfileIds": [
+            "TR_KIPCHAK"
+          ],
+          "units": [
+            {
+              "id": "kipchak",
+              "name": "Maskeli Kıpçak",
+              "period": null,
+              "kind": "cavalry",
+              "role": "Atlı okçu",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "kipchak_masked_swordsman",
+              "name": "Maskeli Kıpçak kılıçlısı",
+              "period": "12.–14. yy; buluntu atıfları tartışmalı",
+              "kind": "cavalry",
+              "role": "Kılıçlı süvari",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "kipchak_lancer",
+              "name": "Mızraklı Kıpçak süvarisi",
+              "period": "12–13. yy",
+              "kind": "cavalry",
+              "role": "Zırhlı mızraklı süvari",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Timurlular",
+          "candidateProfileIds": [
+            "TR_TIMUR_FALLBACK"
+          ],
+          "units": [
+            {
+              "id": "timur",
+              "name": "Savaş Fili",
+              "period": null,
+              "kind": "elephant",
+              "role": "Ağır hücum",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Göktürk Kağanlığı",
+          "candidateProfileIds": [
+            "TR_GUARD_FALLBACK"
+          ],
+          "units": [
+            {
+              "id": "gokturk_bori",
+              "name": "Böri — kağan muhafızı",
+              "period": "6.–8. yy",
+              "kind": "cavalry",
+              "role": "Kılıçlı muhafız süvarisi",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Karahanlı Devleti",
+          "candidateProfileIds": [
+            "TR_GUARD_FALLBACK"
+          ],
+          "units": [
+            {
+              "id": "karakhanid_palace_guard",
+              "name": "Yatgak / Turgak — saray muhafızı",
+              "period": "11.–12. yy",
+              "kind": "spear",
+              "role": "Mızraklı saray muhafızı",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "karakhanid_hassa",
+              "name": "Karahanlı hassa askeri",
+              "period": "11.–12. yy",
+              "kind": "cavalry",
+              "role": "Hassa atlı okçusu",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Harezmşahlar Devleti",
+          "candidateProfileIds": [
+            "TR_GUARD_FALLBACK"
+          ],
+          "units": [
+            {
+              "id": "khwarazm_hassa",
+              "name": "Harezmşah hassa süvarisi",
+              "period": "12. yy–1231",
+              "kind": "cavalry",
+              "role": "Mızraklı hassa süvarisi",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "persian",
+      "name": "Farslar",
+      "countries": [
+        {
+          "name": "Ahameniş İmparatorluğu",
+          "candidateProfileIds": [
+            "PE_ACHAEMENID"
+          ],
+          "units": [
+            {
+              "id": "persian",
+              "name": "Pers Ölümsüzü",
+              "period": null,
+              "kind": "spear",
+              "role": "Muhafız piyade",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "achaemenid_archer",
+              "name": "Ahameniş yaylı savaşçısı",
+              "period": "MÖ 522–486",
+              "kind": "ranged",
+              "role": "Susa kabartmalarından yaylı donanım",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Part / Arsak İmparatorluğu",
+          "candidateProfileIds": [
+            "PE_PARTHIAN"
+          ],
+          "units": [
+            {
+              "id": "parthian_cataphract",
+              "name": "Zırhlı aristokrat süvariler / katafraktlar",
+              "period": "MÖ 1.–MS 2. yy seçkisi",
+              "kind": "cavalry",
+              "role": "Mızraklı süvari",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "parthian_horse_archer",
+              "name": "Part atlı okçusu",
+              "period": "MÖ 1. yy; Carrhae, MÖ 53",
+              "kind": "cavalry",
+              "role": "Hafif atlı okçu",
+              "addedAfterInitialResearch": true
+            }
+          ]
+        },
+        {
+          "name": "Sâsânî İmparatorluğu",
+          "candidateProfileIds": [
+            "PE_SASANIAN"
+          ],
+          "units": [
+            {
+              "id": "sasanian_aswaran",
+              "name": "Asvârân / Savârân",
+              "period": "4.–7. yy seçkisi",
+              "kind": "cavalry",
+              "role": "Mızraklı süvari",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "german",
+      "name": "Almanlar",
+      "countries": [
+        {
+          "name": "Alman Toprakları",
+          "candidateProfileIds": [
+            "DE_PIKE"
+          ],
+          "units": [
+            {
+              "id": "landsknecht",
+              "name": "Landsknecht — mızraklı piyade",
+              "period": null,
+              "kind": "spear",
+              "role": "Uzun mızraklı ücretli piyade",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "german_doppelsoldner",
+              "name": "Doppelsöldner — çift maaşlı kılıççı",
+              "period": "15. yy sonu–16. yy",
+              "kind": "sword",
+              "role": "Çift elli kılıç piyadesi",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "german_pavise_crossbowman",
+              "name": "Alman pavisli arbaletçi",
+              "period": "15. yy",
+              "kind": "ranged",
+              "role": "Pavisli arbaletçi",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "german_halberdier",
+              "name": "Alman teberci",
+              "period": "15. yy sonu–16. yy başı",
+              "kind": "spear",
+              "role": "Teberli piyade",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Kutsal Roma İmparatorluğu",
+          "candidateProfileIds": [
+            "DE_CAVALRY"
+          ],
+          "units": [
+            {
+              "id": "imperial_gothic_knight",
+              "name": "İmparatorluk şövalyesi — Gotik ağır süvari",
+              "period": "15. yy sonu",
+              "kind": "cavalry",
+              "role": "Gotik zırhlı mızraklı şövalye",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "german_armoured_foot",
+              "name": "Zırhlı yaya savaşçı — Alman toprakları",
+              "period": "15. yy seçkisi",
+              "kind": "sword",
+              "role": "Yakın dövüş piyadesi",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "german_ministerial",
+              "name": "Ministerial şövalye",
+              "period": "11.–13. yy",
+              "kind": "cavalry",
+              "role": "Mızraklı hizmet şövalyesi",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Töton Tarikatı / Tarikat Devleti",
+          "candidateProfileIds": [
+            "DE_CAVALRY"
+          ],
+          "units": [
+            {
+              "id": "teutonic_knight",
+              "name": "Töton şövalyesi — Teutonik tarikat süvarisi",
+              "period": "13. yy seçkisi",
+              "kind": "cavalry",
+              "role": "Mızraklı süvari",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "english",
+      "name": "İngilizler",
+      "countries": [
+        {
+          "name": "Anglosakson İngiltere",
+          "candidateProfileIds": [
+            "EN_SHIELDWALL"
+          ],
+          "units": [
+            {
+              "id": "england_housecarl",
+              "name": "Housecarl / Huscarl",
+              "period": "11. yy",
+              "kind": "sword",
+              "role": "Yakın dövüş piyadesi",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "İngiltere Krallığı",
+          "candidateProfileIds": [
+            "EN_ARCHER_LINE"
+          ],
+          "units": [
+            {
+              "id": "english_cheshire_guard",
+              "name": "Cheshire muhafız okçusu",
+              "period": "1397–1399",
+              "kind": "ranged",
+              "role": "II. Richard’ın uzun yaylı muhafızı",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "english_yeoman_guard",
+              "name": "Yeoman — erken Tudor muhafızı",
+              "period": "1485–1509",
+              "kind": "spear",
+              "role": "Teberli kral muhafızı",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "english_billman",
+              "name": "İngiliz bill piyadesi",
+              "period": "15. yy",
+              "kind": "spear",
+              "role": "Kancalı bill piyadesi",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "english_dismounted_man_at_arms",
+              "name": "İngiliz zırhlı yaya savaşçı",
+              "period": "15. yy",
+              "kind": "sword",
+              "role": "Pollaxeli zırhlı piyade",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "english_mail_knight",
+              "name": "İngiliz zincir zırhlı şövalye",
+              "period": "13. yy",
+              "kind": "cavalry",
+              "role": "Mızraklı şövalye",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "french",
+      "name": "Fransızlar",
+      "countries": [
+        {
+          "name": "Fransa Krallığı",
+          "candidateProfileIds": [
+            "FR_OPPORTUNITY"
+          ],
+          "units": [
+            {
+              "id": "french_ordonnance_gendarme",
+              "name": "Ordonnance ağır süvarisi",
+              "period": "15. yy ikinci yarısı",
+              "kind": "cavalry",
+              "role": "Zırhlı kral süvarisi",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "french_scots_guard",
+              "name": "Garde Écossaise — İskoç Muhafızı",
+              "period": "15. yy",
+              "kind": "ranged",
+              "role": "Kraliyet muhafız okçusu",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "french_franc_archer",
+              "name": "Fransız Franc-archer",
+              "period": "1448–15. yy sonu",
+              "kind": "ranged",
+              "role": "Yerel askerlik yükümlüsü okçu",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "french_royal_crossbow_guard",
+              "name": "Fransız kraliyet arbaletçisi",
+              "period": "1386–1388",
+              "kind": "ranged",
+              "role": "Kralın arbaletli muhafızı",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "french_dismounted_man_at_arms",
+              "name": "Fransız zırhlı yaya savaşçı",
+              "period": "14. yy sonu–15. yy başı",
+              "kind": "sword",
+              "role": "Kılıçlı zırhlı piyade",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "italian",
+      "name": "İtalyanlar / Roma",
+      "countries": [
+        {
+          "name": "Roma İmparatorluğu",
+          "candidateProfileIds": [
+            "IT_ROMAN"
+          ],
+          "units": [
+            {
+              "id": "roman",
+              "name": "Roma Lejyoneri",
+              "period": null,
+              "kind": "sword",
+              "role": "Ağır piyade",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "rome_praetorian",
+              "name": "Praetorian Muhafızları",
+              "period": "MS 1.–3. yy seçkisi",
+              "kind": "sword",
+              "role": "Yakın dövüş piyadesi",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "rome_equites",
+              "name": "Equites singulares Augusti",
+              "period": "MS 2.–3. yy seçkisi",
+              "kind": "cavalry",
+              "role": "Mızraklı süvari",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "roman_syrian_archer",
+              "name": "Roma hizmetinde Suriyeli okçu",
+              "period": "Roma İmparatorluk dönemi",
+              "kind": "ranged",
+              "role": "Yardımcı birlik okçusu",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Ceneviz Cumhuriyeti",
+          "candidateProfileIds": [
+            "IT_GENOESE"
+          ],
+          "units": [
+            {
+              "id": "genoese_crossbowman",
+              "name": "Ceneviz arbaletçisi",
+              "period": "14.–15. yy",
+              "kind": "ranged",
+              "role": "Pavizli profesyonel arbaletçi",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Venedik Cumhuriyeti",
+          "candidateProfileIds": [
+            "IT_VENICE_FALLBACK"
+          ],
+          "units": [
+            {
+              "id": "venetian_stradiot",
+              "name": "Stradiot — Venedik hafif süvarisi",
+              "period": "15. yy sonu–16. yy başı",
+              "kind": "cavalry",
+              "role": "Mızraklı akın süvarisi",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Milano Dükalığı",
+          "candidateProfileIds": [
+            "IT_CONDOTTA"
+          ],
+          "units": [
+            {
+              "id": "milan_ducal_cavalry",
+              "name": "Famiglia ducale — Milano dükalık süvarisi",
+              "period": "15. yy ikinci yarısı",
+              "kind": "cavalry",
+              "role": "Dükün ağır maiyet süvarisi",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Floransa Cumhuriyeti",
+          "candidateProfileIds": [
+            "IT_CONDOTTA"
+          ],
+          "units": [
+            {
+              "id": "italian_condotta_lancer",
+              "name": "Condotta — İtalyan ağır süvarisi",
+              "period": "15. yy ikinci yarısı",
+              "kind": "cavalry",
+              "role": "Sözleşmeli ağır mızraklı süvari",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "greek",
+      "name": "Yunanlar / Bizans",
+      "countries": [
+        {
+          "name": "Sparta",
+          "candidateProfileIds": [
+            "GR_HOPLITE"
+          ],
+          "units": [
+            {
+              "id": "spartan",
+              "name": "Spartalı Hoplit",
+              "period": null,
+              "kind": "spear",
+              "role": "Kalkan hattı",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Makedonya Krallığı",
+          "candidateProfileIds": [
+            "GR_MACEDON"
+          ],
+          "units": [
+            {
+              "id": "macedon_companions",
+              "name": "Hetairoi — Yoldaş Süvarileri",
+              "period": "MÖ 4. yy",
+              "kind": "cavalry",
+              "role": "Mızraklı süvari",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "macedon_hypaspists",
+              "name": "Hypaspistler",
+              "period": "MÖ 4. yy",
+              "kind": "spear",
+              "role": "Mızraklı piyade",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "macedon_sarissa_phalangite",
+              "name": "Makedon sarissa piyadesi",
+              "period": "MÖ 3–2. yy",
+              "kind": "spear",
+              "role": "Uzun mızraklı falanks piyadesi",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Bizans İmparatorluğu",
+          "candidateProfileIds": [
+            "GR_BYZANTINE"
+          ],
+          "units": [
+            {
+              "id": "varangian",
+              "name": "Varang Muhafızı",
+              "period": null,
+              "kind": "sword",
+              "role": "Balta piyadesi",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "byzantine_kataphraktos",
+              "name": "Bizans katafraktı",
+              "period": "10. yy sonu–11. yy başı",
+              "kind": "cavalry",
+              "role": "Topuzlu ağır hücum süvarisi",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "byzantine_menavlatos",
+              "name": "Bizans menavlatos piyadesi",
+              "period": "10. yy",
+              "kind": "spear",
+              "role": "Ağır süvariye karşı uzman piyade",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Rodos",
+          "candidateProfileIds": [
+            "GR_SKIRMISH"
+          ],
+          "units": [
+            {
+              "id": "greek_rhodian_slinger",
+              "name": "Rodoslu sapancı",
+              "period": "MÖ 401",
+              "kind": "ranged",
+              "role": "Kurşun taneli sapancı",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Girit Şehir Devletleri",
+          "candidateProfileIds": [
+            "GR_SKIRMISH"
+          ],
+          "units": [
+            {
+              "id": "greek_cretan_archer",
+              "name": "Giritli okçu",
+              "period": "MÖ 401",
+              "kind": "ranged",
+              "role": "Hafif yaya okçu",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Thebai",
+          "candidateProfileIds": [
+            "GR_THEBES"
+          ],
+          "units": [
+            {
+              "id": "thebes_sacred_band",
+              "name": "Thebai Kutsal Birliği",
+              "period": "MÖ 4. yy",
+              "kind": "spear",
+              "role": "Seçkin hoplit",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "japanese",
+      "name": "Japonlar",
+      "countries": [
+        {
+          "name": "Japonya",
+          "candidateProfileIds": [
+            "JP_MOUNTED",
+            "JP_INFANTRY"
+          ],
+          "units": [
+            {
+              "id": "samurai",
+              "name": "Samuray",
+              "period": null,
+              "kind": "sword",
+              "role": "Yakın dövüş",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "japan_mounted_samurai",
+              "name": "Atlı samuray — yaylı yoroi varyantı",
+              "period": "12.–14. yy",
+              "kind": "cavalry",
+              "role": "Atlı okçu",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "japan_sohei",
+              "name": "Sōhei — tapınak savaşçısı",
+              "period": "12–14. yy",
+              "kind": "spear",
+              "role": "Naginatalı tapınak piyadesi",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "japan_yari_ashigaru",
+              "name": "Yari ashigaru",
+              "period": "16–17. yy",
+              "kind": "spear",
+              "role": "Mızraklı piyade",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "japan_yumi_ashigaru",
+              "name": "Yumi ashigaru",
+              "period": "16–17. yy",
+              "kind": "ranged",
+              "role": "Yaya okçu",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "japan_odachi_samurai",
+              "name": "Japon ōdachi samurayı",
+              "period": "14–15. yy",
+              "kind": "sword",
+              "role": "İki elli uzun kılıçlı samuray",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chinese",
+      "name": "Çinliler",
+      "countries": [
+        {
+          "name": "Qin Hanedanı",
+          "candidateProfileIds": [
+            "CN_QIN"
+          ],
+          "units": [
+            {
+              "id": "qin_crossbowman",
+              "name": "Qin arbaletçisi",
+              "period": "MÖ 221–207",
+              "kind": "ranged",
+              "role": "Arbaletli piyade",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "qin_ji_infantry",
+              "name": "Qin ji piyadesi",
+              "period": "MÖ 3. yy",
+              "kind": "spear",
+              "role": "Ji saplı silah piyadesi",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Han Hanedanı",
+          "candidateProfileIds": [
+            "CN_DYNASTY_FALLBACK"
+          ],
+          "units": [
+            {
+              "id": "han_yulin",
+              "name": "Yulin muhafızları · Atlı okçu",
+              "period": "Han dönemi; görsel temsil MS 1.–2. yy",
+              "kind": "cavalry",
+              "role": "Atlı okçu",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Tang Hanedanı",
+          "candidateProfileIds": [
+            "CN_DYNASTY_FALLBACK"
+          ],
+          "units": [
+            {
+              "id": "tang_xuanjia",
+              "name": "Kara zırhlı süvariler · Xuanjia",
+              "period": "621; erken Tang dönemi",
+              "kind": "cavalry",
+              "role": "Mızraklı süvari",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Song Hanedanı",
+          "candidateProfileIds": [
+            "CN_DYNASTY_FALLBACK"
+          ],
+          "units": [
+            {
+              "id": "song_beiwei",
+              "name": "Beiwei süvarisi",
+              "period": "12. yy",
+              "kind": "cavalry",
+              "role": "Kılıçlı süvari",
+              "addedAfterInitialResearch": false
+            }
+          ]
+        },
+        {
+          "name": "Ming Hanedanı",
+          "candidateProfileIds": [
+            "CN_MING"
+          ],
+          "units": [
+            {
+              "id": "ming_langxian",
+              "name": "Ming langxian piyadesi",
+              "period": "16. yy",
+              "kind": "spear",
+              "role": "Dallı bambu silahlı destek piyadesi",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "ming_rattan_shield",
+              "name": "Ming rattan kalkanlısı",
+              "period": "16. yy",
+              "kind": "sword",
+              "role": "Örgü kalkanlı dao piyadesi",
+              "addedAfterInitialResearch": false
+            },
+            {
+              "id": "ming_long_spearman",
+              "name": "Ming uzun mızraklısı",
+              "period": "16. yy; Qi Jiguang dönemi",
+              "kind": "spear",
+              "role": "Uzun mızraklı destek piyadesi",
+              "addedAfterInitialResearch": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

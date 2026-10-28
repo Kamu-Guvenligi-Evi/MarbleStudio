@@ -1,0 +1,45 @@
+15 Ekim 2026 — Doğu ordularının eksik donanım rolleri
+
+Eklenen 6 oynanabilir birlik (katalog toplamı: fantastikler dahil 253):
+egypt_new_composite_archer — Yeni Krallık Mısır — kompozit yaylı yaya okçu
+egypt_khopesh_infantry — Yeni Krallık Mısır — khopesh ve kalkan
+abbasid_mounted_archer — Abbâsî Halifeliği — hareketli atlı okçu
+daylamite_shield_infantry — Deylem toplulukları — kılıçlı kalkanlı piyade
+han_shield_spearman — Han Hanedanı — kalkanlı mızraklı
+song_long_spearman — Song Hanedanı — iki elli uzun mızraklı
+
+Dosyalar:
+src/eastern-roster-gaps.js: veriler, kaynak bağlantıları, dönem ve rekonstrüksiyon notları, ayrı savaş değerleri.
+src/eastern-roster-gap-art.js: özgün başlık, gövde, kalkan ve silah geometrileri; saldırı hareketi mevcut temas fazına bağlı.
+Katalog, sanat profilleri ve savaşçı çizim dağıtıcısına bağlandı.
+Deylemliler kendi kültür menüsünde; diğerleri mevcut ülke başlıklarında.
+Motor, taktikler ve hazır komutan orduları değiştirilmedi.
+
+Tarihî sınırlar:
+Met 555921 erken Yeni Krallık kompozit yay parçasıdır; bütün okçuların bu yayı taşıdığı söylenmez.
+Louvre E 25689 kral adını taşıyan bronz silahtır; khopesh piyadesi bir donanım rekonstrüksiyonudur, ayrı alay iddiası yok.
+Iranica ARMY ii: Abbâsî Türk gulâmları ve hareketli atlı okçuluk. Her gulâmın aynı teçhizatı taşıdığı varsayılmadı.
+Iranica DEYLAMITES: yaklaşık 552'de bağımsız Sâsânî müttefikleri, kılıç/kalkan/üç cirit. Buradaki kart kılıçlı yakın dövüş varyantıdır, cirit atmaz.
+Cleveland 1925.135 Han devri mızrak/kalkan tasviridir; kaplanla mücadele sahnesi askerî üniforma veya alay kanıtı sayılmadı.
+Song: Library and Archives Canada MQ54986 araştırmasının Wujing Zongyao mızraklarına ilişkin bölümü; uzun mızraklı genel rol, ateş mızrağı değil.
+Renkler, tamamlanmış kıyafetler ve hareketler oyun rekonstrüksiyonudur. Müze fotoğrafları oyun varlığı olarak kopyalanmadı; mevcut Canvas sistemi kullanıldı.
+
+Kaynaklar:
+https://www.metmuseum.org/art/collection/search/555921
+https://collections.louvre.fr/ark:/53355/cl010004555
+https://www.iranicaonline.org/articles/army-ii/
+https://www.iranicaonline.org/articles/deylamites/
+https://www.clevelandart.org/art/1925.135
+https://central.bac-lac.gc.ca/.item?app=Library&id=MQ54986&oclc_number=1006987062&op=pdf
+https://en.wikipedia.org/wiki/Chinese_polearm
+
+Doğrulama:
+tests/eastern-roster-gaps.mjs: GEÇTİ. 480 kare, boş/kesilmiş/aynı siluet yok; iki takımda gerçek hasar ve doğru ok; kayıt geri yükleme; 1366 ve 390 genişliklerinde menüden ekle/çıkar, savaş açılışı, sayfa yenileme.
+12 tam savaş: GEÇTİ. Birlik başına iki takım yönünde 12'ye 12 Roma piyadesi; seed 19; sonlu durum; en uzun savaş 25,9 saniye. Bu bir kapsamlı denge kanıtı değil, işlev ve tamamlanma kontrolüdür.
+tests/historical-equipment-balance.mjs: GEÇTİ. 253 ayrı profil, genel profile düşme yok, 258 aynalanmış savaşta zaman aşımı yok.
+Vite üretim derlemesi: GEÇTİ, çıkış 0. Mevcut büyük paket uyarısı sürüyor.
+Tüm katalog çizim kontrolü: GEÇTİ. 253 birlik için 12.144 kare; boş/kesilmiş çizim veya tarayıcı hatası yok.
+
+Önizleme: artifacts/eastern-roster-gaps/units.jpg (yaklaşık 28 KB).
+Kontrol çıktıları: artifacts/eastern-roster-gaps/checks.json, full-battles.json, balance.log, build.log, global-art.log.
+İnternet bayt tüketimi ölçülmedi; dosya boyutu ağ tüketimi olarak sunulmadı.

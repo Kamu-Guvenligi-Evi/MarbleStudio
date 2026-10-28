@@ -1,0 +1,68 @@
+Fatih ordu dengesi — 16 Ekim 2026
+
+Güncellik notu: Aşağıdaki savaş sonuçları ilk güçlendirme sırasındaki motor
+sürümüne aittir. Sonraki motor durumundaki karşılaştırma ve 50 eksik denge
+kaydının tamamlanması docs/unit-stats-completion-2026-10-16.txt içinde izlenir.
+Aşağıda belirtilen historical-unit-stats kapsam hatası artık giderildi;
+güncel kontrolde 402 birim ve 854 savaş geçti.
+
+İstek: Fatih'in savaşta çok güçsüz kalmasını düzeltmek.
+Bu çalışma yeni tarihî birlik eklemez; mevcut birliklerin oyun dengesi ve
+komutanın hazır ordu dağılımını değiştirir. Sayılar tarihî ölçüm değildir.
+
+Uygulanan değişiklikler
+- TR_OTTOMAN hazır ordusunda 24 kapasite içindeki sipahi payı 3 -> 5.
+  Solak 2 -> 1, atlı akıncı okçusu 2 -> 1; diğer sayılar aynı.
+  Kapasite ve 12 farklı birlik türü korunur; ateşli silah eklenmedi.
+- ottoman_janissary_bow: hasar 21 -> 24, saldırı aralığı 1.65 -> 1.45.
+- ottoman_sipah: hasar 27 -> 30, saldırı aralığı 1.3 -> 1.2,
+  zırh 0.14 -> 0.16.
+- ottoman_timariot: hasar 26 -> 28, saldırı aralığı 1.3 -> 1.25,
+  zırh 0.19 -> 0.20.
+- ottoman_cebelu: hasar 26 -> 28, saldırı aralığı 1.2 -> 1.15,
+  zırh 0.20 -> 0.22.
+- ottoman_janissary_armoured_sword: hasar 23 -> 26,
+  saldırı aralığı 1.1 -> 1.05, zırh 0.23 -> 0.26.
+Birlik değerleri özel kurulmuş ordulara da uygulanır. Hazır dağılım değişikliği
+yeniden oluşturulan komutan ordularında kullanılır; kayıtlı özel dağılımlar
+bu çalışma tarafından yeniden yazılmadı. Komutanın bireysel değerleri değişmedi.
+
+Tekrarlanabilir savaş karşılaştırması
+Araç: artifacts/commander-balance/fatih-comparison.mjs.
+30 adım/saniye, 600 saniye üst sınırı, geniş harita, iki başlangıç tarafı.
+Raporlar artifacts/commander-balance/ altında:
+- fatih-before.json: 96 kapasite, 42/93 tohumları, Timur/Alp Arslan/Harald;
+  eski değerlerle Fatih 1/12 kazandı.
+- fatih-final.json: aynı 12 savaş, son değerlerle Fatih 8/12 kazandı.
+  Timur 0/4, Alp Arslan 4/4, Harald 4/4.
+- fatih-final-holdout.json: 96 kapasite, 7/131 tohumları, 24 savaş;
+  Fatih 7/24. Timur 1/4, Alp Arslan 3/4, Harald 1/4, Frundsberg 0/4,
+  VII. Charles 0/4, Leonidas 2/4.
+- fatih-final-large.json: 240 kapasite, 17 tohumu, 8 savaş;
+  Fatih 3/8. Timur 0/2, Alp Arslan 2/2, Harald 0/2, Frundsberg 1/2.
+Tümü ordunun elenmesiyle sonuçlandı. Bu sonuçlar sınırlı deneme kümelerine
+aittir; genel kazanma olasılığı değildir. Timur ve mızrak ağırlıklı ordular
+hâlâ zor rakiplerdir. Önceki deneme raporları nihai ayarları temsil etmez.
+
+Doğrulama
+- tests/historical-fatih-balance.mjs: geçti; 8 komutan savaşında 4 galibiyet,
+  iki ek mızrak/sipahi karşılaşması, okçu katılımı, kapasite, ateşli silah yokluğu.
+- tests/historical-equipment-balance.mjs: geçti; 402 farklı profil,
+  258 savaş, zaman aşımı yok. Sipahinin ilk denenmiş 0.20 zırh değeri bazı
+  mızrak üstünlüklerini bozduğu için son değer 0.16 seçildi.
+- tests/historical-army-presets.mjs: geçti; 23 hazır ordu ve kapasite kontrolleri.
+- tests/historical-army-history.mjs: geçti; 23 tarih/kaynak paneli.
+- tests/historical-ottoman-openings.mjs: geçti; 48/96/240 kapasite,
+  iki taraf, 6 açılış ve savaş içi roller.
+- Vite üretim derlemesi: geçti; mevcut büyük paket boyutu uyarısı sürüyor.
+- tests/historical-unit-stats.mjs: katalog kapsamı kontrolünde başarısız.
+  Önceden eklenen 50 birlik açık combat verisine sahip ancak merkezî
+  UNIT_STAT_BALANCE/RETAINED_FANTASY_STATS listelerinde yok. Bu çalışmada
+  liste üyeliği değişmedi; beş mevcut kaydın değerleri güncellendi.
+  Bu nedenle bütün testlerin geçtiği iddia edilmemelidir.
+
+İlgili dosyalar
+src/historical-unit-stat-balance.js
+src/historical-army-presets.js
+tests/historical-fatih-balance.mjs
+Test/derleme günlükleri: artifacts/commander-balance/fatih-*.log

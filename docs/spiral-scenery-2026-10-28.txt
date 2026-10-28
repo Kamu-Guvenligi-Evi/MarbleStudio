@@ -1,0 +1,10 @@
+Spiral themes expanded from 12 to 18 with animated scenery:
+meteor, abyss, forest, tempest, desert, portal.
+Implementation: src/spiral-scenery.js, spiral-themes.js, spiral-renderer.js.
+Uses existing procedural materials; no downloads or image assets.
+Animation uses race.time, preserving pause/export determinism and physics RNG.
+Verified: tests/spiral-themes.mjs, tests/spiral-materials.mjs,
+tests/spiral-scenery.mjs; Vite build passed (bundle size advisory).
+Preview: artifacts/spiral-scenery-preview.png (visually checked).
+Build log: artifacts/spiral-scenery-build.log.
+Existing unrelated working tree changes preserved. No remaining work.

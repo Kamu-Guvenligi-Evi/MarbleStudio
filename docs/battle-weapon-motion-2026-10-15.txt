@@ -1,0 +1,20 @@
+Weapon-specific attack animation — 2026-10-15
+
+User request: spear units thrust, sword units slash, mace/hammer units make heavy strikes; arms follow weapons and existing art remains recognizable.
+
+Implementation:
+- src/crown-battle-weapon-motion.js supplies shared thrust/slash/heavy curves. Eight cached poses, contact at phase .5 (120 ms), recovery by frame 7.
+- Integrated classic, generic historical, specialized historical weapon drawers, Middle-earth stylized base/expansion and Azog art. Existing ranged weapon and creature-specific drawing paths are largely unchanged.
+- Weapon grips and secondary hands follow the rotated handles. Historical long polearm grip adjusted to fit source sprite bounds.
+- Simulation, damage, attack duration and unit stats were not changed by this task. New geometry runs when shared sprites are baked, not per soldier per rendered frame.
+
+Validation:
+- tests/crown-battle-weapon-motion-browser.mjs PASS: 182 types, 2912 attack frames (both teams), cache reuse, curve/contact assertions, no historical source clipping.
+- tests/crown-battle-sprite-crop-browser.mjs PASS: 972 comparisons.
+- tests/crown-battle-sprite-batch-browser.mjs PASS: 30 Canvas/GPU comparisons; GL error 0.
+- tests/crown-battle-frame-budget-browser.mjs PASS: bounded pose generation, atlas reuse/upgrades and cache identity checks.
+- Vite production build PASS; existing large-chunk advisory remains.
+- artifacts/weapon-motion-preview.png visually inspected once; artifacts/weapon-motion-check.json and weapon-motion-build.log contain local results.
+- No gameplay FPS benchmark performed; cache tests verify retained generation limits, not a measured FPS improvement.
+
+Coordination: thread 01a13b6d-28b1-7921-8984-c4623799e14f owns historical tactics/catalogue work and was asked to avoid concurrent weapon drawer edits. Its known formation positioning test failure is outside this art-only task.

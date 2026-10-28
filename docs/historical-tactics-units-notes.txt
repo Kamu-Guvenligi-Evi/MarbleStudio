@@ -1,0 +1,43 @@
+15 Ekim 2026 — Taktikler için eksik birlikler
+
+Araştırma devri: historical-tactics-research-2026-10-15.txt ve
+historical-tactics-mapping-2026-10-15.json. Kaynakları araştırma sekmesi doğruladı.
+Part: Iranica Carrhae; Ming: Jixiao Xinshu I (rol dağılımı), XI (silah desteği).
+
+Eklenen kimlikler / menü:
+- parthian_horse_archer: Persler > Part / Arsak İmparatorluğu; hafif atlı okçu.
+- ming_long_spearman: Çinliler > Ming Hanedanı; uzun mızraklı destek.
+- ming_long_shield: aynı Ming menüsü; daha yavaş, korumalı ön hat piyadesi.
+- ming_short_weapon_support: aynı Ming menüsü; kalkansız büyük dao örneği.
+Kısa silah rolü yalnız sanjiaocha olarak tanımlanmadı. Lojistik/yemek görevlisi
+olan 火兵 ateşli silahlı asker diye eklenmedi. Dönem Qi Jiguang'ın 16. yüzyılıdır.
+Sayılar kaynakların ölçtüğü tarihî performans değil donanıma göre oyun dengesidir.
+
+Dosyalar: src/historical-tactics-units.js, src/historical-catalogue.js,
+src/historical-art-profiles.js, src/frontier-warrior-art.js,
+tests/historical-tactics-units.mjs, bu not ve historical-tactics-notes.txt.
+Sanatta yalnız Ming uzun kalkan ve destek dao dalları; mevcut weaponMotion korunur.
+Yeni görseller yerel prosedürel çizimdir, indirme yapılmadı. Ana sekmeyle koordine edildi.
+Mevcut kimlikler ve ordu kayıtları korundu; klasik moda yeni birlik eklenmedi.
+
+PASS historical-tactics-units: dört rolün iki takımda gerçek hasarı, yaylı atış,
+donanım farkları, eski/yeni ordu kaydı; Part hareketli atışı ve 45 saniye içinde
+tükenen 180 birim kaçınma bütçesi. PC 1366 / telefon 390: kültür/ülke menüsünden
+iki takımda ekle/kaldır, savaşı aç, yeniden yükle. 320 animasyon karesi boş/kesik değil.
+PASS crown-battle-weapon-motion-browser: 186 tür, 2976 saldırı karesi, 0 kesilme.
+PASS crown-battle-sprite-crop-browser: mevcut altı temsilci türde 972 atlas kontrolü.
+PASS historical-tactics, historical-combat, crown-battle, crown-battle-behavior,
+crown-battle-tactics, crown-battle-charge. Emirler, süvari/mızrak, yığılma ve kovalamaca.
+2400 asker / 60 adım davranış testi: 376 ms toplam; bu tarayıcı FPS ölçümü değildir.
+PASS Vite build --outDir artifacts/tactics-build; mevcut >500 kB chunk uyarısı sürer.
+Artefaktlar: artifacts/historical-tactics-units/{units.jpg,checks.json,build.log}.
+
+Sınır: yeni roller kullanılabilir; bu ekleme tam 12 kişilik Ming düzenini veya Part
+ordu doktrinini otomatik uygulamaz. Şu an ordu düzeyinde yalnız Selçuklu hassa ricadı
+etkindir. Kalkan koruması mevcut genel zırh modeliyle yaklaşık temsil edilir.
+Önceden görülen formations.mjs:40 hareket sorunu formasyon sekmesine bildirildi;
+bu eklemelerde formasyon dosyaları değiştirilmedi.
+Ek inceleme: tacticalAI:false ile 9 samuray wedge(50,300), 900 adımda iki asker
+hold ön sıralarına takılı kalıyor. walk yerel kaçınma içeriyor; çoklu engellerin
+steer katkılarının birbirini götürmesi olası neden (henüz doğrulanmadı).
+Ana/formasyon sekmelerine aktarıldı; bu ekleme motor hareketini değiştirmedi.

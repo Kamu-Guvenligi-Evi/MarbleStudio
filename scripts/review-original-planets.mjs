@@ -1,0 +1,4 @@
+﻿import fs from 'node:fs/promises';import {chromium} from 'playwright';
+const {MERGE_IMAGES:m}=await import('../artifacts/merge-image-manifest-before-cutouts.js');const files=m.planets.map(x=>x.src);
+const b=await chromium.launch({channel:'chrome',headless:true}),p=await b.newPage();await p.goto('http://127.0.0.1:5173');const data=await p.evaluate(async files=>{let c=document.createElement('canvas');c.width=900;c.height=300;let x=c.getContext('2d');x.fillStyle='#252833';x.fillRect(0,0,900,300);for(const[i,f]of files.entries()){let im=new Image();im.src=f;await im.decode();let r=Math.min(90/im.width,110/im.height);x.drawImage(im,(i%6)*150,Math.floor(i/6)*150,im.width*r,im.height*r);x.fillStyle='white';x.font='12px Arial';x.fillText(f.replace('hero-','').replace('.png',''),i%6*150,Math.floor(i/6)*150+130);}return c.toDataURL('image/jpeg',.85).split(',')[1];},files);await fs.writeFile('artifacts/original-planets.jpg',Buffer.from(data,'base64'));await b.close();
+

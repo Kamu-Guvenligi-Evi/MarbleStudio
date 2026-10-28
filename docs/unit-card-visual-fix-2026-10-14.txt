@@ -1,0 +1,24 @@
+Kart görselleri — 14 Ekim 2026
+
+Kullanıcı sorun yerini kartlar olarak netleştirdi.
+56 birliğin yerel kaynak görselleri decode edildi; bozuk dosya bulunmadı.
+Savaş menüsü attachHistoricalPortraits ile oyun çizimini kaynak fotoğrafına
+çeviriyordu. Bazıları tam savaşçı değil müze miğferi, balta başı, ok ucu veya
+kalabalık tarihî sahneydi. Savaş seçim/ordu kartları artık SpriteLibrary oyun
+çizimlerini koruyor. Kaynak fotoğrafları katalog Tarihî kaynaklar görünümünde.
+
+src/unit-card-art.js: şeffaf boşlukları çıkarıp tüm görünür silueti oranını
+koruyarak iç boşlukla sığdırır; kaynak sınırları WeakMap içinde önbelleklenir.
+src/crown-battle-app.js: sabit negatif kırpma ve fotoğraf değiştirme kaldırıldı.
+src/historical-armies.js: aynı kadraj yardımcısı kullanılır; u.source olmayan
+yeni fantastik kayıtlar için kaynak bağlantısı üretilmez (diğer sekmenin isteği).
+Savaş alanındaki çizim/performans koduna müdahale edilmedi.
+
+Doğrulama: tests/unit-card-art-browser.mjs PASS, 56 birlik, 1100 ve 390px.
+Boş çizim, kenar kesilmesi, katalog kart taşması, 56 kaynak fotoğrafı decode,
+görünüm geçişi, sayı girişi ve savaş menüsü portreleri kontrol edildi.
+Vite build PASS (mevcut büyük chunk uyarısı).
+Önce/sonra: artifacts/elite-research/battle-cards-before.jpg ve
+battle-cards-after.jpg. Küçük karşılaştırma levhaları; gerçek menü yerleşimi
+değil. Son levha görsel olarak incelendi. Tüm tarihî ayrıntıların doğruluğunu
+veya silah tutuşlarının kusursuzluğunu bu testler kanıtlamaz.

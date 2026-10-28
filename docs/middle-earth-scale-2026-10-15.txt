@@ -1,0 +1,53 @@
+Orta Dünya / tarihî birlik ölçek düzeltmesi — 15 Ekim 2026
+
+Sorun: Orta Dünya yayaları ~50–53 oyun birimiyle tarihî Kıpçak atlısı
+(54) kadar büyüktü; trol yalnız 55 idi. Sayfa boşluğu, başlık/silah ve
+ayak altı takım oku tam siluet ölçüsünü etkiliyordu. Görsel yüklenmediğinde
+yedek çizim aynı çarpanla çok daha büyük görünüyordu.
+
+36 birlik, aynı zemin/zoomda Viking, samuray, yeniçeri, Spartalı, Varang ve
+Kıpçak ile karşılaştırıldı. Gövde oranı için Viking (~35), binek için Kıpçak
+(54) esas alındı; mızrak/başlık uzunluğu insan boyu sayılmadı.
+Son görünür boşta yükseklikler: insan yayalar 34–38, elf yayalar 36,
+cüceler 23, normal süvariler 54, koçlu cüce 38, Dáin 39, geyikli elfler 59,
+trol 72, Sauron 60, Witch-king 45, Ent 108, Balrog 118, Mûmakil 150.
+Koçlu cücenin miğferi korunuyor. Kahraman olmak insan bedenini büyütmüyor.
+Ok geometrisi hem boyalı hem yedek çizimden kaldırıldı. Boyalı figürlerde
+takım farkı yalnız siluetin içinde hafif renk tonu olarak tutuldu.
+24 boyalı birimin yedek çizimi aynı ayak çapasında normalize edildi;
+stand-in çizimi başka bir boyalı kahramana yönlendirmiyor.
+
+Değişen dosyalar:
+src/middle-earth-visual-profiles.js (36 sabit ölçek, 24 yedek katsayısı)
+src/middle-earth-units.js
+src/middle-earth-art.js
+src/middle-earth-painted-art.js
+src/middle-earth-expansion-fallback.js
+tests/middle-earth-size.mjs
+scripts/audit-middle-earth-size.mjs
+Bu not ve önceki genişleme notundaki derleme durumu.
+Renderer/motor/cache/app ve diğer sekmelerin dosyaları değiştirilmedi.
+
+Doğrulama (yerel Chrome / Vite):
+PASS tests/middle-earth-size.mjs: 36 birim, tarihî piyade/süvari referansları,
+cüce/binek/dev oranları; tüm yedek yükseklikleri boyalı karşılığının %8 içinde.
+PASS tests/middle-earth-revision-browser.mjs: 24 sayfa, 12 dev seçim noktası,
+ekran kenarı görünürlüğü, mobil çizim, atlas sınırı. Balrog/Gondor ~3.32.
+PASS tests/middle-earth.mjs: 1728 poz, 36 ayrı siluet, iki takım animasyonu,
+kırpılma/boş poz yok; PC/mobil katalog, kayıt/yükleme/başlatma, kırmızıdan
+kaldırma; tarayıcı hatası ve dış ağ isteği yok. İçe aktarılan combat testi
+36 kimlik/16 kahraman, emirler ve deterministik savaşı da geçti.
+PASS Vite üretim derlemesi (29.09 saniye). Genel büyük paket uyarısı var.
+Önceki BattleRenderer export derleme hatası bu çalıştırmada tekrarlanmadı.
+
+Önizleme: artifacts/middle-earth/size-lineup.jpg
+Ölçümler: artifacts/middle-earth/size-checks.json
+Diğer sonuçlar: artifacts/middle-earth/checks.json, revision-checks.json,
+build.log. Tüm görseller aynı dünya ölçeğinde karşılaştırıldı.
+
+Sınırlar: Bunlar oyundaki tarihî çizimlere göre görsel oranlardır; kanonik
+metre ölçüsü iddiası yoktur. Altı ana poz ve silah hareketleri siluet sınırını
+değiştirebilir. Yedek çizimin ayrıntısı boyalı görselle aynı değildir.
+Kimlikler, kayıt biçimi ve savaş istatistikleri korunur. Kare başına piksel
+taraması veya yeni asker karşılaştırması yok; yedek dönüşüm atlas üretiminde.
+FPS artışı ya da internet tüketiminde ölçülmüş azalma iddia edilmedi.

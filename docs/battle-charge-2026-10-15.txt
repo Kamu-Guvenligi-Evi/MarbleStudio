@@ -1,0 +1,37 @@
+15 Ekim 2026 — Hussar hücum denemesi
+
+Kullanıcının “ekle” talebi üzerine ilk izlenebilirlik adımı uygulandı: eski
+Hussar çizimleri üzerinde hızlanan hücum ve mızrak indirme. Reddedilen Hussar
+ve Sauron çizimleri etkinleştirilmedi. Onaylanan samuray denemesi korunuyor.
+
+Ana motor: Hussar koşu mesafesini tamamladıktan sonra 115 hızına kademeli
+çıkar. Hücum süresi hedef mesafesine göre en çok 1.65 saniyedir. Aynı hedefe
+bir hücumda tek darbe vurur. Hayatta kalan yaya hedef .28 saniye sendeleyip
+bekleyen saldırısını bırakır; itme yönünde kısa toz efekti görünür. Önden
+karşılayan mızraklı hücumu durdurur ve sendelemez. Efekt sayısı 96 ile sınırlı.
+Yeni hedef taraması veya harici görsel dosyası eklenmedi.
+
+Deneme: http://127.0.0.1:5173/crown-battle-visual-lab.html#charge
+3 Hussar / mevzisini tutan 9 Roma piyadesi. Ana oyun üstündeki “Hücum denemesi”
+bağlantısı bu sahneyi açar. Başlat, duraklat, sıfırla ve yarı hız kullanılabilir.
+Kayıtlı ordular değiştirilmez. Ana oyunda koşu mesafesi bulan Hussarlar da yeni
+davranışı kullanır. Bu teslimat tüm izlenebilirlik önerilerini kapsamıyor.
+
+Doğrulama:
+- tests/crown-battle-charge.mjs PASS: 30/60/120 Hz hızlanma, isabet, tek darbe,
+  toparlanma, önden mızrak karşılaması, saldırı kesilmesi, temas halinde tekrar
+  hücum etmeme ve süvarilere yaya sendelemesi uygulamama.
+- Mevcut behavior, impact, feedback testleri PASS.
+- scripts/battle-visual-study-preview.mjs PASS: yeni sahnenin üç hücumu ve üç
+  ilk isabeti; eski görseller; samuray A/B; kontroller; 390 px yerleşim; kayıtlı
+  orduların korunması; ana oyun açılışı; tarayıcı hatası yok.
+- Vite production build PASS; mevcut büyük chunk uyarısı devam ediyor.
+- Yerel başsız Chrome, 1800 birlik, 180 kare, 1100x500 stres ölçümü:
+  motor median 22.2 ms; çizim median 28.6 ms; kare aralığı median 55.6 ms.
+  İlk çizimde 348.5 ms tepe; sonraki ölçüm bölümünde çizim en çok 52.2 ms.
+  WebGL/tarayıcı hatası yok. Öncesi karşılaştırması yok; FPS artışı veya yüksek
+  birlik sayısında akıcılık iddiası değildir. Kalabalık ordu optimizasyonu açık.
+
+Kanıtlar: artifacts/battle-visual-study/charge-impact.jpg (63545 bayt),
+charge-render-performance.json ve build-charge.log. Dosya boyutu internet
+tüketimi ölçümü değildir. Hiçbir harici indirme/üretim yapılmadı.

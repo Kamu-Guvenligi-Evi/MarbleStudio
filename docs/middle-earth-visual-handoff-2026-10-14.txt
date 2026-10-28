@@ -1,0 +1,82 @@
+Orta Dünya görsel entegrasyonu — 14 Ekim 2026
+
+Kullanıcı kapsamı: Yüzüklerin Efendisi + Hobbit. Gerçek film görselleri
+hem seçim kartlarında hem savaş alanındaki NPC'lerde kullanılacak.
+Mevcut uygulama düzeni incelenecek ve diğer sekmelerle birlikte çalışılacak.
+Yeni görünüm biçimi, portre jetonu veya çizim alternatifi seçilmedi.
+Sauron ve Witch-king özellikle kahraman olarak istendi.
+
+İlk kadro: Gondor, Rohan, Uruk-hai, Mordor orkları, elfler, cüceler;
+Aragorn, Legolas, Gimli, Gandalf, Sauron, Witch-king; mağara trolü.
+Hobbit orduları ve Balrog geniş kapsam içinde. Tam liste tamamlanmadı.
+
+Bu çalışma oyun kaynak kodunu değiştirmedi. Aktif kataloğa ekleme yapılmadı.
+İndirilen adaylar yalnız .cache/middle-earth-reference/ altında bulunuyor.
+
+Mevcut mimari:
+- historical-catalogue.js ortak kimlikleri ve görsel bilgilerini birleştiriyor.
+- historical-armies.js oyun çizimi/kaynak görseli kart görünümlerini oluşturuyor.
+- historical-portraits.js seçim portrelerinde yerel görselleri kullanıyor.
+- crown-battle-art.js SpriteLibrary ayrı animasyonlu canvas çizimleri üretiyor.
+- Sadece kart görseli eklemek, savaş alanına gerçek film görseli eklemek değildir.
+- Sprite sözleşmesi 240x228 HTMLCanvasElement; mantıksal 80x76, ayak 30,61.
+- CPU atlas okuması için getContext('2d', {willReadFrequently:true}) korunacak.
+- Yerel asset, yükleme tamamlanması ve sprite/atlas önbellekleri ele alınmalı.
+
+Sekme koordinasyonu:
+- Motor: 01a13b10-7f99-7a70-b113-bba2c705c791.
+  Performans çalışması bitti; ayrı art modülü ve SpriteLibrary hook uygun.
+  Motor savaş kuralları değiştirilmeyecek. Sunucu bu çalışmada durdurulmadı.
+- Katalog: 01a13b51-ead4-7090-a516-86581873cf50.
+  Viking kayıtları ve ortak tarihî katalog üzerinde çalışıyor.
+  Ayrı Orta Dünya veri/görsel manifesti istedi. Son mesajında katalog importu
+  ve Orta Dünya kültür grubu düzenleme alanını sonradan devretti.
+  Devir alındı: 56 tarihî birlik/41 grup; İskandinavya 5 kayıt.
+  Dört norse_* rolü korunacak. Ortak katalog dosyaları henüz düzenlenmedi.
+  Motor sekmesi .cache watcher EBUSY hatasını Vite ignore ile ele alıyor.
+
+Yerel aday incelemeleri (dosya boyutları internet tüketimi ölçümü değildir):
+- aragorn-full.png: 315x856, saydam tam boy oyuncu fotoğrafı. Görsel olarak uygun.
+  Kaynak: https://www.nicepng.com/ourpic/u2e6q8a9w7t4q8i1_aragorn-lord-of-the-rings-full-body/
+  Dosya: https://www.nicepng.com/png/full/340-3403213_aragorn-lord-of-the-rings-full-body.png
+  Film hakları veya yeniden dağıtım izni bu siteden doğrulanmadı.
+- aragorn-candidate.png: aynı fotoğrafın opak önizlemesi; tekrar indirmeye gerek yok.
+- sauron-candidate.png: film görünümündeki saydam üst gövde. Tam boy değil.
+  Kaynak: https://www.pngkit.com/bigpic/u2e6q8y3y3y3q8q8/
+- gandalf-candidate.png: iki figürlü karşılaştırma; bütün hali NPC için uygun değil.
+  Kaynak: https://www.pngitem.com/middle/ihJmwhw_lotr-gandalf-full-body-png-download-transparent-png/
+- gandalf-second.png: gerçek Ian McKellen fotoğrafı, üst gövde ve koyu arka plan.
+  Kart adayı; tam boy/saydam NPC varlığı değil.
+  Kaynak: https://freepngimg.com/png/23926-gandalf-transparent
+- legolas-preview.png: düşük poligon oyun modeli; gerçek film görseli diye kullanılmayacak.
+  Kaynak: https://freepngimg.com/png/23903-legolas-transparent
+- legolas-second.png: kalp çıkartmalı hayran düzenlemesi, uygun değil.
+  Kaynak: https://www.pngfind.com/mpng/hmRiTox_legolas-image-orlando-bloom-legolas-hd-png-download/
+- witchking-preview.png: kesilmiş figür; gerçek film fotoğrafı olduğu doğrulanmadı.
+  Kaynak: https://officialpsds.com/witch-king-angmar-lord-of-the-rings-psd-721wx4
+
+Kalan iş:
+1. Film fotoğrafı kimliği ve NPC kullanımı uygun adayları doğrula.
+2. Sauron/Witch-king kahraman statüsünü koruyarak ayrı manifestleri oluştur.
+3. Katalog sekmesinin devrinden sonra mevcut kart/filtre/kayıt/ordu aktarımını bağla.
+4. Gerçek film görselleri için ayrı canvas art yolunu mevcut sprite sözleşmesine bağla.
+5. Kart -> iki ordu -> savaş alanı akışı, yükleme hatası, kayıt geri yükleme,
+   canvas dışa aktarımı ve mevcut tarihî birliklerin etkilenmemesini doğrula.
+Henüz uygulama testi çalıştırılmadı; entegrasyon tamamlanmış değildir.
+
+GÜNCEL DURUM — 14 Ekim 2026, görsel değerlendirme
+Yukarıdaki "kaynak kodu değişmedi / test yok" bölümleri eski keşif notlarıdır.
+- 18 Orta Dünya birliği, 6 kahraman aktif kataloğa ve kültür grubuna eklendi.
+- middle-earth-units.js görsel kaynaklarını, ölçekleri ve combat değerlerini tutuyor.
+- middle-earth-art.js yerel fotoğrafları 240x228 canvas içine çiziyor; crown-battle-art.js dispatch bağlı.
+- historical-combat.js birim combat değerlerini kullanıyor. Diğer sekmelerin değişiklikleri korunuyor.
+- Gimli ve cüce askerlerinin heightScale değeri .67; savaş atlasında insan 98, cüce 70 piksel ölçüldü.
+- tests/middle-earth.mjs geçti: katalog, yerel dosyalar, kayıt/yükleme/savaşa geçiş, 432 poz, boş/kırpılmış görsel yok, tarayıcı hatası ve dış istek yok.
+- artifacts/middle-earth/checks.json ve roster.jpg mevcut. Üretim derlemesi geçti.
+- Bu kontroller GÖRSEL KALİTE ONAYI DEĞİLDİR. Mevcut Orta Dünya çizimi fotoğraf kırpıntılarını kaydırıp döndürüyor; eklemli yürüme/saldırı animasyonu değil.
+- Aragorn ve Legolas tam boy kesilmiş görseller; Gimli belden yukarı, Sauron üst gövde; birçok asker arka planlı dikdörtgen fotoğraf. Görsel iş tamamlanmadı.
+- Kullanıcı ekran görüntüsündeki mevcut küçük tam boy çizim askerlerini gösterip doğru yapılıp yapılmadığını sordu. Orta Dünya fotoğraf yolu bu mevcut çizim yoluyla aynı görsel sonucu vermiyor. Kullanıcıdan yeni stil seçimi varsayılmamalı.
+- Kullanıcı Elrond, Entler ve Nazgûlleri de istedi; açıkça önce mevcut işin bitmesini, bunların SONRA eklenmesini söyledi. Henüz eklenmedi.
+- Sonraki iş: mevcut görsel uyumsuzluğunu çözmek; tam boy olmayan görselleri tamamlanmış saymamak. Fotoğraf yerine kendiliğinden çizim stiline geçilmemeli.
+
+SON DURUM — 15 Ekim 2026: Fotoğraf çizimi yolu değiştirildi. Üç büyük kahraman için fazla gerçekçi ilk revizyon da kaldırıldı; çizgi stilinde altı pozlu sprite'lar aktif. Gondor miğferleri ve büyük gövde seçim/çizim desteği tamam. Tüm son testler PASS. Ayrıntılar: docs/middle-earth-revision-2026-10-15.txt ve docs/middle-earth-art-prompts-2026-10-15.txt.

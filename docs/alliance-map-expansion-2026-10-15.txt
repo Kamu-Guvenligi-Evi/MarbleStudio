@@ -1,0 +1,42 @@
+İttifaklar için geniş savaş alanı — 15 Ekim 2026
+
+İstek: Çok sayıda askerle komutanların diziliş, kanat ve saldırı yönü seçimi
+için daha geniş alan. Bu adım harita altyapısıdır; yeni ittifak taktiği değildir.
+
+Önceki canlı alan: 2400x3840. Yeni asgari alan: 4800x7680; toplam alan 4 kat.
+Sınırlar x=-2100..2700, y=-3360..4320. Klasik varsayılan 600x960 korunur.
+İttifak konuşlanmasından sonra askerlerin çevresinde en az 900 dünya birimi
+manevra alanı ayrılır; çok büyük ordularda pay ayrıca büyür. Tek seferlik O(n)
+geçiştir. Başlangıç konumları, birlik aralıkları ve temas mesafesi değişmez.
+Kamera başlangıç ölçeği/asker boyutu korunur. Harita düğmesi tüm alanı gösterir;
+asgari haritada gerçek zoom .125, yuvarlanan düğme etiketi %13 olur.
+Renderer mevcut dinamik bounds/minZoom hesabını kullanır. Arazi tamponunun
+mevcut 2560x1600 sınırı korunur. FPS artışı ölçülmedi/iddia edilmez.
+
+Dosyalar:
+src/crown-battle-bounds.js (yeni sınırlar ve manevra payı)
+src/crown-battle.js (bounds import/oluşturma, deployment expandedMap parametresi)
+src/historical-army-deployment.js (tek seferlik alan ayırma)
+tests/historical-army-deployment.mjs
+tests/crown-battle-camera-browser.mjs
+tests/crown-battle-impact.mjs
+docs/alliance-map-expansion-2026-10-15.txt
+
+PASS:
+- deployment: 2/4/8 ordu, 24/240/1000 askerlik kadrolar, filler/komutansız
+  ordu, çakışmasız başlangıç, >=900 kenar payı, elle diziliş/kayıt önceliği;
+  klasik sınırlar ve başlangıç konumlarının değişmediği doğrulandı.
+- impact: yeni köşeler arasında hedef bulma, harita dışı emri sınırlama,
+  temas/mermi kontrolleri.
+- camera browser: PC1366 ve telefon390; pan, zoom, tüm harita, eski sınırın
+  ötesine emir, dokunmatik iki parmak ve emir izolasyonu; tarayıcı hatası yok.
+- deployment browser: 484 asker/4 ordu çizimi ve 30 saniye aktif savaş.
+- large-4v4: 1920 asker + komutanlar, iki yön, kaynak hash'leri değişmedi.
+  180.03s: 2/243 asker, mevcut süre sınırı; 152.3s: 175/0 doğal bitiş.
+  Otomatik hata sayısı 0. Kanıt:
+  artifacts/alliance-simulation/expanded-map-large-4v4.json
+
+Kalan: Bir büyük savaş mevcut 180s sınırında kesiliyor; savaş içinde geçici
+yakın yığılmalar var (ölçülen en yüksek etkilenen oran %1.28/%2.06).
+Ana sekme süre sınırı/separation/render performansını ayrı ele alıyor.
+Harita büyütme bunların çözüldüğü anlamına gelmez. Ana sekmeye tamam bilgisi verildi.

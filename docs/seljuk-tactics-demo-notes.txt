@@ -1,0 +1,11 @@
+2026-10-15 — Kullanıcı: çalışan Selçuklu sahte ricadını göster.
+Yerel gösterim: http://127.0.0.1:5173/seljuk-tactics-demo.html
+Dosyalar: seljuk-tactics-demo.html, src/seljuk-tactics-demo.js.
+Gerçek Battle + BattleRenderer, seed42, Alp Arslan +24 seljuk_hassa /24 roman.
+Başlangıçta retreat aşamasında duraklar. Aşama düğmeleri sıfırdan gerçek simülasyonu ilerletir; konum/faz ataması yok. Yerel ordu kayıtlarını değiştirmez.
+Kontroller: devam/duraklat, üç aşama, 0.5/1/2 hız. Duraklatılmış çizim renderIfNeeded kullanır.
+Doğrulama: Chrome/Playwright1280x820 canlı retreat->envelop PASS; üç aşama PASS;390x844 taşma yok; sayfa hatası yok.
+Seed42: assemble0.033, retreat2.533, envelop5.033; Alp Arslan8.4sn'de düşer ve taktik kesilir.
+Önizleme: artifacts/seljuk-tactics-demo.jpg. Start-Process ile kullanıcı tarayıcısında açma politika tarafından engellendi; kullanıcı bağlantıyı açabilir.
+HTML yerel geliştirme gösterimidir; production Vite giriş listesine eklenmedi.
+Kalan büyük iş: historical-civilization-tactics.js henüz yazılmadı. historical-tactics.js/helper sahibi sekme01a13b6d-28b1-7921-8984-c4623799e14f entegrasyon sözleşmesini biliyor; lider sekmesi19lider kataloğunu hazırladı.

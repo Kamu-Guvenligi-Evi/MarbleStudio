@@ -1,0 +1,53 @@
+15 Ekim 2026 — Altı az seçenekli kadronun tamamlanması
+
+Eklenen 6 donanım rolü:
+gokturk_lance_cavalry — Göktürk mızraklı süvarisi — Göktürk Kağanlığı
+tibetan_shield_swordsman — Tibet kalkanlı kılıçlısı — Tibet
+benin_bow_warrior — Benin yaylı savaşçısı — Benin Krallığı
+moche_atlatl_warrior — Moche atlatl savaşçısı — Moche
+kerma_dagger_warrior — Kerma hançerli savaşçısı — Nubya
+saka_sagaris_axeman — Saka sagaris baltalısı — İskitler
+
+Katalog: fantastik birlikler dahil 264 kayıt. Altı rol de kendi medeniyetinde,
+iki takımda seçilebilir; savaş türü, kayıt yükleme ve çizim profili bağlı.
+Tarihî seçkin alay oldukları iddia edilmedi. Nesnelerin/metinlerin belgelenmiş
+donanımı ile renk, kıyafet tamamlaması ve oyun rolü yorumları kartta ayrıldı.
+Göktürk: mızrak ve levha zırh üzerine akademik makale.
+Tibet: Met silah/zırh yazısı; farklı tarihli örneklerden birleşik rekonstrüksiyon.
+Benin: British Museum Af1898,0115.16, yay taşıyan saray savaşçısı tasviri.
+Moche: Met 315133, atlatl, dart, hilalli/basamaklı başlık ve bel levhası.
+Kerma: SLAM/MFA sergi açıklaması, savaşçı mezarlarındaki hançerler.
+Saka: Herodotos 7.64; sivri başlık, pantolon, sagaris. Balta biçimi yorumdur.
+Tam kaynak bağlantıları: src/underrepresented-roster.js.
+Bu turda kaynak açıklamaları kullanıldı; müze fotoğrafları oyuna aktarılmadı.
+
+Uygulama:
+src/underrepresented-roster.js — veri, kaynaklar, combat ve görünüm profilleri
+src/underrepresented-roster-art.js — farklı başlık, giysi, kalkan ve silah çizimleri
+src/historical-catalogue.js, historical-art-profiles.js, historical-warrior-art.js — bağlantılar
+src/crown-battle-projectiles.js — config.projectile='dart', 210 oyun birimi/sn
+fırlatma hızı, daha uzun gövde, yayların yüksek yaylı salvo davranışına katılmama.
+Gerçek dünya hız ölçüsü iddiası yok. Sabit kesişim hedefi, yerçekimi ve fiziksel
+çarpışma ortak sistemi korunur. Kaçan hedefi takip etmez.
+Göktürk mızrağı dinlenirken çapraz, hücumda ileri uzatılır; kesilme düzeltildi.
+Ortak motor, taktik, komutan, yorgunluk ve moral dosyalarına müdahale edilmedi.
+
+Doğrulama:
+tests/underrepresented-roster.mjs: GEÇTİ.
+İki takımda gerçek hasar, doğru mermi, ordu kayıtları, dart hızı ve sabit hedef.
+12 tam savaş (12'ye 12 Roma, seed 19, iki yön): GEÇTİ; en uzun 25,17 saniye.
+480 animasyon karesi: boş/kesilmiş çizim yok; 6 ayrı siluet.
+1366 ve 390 genişliğinde iki takım seç/çıkar, savaşa taşı, yenile: GEÇTİ.
+tests/crown-battle-projectiles.mjs: GEÇTİ.
+tests/crown-battle-projectiles-browser.mjs: GEÇTİ; ok/dart/bolt/sapan için
+96 görünür piksel, yön, yakınlaştırma, ekran biçimi ve canvas durum kontrolü.
+tests/historical-equipment-balance.mjs: GEÇTİ; 264 farklı profil, genel role
+düşme yok; mevcut 258 aynalanmış savaşta zaman aşımı yok.
+Vite üretim derlemesi: GEÇTİ; mevcut 500 KB üzeri paket uyarısı devam ediyor.
+tests/historical-elite-art.mjs: GEÇTİ; 264 birliğin 12.672 karesi tarandı.
+Boş/kesilmiş çizim, eksik profil, aynı çizim/siluet veya tarayıcı hatası yok.
+
+Kanıtlar: artifacts/underrepresented-roster/units.jpg, checks.json,
+full-battles.json, test.log, balance.log, projectiles-browser.log, build.log,
+all-art.log. Bunlar tüm eşleşmelerde denge veya tüm tarihin eksiksizliği garantisi değildir.
+Ek tarihî birlik araştırması gerektiğinde önce mevcut katalogla karşılaştırılmalı.

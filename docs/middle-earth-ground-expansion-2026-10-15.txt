@@ -1,0 +1,55 @@
+15 Ekim 2026 — Orta Dünya ek paketi, çizim ve boyut uyumu
+
+Bu not, önceki 26 birlikli paket notunun kapsamını günceller.
+Yeni 10 birlik: Théoden, Éomer, Boromir, Faramir, Saruman, Thranduil,
+Haldir, Dáin, Shelob ve Mûmakil. Toplam 36 sabit kimlik, 16 kahraman.
+İlk 26 kimlik, eski ordu kayıtları ve klasik mod korunur. Uçan birlik yok.
+
+Yeni 10 ve önceki 8 birlik sade, kalın çizgili oyun tarzında yenilendi.
+Aragorn, Legolas ve Gimli ayrıca aynı tarzda altı pozlu çizimler ve katalog
+portreleri aldı. Koçlu cüceye bütün pozlarda miğfer eklendi; balta korundu.
+Eski kaynaklar artifacts/middle-earth/source/previous-detailed altında saklandı.
+
+Boyut sorunu: sayfa boşluğu ve uzun silahların paketleme ölçeği, eşit ayarlara
+rağmen karakter gövdelerini farklı boylarda gösteriyordu. Görünen bekleme
+silueti temelinde sunum ölçekleri ayarlandı. Eski tarihî birlikler değiştirilmedi.
+Ortak dünya ölçüsünde: Kıpçak 54; koçlu cüce 42; Dáin 44; Rohirrim 56;
+Aragorn 50; Legolas 52; Gimli 34; Elrond 52; Ent 150; Balrog 165; Mûmakil 190.
+Koçlu cüce Kıpçaktan hem kısa hem dar. Görsel yüklenmezse kullanılan yerel
+yedekte de küçük binek ve miğfer korunur. Hasar, can, hız, erişim değişmedi.
+
+Değişen uygulama dosyaları:
+src/middle-earth-units.js, middle-earth-painted-art.js, middle-earth-art.js,
+middle-earth-expansion-fallback.js; public/warrior-sprites/middle-earth içindeki
+ilgili WebP poz sayfaları/portreleri; scripts/pack-middle-earth-expansion.mjs.
+Ortak savaş motoru, renderer, batch/cache ve ana arayüz dosyaları değiştirilmedi.
+Paketleyici --ground, --heroes ve --only=<dosya-adı> seçeneklerini destekler.
+Önizleme: artifacts/middle-earth/size-lineup.jpg (bütün figürlerde aynı ölçek).
+
+Doğrulama:
+PASS tests/middle-earth-size.mjs: kahraman oranları, koç/domuz süvarisi ile
+Kıpçak karşılaştırması, normal atlılar, devler; engellenmiş görsellerde yedek boyut.
+PASS tests/middle-earth-revision-browser.mjs: 24 sayfa, 12 dev seçim denemesi,
+ekran dışı ayaklarda görünür gövde, mobil çizim, atlas sınırı. Balrog/Gondor 3.28.
+PASS tests/middle-earth.mjs: 36 ayrı siluet, 1728 poz; boş/kırpılmış/donmuş poz
+yok; iki takım animasyonu, PC/mobil katalog, kayıt/yükleme/başlatma ve kırmızıdan
+kaldırma. Tarayıcı hatası ve dış ağ isteği yok.
+PASS tests/middle-earth-combat.mjs: 36 kimlik/16 kahraman, karma ordu kayıtları,
+emirler/kaldırma, okçuluk/yakın/alan vuruşu; deterministik savaş 52.0 saniye.
+PASS tests/middle-earth-expansion.mjs: 10 binek, koşu sonrası hücum, temasta
+sürekli bonus yok, yönlü mızrak savunması, hareket emirleri; 18 ek birliğin iki
+takımda kaydı/kaldırılması ve görsel yüklenmediğinde yedek çizimi.
+PASS tests/crown-battle.mjs: bu çalışma sırasında klasik mod regresyonları geçti.
+Önceki üretim derlemesi başarısızdı: crown-battle-visual-lab.js içindeki BattleRenderer
+ithalatı crown-battle-renderer.js tarafından dışa aktarılmıyor. Ana sekmeye
+bildirildi; devam eden performans çalışmasının ortak dosyalarına dokunulmadı.
+Ayrıntı: Yukarıdaki testler önceki başarısız derlemeden önce geçti.
+Güncelleme: genel ölçek düzeltmesinden sonra testler yeniden geçti ve Vite
+üretim derlemesi 29.09 saniyede başarılı oldu. Güncel build.log başarılı
+çalıştırmayı içerir. Son boyutlar/testler: middle-earth-scale-2026-10-15.txt.
+
+Sınırlar: altı ana pozdan zamanlanmış animasyon, iskelet animasyonu değil.
+Saruman yakın alan vuruşu kullanır; Mûmakil üstündeki mürettebat dekoratiftir.
+Ölçekler oynanabilirlik içindir; kanonik boy ölçüsü iddiası yoktur.
+Bu çalışmada FPS artışı veya internet baytı ölçülmedi. Performans düzeltmesi
+ana sekmede sürüyor. Kare başına yeni asker karşılaştırma döngüsü eklenmedi.

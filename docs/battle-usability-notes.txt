@@ -1,0 +1,27 @@
+2026-10-14 — Kullanışlılık düzenlemesi
+
+Güncel giriş: http://127.0.0.1:5173/crown-battle.html (varsayılan medeniyetler)
+Savaş öncesi seçili birlikleri boş alana sol tıklayarak/dokunarak yerleştir.
+Dolu alana yerleştirmek için Sahaya yerleştir aracını kullan.
+Son 10 yerleştirme Geri al / Ctrl+Z ile geri alınabilir. Savaş başlayınca geçmiş silinir.
+Savaş başladıktan sonra boş alana tıklama formasyonlu hareket emri verir.
+Sağ tık mevcut hareket/saldırı emri davranışını korur.
+Ordu düzenleyicide ekleme/azaltma miktarı: 1, 10, 50, 100.
+Bekleyen ayar/ordu değişiklikleri sayılarıyla gösterilir; uygulanmadan savaş başlatılmaz.
+Uygula meydanı yeniden kurar ve komuta ekranına döner; mobilde meydana kaydırır.
+Komutada Asker ekle / Orduları düzenle kısayolu bulunur.
+
+Dosyalar: src/crown-battle-app.js, crown-battle-formation-ui.js,
+crown-battle-formations.css, crown-battle-selection.js, crown-battle-selection.css.
+Diğer sekmenin haritalar modülleri ve dar app bağlantıları korunmuştur.
+
+Doğrulama:
+- crown-battle-formations-browser: PASS 1366 ve 390; yerleştirme, undo,
+  Ctrl+Z, miktar adımları, bekleyen ayar koruması, uygulama, savaş içi hareket.
+- crown-battle-layout-browser: PASS 1366,1920,900,390,320,844; dokunmatik etkileşim.
+- crown-battle-selection-browser: PASS 1366 ve 390.
+- crown-battle-removal-browser: PASS 1366 ve 390; sıfır ordular, Delete,
+  lider kaldırma, kayıt geçişi, kalıcılık, zafer.
+- Vite production build PASS; mevcut büyük parça boyutu uyarısı bulunuyor.
+Build log: artifacts/crown-battle/usability-build.log
+Ekran görüntüleri: artifacts/crown-battle/layout-*.jpg

@@ -1,0 +1,78 @@
+Ball Multiplier — 2026-10-14
+
+Reference: screenshots supplied by the user, especially 104045.
+Black portrait scene, purple circle, flat colorful balls, English title.
+Ball-ball collision creates one ball at a random free location anywhere
+inside the circle. Continuing contacts do not create repeated births.
+Wall spawning is optional. Default: 5 initial balls, radius 7, limit 800,
+45-second simulation. Dense ending typically reaches about 700 balls;
+the requested limit is a ceiling, never a reason to overlap new balls.
+Channel selection keeps the shared @ handles; export defaults to 144 FPS.
+
+Implementation: src/ball-multiplier*.js, ball-multiplier.html and CSS.
+Physics is fixed 120 Hz with a spatial grid and three separation passes.
+Browser preview and video use the same engine and seed. Floating-point
+differences across JS engines can affect late chaotic trajectories;
+replay is deterministic within the same engine.
+
+Checks:
+- tests/ball-multiplier.mjs: births, resting contact, optional wall births,
+  deterministic replay, normalization, filled ending and confinement.
+  Node default: 707 balls, maximum final overlap 0.124 logical pixels.
+- tests/ball-multiplier-video.mjs: mobile, pause, channel, queue settings,
+  144 FPS default, render/probe agreement, sound, actual local MP4.
+  Small encode uses 720x1280 at 12 FPS, 7 seconds including ending.
+- Browser benchmark at ~694 balls: physics + drawing mean 6.6 ms/frame,
+  p95 8.5 ms; this measures work, not guaranteed display FPS.
+- Existing factory, English output and game sound director tests passed.
+- Vite production build passed (existing large-chunk advisory remains).
+
+Local entry: http://127.0.0.1:5180/ball-multiplier.html
+The active factory already advertises multiplier-production. Do not
+restart it during another game's video render. Port 5174 may need the
+factory relaunched with MARBLE_STUDIO_PORT=5174 for cross-origin export;
+the entry above uses the service's own origin and does not need that.
+
+2026-10-14 update (supersedes the dense stationary ending above):
+- Chaos begins at 43% area coverage, population limit, or duration minus finale.
+- Absorption is paced over 70% of a 7-second finale (short clips use half duration).
+- Remaining 30% expands the largest ball to fill the circle, then stops.
+- Default seed peaks at 486 balls; 485 are consumed; finishes at 13.075s.
+- English Music & sound menu uses installed manifest, volume, preview, collision melody.
+- Music/style persist in snapshots and exports; music and effects export enabled.
+- Physics tests, browser/music/pause/mobile tests and music-attributed MP4 passed.
+- Latest video artifact: artifacts/multiplier-video-1791966544086.
+- Production rebuilt and idle factory safely restarted with port 5174 allowed.
+
+2026-10-14 population and existing sound menu correction:
+- Default limit 2000, selectable maximum 3000. Previous saved 800 default upgrades once.
+- Removed 43% coverage early finale. Balls gradually shrink to provide space as population grows.
+- Default seed reaches 2000 (15.142s including finale); maximum test reaches 3000.
+- Connected shared game-sound-panel: complete presets, recorded effects, per-event overrides and previews.
+- Overrides persist in snapshots and feed the video sound director; background music remains available.
+- Physics, browser/mobile/queue/manual audio, actual MP4, shared sound and factory tests passed.
+- Production build and idle service restart done; live 5180 checked for 2000/3000 and shared sounds.
+- MP4 artifact: artifacts/multiplier-video-1791966950335.
+
+2026-10-14 full-colour finale redesign:
+- Replaced absorption into one ball with a six-second vortex, centre-to-rim bloom and ring pulse.
+- All existing balls and eight colours survive; unique packed positions fill the circular arena.
+- Finale cues use the existing manual sound mappings. Default 2000 / maximum 3000 remain.
+- Physics passed: 2000/3000 reach their limits, finite states, deterministic replay, full sampled coverage.
+- Browser controls, music, mobile layout, export settings and actual 7-second MP4 passed.
+- Build passed (existing chunk-size warning); idle production service restarted and smoke checked.
+- Visual contact sheet: .cache/multiplier-finale.jpg.
+- MP4 artifact: artifacts/multiplier-video-1791977755486.
+
+2026-10-14 Ball Multiplier lag reduction:
+- Reused typed spatial buckets; squared-distance rejection avoids unnecessary roots and contact keys.
+- Replaced thousands of canvas paths with an antialiased pixel buffer; cached settled balls.
+- Preview resolution follows displayed size/DPR, capped at 1080 wide. Preview painting capped at 60 Hz; video FPS unchanged.
+- Paused/finished previews stop repainting; resize, title and channel changes invalidate correctly.
+- Physics tests passed; default 2000 / maximum 3000 remain. Four-stage visual contact sheet reviewed.
+- Browser/music/mobile/export and actual 7-second MP4 encode/decode passed: artifacts/multiplier-video-1791979241259.
+- Build passed with existing chunk-size warning. Idle production service restarted; 5180 smoke test passed.
+- Production 3000-ball playback, finish/pause idle checks, resize and channel invalidation passed.
+- Local headless timings vary; no guaranteed FPS claim. Production paint intervals median 14 ms / p95 76.5 ms under test conditions.
+- Forced-readback 810x1440 benchmark: 3000-ball bloom mean 52.3 -> 40.01 ms, dense physics mean 7.85 -> 4.01 ms; preview normally renders at a smaller display size.
+- Benchmark files: .cache/multiplier-perf-before.json and .cache/multiplier-perf-raster.json. Network consumption was not measured.

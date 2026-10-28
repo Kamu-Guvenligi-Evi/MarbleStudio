@@ -1,0 +1,54 @@
+KAMERA, HARİTA VE FPS — 14 EKİM 2026
+
+Sorun: kamera sınırları görünen 600x960 alanla aynıydı; %100'de sürükleme
+konumu tekrar merkeze kilitliyordu. Harita ile görünüm sınırları ayrıldı.
+Ana oyun sekmesiyle dosya sahipliği önceden paylaşıldı. Motoru ana sekme,
+renderer/kamera/app/testleri bu sekme düzenledi; katalog ve sprite sanatı korunur.
+
+Canlı oyun expandedMap:true kullanır: x=-300..900, y=-480..1440; en ve boy
+iki kat, toplam alan dört kat. İlk kamera/asker ölçeği ve konuşlanma korunur.
+Motorun varsayılan klasik 600x960 davranışı ve ordu kayıt biçimi korunur.
+Emir koordinatları, arazi, kamera sınırları ve kayıt görünümü yeni haritayı kullanır.
+
+PC: ok tuşları, orta fare sürükleme, Alt+sürükleme veya Gezin düğmesi.
+Tekerlek imlecin çevresinde yakınlaştırır. Harita tüm alanı %50'de gösterir;
+yüzde düğmesi başlangıç %100 görünümüne döner. Formlarda oklar kamerayı oynatmaz.
+Telefon: iki parmakla kaydırma/yakınlaştırma; 9:16 görünüm korunur.
+Kamera hareketleri seçim/emir vermez. Dokunmatik hedef saldırısı parmak kalkınca
+uygulanır; ikinci parmak gelirse iptal edilir. Tek dokunuş saldırısı korunur.
+
+FPS: görünüm dışı mermi/efekt/komutan etiketi çizimi atlanır. Kare sprite Map'i
+yeniden kullanılır. Atlaslar yalnız görünür sprite+gölge sınırından çizilir;
+boş şeffaf kenarlar çizilmez, çözünürlük veya animasyon karesi azaltılmaz.
+972 piksel karşılaştırmasında çizilen kaynak alanı %69 azaldı; bu FPS ölçümü
+değildir. En büyük renk farkı 2/255 (bilinear). Atlas bellek sınırı korunur.
+Önceki beklemede sıfır çizim optimizasyonu korunur.
+Ana sekme ayrıca komşu arama ve rol/radius hesaplarını sadeleştirdi;
+4000 askerde 3 çift koşunun durum hash'leri eşit olduğunu bildirdi.
+
+Bu sekmenin dosyaları: src/crown-battle-{renderer,camera,app,sprite-cache}.js,
+src/crown-battle-camera.css, tests/crown-battle-{camera,performance}-browser.mjs,
+tests/crown-battle-sprite-crop-browser.mjs (yeni) ve bu not.
+Ana sekmenin ilgili motor dosyası: src/crown-battle.js.
+
+PASS: camera PC1366/telefon390; %100 pan, ok/form, pinch, hedef saldırısında
+iki parmak iptali/tek dokunuş, geniş alana emir, tarayıcı hatası yok.
+PASS: layout altı ekran boyutu ve gerçek dokunmatik hareket/dur/saldır.
+PASS: crop 972 piksel karşılaştırması, fps-menu/bellek sınırı, pc-visuals,
+hit-test 144 kontrol, teams PC/telefon, klasik browser/WebM kontrolleri.
+Ana sekme: son atlasla 34 temas/saldırı/ölüm browser kontrolü PASS bildirdi.
+Üretim derlemesi PASS 3.67 sn; mevcut >500 kB paket uyarısı sürer.
+
+Final izole headless Chrome: 1000x540, DPR1, geniş harita, her asker sayısı ayrı
+sayfa, 80 RAF/ilk20 ısınma; her RAF'ta bir 1/30 simülasyon adımı.
+Asker   Medyan adım   Medyan çizim   Ölçülen döngü FPS
+320       1.4 ms        0.8 ms          144.0
+2000     26.5 ms       12.1 ms           18.0
+4000     58.9 ms       36.1 ms           11.6
+Koşular arasında süreler oynak; önceki testlere göre kesin FPS artışı iddia
+edilmez. Kullanıcının donanımındaki gerçek oyun FPS'si değildir. Özellikle
+4000 askerde motor ve çizim hâlâ pahalı; akıcılık sorunu tamamen çözülmedi.
+Haritayı uzaklaştırmak daha çok askeri görünür yapar. WebM ek çizim yükü taşır.
+Kanıt: artifacts/crown-battle/performance-map-final.json, camera-map-build.log;
+tekrarlanabilir testler tests altında. Ölçüm için aynı Node ile
+tests/crown-battle-performance-browser.mjs <çıktı.json> --expanded çalıştırılır.

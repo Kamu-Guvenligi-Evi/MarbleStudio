@@ -1,0 +1,49 @@
+Small reversible visual trial — 2026-10-15
+
+User requested a very small group before deciding whether to keep the visual direction.
+URL: http://127.0.0.1:5173/crown-battle-visual-lab.html
+Main battlefield bar links to the trial in a separate tab. Production art and saved armies are untouched.
+
+Scope: 6 vs 6 samurai, using the existing Battle, BattleRenderer and BattleFeedback.
+New code-native samurai artwork: lit lacquer/steel planes, layered/laced armor, articulated legs,
+two-handed sword preparation/contact/recovery, 8 walk/attack poses, 3 subtle variants, both teams.
+Sprites are cached; no new downloads, images, dependencies, engine rules or crowd FPS changes.
+This is a perspective/shading study, not a completed isometric engine or full army conversion.
+Death continues to use the existing renderer; no new death/hurt animation claim.
+
+UI: Current/New buttons preserve the exact simulation; start/pause, restart, half speed,
+close/wide camera and a magnified pair of animated comparisons. No localStorage writes.
+Back-to-game link discards the trial. To remove the trial altogether remove its main-page link,
+the crownStudy Vite input and the four crown-battle-visual-lab / samurai-study files.
+
+Files: crown-battle-visual-lab.html, src/crown-battle-visual-lab.js/.css,
+src/crown-battle-samurai-study.js; one link in crown-battle.html and one Vite input.
+Verification: scripts/battle-visual-study-preview.mjs PASS — 12 units, A/B state preservation,
+play/pause/reset, real combat damage and finite coordinates, desktop/mobile no overflow,
+existing army save unchanged, no browser errors. Full fight ended at 8.32 simulation seconds.
+Preview: artifacts/battle-visual-study/desktop.jpg (115470 bytes), mobile.jpg (54514 bytes).
+Desktop preview visually inspected. Build PASS; existing >500 kB chunk warning remains.
+No physical GPU benchmark claimed. User liked the samurai trial and requested Hussar + Sauron next.
+
+Extension completed 2026-10-15:
+- src/crown-battle-elite-study.js: hand-drawn Hussar and Sauron, shared pose cache.
+- Picker retains samurai 6v6; Hussar 3v3; Sauron 1v1 using actual me_sauron ID/stats.
+- Direct links #hussar / #sauron; hash changes switch and reset the paused trial.
+- Hussar: articulated horse, feathered wings, steel cuirass, patterned saddle cloth,
+  leopard pelt, articulated rider and lance. Sauron: dark engraved plates, crown/mask,
+  cloak, lifted steps, flanged mace with windup/contact/recovery.
+- No production art/engine/renderer changes. Existing Middle Earth art tab notified.
+- Fixed earlier main-page link integration bug: stage-view-label restored and resizeBattle
+  uses its stable ID instead of a last-child selector that no longer matched.
+- Latest preview script PASS: all three studies, exact A/B state preservation, reset,
+  play/pause, both elite fights completed (12.07s / 41.48s simulation), mobile layout,
+  localStorage unchanged inside trial, hash navigation/reload, main app startup/resize.
+- 68 elite poses: no cropped boundary pixels; distinct walk/attack poses; variants reuse cache.
+- Desktop Hussar/Sauron screenshots inspected; Hussar row spacing reduced after finding
+  upper wings too close to viewport edge. Screenshots in artifacts/battle-visual-study/.
+- Latest build PASS (existing >500 kB chunk warning). Logs: test-elite.log, build-elite.log.
+- Remove elite-study.js too if removing this isolated trial. Keep stage-view-label fix.
+2026-10-15 — Kullanıcı düzeltmesi: "eski halleri daha iyi".
+Hussar ve Sauron denemeleri mevcut SpriteLibrary görsellerine döndürüldü. Yeni çizim karşılaştırması bu iki seçimde kaldırıldı; küçük savaşları korunuyor. EliteStudyLibrary artık deneme sayfasında yüklenmiyor; kaynak yalnız eski deneme olarak duruyor.
+Beğenilen samuray çizimi ve A/B seçimi korundu. Ana oyun görselleri değiştirilmedi. Görsel sekmesine bu tercih bildirildi.
+Doğrulama PASS: üç savaş, eski görsel kitaplığı seçimi, samuraya dönüşte yeni çizim, başlat/duraklat/sıfırla, mobil taşma, kayıtlı ordular, doğrudan bağlantı, ana oyun açılışı/yeniden boyutlandırma. Vite build PASS (mevcut parça boyutu uyarısı).

@@ -17,7 +17,6 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 $archive = [IO.Compression.ZipFile]::Open($Destination,[IO.Compression.ZipArchiveMode]::Create)
 try {
     $folders = @('src','public','scripts','node_modules')
-    if (Test-Path -LiteralPath (Join-Path $projectRoot 'work-videos')) { $folders += 'work-videos' }
     $files = @((Get-ChildItem -LiteralPath $projectRoot -Filter '*.html' -File).Name) + @('vite.config.js','package.json','package-lock.json','Baslat.cmd','Start-Factory.cmd','Start-Studio.ps1','README.md','FACTORY.md')
     foreach ($folder in $folders) {
         $base = Join-Path $projectRoot $folder

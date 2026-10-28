@@ -1,0 +1,30 @@
+Alliances / commander UI integration — 2026-10-15
+
+Main game: crown-battle.html (existing Vite server 127.0.0.1:5173).
+Up to eight independent armies on two alliances, each with armyId, roster,
+commander and deployment. Legacy two-army saves remain supported.
+New storage: marble-battle-alliances-v1. Explicit workshop launch replaces
+this plan with the workshop's two armies. Ordinary reload preserves it.
+
+Commander picker: portrait cards, Turkish name search, faction filter.
+Own-army commander following and tactics are isolated by armyId.
+Special doctrines retain their formations. Otherwise a commanded army gets
+a role/threat-based opening formation, released by contact or after 5 seconds.
+This generic fallback is not continuous mid-battle formation replanning.
+Manual orders take priority. Tactic labels identify each army in the command UI.
+
+Reported size reset fixed: rebuilding planner cards remounted preset inputs at
+the minimum. presetSize now persists independently per army, including a size
+draft before clicking create. Rebuilding cards preserves expanded preset panels.
+Old saves infer initial preset size from existing roster totals.
+
+Root checks passed: crown-battle-alliances, crown-battle-deployment,
+historical-commander-movement, crown-battle-tactical-visuals,
+historical-commanders-battle-browser (all 19 commanders),
+crown-battle-alliances-browser (2v2, independent selection, reload, 320/390px,
+200/350 preset-size regression, reapply and battle restart).
+Final local Vite production build passed (14.66s; existing large-chunk warning).
+Tactics/preset owners also verified commander-formations, multi-army tactics,
+contact, civilization, opponent AI, Turan charge and mixed army presets.
+Local browser tests block Vite HMR websocket to avoid unrelated live edits
+closing dialogs mid-test; application HMR is unchanged.

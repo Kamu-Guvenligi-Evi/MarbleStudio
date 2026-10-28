@@ -1,0 +1,44 @@
+.army-search{position:sticky;top:-16px;z-index:3;background:#18221c;padding:10px 0;margin:10px 0;border-bottom:1px solid #46523c}
+.army-search-field{display:flex;gap:5px}
+.army-search-field input{width:100%;min-width:0;font-size:13px;padding:10px}
+.army-search button,.roster-stepper button{border:1px solid #53614b;border-radius:5px;background:#29352b;color:#f0e6c9;cursor:pointer;min-height:36px}
+.army-search-field button{min-width:36px;font-size:20px}
+.selection-tools{display:flex;gap:6px;margin-top:7px}
+.selection-tools button{flex:1;font-size:12px}
+.selection-tools button[aria-pressed=true]{background:#535b33;border-color:#d4bf73}
+.selection-summary{font-size:11px;color:#d3c59e;margin:7px 0 0}
+.command-team-label{display:grid;gap:5px;margin:0 0 9px;font-size:12px;color:#e5d7b5}
+.command-team-label select{width:100%;min-height:44px}
+.field-team-selection{display:flex;gap:6px;margin-bottom:6px}
+.field-team-selection button{flex:1;min-width:0;min-height:36px;border:1px solid #528a9a;border-radius:5px;background:#203c49;color:#d9f3ff;cursor:pointer;font-size:12px;padding:6px}
+.field-team-selection #select-red-army{border-color:#b56158;background:#512e2c;color:#ffe0d7}
+.field-team-selection button[aria-pressed=true],.field-team-selection button[aria-pressed=mixed]{outline:2px solid #e1c779;outline-offset:-3px}
+.field-team-selection button:disabled{opacity:.45;cursor:default}
+@media(max-width:899px){.field-team-selection button{min-height:44px}}
+.army-search button:disabled{opacity:.45;cursor:default}
+.unit-grid,.historical-mode .unit-grid{grid-template-columns:1fr;gap:6px}
+.unit-grid button,.historical-mode .unit-grid button{display:grid;grid-template-columns:44px 1fr;align-items:center;column-gap:10px;text-align:left;min-height:62px;font-size:13px;padding:7px 10px}
+.unit-grid button .unit-portrait,.unit-grid button .reference-portrait{grid-column:1;grid-row:1/3;width:42px;height:46px;margin:0;object-fit:contain}
+.unit-grid button small{grid-column:2;font-size:10px;margin-top:3px;line-height:1.5}
+.unit-grid button[aria-pressed=true],.unit-grid button[aria-pressed=mixed]{box-shadow:inset 4px 0 #e1c779;background:#3b452e;border-color:#c0ac67}
+.unit-grid button[hidden],.roster-row[hidden],.selection-empty[hidden]{display:none}
+.roster-active-filter{display:flex!important;align-items:center;gap:8px;font-size:12px!important;margin:8px 0 0!important}
+.roster-active-filter input{width:18px!important;min-height:18px!important;height:18px;accent-color:#d9c786}
+.army-builder .roster-head{display:none}
+.army-builder .roster-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:10px 0}
+.roster-row>label{grid-column:1/-1;font-size:13px;gap:8px}
+.roster-stepper{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}
+.roster-stepper>span{grid-column:1/-1;font-size:10px;color:#a4c9d7}
+.roster-stepper:nth-child(3)>span{color:#d7a294}
+.roster-stepper input{grid-column:1/-1;min-height:34px}
+.roster-stepper button{font-size:18px}
+.roster-stepper button:last-child{color:#f5b4a1}
+.roster-stepper button:disabled{opacity:.4;cursor:default}
+.roster-amount{display:flex;align-items:center;gap:10px;margin:8px 0 0;font-size:12px}
+.roster-amount select{flex:1;width:auto;min-width:0;font-size:12px}
+.setup-actions[data-pending=true]{border-color:#d3b56e;background:#332f20;padding:10px;border-radius:6px}
+.setup-actions[data-pending=true] .small-note{color:#f2dc9c}
+#army-setup-shortcut{width:100%;min-height:40px;border:1px solid #7d8956;border-radius:6px;background:#303e29;color:#eee0ae;cursor:pointer;margin-bottom:6px}
+#apply{position:sticky;bottom:0;z-index:4;box-shadow:0 -5px 12px #172019}
+#return-to-field{display:none}
+@media(max-width:899px){.army-search{top:-13px}.army-search button,.roster-stepper button{min-height:44px}.unit-grid button{min-height:66px}#return-to-field{display:block;width:100%;margin-top:8px;color:#e1cf95}}

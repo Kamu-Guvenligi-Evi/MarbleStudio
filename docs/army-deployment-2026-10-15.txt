@@ -1,0 +1,43 @@
+15 Ekim 2026 — Ayrı ordu yerleşimi / komutan ve oyuncu önceliği
+
+Sorun: ArmyConfigs orduları sabit 650 px alana sıkıştırıyordu. Ordu/birlik
+sayısı büyüdüğünde asker aralığı gövde boyunun altına düşüyordu. Kayıtlı
+otomatik konumlar yeni ordu sayısında tekrar yükleniyordu. Elle konuşlanma
+tacticalOverride işaretlemediği için komutan açılışı oyuncu düzenini bozabiliyordu.
+
+Değişen kaynaklar:
+- src/historical-army-deployment.js: Tek seferlik O(n) yerleşim; gövde çapına
+  göre aralık, ordular arasında 100 px, gerekli harita genişlemesi. Komutanlı
+  orduda yakın dövüş önde, yaya menzilliler arkada, atlılar ayrı kanatta.
+  Komutansız orduda yalnız tür blokları; tarihî taktik yetkisi verilmez.
+- src/crown-battle.js: ArmyConfigs oluşturulduğunda yeni yerleşim; oyuncu
+  deploySelected işlemi tacticalOverride=true yapar.
+- src/crown-battle-deployment.js: Otomatik konumları güncel sayılara göre
+  yeniden kurar; elle düzenlenen konum ve yönü kaydeder/korur. Eski manuel
+  kayıtlar headingX üzerinden tanınır. Birlik ve ordu kimlikleri değişmedi.
+
+Doğrulama (tamamı PASS):
+- tests/historical-army-deployment.mjs: 2/4/8 ordu, ordu başına 24/240/1000
+  asker, ters oluşturma sırası, fil ve komutansız ordu; başlangıç gövdeleri
+  çakışmıyor ve sınırlar içinde. Manuel öncelik, müttefik bağımsızlığı,
+  kayıt dönüşü, eski otomatik yığılmanın onarımı ve sayı değişikliği.
+- tests/historical-army-deployment-browser.mjs: Chrome, 1366x900;
+  484 birlik/4 ordu çizimi; 30 saniye savaşta 390 yaralı, tüm konumlar sonlu.
+  Yerel görsel kontrol: artifacts/army-deployment/start.jpg (45 KB).
+- crown-battle-alliances, crown-battle-deployment,
+  historical-commander-formations, historical-multi-army-tactics,
+  crown-battle, historical-combat, historical-turan-horse-archers,
+  crown-battle-alliances-browser testleri PASS. Klasik mod dahil.
+- artifacts/check-army-goals.mjs: 24/240/1000 kişilik 2v2 orduda genel
+  komutan açılış hedefleri müttefik ordu hedefleriyle çakışmıyor.
+
+Sınırlar: Bu düzeltme başlangıç yerleşimi içindir; savaş sırasında safların
+birbirine temas etmesi ve karışması mümkündür. Oyuncunun bilerek verdiği
+çakışan düzen otomatik taşınmaz. Çok büyük ordular haritayı büyütür; uzak
+kamera görünümünde askerler küçük görünebilir. Mevcut komutan planlayıcısı
+sığmayan özel formasyonu atlayabilir (1000 kişilik örnekte süvari kaması);
+başlangıçtaki ayrılmış atlı bloğu korunur. Her karede yeni tüm-çiftler taraması yok.
+
+Koordinasyon: Ana sekmeye ve araştırma sekmesine kapsam/stabil kaynaklar
+bildirildi. Arayüz, birlik kataloğu, görseller ve tarihî taktik kaynakları
+bu iş kapsamında değiştirilmedi.

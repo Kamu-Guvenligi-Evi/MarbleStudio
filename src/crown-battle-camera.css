@@ -1,0 +1,12 @@
+.battle-camera{position:absolute;top:12px;left:12px;z-index:2;display:flex;gap:3px;padding:4px;background:#101b18e8;border:1px solid #65705a;border-radius:7px;box-shadow:0 3px 12px #0005}
+.battle-camera button{min-width:32px;height:32px;border:0;border-radius:4px;background:#26392e;color:#f2e4bb;font-size:14px;cursor:pointer}
+.battle-camera #zoom-reset{min-width:50px;font-size:12px}
+.battle-camera #pan-view{font-size:11px;padding:0 9px}
+.battle-camera #fit-map{font-size:11px;padding:0 9px}
+.battle-camera #follow-battle{font-size:11px;padding:0 9px}
+.camera-help{position:absolute;top:100%;left:0;margin-top:5px;white-space:nowrap;font-size:10px;color:#e7e4cb;background:#101b18cc;padding:4px 6px;border-radius:3px;pointer-events:none}
+.battle-camera button:disabled{opacity:.4;cursor:default}
+.battle-camera button[aria-pressed=true]{background:#65613b}
+#battle.panning{cursor:grab}
+#battle.panning:active{cursor:grabbing}
+@media(max-width:899px){.battle-camera{top:auto;bottom:45px;left:50%;transform:translateX(-50%)}.battle-camera button{height:40px;min-width:38px}.camera-help{display:none}}

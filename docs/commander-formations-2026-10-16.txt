@@ -1,0 +1,57 @@
+Taç Muharebesi — komutan dizilişleri, 16 Ekim 2026
+
+Uygulanan davranış
+
+- Özel doktrini olmayan komutanlar birlik türlerine göre saf kuruyor:
+  mızraklı merkez, yanlarında diğer piyadeler; merkezi ilerleme yolunun
+  dışında iki atıcı grubu; iki kanatta kama düzenindeki yakın dövüş
+  süvarileri; onların dışında ayrı atlı okçu perdeleri; filler için ayrı hat.
+- En az 48 piyadeli ordularda piyadenin yüzde 20'si başlangıç ihtiyatı.
+  Bu, temas sonrasında bağımsız ihtiyat yönetimi anlamına gelmiyor.
+- Diziliş tamamlanınca birlikler ortak hızla hedefe ilerliyor. Atıcının
+  menzile girip ateş açması tek başına bütün orduyu dağıtmıyor. Yakın
+  dövüş/şarj mesafesinde normal savaş davranışı devralıyor.
+- Harita kenarında bütün düzen birlikte kaydırılıyor; ayrı grupların
+  kenara sıkışarak birbirine binmesi önleniyor. Düzen alana sığmazsa
+  olağan savaş davranışı kullanılıyor.
+- Büyük haritada hazırlık süresi yolculuk mesafesine göre 5–25 saniye.
+  İlerleme 8 saniye tıkanırsa veya 60 saniyeyi aşarsa düzen bırakılıyor.
+  Oyuncu emirleri, komutan kaybı ve diğer taktiklerin önceliği korunuyor.
+- Condotta ihtiyatının ve Alman mızrak desteğinin ön saflarla çakışması
+  düzeltildi. Japon okçular geri çekilirken saflarının derinliğini koruyor.
+- Taktik etiketi hazırlık ile birlikte ilerleme aşamalarını ayırıyor.
+
+Kaynaklar
+
+src/historical-commander-deployment.js
+src/historical-commander-formations.js
+src/historical-civilization-tactics.js
+src/crown-battle-tactical-visuals.js
+
+Doğrulama
+
+- historical-commander-deployment: 33 test başarılı. Dört yön, merkez ve
+  harita kenarı; çakışmayan slotlar, birlik kapsamı, kanatlar, ihtiyat,
+  atış koridorları; 10 doktrinin 96/240 kişilik yerleşimleri; birlikte
+  ilerleme, emir önceliği, temas ve tıkanma; Japon okçu geri çekilmesi.
+- historical-doctrine-spacing: 40 doktrin savaşı ve 22 genel komutan
+  savaşı doğal olarak sonuçlandı; 44 komutan/emir kontrolü ve 10 sınırlı
+  hazırlık başarısızlığı kontrolü geçti.
+- historical-deployment-spacing: 12 savaş ve sabit düşman senaryosu geçti.
+  Test artık hazırlanma anını assemble -> advance geçişinde ölçüyor.
+  Düzenli rakip takip etmiyorsa Turan'ın sınırlı yeniden toplanması geçerli.
+- Doktrin hazırlık ölçümü mevcut perde değişimi/atışa yol verme davranışını
+  ve Qin'in yakın düşman nedeniyle zorunlu geri çekilmesini hesaba katıyor.
+- Diğer geçen betikler: historical-commander-formations,
+  historical-commander-movement, historical-tactics-discipline,
+  historical-preparation-pressure, historical-multi-army-tactics,
+  historical-tactics-contact, crown-battle-formations,
+  historical-civilization-tactics, historical-commander-tactics,
+  historical-turan-horse-archers, crown-battle-fire-discipline (32 test).
+- Vite üretim derlemesi başarılı (343 modül). 500 kB paket uyarısı sürüyor.
+- Çıktılar: artifacts/commander-formations/
+  Savaş raporu: artifacts/npc-routing/doctrine-spacing-commander-formations-final.json
+
+Bu düzenler oyun ölçeğinde birlik rollerine dayanan yorumlardır. Tarayıcıda
+görsel inceleme veya tarihsel birebirlik doğrulaması yapılmadı. Paket indirme
+ve harici ağ taraması yapılmadı; testler yerel çalışma zamanıyla çalıştırıldı.

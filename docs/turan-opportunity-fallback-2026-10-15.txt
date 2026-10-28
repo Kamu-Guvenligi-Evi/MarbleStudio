@@ -1,0 +1,66 @@
+Turan başarısız plan ve normal muharebeye dönüş — 15 Ekim 2026
+
+Kapsam ve eşgüdüm
+- Bütün komutanların hazırlık düzeltmesi ayrı notta:
+  docs/all-commander-preparation-2026-10-15.txt.
+- Araştırma sekmesinin devrettiği kalan Turan davranışı tamamlandı.
+  Motor dosyasının sahipliği ana ve araştırma sekmeleriyle paylaşıldı.
+- Değişen dosyalar: src/historical-tactics.js,
+  tests/historical-turan-opportunity.mjs, tests/historical-turan-fallback.mjs,
+  bu not. Preset, katalog, arayüz ve görsel dosyaları bu işte değiştirilmedi.
+
+Bulgu ve uygulama
+- Hayatta kalan asker sayısı kontrolü, çok sayıda yaralı fakat az ölü bulunan
+  ordunun ağır hasar altında hazırlık yapmasını engellemiyordu.
+- Başlangıçtaki toplam canın %10'u kaybedildiğinde hazırlık veya yeniden
+  toplanma bırakılıyor. Önceden var olan yaralar bu kayba sayılmıyor.
+- Başarısız ricat/kuşatma bu kayıp düzeyindeyse eski toplanma noktasına
+  yürümek yerine doğrudan normal muharebeye dönülüyor. Hazırlıksız merkeze
+  erken temas da aynı şekilde savunmaya bırakılıyor.
+- İşleyen ricat/kuşatma yalnız bu hasar eşiğiyle kesilmiyor; gerçek takip,
+  fiziksel kanat kapanması, kuvvet ve süre sınırları korunuyor.
+- Birlik güçleri değiştirilmedi. Kontrol mevcut yarım saniyelik ordu kararında
+  doğrusal üye taraması yapıyor; her kare tüm asker çiftlerini karşılaştırmıyor.
+
+Doğrulama
+- Sabit eski kadrolar, seed42/93, iki yön, kompakt/geniş, plan açık/kapalı:
+  16 savaş PASS; hepsi doğal imhayla bitti. Ağır hasarlı hazırlık bir sonraki
+  ordu kararında bırakıldı. Rapor: artifacts/commander-balance/
+  turan-opportunity-current.json; eski rapor turan-opportunity-before.json.
+- Plan açık bırakma anındaki kalan can: kompakt önce %53,35–69,80,
+  sonra %88,64–89,54; geniş önce %60,46–64,93, sonra %89,07–89,66.
+  Eski rapordaki maxRiskTime daha geniş faz kümesini ölçtüğünden o metrik
+  doğrudan önce/sonra karşılaştırılmamalı.
+- Sabit karşılaşmada galibiyet artmadı: açık plan kompakt 0/4, geniş 0/4;
+  kapalı plan kompakt 3/4, geniş 4/4 Alparslan galibiyeti. Erken vazgeçme
+  düzeltmesi taktik fırsat seçiminin bütünüyle çözüldüğü anlamına gelmiyor.
+- İki yönde mevcut yaralar, ağır hazırlık kaybı, başarısız takip/kapanış ve
+  erken merkez teması kontrolleri PASS; iptal sonrasında taktik emri kalmadı.
+- historical-turan-charge: 6 gerçek hücum senaryosu PASS.
+  historical-turan-horse-archers: 12 savaş ve emir/komutan kaybı PASS.
+- Son kaynakla dokuz regresyon PASS: historical-tactics,
+  historical-turan-interception, historical-tactics-discipline,
+  historical-tactics-contact, historical-commander-tactics,
+  historical-multi-army-tactics, historical-turan-pursuit,
+  historical-deployment-spacing, historical-turan-fallback.
+  Günlükler: artifacts/commander-balance/opportunity-*.log.
+- Güncel hazır ordularla historical-turan-effectiveness: 8 savaş PASS,
+  changedSources=[]; çalışma boyunca src JS/JSON hashleri sabitti.
+  Timur96: 48 timurid_horse_archer, 28 timurid_armored_lancer,
+  16 timurid_guard_cavalry, 4 timur.
+  Alparslan96: 48 seljuk_hassa, 32 seljuk_turkmen_archer,
+  16 seljuk_ghulam_archer. Açık/kapalı planda Timur 4/4 kazandı.
+  Açık plan 8,53–9,03 saniyede hasar nedeniyle normal muharebeye döndü;
+  kuşatma gerçekleşmedi. Yeni preset farklı olduğundan eski preset sonucu
+  ile kazanma oranı değişimi motor düzeltmesine atfedilemez.
+  Rapor: artifacts/commander-balance/turan-effectiveness.json.
+
+Tekrar çalıştırma
+tools/node-runtime/node-v24.21.0-win-x64/node.exe tests/historical-turan-opportunity.mjs
+tools/node-runtime/node-v24.21.0-win-x64/node.exe tests/historical-turan-fallback.mjs
+tools/node-runtime/node-v24.21.0-win-x64/node.exe tests/historical-turan-effectiveness.mjs
+
+Sınırlar
+- Bu iş kayıplı planı bırakmayı düzeltir; her rakibe uygun ilk planın seçildiği
+  veya her komutanın taktiğinin üstünlük sağladığı kanıtlanmadı.
+- Yeni tarayıcı görüntü değerlendirmesi/FPS ölçümü yapılmadı.

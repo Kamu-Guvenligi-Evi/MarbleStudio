@@ -1,0 +1,16 @@
+Formasyon boyutu - 2026-10-15
+
+Sahiplik formasyon sekmesi 01a13b51-ead4-7090-a516-86581873cf50 ile netlestirildi. Onun 10 formasyonu/rehberi korundu; motor, pathfinding ve taktik dosyalarina dokunulmadi.
+
+Degisiklikler: crown-battle-formations.js, crown-battle-formation-ui.js, crown-battle-formations.css.
+- scale .75..2.5; varsayilan 1 eski duzeni korur. Hat yalniz cephe boyunca boyutlanir; derinligi sabit. Cember ve diger sekiller boyutlanir.
+- Asker govdeleri icin minimum aralik korunur; bu nedenle buyuk govdeli birliklerde kucultme sinirlanabilir. Meydana sigmayan duzen uygulanmaz; boyutu kucultme mesaji verilir.
+- Kaydirici, +/- ve Boyutu uygula. Secili grubun mevcut sinir kutusu merkezinde yeniden yerlestirir; geri al destekli. Savasta teleport etmeden move emri verir.
+- Aktif yerlestirme onizlemesi boyutla birlikte guncellenir. controls.scale mevcut deployment kaydina eklenir; gercek asker konumlari da mevcut kayit akisi ile korunur.
+- Her karede yeni hesaplama yok; boyut degisikligi/yerlestirme uzerinden calisir.
+
+PASS: yeni crown-battle-formation-size.mjs (160 geometri, karma govde araligi, kucultme/buyutme, hat derinligi, kapasite).
+PASS: mevcut crown-battle-formation-layouts.mjs (1050 duzen, 30 guvenli ret).
+PASS: yeni crown-battle-formation-size-browser.mjs (1366/390; gercek oyun, cember/hat, geri al, karsi ordu korunmasi, +/- , canli onizleme, kayit/yenileme, mobil sigma, savasta hareket emri).
+PASS: mevcut crown-battle-formations-browser.mjs (1366/390, pinch dahil).
+PASS: Vite build 6.78s, mevcut buyuk chunk uyarisi. Log artifacts/formation-size-build.log.

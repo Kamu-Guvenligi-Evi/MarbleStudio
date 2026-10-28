@@ -1,0 +1,17 @@
+2026-10-15: Ball density and FPS update
+- Default density 1400 -> 4200 (4033 actual hex-grid balls); maximum 8000 (7681 actual).
+- Added 4200/6000/8000 density choices; retained legacy lower choices.
+- Existing browser preferences upgrade once to at least 4200 via densityVersion:2.
+  Subsequent user selections and imported project densities remain unchanged.
+- src/bounce-waves-gpu.js batches depth-sorted textured spheres in a single WebGL draw.
+  The canvas renderer remains the fallback when WebGL is unavailable or lost.
+  GPU state is cached per destination context, not per replay/game.
+- A trial with prescaled canvas sprites did not fix maximum-density stalls and was removed.
+- Validation: tests/bounce-waves.mjs passes, including all four modes at new densities.
+  tests/bounce-waves-browser.mjs passes: preference migration/persistence, max density,
+  controls/music/mobile, preview/export pixel equality and CPU/GPU appearance comparison.
+- Maximum-density 540x960 headless Chrome benchmark: median 4.8 ms, p95 7.4 ms.
+  Mean absolute CPU/GPU pixel difference: 0.00091 / 255.
+  Real app at deviceScaleFactor 2, 862x1532 canvas: about 60 game updates/sec over 5 s.
+  These are local measurements, not a guarantee for all devices.
+- Visual review: artifacts/bounce-waves-review/modes.png. Build log: density-build.log in same folder.

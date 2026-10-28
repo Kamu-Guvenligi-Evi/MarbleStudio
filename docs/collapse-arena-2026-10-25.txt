@@ -1,0 +1,111 @@
+Collapse Arena / Çöken Arena — 2026-10-25
+
+CURRENT USER CLARIFICATION: ball must PUSH fragments aside, not pass through.
+Persistent dynamic fragments: no expiry, fade, or offscreen deletion. Ball
+mask 4 / fragments mask 7, fragment density .00015 vs ball .009. Wall growth
+is now settings.growth * .2 (balanced radius increment 1 instead of 5).
+Ball restitution .2 against fragments; circular-wall normal restitution .8,
+tuned up from .65 at the user's request. Air drag .001. Spawn checks spike.
+Focused tests passed: actual reciprocal debris impulses, persistence after
+10 seconds, physical wall/debris filters, 80% wall bounce, slow growth,
+grazing debounce, swept triangle hit/miss and large-ball triangle contact.
+Earlier full-run/browser/MP4 results below are for earlier physics settings.
+
+REFERENCE RE-REVIEW (no simulation changes in this review):
+Reopened actual YouTube video, duration 84.341 s. Captured 12 new frames at
+8/8.3/8.6/8.9, 35/35.3/35.6/35.9, 50/50.3/50.6/50.9 seconds.
+Evidence: artifacts/universe-reference/review-motion.jpg (113998 bytes).
+Critical mismatch: large blue ball at 35.3 s fractures, new blue ball at
+35.6 s is SMALL. Current spawn preserves size, contrary to the reference.
+Fragments visibly accumulate across colors; four-second expiry is not faithful.
+Ball is visually in front of fragments in reference; drawing order alone is
+not proof of physical interaction. Exact impulse law cannot be recovered from
+these frames. Arena shrink is explicit in reference title, user prefers less.
+Prior tests prove implemented rules, not fidelity to reference mechanics.
+
+LATEST FIX: restore physical interaction with debris (supersedes pass-through).
+Ball mask 4 / debris mask 7: mutual impulses, sixfold ball density, 80-sided
+ball collider created at full size before scaling. Exact wall/triangle checks
+retained; wall correction path also sweeps the spike. Debris is never frozen:
+four-second lifetime with a final 0.6-second fade prevents an impassable pile.
+Debris renders after the ball/trail so they cannot paint over the fragments.
+Passed actual bidirectional momentum-transfer and debris-expiry tests, full
+completion matrix (66.80 / 188.22 / 40.43 s), browser and real MP4/full decode.
+Video: artifacts/collapse-arena/video/3b20a728-b307-4694-8e44-e209e45eaaf6/video.mp4
+
+PREVIOUS FIX: late-game penetration and growth at the triangle.
+Active ball uses exact circle containment and swept circle/triangle contact.
+Scaled low-sided Matter polygons and duplicate wall contact handlers removed
+from active-ball collisions. Triangle contact wins before wall growth; growth
+is rejected if the expanded circle would overlap the triangle. Wall growth
+rearms only after separation. Trail samples retain their original radius.
+Tests passed: triangle contact at radii 12/80/170 without growth, swept hit
+and near miss, grazing-wall debounce, no live triangle overlap or wall escape
+through full completion matrix (33.22 / 50.75 / 18.80 simulated seconds).
+Browser checks and real MP4/full decode passed (10 s):
+artifacts/collapse-arena/video/79dec540-4be5-40da-b615-6bda29448085/video.mp4
+
+PREVIOUS CORRECTION: growth is triggered by wall bounces, not broken balls.
+The same Matter body scales on a wall hit; overlapping wall segments are
+debounced so one bounce counts once. Triangle contact takes precedence.
+Respawns preserve the attained size without adding growth. Settings key v3.
+Tests passed: airborne ball never grows; one wall bounce grows 12 to 17;
+body identity preserved; break/respawn adds no size; triangle-only breaking;
+full completion matrix (31.07 s, 48.03 s, 18.51 s), browser and real MP4
+export/full decode (9 s, c6455647-af47-4ae9-b93a-b6d653cb025d).
+
+USER CORRECTION (supersedes implementation notes below):
+Only actual triangle collision breaks a ball; remove age/pressure/floor shortcuts.
+Triangle enlarged from 26x26 to 46x48; renderer uses exact collision vertices.
+Active ball category 2/mask 1 passes through all category-4 fragments.
+Each next ball grows by configurable 3–10 radius units (default 5), capped
+at 80% of arena radius. Arena shrinks only 0.35 units per break. Final starts
+after the largest ball hits the triangle; original final animation remains.
+Settings key v2 prevents old shrink title/settings carrying into the new UI.
+Completion matrix: default 34 breaks/50.30 s; growth 3 seed 1: 54/66.10 s;
+growth 10 seed 987: 18/34.69 s. Browser checks passed. Updated MP4 export and
+full decode passed (10 s): artifacts/collapse-arena/video/81d6ad18-e219-436b-97d7-e0cc04072047/video.mp4
+Regression checks cover stationary airborne ball, actual spike contact on
+every break, noncolliding fragments, increasing balls and slight contraction.
+
+Reference: https://www.youtube.com/shorts/mPMURc59KdQ
+CodeCraftedPhysics: Is that ending how the universe was made?
+Reference duration: approximately 84.34 seconds.
+Observed: black portrait background, white circular wall, bottom spike,
+successively larger rainbow-colored balls, angular fragments accumulating,
+wall shrinking with each break, final collapse and colorful radial burst.
+Sampled frames: 1, 8, 20, 35, 50, 65, 74, 81, 83 seconds.
+Local research: artifacts/universe-reference (small screenshots only).
+
+Implementation: collapse-arena.html, src/collapse-arena{,-renderer,-app}.js,
+src/collapse-arena.css. Studio navigation and shared MP4 workbench integrated.
+Original physics and audio are unavailable; this is a visual/mechanical adaptation.
+Bottom-spike trigger inferred from frames. Packed balls also break under pressure
+or a lifetime cap to prevent stalls. Latest 128 shards remain dynamic; older
+shards become sediment. Seeded randomness and fixed 120 Hz physics.
+Default: seed 42, shrink 5, 16 fragments; 42 breaks, 85.49 simulated seconds.
+Other verified cases: seed 1/shrink 3/fragments 8: 69 breaks, 133.13 seconds;
+seed 987/shrink 10/fragments 24: 21 breaks, 37.83 seconds.
+
+Validation: deterministic simulation, fracture area, parameter clamps,
+snapshot transfer, all three full completions; browser pause/replay/settings,
+mobile overflow, navigation, export dialog, iframe renderer completion.
+Real local MP4 export: 720p, 12 fps, 14 seconds, effects enabled; full FFmpeg
+decode passed. artifacts/collapse-arena/video/6357ed53-2101-42e9-b4f5-297d32834215/video.mp4
+Preview: http://127.0.0.1:5173/collapse-arena.html
+Tests: tests/collapse-arena.mjs, tests/collapse-arena-browser.mjs,
+tests/collapse-arena-video.mjs. No external upload performed.
+Final production build passed; existing large-chunk warning remains.
+Collapse repetition keys distinguish shrink/fragments/speed and ignore seed
+for similarity; focused assertions passed.
+Broader tests/factory.mjs did not pass: its legacy factory.html #output
+element is absent, failing at line 16 before renderer checks. The new game's
+browser and actual MP4 integration tests passed independently.
+
+Latest update: triangle 66x69, base offset 24. Removed low-speed force and hard speed cap; wall restitution remains 0.8 for impacts above 0.5, slow contact settles without growth. Focused tests passed including no artificial kick, unclamped free flight, and no micro-bounce. Full matrix not rerun for this update.
+
+Full-arena fix: track fragment area incrementally, trigger finale at 70% of usable arena area (including target shrink), guard spawn after finale. Fragments remain through collapse and all become finale sparks. Focused and full three-case matrix passed: seed42 51s/384 fragments; seed1 growth3 65.62s/288; seed987 growth10 35.7s/432. Runtime rebuilt/restarted, HTTP 200.
+
+Early-finish correction: replaced summed area threshold with visible union sampled on 40x40 grid, checked twice per second, requiring 90% coverage. Removed size-cap ending. Overlap/empty upper region/full arena regression tests passed. Full matrix passed: seed42 58.81s/480 shards; seed1 75.97s/336; seed987 39.49s/528. Build/restart succeeded; HTTP200.
+
+Performance: ball/debris collider 80->32 sides (wall/triangle still exact); shard wall restitution .98->.2, shard drag .006 and sleepThreshold30. Live frame budget 8ms/6 fixed steps drops accumulated debt under load; export stepping unchanged. Focused wake-on-contact and full matrix passed (60.33/73.97/39.49 sim seconds). Same synthetic 400-body scene mean step .264->.220ms, p95 .568->.444ms; not an FPS measurement. Browser animation/3x/pause/no-errors passed. Runtime rebuilt/restarted. Under overload preview slows rather than spending many steps on one frame.

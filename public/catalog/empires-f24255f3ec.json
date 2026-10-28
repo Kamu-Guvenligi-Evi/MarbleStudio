@@ -1,0 +1,18 @@
+{
+  "id": "empires-f24255f3ec",
+  "category": "empires",
+  "name": "Nazi Almanyası (sansürlü)",
+  "englishName": "Nazi Germany",
+  "fit": "flag",
+  "curated": true,
+  "historicalNote": "1933–1945 · tarihî devlet; sembol yerine sansür bandı kullanıldı",
+  "keywords": "Nazi Germany 1933–1945 · tarihî devlet; sembol yerine sansür bandı kullanıldı",
+  "identitySource": "https://en.wikipedia.org/wiki/Nazi_Germany",
+  "src": "/catalog/empires-f24255f3ec.svg",
+  "source": "https://en.wikipedia.org/wiki/Nazi_Germany",
+  "credit": "Marble Studio · sansürlü temsil",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "generated": true,
+  "censored": true
+}

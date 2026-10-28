@@ -1,0 +1,126 @@
+TAÇ MUHAREBESİ — TARİHÎ SEÇKİN BİRLİK ARAŞTIRMA DEVRİ
+Tarih: 14 Ekim 2026
+
+ANA DOSYA: docs/historical-elite-research-2026-10-14.json
+
+Kullanıcı kapsamı: kılıç, mızrak ve yay ağırlıklı dönemler; atlılar dahil.
+Bu çalışma araştırma ve görsel teslimidir. Görsel eşleştirmeleri
+src/historical-unit-visuals.json üzerinden oyun sekmesine aktarılır.
+Güncel görsel durumu: docs/historical-visual-handoff-2026-10-14.txt.
+
+TESLİM
+43 kayıt; 27 devlet/hane/tarikat veya tarihî bağlam etiketi; 38 kaynak bağlantısı.
+29 atlı temsil, 13 yaya temsil, 1 karma birlik.
+32 ana aday, 7 dönem/teçhizat doğrulaması gereken kayıt, 4 ayrı geçiş dönemi adayı.
+Bu sayılar benzersiz bağımsız alayların veya 27 modern ülkenin sayısı değildir.
+Devletler, alt bölükler, askerî sınıflar ve tarikatlar kind alanında ayrılır.
+15 araştırma adayı ayrıca bekleme listesinde. Dünya çapında tamlık iddiası yok.
+
+UYGULAMA YAPACAK YAPAY ZEKÂ İÇİN
+1. JSON içindeki scope ve sharedNotes alanlarını önce oku.
+2. units kayıtlarını sourceIds üzerinden kaynaklara bağla; kaynak URL'lerini kartta koru.
+3. equipmentDraft kesin üniforma tarifi değildir. Özellikle donanim_dogrulamasi
+   kayıtlarında silah, dönem ve görünüşü teyit etmeden son karakter üretme.
+4. gecis_donemi kayıtlarını ana antik/ortaçağ seçkisine otomatik ekleme.
+   Bunlar kullanıcının dar dönem seçimine göre ayrı bir genişleme grubudur.
+5. horse/foot/mixed alanlarını koru. Atlı okçu ve mızraklı süvari aynı davranış değil.
+6. gameplayProposals yalnız tasarım önerisidir; tarihî hasar/hız istatistiği değildir.
+7. existingCatalogReview, mevcut 14 başlıktaki genel asker türü/özel birlik ayrımını açıklar.
+   existingId değerleri eşleştirme ipucudur; mevcut kod şemasını okuyup gerçek ID'yi doğrula.
+8. pendingResearch maddelerini kanıtlanmış birlik gibi içeri aktarma.
+9. Görsel hedefi tam figür savaşçıdır; atlıda at ve binici birlikte görünmelidir.
+   visualResearchQueue aday listesidir. Kullanıma alınan çizimler ve lisansları
+   src/historical-unit-visuals.json içinde bulunur; bunlar animasyon sprite'ı değildir.
+
+KANITIN SINIRI
+Kurumsal ansiklopediler, müze katalogları, akademik kayıtlar ve antik metinlerden
+yararlanıldı. Bazı kaynakların yalnız arama dizinindeki ilgili bölümü görülebildi;
+access alanı özellikle erişim engelini ve tam metin okunmayan akademik kaynakları belirtir.
+Birliğin varlığına ilişkin kaynak, çizimdeki bütün ayrıntıları doğrulamaz.
+Tarih aralıkları çoğunlukla oyunda temsil edilecek seçkiyi anlatır; kuruluş/dağılma
+tarihlerinin eksiksiz kronolojisi olarak kullanılmamalıdır.
+
+KATALOĞUN DİZİNİ
+Durum: A=ana aday; D=ek dönem/teçhizat doğrulaması; G=geçiş dönemi eki.
+
+Osmanlı Devleti
+  [A] Sipah bölüğü — atlı
+  [A] Silâhdar bölüğü — atlı
+  [A] Ulûfeciyân-ı yemîn — sağ ulûfeciler — atlı
+  [A] Ulûfeciyân-ı yesâr — sol ulûfeciler — atlı
+  [A] Gurebâ-yi yemîn — sağ garipler — atlı
+  [A] Gurebâ-yi yesâr — sol garipler — atlı
+  [A] Solak muhafızları — yaya
+  [D] Erken dönem yeniçerisi — yaya
+Abbâsî Halifeliği
+  [A] Türk gulâm muhafızları — atlı
+Gazneli Devleti
+  [A] Gulâmân-ı saray — atlı
+  [A] Deylemli seçkin piyadeler — yaya
+Büyük Selçuklu Devleti
+  [A] Hassa gulâm süvarileri — atlı
+Anadolu Selçuklu Devleti
+  [D] Sultan gulâmları / hassa kuvvetleri — atlı
+Safevî Devleti
+  [G] Korçular / Qurchi — atlı
+  [G] Şah gulâmları / Qollar — atlı
+Eyyûbîler / Memlük Sultanlığı
+  [A] Bahriyye Memlükleri — atlı
+Memlük Sultanlığı
+  [A] Burciyye Memlükleri — atlı
+Moğol İmparatorluğu
+  [A] Keşik / Keshig — atlı
+İlhanlı Devleti
+  [A] Keşikten / Kešikten — atlı
+Ahameniş İmparatorluğu
+  [A] Ölümsüzler — yaya
+Part / Arsak İmparatorluğu
+  [A] Zırhlı aristokrat süvariler / katafraktlar — atlı
+Sâsânî İmparatorluğu
+  [A] Asvârân / Savârân — atlı
+Makedonya Krallığı
+  [A] Hetairoi — Yoldaş Süvarileri — atlı
+  [A] Hypaspistler — yaya
+Sparta
+  [A] Hippeis — seçilmiş muhafızlar — yaya
+Thebai
+  [A] Kutsal Birlik / Hieros Lochos — yaya
+Seleukos İmparatorluğu
+  [A] Argyraspides — Gümüş Kalkanlar — yaya
+Roma İmparatorluğu
+  [A] Praetorian Muhafızları — yaya
+  [A] Equites singulares Augusti — atlı
+Bizans İmparatorluğu
+  [D] Scholai — atlı
+  [D] Exkoubitoi / Excubitors — atlı
+  [D] Vigla / Arithmos — atlı
+  [D] Hikanatoi — atlı
+  [A] Varang Muhafızları — yaya
+Anglosakson İngiltere
+  [A] Housecarl / Huscarl — yaya
+Tapınak Tarikatı
+  [A] Tapınakçı şövalye kardeşler — atlı
+Hospitalier / Aziz Yuhanna Tarikatı
+  [A] Hospitalier şövalye kardeşler — atlı
+Töton Tarikatı / Tarikat Devleti
+  [A] Töton şövalye kardeşler — atlı
+Polonya-Litvanya Birliği
+  [G] Kanatlı hüsarlar / Husaria — atlı
+Ortaçağ Japonya'sı
+  [A] Atlı samuray — yaylı yoroi varyantı — atlı
+Ii Hanesi / Tokugawa kuvvetleri
+  [G] Ii Akazonae — Kırmızı Birlik — karma
+Meksika / Mexica (Aztek)
+  [A] Kartal savaşçıları — yaya
+  [D] Jaguar savaşçıları — yaya
+
+DOĞRULAMA
+JSON sözdizimi, benzersiz kayıt kimlikleri, kaynak/görsel bağlantı anahtarları ve
+durum/sınıf sayıları yerelde kontrol edildi: yinelenen kimlik veya eksik kaynak yok.
+Bu kontrol, dış bağlantıların sürekli erişilebilirliğini doğrulamaz. Oyun testi
+bu araştırma tesliminin bir parçası değildir.
+
+DEVİR CÜMLESİ
+docs/historical-elite-research-2026-10-14.json dosyasını araştırma kaynağı olarak oku.
+Önce ana adayları değerlendir; tarih, birlik türü ve atlı/yaya ayrımını koru.
+Eksik teçhizat ve görsel kanıtını uydurma; mevcut oyun şemasına kendin eşleştir.

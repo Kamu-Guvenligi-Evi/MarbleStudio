@@ -15,7 +15,7 @@ const faces={
   'Mao Zedong':[.51,.34,.76],
 };
 export function portraitFrame(item,img) {
-  const frame=item.category==='politicians'?faces[item.name]:null;if(!frame)return null;
+  const frame=item.portraitFrame??(item.category==='politicians'?faces[item.name]:null);if(!frame)return null;
   const [cx,cy,width]=frame,side=Math.min(img.naturalWidth*width,img.naturalHeight);
   return {side,x:Math.max(0,Math.min(img.naturalWidth-side,img.naturalWidth*cx-side/2)),y:Math.max(0,Math.min(img.naturalHeight-side,img.naturalHeight*cy-side/2))};
 }

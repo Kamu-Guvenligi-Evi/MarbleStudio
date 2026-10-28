@@ -1,0 +1,52 @@
+Taç Muharebesi: ikinci FPS turu — 15 Ekim 2026
+
+Uygulama:
+- src/crown-battle-sprite-batch.js: kalabalık yatay sahnede asker gövdelerini
+  sıralı WebGL2 doku dizisiyle tek drawArrays çağrısında çizer. Zemin, seçim,
+  komutan işaretleri, efektler ve arayüz Canvas2D tarafında kalır.
+- WebGL kullanılamadığında/kaybolduğunda veya bir görsel hazır olmadığında
+  mevcut Canvas2D çizimi kullanılır. Dikey video dışa aktarımı aynı yolu korur.
+- CPU atlas sayfalarından yalnız yeni yazılan bölgenin sınırlayıcı dikdörtgeni
+  GPU'ya aktarılır. Atlas en fazla 16 x 1024 x 1024; CPU sayfaları yaklaşık
+  64 MiB, ek GPU doku dizisi yaklaşık 64 MiB (diğer tamponlar hariç).
+- İlk görseli eksik tip/yönlere öncelik verilir; hazırlama sırası döndürülür.
+  Bütçe dolunca aynı tip/takım/varyant/yönün hazır pozu kullanılır.
+  Canlı/ölü pozlar ayrı tutulur. Emekli sayfa referansları temizlenir.
+- Savaş motorundaki ek 9-hücre denemesi tutarlı hızlanma sağlamadığı için
+  kaldırıldı. Önceki doğrulanmış motor optimizasyonları korunuyor.
+
+Kontrollü A/B:
+tests/crown-battle-renderer-performance.mjs, BASELINE=1 önceki renderer/cache.
+Chrome headless, sabit 1100x500 tuval, DPR1, seed1066, 1800 tarihi asker,
+başlangıçta yoğun temas, 180 kare; her kare tam 1/30s simülasyon adımı;
+60. karede 1.9x yakınlaştırma, 120. karede haritaya dönüş. Sıra eski/yeni,
+sonra yeni/eski. Aynı motor ve bağımlılıklar, ayrı browser süreçleri.
+Her koşuda 6s simülasyon ve kalan asker [764,678]; browser/WebGL hatası yok.
+
+                         Eski 1    Yeni 1    Yeni 2    Eski 2
+RAF medyan (ms)             76.6      48.5      55.4      83.4
+RAF p95 (ms)             2028.1      62.6      69.5    1215.3
+RAF >100ms kare               63         1         1        66
+Çizim JS medyan (ms)        22.2      23.4      26.4      26.8
+Çizim JS p95 (ms)           50.3      33.4      34.6      58.0
+GPU toplu çizim kare           0       151       151         0
+
+Tekrarların medyan ortalaması 80ms -> 51.95ms, yaklaşık %35 azalma.
+JS çizim çağrısının süresi GPU beklemesini kapsamaz; kazanç esas olarak
+uzun GPU/kompozit beklemelerinin azalmasıdır, CPU çizimi %35 azaldı denemez.
+Yeni sürümde ilk hazırlık dahil en uzun kare 423.5/437.4ms; soğuk açılış
+takılması tamamen çözülmedi. Bu ağır senaryoda sabit 60FPS doğrulanmadı.
+Mutlak süreler cihaz ve sistem yüküne bağlıdır.
+Ham JSON: artifacts/crown-battle/renderer-round2-{baseline,current}.json
+ve aynı adların -repeat.json karşılıkları.
+
+Son doğrulama PASS:
+- crown-battle-sprite-batch-browser: 12 piksel karşılaştırması; yön, atlı/yaya,
+  saldırı, ölüm, ölçek, yakınlaşma, artımlı yükleme, emekli atlas katmanı,
+  eksik görsel ve context kaybında fallback. Ortalama fark <0.005/255.
+- crown-battle-sprite-crop-browser: 972 karşılaştırma, piksel kaybı yok.
+- crown-battle-frame-budget-browser: bütçeli hazırlama ve yakınlaşma.
+- crown-battle-fps-menu-browser: duraklatma, seçim, kamera, tekrar başlatma,
+  atlas tahliyesi, menü ve browser hata kontrolü.
+- Vite üretim derlemesi PASS (3.90s), mevcut >500kB paket uyarısı sürüyor.
+  Log: artifacts/crown-battle/build-fps-round2.log

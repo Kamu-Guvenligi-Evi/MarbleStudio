@@ -1,0 +1,54 @@
+4x playback / crowded army follow-up, 2026-10-16
+
+User reports severe stutter at 3,000-10,000 soldiers, usually at 4x.
+
+Changes:
+- crown-battle-app.js: periodic counter updates no longer invalidate the
+  renderer every 200 ms. Action-driven updates still invalidate it.
+- crown-battle-timing.js: 9 ms simulation budget; accelerated small battles
+  also use resumable engine steps. Existing bounded backlog and combat steps
+  are preserved. No soldier count reduction.
+- crown-battle-renderer.js: prepare crowded frames in approximately 4 ms
+  chunks; continue GPU motion while preparing; publish completed overlays
+  together. Camera, pause, cancellation and context loss bypass pending work.
+- crown-battle-sprite-batch.js: deferred geometry/texture publication; sample
+  previous displayed positions at publication. Cancelled preparation leaves
+  displayed GPU motion intact.
+
+Validation (local installed Chrome, no downloads):
+- timing and render pacing tests passed.
+- GPU sprite parity: 30 cases, max mean error 0.060684, GL error 0.
+- GPU pixel motion: intermediate positions, continuity, pause, camera and
+  context loss passed.
+- sliced rendering: all 10,000 soldiers retained; three complete publications
+  across 22 pending frames, cancellation/camera/pause/context loss passed.
+- actual app at 4x / 10,000: GPU intermediate frames, periodic UI refresh
+  preserves renderer revision, zoom, mid-step pause/resume and restart passed.
+- Vite production build passed (existing large chunk warning).
+
+Evidence: artifacts/crowd-fps/*-final.log. Baseline module snapshots are in
+the same directory. browser-first.json contains an earlier 6 ms / 5 ms trial,
+not the final configuration. Final measurement is browser.json and
+throughput-final.log; benchmark uses SPEED=4 ARTIFACT_DIR=artifacts/crowd-fps.
+
+Limits: per-frame budgets are cooperative, not hard deadlines. First draws,
+camera changes, canvas fallback and video capture can still do synchronous
+work. Interpolation smooths displayed movement but cannot accelerate combat
+simulation. Extreme dense armies can still progress below selected speed.
+Submitted GPU draws are not measured physical monitor FPS. Shared-machine
+CPU load from other work can affect these headless Chrome measurements.
+The synthetic comparison does not include app counter updates; the separate
+real-app test verifies their corrected invalidation behavior.
+
+Final paired synthetic stress measurement, speed selector 4x, 5 s warm-up
+and approximately 13 s measured per case:
+  3,000: RAF interval median 27.6 -> 13.9 ms; p95 41.7 -> 20.7 ms;
+    max 69.5 -> 34.8 ms. Completed simulation rate 1.035 -> 1.023x.
+  10,000: RAF interval median 20.8 -> 13.9 ms; p95 83.3 -> 20.9 ms;
+    max 125 -> 55.7 ms. Completed simulation rate 0.177 -> 0.204x.
+  All soldiers retained, no JavaScript/GL errors. Submitted GPU draws per
+    second: 38.01 -> 70.38 (3,000), 34.06 -> 65.41 (10,000).
+These show reduced callback stutter in this run, not physical display FPS
+or achievement of actual 4x combat speed. Simulation throughput remains a
+separate bottleneck, particularly in the deliberately overlapping 10,000
+case; earlier profile points to local spatial queries and movement.

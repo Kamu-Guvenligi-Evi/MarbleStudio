@@ -1,0 +1,38 @@
+15 Ekim 2026 — Komutan ordularının eksik birlikleri
+
+Kullanıcı kapsamı: Genel kataloğa rastgele birlik eklemek yerine komutanların kullanacağı birlikleri tamamlamak.
+
+Yeni kayıtlar ve ayrı Canvas çizimleri:
+- caesar_balearic_slinger: Sezar hizmetinde Balear sapancısı. Sapan taşı mermisi, hafif tunik, taş kesesi; varsayımsal standart üniforma iddiası yok.
+- macedon_prodromos: İskender'in öncü mızraklı süvarisi. Hafif kıyafet, petasos, uzun mızrak, üzengisiz at. Başlık/renkler rekonstrüksiyon. Hücumda mızrak yatay konuma iner.
+- qin_bow_cavalry: Qin yaylı süvarisi. Çene bağlı başlık, kısa zırh, pantolon, yay ve üzengisiz at. Müze buluntusu atlı atış tekniğini kesinleştirmez; oyun yorumu kartta belirtilir.
+
+Hazır ordular (24 kapasite temel ağırlıkları; tarihî asker sayısı iddiası değildir):
+- julius_caesar: roman_republic_legionary 14, roman_gallic_cavalry 4, roman_cretan_archer 4, caesar_balearic_slinger 2.
+- alexander_great: alexander_sarissa 8, macedon_hypaspists 4, macedon_companions 3, thessalian_cavalry 3, agrianian_javelineer 2, macedon_foot_archer 2, macedon_prodromos 2.
+- CN_QIN / qin_shi_huang: qin_ji_infantry 8, qin_crossbowman 8, qin_swordsman 4, qin_bow_cavalry 4.
+- PE_ACHAEMENID / darius_i: persian 8, achaemenid_archer 8, achaemenid_horse_archer 4, achaemenid_spear_cavalry 4. Sonuncu mevcut katalog kaydıdır, yeni birlik diye sayılmamalıdır.
+
+İskender dağılımında bu not classical-preset-integration-2026-10-15.txt dosyasındaki eski 10 sarissa dağılımının yerini alır. Agrian ve Tesalya birlikleri korunmuştur.
+Kayıtlı özel ordular kendiliğinden değiştirilmez; komutanın hazır ordusu yeniden oluşturulduğunda yeni dağılım kullanılır.
+
+Kaynaklar:
+Sezar, Galya Savaşı 2.7: https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.02.0001%3Abook%3D2
+Arrianos, Anabasis 2.9 ve 3.12–14: https://www.gutenberg.org/files/46976/46976-h/46976-h.htm
+Qin donanımı, Western Australian Museum küratörü 2025: https://visit.museum.wa.gov.au/episodes/conversations-museum/12/1-5
+Darius süvarisinin varlığı, Herodotos 6.102: https://lexundria.com/hdt/6.102/mcly
+Darius kartında ayrıntılı kıyafetin sonraki Kserkses dönemi 7.84 anlatısından yorumlandığı açıklandı. Hint okçusu Darius'a, triarii/velites Sezar'a eklenmedi.
+
+Değişiklikler:
+Yeni src/commander-reinforcement-units.js ve src/commander-reinforcement-art.js; katalog/profil/çizim kayıtları, historical-army-presets.js, historical-army-history.js, ancient-roster-units.js kaynak notu.
+Savaş motoru ve taktik kodu değiştirilmedi. Çizimler mevcut yerel Canvas altyapısını kullanır; dış görsel indirmesi gerekmedi.
+
+Doğrulama:
+- tests/historical-army-presets.mjs PASS: 20 hazır ordu, kapasite ölçekleme ve doktrin çekirdeği.
+- tests/historical-army-history.mjs PASS: 20 komutanın dönem/kaynak bilgisi.
+- tests/historical-army-presets-browser.mjs PASS: 1440, 390, 320 px, tüm komutanlar, ordu uygulama/kayıt.
+- tests/historical-equipment-balance.mjs PASS: 291 profil ve 258 aynalı savaş.
+- tests/commander-reinforcements.mjs PASS: iki tarafta hasar ve mermi türü; 6 birlik savaşı + 8 komutan savaşı; 240 animasyon karesinde taşma/boş görsel yok; PC/telefon medeniyet menüsü, ekle/çıkar, savaşa aktar, yeniden yükle.
+- Vite build PASS; 500 kB üzeri paket uyarısı bulunuyor.
+- artifacts/commander-reinforcements/units.jpg gözle incelendi. Mızrak üst sınır taşması düzeltildi.
+Yerel kanıtlar: artifacts/commander-reinforcements/{test.log,build.log,checks.json,full-battles.json,commander-battles.json,units.jpg}.

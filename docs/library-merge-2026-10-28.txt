@@ -1,0 +1,8 @@
+28 Ekim 2026
+Kütüphane: 67 yeni kayıt (16 siyasetçi, 15 sporcu, 10 tarihi kişi, 3 sanatçı, 23 ülke).
+Fotoğraf yerine heykel, bina veya imza dönen adaylar ayıklandı. Sabahattin Ali gerçek fotoğrafla düzeltildi.
+Evrim Arenası: ilk yarıçap 28px, son 102px. Yerçekimi 180, giriş hızı 35, aralık .65sn, sekme .88, hız sınırı 480. Eski stok ayarlar taşınıyor; özel hız korunuyor.
+37 temanın 247 aşamasında 214 yerel konu görseli. Yerel dosya toplamı 9071686 bayt; ölçülmüş internet trafiği değildir. Fotoğraflar, çizgi roman çizimleri, bilimsel görseller, Pokemon resmi çizimleri. Kaynaklar src/merge-image-manifest.js ve oyun kaynak panelinde. Fantastik temalarda ve görseli bulunamayan aşamalarda mevcut semboller korunur.
+Canlı oyun ve video ön yükleme ortak. Görseller sabit yönde. Kütüphane ve oyun menüleri gerçek görselleri gösterir.
+Kontroller: merge-evolution.mjs, merge-evolution-browser.mjs, merge-images-browser.mjs, library-expansion-browser.mjs başarılı. Build başarılı (mevcut bundle boyutu uyarısı).
+İçe aktarma: scripts/import-merge-images.mjs; scripts/expand-library.mjs --write. Ara kaynak önbellekleri artifacts altında.

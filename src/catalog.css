@@ -12,6 +12,7 @@ body{background:radial-gradient(ellipse at 5% 10%,#26204555,transparent 48%),rad
 .catalog-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}.catalog-actions p{font-size:12px;color:#a8bada}.catalog-actions .button{font-size:12px}
 #catalog-status{font-size:12px;color:#aeeaf1;min-height:18px;line-height:1.6;margin:10px 0 18px}
 .catalog-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.catalog-card{min-width:0;border:1px solid #334363;border-radius:12px;overflow:hidden;background:#121c31;transition:border-color .15s,transform .15s}
+.catalog-history{display:block;padding:0 8px 6px;text-align:center;color:#b8c7df;font-size:10px;line-height:1.5}
 .catalog-card:hover{border-color:#85e6fa;transform:translateY(-2px)}.catalog-card>button{display:flex;flex-direction:column;align-items:center;width:100%;padding:12px 8px 6px;background:transparent;border:0;color:#edf4ff;cursor:pointer;gap:11px}
 .catalog-card img{width:86px;height:86px;border-radius:50%;object-fit:cover;object-position:50% 22%;background:#e9eef7;border:1px solid #738ab0;max-width:100%;aspect-ratio:1}.catalog-card img.catalog-contain{object-position:center}
 .catalog-card button span{font-size:12px;line-height:1.4;min-height:34px;display:grid;place-items:center;overflow-wrap:anywhere}.catalog-card>a{display:block;text-align:center;font-size:10px;color:#9daccc;padding:4px 0 10px}

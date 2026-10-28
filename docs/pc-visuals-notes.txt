@@ -1,0 +1,38 @@
+PC GÖRSEL İYİLEŞTİRME — 14 EKİM 2026
+
+Sorun: PC asker ölçeği kısa ekranlarda gereğinden küçük; portre zeminin
+geniş ekrana büyütülmesi ince ayrıntıları yumuşatıyordu.
+
+Değişiklikler:
+- src/crown-battle-renderer.js: PC askerleri önceki ölçeğe göre yaklaşık
+  %20–30 büyük. Oranlar, ayak/dünya koordinatları, sprite API korunuyor.
+- src/crown-battle-pc-scene.js: PC için deterministik ince ot/taş ayrıntısı,
+  yönlü ışık ve yumuşak temas gölgesi. Zemin yalnız reset/resize sonrasında
+  hazırlanır; zoom/pan sırasında yeniden üretilmez. Zemin bitmap üst sınırı
+  2560x1600 (~16,4 MB ham RGBA; tarayıcı ek kopyaları hariç).
+- 1200'den fazla görünür canlı askerde ucuz elips gölgeler kullanılır;
+  yakın görünümde ayrıntılı gölge geri gelir. Yeni ağ isteği/varlık yok.
+- Art/katalog/app/motor dosyaları düzenlenmedi. Tarihî çizimler görsel
+  sekmesinin yeni SpriteLibrary uyumlu tesliminden geliyor.
+
+Doğrulama:
+- tests/crown-battle-pc-visuals-browser.mjs PASS: DPR2, bitmap sınırı,
+  zoom/pan önbellek kullanımı, aynı seed aynı zemin, preset reset,
+  PC öncesi/sonrası portre çizimi tam piksel hash eşitliği, JS hatası yok.
+- crown-battle-camera-browser.mjs PASS: 1366 PC / 390 telefon; zoom,
+  pan, dünya koordinatına emir, sıfırlama.
+- crown-battle-teams-browser.mjs PASS: PC/telefon iki takım seçme,
+  emir/silme, tarihî ordu ve komutan, kayıt geri yükleme.
+- Vite üretim derlemesi PASS; mevcut büyük paket uyarısı sürüyor.
+- 1366 klasik ve 1920 tarihî önizlemeler görsel olarak incelendi.
+  artifacts/crown-battle/pc-visuals-1920.jpg; graphics-1366.jpg.
+
+Sınırlar:
+- Çizimler stilize 2B; yoğun saflarda askerler üst üste görünebilir.
+- 4000 klasik asker, 1280x720, önbellek hazırlanmış 16 çizim örneği:
+  gölge sadeleştirmesi sonrası medyan 45,1 ms, en yüksek 1929,1 ms.
+  Bunlar yalnız render çağrısı CPU süreleri; FPS veya tam oyun/GPU
+  ölçümü değildir. 4000 askerde akıcılık garantisi yok; uzun takılma
+  gözlendi. Önceki farklı boyuttaki ölçümlerle doğrudan kıyaslanamaz.
+- Sprite gövdesine tıklama genişletmesi ana sekmede ayrı yürütülüyor;
+  çizim ölçü sözleşmesi (-30,-61,80,76) değiştirilmedi.

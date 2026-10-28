@@ -1,0 +1,38 @@
+14 Ekim 2026 — Halk/kültür ve ülke alt sekmeleri
+
+Asker bulmayı kolaylaştırmak için mevcut 34 ülke/devlet 18 gezinme grubuna
+ayrıldı. Türkler, Farslar, Almanlar, İtalyanlar / Roma ilk sırada; diğer
+gruplar da aynı üst seçicide. Alt satır yalnız seçilen grubun ülkelerini
+gösterir. Grup içindeki Tümü ve üstteki Tümü filtreyi genişletir.
+Tarihî ordu atölyesi ve savaşın Ordu ve alan bölümü aynı seçiciyi kullanır.
+Halk adları iki ekranda da aranabilir. İki ordunun sayıları filtreleme
+sırasında korunur; kayıt, aktarma ve uygulama akışı değişmez.
+
+Bu gruplar gezinme amaçlıdır. Tarihî devletler tek bir etnik kökene
+indirgenmez; karma imparatorluklar ve tarikatlar açıklayıcı başlıklarla
+sunulur. Birlik kimlikleri, donanım, savaş rolleri ve motor değiştirilmedi.
+Katalogda olmayan gelecekteki ülkelere Diğer grubu otomatik açılır.
+
+Dosyalar:
+- src/historical-culture-groups.js: grup eşleştirmeleri ve filtre yardımcıları.
+- src/historical-civilization-ui.js: iki seviyeli düğmeler ve eski change sözleşmesi.
+- src/historical-culture-picker.css: kapsamı seçiciyle sınırlı PC/telefon stilleri.
+- src/historical-armies.js: grup filtresi ve halk adına göre arama.
+- src/crown-battle-app.js: yalnız seçici importu ve grup filtresi satırı.
+- src/crown-battle-selection.js: birleşik arama/grup filtresi.
+- tests/historical-cultures-browser.mjs: yeni gerçek kullanıcı akışı kontrolleri.
+
+Doğrulama:
+- historical-cultures-browser: 1366px ve 390px; tüm grup/ülke düğmeleri,
+  her ülkeye tek gruptan erişim, grup ve ülke filtresi, arama, klavye,
+  kırmızı/mavi sayılarının korunması, aktarım, uygulama/kayıt/yenileme PASS.
+  Yatay taşma veya sayfa JavaScript hatası yok.
+- historical-civilizations: 44 birlik, 34 ülke, eski filtre sözleşmesi,
+  aktarım, kayıt, sprite ve mobil regresyon PASS.
+- crown-battle-selection-browser: PC/telefon arama, seçim/kaldırma,
+  çoklu seçim, iki ordunun bağımsız düzenlenmesi ve uygulama PASS.
+- Vite üretim derlemesi PASS; mevcut 500 kB çıktı paketi uyarısı sürüyor.
+  Günlük: artifacts/crown-battle/culture-build.log.
+
+Yeni görsel, paket veya internet indirmesi yapılmadı. Ana sekmeyle dar
+dosya değişiklikleri önceden paylaşıldı; sinema/harita yapılarına dokunulmadı.

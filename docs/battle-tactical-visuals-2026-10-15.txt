@@ -1,0 +1,23 @@
+Taktik gorselleri - 2026-10-15
+
+Gorev siniri
+- Diger sekme 01a13b6d-28b1-7921-8984-c4623799e14f: historical-tactics.js, savas motoru kancalari, katalog ve yeni birlik gorselleri.
+- Bu sekme: crown-battle-renderer.js, yeni crown-battle-tactical-visuals.js ve ilgili testler. Motor/taktik/katalog dosyalari degistirilmedi.
+
+Eklenenler
+- Secilen taktik birliklerinin gercek intent hedeflerinden merkez/sol/sag grup yon oklari; takim basina en fazla uc ok.
+- Ozetler 0.25 simulasyon saniyesinde bir yenilenir; secim/revision degisimi duraklatmada da aninda yansir. Oyuncu emri/override, olu veya kaldirilan askerler dislanir. Simulasyona yazmaz.
+- Mevcut ordu kartinda taktik asamasi. Su an uygulanan Selcuklu hassa sahte ricat taktigi: assemble/retreat/envelop; done durumunda etiket yok. Tum medeniyetlerin doktrinlerinin tamamlandigi anlamina gelmez.
+- Mevcut sanat profili uygun mizrakli suvarilerde charge-ready/charge pozlari. Gercek vurus charge animasyonundan onceliklidir; Canvas ve GPU ayni poz secimini kullanir.
+
+Dogrulama
+- crown-battle-tactical-visuals.mjs PASS: iki takim, salt okunurluk, sinirli/onbellekli oklar, duraklatmada secim, oyuncu emirleri, hucum/vurus onceligi.
+- crown-battle-tactical-visuals-browser.mjs PASS: 480 hucum karesi, sifir kirpilma, gercek ricatta 3 ok, Sahte ricat etiketi, tarayici hatasi yok.
+- crown-battle-frame-budget-browser.mjs PASS.
+- crown-battle-sprite-batch-browser.mjs PASS: 30 GPU senaryosu, glError 0.
+- Vite build PASS; mevcut buyuk chunk uyarisi devam ediyor.
+- Son onizleme artifacts/tactical-visuals-preview.jpg (58548 bayt), katmanlar ve HUD gorsel olarak kontrol edildi.
+- FPS artis olcumu yapilmadi; performans iddiasi yok. Ek cizimler grup bazli ve ozet hesaplama sinirli.
+
+Bilinen bagimsiz konu
+- Diger sekme mevcut wedge formasyonunda iki askerin sikismasini formasyon sekmesine iletti; bu renderer degisikliginin kapsaminda degil.

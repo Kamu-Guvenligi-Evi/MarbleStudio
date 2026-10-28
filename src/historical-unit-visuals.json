@@ -1,0 +1,391 @@
+{
+  "rome_praetorian": {
+    "image": "/warrior-references/elite-praetorian-guard.jpg",
+    "credit": "Heinrich Leutemann, Praetorian Muhafızlarının 193 yılındaki ayaklanması; Otto von Corvin, Illustrierte Weltgeschichte, 1880",
+    "source": "https://commons.wikimedia.org/wiki/File:Heinrich_Leutemann_-_Insurrection_by_the_Praetorian_Guard_in_Rome_in_193.jpg",
+    "visualNote": "Praetorianları konu alan 19. yüzyıl tarih resmi. Antik dönemden kalma teçhizat belgesi değildir; sahnedeki bütün figürler muhafız değildir.",
+    "license": "Kamu malı (PD-old-100-expired). Wikimedia Commons'taki 330 piksel önizleme; yalnız boyutlandırılmıştır."
+  },
+  "ottoman_silahdar": {
+    "image": "/warrior-references/elite-spahis-mounted.jpg",
+    "credit": "Richard Knötel, Uniformenkunde, 1890'lar; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Knotel-Spahis.jpg",
+    "visualMatch": "period_reference",
+    "visualNote": "Genel Osmanlı atlı sipahi çizimi, 16–17. yüzyılları sonradan tasvir eder. Silahdar bölüğüne özgü üniforma veya sancak olduğu doğrulanmadı. Beş Kapıkulu süvari kartında ortak dönem referansı olarak kullanılır.",
+    "license": "Kamu malı (PD-old-100-expired). Wikimedia Commons önizlemesi; yalnız boyutlandırılmıştır."
+  },
+  "ottoman_ulufeci_right": {
+    "image": "/warrior-references/elite-spahis-mounted.jpg",
+    "credit": "Richard Knötel, Uniformenkunde, 1890'lar; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Knotel-Spahis.jpg",
+    "visualMatch": "period_reference",
+    "visualNote": "Genel Osmanlı atlı sipahi çizimi, 16–17. yüzyılları sonradan tasvir eder. Sağ Ulufecilere özgü üniforma veya sancak olduğu doğrulanmadı. Beş Kapıkulu süvari kartında ortak dönem referansı olarak kullanılır.",
+    "license": "Kamu malı (PD-old-100-expired). Wikimedia Commons önizlemesi; yalnız boyutlandırılmıştır."
+  },
+  "ottoman_ulufeci_left": {
+    "image": "/warrior-references/elite-spahis-mounted.jpg",
+    "credit": "Richard Knötel, Uniformenkunde, 1890'lar; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Knotel-Spahis.jpg",
+    "visualMatch": "period_reference",
+    "visualNote": "Genel Osmanlı atlı sipahi çizimi, 16–17. yüzyılları sonradan tasvir eder. Sol Ulufecilere özgü üniforma veya sancak olduğu doğrulanmadı. Beş Kapıkulu süvari kartında ortak dönem referansı olarak kullanılır.",
+    "license": "Kamu malı (PD-old-100-expired). Wikimedia Commons önizlemesi; yalnız boyutlandırılmıştır."
+  },
+  "ottoman_gureba_right": {
+    "image": "/warrior-references/elite-spahis-mounted.jpg",
+    "credit": "Richard Knötel, Uniformenkunde, 1890'lar; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Knotel-Spahis.jpg",
+    "visualMatch": "period_reference",
+    "visualNote": "Genel Osmanlı atlı sipahi çizimi, 16–17. yüzyılları sonradan tasvir eder. Sağ Gariplere özgü üniforma veya sancak olduğu doğrulanmadı. Beş Kapıkulu süvari kartında ortak dönem referansı olarak kullanılır.",
+    "license": "Kamu malı (PD-old-100-expired). Wikimedia Commons önizlemesi; yalnız boyutlandırılmıştır."
+  },
+  "ottoman_gureba_left": {
+    "image": "/warrior-references/elite-spahis-mounted.jpg",
+    "credit": "Richard Knötel, Uniformenkunde, 1890'lar; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Knotel-Spahis.jpg",
+    "visualMatch": "period_reference",
+    "visualNote": "Genel Osmanlı atlı sipahi çizimi, 16–17. yüzyılları sonradan tasvir eder. Sol Gariplere özgü üniforma veya sancak olduğu doğrulanmadı. Beş Kapıkulu süvari kartında ortak dönem referansı olarak kullanılır.",
+    "license": "Kamu malı (PD-old-100-expired). Wikimedia Commons önizlemesi; yalnız boyutlandırılmıştır."
+  },
+  "ottoman_solak": {
+    "image": "/warrior-references/elite-solak.jpg",
+    "credit": "Richard Knötel, Uniformenkunde, 1890'lar; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Knotel-Solaks.jpg",
+    "visualNote": "Doğrudan Solakları konu alan tarihsel üniforma çizimi. 16–17. yüzyıl muhafızlarını sonradan resmeder; çağdaş belge değildir.",
+    "license": "Kamu malı (Public domain). Kaynak dosya değiştirilmedi."
+  },
+  "macedon_hypaspists": {
+    "image": "/warrior-references/elite-hypaspist.jpg",
+    "credit": "Johnny Shumate (Peltast), 2006; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Hypaspist.jpg",
+    "visualNote": "Hypaspist için modern sanatçı canlandırması. Donanımı tartışmalı birliğin kesin veya standart üniforması olarak alınmamalıdır.",
+    "license": "Sanatçı tarafından kamu malına bırakılmıştır (Public domain). Kaynak dosya değiştirilmedi."
+  },
+  "persian": {
+    "image": "/warrior-references/elite-immortal.png",
+    "credit": "Persian Poet Gal, Persian Army Immortal, 2007; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Persian_Army_Immortal.png",
+    "visualNote": "Ahameniş Ölümsüzü için modern çizim; mızrak, yay ve hasır kalkan gösterir. Antik döneme ait bir tasvir değildir.",
+    "license": "CC BY 3.0 — https://creativecommons.org/licenses/by/3.0/ — Kaynak dosya değiştirilmedi."
+  },
+  "ottoman_sipah": {
+    "image": "/warrior-references/elite-ottoman-sipahi.jpg",
+    "credit": "Anonim Osmanlı nakkaşı; Rålamb Kostüm Kitabı, 1657–1658; İsveç Millî Kütüphanesi",
+    "source": "https://commons.wikimedia.org/wiki/File:Ralamb_Sipahi.jpg",
+    "visualNote": "Genel sipahi kıyafet referansı; figür yaya resmedilmiştir. Altı Bölüğün tamamına özgü tek tip üniforma olarak yorumlanmamalıdır. 1657–1658 tarihli kıyafet daha erken dönemlere aynen uygulanmaz.",
+    "license": "Kamu malı (Public domain). Wikimedia küçük önizlemesi; yalnız boyutlandırılmıştır."
+  },
+  "england_housecarl": {
+    "image": "/warrior-references/elite-housecarl.jpg",
+    "credit": "Bayeux İşlemesi; 1824 tarihli basılı kopya. Sayısallaştırma: Man vyi; kırpma: Alþykkr",
+    "source": "https://commons.wikimedia.org/wiki/File:Housecarl_at_hastings.jpg",
+    "visualNote": "Hastings sahnesinde iki elle balta kullanan İngiliz savaşçı, Housecarl referansı. Ortaçağ işlemesinin 19. yüzyıl basılı kopyasından alınmıştır.",
+    "license": "Kamu malı (Public domain). Kaynaktaki kırpılmış sürümün boyutlandırılmış önizlemesi."
+  },
+  "templar_knight": {
+    "image": "/warrior-references/elite-templars.jpg",
+    "credit": "Anonim, Münchener Bilderbogen no. 733, 1870; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Knights-templar.jpg",
+    "visualNote": "Tapınakçı tarikatında hizmetli kardeş, şövalye ve rahibi gösteren sonradan yapılmış kıyafet çizimi. Üç figürün hepsi savaşçı değildir; ortadaki şövalye ekipman referansıdır.",
+    "license": "Kamu malı (Public domain). Kaynak dosya değiştirilmedi."
+  },
+  "mexica_eagle": {
+    "image": "/warrior-references/elite-mexica-eagle.jpg",
+    "credit": "Floransa Kodeksi, 16. yüzyıl; Bernardino de Sahagún derlemesi, yerli ressamlar",
+    "source": "https://commons.wikimedia.org/wiki/File:Miniatura_Codice_Fiorentino.jpg",
+    "visualNote": "Sağdaki kuş başlıklı figür Kartal Savaşçısıdır. Fetih sonrasında hazırlanmış kodeks çizimi; modern canlandırma değildir.",
+    "license": "Kamu malı (Public domain). Kaynak dosya değiştirilmedi."
+  },
+  "ilkhan_keshikten": {
+    "image": "/warrior-references/elite-ilkhan-riders.jpg",
+    "credit": "Anonim, Diez Albümleri, 14. yüzyıl başı; Staatsbibliothek Berlin, Diez A fol. 70, s. 58; reprodüksiyon Schacht",
+    "source": "https://commons.wikimedia.org/wiki/File:DiezAlbumsArmedRiders_I_(cropped1to1).jpg",
+    "visualNote": "İlhanlı dönemi atlı savaşçı tasviri. Keşik muhafızlarını özellikle gösterdiği doğrulanmadı; genel dönem ve atlı teçhizat referansıdır.",
+    "license": "Kamu malı (Public domain). Commons üzerindeki kırpılmış sürümün boyutlandırılmış önizlemesi."
+  },
+  "mongol_keshig": {
+    "image": "/warrior-references/elite-ilkhan-riders.jpg",
+    "credit": "Anonim, Diez Albümleri, 14. yüzyıl başı; Staatsbibliothek Berlin, Diez A fol. 70, s. 58; reprodüksiyon Schacht",
+    "source": "https://commons.wikimedia.org/wiki/File:DiezAlbumsArmedRiders_I_(cropped1to1).jpg",
+    "visualNote": "Moğol atlıları için İlhanlı çevresinde üretilmiş dönem çizimi. Cengiz Han devrindeki Keşik birliğini veya ona özgü üniformayı doğrudan belgelememektedir.",
+    "license": "Kamu malı (Public domain). Commons üzerindeki kırpılmış sürümün boyutlandırılmış önizlemesi."
+  },
+  "japan_mounted_samurai": {
+    "image": "/warrior-references/elite-mounted-samurai.jpg",
+    "credit": "Anonim, Mōko Shūrai Ekotoba, yaklaşık 1293; Takezaki Suenaga'nın sipariş ettiği resimli tomar; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Takezaki_Suenaga.jpg",
+    "visualNote": "Moğol istilaları sırasında at üzerinde savaşan Takezaki Suenaga tasviri. Ortaçağ samuray zırhı, at donanımı ve yay için dönem referansı; bütün samurayların standart üniforması değildir.",
+    "license": "Kamu malı (Public domain / PD-Art). Wikimedia küçük önizlemesi; yalnız boyutlandırılmıştır."
+  },
+  "mamluk_bahri": {
+    "image": "/warrior-references/elite-mamluk-horsemen.jpg",
+    "credit": "Anonim ressam; kâtip Ömer b. Abdullah b. Ömer eş-Şafii, Kahire, 1366; Chester Beatty, Ar 5655.118, f.2v; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Four_horsemen_taking_part_in_a_contest._From_%27Manual_on_the_Arts_of_Horsemanship%27_by_al-Aqsara%27i_(CBL_Ar_5655.118,_f.2v).jpg",
+    "visualNote": "Bahri dönemi Kahire'sinden furûsiyye el yazmasında dört atlının müsabakası. Dönemin süvari eğitimine görsel referanstır; belirli bir muhafız alayının kimliği veya standart savaş zırhı belgelenmiş değildir.",
+    "license": "Kamu malı (Public domain / PD-Art). Wikimedia küçük önizlemesi; yalnız boyutlandırılmıştır."
+  },
+  "hospitaller_knight": {
+    "image": "/warrior-references/elite-hospitaller.jpg",
+    "credit": "Newbog, 2006; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Hospitaller_101.jpg",
+    "visualNote": "13. yüzyıl sonu Hospitalier şövalyesini gösteren modern çizim. Zincir zırh, kılıç, kalkan ve tarikat haçını gösterir; çağdaş belge veya tüm dönemler için standart kıyafet değildir. Figür yaya durmaktadır.",
+    "license": "CC BY-SA 3.0 — https://creativecommons.org/licenses/by-sa/3.0/ — Wikimedia küçük önizlemesi; yalnız boyutlandırılmıştır."
+  },
+  "teutonic_knight": {
+    "image": "/warrior-references/elite-teutonic-mounted.png",
+    "credit": "Carl Steffeck, Marienburg’a Tarikat Şövalyelerinin Girişi, 1884; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Teutonic_Knight_entering_Malbork_Castle.PNG",
+    "visualNote": "Töton şövalyelerini atlı gösteren 19. yüzyıl tarih resmi. Ortaçağdan kalmış doğrudan teçhizat belgesi değildir; tek asker portresi yerine toplu sahnedir.",
+    "license": "Kamu malı (Public domain). Wikimedia küçük önizlemesi; yalnız boyutlandırılmıştır."
+  },
+  "rus_druzhina": {
+    "image": "/warrior-references/elite-rus-druzhina.jpg",
+    "credit": "V. Prohorov, 1884; Devlet Tarih Müzesi taraması / Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Prince_Vladimir_Varangian_Druzhina.jpg",
+    "visualNote": "Vladimir ve drujinasını gösteren 1884 tarihli tarihî tasvir. Çağdaş üniforma belgesi veya kullanıcı ekran görüntüsünün kaynağı değildir.",
+    "license": "Kamu malı — Commons PD-Russia / PD-scan"
+  },
+  "german_armoured_foot": {
+    "image": "/warrior-references/elite-german-armoured-foot.jpg",
+    "credit": "Hans Talhoffer, Alte Armatur und Ringkunst, 1459; Det Kongelige Bibliotek / Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:De_Alte_Armatur_und_Ringkunst_Talhofer_076.jpg",
+    "visualNote": "1459 tarihli zırhlı yaya düellosu çizimi. Bir alayın standart üniformasını veya sarı kartallı karakterin kimliğini göstermez.",
+    "license": "Kamu malı — PD-old-100-expired / Public Domain Mark"
+  },
+  "ghaznavid_guard": {
+    "image": "/warrior-references/elite-ghaznavid-guard.jpg",
+    "credit": "David Nicolle, Mamluk Studies Review XIX (2016), s. 280; 11. yüzyıl Leşker-i Bâzâr saray muhafızı duvar resmi üzerinden çizim",
+    "source": "https://commons.wikimedia.org/wiki/File:Guard_of_the_sultan,_wall_painting_from_Lashkarī_Bazar,_Ghaznawid,_11th_century_(Archaeological_Museum,_Kabul,_Afghanistan).jpg",
+    "visualNote": "Gazneli saray muhafızını gösteren duvar resminin modern çizimi. Tören giysisini gösterir; oyundaki atlı okçu temsilinin bütün teçhizatını belgeleyen bir resim değildir.",
+    "license": "CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/. David Nicolle; yalnız 330 piksele boyutlandırılmıştır."
+  },
+  "seljuk_hassa": {
+    "image": "/warrior-references/elite-seljuk-hassa.jpg",
+    "credit": "The Metropolitan Museum of Art, Standing Figure with Feathered Headdress, 12.–erken 13. yüzyıl, eser 454621",
+    "source": "https://commons.wikimedia.org/wiki/File:Standing_guard_figure,_Seljuk_period,_Iran,_late_12th-13th_century.jpg",
+    "visualNote": "Selçuklu saray çevresine ait dönem referansı. Müze figürü kişisel muhafız, vezir veya emir olarak yorumlar; Hassa mensubu olduğu kesin değildir. Eserde modern restorasyonlar vardır; süvari teçhizatı belgesi değildir. https://www.metmuseum.org/art/collection/search/454621",
+    "license": "CC0 / kamu malı, The Met Open Access — https://creativecommons.org/publicdomain/zero/1.0/. Yalnız 330 piksele boyutlandırılmıştır."
+  },
+  "mamluk_burji": {
+    "image": "/warrior-references/elite-mamluk-burji.jpg",
+    "credit": "Richard Mortel, fotoğraf 2017; David Collection, yaklaşık 1500 tarihli Memlük fürûsiyye yazması yaprağı",
+    "source": "https://commons.wikimedia.org/wiki/File:Leaf_from_a_Mamluk_furusiyya_manuscript,_Egypt_or_Syria,_ca._1500,_The_David_Collection,_Copenhagen_(1)_(35600910133).jpg",
+    "visualNote": "Burcî dönemine tarihlenen silah talimi resmi; yaya talim yapan kişiyi gösterir. Belirli bir Burcî süvari alayının portresi veya savaş üniforması değildir.",
+    "license": "CC BY 2.0 — https://creativecommons.org/licenses/by/2.0/. Fotoğraf: Richard Mortel; yalnız 330 piksele boyutlandırılmıştır."
+  },
+  "sasanian_aswaran": {
+    "image": "/warrior-references/elite-sasanian-aswaran.jpg",
+    "credit": "Zereshk, 2005; 78maze kırpması, 2007; Tâk-ı Bostan Sasani zırhlı süvari kabartması",
+    "source": "https://commons.wikimedia.org/wiki/File:Armed-horseman.JPG",
+    "visualNote": "Genellikle II. Hüsrev ile ilişkilendirilen kraliyet süvarisi kabartması. Sasani ağır süvari zırhı için dönem referansıdır; bütün Asvârân birliklerinin tek tip kıyafeti olduğu anlamına gelmez.",
+    "license": "Fotoğraf sahibi tarafından kamu malına bırakılmıştır (PD-user: Zereshk). Commons kırpmasının 330 piksel önizlemesi."
+  },
+  "macedon_companions": {
+    "image": "/warrior-references/elite-macedon-companions.jpg",
+    "credit": "Berthold Werner; Napoli Ulusal Arkeoloji Müzesi, Pompeii İskender mozaiği ayrıntısı, yaklaşık MÖ 100",
+    "source": "https://commons.wikimedia.org/wiki/File:Alexander_and_Bucephalus_-_Battle_of_Issus_mosaic_-_Museo_Archeologico_Nazionale_-_Naples_BW.jpg",
+    "visualNote": "At üzerindeki İskenderi gösteren, yaşamından sonraki bir mozaik. Hetairoi komutanı ve Makedon süvarisi için bağlamsal referanstır; sıradan bir Hetairoi askerinin portresi değildir.",
+    "license": "Fotoğraf: CC BY-SA 3.0 — https://creativecommons.org/licenses/by-sa/3.0/. Berthold Werner; yalnız 330 piksele boyutlandırılmıştır; bu görsel aynı lisansla sunulur."
+  },
+  "parthian_cataphract": {
+    "image": "/warrior-references/elite-parthian-cataphract.jpg",
+    "credit": "World Imaging; British Museum, aslanla savaşan zırhlı süvari kabartması, nesne W_-91908",
+    "source": "https://commons.wikimedia.org/wiki/File:ParthianCataphract.JPG",
+    "visualNote": "Eser Seleukos veya Part dönemine (MÖ 3.–2. yüzyıl) atfedilir; kesin Part kimliği iddiası yoktur. Zırhlı süvari için dönem referansıdır. https://www.britishmuseum.org/collection/object/W_-91908",
+    "license": "Fotoğraf sahibi tarafından kamu malına bırakılmıştır (PD-self, World Imaging). Yalnız 330 piksele boyutlandırılmıştır."
+  },
+  "rome_equites": {
+    "image": "/warrior-references/elite-rome-equites.jpg",
+    "credit": "Mark Landon, 2008; Museo Nazionale Romano, Equites Singulares mensubu Marius Alexander mezar sunağı, AE 1982, 76",
+    "source": "https://commons.wikimedia.org/wiki/File:Funerary_altar_of_Marius_Alexander_of_the_equites_singulares_(AE_1982,_76)_02_det.jpg",
+    "visualNote": "Geç 2.–erken 3. yüzyıla tarihlenen mezar sunağında iki at arasında bir asker. Birlik mensubuyla doğrudan bağlantılı mezar tasviridir; çatışma duruşu veya eksiksiz muharebe teçhizatı belgesi değildir.",
+    "license": "CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/. Fotoğraf: Mark Landon; yalnız 330 piksele boyutlandırılmıştır."
+  },
+  "mexica_jaguar": {
+    "image": "/warrior-references/elite-mexica-jaguar.jpg",
+    "credit": "Anonim, Codex Magliabechiano, 16. yüzyıl, yaprak 30r; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Jaguar_warrior.jpg",
+    "visualNote": "Erken sömürge dönemi kodeksindeki Jaguar savaşçısı; ritüel dövüş bağlamındadır. Gündelik üniformanın veya bütün savaş teçhizatının şeması değildir.",
+    "license": "Kamu malı (Public domain) — https://creativecommons.org/publicdomain/mark/1.0/. Commons kopyasının 330 piksel önizlemesi."
+  },
+  "carthage_sacred_band": {
+    "image": "/warrior-references/elite-carthage-sacred-band.png",
+    "credit": "Theodore Ayrault Dodge, Hannibal (1891), Sacred Band footman; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Sacred_band_footman.PNG",
+    "visualNote": "1891 tarihli modern tarih çizimi; antik dönem eseri değildir. Kitabın Hannibal başlığı, bu birliğin Hannibal döneminde var olduğunu kanıtlamaz. Kartaca kaydı MÖ 4. yüzyılla sınırlıdır.",
+    "license": "Kamu malı (Public domain) — https://creativecommons.org/publicdomain/mark/1.0/. Commons dosyası değiştirilmeden kullanılmıştır."
+  },
+  "egypt_sherden": {
+    "image": "/warrior-references/elite-egypt-sherden.jpg",
+    "credit": "Abu Simbel kabartması; Ippolito Rosellini çizimi, James Henry Breasted yayını (1908), fig. 2; Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Relief_Sherden_Breasted_2.jpg",
+    "visualNote": "II. Ramsesin Şerden muhafızlarını betimleyen Abu Simbel kabartmasının tarihsel çizimi. Fotoğraf değil; özgün kabartmanın yayın üzerinden aktarımıdır.",
+    "license": "Kamu malı (Public domain) — https://creativecommons.org/publicdomain/mark/1.0/. Commons kopyasının 330 piksel önizlemesi."
+  },
+  "gaelic_gallowglass": {
+    "image": "/warrior-references/elite-gaelic-gallowglass.jpg",
+    "credit": "Albrecht Dürer, Irish Soldiers and Peasants (1521); Wikimedia Commons kopyası",
+    "source": "https://commons.wikimedia.org/wiki/File:Galloglass-circa-1521.jpg",
+    "visualNote": "Gallowglass ve diğer İrlandalı figürlerin birlikte yorumlandığı grup çizimi. 1521 tarihli kıyafet referansıdır; 13. yüzyıl teçhizatına doğrudan uygulanmaz ve bütün figürler ağır piyade değildir.",
+    "license": "Kamu malı (Public domain) — https://creativecommons.org/publicdomain/mark/1.0/. Commons kopyasının 330 piksel önizlemesi."
+  },
+  "kipchak_masked_swordsman": {
+    "image": "/warrior-references/elite-kipchak-mask.jpg",
+    "credit": "Jim Kelly — Mysterious Mask, Saint Petersburg Museum (2009)",
+    "source": "https://commons.wikimedia.org/wiki/File:Mysterious_Mask,_Saint_Petersburg_Museum.jpg",
+    "visualNote": "Lipovets kökenli yüz maskeli miğferin müze fotoğrafı. Yalnız baş donanımı için referans; bütün savaşçı kıyafetini göstermez. Tarihleme ve kültürel atıf tartışmalıdır. Oyun çizimi özgün ve stilizedir.",
+    "license": "Jim Kelly, CC BY 2.0 — https://creativecommons.org/licenses/by/2.0/. Commons üzerinden 330 piksel önizleme; yalnız boyutlandırılmıştır."
+  },
+  "tang_xuanjia": {
+    "image": "/warrior-references/tang-warrior-met-45865.jpg",
+    "credit": "The Metropolitan Museum of Art, Warrior, 10.221.6; Rogers Fund, 1910",
+    "source": "https://www.metmuseum.org/art/collection/search/45865",
+    "visualMatch": "period_reference",
+    "visualNote": "7.–8. yy Tang mezar heykeli; Xuanjia mensubu olduğu bilinmiyor. Oyun çiziminde koyu zırh tarihî metne dayanır; miğfer ve gövde biçimi dönem heykelinden esinlenir. Mızrak tercihi rekonstrüksiyondur. At koşumu için Saluzi kabartması kullanılmıştır.",
+    "license": "Kamu malı / The Met Open Access. Web görseli değiştirilmeden kaydedildi.",
+    "referenceImages": [
+      {
+        "image": "/warrior-references/tang-saluzi-mary-harrsch.jpg",
+        "sourceId": "tang_saluzi_photo",
+        "credit": "Mary Harrsch, 2005, The Horses of Emperor Taizong Tang Dynasty Limestone; Penn Museum",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "changes": "Yok; 800 × 600 kaynak fotoğrafı",
+        "use": "Atın kısa yelesi, eyer örtüsü ve koşum kayışları için dönem referansı; bütün Xuanjia atlarının aynı donanımı taşıdığı iddia edilmez.",
+        "source": "https://commons.wikimedia.org/wiki/File:The_Horses_of_Emperor_Taizong_Tang_Dynasty_Limestone_(305761810).jpg"
+      }
+    ]
+  },
+  "han_yulin": {
+    "image": "/warrior-references/han-rider-met-62843.jpg",
+    "credit": "The Metropolitan Museum of Art — Horse and rider, 16.149.2; Gift of C. T. Loo, 1916",
+    "source": "https://www.metmuseum.org/art/collection/search/62843",
+    "visualMatch": "period_reference",
+    "visualNote": "Doğu Han atlı heykelciği; Yulin mensubu olduğu bilinmiyor. Başlık ve çapraz yaka dönem referansıdır. Yeşil sır üniforma rengi değildir. Yay, sadak ve giysi rengi oyun rekonstrüksiyonudur.",
+    "license": "Kamu malı / The Met Open Access; kaynak fotoğrafı değiştirilmedi."
+  },
+  "inca_decorated_warrior": {
+    "image": "/warrior-references/inca-met-751901.jpg",
+    "credit": "The Metropolitan Museum of Art — Tunic, 2017.674; Purchase, Fletcher Fund, Claudia Quentin Gift, and Harris Brisbane Dick Fund, 2017",
+    "source": "https://www.metmuseum.org/art/collection/search/751901",
+    "visualMatch": "period_reference",
+    "visualNote": "Dama tunik ve kırmızı basamaklı yaka müze eserine dayanır. Tunik savaşta öne çıkanlara veya diplomatik hediye olarak verilebilirdi; özel bir alay üniforması diye sunulmaz. Baş bağı, saç ve sandaletler rekonstrüksiyondur.",
+    "license": "Kamu malı / The Met Open Access; kaynak fotoğrafı değiştirilmedi.",
+    "referenceImages": [
+      {
+        "image": "/warrior-references/inca-met-315294.jpg",
+        "credit": "The Metropolitan Museum of Art — Mace Head, 1987.394.234; Bequest of Jane Costello Goldberg, from the Collection of Arnold I. Goldberg, 1986",
+        "source": "https://www.metmuseum.org/art/collection/search/315294",
+        "visualMatch": "period_reference",
+        "visualNote": "Altı uçlu gümüş topuz başı; oyun biçimine referans. Sap rekonstrüksiyondur.",
+        "license": "Kamu malı / The Met Open Access; kaynak fotoğrafı değiştirilmedi.",
+        "use": "Altı uçlu baş biçimi. Müze nesnesi gümüştür; tüm İnka askerlerinin standart silahı olduğu iddia edilmez."
+      }
+    ]
+  },
+  "assyria_royal_guard": {
+    "image": "/warrior-references/elite-assyria.jpg",
+    "credit": "Zunkir",
+    "source": "https://commons.wikimedia.org/wiki/File:Campaign_in_southern_Iraq_of_Ashurbanipal_-_carriying_and_couting_booty_in_a_palm_grove.jpg",
+    "visualMatch": "period_reference",
+    "visualNote": "Sivri miğfer, sakal, saç, kısa püsküllü giysi ve mızrak kabartmadan; renkler ve hareketler oyun yorumu.",
+    "license": "CC BY-SA 4.0"
+  },
+  "goryeo_yongho_guard": {
+    "image": "/warrior-references/elite-goryeo.jpg",
+    "credit": "蒙古襲来絵詞 -Mōko Shūrai Ekotoba",
+    "source": "https://commons.wikimedia.org/wiki/File:A_Goryeo_Soldier_wearing_a_durumagi.jpg",
+    "visualMatch": "period_reference",
+    "visualNote": "Mavi dar giysi, beyaz pantolon, omuzluksuz zırh ve küçük beyaz bayraklı kısa mızrak Xu Jing’den. Katalog resmi daha geç Moğol istilası tomarından karşılaştırmadır; aynı muhafızın portresi değildir.",
+    "license": "CC BY-SA 3.0"
+  },
+  "song_beiwei": {
+    "image": "/warrior-references/elite-song.jpg",
+    "credit": "Unknown authorUnknown author",
+    "source": "https://commons.wikimedia.org/wiki/File:SONG_guards.jpg",
+    "visualMatch": "period_reference",
+    "visualNote": "Lamelli gövde ve uzun zırh eteği, geniş boyun koruması, kılıç. Tören alayı resmi Beiwei teşhisi taşımaz; Song/Yuan tarihlemesi belirsizdir. Birliğe özgü üniforma iddiası yoktur.",
+    "license": "Public domain"
+  },
+  "mughal_ahadi": {
+    "image": "/warrior-references/elite-mughal.jpg",
+    "credit": "by Bryce, James, 1838-1922; Petrie, W. M. Flinders (William Matthew Flinders), Sir, 1853-1942",
+    "source": "https://commons.wikimedia.org/wiki/File:Cavalry_soldier_of_Mughal_Empire.jpg",
+    "visualMatch": "later_reconstruction",
+    "visualNote": "Sarık, çapraz kapanan etekli giysi, yuvarlak kalkan ve mızrak. 1915 tarihli genel Babür süvarisi illüstrasyonu kullanıldı; çağdaş Ahadi üniforması belgesi değildir.",
+    "license": "Public domain"
+  },
+  "khmer_ranked_cavalry": {
+    "image": "/warrior-references/elite-khmer.jpg",
+    "credit": "Michael Gunther",
+    "source": "https://commons.wikimedia.org/wiki/File:Procession_of_Suryavarman_II_Angkor_Wat_0873.jpg",
+    "visualMatch": "period_reference",
+    "visualNote": "Hayvan başlı başlık, desenli dolgulu giysi ve açılı ağızlı uzun phkak. At ve donanım kabartmaya dayanır; renkler yorumdur.",
+    "license": "CC BY-SA 4.0"
+  },
+  "maya_sajal": {
+    "image": "/warrior-references/elite-maya-sajal.jpg",
+    "credit": "Cleveland Museum of Art — Seated Warrior, 1990.178",
+    "source": "https://www.clevelandart.org/art/1990.178",
+    "visualMatch": "period_reference",
+    "visualNote": "Büyük kulak süsleri, kabuk kolye, yüksek saç süsü ve dikdörtgen kalkan heykelcikten. Dik duruş ve mızrak oyun rekonstrüksiyonudur; eserde mızrak korunmamıştır.",
+    "license": "CC0"
+  },
+  "benin_warrior_chief": {
+    "image": "/warrior-references/elite-benin-shield.jpg",
+    "credit": "Fotoğraf: Andreas Franzkowiak / Bullenwächter; eser: Igun Eronmwon",
+    "source": "https://commons.wikimedia.org/wiki/File:MARKK_C2384_Warrior_Chief_with_Shield_and_Spear_DSC-1076.jpg",
+    "visualMatch": "period_reference",
+    "visualNote": "Çanlı deri gömlek, leopar dişli kolye, başlık, geniş kalkan ve mızrak kabartmadan. Bronz eserin rengi gerçek kıyafet rengi sayılmaz.",
+    "license": "CC BY-SA 4.0"
+  },
+  "mamluk_axebearer": {
+    "image": "/warrior-references/elite-mamluk-axe.jpg",
+    "credit": "The Metropolitan Museum of Art — Axe, 69.156",
+    "source": "https://www.metmuseum.org/art/collection/search/24857",
+    "visualMatch": "period_reference",
+    "visualNote": "Geniş kıvrımlı balta ağzı ve madalyonlu soket Met nesnesinden; sarık ve giysi yaklaşık 1500 tarihli furusiyye yaprağından dönem karşılaştırmasıdır. Tek tip baltacı üniforması iddiası yoktur.",
+    "license": "CC0",
+    "referenceImages": [
+      {
+        "image": "/warrior-references/elite-mamluk-burji.jpg",
+        "credit": "Richard Mortel, fotoğraf 2017; David Collection, yaklaşık 1500 tarihli Memlük fürûsiyye yazması yaprağı",
+        "source": "https://commons.wikimedia.org/wiki/File:Leaf_from_a_Mamluk_furusiyya_manuscript,_Egypt_or_Syria,_ca._1500,_The_David_Collection,_Copenhagen_(1)_(35600910133).jpg",
+        "license": "CC BY 2.0 — https://creativecommons.org/licenses/by/2.0/. Fotoğraf: Richard Mortel; yalnız 330 piksele boyutlandırılmıştır.",
+        "visualNote": "Yaklaşık 1500, yaya eğitim sahnesi; giysi karşılaştırması.",
+        "use": "dönem giysisi"
+      }
+    ]
+  },
+  "norse_hird_swordsman": {
+    "image": "/warrior-references/norse-sword.jpg",
+    "credit": "Arild Finne Nybø",
+    "source": "https://commons.wikimedia.org/wiki/File:Viking_swords_01.jpg",
+    "visualMatch": "equipment_reference",
+    "visualNote": "Çift ağızlı düz kılıç ve loblu kabza başı Bergen buluntularından; gözlüklü miğfer ve zincir zırh Gjermundbu mezarıyla karşılaştırıldı. Yuvarlak kalkan, pelerin ve renkler birleştirilmiş oyun yorumudur.",
+    "license": "CC BY-SA 2.0"
+  },
+  "norse_spearman": {
+    "image": "/warrior-references/norse-spear.jpg",
+    "credit": "Thomas Quine",
+    "source": "https://commons.wikimedia.org/wiki/File:Viking_spearhead_(29078140247).jpg",
+    "visualMatch": "equipment_reference",
+    "visualNote": "Uzun soketli, yaprak biçimli mızrak ucu müze fotoğrafından; ahşap sap, yuvarlak tahta kalkan, yün tunik ve bacak sargıları dönem karşılaştırmasıdır. Fotoğraf bütün kıyafeti belgelemiyor.",
+    "license": "CC BY 2.0"
+  },
+  "norse_dane_axeman": {
+    "image": "/warrior-references/norse-axe.jpg",
+    "credit": "EricMcHugh",
+    "source": "https://commons.wikimedia.org/wiki/File:DaneAxe.jpg",
+    "visualMatch": "equipment_reference",
+    "visualNote": "İnce ve geniş balta ağzı ile uzun iki elli sap referans alınır. Önde kalkan yok; burun korumalı miğfer ve zincir zırh var. Renkler ve birleşik kıyafet oyun yorumudur.",
+    "license": "CC BY-SA 4.0"
+  },
+  "norse_longbowman": {
+    "image": "/warrior-references/norse-bow.jpg",
+    "credit": "The Swedish History Museum, Stockholm from Sweden",
+    "source": "https://commons.wikimedia.org/wiki/File:Object_from_the_exhibition_We_call_them_Vikings_produced_by_The_Swedish_History_Museum_(13618316875).jpg",
+    "visualMatch": "equipment_reference",
+    "visualNote": "Uzun tek parça ahşap yay, sadak, yün tunik ve sade başlık. Kart fotoğrafı Birka Bj 644 mezarındaki demir ok uçlarıdır; bütün bir okçu veya yay fotoğrafı değildir. Yay biçimi Viking Ship Museum yayınına dayanır.",
+    "license": "CC BY 2.0"
+  }
+}

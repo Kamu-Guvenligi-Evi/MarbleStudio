@@ -1,0 +1,45 @@
+Crowd stutter follow-up, 2026-10-16
+
+User reports continuing stop/start movement, particularly 3,000-10,000
+soldiers at 4x. Previous rendering slices improved RAF cadence, but not
+the rate at which combat completes.
+
+Changes:
+- crown-battle.js: initialize laneCheckAt and lastMissileDamage with the
+  other soldier fields. Reserve floating-point storage for movement,
+  health and timers before assigning their original initial values.
+  This avoids repeated shared layout changes on fractional updates.
+- Track completedSimulationRevision separately from partial slice work.
+  Record the wall interval of completed sliced ticks (presentation only).
+- crown-battle-renderer.js: crowded scenes publish new combat poses on
+  completed ticks rather than every partial-simulation revision. GPU
+  interpolation spans the measured tick cadence, bounded at 500 ms to
+  avoid long smoothing after pauses/backgrounding. Camera, pause and
+  selection invalidations still bypass the motion delay. Deferred atlas
+  preparation can continue without a new combat tick.
+
+Evidence stored locally in artifacts/crowd-engine/final/:
+- parity.json/log: baseline/current query ordering and exact combat state
+  checkpoints match across normal, dense and historical scenarios,
+  repeated in reverse order. Numeric initialization preserves outcomes.
+- render.log: 10,000 troops, partial ticks cannot restart motion; 200 ms
+  tick cadence retained; cancellation, camera/pause and context-loss pass.
+- controls.log: real application 10,000 troops at 4x; pause/resume, zoom,
+  restart, periodic UI updates and GPU intermediate frames pass.
+- motion.log, timing.log, simulation.log: passed. Production build passed (exit 0); existing chunk-size warning remains.
+
+Paired browser stress measurement (4x selected, 5 s warm-up, ~13 s sample):
+  3,000 completed simulation rate: 1.498 -> 2.069x wall time.
+  10,000 completed simulation rate: 0.246 -> 0.304x wall time.
+  RAF median 13.9 ms in both versions/counts. 10,000 RAF p95 20.9 ->
+  20.8 ms; max 28 -> 28 ms. This is not another large FPS improvement.
+  GPU draw submission rate 67.6 -> 72.3/s for 10,000 is not a physical
+  monitor FPS measurement. All soldiers retained; no JS or GL errors.
+  Other local CPU work was active, so timings are indicative, not a
+  hardware-independent guarantee. The 10,000 case intentionally overlaps
+  armies and remains far below actual requested 4x simulation speed.
+
+Baseline source snapshots: artifacts/crowd-engine/crown-battle-before.js
+and artifacts/crowd-engine/final/crown-battle*.js. Performance probe and
+intermediate experiments remain in artifacts/crowd-engine, not production.
+No downloads, external uploads, dependency changes or subagents used.

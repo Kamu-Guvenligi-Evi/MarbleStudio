@@ -1,0 +1,45 @@
+2026-10-15: user rejected previous battle sound as unrealistic.
+
+Replaced generic metal contacts with six StarNinjas blade Foley clips;
+replaced synthesized bow/gun banks with artisticdude bow effect and three
+isolated kurt Black Powder shots. CC0 source/license/transform notes:
+public/audio/battle/SOURCES.txt. Body/heavy contacts remain Kenney Foley.
+These are sound effects, not a recording of a historical battlefield.
+
+prepareBattleSamples now retains recorded decay with light filtering,
+trim, edge fades and bounded attack normalization. No synthesized body
+over loaded recordings. Procedural audio remains missing-bank fallback.
+
+Added a 6.7-second stereo contact texture rendered at unlock with native
+OfflineAudioContext. One runtime voice, within the existing eight-voice
+cap. Only dense armored melee contacts trigger it; sparse combat/ranged
+events/zero-gain distant contacts cannot start it. Density capped at 48,
+envelope renewed at most once per 60 ms, fades by 650 ms without renewal,
+source ends at 680 ms. Pause/mute resets pressure and stops all voices.
+No engine RNG, mechanics, unit stats, or per-hit synthesis changed.
+
+Downloaded source assets (local sizes, NOT measured internet traffic):
+clashes.zip 144575 bytes; bow.zip 220956; black-powder.wav 1545152.
+No large sound packs downloaded. Source files and local import script:
+artifacts/battle-audio-recordings/. Runtime assets are all local.
+
+Validation PASS:
+- crown-battle-audio-design-browser: 16 prepared recorded variants,
+  bounded peaks/RMS/tails; strongest three-voice pre-limiter peak .444;
+  five UI previews, worker/fallback parity.
+- crown-battle-audio-mix: 10000 events, 14 accepted foreground voices/sec,
+  no delayed queue, pitch/distance/pan, fallback at three sample rates.
+- crown-battle-audio-crowd-browser: stereo texture peak .208, max 7 voices,
+  contact activation/end, idle/ranged/distant silence, stop/mute/reset.
+- crown-battle-audio-browser: real local banks, missing-file fallback,
+  user gesture, audible signal, mute/persistence, voice cap, recording
+  with audio+video, track cleanup, desktop/mobile controls.
+- crown-battle-feedback-browser: 752 units, 2985 events, max 8 voices,
+  93 feedback effects, 61 engine effects; draw median 5.1 / p95 8.5 ms;
+  feedback cleanup median 0 / p95 .1 ms. Not whole-frame FPS or an
+  isolated before/after performance comparison. No browser/GL errors.
+- Vite production build passed (existing large-chunk size warning).
+
+No speaker listening or subjective realism approval has been verified.
+Browser tests establish functional playback, signal safety and lifecycle.
+Other thread's historical equipment balance changes left untouched.

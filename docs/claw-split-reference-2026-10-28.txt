@@ -1,0 +1,78 @@
+Pençe Bölünmesi — 28 Ekim 2026
+
+Referans: C:\Users\yigit\Videos\Ekran Kayıtları\Ekran Kaydı 2026-10-28 113533.mp4
+Yerel dosya 26,196,558 bayt; süre 37.61 sn, 1434x888, 30 FPS.
+Yalnız soldaki oyun incelendi. Sağdaki yeşil halka dahil edilmedi.
+İnceleme kareleri: .cache/video-113533/left.jpg
+
+Gözlemler: Siyah portre sahne; beyaz kapalı daire; birbirine ters yönde
+dönen, tek uçları çembere dayanan iki içe kıvrık kanca. Kapanan kancaların arasında hapsolan top sıkışınca ikiye bölünüyor. Başlangıç RPM 15;
+son bölüm yaklaşık 87. Renkler kırmızı, sarı, yeşil, camgöbeği, mavi ve mor.
+Alt bölümde Balls ve RPM sayaçları. Sonlarda büyük renkli kırılma parçaları.
+Kayıt sonunda video yeniden başlangıca dönüyor.
+
+Uygulama: claw-split.html, src/claw-split.js, src/claw-split-app.js.
+Stüdyo menüsü: Akış ve kırma > Pençe Bölünmesi.
+540x960 sahne, 120 Hz sabit fizik, tohumlu rastgelelik, çember yansıması,
+hareketli katı kancalarla alt adımlı çarpışma; dört kolun kesişiminden hesaplanan
+kapalı cepte yakalanma ve cep top yarıçapına daralınca bölünme. Çıkan toplar
+iç uçların gerisine bırakılır, 0.18 sn yeniden yakalanma beklemesi vardır.
+Varsayılan çap 10 px; 2–32 px sürgü canlı uygulanır, ilerleme korunur.
+Başlangıç 1 top, 15 RPM, hızlanma 2.2 RPM/sn, süre 34 sn, sınır 6000.
+Renkli parçacıklar yoğunluk arttıkça büyür; parçacık sayısı sınırlıdır.
+Duraklatma, yeniden başlatma, yeni tohum, kalıcı ayarlar, tam ekran,
+isteğe bağlı sentez sesleri ve 540x960 / 30 FPS WebM kayıt bulunur.
+
+Sınırlar: Referansın kaynak kodu bilinmiyor. Yörüngeler, çoğalma zamanları,
+sesler ve parçacık şekilleri birebir eşleşmez. Top-top çarpışması yoktur;
+son efekt kontrollü bir görsel yorumdur. Fabrika MP4 akışına bağlanmadı.
+
+Önceki sürüm doğrulaması (temas mekaniği artık geçerli değil): tests/claw-split.mjs — belirlenimlilik, temas/bekleme, duvar
+yansıması, halkanın içinde kalma, sınır ve hızlanma geçti; final 6000 top.
+tests/claw-split-browser.mjs — menü, duraklatma, canlı çap, kalıcılık,
+mobil taşma, çözülebilir WebM ve JS hata kontrolü geçti. 29 sn civarı
+4906 top; yerel headless testte iki fizik adımı + çizim yaklaşık 9 ms.
+Kayıt başlamadan önce sahne görünür alana taşınır ve iki çizim beklenir;
+görünmeyen canvas ile oluşan boş kayıt bu şekilde giderildi.
+Görseller: artifacts/claw-split/{desktop,mobile,finale}.jpg.
+
+Kanca düzeltmesi — kullanıcı geri bildirimi sonrası:
+İlk 3 saniye 0.25 sn aralıklarla yakından incelendi:
+.cache/video-113533/hooks.jpg (12 kare, yalnız soldaki arena).
+Önceki simetrik V yanlış: iki uç çembere yakındı. Referansta bir uç çembere
+dayanıyor, dirsek hareket yönünün gerisine kıvrılıyor, serbest uç içeri uzanıyor.
+Yeni yerel geometri (teğet, radyal ofset): (0,0), (-işaret*40,-34), (0,-68).
+İki kanca birbirinin aynası; başlangıçta alt yanlarda, faz 1.1 radyan.
+Çizim ve çarpışma aynı üç noktayı kullanır. Serbest kol teması, tek uçtan
+çembere bağlantı ve farklı dönüş açılarında ayna simetrisi test edildi.
+Yeni şeklin dört dönüş konumu: artifacts/claw-split/hook-correction.png.
+
+Kayit regresyonu: Her cizimden sonra capture track requestFrame cagrisi ve anlik kaydirma eklendi. Tarayici testi iki kez gecti (ikinci kez derlemeyle eszamanli); bos video uretilmedi. Son derleme basarili.
+
+Hapsetme düzeltmesi — kullanıcı: “mesele değmesi değil içeride hapsetmesi”.
+1.5 saniyeden başlayan 12 FPS yakın inceleme: .cache/video-113533/capture.jpg.
+İki kancanın dört kolu kapalı baklava oluşturuyor, top içeride kalıyor,
+alan daralınca iki top çıkıyor. Temasla çoğalma kaldırıldı. Temas yalnız
+hareketli yüzeyden yansıtır. Bölünme kapalı cepte yakalanmış topun sıkışmasına bağlı.
+Yakalanmış top cep merkezinde taşınır; bu bir kinematik yaklaşımdır,
+tam rijit cisim çözücüsü değildir. Top-top çarpışması halen yoktur.
+Yeni testler geçti: temas bölmez, yakalanma hemen bölmez, daralma böler,
+dışarıdaki top etkilenmez, parçalar tekrar bölünmeden çıkar; belirlenimlilik,
+duvar, sınır ve sonlu koordinatlar. Varsayılan final 6000 top.
+Tarayıcı: JS hatası yok; boyut, duraklatma, mobil ve WebM geçti (246498 bayt).
+6000 topta iki fizik adımı ve çizim yaklaşık 35 ms (yerel headless ölçüm).
+Vite derlemesi geçti; mevcut büyük paket uyarısı sürüyor.
+Üç aşamalı görsel kontrol: artifacts/claw-split/capture-check.png.
+
+2026-10-28 density/stability update: native ball objects keep stable property shapes (capture=null, no delete); hook segments precomputed per substep with AABB rejection. Adaptive physical/drawn radius eases toward 24% area coverage. Rotation analytically eases toward 72 RPM (higher manual initial RPM retained), speed bounded at 650. Closing pocket remains the only split trigger. Freed pocket restores velocity. Fragment exits spread more widely. Sparkles capped at 90 and 2px; no expanding shards. Eight related color bands; softer pentatonic sine tones with 140ms rate limit and node cleanup. Animation catch-up capped and work yields after 10ms. Tests: capture/split/determinism, 6000 and 20000 dense containment, angular continuity; browser pause/size/mobile/persistence/WebM pass. Local headless 6000 balls, two steps plus render: 9.85ms average, not a universal FPS guarantee.
+
+Population update: defaults now 4 starting balls and 20000 limit (was 1 / 6000), same 34s duration and true two-fragment crush rule. Existing default values migrate once via populationVersion=2; custom values retained. Seeds 1, 42, 77 all reached 20000 by 30 simulated seconds. Engine dense containment/determinism tests pass. Child capture field initialized for stable object shape.
+
+User correction: starting count restored to 1; population limit remains 20000. Previous version-2 default count=4 migrates once to 1 (populationVersion=3).
+
+Readability correction: adaptive radius now never falls below 65% of the selected size. Default diameter stays between 10px and 6.5px (previous dense minimum 1.6px). Shared clawBallRadius used in physics and live size controls. Start=1, cap=20000 retained. Engine 20000 final and dense containment tests, browser controls/recording passed.
+Center spawning + density finale: initial ball and split siblings spawn at center. Finish requires >=87% occupied inner spatial cells and >=85% aggregate ball area for four samples; 3 second FULL CIRCLE end card, timer no longer ends game. Inner radius collision broad phase skips unreachable hooks, removed velocity reduction scan. Engine tests and Vite build passed. Focused Chrome physics+render benchmark ~8.44ms per two ticks+draw at dense finale (~9.8k balls). Browser recording test failed repeatedly: zero-byte WebM; unresolved, recording implementation retained. Full browser suite did not pass.
+Extended spectacle revision: initial ball and all split fragments launch downward from center; gentle dense swirl and reduced dense gravity distribute the swarm. Spatial rainbow ribbons rotate smoothly, 240 bounded motion accents, readable radius retained. Fullness uses a 2-second spatial coverage window, >=90% coverage and >=18000/default population. Finale waits until >=55 seconds and >=16 seconds after sustained fullness, then continues motion for a 4-second end card. Deterministic engine, downward launches, duration and dense containment tests passed (20000 final balls); Vite build passed. Chrome 30s visual reviewed at 4761 balls. Synthetic 20000-ball benchmark ~21.9ms per two ticks + draw; 60fps on all devices not established. Prior WebM issue remains unresolved.
+Fixed-size / slower motion revision: radius always equals selected radius (default 5 = diameter10), no shrinking. Defaults12RPM/.4 acceleration, hard normalized cap30RPM and acceleration1; old saved motion migrated once via motionVersion1. HTML limits aligned. Dense renderer bins overlapping centers into radius-sized screen cells and draws one representative per occupied cell; ALL20000 bodies still simulate. This is visual density sampling, not exact occlusion. Sprite atlas trial was slower and removed. Chrome synthetic20000 test two ticks+draw ~5.49ms, radius5, RPM23.1 at43s; not a universal FPS guarantee. Engine full-run deterministic/capture/downward/containment/finale tests passed; browser migration/live-size/persistence/reset passed; Vite build passed. Existing recording problem not revisited.
+
+Physical packing correction: removed imposed orbital/tangential forces; gravity, moving hook/wall impacts and local spatial-grid ball collisions drive motion. Four contact iterations per motion substep, overlap velocity bias supports dense piles. All balls rendered; old density sampling removed. Fixed radius 5 gives physical capacity1777 (.84 ring area), configurable limit still caps this. Capacity reached disables pocket capture and prevents recycling existing balls to center. Instantaneous24x24 coverage replaces trailing coverage; dense phase/four-second finale retained. Defaults one ball, downward center releases, radius5, RPM12/max30 retained. Engine tests passed deterministic full runs, capture-only splitting, downward births, no orbit force, pair momentum, finite containment and packing (1777 balls,90.44% cells,105.5 simulated seconds;164 pairs below80% diameter). Focused Chrome packing test passed:1777 balls,95.34% cells,106.5 simulated seconds, radius5;60 frames averaging5.12ms per two physics steps+draw. Local headless metric, not guaranteed device FPS. Screenshot artifacts/claw-split/physical-packing.png inspected. Vite build passed. Earlier WebM recording issue not retested.

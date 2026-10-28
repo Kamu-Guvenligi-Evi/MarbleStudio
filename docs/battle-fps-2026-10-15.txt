@@ -1,0 +1,87 @@
+﻿FPS work log - 2026-10-15
+Game: http://127.0.0.1:5173/crown-battle.html
+
+Changes
+- Uniform combat-unit object layout; specialized nearby queries retain exact result order.
+- Shared pose lookup per frame; one missing pose no longer disables the GPU batch for the entire army.
+- Separate desktop ground, selection/projectile, GPU soldier and overlay layers. Avoid WebGL-to-Canvas copy and repeated layer hide/show.
+- 1024px atlas pages, at most 16 (64 MiB RGBA). Incremental dirty rectangle uploads; texture array grows on demand.
+- Prepare one shared movement/attack pose per idle frame before battle without advancing simulation or affecting paused redraw flags.
+- Retain previous poses during zoom; Canvas fallback for unavailable/lost WebGL.
+- Integrated Qin crossbow projectile style from the other development thread.
+
+Validation
+PASS: engine-performance (spatial query order, deterministic 320/1800/2000/4000 soldier cases).
+PASS: behavior, charge, impact, feedback.
+PASS: sprite-crop-browser (972 pixel comparisons).
+PASS: frame-budget-browser, fps-menu-browser.
+PASS: layers-browser (preparation, partial batch, layer order/input/resize/portrait, texture growth).
+PASS: sprite-batch-browser (12 pixel comparisons, GL error 0, context loss).
+PASS: Vite build, 25.65 seconds; existing large chunk warning.
+Visual checked: artifacts/crown-battle/fps-menu-pc.jpg (90 KB).
+
+Measurements and limits
+Chrome Intel UHD/ANGLE, 1366x768, 12 unit types in immediate dense contact, including zoom in/out.
+1800 soldier earlier comparison: median simulation step 33.6 -> 18.9 ms with equal surviving counts/time. Other threads ran tests concurrently; this is not a controlled hardware comparison.
+Final 596 soldier run, prepared animations and other development browsers closed:
+step median 6 ms; draw median 23.1 ms; frame median 41.7 ms (about 24 FPS), p95 97.4 ms, max 243 ms; 5/119 frame intervals exceeded 100 ms. No browser/WebGL errors.
+Evidence: artifacts/fps-2026-10-15/live-600-warm-final.json.
+Earlier cold 596 soldier run: median 76.3 ms. Preparation/concurrent load differ; do not claim a percentage improvement from these runs.
+Stable 60 FPS is NOT verified. First poses, atlas growth during zoom and dense combat still cause stalls. Earlier 1800 soldier runs include long outliers; these are not proven fixed.
+
+Files
+src/crown-battle.js, crown-battle-art.js, crown-battle-renderer.js, crown-battle-sprite-cache.js, crown-battle-sprite-batch.js, crown-battle-app.js.
+Starting backups: artifacts/fps-2026-10-15/. Do not restore entire files: preserve subsequent changes from other threads.
+No downloads/package installs; no changes to user browser profiles, saved armies or other windows.
+
+Follow-up: battle-start stalls (2026-10-15)
+The earlier 'final' measurements above are superseded by this follow-up.
+- Fixed zoom-independent atlas density (1.5 for armies >=160); 12-type fixture fits 740 sources in 13 pages without cycling through evictions. Historical horse variants 0/2 share their identical pose.
+- Tile readback and premultiplication happen within the pose bake budget. GPU uploads reuse the bounded page pixel buffer; no repeated dirty-region canvas reads during drawing.
+- Maximum one new runtime pose per frame when a prior pose is available; idle preparation also includes initial idle and hussar charge poses.
+- Audio DSP runs in a local module worker; fallback sounds are prepared before simulation and never synthesized in play().
+- Start waits for pose/audio preparation, shows progress, supports cancel, and invalidates on rebuild/hidden tab. Cold fixture preparation measured 8-10 seconds before simulation starts.
+- Large army canvas DPR capped at 1. This trades fine zoom detail for lower drawing cost.
+
+Local Chrome measurements, 1366x768, dense contact, zoom changes, 12 historical types:
+Before: recheck-before.json, 596 soldiers, draw median 23.6 ms; RAF max 270.9 ms, 11 intervals >100 ms.
+After: prepared-start.json, 596 soldiers, draw median 6.5 ms (mean 7.1); RAF max 34.8 ms, 0/119 intervals >100 ms.
+Longer: steady-1800.json, 1800 soldiers, 360 RAF callbacks / 7.77 simulation seconds; draw mean 11.44 ms, step mean 15.13 ms; RAF p95 41.9 ms, max 76.4 ms, 0/359 intervals >100 ms.
+Both final runs: no runtime pose generation, no browser/WebGL errors, no missing sprites.
+These are short local measurements, not a guarantee of sustained 60 FPS or Opera performance. RAF includes callbacks that skip drawing; do not convert median RAF interval to rendered FPS. Very diverse armies can still exceed atlas capacity. Each atlas CPU pixel buffer is bounded alongside its retained Canvas and GPU copy.
+
+Follow-up validation:
+PASS sprite-batch-browser: 18 pixel cases, including resolution 1.5, incremental uploads and context loss.
+PASS frame-budget-browser; fps-menu-browser.
+PASS startup-browser: no simulation during preparation, cancel/rebuild invalidate start, ready start and pause.
+PASS audio-design-browser: worker and failed-worker fallback samples match synchronous DSP, existing mix/preview checks.
+Audio recording test now waits for encoded data rather than assuming the codec produces a chunk in 1.1 seconds.
+PASS production Vite build including the local audio worker (64 seconds with other artwork checks active); existing >500 kB chunk warning only. Other artwork thread independently reported a passing build after its final additions.
+PASS audio-browser: nine clips, audible graph, mute/persistence, fallback, voice cap, downloaded non-silent audio/video recording, clone cleanup, PC/mobile layout and 14 effect checks. Updated obsolete release-streak expectation to match the existing intentional single-arrow visual. CaptureStream tests use encoded data readiness and avoid Chrome locator acknowledgement stalls.
+
+Follow-up: higher army capacity (2026-10-15)
+- Runtime units now share immutable combat metadata (config, role, ranged flag, radius) through a uniform object-literal field. Plain preview/test units retain the type lookup fallback. staggerX is initialized rather than changing the unit shape during a charge hit.
+- Renderer caches sprite families and animation keys instead of creating identity/frame strings for every soldier on every draw. WeakMap unit records validate type/team/id; facing selects the existing key set.
+- Coordinated with ME art thread: sourceResolution includes visualScale, up to native density / 6x. Ordinary large-army density stays 1.5; giant poses retain detail. Both warmup and live cache use the same density.
+- Rejected and reverted scratch neighbor arrays, defineProperty metadata, and a nearLocal loop rearrangement: they did not improve representative dense workloads. Spatial ordering and battle behavior remain unchanged.
+- Benchmark now records actual render intervals and simulation/wall time, not only RAF callbacks; optional engine/renderer snapshots permit identical current dependencies. Missing sprites / WebGL errors fail the probe; atlas revision delta exposes eviction churn.
+
+Controlled local Chrome comparison, 1366x768/DPR2 adapting to1, 12 historical types, 360 RAF callbacks, dense contact and zoom changes:
+1800 before (higher-before-1800.json): step mean14.73/median13.4 ms; draw mean11.86/median11.3; actual render interval mean33.25/p9547.7; no intervals>100ms.
+1800 after (higher-after-1800.json, CPU profiler enabled): step mean12.26/median11.6 ms; draw mean10.47/median10.9; render mean32.33/p9544; no intervals>100ms. Simulation6.03s/wall6.04s; earlier run8.1s/wall8.23s. Different elapsed times mean different final survivor counts.
+4000 before (higher-before-4000.json): step mean32.51/median31.1; draw mean22.40/median21.9; render mean61.95/p9585.1/max131.7ms,5 intervals>100ms. Simulation12s/wall22.32s.
+4000 after (higher-after-4000.json): step mean24.50/median23.5; draw mean18.04/median17.7; render mean49.26/p9571.5/max189.1ms,2 intervals>100ms. Simulation12.03s/wall17.62s. Approx16.1→20.3 rendered frames/s, still below the normal30Hz drawing cadence; not sustained60FPS and not a complete resolution of 4000-unit stutter.
+All four browser runs:13 atlas pages,0 runtime source generations,0 missing sprites,0 browser/WebGL errors. Preparation9.3-14s before combat.
+Engine-only timing is JIT/load sensitive; prefer these browser measurements when describing user-visible gains.
+
+Validation this follow-up:
+PASS engine, behavior, charge, impact, formations, removal, historical combat, historical commanders.
+PASS frame-budget-browser including family-cache identity changes; layers-browser; startup-browser; sprite-batch-browser18pixel cases.
+Layers test synthetic pages updated to include the premultiplied pixel buffer introduced in the preceding follow-up; texture-array growth preserves the old page's pixels.
+PASS production Vite build4.21s; existing >500kB chunk warning.
+Cross-thread ME art test reported191soldiers/36ME+2historical types,16posesx3,9168requests: pageRevision deltas18,1,0,missing0,cap16. One tested composition stabilized; this does not prove every two-team all-type combination fits.
+
+Final checks:
+PASS old/new engine equivalence at six checkpoints in each of five scenarios, repeated in reversed engine order: 320/2000 spread,1800/4000 dense,1800 dense historical. Final run timing overlapped artwork validation and is not used for performance claims; timings vary materially between runs/runtime optimization states.
+PASS higher-steady-4000.json:600 RAF callbacks,23.582s wall/17.733s simulation,4000 initial soldiers. Actual render interval mean44.58ms (about22.4FPS),median42.5,p9568.3,max104.6,2/527 intervals>100ms. Step mean20.39ms,draw mean17.18ms. Atlas revisions0,source generations0,missing sprites0,browser/WebGL errors0,749 sources/13pages. Preparation12.91s. Longer battle ages differ from the360-callback before/after runs, so this is a sustained-run check, not an additional percentage improvement. Art thread reported browser tests closed; its final build may overlap early preparation.
+Remaining limit:4000 dense soldiers still run below30 rendered FPS and simulation falls behind wall time. This follow-up reduces work but does not claim the large-army FPS problem is completely solved.

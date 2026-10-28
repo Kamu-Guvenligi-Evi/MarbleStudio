@@ -1,0 +1,2176 @@
+[
+  {
+    "id": "maori",
+    "name": "Māoriler",
+    "countries": [
+      {
+        "name": "Aotearoa / Māori toplulukları",
+        "units": [
+          {
+            "id": "maori_taiaha",
+            "name": "Māori taiaha ustası",
+            "period": "18. yy geleneksel donanımı",
+            "kind": "sword",
+            "role": "İki elli yakın dövüş uzmanı",
+            "source": "https://collections.tepapa.govt.nz/topic/3128"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hawaiian",
+    "name": "Hawaiililer",
+    "countries": [
+      {
+        "name": "Hawaiʻi şeflikleri",
+        "units": [
+          {
+            "id": "hawaiian_alii",
+            "name": "Hawaiili aliʻi mızraklı savaşçı",
+            "period": "18. yy geleneksel donanımı",
+            "kind": "spear",
+            "role": "Yüksek statülü mızraklı savaşçı",
+            "source": "https://artsandculture.google.com/asset/hawaiian-feather-helmet/RQFHggEharPuvA?hl=en"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "middle-earth",
+    "name": "Orta Dünya",
+    "countries": [
+      {
+        "name": "Gondor",
+        "units": [
+          {
+            "id": "me_gondor_swordsman",
+            "name": "Gondor Kılıçlısı",
+            "kind": "sword",
+            "role": "Kılıçlı piyade",
+            "source": "/warrior-sprites/middle-earth/gondor-swordsman.webp"
+          },
+          {
+            "id": "me_gondor_spearman",
+            "name": "Gondor Mızraklısı",
+            "kind": "spear",
+            "role": "Mızraklı piyade",
+            "source": "/warrior-sprites/middle-earth/gondor-spearman.webp"
+          },
+          {
+            "id": "me_gondor_veteran",
+            "name": "Gondor Seçkin Askeri",
+            "kind": "sword",
+            "role": "Seçkin piyade",
+            "source": "/warrior-sprites/middle-earth/gondor-veteran.webp"
+          },
+          {
+            "id": "me_gondor_cavalry",
+            "name": "Gondor Zırhlı Süvarisi",
+            "kind": "cavalry",
+            "role": "Atlı mızraklı · zırhlı süvari",
+            "source": "/warrior-sprites/middle-earth/gondor-cavalry.webp"
+          }
+        ]
+      },
+      {
+        "name": "Rohan",
+        "units": [
+          {
+            "id": "me_rohan_warrior",
+            "name": "Rohan Savaşçısı",
+            "kind": "sword",
+            "role": "Yaya savaşçı",
+            "source": "/warrior-sprites/middle-earth/rohan-warrior.webp"
+          },
+          {
+            "id": "me_rohirrim",
+            "name": "Rohirrim",
+            "kind": "cavalry",
+            "role": "Atlı mızraklı · hücum süvarisi",
+            "source": "/warrior-sprites/middle-earth/rohirrim.webp"
+          }
+        ]
+      },
+      {
+        "name": "Isengard",
+        "units": [
+          {
+            "id": "me_uruk_swordsman",
+            "name": "Uruk-hai Kılıçlısı",
+            "kind": "sword",
+            "role": "Ağır piyade",
+            "source": "/warrior-sprites/middle-earth/uruk-swordsman.webp"
+          },
+          {
+            "id": "me_uruk_pikeman",
+            "name": "Uruk-hai Kargıcısı",
+            "kind": "spear",
+            "role": "Uzun kargılı piyade",
+            "source": "/warrior-sprites/middle-earth/uruk-pikeman.webp"
+          },
+          {
+            "id": "me_uruk_warg_rider",
+            "name": "Uruk-hai Warg Binicisi",
+            "kind": "cavalry",
+            "role": "Sırtlan görünümlü Warg üzerinde zırhlı binici",
+            "source": "https://www.zbrushcentral.com/t/interview-ben-mauro/334929"
+          }
+        ]
+      },
+      {
+        "name": "Mordor",
+        "units": [
+          {
+            "id": "me_mordor_orc",
+            "name": "Mordor Orku",
+            "kind": "sword",
+            "role": "Ork piyadesi",
+            "source": "/warrior-sprites/middle-earth/mordor-orc.webp"
+          },
+          {
+            "id": "me_nazgul",
+            "name": "Nazgûl · Kara Süvari",
+            "kind": "cavalry",
+            "role": "Kara atlı kılıçlı süvari",
+            "source": "/warrior-sprites/middle-earth/nazgul.webp"
+          }
+        ]
+      },
+      {
+        "name": "Elfler",
+        "units": [
+          {
+            "id": "me_lorien_elf",
+            "name": "Lórien Elf Savaşçısı",
+            "kind": "sword",
+            "role": "Elf piyadesi",
+            "source": "/warrior-sprites/middle-earth/lorien-elf.webp"
+          },
+          {
+            "id": "me_elf_stag_rider",
+            "name": "Elf Geyik Süvarisi",
+            "kind": "cavalry",
+            "role": "Geyik üzerinde elf kılıçlısı",
+            "source": "/warrior-sprites/middle-earth/elf-stag-rider.webp"
+          }
+        ]
+      },
+      {
+        "name": "Cüceler",
+        "units": [
+          {
+            "id": "me_iron_hills_dwarf",
+            "name": "Demir Tepeler Cücesi",
+            "kind": "sword",
+            "role": "Zırhlı cüce piyadesi",
+            "source": "/warrior-sprites/middle-earth/iron-hills-dwarf.webp"
+          },
+          {
+            "id": "me_iron_hills_veteran",
+            "name": "Demir Tepeler Seçkin Cücesi",
+            "kind": "sword",
+            "role": "Seçkin cüce piyadesi",
+            "source": "/warrior-sprites/middle-earth/iron-hills-veteran.webp"
+          },
+          {
+            "id": "me_dwarf_ram_rider",
+            "name": "Demir Tepeler Koç Süvarisi",
+            "kind": "cavalry",
+            "role": "Koç üzerinde baltalı cüce",
+            "source": "/warrior-sprites/middle-earth/dwarf-ram-rider.webp"
+          }
+        ]
+      },
+      {
+        "name": "Orta Dünya Kahramanları",
+        "units": [
+          {
+            "id": "me_aragorn",
+            "name": "Aragorn",
+            "kind": "sword",
+            "role": "Kahraman · Kılıç ustası",
+            "source": "/warrior-sprites/middle-earth/aragorn.webp"
+          },
+          {
+            "id": "me_legolas",
+            "name": "Legolas",
+            "kind": "ranged",
+            "role": "Kahraman · Elf okçusu",
+            "source": "/warrior-sprites/middle-earth/legolas.webp"
+          },
+          {
+            "id": "me_gimli",
+            "name": "Gimli",
+            "kind": "sword",
+            "role": "Kahraman · Cüce balta ustası",
+            "source": "/warrior-sprites/middle-earth/gimli.webp"
+          },
+          {
+            "id": "me_gandalf",
+            "name": "Gandalf",
+            "kind": "sword",
+            "role": "Kahraman · Asa ve Glamdring · yakın dövüş",
+            "source": "/warrior-sprites/middle-earth/gandalf.webp"
+          },
+          {
+            "id": "me_sauron",
+            "name": "Sauron",
+            "kind": "sword",
+            "role": "Kahraman · Karanlık Lord",
+            "source": "/warrior-sprites/middle-earth/sauron.webp"
+          },
+          {
+            "id": "me_witch_king",
+            "name": "Witch-king · Angmar’ın Cadı Kralı",
+            "kind": "sword",
+            "role": "Kahraman · Nazgûl efendisi",
+            "source": "/warrior-sprites/middle-earth/witch-king.webp"
+          },
+          {
+            "id": "me_elrond",
+            "name": "Elrond",
+            "kind": "sword",
+            "role": "Kahraman · Elf kılıç ustası",
+            "source": "/warrior-sprites/middle-earth/elrond.webp"
+          },
+          {
+            "id": "me_azog_warg",
+            "name": "Azog · Beyaz Warg",
+            "kind": "cavalry",
+            "role": "Kahraman · Beyaz Warg üzerinde topuzlu ork",
+            "source": "https://www.wetanz.com/us/azog-the-defiler-on-warg"
+          },
+          {
+            "id": "me_theoden",
+            "name": "Théoden",
+            "kind": "cavalry",
+            "role": "Kahraman · Atlı kral · kılıç ve kalkan",
+            "source": "/warrior-sprites/middle-earth/theoden.webp"
+          },
+          {
+            "id": "me_eomer",
+            "name": "Éomer",
+            "kind": "cavalry",
+            "role": "Kahraman · Rohan atlı komutanı · kılıç ve kalkan",
+            "source": "/warrior-sprites/middle-earth/eomer.webp"
+          },
+          {
+            "id": "me_boromir",
+            "name": "Boromir",
+            "kind": "sword",
+            "role": "Kahraman · Gondor kılıç ve kalkan ustası",
+            "source": "/warrior-sprites/middle-earth/boromir.webp"
+          },
+          {
+            "id": "me_faramir",
+            "name": "Faramir",
+            "kind": "ranged",
+            "role": "Kahraman · Ithilien yaya okçusu",
+            "source": "/warrior-sprites/middle-earth/faramir.webp"
+          },
+          {
+            "id": "me_saruman",
+            "name": "Saruman",
+            "kind": "sword",
+            "role": "Kahraman · Asa · yakın alan vuruşu",
+            "source": "/warrior-sprites/middle-earth/saruman.webp"
+          },
+          {
+            "id": "me_thranduil",
+            "name": "Thranduil",
+            "kind": "cavalry",
+            "role": "Kahraman · Büyük geyik üzerinde elf kılıç ustası",
+            "source": "/warrior-sprites/middle-earth/thranduil.webp"
+          },
+          {
+            "id": "me_haldir",
+            "name": "Haldir",
+            "kind": "sword",
+            "role": "Kahraman · Lórien elf kılıç komutanı",
+            "source": "/warrior-sprites/middle-earth/haldir.webp"
+          },
+          {
+            "id": "me_dain",
+            "name": "Dáin Demirayak",
+            "kind": "cavalry",
+            "role": "Kahraman · Zırhlı yaban domuzu üzerinde çekiçli cüce",
+            "source": "/warrior-sprites/middle-earth/dain.webp"
+          }
+        ]
+      },
+      {
+        "name": "Orta Dünya Yaratıkları",
+        "units": [
+          {
+            "id": "me_cave_troll",
+            "name": "Mağara Trolü",
+            "kind": "sword",
+            "role": "Büyük düşman",
+            "source": "/warrior-sprites/middle-earth/cave-troll.webp"
+          },
+          {
+            "id": "me_balrog",
+            "name": "Balrog",
+            "kind": "sword",
+            "role": "Büyük düşman",
+            "source": "/warrior-sprites/middle-earth/balrog.webp"
+          },
+          {
+            "id": "me_ent",
+            "name": "Ent",
+            "kind": "sword",
+            "role": "Ağaç çobanı · alan vuruşu",
+            "source": "/warrior-sprites/middle-earth/ent.webp"
+          },
+          {
+            "id": "me_shelob",
+            "name": "Shelob",
+            "kind": "sword",
+            "role": "Dev örümcek · yakın ısırık",
+            "source": "/warrior-sprites/middle-earth/shelob.webp"
+          },
+          {
+            "id": "me_mumakil",
+            "name": "Mûmakil",
+            "kind": "elephant",
+            "role": "Dev savaş fili · alan ezme saldırısı",
+            "source": "/warrior-sprites/middle-earth/mumakil.webp"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mythology",
+    "name": "Mitoloji",
+    "countries": [
+      {
+        "name": "Yunan Mitolojisi",
+        "units": [
+          {
+            "id": "myth_minotaur",
+            "name": "Minotor",
+            "kind": "sword",
+            "role": "Baltalı yakın dövüş yaratığı"
+          },
+          {
+            "id": "myth_centaur",
+            "name": "Kentaur",
+            "kind": "cavalry",
+            "role": "Hareketli yaylı yaratık"
+          },
+          {
+            "id": "myth_cyclops",
+            "name": "Kiklop",
+            "kind": "elephant",
+            "role": "Tek gözlü ağır dev"
+          }
+        ]
+      },
+      {
+        "name": "İskandinav Mitolojisi",
+        "units": [
+          {
+            "id": "myth_fenrir",
+            "name": "Fenrir",
+            "kind": "cavalry",
+            "role": "Hızlı kurt hücumcusu"
+          },
+          {
+            "id": "myth_jotun",
+            "name": "Jotun",
+            "kind": "elephant",
+            "role": "Buz devi"
+          },
+          {
+            "id": "myth_nidhogg",
+            "name": "Nidhogg",
+            "kind": "elephant",
+            "role": "Ağır ejderha"
+          }
+        ]
+      },
+      {
+        "name": "Mısır Mitolojisi",
+        "units": [
+          {
+            "id": "myth_sphinx",
+            "name": "Sfenks",
+            "kind": "cavalry",
+            "role": "Aslan gövdeli muhafız"
+          },
+          {
+            "id": "myth_ammit",
+            "name": "Ammit",
+            "kind": "elephant",
+            "role": "Ağır çeneli yaratık"
+          },
+          {
+            "id": "myth_uraeus",
+            "name": "Uraeus",
+            "kind": "sword",
+            "role": "Kobra muhafızı"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "turkic",
+    "name": "Türkler",
+    "countries": [
+      {
+        "name": "Osmanlı Devleti",
+        "units": [
+          {
+            "id": "janissary",
+            "name": "Yeniçeri",
+            "kind": "ranged",
+            "role": "Menzilli piyade",
+            "source": "https://au.pinterest.com/pin/8936899244365540/"
+          },
+          {
+            "id": "janissary_yatagan",
+            "name": "Yatağanlı Yeniçeri",
+            "period": "18. yy–1826",
+            "kind": "sword",
+            "role": "Yatağanlı yakın dövüş piyadesi",
+            "source": "https://www.metmuseum.org/art/collection/search/24329"
+          },
+          {
+            "id": "ottoman_sipah",
+            "name": "Kapıkulu süvarileri",
+            "period": "15.–16. yy seçkisi",
+            "kind": "cavalry",
+            "role": "Mızraklı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Ralamb_Sipahi.jpg"
+          },
+          {
+            "id": "ottoman_solak",
+            "name": "Solak muhafızları",
+            "period": "15.–16. yy seçkisi",
+            "kind": "ranged",
+            "role": "Yaya okçu",
+            "source": "https://commons.wikimedia.org/wiki/File:Knotel-Solaks.jpg"
+          },
+          {
+            "id": "ottoman_deli",
+            "name": "Deli — serhad süvarisi",
+            "period": "16. yy",
+            "kind": "cavalry",
+            "role": "Mızraklı öncü süvari",
+            "source": "https://islamansiklopedisi.org.tr/deli--asker"
+          },
+          {
+            "id": "ottoman_akinci",
+            "name": "Akıncı",
+            "period": "14–16. yy",
+            "kind": "cavalry",
+            "role": "Hafif kılıçlı süvari",
+            "source": "https://islamansiklopedisi.org.tr/akinci"
+          },
+          {
+            "id": "ottoman_azap_archer",
+            "name": "Azap okçusu",
+            "period": "16. yy tasviri / 1664 baskısı",
+            "kind": "ranged",
+            "role": "Hafif yaya okçu",
+            "source": "https://islamansiklopedisi.org.tr/azeb--asker"
+          }
+        ]
+      },
+      {
+        "name": "Büyük Selçuklu Devleti",
+        "units": [
+          {
+            "id": "seljuk_hassa",
+            "name": "Hassa gulâm süvarileri",
+            "period": "11.–12. yy",
+            "kind": "cavalry",
+            "role": "Mızraklı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Standing_guard_figure,_Seljuk_period,_Iran,_late_12th-13th_century.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Anadolu Selçuklu Devleti",
+        "units": [
+          {
+            "id": "rum_halka_guard",
+            "name": "Halka-i hâs — Selçuklu muhafızı",
+            "period": "12–13. yy",
+            "kind": "sword",
+            "role": "Zırhlı kılıçlı hassa muhafızı",
+            "source": "https://islamansiklopedisi.org.tr/hassa-ordusu"
+          }
+        ]
+      },
+      {
+        "name": "Gazneli Devleti",
+        "units": [
+          {
+            "id": "ghaznavid_guard",
+            "name": "Gulâmân-ı saray",
+            "period": "10.–11. yy",
+            "kind": "cavalry",
+            "role": "Atlı okçu",
+            "source": "https://commons.wikimedia.org/wiki/File:Guard_of_the_sultan,_wall_painting_from_Lashkarī_Bazar,_Ghaznawid,_11th_century_(Archaeological_Museum,_Kabul,_Afghanistan).jpg"
+          }
+        ]
+      },
+      {
+        "name": "Kıpçak / Kuman",
+        "units": [
+          {
+            "id": "kipchak",
+            "name": "Maskeli Kıpçak",
+            "kind": "cavalry",
+            "role": "Atlı okçu",
+            "source": "https://www.qrim.ru/files/images/?id=349"
+          },
+          {
+            "id": "kipchak_masked_swordsman",
+            "name": "Maskeli Kıpçak kılıçlısı",
+            "period": "12.–14. yy; buluntu atıfları tartışmalı",
+            "kind": "cavalry",
+            "role": "Kılıçlı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Mysterious_Mask,_Saint_Petersburg_Museum.jpg"
+          },
+          {
+            "id": "kipchak_lancer",
+            "name": "Mızraklı Kıpçak süvarisi",
+            "period": "12–13. yy",
+            "kind": "cavalry",
+            "role": "Zırhlı mızraklı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Mysterious_Mask,_Saint_Petersburg_Museum.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Timurlular",
+        "units": [
+          {
+            "id": "timur",
+            "name": "Savaş Fili",
+            "kind": "elephant",
+            "role": "Ağır hücum",
+            "source": "https://www.kizlarsoruyor.com/kultur-sanat/a10861-timur-ile-yildirim-beyazit-arasindaki-sorunun-analizi"
+          }
+        ]
+      },
+      {
+        "name": "Göktürk Kağanlığı",
+        "units": [
+          {
+            "id": "gokturk_bori",
+            "name": "Böri — kağan muhafızı",
+            "period": "6.–8. yy",
+            "kind": "cavalry",
+            "role": "Kılıçlı muhafız süvarisi",
+            "source": "https://dergipark.org.tr/tr/download/article-file/3528902"
+          }
+        ]
+      },
+      {
+        "name": "Karahanlı Devleti",
+        "units": [
+          {
+            "id": "karakhanid_palace_guard",
+            "name": "Yatgak / Turgak — saray muhafızı",
+            "period": "11.–12. yy",
+            "kind": "spear",
+            "role": "Mızraklı saray muhafızı",
+            "source": "https://islamansiklopedisi.org.tr/karahanlilar"
+          },
+          {
+            "id": "karakhanid_hassa",
+            "name": "Karahanlı hassa askeri",
+            "period": "11.–12. yy",
+            "kind": "cavalry",
+            "role": "Hassa atlı okçusu",
+            "source": "https://islamansiklopedisi.org.tr/karahanlilar"
+          }
+        ]
+      },
+      {
+        "name": "Harezmşahlar Devleti",
+        "units": [
+          {
+            "id": "khwarazm_hassa",
+            "name": "Harezmşah hassa süvarisi",
+            "period": "12. yy–1231",
+            "kind": "cavalry",
+            "role": "Mızraklı hassa süvarisi",
+            "source": "https://islamansiklopedisi.org.tr/harizmsahlar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "andalusian",
+    "name": "Endülüslüler",
+    "countries": [
+      {
+        "name": "Kurtuba Halifeliği",
+        "units": [
+          {
+            "id": "cordoba_saqaliba",
+            "name": "Sakālibe — Kurtuba saray muhafızı",
+            "period": "10. yy",
+            "kind": "sword",
+            "role": "Kılıçlı saray muhafızı",
+            "source": "https://islamansiklopedisi.org.tr/sakalibe"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "arab",
+    "name": "Araplar / Halifelikler",
+    "countries": [
+      {
+        "name": "Medine Arapları",
+        "units": [
+          {
+            "id": "medina_foot_archer",
+            "name": "Medineli yaya okçusu",
+            "period": "7. yy",
+            "kind": "ranged",
+            "role": "Erken İslam dönemi yaylı piyade",
+            "source": "https://visitmadinahsa.com/sa-en/destinations/The-Archers%E2%80%99-Mount-"
+          }
+        ]
+      },
+      {
+        "name": "Emevî Halifeliği",
+        "units": [
+          {
+            "id": "umayyad_haras",
+            "name": "Hares — Emevî halife muhafızı",
+            "period": "661–750",
+            "kind": "spear",
+            "role": "Mızraklı kişisel muhafız",
+            "source": "https://islamansiklopedisi.org.tr/surta"
+          }
+        ]
+      },
+      {
+        "name": "Abbâsî Halifeliği",
+        "units": [
+          {
+            "id": "abbasid_abna",
+            "name": "Ebnâü’d-devle — Abbâsî askeri",
+            "period": "8. yy sonu–9. yy başı",
+            "kind": "sword",
+            "role": "Seçkin çevreden kılıçlı piyade",
+            "source": "https://digitalcommons.colby.edu/faculty_scholarship/69/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "persian",
+    "name": "Farslar",
+    "countries": [
+      {
+        "name": "Ahameniş İmparatorluğu",
+        "units": [
+          {
+            "id": "persian",
+            "name": "Pers Ölümsüzü",
+            "kind": "spear",
+            "role": "Muhafız piyade",
+            "source": "https://commons.wikimedia.org/wiki/File:Persian_Army_Immortal.png"
+          },
+          {
+            "id": "achaemenid_archer",
+            "name": "Ahameniş yaylı savaşçısı",
+            "period": "MÖ 522–486",
+            "kind": "ranged",
+            "role": "Susa kabartmalarından yaylı donanım",
+            "source": "https://collections.louvre.fr/ark:/53355/cl010177288"
+          }
+        ]
+      },
+      {
+        "name": "Part / Arsak İmparatorluğu",
+        "units": [
+          {
+            "id": "parthian_cataphract",
+            "name": "Zırhlı aristokrat süvariler / katafraktlar",
+            "period": "MÖ 1.–MS 2. yy seçkisi",
+            "kind": "cavalry",
+            "role": "Mızraklı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:ParthianCataphract.JPG"
+          }
+        ]
+      },
+      {
+        "name": "Sâsânî İmparatorluğu",
+        "units": [
+          {
+            "id": "sasanian_aswaran",
+            "name": "Asvârân / Savârân",
+            "period": "4.–7. yy seçkisi",
+            "kind": "cavalry",
+            "role": "Mızraklı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Armed-horseman.JPG"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "assyrian",
+    "name": "Asurlular",
+    "countries": [
+      {
+        "name": "Yeni Asur",
+        "units": [
+          {
+            "id": "assyria_royal_guard",
+            "name": "Kraliyet muhafızı",
+            "period": "MÖ 7. yy",
+            "kind": "spear",
+            "role": "Mızraklı piyade",
+            "source": "https://commons.wikimedia.org/wiki/File:Campaign_in_southern_Iraq_of_Ashurbanipal_-_carriying_and_couting_booty_in_a_palm_grove.jpg"
+          },
+          {
+            "id": "assyrian_foot_archer",
+            "name": "Asur yaya okçusu",
+            "period": "MÖ 9. yy",
+            "kind": "ranged",
+            "role": "Sivri miğferli okçu",
+            "source": "https://www.britishmuseum.org/collection/object/W_1849-1222-10"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mughal",
+    "name": "Babürler / Hindistan",
+    "countries": [
+      {
+        "name": "Babür İmparatorluğu",
+        "units": [
+          {
+            "id": "mughal_ahadi",
+            "name": "Ahadi süvarisi",
+            "period": "16.–17. yy",
+            "kind": "cavalry",
+            "role": "Mızraklı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Cavalry_soldier_of_Mughal_Empire.jpg"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "german",
+    "name": "Almanlar",
+    "countries": [
+      {
+        "name": "Alman Toprakları",
+        "units": [
+          {
+            "id": "landsknecht",
+            "name": "Landsknecht — mızraklı piyade",
+            "kind": "spear",
+            "role": "Uzun mızraklı ücretli piyade",
+            "source": "https://www.britishmuseum.org/collection/object/P_1845-0809-1725"
+          },
+          {
+            "id": "german_doppelsoldner",
+            "name": "Doppelsöldner — çift maaşlı kılıççı",
+            "period": "15. yy sonu–16. yy",
+            "kind": "sword",
+            "role": "Çift elli kılıç piyadesi",
+            "source": "https://www.historisches-lexikon-bayerns.de/Lexikon/Landsknechte"
+          },
+          {
+            "id": "german_pavise_crossbowman",
+            "name": "Alman pavisli arbaletçi",
+            "period": "15. yy",
+            "kind": "ranged",
+            "role": "Pavisli arbaletçi",
+            "source": "https://www.metmuseum.org/art/collection/search/21940"
+          },
+          {
+            "id": "german_halberdier",
+            "name": "Alman teberci",
+            "period": "15. yy sonu–16. yy başı",
+            "kind": "spear",
+            "role": "Teberli piyade",
+            "source": "https://wallacelive.wallacecollection.org/eMP/eMuseumPlus?module=collection&objectId=61449&service=ExternalInterface"
+          }
+        ]
+      },
+      {
+        "name": "Kutsal Roma İmparatorluğu",
+        "units": [
+          {
+            "id": "imperial_gothic_knight",
+            "name": "İmparatorluk şövalyesi — Gotik ağır süvari",
+            "period": "15. yy sonu",
+            "kind": "cavalry",
+            "role": "Gotik zırhlı mızraklı şövalye",
+            "source": "https://www.metmuseum.org/art/collection/search/35903"
+          },
+          {
+            "id": "german_armoured_foot",
+            "name": "Zırhlı yaya savaşçı — Alman toprakları",
+            "period": "15. yy seçkisi",
+            "kind": "sword",
+            "role": "Yakın dövüş piyadesi",
+            "source": "https://commons.wikimedia.org/wiki/File:De_Alte_Armatur_und_Ringkunst_Talhofer_076.jpg"
+          },
+          {
+            "id": "german_ministerial",
+            "name": "Ministerial şövalye",
+            "period": "11.–13. yy",
+            "kind": "cavalry",
+            "role": "Mızraklı hizmet şövalyesi",
+            "source": "https://historisches-lexikon.li/Ministerialit%C3%A4t_%28Dienstmannschaft%29"
+          }
+        ]
+      },
+      {
+        "name": "Töton Tarikatı / Tarikat Devleti",
+        "units": [
+          {
+            "id": "teutonic_knight",
+            "name": "Töton şövalyesi — Teutonik tarikat süvarisi",
+            "period": "13. yy seçkisi",
+            "kind": "cavalry",
+            "role": "Mızraklı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Teutonic_Knight_entering_Malbork_Castle.PNG"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "spanish",
+    "name": "İspanyollar",
+    "countries": [
+      {
+        "name": "León / Kastilya",
+        "units": [
+          {
+            "id": "santiago_knight",
+            "name": "Santiago şövalyesi",
+            "period": "13. yy temsili",
+            "kind": "cavalry",
+            "role": "Mızraklı tarikat süvarisi",
+            "source": "https://pares.cultura.gob.es/ParesBusquedas20/catalogo/autoridad/21516/imprimir"
+          },
+          {
+            "id": "castilian_crossbowman",
+            "name": "Kastilya arbaletçisi",
+            "period": "15. yy sonu",
+            "kind": "ranged",
+            "role": "Arbaletli piyade",
+            "source": "https://pares.cultura.gob.es/ParesBusquedas20/catalogo/description/2318238"
+          }
+        ]
+      },
+      {
+        "name": "Aragon Tacı",
+        "units": [
+          {
+            "id": "aragon_almogavar",
+            "name": "Almogavar",
+            "period": "13–14. yy",
+            "kind": "spear",
+            "role": "Hafif mızraklı akın piyadesi",
+            "source": "https://www.mhcat.cat/exposicions/exposicions_realitzades/el_temps_dels_almogavers/l_aventura_d_orient/els_almogavers"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "french",
+    "name": "Fransızlar",
+    "countries": [
+      {
+        "name": "Fransa Krallığı",
+        "units": [
+          {
+            "id": "french_ordonnance_gendarme",
+            "name": "Ordonnance ağır süvarisi",
+            "period": "15. yy ikinci yarısı",
+            "kind": "cavalry",
+            "role": "Zırhlı kral süvarisi",
+            "source": "https://www.musee-armee.fr/ExpoChevaliersBombardes/time-of-refom.html"
+          },
+          {
+            "id": "french_scots_guard",
+            "name": "Garde Écossaise — İskoç Muhafızı",
+            "period": "15. yy",
+            "kind": "ranged",
+            "role": "Kraliyet muhafız okçusu",
+            "source": "https://larevuedhistoiremilitaire.fr/2024/07/24/la-genese-des-archers-du-corps-lelite-de-la-garde-ecossaise-et-les-precurseurs-des-gardes-de-la-manche/"
+          },
+          {
+            "id": "french_franc_archer",
+            "name": "Fransız Franc-archer",
+            "period": "1448–15. yy sonu",
+            "kind": "ranged",
+            "role": "Yerel askerlik yükümlüsü okçu",
+            "source": "https://www.musee-archerie-valois.fr/wp-content/uploads/2021/09/dossier_de_presse_expo_traditions_d_archers.pdf"
+          },
+          {
+            "id": "french_royal_crossbow_guard",
+            "name": "Fransız kraliyet arbaletçisi",
+            "period": "1386–1388",
+            "kind": "ranged",
+            "role": "Kralın arbaletli muhafızı",
+            "source": "https://ccfr.bnf.fr/portailccfr/ark%3A/16871/004D48012728"
+          },
+          {
+            "id": "french_dismounted_man_at_arms",
+            "name": "Fransız zırhlı yaya savaşçı",
+            "period": "14. yy sonu–15. yy başı",
+            "kind": "sword",
+            "role": "Kılıçlı zırhlı piyade",
+            "source": "https://royalarmouries.org/objects-and-stories/stories/the-hundred-years-war-1337-1453"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "italian",
+    "name": "İtalyanlar / Roma",
+    "countries": [
+      {
+        "name": "Roma İmparatorluğu",
+        "units": [
+          {
+            "id": "roman",
+            "name": "Roma Lejyoneri",
+            "kind": "sword",
+            "role": "Ağır piyade",
+            "source": "https://triariusllc.wordpress.com/about/"
+          },
+          {
+            "id": "rome_praetorian",
+            "name": "Praetorian Muhafızları",
+            "period": "MS 1.–3. yy seçkisi",
+            "kind": "sword",
+            "role": "Yakın dövüş piyadesi",
+            "source": "https://commons.wikimedia.org/wiki/File:Heinrich_Leutemann_-_Insurrection_by_the_Praetorian_Guard_in_Rome_in_193.jpg"
+          },
+          {
+            "id": "rome_equites",
+            "name": "Equites singulares Augusti",
+            "period": "MS 2.–3. yy seçkisi",
+            "kind": "cavalry",
+            "role": "Mızraklı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Funerary_altar_of_Marius_Alexander_of_the_equites_singulares_(AE_1982,_76)_02_det.jpg"
+          },
+          {
+            "id": "roman_syrian_archer",
+            "name": "Roma hizmetinde Suriyeli okçu",
+            "period": "Roma İmparatorluk dönemi",
+            "kind": "ranged",
+            "role": "Yardımcı birlik okçusu",
+            "source": "https://production.english-heritage.org.uk/visit/places/birdoswald-roman-fort-hadrians-wall/history-and-stories/the-people-of-birdsowald/"
+          }
+        ]
+      },
+      {
+        "name": "Ceneviz Cumhuriyeti",
+        "units": [
+          {
+            "id": "genoese_crossbowman",
+            "name": "Ceneviz arbaletçisi",
+            "period": "14.–15. yy",
+            "kind": "ranged",
+            "role": "Pavizli profesyonel arbaletçi",
+            "source": "https://serena.atcult.it/index.php/rm/article/download/urn%3Anbn%3Ait%3Aunina-3153/5213"
+          }
+        ]
+      },
+      {
+        "name": "Venedik Cumhuriyeti",
+        "units": [
+          {
+            "id": "venetian_stradiot",
+            "name": "Stradiot — Venedik hafif süvarisi",
+            "period": "15. yy sonu–16. yy başı",
+            "kind": "cavalry",
+            "role": "Mızraklı akın süvarisi",
+            "source": "https://www.treccani.it/enciclopedia/stradiotti/"
+          }
+        ]
+      },
+      {
+        "name": "Milano Dükalığı",
+        "units": [
+          {
+            "id": "milan_ducal_cavalry",
+            "name": "Famiglia ducale — Milano dükalık süvarisi",
+            "period": "15. yy ikinci yarısı",
+            "kind": "cavalry",
+            "role": "Dükün ağır maiyet süvarisi",
+            "source": "https://www.storiaonline.org/mi/belsanti.situazione.pdf"
+          }
+        ]
+      },
+      {
+        "name": "Floransa Cumhuriyeti",
+        "units": [
+          {
+            "id": "italian_condotta_lancer",
+            "name": "Condotta — İtalyan ağır süvarisi",
+            "period": "15. yy ikinci yarısı",
+            "kind": "cavalry",
+            "role": "Sözleşmeli ağır mızraklı süvari",
+            "source": "https://www.metmuseum.org/art/collection/search/24810"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mongol",
+    "name": "Moğollar",
+    "countries": [
+      {
+        "name": "Moğol İmparatorluğu",
+        "units": [
+          {
+            "id": "mongol",
+            "name": "Moğol Atlısı",
+            "kind": "cavalry",
+            "role": "Atlı okçu",
+            "source": "https://munkhdalai.blogspot.com/2010/08/blog-post_98.html"
+          },
+          {
+            "id": "mongol_keshig",
+            "name": "Keşik / Keshig",
+            "period": "13. yy",
+            "kind": "cavalry",
+            "role": "Atlı okçu",
+            "source": "https://commons.wikimedia.org/wiki/File:DiezAlbumsArmedRiders_I_(cropped1to1).jpg"
+          },
+          {
+            "id": "mongol_hook_lancer",
+            "name": "Moğol kancalı mızraklı süvari",
+            "period": "13–14. yy",
+            "kind": "cavalry",
+            "role": "Yakın dövüş mızraklı süvari",
+            "source": "https://royalarmouries.org/objects-and-stories/stories/the-mongols/arms-and-armour-of-the-mongol-empire"
+          }
+        ]
+      },
+      {
+        "name": "İlhanlı Devleti",
+        "units": [
+          {
+            "id": "ilkhan_keshikten",
+            "name": "Keşikten / Kešikten",
+            "period": "1256–1335",
+            "kind": "cavalry",
+            "role": "Atlı okçu",
+            "source": "https://commons.wikimedia.org/wiki/File:DiezAlbumsArmedRiders_I_(cropped1to1).jpg"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "japanese",
+    "name": "Japonlar",
+    "countries": [
+      {
+        "name": "Japonya",
+        "units": [
+          {
+            "id": "samurai",
+            "name": "Samuray",
+            "kind": "sword",
+            "role": "Yakın dövüş",
+            "source": "https://www.g-rava.it/product/med0022-the-ii-naomasas-red-devils-charge-at-sekigahara/"
+          },
+          {
+            "id": "japan_mounted_samurai",
+            "name": "Atlı samuray — yaylı yoroi varyantı",
+            "period": "12.–14. yy",
+            "kind": "cavalry",
+            "role": "Atlı okçu",
+            "source": "https://commons.wikimedia.org/wiki/File:Takezaki_Suenaga.jpg"
+          },
+          {
+            "id": "japan_sohei",
+            "name": "Sōhei — tapınak savaşçısı",
+            "period": "12–14. yy",
+            "kind": "spear",
+            "role": "Naginatalı tapınak piyadesi",
+            "source": "https://uhpress.hawaii.edu/9780824831233/"
+          },
+          {
+            "id": "japan_yari_ashigaru",
+            "name": "Yari ashigaru",
+            "period": "16–17. yy",
+            "kind": "spear",
+            "role": "Mızraklı piyade",
+            "source": "https://www.mlit.go.jp/tagengo-db/en/H30-00668.html"
+          },
+          {
+            "id": "japan_yumi_ashigaru",
+            "name": "Yumi ashigaru",
+            "period": "16–17. yy",
+            "kind": "ranged",
+            "role": "Yaya okçu",
+            "source": "https://www.mlit.go.jp/tagengo-db/en/H30-00668.html"
+          },
+          {
+            "id": "japan_odachi_samurai",
+            "name": "Japon ōdachi samurayı",
+            "period": "14–15. yy",
+            "kind": "sword",
+            "role": "İki elli uzun kılıçlı samuray",
+            "source": "https://emuseum.nich.go.jp/detail?content_base_id=100493&content_part_id=0&content_pict_id=0&langId=en"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "chinese",
+    "name": "Çinliler",
+    "countries": [
+      {
+        "name": "Qin Hanedanı",
+        "units": [
+          {
+            "id": "qin_crossbowman",
+            "name": "Qin arbaletçisi",
+            "period": "MÖ 221–207",
+            "kind": "ranged",
+            "role": "Arbaletli piyade",
+            "source": "https://www.ngv.vic.gov.au/exhibition/terracotta-warriors-cai-guo-qiang/"
+          },
+          {
+            "id": "qin_ji_infantry",
+            "name": "Qin ji piyadesi",
+            "period": "MÖ 3. yy",
+            "kind": "spear",
+            "role": "Ji saplı silah piyadesi",
+            "source": "https://discovery.ucl.ac.uk/id/eprint/1350109/"
+          }
+        ]
+      },
+      {
+        "name": "Han Hanedanı",
+        "units": [
+          {
+            "id": "han_yulin",
+            "name": "Yulin muhafızları · Atlı okçu",
+            "period": "Han dönemi; görsel temsil MS 1.–2. yy",
+            "kind": "cavalry",
+            "role": "Atlı okçu",
+            "source": "https://www.metmuseum.org/art/collection/search/62843"
+          }
+        ]
+      },
+      {
+        "name": "Tang Hanedanı",
+        "units": [
+          {
+            "id": "tang_xuanjia",
+            "name": "Kara zırhlı süvariler · Xuanjia",
+            "period": "621; erken Tang dönemi",
+            "kind": "cavalry",
+            "role": "Mızraklı süvari",
+            "source": "https://www.metmuseum.org/art/collection/search/45865"
+          }
+        ]
+      },
+      {
+        "name": "Song Hanedanı",
+        "units": [
+          {
+            "id": "song_beiwei",
+            "name": "Beiwei süvarisi",
+            "period": "12. yy",
+            "kind": "cavalry",
+            "role": "Kılıçlı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:SONG_guards.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Ming Hanedanı",
+        "units": [
+          {
+            "id": "ming_langxian",
+            "name": "Ming langxian piyadesi",
+            "period": "16. yy",
+            "kind": "spear",
+            "role": "Dallı bambu silahlı destek piyadesi",
+            "source": "https://zh.wikisource.org/zh/紀效新書/卷十一"
+          },
+          {
+            "id": "ming_rattan_shield",
+            "name": "Ming rattan kalkanlısı",
+            "period": "16. yy",
+            "kind": "sword",
+            "role": "Örgü kalkanlı dao piyadesi",
+            "source": "https://zh.wikisource.org/zh/紀效新書/卷十一"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sogdian",
+    "name": "Soğdlar",
+    "countries": [
+      {
+        "name": "Soğd şehir devletleri",
+        "units": [
+          {
+            "id": "sogdian_cakar",
+            "name": "Soğd çakar süvarisi",
+            "period": "7–8. yy",
+            "kind": "cavalry",
+            "role": "Zırhlı maiyet süvarisi",
+            "source": "https://www.iranicaonline.org/articles/cakar/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "scottish",
+    "name": "İskoçlar",
+    "countries": [
+      {
+        "name": "İskoçya Krallığı",
+        "units": [
+          {
+            "id": "scots_schiltron",
+            "name": "İskoç schiltron mızraklısı",
+            "period": "13–14. yy",
+            "kind": "spear",
+            "role": "Uzun mızraklı düzen piyadesi",
+            "source": "https://portal.historicenvironment.scot/apex/f?p=1505:300::::VIEWTYPE,VIEWREF:designation,BTL4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "welsh",
+    "name": "Galliler",
+    "countries": [
+      {
+        "name": "Galler / İngiliz hizmeti",
+        "units": [
+          {
+            "id": "welsh_longbowman",
+            "name": "Galler uzun yaylı okçusu",
+            "period": "14. yy sonu–15. yy başı",
+            "kind": "ranged",
+            "role": "Uzun yaylı uzman piyade",
+            "source": "https://museum.wales/collections/online/object/228d8c8e-73b5-3d7b-aab0-c907584af17d/Model-of-Longbowman/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hungarian",
+    "name": "Macarlar",
+    "countries": [
+      {
+        "name": "Macaristan Krallığı",
+        "units": [
+          {
+            "id": "hungarian_early_hussar",
+            "name": "Erken Macar hussarı",
+            "period": "Yaklaşık 1500–1550",
+            "kind": "cavalry",
+            "role": "Hafif mızraklı süvari",
+            "source": "https://www.metmuseum.org/art/collection/search/24698"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "czech",
+    "name": "Çekler / Bohemya",
+    "countries": [
+      {
+        "name": "Bohemya / Hussitler",
+        "units": [
+          {
+            "id": "hussite_flailman",
+            "name": "Hussit savaş dövenli piyade",
+            "period": "15. yy",
+            "kind": "sword",
+            "role": "İki elli savaş dövenli piyade",
+            "source": "https://www.esbirky.cz/predmet/cep-7381395"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "scythian",
+    "name": "İskitler",
+    "countries": [
+      {
+        "name": "İskitler",
+        "units": [
+          {
+            "id": "scythian_mounted_archer",
+            "name": "İskit atlı okçusu",
+            "period": "MÖ 5. yy",
+            "kind": "cavalry",
+            "role": "Atlı okçu",
+            "source": "https://www.metmuseum.org/art/collection/search/255955"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "thracian",
+    "name": "Traklar",
+    "countries": [
+      {
+        "name": "Traklar",
+        "units": [
+          {
+            "id": "thracian_peltast",
+            "name": "Trak peltastı",
+            "period": "MÖ 5. yy",
+            "kind": "spear",
+            "role": "Hafif mızraklı piyade",
+            "source": "https://www.perseus.tufts.edu/hopper/artifact?name=Harvard+1959.219&object=Vase"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dacian",
+    "name": "Daklar",
+    "countries": [
+      {
+        "name": "Daklar",
+        "units": [
+          {
+            "id": "dacian_falx_warrior",
+            "name": "Dak falx savaşçısı",
+            "period": "MS 1.–2. yy başı",
+            "kind": "sword",
+            "role": "İki elli falx piyadesi",
+            "source": "https://www.ceeol.com/search/article-detail?id=482800"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "swiss",
+    "name": "İsviçreliler",
+    "countries": [
+      {
+        "name": "İsviçre kantonları",
+        "units": [
+          {
+            "id": "swiss_halberdier",
+            "name": "İsviçre tebercisi",
+            "period": "15. yy",
+            "kind": "spear",
+            "role": "Teberli piyade",
+            "source": "https://blog.nationalmuseum.ch/en/2022/01/the-rise-of-the-all-purpose-weapon-halberd/"
+          },
+          {
+            "id": "swiss_pikeman",
+            "name": "İsviçre uzun mızraklı piyadesi",
+            "period": "15. yy sonu",
+            "kind": "spear",
+            "role": "Pike düzeni piyadesi",
+            "source": "https://blog.nationalmuseum.ch/en/2020/06/the-battle-of-grandson/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tibetan",
+    "name": "Tibetliler",
+    "countries": [
+      {
+        "name": "Tibet",
+        "units": [
+          {
+            "id": "tibetan_lamellar_cavalry",
+            "name": "Tibet lamelli süvarisi",
+            "period": "16. yy",
+            "kind": "cavalry",
+            "role": "Kılıçlı ağır süvari",
+            "source": "https://www.metmuseum.org/essays/tibetan-arms-and-armor"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "moche",
+    "name": "Moche",
+    "countries": [
+      {
+        "name": "Moche",
+        "units": [
+          {
+            "id": "moche_mace_warrior",
+            "name": "Moche topuzlu savaşçısı",
+            "period": "MS 4.–7. yy",
+            "kind": "sword",
+            "role": "Topuzlu ve küçük kalkanlı piyade",
+            "source": "https://www.metmuseum.org/art/collection/search/309439"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mixtec",
+    "name": "Mixtecler",
+    "countries": [
+      {
+        "name": "Mixtec şehir devletleri",
+        "units": [
+          {
+            "id": "mixtec_noble_warrior",
+            "name": "Mixtec soylu savaşçısı",
+            "period": "Geç Postklasik dönem",
+            "kind": "sword",
+            "role": "Baltalı ve kalkanlı piyade",
+            "source": "https://www.researchgate.net/publication/339371399_Mixtec_Militarism_Weapons_and_Warfare_in_the_Mixtec_Codices"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nubian",
+    "name": "Nubyalılar",
+    "countries": [
+      {
+        "name": "Nubya",
+        "units": [
+          {
+            "id": "nubian_archer_middle_kingdom",
+            "name": "Nubyalı okçu",
+            "period": "Yaklaşık MÖ 2000",
+            "kind": "ranged",
+            "role": "Hafif yaya okçu",
+            "source": "https://aaeportal.com/images/26817/troop-of-nubian-archers-detail"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "korean",
+    "name": "Koreliler",
+    "countries": [
+      {
+        "name": "Goryeo Kore",
+        "units": [
+          {
+            "id": "goryeo_yongho_guard",
+            "name": "Yongho muhafızı",
+            "period": "1123",
+            "kind": "spear",
+            "role": "Mızraklı piyade",
+            "source": "https://commons.wikimedia.org/wiki/File:A_Goryeo_Soldier_wearing_a_durumagi.jpg"
+          },
+          {
+            "id": "goryeo_gyeonggung",
+            "name": "Goryeo Gyeonggung okçusu",
+            "period": "Goryeo dönemi, 918–1392",
+            "kind": "ranged",
+            "role": "Güçlü yaylı merkez ordusu birliği",
+            "source": "https://encykorea.aks.ac.kr/Article/E0071099"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "khmer",
+    "name": "Khmerler",
+    "countries": [
+      {
+        "name": "Khmer İmparatorluğu",
+        "units": [
+          {
+            "id": "khmer_ranked_cavalry",
+            "name": "Rütbeli Khmer süvarisi",
+            "period": "12. yy",
+            "kind": "cavalry",
+            "role": "Kılıçlı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Procession_of_Suryavarman_II_Angkor_Wat_0873.jpg"
+          },
+          {
+            "id": "khmer_foot_archer",
+            "name": "Khmer yaya okçusu",
+            "period": "12. yy sonu–13. yy başı",
+            "kind": "ranged",
+            "role": "Bayon dönemi yaylı piyade",
+            "source": "https://cambodianess.com/article/picture-of-the-day-khmer-archers-and-crossbowmen-at-bayon"
+          },
+          {
+            "id": "khmer_crossbowman",
+            "name": "Khmer arbaletçisi",
+            "period": "12. yy sonu–13. yy başı",
+            "kind": "ranged",
+            "role": "Arbaletli piyade",
+            "source": "https://cambodianess.com/article/picture-of-the-day-khmer-archers-and-crossbowmen-at-bayon"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "greek",
+    "name": "Yunanlar / Bizans",
+    "countries": [
+      {
+        "name": "Sparta",
+        "units": [
+          {
+            "id": "spartan",
+            "name": "Spartalı Hoplit",
+            "kind": "spear",
+            "role": "Kalkan hattı",
+            "source": "https://pikabu.ru/story/falanga_goplityi_chast_1_6893570"
+          }
+        ]
+      },
+      {
+        "name": "Makedonya Krallığı",
+        "units": [
+          {
+            "id": "macedon_companions",
+            "name": "Hetairoi — Yoldaş Süvarileri",
+            "period": "MÖ 4. yy",
+            "kind": "cavalry",
+            "role": "Mızraklı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Alexander_and_Bucephalus_-_Battle_of_Issus_mosaic_-_Museo_Archeologico_Nazionale_-_Naples_BW.jpg"
+          },
+          {
+            "id": "macedon_hypaspists",
+            "name": "Hypaspistler",
+            "period": "MÖ 4. yy",
+            "kind": "spear",
+            "role": "Mızraklı piyade",
+            "source": "https://commons.wikimedia.org/wiki/File:Hypaspist.jpg"
+          },
+          {
+            "id": "macedon_sarissa_phalangite",
+            "name": "Makedon sarissa piyadesi",
+            "period": "MÖ 3–2. yy",
+            "kind": "spear",
+            "role": "Uzun mızraklı falanks piyadesi",
+            "source": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Polybius/18*.html#29"
+          }
+        ]
+      },
+      {
+        "name": "Bizans İmparatorluğu",
+        "units": [
+          {
+            "id": "varangian",
+            "name": "Varang Muhafızı",
+            "kind": "sword",
+            "role": "Balta piyadesi",
+            "source": "https://www.pinterest.com/pin/547046685961912850/"
+          },
+          {
+            "id": "byzantine_kataphraktos",
+            "name": "Bizans katafraktı",
+            "period": "10. yy sonu–11. yy başı",
+            "kind": "cavalry",
+            "role": "Topuzlu ağır hücum süvarisi",
+            "source": "https://ebrary.net/242454/sociology/analysis_sources_archaeology"
+          },
+          {
+            "id": "byzantine_menavlatos",
+            "name": "Bizans menavlatos piyadesi",
+            "period": "10. yy",
+            "kind": "spear",
+            "role": "Ağır süvariye karşı uzman piyade",
+            "source": "https://archives.maryjahariscenter.org/blog/a-tenth-century-byzantine-military-manual"
+          }
+        ]
+      },
+      {
+        "name": "Rodos",
+        "units": [
+          {
+            "id": "greek_rhodian_slinger",
+            "name": "Rodoslu sapancı",
+            "period": "MÖ 401",
+            "kind": "ranged",
+            "role": "Kurşun taneli sapancı",
+            "source": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Aabo%3Atlg%2C0032%2C006%3A3"
+          }
+        ]
+      },
+      {
+        "name": "Girit Şehir Devletleri",
+        "units": [
+          {
+            "id": "greek_cretan_archer",
+            "name": "Giritli okçu",
+            "period": "MÖ 401",
+            "kind": "ranged",
+            "role": "Hafif yaya okçu",
+            "source": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Aabo%3Atlg%2C0032%2C006%3A3"
+          }
+        ]
+      },
+      {
+        "name": "Thebai",
+        "units": [
+          {
+            "id": "thebes_sacred_band",
+            "name": "Thebai Kutsal Birliği",
+            "period": "MÖ 4. yy",
+            "kind": "spear",
+            "role": "Seçkin hoplit",
+            "source": "https://www.metmuseum.org/art/collection/search/248012"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "egyptian",
+    "name": "Mısır / Memlükler",
+    "countries": [
+      {
+        "name": "Eski Krallık Mısır",
+        "units": [
+          {
+            "id": "egypt_old_kingdom_archer",
+            "name": "Eski Krallık Mısır okçusu",
+            "period": "MÖ yaklaşık 2551–2494",
+            "kind": "ranged",
+            "role": "Uzun yaylı piyade",
+            "source": "https://www.metmuseum.org/art/collection/search/543895"
+          }
+        ]
+      },
+      {
+        "name": "Yeni Krallık Mısır",
+        "units": [
+          {
+            "id": "egypt_sherden",
+            "name": "Şerden muhafızları",
+            "period": "MÖ 13. yy — II. Ramses",
+            "kind": "sword",
+            "role": "Yakın dövüş piyadesi",
+            "source": "https://commons.wikimedia.org/wiki/File:Relief_Sherden_Breasted_2.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Memlük Sultanlığı",
+        "units": [
+          {
+            "id": "mamluk",
+            "name": "Memlük Süvarisi",
+            "kind": "cavalry",
+            "role": "Zırhlı süvari",
+            "source": "https://fr.pinterest.com/pin/290974825944033277/"
+          },
+          {
+            "id": "mamluk_burji",
+            "name": "Burciyye Memlükleri",
+            "period": "13. yy sonu–15. yy seçkisi",
+            "kind": "cavalry",
+            "role": "Kılıçlı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Leaf_from_a_Mamluk_furusiyya_manuscript,_Egypt_or_Syria,_ca._1500,_The_David_Collection,_Copenhagen_(1)_(35600910133).jpg"
+          },
+          {
+            "id": "mamluk_axebearer",
+            "name": "Baltalı maiyet askeri",
+            "period": "1450–1500",
+            "kind": "sword",
+            "role": "Yakın dövüş piyadesi",
+            "source": "https://www.metmuseum.org/art/collection/search/24857"
+          }
+        ]
+      },
+      {
+        "name": "Eyyûbîler / Memlük Sultanlığı",
+        "units": [
+          {
+            "id": "mamluk_bahri",
+            "name": "Bahriyye Memlükleri",
+            "period": "13.–14. yy",
+            "kind": "cavalry",
+            "role": "Mızraklı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Four_horsemen_taking_part_in_a_contest._From_%27Manual_on_the_Arts_of_Horsemanship%27_by_al-Aqsara%27i_(CBL_Ar_5655.118,_f.2v).jpg"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "norse",
+    "name": "İskandinavlar",
+    "countries": [
+      {
+        "name": "İskandinavya",
+        "units": [
+          {
+            "id": "viking",
+            "name": "Viking Savaşçısı",
+            "kind": "sword",
+            "role": "Hücum piyadesi",
+            "source": "https://inthepresenceoftheancients.wordpress.com/2013/12/18/deadliest-warrior-a-critique-part-2-viking-vs-samurai/"
+          },
+          {
+            "id": "norse_hird_swordsman",
+            "name": "Hird kılıçlısı",
+            "period": "10.–11. yy",
+            "kind": "sword",
+            "role": "Yakın dövüş piyadesi",
+            "source": "https://commons.wikimedia.org/wiki/File:Viking_swords_01.jpg"
+          },
+          {
+            "id": "norse_spearman",
+            "name": "Viking mızraklısı",
+            "period": "9.–11. yy",
+            "kind": "spear",
+            "role": "Mızraklı piyade",
+            "source": "https://commons.wikimedia.org/wiki/File:Viking_spearhead_(29078140247).jpg"
+          },
+          {
+            "id": "norse_dane_axeman",
+            "name": "Dan baltacısı",
+            "period": "10.–11. yy",
+            "kind": "sword",
+            "role": "Yakın dövüş piyadesi",
+            "source": "https://commons.wikimedia.org/wiki/File:DaneAxe.jpg"
+          },
+          {
+            "id": "norse_longbowman",
+            "name": "Viking uzun yaylısı",
+            "period": "9.–11. yy",
+            "kind": "ranged",
+            "role": "Yaya okçu",
+            "source": "https://commons.wikimedia.org/wiki/File:Object_from_the_exhibition_We_call_them_Vikings_produced_by_The_Swedish_History_Museum_(13618316875).jpg"
+          },
+          {
+            "id": "norse_berserker",
+            "name": "Berserker — Lewis tasviri",
+            "period": "12. yy tasviri",
+            "kind": "sword",
+            "role": "Uzun kalkanlı kılıç savaşçısı",
+            "source": "https://www.nms.ac.uk/collections/search/object?entry=21739"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "english",
+    "name": "İngilizler",
+    "countries": [
+      {
+        "name": "Anglosakson İngiltere",
+        "units": [
+          {
+            "id": "england_housecarl",
+            "name": "Housecarl / Huscarl",
+            "period": "11. yy",
+            "kind": "sword",
+            "role": "Yakın dövüş piyadesi",
+            "source": "https://commons.wikimedia.org/wiki/File:Housecarl_at_hastings.jpg"
+          }
+        ]
+      },
+      {
+        "name": "İngiltere Krallığı",
+        "units": [
+          {
+            "id": "english_cheshire_guard",
+            "name": "Cheshire muhafız okçusu",
+            "period": "1397–1399",
+            "kind": "ranged",
+            "role": "II. Richard’ın uzun yaylı muhafızı",
+            "source": "https://www.medievalsoldier.org/about/soldier-profiles/archers-at-the-battle-of-shrewsbury/"
+          },
+          {
+            "id": "english_yeoman_guard",
+            "name": "Yeoman — erken Tudor muhafızı",
+            "period": "1485–1509",
+            "kind": "spear",
+            "role": "Teberli kral muhafızı",
+            "source": "https://www.royal.uk/yeomen-guard"
+          },
+          {
+            "id": "english_billman",
+            "name": "İngiliz bill piyadesi",
+            "period": "15. yy",
+            "kind": "spear",
+            "role": "Kancalı bill piyadesi",
+            "source": "https://royalarmouries.org/objects-and-stories/stories/the-hundred-years-war-1337-1453"
+          },
+          {
+            "id": "english_dismounted_man_at_arms",
+            "name": "İngiliz zırhlı yaya savaşçı",
+            "period": "15. yy",
+            "kind": "sword",
+            "role": "Pollaxeli zırhlı piyade",
+            "source": "https://www.english-heritage.org.uk/learn/story-of-england/medieval/war/"
+          },
+          {
+            "id": "english_mail_knight",
+            "name": "İngiliz zincir zırhlı şövalye",
+            "period": "13. yy",
+            "kind": "cavalry",
+            "role": "Mızraklı şövalye",
+            "source": "https://english-heritage.shorthandstories.com/how-to-spot-the-difference-between-13th-and-15th-century-knights/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gaelic",
+    "name": "İrlandalılar",
+    "countries": [
+      {
+        "name": "İrlanda Gal lordlukları",
+        "units": [
+          {
+            "id": "gaelic_gallowglass",
+            "name": "Gallowglass ağır piyadesi",
+            "period": "13.–15. yy seçkisi",
+            "kind": "sword",
+            "role": "Yakın dövüş piyadesi",
+            "source": "https://commons.wikimedia.org/wiki/File:Galloglass-circa-1521.jpg"
+          },
+          {
+            "id": "irish_kern_spearman",
+            "name": "İrlanda kern mızraklısı",
+            "period": "16. yy başı",
+            "kind": "spear",
+            "role": "Hafif piyade",
+            "source": "https://catalogue.nli.ie/Record/vtls000171614"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rus",
+    "name": "Ruslar",
+    "countries": [
+      {
+        "name": "Kiev Rus ve Rus Prenslikleri",
+        "units": [
+          {
+            "id": "rus_druzhina",
+            "name": "Drujina — prensin savaşçı maiyeti",
+            "period": "10.–13. yy seçkisi",
+            "kind": "cavalry",
+            "role": "Mızraklı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Prince_Vladimir_Varangian_Druzhina.jpg"
+          },
+          {
+            "id": "rus_hryd_guard",
+            "name": "Hryd — knez muhafızı",
+            "period": "10.–13. yy",
+            "kind": "sword",
+            "role": "Kılıçlı maiyet muhafızı",
+            "source": "https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CD%5CR%5CDruzhynaIT.htm"
+          },
+          {
+            "id": "rus_foot_archer",
+            "name": "Rus yaya okçusu",
+            "period": "11–13. yy",
+            "kind": "ranged",
+            "role": "Bileşik yaylı piyade",
+            "source": "https://novgorodmuseum.ru/visit/sobytiya/«letyat-strely-kalyonye…»"
+          },
+          {
+            "id": "rus_retinue_spearman",
+            "name": "Rus mızraklı maiyet savaşçısı",
+            "period": "11–13. yy",
+            "kind": "spear",
+            "role": "Mızrak ve uzun kalkan",
+            "source": "https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CD%5CR%5CDruzhynaIT.htm"
+          },
+          {
+            "id": "rus_axe_warrior",
+            "name": "Rus baltalı savaşçı",
+            "period": "11–12. yy",
+            "kind": "sword",
+            "role": "Tek elli balta ve yuvarlak kalkan",
+            "source": "https://novgorodmuseum.ru/o-muzee-zapovednike/novosti/v-fondy-muzeya-postupil-unikalnyj-topor-x–xi-veka"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "polish",
+    "name": "Lehler / Litvanlar",
+    "countries": [
+      {
+        "name": "Polonya Krallığı",
+        "units": [
+          {
+            "id": "polish_medieval_knight",
+            "name": "Leh ortaçağ şövalyesi",
+            "period": "14. yy sonu–15. yy başı",
+            "kind": "cavalry",
+            "role": "Mızraklı soylu süvari",
+            "source": "https://muzhp.pl/wiedza-on-line/rycerz"
+          }
+        ]
+      },
+      {
+        "name": "Polonya-Litvanya",
+        "units": [
+          {
+            "id": "hussar",
+            "name": "Kanatlı Hussar",
+            "kind": "cavalry",
+            "role": "Ağır süvari",
+            "source": "https://www.pinterest.com/pin/polish-winged-hussars--552957660474075855/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "carthaginian",
+    "name": "Kartacalılar",
+    "countries": [
+      {
+        "name": "Kartaca",
+        "units": [
+          {
+            "id": "carthage_sacred_band",
+            "name": "Kutsal Birlik — Kartaca",
+            "period": "MÖ 4. yy",
+            "kind": "spear",
+            "role": "Mızraklı piyade",
+            "source": "https://commons.wikimedia.org/wiki/File:Sacred_band_footman.PNG"
+          },
+          {
+            "id": "carthage_balearic_slinger",
+            "name": "Kartaca hizmetinde Balear sapancısı",
+            "period": "MÖ 3. yy sonu",
+            "kind": "ranged",
+            "role": "Paralı sapancı",
+            "source": "https://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0234%3Abook%3D3%3Achapter%3D33"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "benin",
+    "name": "Benin / Edo",
+    "countries": [
+      {
+        "name": "Benin Krallığı",
+        "units": [
+          {
+            "id": "benin_warrior_chief",
+            "name": "Savaşçı şef",
+            "period": "16.–17. yy",
+            "kind": "spear",
+            "role": "Mızraklı piyade",
+            "source": "https://commons.wikimedia.org/wiki/File:MARKK_C2384_Warrior_Chief_with_Shield_and_Spear_DSC-1076.jpg"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mexica",
+    "name": "Aztekler",
+    "countries": [
+      {
+        "name": "Meksika / Mexica (Aztek)",
+        "units": [
+          {
+            "id": "mexica_eagle",
+            "name": "Kartal savaşçıları",
+            "period": "15.–16. yy başı",
+            "kind": "sword",
+            "role": "Yakın dövüş piyadesi",
+            "source": "https://commons.wikimedia.org/wiki/File:Miniatura_Codice_Fiorentino.jpg"
+          },
+          {
+            "id": "mexica_jaguar",
+            "name": "Jaguar savaşçıları",
+            "period": "15.–erken 16. yy",
+            "kind": "sword",
+            "role": "Yakın dövüş piyadesi",
+            "source": "https://commons.wikimedia.org/wiki/File:Jaguar_warrior.jpg"
+          },
+          {
+            "id": "mexica_cuachicque",
+            "name": "Mexica Cuachicque savaşçısı",
+            "period": "15. yy–1521",
+            "kind": "sword",
+            "role": "Seçkin yakın dövüş piyadesi",
+            "source": "https://digital.bodleian.ox.ac.uk/objects/2fea788e-2aa2-4f08-b6d9-648c00486220/surfaces/8ea8d550-9b2b-4e68-8885-8d0d122f2950/"
+          },
+          {
+            "id": "mexica_otomi_rank",
+            "name": "Mexica Otomi rütbeli savaşçı",
+            "period": "15. yy–1521",
+            "kind": "sword",
+            "role": "Kıdemli kalkanlı piyade",
+            "source": "https://digital.bodleian.ox.ac.uk/objects/2fea788e-2aa2-4f08-b6d9-648c00486220/surfaces/8ea8d550-9b2b-4e68-8885-8d0d122f2950/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "maya",
+    "name": "Mayalar",
+    "countries": [
+      {
+        "name": "Maya şehir devletleri",
+        "units": [
+          {
+            "id": "maya_sajal",
+            "name": "Sajal · Soylu savaşçı",
+            "period": "MS 600–900",
+            "kind": "spear",
+            "role": "Mızraklı piyade",
+            "source": "https://www.clevelandart.org/art/1990.178"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "inca",
+    "name": "İnkalar",
+    "countries": [
+      {
+        "name": "İnka İmparatorluğu",
+        "units": [
+          {
+            "id": "inca_decorated_warrior",
+            "name": "Onurlandırılmış savaşçı · Dama tunikli",
+            "period": "15.–erken 16. yy",
+            "kind": "sword",
+            "role": "Yakın dövüş piyadesi",
+            "source": "https://www.metmuseum.org/art/collection/search/751901"
+          },
+          {
+            "id": "inca_slinger",
+            "name": "İnka sapancısı",
+            "period": "14–16. yy",
+            "kind": "ranged",
+            "role": "Dokuma sapanlı piyade",
+            "source": "https://www.metmuseum.org/art/collection/search/314615"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "crusader",
+    "name": "Haçlı Orduları",
+    "countries": [
+      {
+        "name": "Hospitalier / Aziz Yuhanna Tarikatı",
+        "units": [
+          {
+            "id": "hospitaller_knight",
+            "name": "Hospitalier şövalye kardeşler",
+            "period": "12.–14. yy seçkisi",
+            "kind": "cavalry",
+            "role": "Mızraklı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Hospitaller_101.jpg"
+          }
+        ]
+      },
+      {
+        "name": "Tapınak Tarikatı",
+        "units": [
+          {
+            "id": "templar_knight",
+            "name": "Tapınakçı şövalye kardeşler",
+            "period": "12.–13. yy",
+            "kind": "cavalry",
+            "role": "Mızraklı süvari",
+            "source": "https://commons.wikimedia.org/wiki/File:Knights-templar.jpg"
+          },
+          {
+            "id": "templar_sergeant",
+            "name": "Tapınak çavuşu",
+            "period": "12–13. yy",
+            "kind": "sword",
+            "role": "Tarikatın silahlı çavuş kardeşi",
+            "source": "https://sourcebooks.web.fordham.edu/source/templars-primitiverule.asp"
+          }
+        ]
+      },
+      {
+        "name": "Haçlı Seferi Orduları",
+        "units": [
+          {
+            "id": "crusader_crossbowman",
+            "name": "Haçlı arbaletçisi",
+            "period": "1202–1204",
+            "kind": "ranged",
+            "role": "Arbaletli piyade",
+            "source": "https://journals.azbuki.bg/history/on-the-armament-in-the-military-conflicts-in-latin-romania-at-the-beginning-of-the-13-th-century/view"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orders",
+    "name": "Orta Çağ Avrupası",
+    "countries": [
+      {
+        "name": "Orta Çağ Avrupası",
+        "units": [
+          {
+            "id": "knight",
+            "name": "Avrupa Şövalyesi",
+            "kind": "cavalry",
+            "role": "Ağır süvari",
+            "source": "https://www.pinterest.com/pin/523191681682088042/"
+          }
+        ]
+      }
+    ]
+  }
+]

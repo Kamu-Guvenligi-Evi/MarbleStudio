@@ -1,0 +1,43 @@
+Orta Dünya / sade kahraman çizimleri — 15 Ekim 2026
+
+Sorun: Boyları düzeltilmiş olsa da Aragorn, Legolas ve Gimli'nin ayrıntılı
+illüstrasyonları tarihî askerlerin düz renkli, geometrik çizgilerinden ayrılıyordu.
+Üçü yerel canvas kaynağında yeniden çizildi: sade yüz, belirgin dış hat,
+düz renkler; saç, sakal, miğfer ve silah ile karakter ayrımı korunuyor.
+Altı pozlu mevcut WebP atlasları ve katalog portreleri yeniden paketlendi.
+Çalışma zamanına yeni çizim döngüsü eklenmedi; mevcut atlas yolu kullanılıyor.
+FPS artışı ölçüldüğü iddia edilmiyor. Harici görsel indirme/üretme yapılmadı.
+
+Değişen dosyalar:
+src/middle-earth-flat-heroes.js (yeni, düzenlenebilir çizim kaynağı)
+scripts/bake-middle-earth-flat-heroes.mjs (yeni, yerel atlas/portre üretimi)
+scripts/preview-middle-earth-style.mjs (yeni, karşılaştırma ve poz önizlemesi)
+src/middle-earth-visual-profiles.js (yalnız üç kahramanın ölçek/yedek katsayıları)
+src/middle-earth-units.js (üç çizimin kaynak açıklaması)
+public/warrior-sprites/middle-earth/ altında aragorn.webp, legolas.webp,
+gimli.webp ve aynı adların -portrait.webp dosyaları; bu not.
+Renderer, cache, motor, app ve diğer sekmelerin dosyalarına dokunulmadı.
+Birlik kimlikleri, savaş değerleri, kayıt biçimi ve klasik mod korunuyor.
+
+Boylar: Aragorn 34, Legolas 36, Gimli 23; tarihî Viking referansı 34.7.
+PASS tests/middle-earth-size.mjs: 36 birim ve tarihî referanslar; yedek
+yükseklikler atlas karşılığının %8 içinde.
+PASS tests/middle-earth.mjs: 36 ayrı siluet, 16 kahraman, 1728 poz,
+iki takım animasyonu; kayıt/yükleme/başlatma, iki takım emirleri/kaldırma,
+okçuluk/yakın dövüş/alan hasarı ve deterministik savaş (52.0 sn).
+Tarayıcı hatası veya dış ağ isteği yok.
+Vite üretim derlemesi tamamlandı (32.88 sn), dist çıktıları oluştu.
+500 kB paket uyarısı var; PowerShell stderr yönlendirmesi NativeCommandError
+üreterek kabuk çıkışını 1 gösterdi. Vite günlüğü başarılı tamamlanmayı bildiriyor.
+Derleme günlüğü: artifacts/middle-earth/flat-heroes-build.log.
+Üç kahramanın boşta/yürüyüş/saldırı ve ters yöne saldırı görselleri incelendi.
+
+Önizlemeler: artifacts/middle-earth/style-before.jpg, style-after.jpg,
+style-poses.jpg. Test günlüğü: flat-heroes-test.log (aynı dizin).
+Eski atlas/portre yedeği: artifacts/middle-earth/before-flat-heroes/.
+
+Kapsam sınırı: Bu tur yalnız Aragorn, Legolas ve Gimli yeniden çizildi;
+diğer 33 birimin çizimi değişmedi. Görsel yüklenmeden kullanılan eski
+yedek çizimler korunuyor, boyları yeni atlaslara göre ayarlı.
+Önceki kaynak PNG'ler arşiv olarak kaldı; bu üç yeni atlasın kaynağı
+middle-earth-flat-heroes.js dosyasıdır.

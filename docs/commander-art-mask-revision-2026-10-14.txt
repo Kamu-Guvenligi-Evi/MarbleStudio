@@ -1,0 +1,54 @@
+TAÇ MUHAREBESİ — LİDER ÇİZİMLERİ VE KIPÇAK MASKESİ — 14 EKİM 2026
+
+Sorun: Liderler savaş motorunda ayrı komutan olarak mevcuttu, ancak renderer
+ve hit-test bütün liderler için genel cavalry sprite'ını kullanıyordu.
+
+src/historical-commander-art.js: Dokuz ayrı donanım/başlık/yüz profili:
+mehmed_ii, timur, attila, genghis_khan, alexander_great, julius_caesar,
+alp_arslan, saladin, hannibal_barca. Başlık, saç/sakal, zırh, kaftan,
+pelerin, kalkan ve at renkleri profillere göre çizilir.
+src/crown-battle-art.js: COMMANDER_TYPES dispatch ve lider varyant desteği.
+src/historical-warrior-art.js: İsteğe bağlı lider baş çizimi callback'i;
+iki Kıpçak birliği için ortak yeni yüz maskesi. Ayrı göz delikleri,
+kabartmalı burun/bıyık, geniş yanaklar ve daralan çene yeniden çizildi.
+Renderer sekmesi crown-battle-renderer.js ve crown-battle-hit-test.js
+genel cavalry eşlemesini kaldırdı; canlı/ölü liderler gerçek u.type kullanır.
+
+GÖRSEL İNCELEME
+artifacts/historical-commanders/commander-game-art.jpg: Dokuz lider birlikte.
+artifacts/historical-combat/kipchak-mask-comparison.jpg: Yerel müze referansı,
+maske yakın planı ve oyun boyutundaki çizim. İkisi gözle incelendi.
+Çizimler stilize oyun yorumudur. Ortak at/animasyon iskeleti korunur.
+Portre benzerliği veya donanımın birebir arkeolojik doğruluğu iddia edilmez.
+Attila, Alp Arslan, Selahaddin ve Hannibal'ın mevcut geç dönem/hayalî
+tasvirleri kesin yüz ya da savaş kıyafeti kanıtı değildir. JSON visualNote
+ve docs/historical-commanders-handoff-2026-10-14.txt sınırlılıkları geçerli.
+
+KAYNAKLAR
+Yerel portreler ve kaynak/lisanslar: src/historical-commanders.json.
+Fatih, Bellini portresi: https://www.nationalgallery.org.uk/paintings/gentile-bellini-the-sultan-mehmet-ii
+Fatih tasvir açıklaması: https://www.nga.gov/artworks/38460-mehmed-ii-sultan-turkey
+Sezar başı: https://www.britishmuseum.org/collection/object/G_1818-0110-3
+Kıpçak maskesi referansı: public/warrior-references/elite-kipchak-mask.jpg
+https://commons.wikimedia.org/wiki/File:Mysterious_Mask,_Saint_Petersburg_Museum.jpg
+Jim Kelly / CC BY 2.0. Etnik/dönem aidiyeti kesin bir alay üniforması diye sunulmaz.
+https://dergipark.org.tr/en/pub/turkiyat/article/1598769
+https://dergipark.org.tr/tr/pub/turklad/article/1366953
+
+DOĞRULAMA
+tests/historical-commander-art.mjs PASS: 432 kare, 9 farklı çizim/siluet;
+genel süvari ile eşleşme, boş veya kesilen kare yok. Bu teknik test
+sanatsal kalite ya da tarihsel doğruluğun otomatik kanıtı değildir.
+tests/historical-elite-art.mjs PASS: 1968 kare, iki ordu/üç animasyon.
+tests/historical-commanders-combat.mjs PASS: 9 lider, emir, hasar, ölüm.
+tests/historical-commanders-battle-browser.mjs PASS: 9 lider sırayla
+menüden uygulandı, tek komutan sayısı ve seçimi; hareket/durdurma,
+yeniden kurma, kaldırma, canlı can durumu ve 320/390px taşma kontrolü.
+Vite build PASS (4.55 s); mevcut 500 kB chunk uyarısı devam ediyor.
+
+ERİŞİM
+http://127.0.0.1:5173/crown-battle.html?historical=1
+Lider menüsü #commander-details açılır bölümünde. Seçimden sonra
+“Liderleri uygula · Meydanı yeniden kur” düğmesi sahayı yeniden kurar.
+Yeni görsel indirmesi yapılmadı; mevcut yerel kaynaklar kullanıldı.
+Dosya boyutları internet tüketimi ölçümü olarak sunulmadı.

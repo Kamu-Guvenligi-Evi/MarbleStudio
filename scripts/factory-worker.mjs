@@ -93,7 +93,7 @@ export async function produce(job,{root,origin,history,update,cancelled,novelty}
     if(!actual.complete||actual.winner!==best.analysis.winner)throw new Error('Kaydedilen sonuç ön simülasyonla eşleşmedi; video hazır olarak işaretlenmedi.');
     await update({stage:'Ses ve dosya kontrolü',progress:94});
     const events=await page.evaluate(()=>window.factoryRenderer.audio());
-    const generatedAudio=best.recipe.mode==='spiral'&&best.recipe.spiralHypnotic?await page.evaluate(({duration,audio})=>window.factoryRenderer.hypnoticAudio(duration,audio),{duration,audio:job.options.audio??'all'}):null;
+    const generatedAudio=best.recipe.mode==='escape-multiply'?await page.evaluate(({duration,audio})=>window.factoryRenderer.escapeAudio(duration,audio),{duration,audio:job.options.audio??'effects'}):best.recipe.mode==='spiral'&&best.recipe.spiralHypnotic?await page.evaluate(({duration,audio})=>window.factoryRenderer.hypnoticAudio(duration,audio),{duration,audio:job.options.audio??'all'}):null;
     const audio=path.join(dir,'impacts.wav'),project=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
     const soundtrack=await productionAudio({events,recipe:best.recipe,duration,audio:job.options.audio??'all',project,signal:controller.signal,generatedAudio});await writeFile(audio,soundtrack.buffer);check();
     const temporary=path.join(dir,'video.pending.mp4'),output=path.join(dir,'video.mp4');

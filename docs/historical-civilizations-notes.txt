@@ -1,0 +1,39 @@
+14 Ekim 2026 — Medeniyetler ve yeni oynanabilir birlikler
+
+Çalışan adres: http://127.0.0.1:5173/historical-armies.html
+44 birlik, 29 medeniyet / tarihî bağlam başlığı. 30 yeni oynanabilir kayıt.
+Atölye ve savaş düzenleyicisi medeniyetlere ayrıldı. Filtreler sayıları
+silmez; toplam, kayıt ve savaşa aktarım gizli birlikleri de içerir.
+Komuta paneli yalnız meydandaki Mavi birlikleri medeniyet başlıklarıyla gösterir.
+
+Kaynak: docs/historical-elite-research-2026-10-14.json
+32 ana adaydan 30'u eklendi. Ölümsüzler ve Varanglar mevcut persian /
+varangian kayıtlarında zaten var; ikinci kopya oluşturulmadı.
+7 donanım doğrulaması ve 4 geçiş dönemi adayı bu aktarıma alınmadı.
+Önceki 14 birlik ve kayıt kimlikleri korundu.
+
+src/historical-catalogue.js araştırma şemasını oyun şemasına dönüştürür.
+roles tablosu gözden geçirilmiş oyun temsillerini seçer. Yeni araştırma
+adayını oynatmak için durumu, atlı/yaya temsili ve rolü burada değerlendir.
+src/historical-units.json dosyasına eklenen oyun şemasındaki kayıtlar
+otomatik katılır. Aynı kimlikte hazır görsel kaydı gelirse bu kayıt tercih edilir.
+Araştırma dosyasına ve diğer sekmenin görsellerine yazılmadı.
+
+Yeni kartlarda özgün canvas prototipi var; tarihî son görünüş değildir.
+Kaynak bağlantıları kartlarda korunur. Yeni görsel/paket indirilmedi.
+Savaş denge değerleri kurgu. Atlı okçu mesafe korur, süvari hücum eder,
+mızraklı süvari karşılar, yaya okçu ok atar. Yeni birlik görselleri bu
+rollerin prototiplerini kullanır; her biri için özgün son çizim yapılmadı.
+
+Geçen kontroller:
+- tests/historical-civilizations.mjs: 44 kayıt, 29 grup, yeni birliklerle
+  aktarım, filtre + gizli sayılar, yeniden yükleme, tüm sprite'lar, 390px.
+- tests/historical-combat.mjs: bütün tipler, 2501 asker, deterministik savaşlar.
+- tests/historical-armies-browser.mjs: katalog, kayıt, arama, sayılar, JSON,
+  yerel referans görseller, mobil; haricî ağ isteği yok.
+- tests/historical-combat-browser.mjs: komuta, klavye/dokunma, oynat/duraklat,
+  aktarım, kayıt, klasik mod; haricî ağ isteği yok.
+- tests/crown-battle.mjs: klasik motor regresyonları geçti.
+- Vite build başarılı; mevcut büyük çıktı paketi uyarısı devam ediyor.
+Build günlüğü: artifacts/historical-combat/civilizations-build.log
+Video testi bu tur çalıştırılmadı; kullanıcı önceliği oynanabilirlik.

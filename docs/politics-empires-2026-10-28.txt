@@ -1,0 +1,33 @@
+Siyasetçiler ve tarihî devletler genişletmesi — 28 Ekim 2026
+
+29 yeni siyasetçi: Türkiye'den 13, diğer ülkelerden 16. Toplam 52.
+16 yeni imparatorluk/tarihî devlet. Toplam 40.
+Yeni kayıtlar scripts/expand-politics-empires.mjs içinde listelenir.
+Kimlik kaynağı, Commons dosyası, sanatçı ve lisans sidecar JSON'larda tutulur.
+Portreler Wikipedia kişi maddesinin serbest lisanslı görselinden, bayraklar
+açıkça seçilmiş Commons dosyasından alınır; makale haritası bayrak sayılmaz.
+
+Nazi Almanyası kullanıcının isteğiyle sansürlüdür: yerel SVG sadece kırmızı
+zemin, beyaz daire, siyah bant ve SANSÜRLÜ yazısı içerir. Altında gizlenmiş
+veya başka dosyadan yüklenen gamalı haç bulunmaz. Orijinal Nazi bayrağı
+indirilmedi. censored=true ve görünür açıklama kayıtta saklanır.
+Sovyetler ve Nazi Almanyası resmî imparatorluk olarak tanıtılmaz.
+Hanedan rengi/rekonstrüksiyon olan sancaklar tarihî kesin bayrak diye sunulmaz.
+İtalya çizimi sivil bayrak; ikinci Meksika çizimi imparatorluk sancağıdır.
+
+Temsil seçiminin kaynakları:
+https://commons.wikimedia.org/wiki/File:Derafsh_Kaviani_flag_of_the_late_Sassanid_Empire.svg
+https://commons.wikimedia.org/wiki/File:Bandera_del_Primer_Imperio_Mexicano.svg
+https://www.iranicaonline.org/articles/flags-i/
+https://www.jaf.mil.jo/Assets/File/hestoryPdfEn.pdf (hanedan renkleri, s. 289)
+
+İndirmeler 330px önizlemeler; büyük orijinal dosyalar indirilmez.
+Kaynak önbelleği artifacts/politics-empire-sources.json. Tekrar çalıştırma
+mevcut sidecar ve görselleri kullanır. Genel importer curated kayıtları korur.
+Testler: tests/politics-expansion-browser.mjs ve tests/empire-catalog-browser.mjs.
+Görsel özetler: artifacts/new-politicians.png, artifacts/empires-contact-sheet.png.
+
+Doğrulama: Her iki tarayıcı testi geçti. Kategori sayıları, yerel görseller,
+arama, topa atama ve yeniden yüklemede kayıtların korunması doğrulandı.
+Görsel özetler incelendi. Vite üretim derlemesi başarılı (9,88 saniye);
+mevcut büyük paket uyarısı sürüyor. Günlük: artifacts/politics-build.log.

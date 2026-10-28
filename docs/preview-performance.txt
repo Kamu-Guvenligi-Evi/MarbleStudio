@@ -43,3 +43,22 @@ Earlier runs varied with machine load; the initial statistics sample was idle,
 and one intermediate run was interrupted by development-server reload.
 Use the final JSON for current results; do not present earlier comparisons as
 controlled before/after performance. No packages/assets were downloaded.
+
+2026-10-28 shared stutter follow-up:
+- Removed extra 60 Hz gates in multiplier, goal arena and bounce waves; native
+  RAF paints retain existing fixed physics steps / analytic seeking and export FPS.
+- EffectVoicePlayer weakly caches immutable PCM-to-AudioBuffer conversion per player;
+  each hit still has independent playback nodes and overlap fades.
+- Claw status formats at most every 100 ms (state changes immediate), writes only
+  changed labels, skips hidden preview drawing.
+- tests/effect-buffer-cache.mjs: 100 attacks, one buffer conversion, separate nodes.
+- collision-retrigger-browser.mjs passed PCM/fades, retriggers and voice limits.
+- ball-multiplier-performance.mjs passed 3000-ball completion, idle/paused drawing,
+  resize and channel changes. Dense sample median 13.7 ms, p95 34.8 ms: occasional
+  slow frames remain; this does NOT establish sustained 60 FPS at high population.
+- artifacts/preview-verified.json: 8 games, Chrome headless, 1440x1000, 5 seconds
+  each, main canvas painted frames deduplicated by RAF timestamp. 138.8-144 FPS,
+  zero page errors. Short early-game samples only, not a device-wide guarantee.
+  Baseline/after used fillRect-only sampling; missing games were remeasured with
+  clearRect/drawImage/putImageData too. Do not claim a controlled universal speedup.
+- No network downloads or dependency changes.

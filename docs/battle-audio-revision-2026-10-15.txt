@@ -1,0 +1,36 @@
+Battle audio revision - 2026-10-15
+
+Request: battle and hit sounds are poor. Work is confined to audio;
+simulation, art, renderer and combat feedback timing are unchanged.
+
+Changes:
+- crown-battle-sound-design.js: short steel resonances + transient body,
+  low body impacts, damped bow string/air, powder crack/body/tail,
+  deep heavy impact. Existing local CC0 Foley is filtered and layered.
+- Recordings matched by 80 ms RMS, peak <= .62, short fade/DC cleanup.
+  Metal ringing and heavy wooden tails are suppressed.
+- crown-battle-audio.js: max 8 voices; global 3-token/12-per-second budget,
+  separate shots (2/4) and impacts (3/9) budgets. No delayed queue.
+  Variable spacing/pitch/level; density lowers per-voice gain.
+  Fallback banks prepared at unlock instead of first combat hit.
+- crown-battle-audio-ui.js: Sesi dene cycles steel/body/bow/gun/heavy.
+  Preview button disabled while unlocking; labels announce each sound.
+- No new downloads, no new dependencies. Nine existing local recordings.
+
+Validation:
+PASS tests/crown-battle-audio-mix.mjs: 10,000 events -> 14 voices/second;
+volley/contact fairness, varied intervals, caps, no queued/repeated take,
+mute/stop and finite/faded output at 24/44.1/48 kHz.
+PASS tests/crown-battle-feedback.mjs: contact timing/seeded battle parity.
+PASS tests/crown-battle-audio-browser.mjs: nine decoded recordings,
+failed-load fallback, gesture unlock, persistent mute, non-silent WebM,
+recording track cleanup, desktop/mobile fit and 14 effect checks.
+Log: artifacts/battle-audio/browser-revision.log.
+PASS tests/crown-battle-audio-design-browser.mjs: 15 prepared variants,
+RMS and tail bounds, concurrent full-volume pre-limiter peak .784,
+all five UI previews/wraparound and desktop fit.
+PASS Vite production build (3.88 s); existing >500 kB chunk warning remains.
+Log: artifacts/battle-audio/build-revision.log.
+
+Limit: signal and browser behavior were measured; no physical speaker
+listening was performed. The in-game preview is the subjective review path.

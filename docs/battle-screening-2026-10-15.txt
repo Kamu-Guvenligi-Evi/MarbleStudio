@@ -1,0 +1,43 @@
+2026-10-15: Ranged troops exchange ranks with friendly melee.
+
+Implementation
+- src/crown-battle-screening.js: foot ranged troops detect local melee pressure,
+  find a living friendly melee screen (including another allied army), and move
+  behind it with a lateral offset. An urgent retreat cancels unreleased shots.
+- Melee walking towards enemies requests a brief sideways passage from ranged
+  blockers; ordinary shots finish first. Lateral deployment does not request it.
+- Explicit hold/move/attack orders retain priority. Mounted archers are excluded
+  and belong to the other thread's mounted-skirmish work.
+- crown-battle.js integrates screening before autonomous tactics and passage
+  requests into existing bounded walk avoidance. No whole-army scan added.
+- historical-civilization-tactics.js counts active rank exchange as responding
+  during assembly; otherwise Ottoman assembly timed out against advancing foes.
+- Threat/support queries run every 0.35-0.45 seconds with 24/40 candidate caps.
+  Threat radius 100, support radius 125; retreat attempts bounded to 7 seconds.
+  This is local avoidance, not a guarantee that every surrounded unit escapes.
+
+Validation
+- PASS crown-battle-screening: archers/crossbows, both directions, 30/60Hz,
+  allied guard, 12/12 melee crossing two ranged ranks on both teams, manual
+  orders, sword/pike/cavalry passage requests, dead or ranged support rejected.
+- PASS crown-battle-screening-browser: real game loads, renderer runs, no page
+  errors, 6/6 crossbows alive and mean 54.3px behind friendly melee after 6s.
+- PASS crown-battle, crown-battle-frontline, crown-battle-behavior,
+  crown-battle-npc-routing, historical-commander-tactics,
+  historical-multi-army-tactics, historical-tactics,
+  historical-civilization-tactics (10 doctrines, both teams).
+- PASS Vite production build; existing large-chunk warning remains.
+
+Performance evidence (engine only; not measured user FPS)
+- Sequential before/after engine benchmark with repeated-seed determinism.
+- 2000 separated troops: before median 5.39/5.53ms; after 7.46/6.56ms.
+- 4000 dense troops: before median 47.22/46.95ms; after 43.22/44.19ms.
+- Costs vary with changed movement and local load. No claim of an FPS fix;
+  dense 4000-unit simulation remains expensive. Background work adds noise.
+- Artifacts: artifacts/historical-commanders/screening-perf-before.json,
+  screening-perf-after.json and screening-*.log.
+
+Coordination
+- Thread 01a13b6d-28b1-7921-8984-c4623799e14f owns mounted-archer skirmishing.
+  Notified of completed screening import/state/steer/walk integration and the
+  civilization assembly adjustment. No other thread's changes reverted.

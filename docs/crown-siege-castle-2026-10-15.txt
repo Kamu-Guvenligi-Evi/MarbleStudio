@@ -1,0 +1,30 @@
+Castle refinement - 2026-10-15
+
+Request: improve the castle while retaining the separate siege mode, large western
+fortress, eastern assault, and original battle artwork.
+
+Changes:
+- Reworked cached masonry: recessed wall walks, raised parapets, stone variation,
+  reinforcing piers, arrow slits, gate guard galleries and heraldic banners.
+- Roofed inner keep with corner towers and chimneys; hipped roofs on barracks.
+- Added smithy, storehouse and well with matching navigation obstacles.
+- Stone courtyard paths, muster court, well apparatus and supply detail.
+- Iron-bound gate leaves with rings, progressive damage and broken timber.
+- Static detail remains cached; no external assets or packages downloaded.
+
+Files: src/crown-siege-art.js, src/crown-siege.js.
+Classic battle files unchanged in this task.
+
+Verification:
+- Siege regression and operations suites passed.
+- Full seeds 1066/42/123 completed at 128/127/128 seconds; gate breaches
+  75/76/75 seconds; ram and ladder assaults remained functional.
+- New building crossings blocked; routes around all three obstacles passed.
+- Browser suite passed at 1440x1000 and 390x844.
+- Final roof orientation change checked with desktop/mobile rendering, no errors
+  or horizontal overflow. Final production build passed in 10.19s.
+- Existing bundle-size advisory remains in build output.
+
+Preview: http://127.0.0.1:5173/crown-siege.html
+Screenshots: artifacts/crown-siege/castle-1440.jpg, castle-390.jpg,
+castle-detail.jpg. Build log: artifacts/crown-siege/castle-build.log.

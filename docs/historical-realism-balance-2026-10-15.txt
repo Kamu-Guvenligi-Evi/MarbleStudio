@@ -1,0 +1,107 @@
+Tüm katalog: donanım ve rol denetimi — 15 Ekim 2026
+
+Kapsam
+- Başlangıç 179; diğer sekmenin 7 yeni kartı dahil son katalog 186:
+  140 tarihî, 37 Orta Dünya, 9 mitoloji. Tümü sayısal/rol denetiminde ve
+  kendi grubunun tekrarlanabilir savaş taramasında yer aldı.
+- 26 mevcut profil değişti; 153 mevcut profil korundu; diğer sekmenin
+  eklediği 7 profil denetlendi. Aynı donanımın sırf farklı isim/ülke taşıması
+  büyük güç farkının gerekçesi sayılmadı. Döneme göre evrensel güç çarpanı yok.
+- Kaynak: mevcut katalog araştırma/donanım notları, historical-combat-notes.txt,
+  historical-civilizations-notes.txt ve silah/zırh çizim profilleri. Katalogdaki
+  dönem/kaynak bilgileri ile tüm önce/sonra değerleri birlik bazında kaydedildi:
+  artifacts/realism-balance/catalogue-audit.json, before-types.json, after-types.json.
+  before-types başlangıç anıdır; diğer sekmenin sonradan eklediği 7 kartı içermez.
+
+Bulunan sorunlar ve düzeltmeler
+- Bazı uzun atlı mızraklar kılıç erişimine çok yakındı. Genel şövalye,
+  Kapıkulu, Selçuk hassa, Memlük, Roma equites, Rus drujina, Tang xuanjia,
+  Santiago, Tapınakçı/Hospitalier/Töton, Part ve Sasani erişimleri düzeltildi.
+- Landsknecht uzun mızrağı 34 -> 39 erişim. İsviçre pikesi ve sarissa ile
+  aynı uzun silah sınıfı; kısa hoplit mızrağından ayrı.
+- Samuray koruma .12 -> .20, hız 26 -> 24, saldırı aralığı .75 -> .95;
+  can/erişim 130/18. Viking, Pers, İskandinav iki elli baltacı ve Moğol
+  Keşik'in zırhları temsil edilen donanıma yaklaştırıldı.
+- Mamluk Burji çizimde zincir zırh ve sabre taşır: kılıçlı süvari etiketi,
+  erişim 31 -> 22, saldırı aralığı 1.4 -> 1.15, hücum 50 -> 36.
+  Kind=cavalry ve ID değişmedi. Eski nottaki iki Memlük kartının da mızraklı
+  olduğu yorumu bu düzeltmeyle geçersizdir.
+- Plaka zırhlı hussar koruma .18 -> .28, hız 42 -> 38, erişim 24 -> 36;
+  saldırı aralığı 1.2 -> 1.35. Zincir zırhlı Kıpçak mızraklı hız 40 -> 43,
+  koruma .23 -> .20; can, hasar ve hücum düşürüldü. Atlı okçu Kıpçak ayrı
+  profildir: yay menzili 150 -> 170, zincir zırh koruması .10 -> .16.
+- Galli uzun yay menzili 275 -> 215. Giyim rekonstrüksiyonunu olağanüstü
+  yay menzili kanıtı sayan sayısal fark kaldırıldı.
+- Kartal/Jaguar ortak macuahuitl ve kalkan taşır. Büyük dayanım/hasar farkı
+  daraltıldı: can 125/130, hasar 27/28, hız 28/27, aralık 1.15/1.20.
+  Eski uzmanlaşma notundaki daha büyük farklar artık geçerli değil.
+- Mevcut arbalet, tüfek, yay, atlı okçu, ağır piyade, fil, kahraman ve
+  mitolojik yaratık profilleri rol kontrollerinde korundu; tümünü yeniden
+  sayısallaştırmak veya birbirine eşitlemek için gerekçe bulunmadı.
+
+Değişen dosyalar
+- src/historical-combat.js
+- src/historical-equipment-balance.js
+- src/historical-catalogue.js (yalnız Burji rol eşlemesi)
+- src/europe-crusader-units.js (yalnız Kıpçak combat)
+- src/european-specialist-units.js (yalnız Galli combat)
+- src/iberian-units.js (yalnız Santiago combat)
+- tests/historical-realism.mjs (yeni tüm katalog donanım/kayıt kontrolü;
+  54 mitoloji savaşı; her birlik için denetim çıktısı)
+- tests/historical-equipment-balance.mjs (Burji sabre/Bahri lance beklentisi)
+- tests/historical-balance.mjs (langxian destek silahı beklentisi)
+- tests/middle-earth-combat.mjs (yeni Warg eklenirken eski kimlikleri,
+  göreli sıralamayı ve tüm 37 kartın emir/kayıtlarını kontrol eder)
+- tests/middle-earth-balance.mjs (rapor gerçek birlik sayısını yazar)
+- tests/european-specialists.mjs (eski ülke sayıları yerine korunacak ID'ler)
+- Bu proje notu. Motor, arayüz ve çizim dosyaları bu çalışmada değiştirilmedi.
+
+Doğrulama
+- historical-balance PASS: 140 tarihî profil, 1728 savaş.
+- middle-earth-balance PASS: 37 profil, 354 savaş.
+- historical-equipment-balance PASS: 186 profil, genel şablona düşen yok,
+  258 savaş. Silah/rol, profil önceliği ve kayıt kontrolü.
+- historical-realism PASS: tüm 186 profil, 54 mitoloji savaşı.
+- turkic-cavalry-balance PASS: 72 savaş.
+- Bu beş tarama toplam 2466 savaş; seed 5/39/1066 ve iki takım yönü;
+  zaman aşımı yok. Bunlar seçili rol karşılaşmalarıdır, tüm olası ikililer değil.
+- historical-combat PASS: 2501 askerlik kayıt, seçim/emir, alan hasarı,
+  mızrak karşılaması, atlı yay, tüfek ve deterministik sonuçlar.
+- crown-battle PASS: klasik mod. crown-battle-charge PASS: 30/60/120 Hz
+  hızlanma, tek temas bonusu, toparlanma, temas halinde yeniden hücum yok.
+- crown-battle-behavior PASS: ön/yan/arka mızrak, sınırlı okçu kaçışı,
+  48'e 48 sıkışık yakın dövüş, hedef kararlılığı, emir önceliği, tüfek,
+  fil. 2400 asker/60 adım 332 ms; 521621 hedef adayı, 187248 ayrışma çifti.
+  Bu yerel motor ölçümüdür; tarayıcı FPS veya ağ tüketimi ölçümü değildir.
+- mythological-combat ve middle-earth-combat PASS: iki takımın emirleri,
+  silme, kayıt, alan vuruşu/menzilli saldırı, tekrarlanabilir karma savaş.
+- european-specialists ve europe-crusader tarayıcı testleri PASS:
+  240 + 800 sprite karesi, ülke menüleri, başlatma ve kayıt yenileme.
+  İlk koşudaki drawAzogWarg hatası güncel diğer-sekme dosyalarıyla kayboldu;
+  görsel dosyasına bu çalışma müdahale etmedi.
+- Vite build PASS, Node çıkışı 0. Çıktı artifacts/realism-balance/build-check;
+  mevcut büyük paket uyarısı sürüyor. Günlükler aynı artifact dizininde.
+- Langxian testi önceden her mızrak türünü 6/6 galibiyete zorluyordu.
+  Dallı bambu destek silahı düşük hasarını korur; bu özel test artık sayıca
+  üstünken çoğunluk galibiyetini (>=4/6) ve gerçek karşılamayı arar; sonuç 5/6.
+  Gerçek pike beklentileri değişmedi. Test için birliğe yapay hasar eklenmedi.
+
+Araştırmaya aktarılacak eksikler / gerçekçilik sınırları
+- İlk 14 eski kartın açık period alanı yok: samurai, janissary, kipchak,
+  hussar, timur, spartan, mongol, mamluk, viking, roman, persian, knight,
+  varangian, landsknecht. Genel ad yerine hangi dönem/donanım varyantının
+  temsil edildiği netleştirilmeli; motor bu eksikliği gizleyen çağ bonusu almadı.
+- Timur filinin birincil kaynak/donanım kaydı zayıf; Gazneli muhafızın
+  giysi altı zırhı, Kapıkulu kartının birleştirdiği farklı bölüklerin zırhı,
+  Kıpçak mızraklı varyantı ve Burji sabre seçkisi daha açık kaynaklandırılmalı.
+- Destekleyici dış kaynaklar: Wilanów'un zırh/sabre açıklaması ve Met'in
+  dō-maru kaydı donanım sınıfını destekler; bu oyun sayılarını ölçmez:
+  https://wilanow-palac.pl/en/knowledge/the-polish-sabre-in-the-17th-century
+  https://www.metmuseum.org/art/collection/search/22505
+- Sayılar donanım temelli oyun kalibrasyonudur; tarihî kesin hız/öldürme
+  oranları değildir. Orta Dünya/mitoloji için tarihî gerçeklik iddiası yoktur.
+- Motor hâlâ ortak zırh indirgeme modeli kullanır; silaha özel zırh delme,
+  beden bölgesi zırhı, moral, yorgunluk ve gerçek balistik yok. Langxian takım
+  desteği ve bazı silahların ikincil kullanımları ayrı mekanik değildir.
+- Mevcut açık savaş eski tipleri tutabilir: sayfayı yenileyip yeni savaş
+  başlatmak gerekir. Kimlikler, kayıt biçimi ve klasik oyun profilleri korundu.

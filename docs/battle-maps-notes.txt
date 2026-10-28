@@ -1,0 +1,35 @@
+Tarih: 14 Ekim 2026
+Konu: Secilebilir yeni savas haritalari
+
+Eski Meydan korundu. Bozkir, Kum Colu, Karli Ova,
+Guz Cayiri ve Tas Meydani eklendi. Secim Ordu ve alan > Haritalar
+bolumundeki onizlemeli dugmelerden yapilir ve hemen uygulanir.
+Ordular, secim, emirler, savas zamani ve kamera korunur. Harita tercihi
+marble-crown-battle-map-v1 anahtariyla yerelde saklanir; ordu kayitlari
+degistirilmez. Yeniden kurma ve video kaydi secili haritayi kullanir.
+
+Dosyalar:
+- src/crown-battle-maps.js: bes deterministik prosedurel zemin ve katalog.
+- src/crown-battle-map-ui.js: secim, onizleme, yerel tercih ve kayit esleme.
+- src/crown-battle-maps.css: PC ve telefon icin seciciye ozel stiller.
+- src/crown-battle-renderer.js: harita secimi ve zemin onbellegi.
+- src/crown-battle-app.js: seciciyi baglama ve kayit renderer harita kimligi.
+- tests/crown-battle-maps-browser.mjs: tekrarlanabilir tarayici testleri.
+
+Dogrulama:
+Yerel Node ile tests/crown-battle-maps-browser.mjs calistirildi: PASS.
+1366px PC ve 390px telefon: alti farkli zemin, ordu/emir/kamera korunmasi,
+onbellek yeniden kullanimi ve boyut siniri, devam eden savasta degisim,
+yeniden kurma/sayfa yenileme, tarihi ordu kayitlari, WebM kaydi ve kayit
+sirasinda harita degisimi gecti. Sayfa hatasi ve yatay tasma yok.
+Ayni seed ile ayni zemin, farkli seed ile farkli zemin: PASS.
+Ana sekme yeni modulleri iceren Vite uretim derlemesinin ve kendi
+PC/telefon yerlesim, birlik secimi/kaldirma testlerinin gectigini bildirdi.
+Yerel gorsel onizleme incelendi: artifacts/crown-battle/maps-preview.png.
+
+Sinirlar:
+Haritalar acik savas alanlaridir; tas ve agaclar dekoratiftir. Yeni engel,
+yol bulma, arazi hasari veya birlik davranisi eklenmedi. Zeminler kare
+basina uretilmez; onbellek en fazla 2560x1600 tutulur. Bu degisiklik icin
+FPS artisi olculmedi; binlerce asker performansi icin artis iddiasi yok.
+Harici gorsel indirme, paket kurulumu veya yeni ag istegi gerekmedi.

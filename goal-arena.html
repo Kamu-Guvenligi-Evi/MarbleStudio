@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Goal Arena · Marble Studio</title></head>
+<body>
+<header class="multiplier-header"><a class="brand" href="/">MARBLE STUDIO</a><nav><button id="studio-videos" class="button">My videos</button><button id="studio-export" class="button primary">Create video</button></nav></header>
+<main class="multiplier-layout">
+<aside class="multiplier-controls"><p class="eyebrow">GOAL ARENA</p><h1>One goal.<br><span>Two rivals.</span></h1>
+<fieldset><legend class="sr-only">Match settings</legend>
+<div class="setting-row team-images"><div><button id="pick-0" class="button" type="button"><img id="portrait-0" alt="" hidden><span>Home image<br><small>Image library</small></span></button><button id="clear-0" class="clear-image" type="button" disabled>Remove image</button></div><div><button id="pick-1" class="button" type="button"><img id="portrait-1" alt="" hidden><span>Away image<br><small>Image library</small></span></button><button id="clear-1" class="clear-image" type="button" disabled>Remove image</button></div></div>
+<div class="setting-row"><label>Home team<input id="home" maxlength="24" value="LASK"></label><label>Away team<input id="away" maxlength="24" value="Liverpool"></label></div>
+<div class="setting-row"><label>Home abbreviation<input id="homeCode" maxlength="5" value="LASK"></label><label>Away abbreviation<input id="awayCode" maxlength="5" value="LIV"></label></div>
+<div class="setting-row"><label>Home color<input id="homeColor" type="color" value="#e7edf5"></label><label>Away color<input id="awayColor" type="color" value="#ff334b"></label></div>
+<div class="setting-row"><label>Playing time<select id="duration"><option value="37.5">38 seconds · Reference</option><option value="45">45 seconds</option><option value="60">60 seconds</option><option value="90">90 seconds</option></select></label><label>Playback speed<select id="speed"><option value="0.5">0.5×</option><option value="1">1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label></div>
+<details class="music-menu"><summary>Match physics</summary><div class="setting-row"><label>Ball speed<input id="ballSpeed" type="number" min="150" max="360" value="300"></label><label>Goal rotation<input id="goalSpeed" type="number" min="0.35" max="1.3" step="0.05" value="0.8"></label></div><div class="setting-row"><label>Goal width<input id="goalWidth" type="number" min="112" max="156" value="132"></label><label>Match seed<input id="seed" type="number" min="0" max="4294967295" value="255"></label></div></details>
+</fieldset>
+<details class="music-menu"><summary>Music</summary><label>Background music<select id="music-track"><option value="">No music</option></select></label><label>Music volume <output id="music-level">35%</output><input id="music-volume" type="range" min="0" max="100" value="35"></label><button id="music-preview" class="button" type="button">Preview music</button><p id="music-credit"></p><audio id="music-audio" loop preload="none"></audio></details>
+<div class="actions"><button id="new-game" class="button primary">New match</button><button id="replay" class="button">Replay</button></div><p id="status" role="status" aria-live="polite"></p></aside>
+<section class="multiplier-preview" aria-label="Game preview"><div class="multiplier-stage" id="stage"><canvas id="goal-canvas" width="810" height="1440" aria-label="Two team balls compete to enter a rotating goal"></canvas></div><div class="playback"><button id="pause" class="button">Pause</button><button id="sound" class="button" aria-pressed="true">Sound on</button><button id="fullscreen" class="button">Full screen</button></div><p id="match-state" aria-live="off"></p></section>
+</main>
+<dialog id="catalog-dialog" class="catalog-dialog" aria-labelledby="catalog-title">
+<div class="dialog-heading"><div><p class="eyebrow">TEAM IMAGES</p><h2 id="catalog-title">Image library</h2><p id="catalog-total" class="catalog-subtitle"></p></div><button class="close-dialog" data-close="catalog-dialog" aria-label="Close image library">×</button></div>
+<div id="catalog-roster" class="catalog-roster" aria-label="Teams"></div>
+<div class="catalog-controls"><label for="catalog-search">Search<input id="catalog-search" type="search" placeholder="Find a team, country or player" autocomplete="off"></label><label for="catalog-target">Apply to<select id="catalog-target"></select></label></div>
+<div id="catalog-categories" class="catalog-categories"></div>
+<div class="catalog-actions"><p id="catalog-count" role="status"></p><button id="catalog-fill" class="button secondary" disabled>Choose both randomly</button></div>
+<p id="catalog-status" role="status" aria-live="polite"></p><button id="catalog-retry" class="button" hidden>Try again</button>
+<div id="catalog-grid" class="catalog-grid"></div>
+<footer class="catalog-footer"><span>Choose an image for each team.</span><a href="/catalog/credits.html" target="_blank" rel="noopener">Image credits</a></footer>
+</dialog>
+<script type="module" src="/src/goal-arena-app.js"></script></body></html>

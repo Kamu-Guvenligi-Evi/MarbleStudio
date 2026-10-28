@@ -1,0 +1,71 @@
+Komutan ve ittifak savaşları — 15 Ekim 2026
+
+Kapsam
+tests/alliance-commanders-simulation.mjs: dokuz senaryo, taraflar değiştirilerek
+18 tam savaş. Seed 1427, 1/30 saniye adım, mevcut 180 saniye oyun sınırı.
+2v2, aynı komutanın ayrı orduları, 1v2, 3v1, 4v4, komutan kaybı,
+müttefik ordu kaybı, genel/özel komutan karışımı ve 1920 askerli 4v4.
+Kaynak dosyalarının başlangıç/bitiş SHA256 değerleri raporda tutulur.
+Savaş sırasında sonlu konum/can, dost hedeflememe, komutanın saldırmaması,
+ordu-plan aidiyeti, ölü komutan planının kapanması ve sonuç kontrol edilir.
+Bu tarama tüm birlik/komutan kombinasyonlarının kapsamlı dengesi değildir.
+
+Bulunan ve giderilen hata
+Askerler düşman savaşçılarını bırakarak kaçan, saldırmayan komutanların
+peşine takılıyordu. Aynı leader-loss-2v2 tekrarında 11 Selçuklu Harold'u,
+25 Fransız Mehmed'i kovaladı; savaşçıların toplam canı 38 saniye değişmedi.
+crown-battle.js chooseTarget: otomatik seçim ve hedef tutma, komutanı ancak
+silah menzilindeyken kabul eder. Açık oyuncu saldırı emri korunur. Yakındaki
+zararsız komutan, okçunun kaçış tehdidi olarak sayılmaz. Komutan hasar alabilir.
+Diğer kaynaklar aynı kalan önce/sonra tekrarında süre 92.77 -> 49.13 saniye,
+en uzun hasarsız dönem 38 -> 0 saniye. Aynalı tekrar 67.67 -> 53.70 saniye.
+Kanıt: artifacts/alliance-simulation/leader-loss-2v2.json ve leader-loss-after.json.
+
+İlk tam tarama
+artifacts/alliance-simulation/battles.json: 18 savaşın 16'sı bir tarafın bütün
+savaşçılarını kaybetmesiyle, 1920 askerli ikisi 180 saniye sınırıyla bitti.
+Bir hasarsız bekleme uyarısı (yukarıdaki hata); diğer doğrulamalarda hata yok.
+Başlangıçta ölçülen ciddi gövde çakışması yok. Savaşta geçici sıkışmalar var.
+Çakışma ölçütü: merkez uzaklığı, iki gövde yarıçapı toplamının %65'inden az.
+Savaş içi ölçüm saniyede bir; her kareyi kapsamaz ve tek başına takılma kanıtı değildir.
+
+Son birleşik tarama
+artifacts/alliance-simulation/battles-after.json: 18/18 tamamlandı; kaynak
+hashleri değişmedi. 17 savaş yok edilme, 1 savaş süre sınırıyla sonuçlandı.
+Doğrulama hatası ve 30 saniyeyi aşan hasarsız bekleme uyarısı yok.
+Süre sınırına ulaşan 1920 askerli savaş 2/243 kalan savaşçıyla bitti;
+son 15 saniyede can ve asker sayısı azalmayı sürdürdü: bu örnekte motor
+kilitlenmesi değil, devam eden çatışmayı bitiren mevcut oyun kuralı söz konusu.
+Başlangıç çakışması 0. En büyük oranlı savaş içi örnek, yalnız 23 kişi kalmışken
+3 askerin teması (%13); bunu tüm ordunun sıkışması şeklinde yorumlamamak gerekir.
+Birleşik sonuçlar yeni taktik davranışlarını da içerir. Yukarıdaki 92.77/49.13
+karşılaştırması yalnız hedefleme düzeltmesini ayıran önceki kontrollü tekrardır.
+
+Görüntü performansı bulgusu
+tests/alliance-commanders-render-browser.mjs gerçek BattleRenderer'ı yerel
+Chrome headless içinde çalıştırır. 1366x768, DPR1, ses kapalı, kare başına tek
+1/30 adım, 10 saniye motor ısınması ve 420 kare (ilk 60 ölçüm dışı).
+384 asker: medyan motor 1.7ms, çizim 9.8ms; çizim p95 17.3ms.
+1920 asker: medyan motor 8.7ms, çizim 21.9ms; çizim p95 26.3ms.
+Kalabalık savaşta çizim önemli yük. Bunlar tam uygulamanın kullanıcı FPS'si
+değildir; headless çalışma ve makinedeki diğer işler süreleri etkileyebilir.
+Bu görevde çizim performansına müdahale edilmedi. Hata ve sonlu olmayan konum yok.
+Kanıt: artifacts/alliance-simulation/browser.json.
+
+Doğrulamalar
+historical-commander-targeting: piyade/süvari/okçu, iki taraf, uzak komutanı
+bırakma, yakındaki komutana saldırabilme, açık saldırı emri — PASS.
+historical-commanders-combat, historical-commander-movement,
+crown-battle-alliances, historical-multi-army-tactics — PASS.
+crown-battle-alliances-browser: bağımsız ordu sayıları, oluşturma/yenileme/yeni
+savaş sonrası korunma, komutan arama/seçim, dar ekran — PASS.
+Vite build — PASS (mevcut büyük chunk uyarısı var).
+
+Koordinasyon
+Diğer sekme historical-civilization-tactics.js üzerinde savunma disiplini ve
+süvari fırsat değerlendirmesini tamamladı. Bu görevde o kaynak düzenlenmedi.
+Birleşik kaynakta historical-tactics-discipline testi burada da PASS: 45 saniye
+sonra savunma hattının korunması, Fransız süvarisinin kapanan fırsatı yeniden
+değerlendirmesi, Osmanlı kanadının yana açılması ve safların birlikte ilerlemesi.
+Birlik yerleşimi ve hazır ordular diğer sekmeyle koordine edildi. Son birleşik
+tarama artifacts/alliance-simulation/battles-after.json altında tutulur.

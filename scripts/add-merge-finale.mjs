@@ -1,0 +1,4 @@
+﻿import fs from 'node:fs';
+let p='src/merge-evolution-app.js',s=fs.readFileSync(p,'utf8');s=s.replace("if(e.type==='merge'&&settings.sound&&!paused&&!document.hidden)sound.event({...e,type:'multiply'});", "if(['merge','final'].includes(e.type)&&settings.sound&&!paused&&!document.hidden)sound.event({...e,type:e.type==='final'?'win':'multiply'});");fs.writeFileSync(p,s);
+p='src/merge-evolution-video.js';s=fs.readFileSync(p,'utf8').replace("e.type!=='merge'","!['merge','final'].includes(e.type)").replace("{...e,type:'multiply'}","{...e,type:e.type==='final'?'win':'multiply'}");fs.writeFileSync(p,s);
+p='merge-evolution.html';s=fs.readFileSync(p,'utf8').replace('Son form 3 saniye gösterilir ve oyun tamamlanır.','Son form kısa bir kutlamayla gösterilir ve oyun tamamlanır.');fs.writeFileSync(p,s);

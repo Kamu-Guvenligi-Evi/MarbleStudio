@@ -5,7 +5,7 @@ import {COUNTRY_MAPS} from './territory-maps.js';
 
 export const TERRITORY_SHAPES={portrait:'Dikey Arena',triangle:'Üçgen',square:'Kare',hexagon:'Altıgen',star:'Yıldız',circle:'Daire',...Object.fromEntries(Object.entries(COUNTRY_MAPS).map(([id,map])=>[id,map.name]))};
 export const TERRITORY_BUFFS={speed:{duration:2,multiplier:1.8},shield:{duration:1.5}};
-export const TERRITORY_BALL_RADIUS=13;
+export const TERRITORY_BALL_RADIUS=19;
 export const TERRITORY_PICKUP_RADIUS=15;
 export function shapeOutline(shape){
   if(shape==='portrait')return [{x:60,y:190},{x:480,y:190},{x:504,y:214},{x:504,y:778},{x:480,y:802},{x:60,y:802},{x:36,y:778},{x:36,y:214}];
@@ -17,9 +17,9 @@ export function shapeOutline(shape){
 }
 function inside(p,vertices){let yes=false;for(let i=0,j=vertices.length-1;i<vertices.length;j=i++){const a=vertices[i],b=vertices[j];if((a.y>p.y)!==(b.y>p.y)&&p.x<(b.x-a.x)*(p.y-a.y)/(b.y-a.y)+a.x)yes=!yes;}return yes;}
 export class TerritoryBattle{
-  constructor({seed=2048,count=8,arenaShape='portrait',territoryDuration=45,ballImages=[],ballNames=[],onHit=()=>{}}={}){
+  constructor({seed=2048,count=8,arenaShape='portrait',territoryDuration=60,ballImages=[],ballNames=[],onHit=()=>{}}={}){
     this.mode='arena';this.arenaGame='territory';this.arenaShape=Object.hasOwn(TERRITORY_SHAPES,arenaShape)?arenaShape:'triangle';
-    this.duration=[30,45,60].includes(territoryDuration)?territoryDuration:45;this.seed=seed;this.onHit=onHit;this.rng=random(seed);
+    this.duration=[30,45,60,90].includes(territoryDuration)?territoryDuration:60;this.seed=seed;this.onHit=onHit;this.rng=random(seed);
     this.time=0;this.state='ready';this.finished=[];this.winners=[];this.totalCuts=0;this.totalClaims=0;this.events=[];
     this.pickups=[];this.nextPickupAt=2;this.pickupSequence=0;
     this.sectionCount=1;this.sections=[];this.sequence=[];this.finishY=960;this.isCustom=true;
@@ -49,14 +49,31 @@ export class TerritoryBattle{
   seedHome(b){const x=b.home%80,y=Math.floor(b.home/80);for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)this.setOwner((y+dy)*80+x+dx,b.id);}
   rectangleValid(cell,dx,dy){const x=cell%80,y=Math.floor(cell/80),x2=x+dx,y2=y+dy;if(x2<0||x2>=80||y2<0||y2>=this.rows)return false;for(let yy=Math.min(y,y2);yy<=Math.max(y,y2);yy++)for(let xx=Math.min(x,x2);xx<=Math.max(x,x2);xx++)if(this.cells[yy*80+xx]===-2)return false;return true;}
   speed(b){return b.speedUntil>this.time?TERRITORY_BUFFS.speed.multiplier:1;}
-  localRoute(b,accept,maxSteps=28){
+  travelTime(b,steps){
+    const boosted=Math.max(0,b.speedUntil-this.time),work=Math.max(0,steps)*this.cellSeconds;
+    return work<=boosted*TERRITORY_BUFFS.speed.multiplier?work/TERRITORY_BUFFS.speed.multiplier:work-boosted*(TERRITORY_BUFFS.speed.multiplier-1);
+  }
+  useBuff(b){
+    if(!b.buffDecision)return;
+    b.buffDecision=false;
+    if(b.speedUntil<=this.time&&b.shieldUntil<=this.time)return;
+    b.nextHuntAt=0;
+    // Reconsider an unstarted loop, never turn midway through a cell or abandon
+    // a committed claim. Speed already helps an open claim close sooner.
+    if(!b.trail.length&&this.cells[b.cell]===b.id&&b.route.some(cell=>this.cells[cell]!==b.id)&&this.cells[b.route.at(-1)]===b.id){
+      b.route=[];b.detourResumeRoute=null;b.launchReady=false;
+    }
+  }
+  localRoute(b,accept,maxSteps=28,rank=null){
     const others=this.balls.filter(other=>other!==b&&other.eliminatedAt===null);
     const parent=new Int16Array(this.rows*80).fill(-1),depth=new Uint8Array(this.rows*80),queue=[b.cell];parent[b.cell]=b.cell;
+    let best=null,bestScore=Infinity;
+    const result=cell=>{const path=[];for(let i=cell;i!==b.cell;i=parent[i])path.push(i);return {cell,path:path.reverse()};};
     for(let head=0;head<queue.length;head++){
       const cell=queue[head];
       if(accept(cell,depth[cell])){
-        const path=[];for(let i=cell;i!==b.cell;i=parent[i])path.push(i);
-        return {cell,path:path.reverse()};
+        if(!rank)return result(cell);
+        const score=rank(cell,depth[cell]);if(score<bestScore){bestScore=score;best=cell;}
       }
       if(depth[cell]>=maxSteps)continue;
       for(const n of this.neighbors(cell))if(parent[n]===-1){
@@ -65,7 +82,7 @@ export class TerritoryBattle{
         parent[n]=cell;depth[n]=depth[cell]+1;queue.push(n);
       }
     }
-    return null;
+    return best===null?null:result(best);
   }
   resumeAfterPickup(b){
     const original=b.pickupTarget.resumeRoute,targets=new Map();
@@ -76,26 +93,44 @@ export class TerritoryBattle{
     b.route=join?join.path.concat(original.slice(targets.get(join.cell)+1)):[];
   }
   seekPickup(b){
-    if(b.pickupTarget||this.time<(b.nextPickupLookAt??0))return;
-    // Bank an almost finished claim before taking a buff detour.
-    if(b.trail.length&&b.route.slice(0,8).some(cell=>this.cells[cell]===b.id))return;
+    // Commit to an open claim. Buffs touching the route are still collected.
+    if(b.trail.length||b.pickupTarget||b.shieldUntil>this.time||b.speedUntil>this.time||this.time<(b.nextPickupLookAt??0))return;
     b.nextPickupLookAt=this.time+.35;
-    const maxSteps=b.trail.length>30?6:28,p=this.position(b.cell),wanted=this.pickups.filter(item=>{
+    const maxSteps=28,p=this.position(b.cell),wanted=this.pickups.filter(item=>{
       const q=this.position(item.cell),active=b[item.type==='speed'?'speedUntil':'shieldUntil']>this.time;
       return !active&&item.expiresAt>this.time+.15&&Math.hypot(p.x-q.x,p.y-q.y)<=maxSteps*6;
     });
     if(!wanted.length)return;
     const targets=new Map(wanted.map(item=>[item.cell,item]));
-    const reachable=(cell,steps)=>targets.has(cell)&&targets.get(cell).expiresAt>this.time+steps*this.cellSeconds/this.speed(b)+.15;
-    // An exposed player prefers a close shield; otherwise take the nearest useful buff.
-    const shield=this.exposed(b)?this.localRoute(b,(cell,steps)=>reachable(cell,steps)&&targets.get(cell).type==='shield',Math.min(maxSteps,12)):null;
-    const target=shield??this.localRoute(b,reachable,maxSteps);
+    const reachable=(cell,steps)=>targets.has(cell)&&targets.get(cell).expiresAt>this.time+this.travelTime(b,steps)+.15;
+    let target=this.localRoute(b,reachable,maxSteps);
+    if(!target){
+      // A larger rival can block the pickup's centre while its edge remains reachable.
+      const touching=(cell,steps)=>{const p=this.position(cell);return wanted.find(item=>{
+        const q=this.position(item.cell);return item.expiresAt>this.time+this.travelTime(b,steps)+.15&&Math.hypot(p.x-q.x,p.y-q.y)<=b.body.circleRadius+TERRITORY_PICKUP_RADIUS;
+      });};
+      target=this.localRoute(b,(cell,steps)=>Boolean(touching(cell,steps)),maxSteps);
+      if(target)target.item=touching(target.cell,target.path.length);
+    }
     if(!target)return;
     if(!target.path.length){this.collectPickups(b);return;}
-    b.pickupTarget={item:targets.get(target.cell),resumeRoute:[b.cell,...b.route]};
+    b.pickupTarget={item:target.item??targets.get(target.cell),resumeRoute:[b.cell,...b.route]};
     b.route=target.path;
   }
   tryCloseTrail(b){
+    if(this.exposed(b)&&b.shieldUntil>this.time&&!this.opening()){
+      if(this.time<(b.nextShieldLookAt??0))return false;
+      b.nextShieldLookAt=this.time+.12;
+      const remaining=b.shieldUntil-this.time,homeIndex=b.route.findIndex(cell=>this.cells[cell]===b.id);
+      if(homeIndex>=0&&this.travelTime(b,homeIndex+1)+.18<=remaining)return false;
+      const home=this.localRoute(b,cell=>this.cells[cell]===b.id,48);
+      // Start banking the claim before protection expires, including the trip
+      // home and a margin for cell-boundary decisions and moving obstacles.
+      if(home?.path.length&&this.travelTime(b,home.path.length)+.3>=remaining){
+        b.route=home.path;b.detourResumeRoute=null;return true;
+      }
+      return false;
+    }
     if(!this.exposed(b)||b.trail.length<12||this.protected(b)||this.time<(b.nextSafetyLookAt??0))return false;
     b.nextSafetyLookAt=this.time+.6;
     if(b.route.slice(0,8).some(cell=>this.cells[cell]===b.id))return false;
@@ -118,6 +153,60 @@ export class TerritoryBattle{
     }
     return false;
   }
+  seekCut(b){
+    if(this.opening()||b.trail.length||b.pickupTarget||this.time<(b.nextHuntAt??0))return false;
+    b.nextHuntAt=this.time+.8;
+    const targets=new Map();
+    for(const victim of this.balls){
+      if(victim===b||victim.eliminatedAt!==null||this.protected(victim)||victim.trail.length<8)continue;
+      for(const cell of victim.trail)targets.set(cell,victim.id);
+    }
+    if(!targets.size)return false;
+    const shieldRemaining=b.shieldUntil-this.time;
+    const range=shieldRemaining>0?32:b.speedUntil>this.time?22:12;
+    const target=this.localRoute(b,(cell,steps)=>targets.has(cell)&&(shieldRemaining>0?this.travelTime(b,steps*2)+.2<=shieldRemaining:this.travelTime(b,steps)<=12*this.cellSeconds),range);
+    if(!target?.path.length)return false;
+    // A protected raid has a known route back even if the victim banks its trail.
+    b.route=shieldRemaining>0?target.path.concat([b.cell,...target.path.slice(0,-1)].reverse()):target.path;
+    b.detourResumeRoute=null;b.launchReady=false;
+    return true;
+  }
+  cutTrails(b){
+    if(this.opening())return;
+    // Use the visible marble edge, not just its centre cell, to cut an open trail.
+    const p=b.body.position,r=b.body.circleRadius+2.25,reach=Math.ceil(r/this.cellSize);
+    const x=Math.floor((p.x-30)/this.cellSize),y=Math.floor((p.y-this.originY)/this.cellSize);
+    for(let yy=Math.max(0,y-reach);yy<=Math.min(this.rows-1,y+reach);yy++)for(let xx=Math.max(0,x-reach);xx<=Math.min(79,x+reach);xx++){
+      const cell=yy*80+xx,id=this.trailOwners[cell];if(id<0||id===b.id)continue;
+      const q=this.position(cell);if((p.x-q.x)**2+(p.y-q.y)**2<=r*r)this.eliminate(this.balls[id],b,'trail',q);
+    }
+  }
+  claimCandidate(b,dx,dy,horizontal){
+    const moves=horizontal?[[Math.sign(dx),Math.abs(dx)],[Math.sign(dy)*80,Math.abs(dy)],[-Math.sign(dx),Math.abs(dx)],[-Math.sign(dy)*80,Math.abs(dy)]]:[[Math.sign(dy)*80,Math.abs(dy)],[Math.sign(dx),Math.abs(dx)],[-Math.sign(dy)*80,Math.abs(dy)],[-Math.sign(dx),Math.abs(dx)]];
+    const route=[],trail=new Set();let cell=b.cell,closed=false;
+    outer:for(const [delta,n] of moves)for(let i=0;i<n;i++){
+      cell+=delta;route.push(cell);
+      if(this.cells[cell]!==b.id)trail.add(cell);
+      else if(trail.size){closed=true;break outer;}
+    }
+    if(!closed)return null;
+    // Capture happens at the FIRST return to owned land. Score that excursion,
+    // not the rest of a rectangle which the marble will never travel.
+    const x=b.cell%80,y=Math.floor(b.cell/80),left=Math.min(x,x+dx),top=Math.min(y,y+dy);
+    const width=Math.abs(dx)+1,height=Math.abs(dy)+1,blocked=new Uint8Array(width*height),seen=new Uint8Array(width*height),queue=[];
+    for(let yy=0;yy<height;yy++)for(let xx=0;xx<width;xx++){
+      const i=yy*width+xx,c=(top+yy)*80+left+xx;
+      blocked[i]=this.cells[c]===b.id||trail.has(c)?1:0;
+      if(!blocked[i]&&(xx===0||yy===0||xx===width-1||yy===height-1)){seen[i]=1;queue.push(i);}
+    }
+    for(let head=0;head<queue.length;head++){
+      const i=queue[head],xx=i%width,yy=Math.floor(i/width);
+      for(const n of [xx>0?i-1:-1,xx+1<width?i+1:-1,yy>0?i-width:-1,yy+1<height?i+width:-1])if(n>=0&&!blocked[n]&&!seen[n]){seen[n]=1;queue.push(n);}
+    }
+    let gain=trail.size;
+    for(let i=0;i<seen.length;i++)if(!blocked[i]&&!seen[i])gain++;
+    return {route,gain,interior:gain-trail.size};
+  }
   plan(b){
     if(b.eliminatedAt!==null)return;
     if(this.cells[b.cell]!==b.id){
@@ -132,31 +221,44 @@ export class TerritoryBattle{
     }
     if(!b.launchReady){
       // Walk through owned land to its frontier so the next loop expands outward.
-      const parent=new Int16Array(this.rows*80).fill(-1),queue=[b.cell];parent[b.cell]=b.cell;
+      const parent=new Int16Array(this.rows*80).fill(-1),distance=new Uint16Array(this.rows*80),queue=[b.cell];parent[b.cell]=b.cell;
       let target=b.cell,best=-Infinity;
       for(let head=0;head<queue.length;head++){
         const cell=queue[head],adjacent=this.neighbors(cell),frontier=adjacent.filter(i=>this.cells[i]!==b.id).length;
-        if(frontier){const score=frontier+this.rng()*3;if(score>best){best=score;target=cell;}}
-        for(const n of adjacent)if(this.cells[n]===b.id&&parent[n]===-1){parent[n]=cell;queue.push(n);}
+        // Prefer a useful nearby edge over crossing the entire empire randomly.
+        if(frontier){const score=frontier+this.rng()*.5-distance[cell]*.2;if(score>best){best=score;target=cell;}}
+        for(const n of adjacent)if(this.cells[n]===b.id&&parent[n]===-1){parent[n]=cell;distance[n]=distance[cell]+1;queue.push(n);}
       }
       const path=[];for(let i=target;i!==b.cell;i=parent[i])path.push(i);b.launchReady=true;
       if(path.length){b.route=path.reverse();return;}
     }
     b.launchReady=false;
+    // Alternate ordinary claims with ambitious loops: the extra area stays at risk
+    // until the player reconnects to their land. Narrow maps retain small fallbacks.
+    const ambitious=!this.opening()&&this.rng()<.3;
+    const shieldBudget=b.shieldUntil-this.time-.2;
+    const speedExtra=Math.floor(Math.max(0,b.speedUntil-this.time)*(TERRITORY_BUFFS.speed.multiplier-1)/this.cellSeconds/4);
     let best=null,score=-Infinity;
     for(let attempt=0;attempt<48;attempt++){
-      const dx=(this.rng()<.5?-1:1)*(2+Math.floor(this.rng()*14)),dy=(this.rng()<.5?-1:1)*(2+Math.floor(this.rng()*14));
+      const normalSpan=ambitious&&attempt<36?28:14;
+      const span=shieldBudget>0?Math.max(1,Math.min(normalSpan,Math.floor(shieldBudget*this.speed(b)/this.cellSeconds/2)-3)):normalSpan+Math.min(6,speedExtra);
+      const dx=(this.rng()<.5?-1:1)*(2+Math.floor(this.rng()*span)),dy=(this.rng()<.5?-1:1)*(2+Math.floor(this.rng()*span));
       if(!this.rectangleValid(b.cell,dx,dy))continue;
-      const x=b.cell%80,y=Math.floor(b.cell/80);let gain=0;
-      for(let yy=Math.min(y,y+dy);yy<=Math.max(y,y+dy);yy++)for(let xx=Math.min(x,x+dx);xx<=Math.max(x,x+dx);xx++)if(this.cells[yy*80+xx]!==b.id)gain++;
-      const value=gain/(Math.abs(dx)+Math.abs(dy))+this.rng()*2;
-      if(value>score){score=value;best={dx,dy,horizontal:this.rng()<.5};}
+      for(const horizontal of [true,false]){
+        const candidate=this.claimCandidate(b,dx,dy,horizontal);
+        if(!candidate)continue;
+        const travel=this.travelTime(b,candidate.route.length);
+        if(shieldBudget>0&&travel>shieldBudget)continue;
+        // Prefer an enclosed patch over drawing a thin strip along existing land.
+        const value=(candidate.gain+candidate.interior)/(travel/(2*this.cellSeconds));
+        if(value>score){score=value;best=candidate;}
+      }
     }
     if(!best){const adjacent=this.neighbors(b.cell);b.route=adjacent.length?[adjacent[Math.floor(this.rng()*adjacent.length)]]:[];return;}
-    let cell=b.cell;const {dx,dy,horizontal}=best,moves=horizontal?[[Math.sign(dx),Math.abs(dx)],[Math.sign(dy)*80,Math.abs(dy)],[-Math.sign(dx),Math.abs(dx)],[-Math.sign(dy)*80,Math.abs(dy)]]:[[Math.sign(dy)*80,Math.abs(dy)],[Math.sign(dx),Math.abs(dx)],[-Math.sign(dy)*80,Math.abs(dy)],[-Math.sign(dx),Math.abs(dx)]];
-    for(const [delta,n] of moves)for(let i=0;i<n;i++){cell+=delta;b.route.push(cell);}
+    b.route=best.route;
   }
-  clearTrail(b){const old=b.trail;b.trail=[];for(const i of old)if(this.trailOwners[i]===b.id)this.trailOwners[i]=this.balls.find(other=>other.eliminatedAt===null&&other.trail.includes(i))?.id??-1;}
+  trimTrail(b,length=0){const removed=b.trail.splice(length);for(const i of removed)if(this.trailOwners[i]===b.id)this.trailOwners[i]=this.balls.find(other=>other.eliminatedAt===null&&other.trail.includes(i))?.id??-1;}
+  clearTrail(b){this.trimTrail(b);b.trailAnchor=null;}
   opening(){return this.state==='running'&&this.time<this.openingDuration;}
   protected(b){return this.opening()||b.shieldUntil>this.time;}
   exposed(b){return b.trail.length>0&&this.cells[b.cell]!==b.id;}
@@ -166,8 +268,10 @@ export class TerritoryBattle{
       const q=other.body.position;
       // Include the visible outline. Resolve contact before two bodies overlap.
       if(Math.hypot(p.x-q.x,p.y-q.y)>=b.body.circleRadius+other.body.circleRadius+4-1e-8)continue;
-      if(this.exposed(other)&&this.eliminate(other,b))continue;
-      if(this.exposed(b))this.eliminate(b,other);
+      const vulnerable=this.exposed(b)&&!this.protected(b),otherVulnerable=this.exposed(other)&&!this.protected(other);
+      // Equally exposed bodies yield. Array iteration order must not choose a winner.
+      if(otherVulnerable&&!vulnerable&&this.eliminate(other,b,'contact',p))continue;
+      if(vulnerable&&!otherVulnerable)this.eliminate(b,other,'contact',p);
       return false;
     }
     return true;
@@ -206,7 +310,7 @@ export class TerritoryBattle{
         const score=Math.min(clearance,24)+Math.min(lateral,36)*.5-depth[cell]*.5;
         if(score>escapeScore){escape=cell;escapeScore=score;}
       }
-      if(depth[cell]>=24)continue;
+      if(depth[cell]>=36)continue;
       // Alternate passing sides so head-on players do not mirror every detour.
       const adjacent=this.neighbors(cell);if(nearest&&b.id>nearest.id)adjacent.reverse();
       for(const n of adjacent)if(parent[n]===-1&&!(n===b.blockedCell&&this.time<b.blockedUntil)&&clear(cell,n)){parent[n]=cell;depth[n]=depth[cell]+1;queue.push(n);}
@@ -222,11 +326,18 @@ export class TerritoryBattle{
     while(budget>1e-8&&b.eliminatedAt===null){
       if(b.phase===0&&!b.retreating){
         if(b.pickupTarget&&(!this.pickups.includes(b.pickupTarget.item)||b.pickupTarget.item.expiresAt<=this.time))this.resumeAfterPickup(b);
-        if(this.tryCloseTrail(b))b.pickupTarget=null;else this.seekPickup(b);
+        this.useBuff(b);
+        if(this.tryCloseTrail(b))b.pickupTarget=null;else if(!this.seekCut(b))this.seekPickup(b);
       }
       if(!b.route.length&&b.detourResumeRoute){
         const targets=new Map();b.detourResumeRoute.forEach((cell,i)=>targets.set(cell,i));
-        const join=this.localRoute(b,cell=>targets.has(cell));
+        // Resume at a reachable forward waypoint. Jumping straight to the final
+        // home cell abandons the entire claim after every sideways dodge.
+        const visited=new Set(b.trail);
+        const destination=b.detourResumeRoute.at(-1),claim=b.trail.length&&this.cells[destination]===b.id;
+        const join=claim
+          ?this.localRoute(b,cell=>targets.has(cell)&&!visited.has(cell),36,(cell,steps)=>steps+targets.get(cell)*.5)
+          :this.localRoute(b,cell=>cell===destination,36)??this.localRoute(b,cell=>targets.has(cell));
         if(join)b.route=join.path.concat(b.detourResumeRoute.slice(targets.get(join.cell)+1));
         b.detourResumeRoute=null;
       }
@@ -240,19 +351,19 @@ export class TerritoryBattle{
         if(b.phase>0)b.retreating=true;else this.detour(b);
         break;
       }
-      b.phase=phase;b.body.position=next;budget-=amount;this.collectPickups(b);
+      b.phase=phase;b.body.position=next;budget-=amount;this.collectPickups(b);this.cutTrails(b);
       if(b.retreating&&b.phase<=1e-8){b.phase=0;b.retreating=false;this.detour(b);break;}
       if(!b.retreating&&b.phase>=1-1e-8){this.advance(b);b.phase=0;}
     }
     b.body.velocity=b.eliminatedAt!==null?{x:0,y:0}:{x:(b.body.position.x-before.x)/dt,y:(b.body.position.y-before.y)/dt};
   }
-  eliminate(victim,attacker){
+  eliminate(victim,attacker,reason='trail',contactPosition=attacker.body.position){
     if(victim===attacker||victim.eliminatedAt!==null||attacker.eliminatedAt!==null||this.protected(victim))return false;
-    const cutPosition={...attacker.body.position},lostTrail=[...victim.trail],changedCells=[];
+    const cutPosition={...contactPosition},lostTrail=[...victim.trail],trailAnchor=victim.trailAnchor,changedCells=[];
     victim.eliminatedAt=this.time;victim.speedUntil=0;victim.shieldUntil=0;victim.route=[];victim.pickupTarget=null;victim.body.velocity={x:0,y:0};this.clearTrail(victim);
     let transferred=0;for(const i of this.valid)if(this.cells[i]===victim.id){this.setOwner(i,attacker.id);transferred++;changedCells.push(i);}
     attacker.cuts++;this.totalCuts++;this.onHit(6,this.position(attacker.cell).x);
-    this.events.unshift({type:'elimination',cutter:attacker.id,owner:victim.id,cells:transferred,changedCells,trail:lostTrail,position:{...victim.body.position},cutPosition,time:this.time});return true;
+    this.events.unshift({type:'elimination',reason,cutter:attacker.id,owner:victim.id,cells:transferred,changedCells,trail:lostTrail,trailAnchor,position:{...victim.body.position},cutPosition,time:this.time});return true;
   }
   spawnPickups(){
     this.pickups=this.pickups.filter(p=>p.expiresAt>this.time);
@@ -271,6 +382,7 @@ export class TerritoryBattle{
       if(item.expiresAt<=this.time)return false;
       const q=this.position(item.cell);if(Math.hypot(p.x-q.x,p.y-q.y)>b.body.circleRadius+TERRITORY_PICKUP_RADIUS)return true;
       b[item.type==='speed'?'speedUntil':'shieldUntil']=this.time+TERRITORY_BUFFS[item.type].duration;
+      b.buffDecision=true;
       this.events.unshift({type:item.type,owner:b.id,time:this.time});this.onHit(3,p.x);return false;
     });
   }
@@ -281,20 +393,27 @@ export class TerritoryBattle{
     for(const i of this.valid)if(!blocked(i)&&this.neighbors(i).length<4){seen[i]=1;queue.push(i);}
     for(let head=0;head<queue.length;head++)for(const n of this.neighbors(queue[head]))if(!seen[n]&&!blocked(n)){seen[n]=1;queue.push(n);}
     let changed=0;const changedCells=[];for(const i of this.valid)if((!seen[i]||trail.has(i))&&this.cells[i]!==b.id){this.setOwner(i,b.id);if(this.cells[i]===b.id){changed++;changedCells.push(i);}}
-    this.clearTrail(b);if(changed){b.claims++;this.totalClaims++;this.onHit(4,b.body.position.x);this.events.unshift({type:'claim',owner:b.id,cells:changed,changedCells,position:{...b.body.position},time:this.time});}
-    for(const other of this.balls)if(other!==b&&other.eliminatedAt===null&&other.area===0){if(this.protected(other))other.lastConqueror=b.id;else this.eliminate(other,b);}
+    this.clearTrail(b);b.route=[];b.pickupTarget=null;b.detourResumeRoute=null;b.launchReady=false;
+    if(changed){b.claims++;this.totalClaims++;this.onHit(4,b.body.position.x);this.events.unshift({type:'claim',owner:b.id,cells:changed,changedCells,position:{...b.body.position},time:this.time});}
+    for(const other of this.balls)if(other!==b&&other.eliminatedAt===null&&other.area===0){if(this.protected(other))other.lastConqueror=b.id;else this.eliminate(other,b,'territory');}
   }
   advance(b){
     if(b.eliminatedAt!==null)return;
     if(!b.route.length)this.plan(b);const next=b.route[0];if(next===undefined)return;
     const p=this.position(next);if(!this.contact(b,p))return;
-    b.route.shift();b.cell=next;b.body.position=p;
+    const previous=b.cell;b.route.shift();b.cell=next;b.body.position=p;
     this.collectPickups(b);
     for(const victim of this.balls){
       if(victim===b||victim.eliminatedAt!==null)continue;
-      if(victim.trail.includes(next))this.eliminate(victim,b);
+      if(victim.trail.includes(next))this.eliminate(victim,b,'trail',p);
     }
-    if(this.cells[next]===b.id){if(b.trail.length)this.capture(b);}else if(!b.trail.includes(next)){this.trailOwners[next]=b.id;b.trail.push(next);}
+    if(this.cells[next]===b.id){if(b.trail.length)this.capture(b);}else{
+      const revisited=b.trail.indexOf(next);
+      // Retracing retracts the open path; otherwise the rendered line jumps from
+      // the abandoned tip to the new route and cuts invisible or invented segments.
+      if(revisited>=0)this.trimTrail(b,revisited+1);
+      else{if(!b.trail.length)b.trailAnchor=previous;this.trailOwners[next]=b.id;b.trail.push(next);}
+    }
   }
   start(){if(this.state==='ready')this.state='running';}
   share(b){return b.area/this.valid.length*100;}
@@ -308,7 +427,7 @@ export class TerritoryBattle{
       const dt=Math.min(remaining,1/120);this.time+=dt;this.spawnPickups();
       for(const b of this.balls){
         if(b.eliminatedAt!==null)continue;
-        if(!b.area&&!this.protected(b)&&b.lastConqueror!==undefined){const conqueror=this.balls[b.lastConqueror];const owner=conqueror.eliminatedAt===null?conqueror:this.ranking().find(other=>other!==b&&other.eliminatedAt===null);if(owner)this.eliminate(b,owner);continue;}
+        if(!b.area&&!this.protected(b)&&b.lastConqueror!==undefined){const conqueror=this.balls[b.lastConqueror];const owner=conqueror.eliminatedAt===null?conqueror:this.ranking().find(other=>other!==b&&other.eliminatedAt===null);if(owner)this.eliminate(b,owner,'territory');continue;}
         this.move(b,dt);
       }
       remaining-=dt;if(this.balls.filter(b=>b.eliminatedAt===null).length===1)this.finish();

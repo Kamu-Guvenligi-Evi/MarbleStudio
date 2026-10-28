@@ -1,0 +1,80 @@
+Taç Savaşı — birlik rolleri ve rakibe göre komutan kararları
+16 Ekim 2026
+
+Uygulama
+- Canlı komutan, kendi serbest askerleri ve kendi cephesindeki yaşayan rakipler
+  üzerinden saniyede bir değerlendirme yapar. Oyuncu emirleri önceliklidir.
+- Yeterli mızrak varsa yoğun yakın dövüş süvarisine karşı ön hat; yoğun atışa
+  karşı mesafe kapatma; yeterli şok süvarisi varsa uzun mızrak hattının zayıf
+  kanadına manevra; çoğunluk atlı okçuysa uygun rakibe karşı yıpratma;
+  diğer durumlarda dengeli merkez ve kanatlar seçilir.
+- Eşikler oyun dengelemesidir, tarihî komutanların değişmez kuralları değildir.
+  Karar değişimi en az iki saniye sürmeli; önceki karar en az dört saniye
+  korunmalıdır. Genel formasyon yalnız ilk 20 saniyede, temas ve atış baskısı
+  yokken bir kez yeniden kurulabilir. Çarpışan askerler geri çağrılmaz.
+- Özel doktrinler korunur: Fransız fırsat hücumu ve İtalyan ihtiyatı kendi
+  güvenli kanat aramasını sürdürür. Kalkan hattı atıcı ağırlıklı rakibe ilerler.
+  Takip etmeyen atıcı ordusuna karşı Selçuklu sahte ricadı başlatılmaz.
+- Genel plandaki süvari karşıtı bekleme altı saniyeyle sınırlıdır. Dar alanda
+  kanat sığmazsa cephe düzeni, o da sığmazsa türlere ayrılmış dar saflar denenir.
+  Haritaya kaydırma bir kuşatma kanadını rakip cephesinin içine sokamaz.
+- Müttefik ordu alanları mevcut koordinatörce korunur; hiçbir komutan başka
+  ordunun askerini kendi formasyonuna katmaz. Bu değişiklik ortak üst komuta
+  veya birleşik ittifak taktiği eklemez.
+
+Yeni birliklerin yerleşimi
+- Uzun mızraklılar ayrı blok; kısa mızraklılar sıradan piyade veya süvariye
+  karşı ön hat. Her mızrak taşıyan asker sarissa falanksı sayılmaz.
+- Ciritçiler ve hafif süvariler açık düzende ayrı kanat/perde; atlı okçular
+  yakın dövüş süvarisinin kamasına karıştırılmaz. Savaş arabaları ve filler
+  gövde boyutlarına uygun ayrı alan alır. Arabalar atlı okçu kabul edilmez.
+- Sezar'ın Germen hafif piyadesi süvari yanında ayrı destek hattındadır;
+  yaya askere süvari hızı verilmez. İskender'in yeni yardımcı birlikleri,
+  Hannibal'ın Liguryalıları ve diğer yeni katalog birlikleri de kapsanır.
+- Özel doktrinin dışında kalan birlikler boşta bırakılmaz: kendi türüne göre
+  dış destek gruplarına eklenir. Ming hücrelerinden artan askerler de dahil.
+- Naginata, Eyyubi piyadesi, Tang arbaletçisi ve Babür kılıçlısı ekipmanına
+  göre yerleşir. Tarihen ilişkisiz komutanlara yeni hazır ordu uydurulmaz.
+
+Tarihî dayanak ve yorum sınırı
+- Arrian, Anabasis III.12: Gaugamela'da yedek hat, kanatlarda okçular ve
+  Agrianlar, ileri hafif süvariler ve Paionialılar, Yunan paralı süvariler,
+  Odrysialılar gibi farklı görevler. Simetrik oyun yerleşimi savaşın birebir
+  rekonstrüksiyonu değildir; rol ayrımlarının dayanağıdır.
+  https://en.wikisource.org/wiki/The_Anabasis_of_Alexander/Book_III/Chapter_XII
+- Caesar, De Bello Gallico VII.65.4: Germen süvarileriyle birlikte savaşan
+  hafif piyade. Oyundaki bitişik destek hattı bunun sadeleştirilmesidir.
+  https://www.lateinlex.de/?call=Puc&permalink=Caes_Gall_VII_65
+- Pi-Ramesse kazı sergisi, Horses for the Pharaoh: savaş arabalarına koşulan
+  atlar ve arkeolojik bağlam; savaş arabası/süvari ayrımı.
+  https://piramesse-exhibition.de/en/pferde-fuer-den-pharao/
+- Ayrıntılı birlik/komutan kaynakları mevcut commander-allied-contingents,
+  alexander-light-infantry, major-army-expansion ve kültür genişletme notlarında.
+
+Dosyalar
+src/historical-commander-strategy.js
+src/historical-deployment-corps.js
+src/historical-commander-deployment.js
+src/historical-compact-deployment.js
+src/historical-commander-formations.js
+src/historical-civilization-tactics.js
+src/historical-tactics.js
+src/crown-battle-tactical-visuals.js
+
+Doğrulama çıktıları: artifacts/new-unit-formations/
+- regression.log: 16 ilgili test dosyası, Node test koşucusunda 179/179 geçti.
+  Bunların bazıları kendi içinde çok sayıda savaş/yerleşim senaryosu çalıştırır.
+- historical-new-unit-formations: 22 hazır ordu; minimum, 96, 240 asker;
+  dört yön; 10 özel doktrin; yeni ve özel birlikler; tam katılım, gövde aralığı,
+  ayrı dar saflar ve mevcut doktrin çekirdeğinin korunması.
+- historical-commander-strategy: 17 kontrol; beş tepki, iki taraf, değişen
+  rakip, dar kanat, dört yön, emir/ölüm/devre dışı bırakma ve kalkan hattı.
+- adaptive-battles.json: beş strateji iki tarafta, toplam 10 gerçek simülasyon;
+  fiziksel ilerleme ve doğal eleme ile bitiş doğrulandı.
+- full-battles.log ve ../alliance-tactics/full-battles.json: 11 tarihî komutan
+  iki tarafta, toplam 22 tam 2v2 savaş; ordu aidiyeti, alan içinde manevra ve
+  doğal eleme doğrulandı. Simülasyon boyunca kaynak hash'leri değişmedi.
+- Vite build başarılı: artifacts/new-unit-formations/build. Mevcut büyük
+  parça uyarısı sürüyor. Eşzamanlı çalışmanın dist çıktısına yazılmadı.
+- Tarayıcıda görsel inceleme yapılmadı; kontroller motor, gerçek hareket
+  hedefleri, taktik etiketleri ve derleme üzerindedir.

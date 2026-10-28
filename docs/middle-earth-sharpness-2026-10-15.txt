@@ -1,0 +1,64 @@
+﻿Orta Dünya netlik düzeltmesi — 15 Ekim 2026
+
+Önceki balanced-style revizyonu kullanıcı tarafından bulanık ve kaba bulundu.
+O nottaki “tamamlandı” ifadesi görsel kabul anlamına gelmez. Bu not yeni durumu
+anlatır; görsel beğeni otomatik testle kanıtlanamaz.
+
+Sorun: 240x228 kaynak, büyütülmüş WebP atlas, tekrar 240x228 küçültme ve kalabalık
+orduda 1.5 yoğunluklu önbellek zinciri özellikle devlerin çizgilerini bozuyordu.
+Düzeltme: 36 birliğin savaş pozları doğrudan native canvas paths ile, normal
+birliklerde 3, büyüklerde 6 yoğunlukta üretiliyor. Normalizasyon rasterleştirmeden
+önce uygulanıyor. SpriteLibrary aynı pozu ortak kullanıyor; asker başına çizilmiyor.
+Hazır olma/sürüm API'si uyumluluk için korundu; savaşta WebP yüklenmiyor.
+
+Ana sekme ayrıca sourceResolution(source,size) hesabını devlerin görsel ölçeğine
+göre düzeltti. Renderer/cache/motor dosyaları bu sekmede değiştirilmedi.
+
+Şekiller: Balrog'un yüzü, kanatları ve gövdesi; Mûmakil'in ayakları, gövdesi,
+kulesi ve mürettebatı; Azog'un kurt bineğinin başı yenilendi. Devlerin dış çizgi
+kalınlığı azaltıldı. Tüm sette ölçülü malzeme gölgeleri kullanılıyor. 36 portre
+ve 36 uyumlu atlas, yüksek yoğunluklu native kaynaktan yerelde yeniden üretildi.
+İlk bake Balrog kanat sınırı testinde durdu; genişlik düzeltildikten sonra geçti.
+
+Dosyalar:
+- src/middle-earth-{art,painted-art,stylized-base,stylized-expansion}.js
+- scripts/bake-middle-earth-balanced-art.mjs
+- scripts/apply-middle-earth-balanced-art.mjs (runtime dosyalarını yeniden yazmaz)
+- tests/middle-earth-sharpness.mjs
+- public/warrior-sprites/middle-earth/ altında 36 atlas + 36 portre
+- bu not ve önceki balanced-style notunun düzeltme başlığı
+VISUAL_SCALES/FALLBACK_SCALES, birlik kimlikleri, roller, savaş değerleri ve
+ordu kayıt formatı bu turda değiştirilmedi. apply betiği bu turda çalıştırılmadı.
+
+Doğrulama:
+- Bake PASS: 36 atlas + 36 portre, kaynak sınırları; dış görsel indirme yok.
+- Size PASS: 36 birliğin tarihî askerlerle oranı ve yükleme ölçeği eşitliği.
+  Viking34.7, Aragorn33.2, Legolas35.2, Gimli22.7; Kıpçak54, koçlu cüce37,
+  Nazgûl/Rohirrim/Gondor süvari53.2; Balrog112.9, Mûmakil145.5 oyun birimi.
+- Revision PASS: 12 dev seçim kontrolü, ekran dışı eleme ve mobil çizim.
+- Sharpness testi: 191 asker, 36 ME + 2 tarihî tür, 3 walk/attack animasyon
+  çevrimi; 9168 poz isteği. Son çevrimde yeni atlas sayfası olmaması ve hiçbir
+  isteğin görünür pozsuz kalmaması artık otomatik koşul.
+
+Kanıt: artifacts/middle-earth/sharp-{battlefield.jpg,runtime.log,size.log,
+revision.log,full.log,bake.log}, sharpness-checks.json. Eski runtime yedeği:
+artifacts/middle-earth/before-sharp-runtime/.
+
+Sınırlar: Bu karşılaştırma aynı kamera yakınlığında gerçek savaş renderer'ı
+kullanır; tek başına tüm PC'lerde FPS garantisi değildir. Her iki takımda tüm
+36 türün bütün pozlarını aynı anda önbellekte tutma sınırı ayrıca ölçülmedi.
+Kamera çok yakınlaştırıldığında sonlu raster çözünürlüğü yine görünür olabilir.
+Görsel kalite için kullanıcının oyun ekranındaki değerlendirmesi esastır.
+
+Son doğrulama (tamamlandı):
+- Full PASS: 36 kimlik, 16 kahraman, 36 ayrı siluet, 1728 poz; iki takımın
+  animasyonları, kayıt/yükleme, emirler, kırmızı takım kaldırma, PC/mobil katalog,
+  52 saniyelik tekrarlanabilir savaş. Tarayıcı hatası ve dış ağ isteği yok.
+- Sharpness PASS: 9168 poz isteğinde kayıp 0; üç çevrimde atlas tahsisleri
+  18/1/0, son durumda 16 sayfa. Dev kaynakları 6x, atlas yoğunluğu yaklaşık 5x.
+- Vite build PASS, exit 0. Mevcut büyük paket uyarısı devam ediyor.
+  İlk PowerShell sarmalayıcı stderr uyarısını hata olarak raporladı; doğrudan
+  süreç çıkış koduyla tekrar doğrulandı.
+- Son oyun içi karşılaştırma görseli incelendi: sharp-battlefield.jpg.
+  Tarihî birliklerle aynı yakınlıkta; stil çizgisel ve sade, fotoğraf gerçekçiliği
+  hedeflenmiyor. Bu sonuç kullanıcının görsel onayı olarak kaydedilmemelidir.

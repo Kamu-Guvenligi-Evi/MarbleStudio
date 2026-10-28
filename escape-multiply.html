@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kaçış Çoğalması · Marble Studio</title></head>
+<body><header class="multiplier-header"><span>Kaçış Çoğalması</span><nav><button id="studio-videos" class="button">Videolarım</button><button id="studio-export" class="button primary">Video oluştur</button></nav></header>
+<main class="multiplier-layout"><section class="multiplier-controls"><p class="eyebrow">VİDEODAN OYUNA · 01</p><h1>Bir kaçış.<br><span>Üç yeni top.</span></h1><p class="description">Dönen açıklıktan çıkan her top, halkanın içine yeni toplar ekler. Tek topla başlayan hareket renkli bir akışa dönüşür.</p>
+<fieldset id="settings"><div class="setting-row"><label>Başlangıç topu<input id="count" type="number" min="1" max="50"></label><label>Her kaçışta eklenen<input id="addition" type="number" min="1" max="10"></label></div>
+<div class="setting-row"><label>Açıklık (derece)<input id="gap" type="number" min="12" max="90"></label><label>Dönüş (radyan/sn)<input id="rotation" type="number" min="-2" max="2" step="0.05"></label></div>
+<label>Top boyutu · çap: <output id="ball-size-value" for="ball-size">10 px</output><input id="ball-size" type="range" min="2" max="32" step="0.5" value="10"><small>540 px genişliğindeki sahneye göre; değişiklik anında uygulanır.</small></label>
+<label>Yerçekimi<input id="gravity" type="number" min="0" max="800" step="10"></label>
+<div class="setting-row" hidden><label>Legacy<input id="duration" type="number" min="10" max="180"></label><label>Üretim sınırı<input id="limit" type="number" min="100" max="6000" step="100"></label></div>
+<div class="setting-row"><label>Tohum<input id="seed" type="number" min="0" max="4294967295"></label><label>Oynatma hızı<select id="speed"><option value="0.5">0,5×</option><option value="1">1× · Referans</option><option value="2">2×</option><option value="3">3×</option></select></label></div></fieldset>
+<div class="actions"><button class="button primary" id="new-game">Yeni akış</button><button class="button" id="reference">Referans ayarları</button></div>
+<p id="status" role="status">Referans görünümü · Siyah zemin, beyaz halka, renkli toplar.</p><p class="description">Toplar halkayı doldurur, sonra genişleyen açıklıktan topluca boşalır.</p></section>
+<section class="multiplier-preview"><div class="multiplier-stage" id="stage"><canvas id="escape-canvas" width="540" height="960" aria-label="Dönen halkadan kaçan ve çoğalan renkli toplar"></canvas></div><p id="match-state" aria-live="off"></p><div class="playback"><button class="button" id="pause">Duraklat</button><button class="button" id="replay">Yeniden başlat</button><button class="button" id="fullscreen">Tam ekran</button><button class="button" id="sound" aria-pressed="false">Ses aç</button></div></section></main>
+<script type="module" src="/src/escape-multiply-app.js"></script></body></html>

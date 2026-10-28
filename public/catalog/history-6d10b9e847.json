@@ -1,0 +1,22 @@
+{
+  "id": "history-6d10b9e847",
+  "category": "history",
+  "name": "Johann Sebastian Bach",
+  "englishName": "Johann Sebastian Bach",
+  "src": "/catalog/history-6d10b9e847.jpg",
+  "fit": "cover",
+  "source": "https://commons.wikimedia.org/wiki/File:Johann_Sebastian_Bach.jpg",
+  "identitySource": "https://en.wikipedia.org/wiki/Johann_Sebastian_Bach",
+  "credit": "Elias Gottlob Haussmann",
+  "license": "Public domain",
+  "licenseUrl": "",
+  "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Johann_Sebastian_Bach.jpg/330px-Johann_Sebastian_Bach.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "curated": true,
+  "historicalNote": "Almanya · besteci",
+  "keywords": "Johann Sebastian Bach Almanya · besteci",
+  "portraitFrame": [
+    0.5,
+    0.25,
+    0.75
+  ]
+}

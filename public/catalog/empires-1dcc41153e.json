@@ -1,0 +1,15 @@
+{
+  "id": "empires-1dcc41153e",
+  "category": "empires",
+  "name": "Avusturya İmparatorluğu",
+  "src": "/catalog/empires-1dcc41153e-historical.png",
+  "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Habsburg_Monarchy.svg",
+  "credit": "ThrashedParanoid and Peregrine981.",
+  "license": "Public domain",
+  "licenseUrl": "",
+  "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/Flag_of_the_Habsburg_Monarchy.svg/330px-Flag_of_the_Habsburg_Monarchy.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "fileOverride": "Flag of the Habsburg Monarchy.svg",
+  "fit": "flag",
+  "historicalNote": "1804–1867 · Habsburg siyah-sarı renkleri",
+  "curated": true
+}

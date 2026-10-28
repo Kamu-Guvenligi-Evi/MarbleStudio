@@ -1,0 +1,17 @@
+Request: Preserve manually arranged prebattle formations across refresh; drop removed units/armies from saved layout.
+
+Implementation:
+- crown-battle-deployment.js saves positions, facing and heading per team/type, with separate historical/classic storage keys.
+- Formation placement/undo saves immediately. Controls remember formation and facing choices.
+- Rebuild restores surviving roster members and prunes removed entries; recruits receive default positions.
+- Explicit removal also prunes the original deployment during combat. Combat movement/deaths never overwrite it.
+- Classic roster counts restore from deployment. Historical counts use existing army storage.
+- historical=new/demo URL actions are consumed once so refresh cannot erase/recreate the army again.
+- Writes happen on setup actions, not in the frame loop. No new packages/downloads.
+
+Validation:
+- tests/crown-battle-deployment.mjs passed: individual placement, reload, heading, partial removal, combat isolation, empty army, corrupt/unavailable storage, explicit reset.
+- tests/crown-battle-formations-browser.mjs passed at 1366px and 390px: actual reload/rebuild, both armies, controls, combat, recruitment, partial/full removal and undo.
+- Vite production build passed (existing chunk-size warning). Log: artifacts/deployment-build.log.
+- tests/crown-battle-removal-browser.mjs passed at 1366px and 390px, including classic reload and one-time new-army entry; waits for simulation time instead of assuming a 150ms warmup.
+- Concurrent visual edits briefly interrupted browser loading; final removal rerun passed on the updated files without visual code changes here.

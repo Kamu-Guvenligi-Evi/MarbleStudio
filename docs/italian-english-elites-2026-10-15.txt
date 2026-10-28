@@ -1,0 +1,62 @@
+Taç Muharebesi — İtalya / İngiltere eklemeleri, Alman / Rus kontrolü
+15 Ekim 2026
+
+Tamamlanan: 5 yeni oynanabilir birlik.
+İtalyanlar / Roma > Ceneviz Cumhuriyeti: genoese_crossbowman
+İtalyanlar / Roma > Venedik Cumhuriyeti: venetian_stradiot
+İtalyanlar / Roma > Milano Dükalığı: milan_ducal_cavalry
+İngilizler > İngiltere Krallığı: english_cheshire_guard, english_yeoman_guard
+Anglosakson İngiltere ve Roma İmparatorluğu seçenekleri korunur.
+
+Kaynaklar ve sınırlar
+- Ceneviz: Fabio Romanoni, 1357 kayıtlarını kullanan araştırmalar. Arbaletçi
+  uzmanlığı, ayrı bir saray muhafız alayı olarak sunulmaz. Paviz için Walters
+  51.1371 biçim referansıdır; müze nesnesinin Ceneviz'e ait olduğu iddia edilmez.
+  Büyük kalkan ve arbalet aynı askerde temsil edilir; ayrı pavizci simülasyonu yok.
+- Venedik: Treccani Stradiotti; Birtachas'ın Venedik hizmetindeki Balkan askerleri
+  çalışması. Arnavut/Rum kökenleri açıklanır. Hafif süvari, küçük kalkan, mızrak.
+- Milano: Belsanti, Situazione militare italiana nel quattrocento, famiglia ducale
+  açıklaması ve Covini/Mallett atıfları (arama dizini metni; PDF doğrudan açılması
+  araştırma aracında zaman aşımına uğradı). Donanım: Met 24810, yaklaşık 1490 armet;
+  Met, Fashion in European Armor 1400–1500. Renkler kesin üniforma değildir.
+- Cheshire: Medieval Soldier üniversite projesi, Archers at the Battle of
+  Shrewsbury; J. L. Gillespie, Richard II and the Cheshire Archers.
+  1397–1399 kişisel muhafız seçkisi, bütün uzun yaycıların ortak adı değildir.
+- Tudor: royal.uk/yeomen-guard ve Anita Hewerdine tezi, birliğin kendi sitesindeki
+  metin. 1501 tasviri beyaz-yeşil ceket, gül ve teberi birlikte doğrular.
+  Modern kırmızı tören üniforması kullanılmaz. Teberli seçenek ile sınırlıdır.
+Kaynak bağlantılarının tamamı src/italian-english-units.js içindedir ve kartlara taşınır.
+
+Mevcut Alman 5 ve Rus 2 kartı korundu; bunlar yeni ekleme sayısına dahil değildir.
+Landsknecht artık açıkça mızraklı seçenek; tüm ücretli piyadeler elit sayılmaz.
+Doppelsöldner bir maaş/statü tanımıdır; kart büyük kılıç taşıyan çeşididir.
+Ministerial bir hizmet sınıfıdır; tek muhafız alayı olarak tanıtılmaz.
+Zırhlı Alman yaya kartı adsız donanım temsilidir; Töton kartı ayrı tarikat kardeşidir.
+Drujina ile genç kol Hryd arasındaki ilişki açıklanır. Atlı Drujina / yaya Hryd
+ayrımı oyun seçenekleridir, bütün tarihî maiyetin sabit donanımı iddiası değildir.
+Doppelsöldner ana bağlantısı büyük Met PDF yerine HLB Landsknechte maddesidir.
+Drujina ek tarih kaynağı Canadian Institute of Ukrainian Studies maddesidir.
+
+Görsel / performans
+Yeni raster indirme yok. Mevcut önbellekli canvas sprite sistemi kullanıldı.
+Beş farklı donanım çizimi, kart ve savaş için aynı profilleri kullanır.
+Kullanıcının son mesajıyla boyut değişikliği geri çekildi; ölçek sistemi değiştirilmedi.
+Arbalet mevcut bolt mermi türünü kullanır; savaş motoru ve render döngüsü değiştirilmedi.
+Gerçekçi görünüm, dönem donanımının stilize yorumudur; fotoğraf kopyası değildir.
+
+Doğrulama
+tests/italian-english.mjs geçti: 5 benzersiz kayıt, doğru kültür/ülke, canlı hasar,
+2 takım x 5 animasyon x 8 kare x 5 birlik = 400 kare; boş/kesilmiş kare yok,
+5 ayrı siluet; menüden seçme, savaşa geçme, kayıtlı ordunun yeniden yüklenmesi.
+Alman 5 / Rus 2 kayıtlarının korunması ve çizim/savaş profilleri doğrulandı.
+tests/european-elite.mjs --node-only geçti (önceki 5 Avrupa birliği).
+Vite üretim derlemesi geçti, 3.93 saniye. 500 kB paket boyutu uyarısı sürüyor.
+İlgili takipli entegrasyon dosyalarında git diff --check temiz.
+artifacts/italian-english/checks.json
+artifacts/italian-english/five-warriors.jpg — tek küçük önizleme, görsel incelendi.
+artifacts/italian-english/build.log
+
+Paylaşılan çalışma alanı: crown-battle.js / crown-battle-renderer.js değiştirilmedi.
+Kaynak kodu modülleri: italian-english-units.js, italian-english-art.js;
+entegrasyon: historical-catalogue, historical-art-profiles, historical-warrior-art,
+historical-culture-groups. European-elite-units içinde açıklama/kaynak düzeltmeleri.

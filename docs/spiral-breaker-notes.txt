@@ -1,0 +1,77 @@
+Spiral Breaker small-opening gameplay - 2026-10-14
+
+User clarification: balls must enter through small holes and break material
+inside the maze. Reference: https://www.youtube.com/shorts/JhvBkaWipcs
+Inspected its thumbnail (52,530 bytes); full video was not downloaded or watched.
+
+Gray tiles are permanent walls. Each map has 15px side passages through those
+walls; balls have 8px diameter. The lower enclosure stays solid except for its
+visible entrance. Only colored material counts toward progress and winning.
+Initial balls, clones and paddle returns use actual bottom openings.
+
+Solid-wall collisions restore the previous position instead of pushing a ball
+through the opposite rim. Bounded outward angle variation prevents repeated
+corridor loops while keeping speed at 410. Passage tests cover a usable 15px
+opening and a blocked 5px slit. Six two-minute map simulations finished with
+all permanent walls intact; first breaks occurred after 1.36-5.98 seconds.
+No ball centers entered solid cells in those six simulations.
+Ball coordinates and velocities are rounded to 1e-6 per tick so browser/server
+trigonometry differences do not accumulate into different render outcomes.
+
+Falling buffs remain paddle-collected, with one-second drop cooldown and twelve
+simultaneous drops maximum. Wide/shrink change actual paddle collision width.
+Automatic paddle movement remains finite, so some balls escape. Cap: 240 balls.
+
+Validation: tests/spiral-breaker.mjs and tests/breaker-maps.mjs passed.
+30fps and 120Hz stepping produce identical physics. Production build passed.
+Browser validation passed: tests/spiral-breaker-crowd.mjs, 239 balls and 4,655
+broken tiles at 36.2 seconds. Video canvas matches server physics at 30 seconds.
+Browser tests use TEST_STUDIO_ORIGIN.
+No encoded video was generated for these checks.
+
+Reference analysis - 2026-10-14
+https://www.youtube.com/shorts/3BmY4SGXBHQ
+Title: Impossible Levels? Challenge Accepted! (#bricks #brickgame #brickmania #satisfying)
+YouTube player metadata reports 124 seconds. Reviewed official storyboard
+frames sampled at 0, 8, 16 ... 120 seconds. Did not play the full video or
+inspect audio. Small storyboard frames cannot establish exact collision,
+power-up rules, ball counts, or whether pale corridor walls are destructible.
+
+Observed: dark background, saturated magenta dense block field, pale square
+spiral boundaries, white balls and orange paddle. Around 16-32 seconds a
+small dark cavity appears near the inner spiral tip. It gradually expands
+through the middle period; colored drops appear below the field. Around
+96-120 seconds the visible ball population and cleared area increase sharply.
+The progression reads as a difficult entry, an internal foothold, then a
+large cascade. No evidence for an exact multiplier value from these frames.
+
+Current code comparison: reset() cuts 15px side gates repeatedly along
+alternate path segments (slots per ~100px), so balls can access material
+before reaching the inner tip. collectBonus(multiply) adds 2*N balls from
+the paddle, producing 3*N total, capped at 240. Current walls are permanent.
+Suggested next implementation, not applied by this analysis: give the
+reference-style map fewer purposeful exits, a clear first target at the
+inner tip, and a staged ball-growth curve; retain real paddle misses and
+physical passage checks. Avoid copying the reference's long quiet period
+unchanged for a shorter clip. Tune with measured time to first break and
+population milestones, not fabricated observed physics.
+Local storyboard: artifacts/spiral-reference-3BmY4SGXBHQ/storyboard.jpg
+Local sheets total 126918 bytes; this is NOT measured total network usage.
+No app source changes or physics tests performed for this analysis.
+
+2026-10-14: Applied reference-inspired entry rules, excluding buff changes.
+All six maps now have one grid-aligned 15px opening at the inner tip and
+a 27px-radius starting pocket on its free side. Removed scattered side
+shortcuts and old targets that could place breakables in the corridor.
+The pocket rim highlights the first target; destruction spreads by real
+ball impacts. Slightly wider corridors and per-map opening angles avoid
+a long initial wait. No steering, teleport, timed auto-break or wall removal.
+Permanent maze walls, protected underside, finite paddle movement and
+actual ball loss remain. Drop schedule and every buff effect are unchanged.
+Validation: spiral-breaker.mjs and breaker-maps.mjs pass, all six maps
+first break 7.44-9.49s in the inner pocket; continuing progress through120s.
+Map tests cover exposed-target locality, 15px slits, intact walls, physical
+loss, population cap and identical30/120Hz simulation. Browser crowd test
+passes:39.7s,47balls,339tiles,8buffs; browser/server video match at30s.
+Vite production build passes. Local logs:artifacts/spiral-inner-browser.log
+and artifacts/spiral-inner-build.log. Screenshot:spiral-breaker-crowd.png.

@@ -1,0 +1,61 @@
+Tactical responsiveness — 2026-10-16 (final frozen validation in progress)
+Problem: Ottoman cavalry maneuvered while the unsupported bow centre died; formed rear ranks could wait behind a stalled anchor under missile fire.
+Changes:
+- historical-ottoman-deployment.js: separate bow centre, forward foot/light screens, cavalry wings and household reserve; centred partial rows and body clearance at 48/96/240 capacity. Akincis do not inherit heavy cavalry wing maneuvers.
+- historical-line-support.js: bounded threat response, reserves before wings. Repeated decisions do not drain both wings for a single intruder; more attackers receive more support. Existing fights and charges remain protected. The dispatch multiplier is a simulation heuristic.
+- historical-deployment-corps.js: Ottoman foot supports screen the centre ahead of archers.
+- historical-line-support.js: assess the actual centre, dispatch available supports before imminent impact, preserve manual orders and existing engagements.
+- historical-civilization-tactics.js: fixed maneuver destinations, bounded blocked/stalled flanking, rear-rank release during contact/stalled missile exposure, actual missile pressure and bounded passive hold.
+- crown-battle.js: record actual projectile damage time for tactical decisions.
+- historical-commander-formations.js: release generic stepwise formation control under sustained actual missile losses (10% health), including fatal hits; local units close and fight instead of waiting between march steps.
+Tests:
+- historical-line-support.mjs: six Ottoman/French battles, four Ming/Anglo-Saxon battles, manual-order and fatal-projectile regressions passed.
+- historical-line-support.mjs also checks two mirrored Norse/archer battles: at least half the army attacks by 30 seconds after responding to actual fire.
+- historical-line-support-browser.mjs: rendered local battle passed (centre 32/32 at 40 seconds).
+- historical-all-civilization-battles.mjs: earlier full baseline 121 civilizations / 14,641 ordered pairs. A subsequent 2,115 affected-pair retest gave combined coverage of 122 civilizations / 14,884 pairs (verified-matrix-48.json). The final frozen catalogue has 126 civilizations, including fantasy; 2,651 affected pairs are being retested. Capacity 48, seed 42, 30 Hz, 600 simulated seconds maximum. Combined coverage must not be described as a fresh full-matrix run on the final engine.
+- Alliance test: 22 natural eliminations with no sector/order violations passed on consistent sources.
+- Doctrine frozen-assembly regression updated: ready opening placement requires deliberately displacing the synthetic frozen units before testing the timeout.
+- Mounted archers: validate actual moving fire/withdrawal when retreat is feasible; when enemies arrive too early, validate timely cancellation and actual local firing instead of demanding completion of an unsafe scripted maneuver.
+- Isolated production build passed: 354 modules; existing large-chunk warning. Output artifacts/tactical-responsiveness/build-validation.
+
+Repeatable regression gate:
+npm run test:battle-behavior -- --browser
+Requires a local Vite server, default http://127.0.0.1:5173; BATTLE_TEST_URL overrides it. No browser download is required. Twelve checks jointly cover openings, all preset corps, centre support, friendly passage, mounted archery, multiple commanders, alliances, doctrine spacing/execution and browser behaviour. Logs and hashes: artifacts/battle-behavior-suite/report.json. Source changes during testing invalidate the combined result.
+
+Provenance:
+Concurrent catalogue edits invalidated the first live combined runs, even though all eleven individual checks passed. Final verification uses artifacts/tactical-responsiveness/battle-final-snapshot. Engine extraction is compared against the previous implementation with the same frozen dependencies, checking complete battle states. Subsequent live changes must be reported separately.
+Final frozen behaviour suite: 11/11 PASS, zero changed source files. Browser
+checks used a temporary localhost:5175 server, closed after validation; the
+existing localhost:5173 server was preserved.
+An additional live-catalogue formation check passed all 35 cases, with no source
+changes during the run (new-unit-formations-final.json). It covers all presets
+at minimum/96/240 capacity in four directions, auxiliary corps and compact ranks.
+The Ottoman scout assertion now verifies forward clearance from the foot screen
+while preserving flank and role; the body-overlap assertions remain unchanged.
+This check is now included in the repeatable gate, bringing it to twelve checks;
+the frozen combined run above contained the original eleven.
+That earlier matrix completed: 126 civilizations, 15876 ordered matches,
+zero failures, 1657 review flags, maximum ordered formation stall four seconds.
+Engine extraction comparison: 245 complete battles, 1700 identical state checks.
+These results predate the French/Milan adaptive formation changes. Current
+validation and the thirteen-check gate are documented separately in
+docs/adaptive-openings-2026-10-16.txt; do not present this older matrix as fresh
+validation of the later formations.
+Acceptance now also rejects a formation-ordered, never-attacked majority staying
+mostly stationary for more than 6.1 seconds after at least 25% army casualties.
+The 0.1-second tolerance covers fixed-step sampling around the maneuver timeout.
+The merged report applies this check to all retained and retested matchups.
+A deliberately injected 7-second stall was rejected by that report guard.
+
+Historical interpretation:
+The Ottoman preset represents a fifteenth-century interpretation, not a universal arrangement for every Ottoman battle. It has no artillery/firearm component. A crescent or feigned retreat is not prescribed for every opponent. Formation dimensions, unit ratios and dispatch timing are game parameters, not documented historical measurements.
+HRE: pike block with protected short weapons and flank missiles. Ming: equipment-based teams with shields, wolf brushes, spears and short weapons in separate positions. Both are scaled game interpretations.
+Sources consulted:
+https://islamansiklopedisi.org.tr/akinci
+https://islamansiklopedisi.org.tr/azeb--asker
+https://islamansiklopedisi.org.tr/varna-muharebesi
+https://zh.wikisource.org/zh/紀效新書/卷一
+https://zh.wikisource.org/zh/紀效新書/卷二
+https://www.metmuseum.org/art/collection/search/25898
+Artifacts: artifacts/tactical-responsiveness/. Do not interpret an idle-loss flag alone as a tactical deadlock: examine movement, target distance and active formation orders.
+Scope: automated coverage is finite; it does not establish universal historical realism or cover every seed, army size and map.

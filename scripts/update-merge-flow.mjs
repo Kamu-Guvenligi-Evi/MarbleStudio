@@ -1,0 +1,10 @@
+﻿import fs from 'node:fs';
+let p='src/merge-evolution.js',s=fs.readFileSync(p,'utf8');
+s=s.replace("// Bounded population; stop feeding instead of deleting balls or forcing merges.\n   if(this.balls.length<180){", "// Feed continuously until the final form is actually created.\n   {");
+s=s.replace("  else if(this.finalAt===null&&this.time>=this.settings.duration){this.state='finished';this.outcome='timeout';}", '');
+s=s.replace("while(game.state==='running')game.step();return", "while(game.state==='running'&&game.time<1800)game.step();if(game.state!=='finished')throw new Error('Son forma henüz ulaşılamadı. Yarım kalan oyun video olarak dışa aktarılmadı; farklı bir tohum veya akış ayarı deneyin.');return");
+fs.writeFileSync(p,s);
+p='merge-evolution.html';s=fs.readFileSync(p,'utf8').replace(/<label>Azami süre \(sn\)<input id="duration"[^>]+><\/label>/,'<p class="muted">Akış son forma ulaşana kadar sürer. Son form 3 saniye gösterilir ve oyun tamamlanır.</p>');fs.writeFileSync(p,s);
+p='src/merge-evolution-app.js';s=fs.readFileSync(p,'utf8').replaceAll("'seed','duration','spawnInterval'","'seed','spawnInterval'");fs.writeFileSync(p,s);
+p='tests/merge-evolution.mjs';s=fs.readFileSync(p,'utf8').replaceAll('48','27').replace('stages.length<=8','stages.length<=6').replace("const timeout=new MergeEvolution({duration:15,spawnInterval:1.5});while(timeout.state==='running')timeout.step();assert.equal(timeout.outcome,'timeout');", "const ongoing=new MergeEvolution({theme:'planets',duration:15,spawnInterval:1.5});for(let i=0;i<120*20;i++)ongoing.step();assert.equal(ongoing.state,'running');assert.ok(ongoing.spawned>=13);while(ongoing.state==='running'&&ongoing.time<600)ongoing.step();assert.equal(ongoing.outcome,'final');assert.equal(ongoing.state,'finished');").replace(".theme,'reference'", ".theme,MERGE_THEMES[0].id").replace('timeout:true','noPrematureTimeout:true');fs.writeFileSync(p,s);
+p='tests/merge-evolution-browser.mjs';s=fs.readFileSync(p,'utf8').replace("count(),48","count(),24").replace("count(),8","count(),6").replace("theme:'butterfly'","theme:'fruit'");fs.writeFileSync(p,s);

@@ -1,0 +1,43 @@
+15 Ekim 2026 — Türk ve Arap devletleri araştırması / oyun entegrasyonu
+
+Eklenen 4 birlik:
+- khwarazm_hassa: Türkler > Harezmşahlar Devleti. Gulâmlardan oluşan hassa ordusunun süvari yorumu.
+- ottoman_deli: Türkler > Osmanlı Devleti. 16. yüzyıl maiyet/öncü süvarisi, Kapıkulu teşkilatından ayrı.
+- umayyad_haras: Araplar / Halifelikler > Emevî Halifeliği. Halifenin kişisel muhafızları; bütün şurta ile eşitlenmez.
+- abbasid_abna: Araplar / Halifelikler > Abbâsî Halifeliği. Ebnâ askerî-siyasî çevresi; homojen etnik Arap alayı değildir.
+
+Araştırma sınırları:
+TDV Hârizmşahlar hassa ordusunun varlığını doğrular; her üyesinin mızraklı süvari olduğunu veya kesin üniformasını doğrulamaz.
+TDV Deli, post/başlık/tekne kalkan/mızrak donanımını ve Türk-Balkan köken çeşitliliğini destekler.
+TDV Şurta, Muâviye'nin özel hares birliğini doğrular. Al-Qantara makalesinin doğrudan PDF erişimi başarısız oldu; silah özeti ikincil aktarımla karşılaştırıldı. Mızraklı yaya seçenek oyun yorumudur.
+Turner (2004) Ebnâ kimliğinin ortaya çıkışını tartışır; tek bir kesin kuruluş tarihi/tek etnik köken verilmedi. Kaftan başlık ve kılıç kombinasyonu doğrulanmış birlik üniforması değildir.
+Harezm ve Hares çizimleri donanım yorumudur; birliğin kimliğini doğrulayan çağdaş portre bulunduğu ileri sürülmez.
+
+Kaynaklar (kartlardaki sources alanına işlendi):
+https://islamansiklopedisi.org.tr/harizmsahlar
+https://islamansiklopedisi.org.tr/deli--asker
+https://islamansiklopedisi.org.tr/surta
+https://al-qantara.revistas.csic.es/index.php/al-qantara/article/view/348/340
+https://digitalcommons.colby.edu/faculty_scholarship/69/
+https://www.clevelandart.org/art/1947.193 — 700'ler avcı tasvirli kumaş, muhafız portresi değil.
+https://www.iranicaonline.org/articles/clothing-viii/ — Samarra avcı freski, 833–842; Ebnâ askeri portresi değil.
+https://warfare.6te.net/Ottoman/byEuropeans/Nicolay-folio_V_238.htm — Nicolay Deli gravürü, 1576 baskısı.
+
+Görsel inceleme:
+artifacts/deli-nicolay-reference.jpg (91.120 bayt) ve artifacts/samarra-reference.jpg (135.870 bayt) yerelde incelendi.
+Kaynak resimler yalnız çalışma referansıdır; oyuncu kartları özgün canvas çizimleri kullanır. Gravürdeki bütün tören süsleri kopyalanmadı.
+Dosya boyutları ölçülen internet tüketimi değildir. Haricî görseller oyun açılışında indirilmez.
+
+Dosyalar: src/turkic-arab-units.js, src/turkic-arab-art.js.
+Katalog, profil, canvas çizim ve kültür gruplarına bağlandı. Boyut ölçeği değiştirilmedi.
+Savaş motoru ve renderer dosyaları düzenlenmedi.
+
+Doğrulama: tests/turkic-arab.mjs.
+4 benzersiz kayıt, doğru kültür/ülke, 4 gerçek savaş hasar kontrolü.
+320 animasyon karesi; boş/kırpılmış kare yok; dört farklı alfa silueti.
+Ülke menüsünden seçim > savaşa geçiş > kayıtlı kadro yeniden yükleme başarılı, tarayıcı hatası yok.
+Önceki İtalyan/İngiliz 5 birlik düğüm testi başarılı. Vite build başarılı; mevcut büyük chunk uyarısı sürüyor.
+Önizleme: artifacts/turkic-arab/four-warriors.jpg; sonuçlar checks.json; derleme build.log.
+
+Kalan araştırma adayları: Endülüs saray muhafızları, Ali döneminin Şurtatü'l-hamîs'i, Anadolu Selçuklu hassa teşkilatı.
+Henüz eklenmediler. Var olan birliklerle tekrar ve güvenilir görsel/donanım kanıtı ayrıca incelenmeli.

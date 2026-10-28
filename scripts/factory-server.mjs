@@ -1,9 +1,6 @@
 import {openRepetitionLedger} from './repetition-guard.mjs';
 import {serveOutput} from './output-file.mjs';
-import {sharedVideos} from './shared-videos.mjs';
-import {createVideoGithubSync} from './video-github-sync.mjs';
-import {importVideo} from './import-video.mjs';
-import {spawn} from 'node:child_process';
+import {assertManualExport,recordDownload,cleanDownloadedVideo} from './manual-export.mjs';
 import {createFactoryStore} from './factory-store.mjs';
 import http from 'node:http';
 import path from 'node:path';
@@ -20,13 +17,6 @@ const getMatches=createMatchService();
 
 const project=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),root=path.resolve(process.env.FACTORY_OUTPUT||path.join(project,'output'));
 const port=Number(process.env.FACTORY_PORT||5180),origin='http://127.0.0.1:'+port;
-async function loadShared(){
-  let unavailable=0;
-  try{
-    const jobs=await sharedVideos(project,{enabled:process.env.FACTORY_SHARED_VIDEOS==='1'||(!process.env.FACTORY_OUTPUT&&process.env.FACTORY_SHARED_VIDEOS!=='0'),onUnavailable:()=>unavailable++});
-    return {jobs,warning:unavailable?`${unavailable} ortak video bu bilgisayara indirilmemiş. Hazır videoları kullanabilir ve yeni video üretebilirsin.`:null};
-  }catch(error){return {jobs:[],warning:'Ortak arşiv okunamadı: '+error.message+' Yerel video üretimi kullanılabilir.'};}
-}
 await mkdir(root,{recursive:true});
 const lockFile=path.join(root,'.factory.lock');
 try{await writeFile(lockFile,String(process.pid),{flag:'wx'});}catch(error){
@@ -39,17 +29,17 @@ try{await writeFile(lockFile,String(process.pid),{flag:'wx'});}catch(error){
 process.on('exit',()=>{try{const fs=process.getBuiltinModule('fs');if(fs.readFileSync(lockFile,'utf8')===String(process.pid))fs.unlinkSync(lockFile);}catch{}});
 const store=createFactoryStore(root);
 let state=await store.load(),busy=false,active=null,closing=false,storageError=null;const uncommitted=new Set();
-state.schedules??=[];
+state.schedule=null;state.schedules=[];
+for(const job of state.jobs)if(['queued','running'].includes(job.state)){try{assertManualExport(job.options);}catch{job.state='cancelled';job.stage='Otomatik üretim kaldırıldı';}}
 const youtube=createYouTube(root,{port});await youtube.load();let uploadBusy=false;
 for(const job of state.jobs)if(job.state==='done'&&job.options?.youtube&&!job.youtube)job.youtube={state:'queued',channelId:job.options.youtube.channelId};
 const novelty=await openRepetitionLedger(root,state.jobs.filter(j=>j.state==='done'));
 for(const job of state.jobs)if(job.state==='running'){job.state='queued';job.stage='Kesilen üretim yeniden başlatılacak';job.cancelRequested=false;}
 async function save(){try{await store.save(state);storageError=null;}catch(error){storageError=error.message;throw error;}}
-const githubSync=createVideoGithubSync({project,root,getJobs:()=>state.jobs,save,enabled:process.env.FACTORY_GITHUB_SYNC==='1'||(!process.env.FACTORY_OUTPUT&&process.env.FACTORY_GITHUB_SYNC!=='0')});
 function enqueue(options,scheduleKey=null){
   if(state.jobs.filter(j=>['queued','running'].includes(j.state)).length+options.count>100)throw new Error('Kuyruk sınırı 100 video.');
   const offset=state.jobs.length;
-  const added=[];for(let i=0;i<options.count;i++){const job={id:randomUUID(),ordinal:offset+i,mode:options.modes[(offset+i)%options.modes.length],options,state:'queued',stage:'Sırada',progress:0,createdAt:new Date().toISOString(),scheduleKey};state.jobs.push(job);added.push(job.id);uncommitted.add(job.id);}return added;
+  const added=[];for(let i=0;i<options.count;i++){const job={id:randomUUID(),ordinal:offset+i,mode:options.modes[(offset+i)%options.modes.length],options,transient:true,state:'queued',stage:'Sırada',progress:0,createdAt:new Date().toISOString(),scheduleKey};state.jobs.push(job);added.push(job.id);uncommitted.add(job.id);}return added;
 }
 async function work(){
   if(busy||closing)return;const job=state.jobs.find(j=>!uncommitted.has(j.id)&&j.state==='queued'&&(!j.retryAt||j.retryAt<=Date.now()));if(!job)return;
@@ -76,14 +66,15 @@ async function uploadReady(){
   }catch(error){job.youtube.error=error.message;job.youtube.attempts=(job.youtube.attempts??0)+1;job.youtube.state=job.youtube.attempts<3&&job.youtube.session?'queued':'failed';job.youtube.retryAt=Date.now()+30000;try{await save();}catch(storage){console.error('YouTube durumu kaydedilemedi:',storage.message);}console.error('YouTube yükleme:',error.message);}
   finally{uploadBusy=false;}
 }
-function dayKey(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Istanbul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());}
+let cleaning=false;
+async function cleanDownloads(){
+  if(cleaning)return;cleaning=true;
+  try{for(const job of state.jobs)try{if(await cleanDownloadedVideo(root,job))await save();}catch(error){console.error('Geçici video temizliği:',error.message);}}
+  finally{cleaning=false;}
+}
 async function tick(){
   if(closing)return;
-  for(const schedule of [state.schedule,...state.schedules].filter(s=>s?.enabled)){
-    const key=dayKey(),pending=state.jobs.filter(j=>['queued','running'].includes(j.state)).length;
-    if(schedule.lastDay!==key&&pending+schedule.options.count<=100){const added=enqueue(schedule.options,key),previous=schedule.lastDay;schedule.lastDay=key;try{await save();}catch(error){state.jobs=state.jobs.filter(j=>!added.includes(j.id));schedule.lastDay=previous;throw error;}finally{added.forEach(id=>uncommitted.delete(id));}}
-  }
-  await work();void uploadReady().catch(console.error);void githubSync.run().catch(console.error);
+  await work();void uploadReady().catch(console.error);await cleanDownloads();
 }
 async function body(req){let value='';for await(const chunk of req){value+=chunk;if(Buffer.byteLength(value)>2000000)throw new Error('İstek çok büyük.');}return JSON.parse(value||'{}');}
 await build({root:project,logLevel:'error'});
@@ -104,52 +95,21 @@ const server=http.createServer(async(req,res)=>{
     if(url.pathname==='/api/youtube/connect'&&req.method==='GET'){res.writeHead(302,{Location:youtube.begin(),'Cache-Control':'no-store'});res.end();return;}
     if(url.pathname==='/api/youtube/callback'&&req.method==='GET'){
       const account=await youtube.callback(url.searchParams.get('code'),url.searchParams.get('state'));
-      res.writeHead(302,{Location:'/factory.html?youtube=connected#youtube','Cache-Control':'no-store'});res.end();console.log('YouTube kanalı bağlandı: '+account.id);return;
+      res.writeHead(302,{Location:'/index.html?youtube=connected','Cache-Control':'no-store'});res.end();console.log('YouTube kanalı bağlandı: '+account.id);return;
     }
     if(url.pathname==='/api/youtube/accounts'&&req.method==='GET')return json({configured:youtube.configured,accounts:youtube.list()});
     if(url.pathname==='/api/factory'&&req.method==='GET'){
       const offset=Math.max(0,Math.floor(Number(url.searchParams.get('offset'))||0)),limit=Math.max(1,Math.min(50,Math.floor(Number(url.searchParams.get('limit'))||12))),filter=url.searchParams.get('state')??'all';
-      const archive=await loadShared(),shared=archive.jobs.filter(j=>!state.jobs.some(local=>local.github?.sharedId===j.id)),allJobs=[...shared,...state.jobs];
+      const allJobs=state.jobs;
       const jobs=allJobs.filter(j=>filter==='all'||j.state===filter).slice().reverse();
       const summary={done:allJobs.filter(j=>j.state==='done').length,pending:state.jobs.filter(j=>['running','queued'].includes(j.state)).length};
-      return json({sharedWarning:archive.warning,githubSharing:githubSync.enabled,apiVersion:4,capabilities:['studio-workbench','automatic-diversity','long-term-repetition','episode-formats','youtube-upload','territory-production','breaker-production','duel-production','rps-production'],jobs:jobs.slice(offset,offset+limit).map(({recipe,analysis,structure,similarity,selectionScore,candidateReview,outputQuality,...job})=>({...job,contentKind:job.contentKind??(job.mode==='arena'&&(recipe?.arenaGame??job.options?.source?.project?.arenaGame??job.options?.arenaGame)==='territory'?'territory':job.mode),youtube:job.youtube?{state:job.youtube.state,channelId:job.youtube.channelId,url:job.youtube.url,error:job.youtube.error}:null,options:{channel:job.options?.channel??'Marble Studio',duration:job.options?.duration??job.duration,language:job.options?.language??'en'}})),summary,total:jobs.length,schedule:state.schedule?{enabled:state.schedule.enabled,lastDay:state.schedule.lastDay,options:{channel:state.schedule.options?.channel,count:state.schedule.options?.count}}:null,schedules:state.schedules.map(s=>({id:s.id,enabled:s.enabled,lastDay:s.lastDay,channel:s.options.channel,count:s.options.count,youtubeChannelId:s.options.youtube?.channelId,privacyStatus:s.options.youtube?.privacyStatus})),output:root,storageError});
+      return json({sharedWarning:null,githubSharing:false,apiVersion:5,capabilities:['studio-workbench','temporary-downloads','youtube-upload','territory-production','breaker-production','duel-production','rps-production','escape-production','multiplier-production','goal-production','waves-production','merge-production'],jobs:jobs.slice(offset,offset+limit).map(({recipe,analysis,structure,similarity,selectionScore,candidateReview,outputQuality,...job})=>({...job,contentKind:job.contentKind??(job.mode==='arena'&&(recipe?.arenaGame??job.options?.source?.project?.arenaGame??job.options?.arenaGame)==='territory'?'territory':job.mode),youtube:job.youtube?{state:job.youtube.state,channelId:job.youtube.channelId,url:job.youtube.url,error:job.youtube.error}:null,options:{channel:job.options?.channel??'Marble Studio',duration:job.options?.duration??job.duration,language:job.options?.language??'en'}})),summary,total:jobs.length,schedule:null,schedules:[],storageError});
     }
-    if(url.pathname==='/api/import-video'&&req.method==='POST'){
-      if(!allowedOrigins.has(req.headers.origin))return json({error:'Geçersiz istek kaynağı.'},403);
-      const title=decodeURIComponent(String(req.headers['x-marble-title']??'Video'));
-      const job=await importVideo(req,{root,mode:String(req.headers['x-marble-mode']??'track'),title});state.jobs.push(job);await save();void githubSync.run().catch(console.error);return json({ok:true,id:job.id});
-    }
+    if(['/api/import-video','/api/reveal','/api/schedule','/api/schedules'].includes(url.pathname))return json({error:'Otomatik üretim ve video arşivleme kaldırıldı.'},410);
     if(url.pathname.startsWith('/api/')&&req.method==='POST'){
       if(!allowedOrigins.has(req.headers.origin)||req.headers['content-type']!=='application/json')return json({error:'Geçersiz istek kaynağı.'},403);
       const input=await body(req);
-      if(url.pathname==='/api/reveal'){
-        const job=state.jobs.find(j=>j.id===input.id)??(await loadShared()).jobs.find(j=>j.id===input.id);if(job?.state!=='done'||!/^[-a-zA-Z0-9]+$/.test(job.id))throw new Error('Hazır video bulunamadı.');
-        const target=path.join(job.shared?path.join(project,'work-videos'):root,job.id);if(!(await stat(target)).isDirectory())throw new Error('Video klasörü bulunamadı.');
-        if(process.env.FACTORY_DISABLE_REVEAL==='1')return json({ok:true});
-        const command=process.platform==='win32'?'explorer.exe':process.platform==='darwin'?'open':'xdg-open';
-        await new Promise((resolve,reject)=>{const child=spawn(command,[target],{windowsHide:true,stdio:'ignore'});child.once('error',reject);child.once('spawn',()=>{child.unref();resolve();});});return json({ok:true});
-      }
-      if(url.pathname==='/api/queue'){const options=validateBatch(input);if(options.youtube&&!youtube.has(options.youtube.channelId))throw new Error('Önce seçilen YouTube kanalını bağla.');const added=enqueue(options);try{await save();}catch(error){state.jobs=state.jobs.filter(j=>!added.includes(j.id));throw error;}finally{added.forEach(id=>uncommitted.delete(id));}void work().catch(console.error);return json({ok:true});}
-      if(url.pathname==='/api/schedule'){
-        if(typeof input.enabled!=='boolean')throw new Error('Günlük üretim seçimi geçersiz.');
-        const options=input.enabled?validateBatch(input):null;if(options?.youtube&&!youtube.has(options.youtube.channelId))throw new Error('Önce seçilen YouTube kanalını bağla.');
-        state.schedule=input.enabled?{enabled:true,options,lastDay:state.schedule?.lastDay??null}:{...state.schedule,enabled:false};
-        await save();void tick().catch(console.error);return json({ok:true});
-      }
-      if(url.pathname==='/api/schedules'){
-        if(input.action==='add'){
-          if(state.schedules.length>=10)throw new Error('En fazla 10 günlük reçete eklenebilir.');
-          const options=validateBatch(input);if(options.youtube&&!youtube.has(options.youtube.channelId))throw new Error('Önce seçilen YouTube kanalını bağla.');
-          const schedule={id:randomUUID(),enabled:true,options,lastDay:null};state.schedules.push(schedule);
-          try{await save();}catch(error){state.schedules=state.schedules.filter(s=>s!==schedule);throw error;}
-          void tick().catch(console.error);return json({ok:true,id:schedule.id});
-        }
-        if(input.action==='remove'){
-          const index=state.schedules.findIndex(s=>s.id===input.id);if(index<0)throw new Error('Günlük reçete bulunamadı.');
-          const [removed]=state.schedules.splice(index,1);try{await save();}catch(error){state.schedules.splice(index,0,removed);throw error;}return json({ok:true});
-        }
-        throw new Error('Günlük reçete işlemi geçersiz.');
-      }
+      if(url.pathname==='/api/queue'){assertManualExport(input);const options=validateBatch(input);if(options.youtube&&!youtube.has(options.youtube.channelId))throw new Error('Önce seçilen YouTube kanalını bağla.');const added=enqueue(options);try{await save();}catch(error){state.jobs=state.jobs.filter(j=>!added.includes(j.id));throw error;}finally{added.forEach(id=>uncommitted.delete(id));}void work().catch(console.error);return json({ok:true});}
       if(url.pathname==='/api/youtube/retry'){
         const job=state.jobs.find(j=>j.id===input.id);if(job?.state!=='done'||job.youtube?.state!=='failed')throw new Error('Yeniden denenebilir YouTube yüklemesi bulunamadı.');
         job.youtube.state='queued';job.youtube.error=null;job.youtube.attempts=0;job.youtube.retryAt=0;await save();void uploadReady().catch(console.error);return json({ok:true});
@@ -161,16 +121,16 @@ const server=http.createServer(async(req,res)=>{
       }
       if(url.pathname==='/api/retry'){
         const job=state.jobs.find(j=>j.id===input.id);if(!job||!['failed','cancelled'].includes(job.state))throw new Error('Yeniden denenebilir iş bulunamadı.');
-        job.state='queued';job.error=null;job.cancelRequested=false;job.attempts=0;job.retryAt=0;job.progress=0;job.stage='Sırada';await save();void work().catch(console.error);return json({ok:true});
+        assertManualExport(job.options);job.transient=true;job.state='queued';job.error=null;job.cancelRequested=false;job.attempts=0;job.retryAt=0;job.progress=0;job.stage='Sırada';await save();void work().catch(console.error);return json({ok:true});
       }
       return json({error:'Adres bulunamadı.'},404);
     }
     if(url.pathname.startsWith('/output/')){
-      const [, ,id,name]=url.pathname.split('/'),job=state.jobs.find(j=>j.id===id)??(await loadShared()).jobs.find(j=>j.id===id);
+      const [, ,id,name]=url.pathname.split('/'),job=state.jobs.find(j=>j.id===id);
       if(job?.state!=='done'||!job.files?.includes(name)||url.pathname!==`/output/${id}/${name}`)return json({error:'Dosya bulunamadı.'},404);
-      await serveOutput(req,res,path.join(job.shared?path.join(project,'work-videos'):root,id,name),{name,id,preview:url.searchParams.get('preview')==='1'});return;
+      await serveOutput(req,res,path.join(root,id,name),{name,id,preview:url.searchParams.get('preview')==='1',onDownload:async range=>{recordDownload(job,range);await save();await cleanDownloads();}});return;
     }
-    if(url.pathname==='/'){res.writeHead(302,{Location:'/factory.html'});res.end();return;}
+    if(url.pathname==='/'){res.writeHead(302,{Location:'/index.html'});res.end();return;}
     const target=path.resolve(staticRoot,'.'+decodeURIComponent(url.pathname));
     if(!target.startsWith(staticRoot+path.sep))return json({error:'Dosya bulunamadı.'},404);
     let info;try{info=await stat(target);}catch{return json({error:'Dosya bulunamadı.'},404);}
@@ -181,5 +141,5 @@ const server=http.createServer(async(req,res)=>{
 });
 server.listen(port,'127.0.0.1',()=>{console.log('Marble Studio üretim paneli: '+origin);void save().then(tick).catch(console.error);});
 const timer=setInterval(()=>void tick().catch(console.error),1000);
-async function close(){closing=true;clearInterval(timer);while(busy||uploadBusy)await new Promise(resolve=>setTimeout(resolve,100));await githubSync.close();await save();server.close();await unlink(lockFile);}
+async function close(){closing=true;clearInterval(timer);while(busy||uploadBusy)await new Promise(resolve=>setTimeout(resolve,100));await save();server.close();await unlink(lockFile);}
 process.on('SIGINT',()=>void close());process.on('SIGTERM',()=>void close());

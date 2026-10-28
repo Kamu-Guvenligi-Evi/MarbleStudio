@@ -1,0 +1,65 @@
+Orta Dünya genişlemesi — 15 Ekim 2026
+
+Kapsam
+Önceki 18 birim kimliği ve sırası korundu; toplam 26 birim, 8 kahraman.
+Eklenenler: me_elrond, me_ent, me_nazgul, me_rohirrim, me_gondor_cavalry,
+me_dwarf_ram_rider, me_elf_stag_rider, me_azog_warg.
+Elrond yaya kılıçlı; Ent yavaş, uzun aralıklı alan vuruşlu.
+Nazgûl siyah atlı, Rohirrim ve Gondor süvarisi atlı mızraklı;
+cüce koç üzerinde baltalı, elf geyik üzerinde kılıçlı, Azog beyaz Warg üzerinde topuzlu.
+Altı binekli tip mevcut cavalry davranışını kullanır; temas halinde tekrar hücum bonusu almaz.
+Mevcut Rohan/Gondor yaya birlikleri ve yaya Witch-king kaydı korunur.
+
+Dosyalar
+src/middle-earth-units.js: sekiz kayıt, yerel portreler, rol/istatistik/ölçek.
+src/middle-earth-painted-art.js: sekiz sayfa, altı poz, hizalanmış ayak noktaları.
+src/middle-earth-expansion-fallback.js: yükleme/başarısız görsel için yerel binek/Ent çizimi.
+src/middle-earth-art.js: yeni fallback yönlendirmesi ve Elrond elf görünümü.
+src/crown-battle-art.js: yalnız me_ varyantlarını 0'a indirerek aynı çizimin gereksiz cache kopyalarını önler.
+scripts/pack-middle-earth-expansion.mjs: altı bağlı pozu ayırma, ortak ölçek, şeffaf WebP paketleme.
+tests/middle-earth-combat.mjs, tests/middle-earth.mjs,
+tests/middle-earth-revision-browser.mjs, tests/middle-earth-expansion.mjs.
+public/warrior-sprites/middle-earth/{elrond,ent,nazgul,rohirrim,gondor-cavalry,
+dwarf-ram-rider,elf-stag-rider,azog-warg}.webp ve aynı adların -portrait.webp dosyaları.
+Ana sekmeye kapsam önceden bildirildi. Motor/renderer/ses/arayüz kaynakları değiştirilmedi.
+
+Görsel üretimi
+imagegen skill, builtin araç. Oyun çizgisine uygun koyu kontur, sınırlı düz renk,
+iki ton gölge; fotoğraf gerçekçiliği yok. Her karakter için ayrı 1536x1024
+şeffaf 3x2 sayfa: idle, walk A/B, windup, impact, recovery; sağa bakış.
+Karakter istemleri: Elrond elf kılıç ustası; ağaç gövdeli Ent; kara atlı pelerinli
+Nazgûl; yeşil pelerinli mızraklı Rohirrim; gümüş zırhlı Gondor atlısı;
+zırhlı baltalı cüce ve koç; elf ve boynuzlu geyik; soluk tenli Azog ve beyaz Warg.
+Bu bölüm istem özelliklerinin özetidir, eksiksiz araç istemi kaydı değildir.
+Kaynak PNG'ler: artifacts/middle-earth/source/<ad>.png.
+Paketleme raporu: artifacts/middle-earth/expansion-pack.json.
+Kırpma/maskeleme yalnız teknik kare ayırma; kaynak çizim yeniden boyanmadı.
+Önizleme: artifacts/middle-earth/roster-3.jpg (61 KB civarı).
+Sekiz savaş sayfası yaklaşık 1.82 MB yerel dosyadır; bu internet trafiği ölçümü değildir.
+Üretilmiş oyun çizimleri, resmî karakter görselleri olarak sunulmaz.
+
+Doğrulama
+PASS middle-earth-expansion: altı binekli rolü, hızlanma/mesafe sonrası hücum,
+12 sn temasta yeni hücum olmaması, önden/yandan/arkadan mızrak savunması,
+hareket emrinin otomatik saldırıyı bastırması. Sekiz yeni birimin iki takımda
+kaydet/yükle, yalnız kırmızıdan kaldır, cache varyant paylaşımı ve engellenmiş
+görsel yüklemesinde görünür fallback kontrolleri.
+PASS middle-earth-revision-browser: 11 sayfa yükleniyor; 12 dev birim seçim testi,
+mobil görünürlük, atlas sınırı, Balrog/Sauron ölçekleri korunuyor.
+PASS crown-battle-sprite-batch-browser: GPU/Canvas yön, ölüm, yakınlaştırma,
+çözünürlük ve GPU kaybında fallback karşılaştırmaları.
+PASS crown-battle: klasik mod, deterministik savaşlar, emirler ve özel ordu kayıtları.
+PASS Vite üretim derlemesi; mevcut büyük chunk uyarısı sürüyor.
+PASS middle-earth tam tarayıcı testi: 26 ayrı siluet, 1248 poz, iki takım animasyon,
+cüce ölçeği, kayıt/yükleme/oyun başlatma, PC/mobil katalog ve kırmızıdan kaldırma.
+Tarayıcı hatası, başarısız görsel isteği ve dış ağ isteği yok.
+26 tipli iki ordunun aynı tohumlu savaşı deterministik olarak 40.3 sn içinde bitti.
+Oyun açılışındaki stage-bar seçici hatası ana sekmeye bildirildi ve orada sabit
+stage-view-label kimliğiyle düzeltildi; son tam test ve tekrar derleme geçti.
+
+Sınırlamalar / sonraki kapsam
+Altı ana pozdan zamanlanmış animasyon; sürekli iskelet animasyonu yok.
+Oyun istatistikleri kurmaca dengelemedir. Binlerce asker için yeni çift karşılaştırma
+döngüsü eklenmedi; bu çalışmada sayısal FPS artışı ölçülmedi.
+Uçan birlik davranışı yok. Shelob, Mûmakil, Smaug, uçan Nazgûl ve diğer adı geçen
+kahramanlar bu pakete dahil değil. Mitoloji genişletmesi kullanıcı sırasına göre sonra.

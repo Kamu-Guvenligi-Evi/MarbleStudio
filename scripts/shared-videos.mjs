@@ -8,7 +8,7 @@ export async function sharedVideos(project,{enabled=true,onUnavailable=()=>{}}={
   if(manifest.version!==1||!Array.isArray(manifest.jobs))throw new Error('Ortak video listesi geçersiz.');
   const ids=new Set(),jobs=[];
   for(const entry of manifest.jobs){
-    if(!/^shared-[a-f0-9]{16}$/.test(entry.id)||ids.has(entry.id)||!['video.mp4','video.webm'].includes(entry.videoFile)||!['track','arena','spiral','statistics','pi','territory','glass-breaker','spiral-breaker','ball-duel','ring-escape','rock-paper-scissors'].includes(entry.mode))throw new Error('Ortak video kaydı geçersiz.');
+    if(!/^shared-[a-f0-9]{16}$/.test(entry.id)||ids.has(entry.id)||!['video.mp4','video.webm'].includes(entry.videoFile)||!['track','arena','spiral','statistics','pi','territory','glass-breaker','spiral-breaker','ball-duel','ring-escape','rock-paper-scissors','ball-multiplier','goal-arena'].includes(entry.mode))throw new Error('Ortak video kaydı geçersiz.');
     ids.add(entry.id);
     let info;
     try{info=await stat(path.join(project,'work-videos',entry.id,entry.videoFile));}

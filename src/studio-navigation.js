@@ -3,11 +3,11 @@ import './studio-navigation.css';
 import {mountChannelPicker} from './channel-branding.js';
 
 const groups = [
-  ['Yarış ve mücadele', [['track','Parkur','↘'],['arena','Küre Arenası','◉'],['territory','Alan Savaşı','⬡'],['ball-duel','Top Düellosu','⚔'],['rock-paper-scissors','Taş Kâğıt Makas','✂']]],
-  ['Akış ve kırma', [['spiral','Spiral','◎'],['spiral-breaker','Spiral Kırıcı','▧'],['glass-breaker','Cam Kırıcı','◇'],['ring-escape','Halka Kaçışı','◌']]],
+  ['Yarış ve mücadele', [['track','Parkur','↘'],['arena','Küre Arenası','◉'],['territory','Alan Savaşı','⬡'],['crown-battle','Taç Savaşı','♛'],['goal-arena','Gol Arenası','⚽'],['ball-duel','Top Düellosu','⚔'],['rock-paper-scissors','Taş Kâğıt Makas','✂']]],
+  ['Akış ve kırma', [['claw-split','Pençe Bölünmesi','⋔'],['escape-multiply','Kaçış Çoğalması','✦'],['merge-evolution','Evrim Arenası','✧'],['collapse-arena','Çöken Arena','◉'],['bounce-waves','Bounce Waves','≋'],['ball-multiplier','Top Çoğalma','✦'],['spiral','Spiral','◎'],['spiral-breaker','Spiral Kırıcı','▧'],['glass-breaker','Cam Kırıcı','◇'],['ring-escape','Halka Kaçışı','◌']]],
   ['Veri ve deney', [['pi','Pi Çarpışmaları','π'],['statistics','İstatistik','▥']]],
 ];
-const standalone = new Set(['ball-duel','spiral-breaker','glass-breaker','ring-escape','rock-paper-scissors']);
+const standalone = new Set(['claw-split','escape-multiply','merge-evolution','collapse-arena','crown-battle','bounce-waves','goal-arena','ball-multiplier','ball-duel','spiral-breaker','glass-breaker','ring-escape','rock-paper-scissors']);
 
 // Move the existing controls, keeping their listeners, values and recording locks.
 function settingGroup(parent, title, description, nodes, open = false) {
@@ -38,6 +38,8 @@ function organizeSettings(mode) {
     return;
   }
   const parent = select(mode === 'ring-escape' ? '#settings' : mode === 'ball-duel' ? '.duel-controls' : '.game-info');
+  // Newer studios already arrange their own settings.
+  if (!parent) return;
   const settings = document.createElement('div');settings.className = 'studio-settings';
   if(mode === 'ring-escape')parent.prepend(settings);
   else parent.querySelector('.intro,.description').after(settings);
@@ -93,10 +95,10 @@ export function mountStudioNavigation(mode = 'main') {
   const backups = document.querySelector('.studio-actions');if(backups)footer.append(backups);
   menu.append(nav,footer);rail.append(brand,toggle,menu);document.body.prepend(rail);
 
-  let header = document.querySelector('.app-header,.ring-header,.duel-header');
+  let header = document.querySelector('body > header');
   if (!header) {header = document.createElement('header');rail.after(header);}
   header.classList.add('studio-toolbar');
-  mountChannelPicker(header);
+  if (!header.querySelector('.studio-channel')) mountChannelPicker(header);
   header.querySelector('.brand')?.remove();
   header.querySelector('nav > a[href="/"]')?.remove();
   document.querySelector('.game-info > .back')?.remove();
@@ -117,16 +119,14 @@ export function mountStudioNavigation(mode = 'main') {
   nav.addEventListener('click',event=>{
     const item=event.target.closest('[data-studio-game]');if(!item||item.disabled)return;
     if(main && document.getElementById('nav-track').disabled){event.preventDefault();event.stopPropagation();return;}
-    if(main)document.getElementById('automatic-manual')?.click();
     if(mobile.matches)setOpen(false);
   },true);
   function sync(){
     const active=main?nav.querySelector('[aria-pressed="true"]'):nav.querySelector('[aria-current="page"]');
-    const automaticOpen=document.body.classList.contains('automatic-home');
-    context.textContent=automaticOpen?'Otomatik üretim':active?.querySelector('span:last-child')?.textContent||'Oyun stüdyosu';
+    context.textContent=active?.querySelector('span:last-child')?.textContent||'Oyun stüdyosu';
     toggle.textContent='☰  '+(active?.querySelector('span:last-child')?.textContent||'Oyunlar')+' · Oyun seç';
     for(const item of nav.querySelectorAll('button')){
-      if(item===active&&!automaticOpen)item.setAttribute('aria-current','page');else item.removeAttribute('aria-current');
+      if(item===active)item.setAttribute('aria-current','page');else item.removeAttribute('aria-current');
     }
   }
   const observer=new MutationObserver(sync);observer.observe(nav,{subtree:true,attributes:true,attributeFilter:['aria-pressed']});

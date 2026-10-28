@@ -1,0 +1,37 @@
+Turan ricadı ve süvari hücum mesafesi — 15 Ekim 2026
+
+Kullanıcı isteği: Turan sırasında atlıların koşarak hız kazanma ve çarpma avantajı korunmalı; yaklaşma mesafesi buna göre ayarlanmalı.
+
+src/historical-tactics.js:
+- Ricat için merkez gerçekten geri çekilir, takipçi düşman kanatlar arasına girmeden kuşatma başlamaz.
+- Kanat açıklığı sabit 120–180 yerine düşman hattının yarı genişliği +85; kanatlar geniş piyade hattının içine yürümez.
+- Kuşatma hareketli takip grubuna göre yönlenir. İki kanadın fiziksel yan/arka konumu doğrulanır.
+- Kanatlar yürüyerek temasa kapanmaz; charge hazırlığına geçer. Merkez de dönüş için geriye mesafe açar.
+- Her atlı için yakın düşmanlar mevcut uzamsal ızgaradan sınırlı sorgulanır. En yakın hedefe 95 birim mesafesi olan atlı normal hücum motoruna bırakılır.
+- Açılan mesafeyi kaybetmemek için atlılar diğer bütün atlıları beklemez. 3 saniyede yer açamayanlar yerel savaşa döner.
+- Hız/hasar bonusu verilmedi. Motorun >=28 koşu mesafesi, >=%80 hız, hedefe dönük olma ve hücum bekleme süresi şartları aynen geçerli.
+- Takip yoksa veya kuşatma gerçekleşmediyse zaman dolması başarı sayılmaz; yeniden birleşme/normal savaş uygulanır.
+- Dar haritada iki kanada yer yoksa manevra etkinleşmez. Ana oyun ve demo geniş haritayı kullanır.
+- Oyuncu emri ve komutan kaybı önceliklidir; sınır dışındaki manevra hedefi iptal edilir.
+
+Doğrulama (seed42, 45 saniyeye kadar, eşit sayıda Roman piyadesi):
+  taraf / süvari / gerçek hücum / hasar veren çarpışma
+  0 / 24 / 20 / 47
+  0 / 48 / 27 / 113
+  0 / 96 / 52 / 96
+  1 / 24 / 21 / 36
+  1 / 48 / 42 / 54
+  1 / 96 / 56 / 58
+Her durumda iki kanatta gerçek hücum ve hasar doğrulandı. 24 kişilik iki koşuda merkez dönüş hücumu da doğrulandı. Kalabalıkta her atlıya/merkeze hücum garantisi yok; temasa kilitlenme ve düşman tepkisi sonucu etkiler. Bu rakamlar bütün eşleşmeler için denge/zafer garantisi değildir.
+
+PASS: historical-tactics, historical-turan-charge, historical-opponent-ai,
+historical-civilization-tactics, historical-commander-tactics,
+crown-battle-tactical-visuals, historical-army-presets.
+PASS: crown-battle-tactical-visuals-browser (480 kare, kırpma yok),
+artifacts/turan-fix/demo-check.mjs (dört gerçek aşama, tarayıcı hatası yok).
+PASS: Vite build artifacts/turan-fix/build (mevcut büyük paket uyarısı).
+
+Demo: http://127.0.0.1:5173/seljuk-tactics-demo.html
+Yeni düğme: 4. Hücuma hazırlan.
+
+Diğer sekmeye devir: yeni charge/regroup fazları ve geniş harita gereksinimi bildirildi. Sonraki armyId/çoklu ordu değişiklikleri bu kontrolleri korumalı. Bu çalışma crown-battle.js motoruna dokunmadı.

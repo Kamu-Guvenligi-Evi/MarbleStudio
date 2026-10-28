@@ -1,0 +1,41 @@
+Taç Savaşı — büyük medeniyetlere dört yeni asker, 2026-10-16
+
+Eklenen kartlar
+- japan_naginata_foot: Japon naginatalı laik yaya; uzun kesici silah, sword rolü. Mevcut sōhei kimliğiyle birleştirilmedi.
+- mughal_shamsherbaz: Babür kılıç-kalkan piyadesi; hafif donanım, küçük chirwah kalkanı ve daha çevik yakın dövüş.
+- tang_crossbowman: Tang arbaletçisi; bolt mermisi, yavaş atış döngüsü ve uzak destek.
+- ayyubid_foot_spearman: Eyyûbî mızraklı yaya; uzun kalkan ve saf desteği.
+
+Entegrasyon
+Mevcut insan çizim ölçeği ve animasyon sistemi kullanıldı. Yeni bitmap/indirme yok.
+Her kart iki takımda seçilebilir/kaldırılabilir ve ordu kaydına girebilir.
+Takeda'nın 24 kapasiteli temel ordusunda 2 naginatalı; Selahaddin'de 4 mızraklı yaya var. Toplam kapasite değişmedi.
+Tang ve Babür için mevcut uygun komutan olmadığı için bu askerler kataloğa eklendi; başka dönemlerin hazır ordularına konmadı.
+Yeni ateşli silah eklenmedi. Mevcut kimlikler, klasik mod, savaş motoru ve menü kaynakları değiştirilmedi.
+
+Değişen dosyalar
+Yeni: src/major-army-expansion-units.js, src/major-army-expansion-art.js, tests/major-army-expansion.mjs, bu not.
+Dar entegrasyon: src/historical-catalogue.js, src/historical-art-profiles.js, src/historical-warrior-art.js.
+Yalnız Takeda/Selahaddin girdileri: src/historical-army-presets.js, src/historical-army-history.js.
+Araştırma sekmesi ayrıca tests/historical-army-presets.mjs entegrasyon kontrollerini genişletti.
+
+Doğrulama
+PASS: dört rolün iki takımda kontrollü hasar/mermi kontrolleri; mevcut ve yeni kimliklerle kayıt turu.
+PASS: Roma piyadesine karşı iki takımda toplam 8 doğal 12v12 savaş (tohum 19); hepsi bitti, en uzun 44,1 simülasyon saniyesi.
+PASS: 4 birlik x 2 takım x 5 eylem x 8 kare = 320 kare; boş/kırpılmış kare yok, dört farklı siluet.
+PASS: PC 1366 ve telefon 390 genişlikte iki takımda ekle/kaldır, savaş açılışı, yeniden yükleme ve kayıt; tarayıcı hatası yok.
+PASS: Vite üretim derlemesi (14,55 saniye); mevcut büyük paket boyutu uyarısı sürüyor.
+Araştırma sekmesinin bağımsız raporu: 20 hazır ordu min–1000 kapasite; yeni birlikler 24/97/241 kapasitelerde iki takımda; Tang/Babür yanlış komutanda bulunmama; 20 tarihçe; 1440/390/320 hazır ordu UI ve kayıt; 303 ekipman profili ve 258 ayna savaş regresyonları PASS.
+Kanıtlar: artifacts/major-army-expansion/checks.json, full-battles.json, units.jpg, build.log ve *-regression.log.
+Naginata savuruşunda testin bulduğu iki takım kırpılması düzeltildi ve kare testi yeniden geçti.
+
+Tarihî dayanaklar
+Japon naginata, Tachibana Müzesi 16. yy donanımı: https://artsandculture.google.com/story/rwXBhVHFrCNTLQ
+Babür Shamsherbaz, Ayn-ı Ekberî: https://persian.packhum.org/text/000702051/5
+Tang arbaletçi bileşeni, Du You Tongdian 148: https://m.gushiwen.cn/guwen/bookv_31ecf2aa5458.aspx
+Eyyûbî yaya ve uzun kalkan, Nicolle'nin el-Tarsûsî aktarımı: https://warfare.6te.net/Nicolle-Islam-Continued_Importance_of_Trained_Infantry.htm
+
+Sınırlar
+Silah/rol dayanakları ile kıyafet yorumu kartlarda ayrıldı. Sayısal güçler oyun ayarıdır; ölçülmüş tarihî değerler veya kesin alay mevcutları değildir.
+Yeni doğal savaş testleri tek tohum ve Roma piyadesi rakibiyle sınırlıdır; bütün eşleşmelerin dengeli olduğunu kanıtlamaz.
+Japon kartı belirli bir Takeda alayı iddiası taşımaz; hazır ordudaki oran oyun amaçlıdır. Tang/Babür hazır ordu ve komutanları bu paketin dışında kalır.

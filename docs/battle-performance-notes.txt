@@ -1,0 +1,90 @@
+Taç Muharebesi — yoğun kasma düzeltmesi, 14 Ekim 2026
+
+Profil: animasyon karesi üretilince GPU canvas getImageData okuması senkron
+bekletiyordu. Kale haritasında segment/dikdörtgen testi çok sayıda geçici
+dizi/closure oluşturuyor; sabit askerler de hareket çarpışması hesaplıyordu.
+
+Değişiklikler:
+- Küçük sprite kaynakları ilk context oluşturulurken willReadFrequently:true
+  kullanır. GPU atlası/savaş alanı değişmez; kaynak alfa sınırları bir kez okunur.
+  Klasik/tarihi asker, komutan ve kompozit sprite canvas'ları kapsanır.
+- Engel testinde önce bounding-box elemesi; eksen başına dizi oluşturulmaz.
+  free/clear erken çıkan döngülerdir. Sıfır mesafeli hareket atlanır.
+- Komşu araması boş halkaları ve sorgu çemberi dışındaki hücreleri atlar;
+  örnek sırası, hücre başına 16 ve sorgu sonuç sınırları korunur.
+- Birlik sayısına yeni sınır, görsel çözünürlük azaltması eklenmedi.
+
+Yerel headless Chrome, 1200x650 DPR1; seed1066, geniş harita,
+%60 samuray/%20 hussar/%20 yeniçeri, iki eşit ordu, 180 RAF karesi,
+ilk 30 ısınma. Her RAF'ta 1/30 simülasyon adımı + çizim, CDP CPU profili.
+Dosyalar: tests/crown-battle-load-browser.mjs,
+artifacts/crown-battle/lag-before.json ve lag-after.json.
+
+Harita  Asker  Simülasyon medyanı önce/sonra  Kare aralığı medyanı önce/sonra
+Klasik   400          1.9 / 2.6 ms                   34.6 / 27.8 ms
+Klasik  2000         12.3 / 12.0 ms                  34.9 / 34.6 ms
+Kale     400          9.2 / 4.8 ms                   34.6 / 27.8 ms
+Kale    2000         40.8 / 15.2 ms                  48.7 / 34.8 ms
+
+400 askerde maksimum çizim: klasik 103.7 -> 24.5 ms, kale 112.4 -> 30.6 ms.
+Kale 2000 simülasyon medyanında %62.7 azalma. Her ölçüt iyileşmedi:
+bu sahnede çizim p95 16.5 -> 22.6 ms; toplam kare medyanı yine düştü.
+Bu kısa sentetik sahne kullanıcının gerçek oyun FPS'si veya sınırsız birlik
+akıcılığı garantisi değildir. Tarayıcı/sürücü ve diğer uygulamalar etkiler.
+
+Kontroller:
+PASS Node: crown-battle, crown-battle-behavior (2400 asker / 60 adım dahil),
+crown-battle-formations, crown-battle-fortress, historical-combat.
+PASS crop browser: 972 yön/animasyon/zoom/çözünürlük karşılaştırması;
+69% az çizilen atlas alanı. CPU raster + kesirli zoom kanal yuvarlaması için
+en fazla 3/255 fark ve ortalama <0.01 kanal değeri birlikte denetlenir.
+Ölçülen en yüksek ortalama fark 0.005083; görünür parça kesilmesi yok.
+PASS fps-menu browser: beklemede çizim yok, seçim/zoom/devam, atlas sınırı,
+reset/resize. Yeni medeniyet filtreleri için sabit 160px beklentisi yerine
+arama kutusunun kaydırılan listenin üstünde kaldığı doğrulanır.
+Üretim derlemesi PASS (37.35 s), mevcut >500 kB paket uyarısı sürüyor.
+PASS kale browser PC (1366px) ve mobil (390px): boş başlangıç, harita seçimi,
+yerleştirme/engel reddi, geri alma, yeniden kurma, başlat/duraklat.
+Test sırasında 5173 sunucu kapandı; iki boyuttaki test yeniden geçti.
+Sebep logdan doğrulandı: Windows EBUSY watcher hatası,
+.cache/middle-earth-reference/legolas-second.png dosyası kilitliydi.
+vite.config.js watch ignored listesine **/.cache/** eklendi. Aktif Vite
+otomatik yeniden başladı; geçici .cache dosyası özel kilitle açıkken oyun
+HTTP 200 verdi. Son foreground Vite oturumu açık bırakıldı.
+
+Koordinasyon: Ses sekmesi audio/feedback, katalog sekmesi veri/görseller,
+LOTR sekmesi yeni middle-earth varlıkları üzerinde çalışıyor. LOTR hook'una
+CPU canvas sözleşmesi ve önbellek invalidasyonu gereği iletildi.
+
+14 Ekim, 23:44 güncellemesi — yapılar ertelendi, ani donma çalışması:
+- Köprü/ev çizim çağrıları ve kale seçeneği kaldırıldı. Altı açık harita var.
+  Eski fortress URL/kayıtları classic'e geçer; aktif engel/navigasyon kalmaz.
+  Yapı/navigasyon modülleri ileride kullanılabilmesi için diskte tutuldu.
+- SpriteLibrary yeni animasyonları kare başına 4 poz / 4 ms bütçeyle hazırlar.
+  Hazır poz gösterilir; duraklatılmış görüntü eksik pozlar tamamlanınca susar.
+- Atlas zoom sırasında boşaltılmaz, mevcut pozlar küçük bütçeyle keskinleşir.
+  Görünen alanı paketler; azami 16 x 1024px sayfa = teorik 64 MiB RGBA alanı.
+  Bu, ölçülmüş GPU belleği değildir. Düşen askerler de atlası kullanır.
+- PC'de 800'den fazla askerde DPR1; daha küçük orduda 30 kare ortalaması
+  40ms üzerindeyse DPR kademeli düşer (en az1). Oturumda yukarı salınım yok.
+  600'den fazla askerde atlas çözünürlüğü en çok2; dünya koordinatları ve
+  asker boyları değişmez. Dikey kayıt ayrı renderer ile1080x1920 kalır.
+- İlk nottaki 'çözünürlük azaltması eklenmedi' artık geçerli değildir.
+
+Tanı: tests/crown-battle-stutter-browser.mjs, 1800 asker/12 tür, yakın dövüş,
+Chrome headless1366x768, cihazDPR2, zoom/fit. stutter-before.json 240RAF+CPU
+profili; stutter-adaptive.json120RAF, profilsiz. Bu farklar nedeniyle doğrudan
+FPS yüzdesi karşılaştırması yapılmaz. Önce en uzun çizim527ms ve100ms üzeri8;
+adaptif koşuda en uzun86ms ve100ms üzeri0. Adaptif koşuda JS step med28.3ms,
+draw med46.6ms, fakat RAF p95840ms/max1042ms: uçtan uca takılma tamamen
+giderildi denemez. Ölçümler engine sekmesinin son değişikliğinden öncedir.
+--disable-gpu yalnız tanıda denendi, drawp95912ms ile kötüleşti; uygulama
+ayarlarına eklenmedi. Donanımsal tarayıcı/gerçek kullanıcı FPS'si garanti değil.
+
+PASS: frame-budget browser (poz bütçesi/tamamlama, zoomkoruma, atlasçakışması,
+eski harita göçü, DPR düşerken dünya/ölçek korunması, kayıt çözünürlüğü).
+PASS: crop972 karşılaştırma, kanal farkı<=3 ve ortalama<0.01; kesilme yok.
+PASS: fps-menu beklemede redraw yok, seçim/zoom/devam, atlas sınırı/eviction.
+Final tüm-sekmeler build/doğrulama: aşağıdaki ek sonuçlara bak.
+
+Final 2026-10-14 23:47: fps-menu, frame-budget, sprite-crop (972 comparisons) PASS. Production build PASS (6.02 s, existing chunk-size warning). Restored mythology source included. Engine final query oracle and battle hashes match; six behavior suites PASS. Engine measurements and limitations: docs/fps-engine-2026-10-14.txt. Heavy RAF stress still showed intermittent stalls; no stable 60 FPS or complete freeze elimination claim.

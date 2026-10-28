@@ -1,0 +1,58 @@
+TAÇ MUHAREBESİ — TANG BİRLİĞİ ARAŞTIRMA VE ENTEGRASYON KAYDI
+Tarih: 14 Ekim 2026
+
+OYUNA EKLENDİ
+tang_xuanjia — Kara zırhlı süvariler · Xuanjia
+Medeniyet: Tang Hanedanı. Temsil tarihi: 621. Oyun rolü: mızraklı süvari.
+Katalog, medeniyet gruplaması, iki ordunun seçim ekranı ve savaş motoru bağlantısı hazır.
+Bu parti sonunda 42 birlik ve 32 medeniyet grubu bulunuyor.
+
+TARİH VE GÖRSEL AYRIMI
+Zizhi Tongjian 188: Li Shimin'in seçtiği bini aşkın kara giysili/zırhlı öncü süvari.
+Bu daha geç derlenmiş kronik, silah tipini belirtmiyor. Mızrak bir oyun rekonstrüksiyonu.
+Xuanjia betimleyici ad; değişmez üniformalı kalıcı bir alay iddiası yapılmıyor.
+The Met Warrior (10.221.6), 7.–8. yy: miğfer, gövde ve parçalı etek zırhı için dönem referansı.
+Heykelin Xuanjia mensubu olduğu bilinmiyor. Koyu renk heykelin boyasına değil metne dayanıyor.
+Penn Museum Saluzi (C395): kısa yele, eyer örtüsü ve koşum için dönem referansı.
+Tam at zırhı, kanat, yüz maskesi veya samuray başlığı kullanılmadı.
+
+KAYNAKLAR
+https://zh.wikisource.org/wiki/資治通鑑/卷188
+https://www.metmuseum.org/art/collection/search/45865
+https://www.pennmuseum.org/collections/object/167942
+https://commons.wikimedia.org/wiki/File:The_Horses_of_Emperor_Taizong_Tang_Dynasty_Limestone_(305761810).jpg
+
+GÖRSELLER VE HAKLAR
+public/warrior-references/tang-warrior-met-45865.jpg — 68107 bayt; The Met Open Access, kamu malı.
+public/warrior-references/tang-saluzi-mary-harrsch.jpg — 98639 bayt; Mary Harrsch 2005, CC BY 2.0.
+https://creativecommons.org/licenses/by/2.0/
+İki fotoğraf değiştirilmeden kaydedildi. At fotoğrafı, kaynak ve lisans bağlantıları birlik kartında bulunuyor.
+Bunlar yerel dosya boyutlarıdır; ölçülmüş internet trafiği değildir.
+
+DEĞİŞİKLİKLER
+docs/elite-research-tang-sogdiana-2026-10-14.json — bu partinin araştırma ve görsel kayıtları.
+docs/historical-elite-research-2026-10-14.json — 51 araştırma kaydı, Tang ana; Soğd donanım doğrulamasında.
+src/historical-unit-visuals.json — iki Tang referansı ve lisansları.
+src/historical-catalogue.js — Tang rol eşlemesi ve ek referans aktarımı.
+src/historical-armies.js — ek dönem görseli/kaynak/lisans bağlantıları; ilk tarih kaynağının kaybolması önlendi.
+src/historical-art-profiles.js, src/historical-warrior-art.js — ayrı Tang miğferi, gövde zırhı ve at koşumu.
+Diğer entegrasyon sekmesinin isteğiyle tarihî ve klasik yaylarda ok 4. karede ayrılıyor;
+tüfek alevi yalnız 4–5. karede görünüyor (motor teması 0,12 saniye). Motor dosyaları değiştirilmedi.
+
+DOĞRULAMA
+tests/historical-elite-art.mjs: PASS, 2016 kare, iki takım; boş/kırpılmış/aynı sprite veya siluet yok.
+tests/historical-combat.mjs: PASS; tüm katalog türleri, seçim/emirler ve deterministik savaşlar.
+artifacts/elite-research/verify-tang.mjs: PASS; yerel görseller, kaynaklar, katalogdan savaşa geçiş,
+Tang seçimi, savaş saati ve hasar. Tarayıcı hatası yok.
+artifacts/elite-research/tang-preview.jpg: yerel yakın görünüm incelendi; Tang bekleme/saldırı/yürüme,
+Moğol yayının 3–4. kareleri ve Yeniçeri 4. kare alevi birlikte kontrol edildi.
+Vite üretim derlemesi başarılı; mevcut 500 kB üzeri paket boyutu uyarısı devam ediyor.
+artifacts/elite-research/build.log ve tang-checks.json sonuçları içerir.
+
+ARAŞTIRMADA KALANLAR
+sogdian_cakar — Soğd hükümdar/soylu maiyet askerleri. Akademik kurum bilgisi bulundu.
+https://www.iranicaonline.org/articles/cakar/
+https://www.iranicaonline.org/articles/sogdiana-vi-sogdian-art/
+Mugh kalkanı dönem görseli adayı; ayrıntılı görsel inceleme ve kullanım hakkı tamamlanmadı.
+Bu yüzden oyuna eklenmedi. Tek bir birleşik Soğd devleti veya standart üniforma varsayılmayacak.
+Velaikkarar — Polonnaruwa yazıtının akademik edisyonu ve dönem görseli bulunmalı.

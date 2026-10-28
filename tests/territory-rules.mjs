@@ -45,7 +45,8 @@ for(const type of ['speed','shield']){
     if(!chase.pickups.length)collected=true;
   }
   assert.ok(collected,`A nearby ${type} pickup off the original route is deliberately collected`);
-  assert.equal(b.cell,goal,'After collecting a buff, the original route is completed');
+  assert.equal(b.cell,start,'Return home after the pickup excursion before planning a fresh claim');
+  assert.equal(b.route.length,0,'Do not continue the obsolete pre-pickup claim after returning home');
 }
 for(const scenario of ['distant','active','expiring','long-trail']){
   const chase=make(),b=chase.balls[0],start=40*80+40;
@@ -61,7 +62,7 @@ for(const scenario of ['nearby','distant','shielded','short-trail','no-nearby-ho
   b.trail=Array.from({length:scenario==='short-trail'?5:12},(_,i)=>start+i);
   b.route=Array.from({length:12},(_,i)=>start-(i+1)*80);
   race.setOwner(start-(scenario==='no-nearby-home'?10:4),b.id);
-  other.cell=start+(scenario==='distant'?20:7)*80;other.body.position=race.position(other.cell);
+  other.cell=start+(scenario==='distant'?20:8)*80;other.body.position=race.position(other.cell);
   if(scenario==='shielded')b.shieldUntil=5;
   if(scenario==='already-closing')b.route=[start-1,start-2,start-3,start-4];
   const original=[...b.route];race.plan=()=>{};
@@ -83,6 +84,7 @@ for(const scenario of ['nearby','distant','shielded','short-trail','no-nearby-ho
 }
 const plain=make(),fast=make();
 for(const race of [plain,fast]){
+  race.nextPickupAt=Infinity; // Isolate buff expiry from unrelated pickup detours.
   const b=race.balls[0],start=40*80+30;
   b.cell=start;b.body.position=race.position(start);b.route=Array.from({length:20},(_,i)=>start+i+1);
   for(let i=0;i<=20;i++)race.setOwner(start+i,b.id);

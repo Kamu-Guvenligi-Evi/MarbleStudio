@@ -26,7 +26,7 @@ export function rampEffectVoice(voice,level,time){
   return from;
 }
 export class EffectVoicePlayer{
-  constructor(context,destination){this.context=context;this.destination=destination;this.voices=new Set();this.releasing=new Set();}
+  constructor(context,destination){this.context=context;this.destination=destination;this.voices=new Set();this.releasing=new Set();this.buffers=new WeakMap();}
   end(voice){try{voice.source.stop();}catch{}voice.source.disconnect();voice.pan.disconnect();voice.gain.disconnect();this.voices.delete(voice);this.releasing.delete(voice);}
   stop(){for(const voice of [...this.voices,...this.releasing])this.end(voice);}
   play(event,samples){
@@ -45,8 +45,12 @@ export class EffectVoicePlayer{
         if(this.releasing.size>8)this.end(this.releasing.values().next().value);
       }
     }
-    const buffer=samples instanceof Float32Array?context.createBuffer(1,samples.length,context.sampleRate):samples;
-    if(samples instanceof Float32Array)buffer.copyToChannel(samples,0);
+    // Cached PCM samples are immutable. Share their buffer, not playback nodes.
+    let buffer=samples;
+    if(samples instanceof Float32Array){
+      buffer=this.buffers.get(samples);
+      if(!buffer){buffer=context.createBuffer(1,samples.length,context.sampleRate);buffer.copyToChannel(samples,0);this.buffers.set(samples,buffer);}
+    }
     const source=context.createBufferSource(),pan=context.createStereoPanner(),gain=context.createGain();source.buffer=buffer;
     pan.pan.value=Math.max(-.75,Math.min(.75,(event.x??270)/270-1));
     source.connect(gain);gain.connect(pan);pan.connect(this.destination);

@@ -1,0 +1,52 @@
+14 Ekim 2026 — Görsel ve oyun sekmesi ortak aktarımı
+
+Görsel araştırması sekmesi: 01a13b51-ead4-7090-a516-86581873cf50
+Oyun entegrasyonu sekmesi: 01a13b10-7f99-7a70-b113-bba2c705c791
+
+Görsel sekmesinin yönettiği dosya: src/historical-unit-visuals.json
+Yerel görseller: public/warrior-references/
+Şema: birlik kimliğine göre nesne. Örnek (yer tutucu, gerçek kayıt değildir):
+{"ottoman_solak":{"image":"/warrior-references/solak.jpg","credit":"çizer/koleksiyon","source":"kaynak sayfası URL","visualNote":"Birliğe doğrudan ait veya genel dönem referansı açıklaması","license":"doğrulanmış lisans ya da doğrulanmadı"}}
+
+Önce yerel görsel dosyasını tamamla, sonra JSON'a kaydı ekle.
+Kimlikler src/historical-catalogue.js ve src/historical-units.json içinde.
+Katalog aktarım dosyasını otomatik birleştirir; Vite yenilemesiyle kartta görünür.
+Yalnız görsel alanları alınır; ordu kayıtları, medeniyetler ve savaş rolleri korunur.
+Eksik/yüklenemeyen görselde canvas prototipine dönülür.
+visualNote ve license kartta metin olarak gösterilir.
+Bu aktarım referans kartlarını besler; savaş alanı animasyonları ayrı varlıklardır.
+Görsel sekmesi araştırma, görseller ve aktarım JSON'unu; oyun sekmesi katalog,
+arayüz, motor ve kontrolleri yönetir. Hazır teslimatlarda sekmeler mesajlaşır.
+
+İlk teslimat doğrulandı: ottoman_solak, macedon_hypaspists, persian.
+Yerel tarayıcı kontrolü: üç görsel doğru kartta decode edildi; visualNote ve
+lisans metni mevcut, JavaScript hatası yok. Savaş animasyonları değişmedi.
+
+İkinci parti ve oyun içi portreler:
+Aktarım JSON'u 10 kayıt içeriyor; toplam 23 birliğin referans görseli var.
+Yeni teslimatlar: ottoman_sipah, england_housecarl, templar_knight,
+mexica_eagle, ilkhan_keshikten, mongol_keshig, teutonic_knight.
+src/historical-portraits.js savaş komuta düğmeleri ve ordu düzenleme
+listelerinde yerel referansları gösterir. Görsel yüklenene kadar ve hata
+durumunda canvas portresi kalır. Meydan animasyonları değişmedi.
+Kontrol: tests/historical-portraits.mjs ve historical-armies-browser.mjs geçti.
+23 birlik x 2 portre, seçim, 390px, yükleme hatası, klasik mod doğrulandı.
+Vite build başarılı (3.63s), mevcut büyük paket uyarısı sürüyor.
+Build günlüğü: artifacts/historical-combat/visual-integration-build.log
+
+Üçüncü parti ve meydan çizimleri (14 Ekim 2026):
+Atlı samuray, Bahri Memlük ve Hospitalier referansları bağlandı.
+44 birliğin 26'sında referans görseli mevcut. Kaynak/lisans notları korunuyor.
+9 birliğin özgün canvas çizimi ayrıştırıldı: Solak, Hypaspist, Housecarl,
+Kartal savaşçısı, Tapınakçı, Töton, Hospitalier, atlı samuray, Bahri Memlük.
+Başlık, zırh, kalkan ve tarikat işaretleri; Housecarl baltası, Kartal savaşçısının
+obsidyen ağızlı silahı ve atlı samurayın uzun yayı eklendi. Çizimler sadeleştirilmiş
+oyun tasarımlarıdır; kesin tarihsel üniforma iddiası taşımaz.
+Dosyalar: src/historical-elite-art.js, historical-battle-art.js, crown-battle-art.js.
+Doğrulama: historical-portraits (26 x 2, seçim, mobil, hata yedeği, klasik),
+historical-armies-browser (44 kart, filtreler, kayıt, aktarım, mobil),
+historical-elite-art (432 kare; iki ordu, duruş/yürüme/saldırı; boş/kesik yok).
+Tarayıcı testlerinde sayfa hatası veya dış ağ isteği yok.
+Son yay düzeltmesi sonrası 432 kare testi tekrar geçti. Vite build 5.77s başarılı;
+mevcut 500 kB paket uyarısı sürüyor. Günlük: artifacts/historical-combat/elite-art-build.log.
+Önizleme: artifacts/historical-combat/elite-art-preview.jpg.

@@ -1,0 +1,138 @@
+Komutan orduları: katalog, çizim ve arayüz doğrulaması — 15 Ekim 2026
+
+Kapsam
+src/commander-army-units.js: 19 yeni donanım/rol kartı ve özgün prosedürel çizim.
+src/historical-timurid-units.js: diğer kullanıcı sekmesinden 3 Timurlu kartı
+entegre edildi. historical-coalition-units.js ile 5 müttefik birliği daha eklendi;
+bu çalışmanın toplamı 27 yeni birlik, katalog toplamı 227.
+Fatih: 15. yüzyıl yaylı yeniçeri ve azap ön saf desteği.
+Alparslan: mevcut hassa ve Türkmen okçusuna zırhlı gulâm atlı okçusu.
+Attila: Hun atlı okçusu ve yakın dövüş süvarisi.
+İskender: dönem sarissa piyadesi ve Makedon yaya okçusu.
+Caesar: Cumhuriyet lejyoneri, Galya süvarisi, Giritli okçu.
+Selahaddin: Eyyûbî mızraklı süvarisi, atlı okçusu, yaya okçusu.
+Hannibal: Libya piyadesi, İber kılıçlısı, Numidya hafif süvarisi.
+Nikephoros: skoutatos ve yaya okçusu.
+Takeda: Sengoku dönemi atlı yari savaşçısı.
+Timur: atlı okçu, zırhlı mızraklı süvari, Kavçin muhafızı; hazır orduda mevcut
+fil desteği korunur. Donanımlar ve oranlar tarihî kaynaklardan oyun yorumudur.
+
+19 komutanın tamamı artık hazır orduya sahip. Cengiz Han mevcut dönem birimlerini
+kullanır. Hazır ordular farklı asker miktarlarında tam toplamı ve özel taktiklerin
+çekirdek birlik koşullarını korur. Ordular kullanıcı isteği olmadan değiştirilmez;
+komutan panelindeki hazır ordu oluşturma işlemi gerekir.
+
+Tarihî kapsam
+Her kartta dönem, kaynak ve yorum sınırı bulunur. Renk, donanım alt rolü, güç ve
+birlik oranları kesin tarihî üniforma veya yoklama kaydı olarak sunulmaz.
+Yeniçeri okçusu: TDV Yeniçeri; azap: TDV Azeb; gulâm: Encyclopaedia Iranica Army II.
+Hun: Ammianus 31; Makedon: Arrianos III.12; Caesar: Galya Savaşı II;
+Eyyûbî: TDV Eyyûbîler; Kartaca: Polybios III; Bizans: 10. yüzyıl askerî metinleri;
+Sengoku yari: Metropolitan Museum, eser 30843. Tam bağlantılar kart modülündedir.
+Roma Cumhuriyet kartında zincir zırh, oval kalkan ve ayrı miğfer çizimi kullanılır.
+Antik süvarilerde üzengi çizilmez. Hafif Hun süvarisi zincir zırhlı çizilmez.
+Numidya ciridinin uzaktan atışı ve Cumhuriyet lejyonerinin pilum atışı henüz
+simüle edilmez; mevcut kartlarda bu sınır açıkça yazılıdır.
+
+Tamamlanan kontroller
+- tests/historical-army-presets.mjs: 19 komutan; minimum–1000 asker yuvarlama,
+  dört ordu boyutu ve iki tarafta komutan formasyonu/taktik başlangıcı PASS.
+- tests/historical-army-presets-browser.mjs: 1440, 390 ve 320 px; komutan seçimi,
+  tüm hazır ordular, miktar tercihini koruma, karşı orduyu koruma, kayıt PASS.
+- tests/commander-army-units.mjs: 19 birlik iki tarafta gerçek hasar, yaylılarda
+  ok üretimi, kayıt; 1520 çizim karesi, boş/kesilmiş çizim yok; PC ve mobilde
+  ekle/kaldır, savaşa taşı ve yenileme sonrası kayıt PASS.
+- tests/commander-roster-battles.mjs: yeni hazır ordulu yedi komutan, 48 askere
+  karşı 48 komutansız Roma askeri, iki yön, seed42: 14/14 doğal eleme PASS.
+  Bu, farklı komutanlar arasındaki güç dengesi kanıtı değildir.
+- tests/historical-realism.mjs: 219 profil, donanım/rol/kayıt, 54 mitoloji savaşı PASS.
+- tests/historical-equipment-balance.mjs: 219 farklı profil, varsayılan rol artığı
+  yok, mevcut uzmanlık karşılıkları, kayıt ve 258 yön değiştirmeli savaş PASS.
+
+Test düzeltmeleri
+Hazır ordu arayüzü testi eski otomatik minimuma sıfırlama beklentisini bıraktı;
+kullanıcının seçtiği miktarın yeni komutanda korunmasını doğruluyor.
+Açılır panel zaten açıksa tekrar kapatmıyor.
+Gerçekçilik testi hafif yay desteğinin 160 menzilini kapsıyor; erken İngiliz
+okçusunun uzun yay uzmanından daha kısa menzilli ve düşük hasarlı olması ayrıca
+kontrol ediliyor. Oyun değerleri testi geçirmek için değiştirilmedi.
+
+Paralel kullanıcı sekmeleriyle dosya sahipliği
+Bu sekme: commander-army-units, catalogue/art-profiles entegrasyonu, ilgili
+çizim/kayıt/arayüz testleri. Araştırma sekmesi: Timurlu birimleri, presetlerin
+dönem/kapsam açıklamaları. NPC sekmesi: historical-tactics.js Turan kapanma ve
+başarısız plandan normal muharebeye dönüş. Son ortak sonuçlar ayrıca kaydedilecek.
+
+Son birleşik doğrulama
+- 22 birlik: iki taraf hasar/atış/kayıt, 1760 animasyon karesi, PC ve telefon
+  ekle/kaldır, savaşa taşıma ve yenileme sonrası kayıt PASS.
+- Güncel dönem/kapsam paneliyle hazır ordu arayüzü: 1440/390/320 px ve ordu
+  atölyesi PASS; asker miktarı tercihi ve karşı takım korunuyor.
+- 222 profil gerçekçilik/donanım kontrolü ve 54 mitoloji savaşı PASS.
+- 222 profil ekipman dengesi, kayıt ve 258 yön değiştirmeli savaş PASS.
+- Üretim derlemesi exit 0, 7.99 saniye; mevcut büyük parça uyarısı sürüyor.
+- Tam katalog çizim kontrolünde mevcut odachi saldırısının sağ ucunda iki
+  sınır pikseli bulundu. additional-historical-art.js içinde silah ve iki
+  elin tutuşu birlikte bir çizim birimi sola taşındı; savaş değerleri değişmedi.
+
+Komutan dengesi: araştırma sekmesinin timurid-final.json raporu 52/52 doğal
+elemeyle tamamlandı, çalışma sırasında kaynak hashleri değişmedi. 96/240 adet
+kadrolarda Timur, Fatih ve Alparslan'a karşı dört koşulun hepsini kazandı.
+96 adet taktik kapalı, özel plan kapalı ve filler mızraklıyla değişmiş koşullarda
+da Timur 4/4 kazandı. Alparslan da Fatih'e karşı 4/4 kazandı. Eşit adet eşit
+güç değildir; bu çalışma bütün komutanların güç dengesini çözdüğünü kanıtlamaz.
+Turan başarısız hazırlığı erken bırakır; mevcut Timur rakibine kuşatma oluşmadı.
+Kaynak: docs/turan-opportunity-fallback-2026-10-15.txt.
+Sonraki taktik incelemesi için ölçüm: seed42, 96 asker; 9.03 saniyede kanatlar
+17/48 hazır, gereken 24/48. Hazırlık hasarı kanatlarda 1209.08, merkezde454.56.
+Yalnız merkez tehdidine bakmak yetersiz; yerel takip ve kanat tehdidi birlikte
+değerlendirilmeli. Bu öneri bu sürümde uygulanmış/doğrulanmış bir özellik değildir.
+
+Son görsel düzeltmeler
+Sarissa piyadesinin Phryg tipi başlığı, Cumhuriyet Giritli okçusunun baş donanımı
+ve Eyyûbî yaya okçusunun sarığı ayrıştırıldı. Tam katalog durağan siluet hash
+kontrolünde tekrar kalmadı; üç birlik ve odachi için iki takım/beş hareket/sekiz
+kare, toplam 320 kare boşluk ve sınır kesilmesi olmadan doğrulandı. Savaş
+değerleri değişmedi. Ardından tam 222 birlik/10656 animasyon karesi PASS.
+Araştırma sekmesi beş müttefik birliği daha ekledi; toplam 27 yeni/227 katalog
+birliği oldu. Güncel 227 birlik/10896 animasyon karesi kontrolü PASS.
+
+Takip edilen ayrı çalışma
+NPC kullanıcı sekmesi yerel kanat/merkez ateş baskısı ve gerçek can kaybıyla
+taktik hazırlık değerlendirmesini historical-tactics.js, historical-opponent-
+analysis.js ve historical-civilization-tactics.js dosyalarında sürdürüyor.
+Yukarıdaki 52 savaş raporu bu yeni değişikliklerden önceki kaynaklara aittir;
+yeni taktiklerin doğrulaması ve sonuçları bu raporun tamamlandı kapsamına girmez.
+
+İsteğe bağlı donanım bütçesi
+src/historical-army-budget.js: bütün birliklere aynı formülle puan; EHP, DPS,
+hareket, menzil, hücum ve alan etkisi. Millet veya komutan katsayısı yok.
+Tarihî güç sıralaması veya kazanma olasılığı değildir. Birim değerleri değişmedi.
+Hazır orduların çekirdek rolleri korunur, puan aşılmaz; kalan puan gösterilir.
+Asker sayısı modu korunur. Bütçe ve mod tercihi her ordu için ayrı hatırlanır;
+komutan değişimi, ordu oluşturma ve yenileme sayı tercihini sıfırlamaz.
+tests/historical-army-budget.mjs PASS: 227 fiyat/19 preset, geçersiz bütçe,
+asgari roller, deterministik dağıtım, fiyat tavanı ve 16 yön değiştirmeli savaş.
+Taktik kapalı, seed42/93, iki yön: eşit96 askerde Timur her iki rakibe4/4.
+Eşit2000 puanda Fatih3/4, Alparslan2/4. 2000 puan kadroları:
+Fatih144 asker/1992 puan; Alparslan122/1992; Timur111/1987.
+Bu küçük örnek bütün ordulara veya açık taktiklere genellenmez.
+Rapor: artifacts/commander-balance/budget.json.
+tests/historical-army-budget-browser.mjs PASS: 1440/390/320 px, giriş doğrulama,
+sayı tercihleri, karşı orduyu koruma, oluştur/uygula/kaydet/yenile/komutan değişimi.
+
+Son doğrulama
+19 hazır ordu × 4 bütçe seviyesi (100000 üst sınırı dahil): ittifak kayıt/geri
+yükleme ve toplam kadro birebir korunuyor; sessiz asker kırpması yok. Mevcut
+asker sayısı modu da üst sınır uygulamıyor. Bu kontrol yüksek asker sayısında
+FPS garantisi değildir; performans artışı iddia edilmedi.
+227 birlik/10896 kare tam görsel testi PASS; 27 yeni birlik/2160 kare ve
+1366/390 px ekle/kaldır/savaş/yenile PASS. 19 hazır ordu arayüzü 1440/390/320
+px, atölye ve kayıt kalıcılığı PASS. 19 tarih paneli PASS. Vite build PASS;
+mevcut büyük paket uyarısı sürüyor.
+NPC sekmesinin ayrı nihai doğrulaması: 22 betik, 40 özel ve 16 genel savaş,
+38 emir/komutan kontrolü, 6 gerçek Turan kapanışı, 12 hareketli atlı okçu
+savaşı ve build PASS. Ayrıntı: commander-opportunity-pressure-2026-10-15.txt.
+96 askerlik Alp Arslan–Timur tanılamasında açık/kapalı planla Timur 4/4
+kazandı. Kanat ateşinde hazırlık daha erken bırakılıyor; bu sonuç kuşatma
+başarısı veya genel denge sağlandı diye yorumlanmamalı.

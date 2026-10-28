@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080a0d"><title>Çöken Arena · Marble Studio</title></head>
+<body><header><a class="brand" href="/index.html">MARBLE STUDIO</a></header>
+<main class="collapse-layout"><aside class="collapse-controls">
+<p class="eyebrow">FİZİK DENEYİ</p><h1>Çöken Arena</h1><p class="intro">Her kırılma, sona bir adım daha. Renkli parçalar birikir, çember daralır ve her şey tek noktada birleşir.</p>
+<fieldset id="settings"><legend>Oyun ayarları</legend>
+<label>Video başlığı<input id="title" maxlength="100" value="The ball grows with every wall hit"></label>
+<label>Duvara her çarpmada büyüme<select id="growth"><option value="3">Yavaş</option><option value="5" selected>Dengeli</option><option value="8">Hızlı</option><option value="10">Çok hızlı</option></select></label>
+<label>Top başına kırık parça<select id="fragments"><option value="8">8 · Hafif</option><option value="16" selected>16 · Dengeli</option><option value="24">24 · Ayrıntılı</option></select></label>
+<label>Oynatma hızı<select id="playbackSpeed"><option value="0.5">0,5×</option><option value="1" selected>1×</option><option value="1.5">1,5×</option><option value="2">2×</option><option value="3">3×</option></select></label>
+<label>Düzen tohumu<input id="seed" type="number" min="0" max="4294967295" step="1" value="42"></label></fieldset>
+<div class="collapse-actions"><button id="restart" class="primary">Tekrar oynat</button><button id="new-seed">Yeni düzen</button></div>
+<details><summary>Nasıl çalışır?</summary><p>Top duvara her sektiğinde yavaşça büyür, yalnızca alttaki üçgene değince kırılır. Kırık parçalar kaybolmaz; top hafif parçaları iterek kendine yol açar. Yeni top ulaşılan boyutta doğar. Her kırılmada çember çok az küçülür. En büyük top kırıldığında final başlar.</p><p>Boşluk: duraklat / sürdür · R: tekrar oynat. Aynı tohum aynı simülasyonu üretir. Ayarlar cihazında saklanır.</p><a href="https://www.youtube.com/shorts/mPMURc59KdQ" target="_blank" rel="noreferrer">Referans video · CodeCraftedPhysics ↗</a></details>
+<p id="status" role="status" aria-live="polite"></p></aside>
+<section class="collapse-preview" aria-label="Oyun önizlemesi"><div id="stage"><canvas id="game" width="540" height="960" aria-label="Kırılan toplarla daralan dairesel arena"></canvas></div>
+<div class="collapse-playback"><button id="pause">Duraklat</button><button id="sound" aria-pressed="true">Ses açık</button><button id="fullscreen">Tam ekran</button></div><p id="metrics" aria-live="off"></p></section></main>
+<script type="module" src="/src/collapse-arena-app.js"></script></body></html>

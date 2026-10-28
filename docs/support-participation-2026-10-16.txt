@@ -1,0 +1,72 @@
+Savaş desteği ve hedef seçimi düzeltmesi — 16 Ekim 2026
+
+Kök nedenler ve değişiklikler
+- Milano/Fransa süvari taktiğinde wait/reserve/charge/flank aşamaları yardımcı
+  birliklerin ilerlemesini çalıştırmıyordu. Bu aşamalar ortak ilerlemeye dahil
+  edildi. Hızın belirlenmesinde ateş etmek için duran arbaletçiler veya daha
+  önce desteğe gönderilen askerler bütün piyade hattını durdurmuyor.
+- Manevra sırasında yakın safına ulaşmış ve ateş alan yardımcı piyade yerel
+  muharebeye bırakılıyor. Oyuncunun açık emri korunuyor.
+- Merkez desteği her karar döngüsünde aynı askerin hedefini ve hedef yenileme
+  sayacını sıfırlıyordu. İlk sevkten sonra yerel hedef seçimi devralıyor;
+  artan tehditte ilave destek gönderme bütçesi korunuyor.
+- Genel komutan dizilişleri sürekli ok ateşine iki saniyede cevap veriyor;
+  önceden yalnızca yüzde on toplam can kaybı eşiği kullanılıyordu.
+- Yardımcı birlik içermeyen ordularda da gövde yarıçapları hazırlanıyor.
+  Böylece saf sınırları eksik yarıçap nedeniyle NaN olmuyor.
+
+Doğrulama
+- Ana projede, test boyunca kaynaklar değişmeden davranış paketi 15/15 geçti.
+  Paket başlangıç geometrisi, müttefik sınırları, yol verme, atlı okçular,
+  destek, oyuncu emirleri ve iki yerel tarayıcı kontrolünü kapsıyor.
+- Milano: üç rakip, iki taraf, üç tohum; 18 doğal savaş. Her eşleşmede
+  arbaletçilerin en az yarısı 40 saniyede saldırıyor. Kartaca ve Kiev'e karşı
+  piyadenin de en az yarısı saldırıyor. Pers ok hattında küçük piyade birliği
+  temastan önce ölebildiğinden bu eşleşmede piyade saldırı oranı zorlanmıyor.
+- Osmanlı: altı merkez hücumu; erken destek ve 15 saniye içinde fiili saldırı.
+  Ming/Anglo-Sakson: dört savaşta arka safların katılımı. İskandinav: iki
+  okçu karşılaşmasında ateş altında hazırlığın bırakılması.
+- Eklenen çekirdek ordu yarıçap testiyle yeni birlik dizilişi paketi 36/36.
+- Önceki 61 şüpheli eşleşmenin ayrıntılı tekrarında uzun katılım gecikmesi
+  yedi eşleşmeden üçe indi. Kalanlar Milano/İskandinav Mitolojisi iki yön ve
+  Milano/Selçuklu: birliklerin çoğu hareket ediyor; bekleten formasyon emri
+  saptanmadı. Bu sinyal tek başına tüm birlik dengesinin doğru olduğunu kanıtlamaz.
+
+Artefaktlar
+- artifacts/battle-behavior-suite/report.json
+- artifacts/tactical-responsiveness/cavalry-support.json
+- artifacts/tactical-responsiveness/remaining-support-before.json
+- artifacts/tactical-responsiveness/remaining-support-audit.json
+- artifacts/tactical-responsiveness/new-unit-final.log
+- artifacts/tactical-responsiveness/support-fix-snapshot/
+
+Eşzamanlı çalışma
+Kullanıcı diğer çalışmanın devam etmesini istedi. Kaynak değişimi sırasında
+kesilen ilk iki toplu koşu başarılı kabul edilmedi. Uzun savaş matrisi yerel
+kaynak kopyasında tamamlandı. Bu tur tüm medeniyetlerin kendi aralarındaki bütün çiftleri veya
+bütün kapasite/tohum kombinasyonlarını doğrulamış değildir.
+
+Nihai matris
+- 138 medeniyetlik katalogda Milano, Fransa ve İskandinavya'nın bütün rakiplerle
+  iki taraflı eşleşmeleri: 819 savaş, kapasite 48, tohum 42, 30 Hz.
+- 819 doğal sonuçlanma, sıfır geçersiz/sonuçlanmayan savaş, kayıp altında
+  hareketsiz ve emirli çoğunluk için en uzun bekleme sıfır saniye.
+- 72 geniş katılım/uzun sessizlik uyarısı var; bunlar başarısızlık eşiğiyle aynı
+  şey değil. Testin geçmesi her eşleşmenin tarihsel açıdan kusursuz olduğunu
+  göstermiyor. Önceki 61 uyarının ayrıntılı tekrarının sınırları yukarıda.
+- Matris kaynağı başlangıç/bitiş SHA256:
+  31903b692493c2dbc19648c6375eaca78d91c684c455afdf354b24fb6200162b
+- Sonuç: artifacts/tactical-responsiveness/support-fix-snapshot/artifacts/
+  tactical-responsiveness/filtered-48.json
+- Özet: artifacts/tactical-responsiveness/support-final-summary.json
+- Korunan 15/15 raporu: artifacts/tactical-responsiveness/support-final-suite.json
+
+Son canlı uyumluluk kontrolü
+Matris sonrasında canlı kaynak farkı crown-battle-timing.js ve crown-battle.js:
+diğer çalışma 6000+ askerde 4x oynatım için adımı 200 ms'den 400 ms'ye çıkardı.
+Bu değişiklik sabit 30 Hz matris yolunu değiştirmiyor. Canlı destek ve Milano
+katılım testleri yeniden geçti. Dilimli/senkron simülasyon eşitlik testi
+320/3000/10000 askerde geçti. crown-battle-timing.mjs ise 10000 asker/4x için
+40 güncelleme beklerken 20 buluyor: diğer çalışmanın yeni zamanlama davranışı
+ile mevcut test beklentisi uyumsuz. O çalışma devam ettiği için dosyaları veya
+beklentileri burada değiştirilmedi; büyük ordu 4x zamanlamasına başarı verilmedi.

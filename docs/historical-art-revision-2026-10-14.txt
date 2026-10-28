@@ -1,0 +1,42 @@
+Tarihî savaşçı çizimleri — 14 Ekim 2026
+
+39 mevcut insan birliği boş tuvalden, birime özgü teçhizat profilleriyle yeniden
+çizildi. Yeni maskeli Kıpçak kılıçlısıyla 40 insan çizimi; mevcut savaş filiyle
+41 birlik / 31 medeniyet. Genel asker üzerine aynı aksesuar şablonu kaldırıldı.
+Miğfer, zırh, silah, kalkan, pelerin, at ve at zırhları profilden gelir.
+Atların gövde/bacakları, metal kollar ve mail coif ayrıca düzeltildi.
+
+Kaynaklar: src/historical-art-profiles.js, historical-warrior-art.js,
+historical-battle-art.js. Sprite API ve 240×228 tuval / (-30,-61,80,76)
+yerleşimi korundu. Eski historical-elite-art.js artık bu yolda çağrılmıyor.
+Katalog: historical-armies.js / historical-armies-layout.css; varsayılan
+Oyun çizimleri, alternatif Tarihî kaynaklar. Mobil kart taşması düzeltildi.
+
+kipchak_masked_swordsman: yakın dövüş süvarisi; ranged/skirmish yok.
+Veri: historical-catalogue.js, historical-unit-visuals.json ve araştırma JSON.
+Tekrarlanabilir veri ekleme: scripts/add-kipchak-swordsman.mjs.
+Yerel referans: public/warrior-references/elite-kipchak-mask.jpg (18.303 bayt).
+Fotoğraf: Jim Kelly, CC BY 2.0;
+https://commons.wikimedia.org/wiki/File:Mysterious_Mask,_Saint_Petersburg_Museum.jpg
+Araştırma:
+https://dergipark.org.tr/en/pub/turkiyat/article/1598769
+https://dergipark.org.tr/tr/pub/turklad/article/1366953
+Maske buluntularının Kıpçak/Altın Orda aidiyeti, tarihleme ve kullanım amacı
+tartışmalıdır. Birlik belgelenmiş ayrı bir alay değildir; ağır süvariden
+esinlenen oyun temsilidir. Teçhizat profilleri dönemsel esin taşır; renk ve
+arma tercihleri tüm askerler için belgelenmiş standart üniforma iddiası taşımaz.
+
+PASS: historical-elite-art — 41 birlik × 2 takım × 3 hareket × 8 kare = 1.968.
+Boş/kesilmiş kare, birebir piksel kopyası veya aynı alfa silueti yok;
+40 insan profilinin tamamı mevcut, Kıpçak yakın dövüş sınıfı doğru.
+PASS: historical-civilizations, historical-portraits, historical-armies-browser
+(oyun/kaynak geçişi, 390 px kart sınırları, yerel görseller ve katalog akışları).
+Son Vite build PASS 4,91 s; mevcut >500 kB paket boyutu uyarısı sürüyor.
+Ana sekmenin bildirdiği PASS: historical-combat, crown-battle-removal,
+Kıpçak iki takım 7/3 kaydetme/yükleme ve yeni sprite ölçeklerinde hit-test.
+Renderer sekmesi yeni çizimleri 1920 önizlemede doğruladı; API değişmedi.
+
+Çıktılar: artifacts/historical-combat/elite-art-preview.jpg,
+elite-art-details.jpg, elite-art-checks.json, art-revision-build.log.
+Testler teknik ayrışmayı doğrular; tarihsel kesinliğin veya estetik kalitenin
+otomatik kanıtı değildir. Son yakın plan görsel de gözle incelendi.

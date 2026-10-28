@@ -1,0 +1,42 @@
+Material contact audio — 2026-10-15
+
+Projectile impacts (arrow, bolt and bullet) now select a short metal contact
+for armored targets (existing armor >= 0.14 heuristic) and a soft contact for
+other targets. Pikes striking unarmored targets also use the soft bank.
+Projectile visuals use armor-hit/body-hit accordingly, without melee sparks.
+Mounted archers' sidearm hits can clang against armor; their arrows retain
+light projectile weight rather than inheriting cavalry impact weight.
+Slow, high-damage infantry contacts use a modestly lower playback pitch.
+This is game sound design, not historically measured material acoustics.
+
+Six original Kenney CC0 clips extracted from the already-local impact.zip:
+public/audio/battle/impactMetal_light_000..002.ogg
+public/audio/battle/impactSoft_medium_000..002.ogg
+Total 37,637 local bytes, NOT measured network usage. No new asset downloads.
+Sources/licence: public/audio/battle/SOURCES.txt and KENNEY-LICENSE.txt.
+
+BattleAudio loads two separate contact banks through the existing worker,
+trims once to 0.22/0.25 seconds, applies conservative gains, and shares the
+existing hit cooldown/token budget. One source per accepted hit; eight total
+voices remain the limit. No extra runtime filter or queued sounds. Missing
+contact clips fall back to the existing hit bank. Projectile contacts do not
+activate the metallic melee crowd bed.
+
+Validation passed:
+- tests/crown-battle-feedback-realism.mjs: material selection, projectile
+  timing/direction, no projectile sparks, mounted shooter vs projectile weight.
+- tests/crown-battle-contact-audio-browser.mjs: all six decoded recordings,
+  bounded/faded samples, actual audible output, sample variation, shared
+  cooldown across material switches, natural stop/mute and missing bank fallback.
+- tests/crown-battle-audio-mix.mjs: 10,000 events -> 14 accepted voices/second.
+- tests/crown-battle-feedback.mjs: timing, bounded effects, engine seeded parity.
+- tests/crown-battle-movement-audio-browser.mjs: max eight voices/two movement,
+  approach audio, distance filtering, pause/mute/restart and missing hoof clips.
+- tests/crown-battle-audio-crowd-browser.mjs: contact activation/fade, max seven
+  voices in fixture, output peak 0.208, reset/pause/mute and ranged silence.
+Logs: artifacts/battle-audio-recordings/contact-*.log.
+Vite production build passed in 27.63s with the existing large-chunk warning;
+log: artifacts/battle-audio-recordings/build-contact.log.
+
+Subjective listening has not been performed by the assistant. No overall FPS
+improvement claim; no combat balance or unit stats changed in this iteration.

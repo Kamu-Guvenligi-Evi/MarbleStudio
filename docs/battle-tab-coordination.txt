@@ -1,0 +1,111 @@
+Taç Muharebesi — sekmeler arası devir, 14 Ekim 2026
+
+GÜNCEL DURUM: FPS/menü ve lider/asker görsel işleri tamamlandı, devredildi.
+FPS sekmesi ortak dosyalarda yazmayı bitirdi ve sahipliği bıraktı.
+Ana sekme entegrasyon sorumluluğunu geri aldı; devam eden kod değişikliği yok.
+Sıfır başlangıç, iki takım yönetimi ve hit-test bağlantısı korundu.
+Aşağıdaki ara devirler geçmiş kayıtlarıdır; son durum bu paragraftır.
+
+GÖRSEL SON DEVİR: Katalog sekmesi revizyonu tamamladı. 40 insan çizimi ve
+fil ile toplam 41 birlik. Katalog varsayılan oyun çizimleri; tarihî kaynaklara
+geçiş mevcut. 1968 kare, katalog/medeniyet/portre, 390px ve build PASS
+bildirildi; API değişmedi. Ana sekmenin Kıpçak ve hit-test kontrolleri de
+devir notuna işlendi: historical-art-revision-2026-10-14.txt.
+FPS/menü sekmesine tamamlanan görsel teslimi iletildi.
+
+YENİ LİDER GÖRSEL İŞİ: Katalog sekmesi liderlerin saha çizimlerini ve Kıpçak
+maskelerinin ayrışmasını çalışıyor. Liderler motorda zaten ayrı asker; mevcut
+renderer ve hit-test bunları generic cavalry sprite'ına yönlendiriyor.
+Görsel sekmesi lider sprite'larını sağlayacak; FPS sekmesi renderer ve
+crown-battle-hit-test.js eşlemesini birlikte güncelleyecek. Her iki sekmeye
+dosya/sözleşme ve mevcut komutan testleri iletildi. Ana sekme bu dosyalarda
+eşzamanlı değişiklik yapmıyor.
+
+LİDER GÖRSEL TESLİMİ: Görsel sekmesi historical-commander-art.js ile 9 ayrı
+lider çizimini tamamladı. crown-battle-art dispatch ve FPS sekmesinin
+renderer/hit-test gerçek komutan tipi bağlantısı teslim edildi. Bildirilen
+PASS: 432 lider karesi, 1968 elit karesi, 9 lider savaş testi ve 9 liderin
+seçilip sahaya uygulanması tarayıcı kontrolü. İki Kıpçak maskesi de revize.
+Önizleme: artifacts/historical-commanders/commander-game-art.jpg.
+
+FPS/MENÜ ARA TESLİMİ: İlgili sekme duraklatmada sıfır tekrar çizim, atlasın
+en çok 8 sayfa kalması, PC/telefon arama ve iki takım silme, kamera/hit-test,
+WebM, DPR2 ve portrait-hash kontrollerini PASS bildirdi. Arama/Uygula sabit;
+komutan ayrıntıları açılır. Son izole Chrome çizim medyanları 320 asker:
+0.7 ms, 2000: 2.5 ms, 4000: 31.6 ms. Bunlar FPS değildir; 4000 askerde
+yavaşlık sürer. Son build ve docs/fps-menu-notes.txt teslimi bekleniyor.
+
+FPS/MENÜ SON TESLİMİ: docs/fps-menu-notes.txt tamamlandı ve ana sekmece
+okundu. Build PASS 3.21 s (mevcut paket boyutu uyarısı). Değişenler:
+crown-battle-sprite-cache.js, renderer/app/hit-test JS ve crown-battle.css;
+yeni performance/fps-menu tarayıcı testleri, teams testinde açılır panel uyumu.
+Sekme yazmayı bitirdi, dosya sahipliğini bıraktı. Yeni değişiklik olmadığı
+için tamamlanan testler ana sekmede tekrar çalıştırılmadı.
+
+Ana oyun/entegrasyon: 01a13b10-7f99-7a70-b113-bba2c705c791
+App, savaş motoru, seçim ve kayıt uyumluluğu. Sıfır başlangıç ve iki takımın
+seçilen askerlerini kaldırma tamam. PC/telefon kontrolleri ve derleme PASS.
+Detay: battle-empty-removal.txt.
+
+Kamera/renderer: 01a13b6d-28b1-7921-8984-c4623799e14f
+PC görsel iyileştirmesi tamamlandı ve devredildi. Renderer/kamera bu sekmede;
+asker ölçeği %20–30 büyüdü, önbellekli PC zemini/ışık/temas gölgesi eklendi.
+1200'den fazla görünür askerde ucuz gölge kullanılır. Yeni art dosyalarının
+sahipliği görsel sekmesinde. Detay: pc-visuals-notes.txt.
+Önceki kamera ve iki takım testleri devredildi. App/seçim sahipliği ana sekmede.
+Detay: selection-graphics-notes.txt.
+
+Katalog/görseller: 01a13b51-ead4-7090-a516-86581873cf50
+Aktif: birbirine benzeyen savaşçıların donanım ve siluetlerini yeniden çizme,
+maskeli kılıçlı Kıpçak süvarisini ayrı birlik olarak ekleme.
+Sahiplik: historical-battle-art.js, historical-elite-art.js,
+historical-art-profiles.js, katalog ve araştırma/portre verileri.
+Bu revizyon henüz tamamlandı veya doğrulandı diye raporlanmamalı.
+
+Bağlantı: katalogdan historical-combat üzerinden savaş türleri üretiliyor;
+SpriteLibrary tarihî çizimleri renderer'a taşıyor. Yeni türün katalog,
+rol, çizim ve yerel portre eşleşmesi hazır olduğunda birlikte doğrulanacak.
+App/motor değişikliği gerekirse ana sekmeye, renderer değişikliği gerekirse
+kamera sekmesine haber verilecek. Aynı dosyada eşzamanlı düzenleme yapılmaz.
+Bitmiş testler sebepsiz tekrarlanmaz; yeni değişikliğin ilgili kontrolleri yapılır.
+
+Son ara devir: görsel sekmesi historical-warrior-art.js ile insan askerlerin
+tam çizimini yeniliyor. Yeni kimlik kipchak_masked_swordsman olarak bildirildi.
+Ana sekmenin ilk bağlantı kontrolünde çizim profili mevcut, fakat katalogdan
+HISTORICAL_TYPES içine henüz gelmiyordu. Eksik bağlantı katalog sekmesine
+iletildi; bu, devam eden revizyonun ara durumudur. Katalog devrinden sonra
+yakın dövüş rolü, medeniyet ve iki tarafın kayıt geri yüklemesi doğrulanacak.
+
+Son doğrulama: katalog eklemesi teslim edildi. kipchak_masked_swordsman
+cavalry, ranged/skirmish kapalı; Kıpçak / Kuman grubunda. İki ordunun 7/3
+sayılı kayıtlarını geri yükleme PASS. Yeni katalogla historical-combat.mjs
+ve crown-battle-removal.mjs PASS. App/motorda ek düzenleme gerekmiyor.
+Görsel kare/kırpılma testleri katalog sekmesinde devam ediyor.
+
+PC entegrasyonu: crown-battle-hit-test.js eklendi; app seçim ve saldırı hedefi
+için görünür sprite pikselini kontrol ediyor. Güncel spriteScaleX/Y, face,
+animasyon karesi ve kamera ölçeği kullanılır; ayak çevresindeki dokunma payı
+korunur. Renderer çizim sözleşmesi (-30,-61,80,76) kamera sekmesiyle teyitli.
+PASS: crown-battle-hit-test-browser (144 kontrol: PC/telefon, DPR 1/2,
+zoom 1/3, iki taraf/yön, şeffaflık ve kaldırılmış askerler).
+PASS: crown-battle-teams-browser (1366/390), Vite build (6.75 s;
+mevcut paket boyutu uyarısı). Log: artifacts/battle-hit-build.log.
+Görsel sekmesi 41 birimin 1968 karesi, katalog/portre testleri PASS bildirdi;
+şimdi historical-armies.js/layout.css içinde oyun çizimi/kaynak görünümü yapıyor.
+
+PC son devri: crown-battle-renderer.js, crown-battle-pc-scene.js ve
+tests/crown-battle-pc-visuals-browser.mjs. Kamera/iki takım PC-telefon,
+DPR2/preset/önbellek/portrait-hash ve build PASS bildirildi. Sprite sözleşmesi
+korundu; ana sekmenin yukarıdaki hit-test sonuçları bu ölçekle geçerli.
+Önizleme: artifacts/crown-battle/pc-visuals-1920.jpg.
+Sınır: 4000 askerde CPU çizim medyanı 45.1 ms, en yüksek 1929.1 ms;
+bu ölçüm FPS değildir ve kalabalık savaşlarda akıcılık garantisi vermez.
+
+2026-10-14 mekanik/animasyon devri:
+Ana sekme crown-battle.js motor ve impact/behavior testlerini tamamladı.
+Kamera sekmesi renderer/app/camera/CSS sahibi; expandedMap motor desteği hazır.
+Görsel sekmesi sprite/katalog sahibi. Ayrıntılar docs/battle-impact-notes.txt.
+6 motor test grubu + 34 tarayıcı temas/ölüm kontrolü PASS.
+Son sprite atış eşleştirmesi ve ortak FPS ölçümü diğer sekmelerle koordine.
+
+Mekanik final: goruntulerde yay4/musket4-5 entegrasyonu ve son atlasla34tarayici PASS. 4000 karma birlikte motor mikro-optimizasyonundan once/sonra deterministik durum birebir ayni. Motor dosyasi final olcume hazir; kamera sekmesine devredildi. Ayrintilar battle-impact-notes.txt.

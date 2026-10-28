@@ -1,0 +1,47 @@
+Automatic commander opening deployment — 2026-10-16
+
+Request: automatic armies should spawn in opponent-aware ranks instead of
+spending the opening seconds assembling through friendly troops.
+
+Implementation
+- src/historical-opening-deployment.js runs the existing strategy, historical
+  doctrine and generic formation planners before the first simulation tick.
+  Actual tactical slots determine initial positions; no independent duplicate
+  historical formation definitions were introduced.
+- Historical army deployment first establishes local opposing fronts, then
+  packs complete plans into separate allied areas. Fronts share a safe gap;
+  Seljuk wings include their required maneuver envelope. Non-doctrine support
+  troops receive separate files. Bounds grow with the resulting positions.
+- HistoricalTactics adopts unchanged opening plans on the first live tick.
+  Civilizations and generic formations preserve their adopted state. Seljuk
+  bait still requires real enemy pursuit; readiness does not trigger a fake
+  retreat automatically.
+- Manual orders/positions, commander loss and roster changes invalidate cached
+  orders. Disabled tactical AI and fortress maps bypass opening planning.
+- Legacy historicalArmies constructors retain their prior behavior; the army
+  configuration UI uses armyConfigs and receives the new opening deployment.
+- Existing researched doctrine definitions remain game interpretations; this
+  change connects those definitions to deployment, not a new historical claim.
+
+Validation
+- Added tests/historical-opening-deployment.mjs: five enemy responses mirrored
+  across both teams; ten civilization doctrines; Seljuk support; chariots,
+  elephants and horse archers; exact initial slots and first-order continuity;
+  invalidation and empty armies; six allied armies with maneuver space.
+- Passed historical-army-deployment (2/4/8 armies, up to 1,000 troops per army),
+  historical-deployment-spacing, historical-commander-formations,
+  historical-preparation-pressure, crown-battle-early-yield,
+  historical-alliance-coordination, historical-multi-army-tactics,
+  historical-adaptive-battles. Earlier in task: commander-deployment,
+  commander-strategy and alliance-redeployment also passed.
+- Existing stalled-assembly test now explicitly sets an assembly phase after
+  verifying that an automatically deployed army immediately advances.
+- Browser: 484 units, four armies, rendered opening, 30 simulated seconds,
+  finite positions, 243 wounded. Screenshot inspected locally via small JPEG.
+- Vite production build passed; existing large-chunk warning remains.
+- During concurrent work a temporary catalogue kind mismatch interrupted two
+  tests. It was resolved externally before rerunning; no catalogue edit was
+  made for this task. Both tests passed on rerun.
+
+Artifacts: artifacts/opening-deployment-2026-10-16/ (logs and isolated build).
+Browser image: artifacts/army-deployment/start.jpg.

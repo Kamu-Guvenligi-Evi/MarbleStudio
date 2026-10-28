@@ -1,0 +1,23 @@
+Irk / halk menüsü entegrasyonu — 14 Ekim 2026
+
+Paylaşılan historical-culture-groups.js hem tarihi ordu kataloğunu hem
+Taç Muharebesi ordu kurma menüsünü besliyor.
+
+Song Hanedanı -> Çinliler
+Goryeo Kore -> Koreliler
+Yeni Asur -> Asurlular
+Babür İmparatorluğu -> Babürler / Hindistan
+Khmer İmparatorluğu -> Khmerler
+Maya şehir devletleri -> Mayalar
+Benin Krallığı -> Benin / Edo
+Memlük Sultanlığı -> Mısır / Memlükler (mevcut eşleme korundu)
+
+52 birlik, 41 ülke/devlet grubu, 24 halk/kültür menüsü.
+Mevcut katalogda Diğer altında kalan ülke yok.
+Bu kategoriler menü gruplarıdır; çok halklı devletlerin bütün askerlerini
+tek bir etnik kökene atfetmez.
+
+historical-cultures-browser.mjs: 1366px ve 390px geçti.
+Her kültürün ve ülkenin gerçek düğmeleri iki sayfada da tıklandı;
+birlik sayıları, arama, klavye, seçimlerin korunması, savaşa aktarım,
+kayıt/yükleme ve yatay taşma kontrol edildi. Tarayıcı hatası yok.

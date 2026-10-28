@@ -1,0 +1,29 @@
+Battle watchability / mechanics — 2026-10-15
+
+Changes
+- Optional Takip button in camera toolbar; usable in cinema or normal view.
+- Read-only BattleDirector groups nearby engagements every 0.6 seconds. Frames cavalry charges, close combat and ranged attacks; eases camera motion; holds shots and ignores brief attack-animation gaps.
+- No automatic enable. Pause stops camera. Wheel, zoom, map, arrows, pointer selection and Escape return manual control. Rebuilding a battle resets tracking on playback.
+- Frame settles exactly after movement, allowing cached ground reuse. No extra particles, art downloads or simulation commands.
+- Found unbounded firearm smoke and elephant impact emitters. Both now respect existing 96-effect budget. Projectiles, damage and attack counts remain intact.
+
+Verified
+- crown-battle-director.mjs: default off, pause/end/rebuild, empty armies, stable view, shot retention, stronger action switch; 450-step seeded fight identical with tracking enabled/disabled.
+- crown-battle-effect-budget.mjs: 240 gun attacks / elephant attacks keep all projectiles, hits and attack counts while cosmetic effects stay bounded and expire.
+- Existing behavior, impact, charge, projectiles and feedback tests pass. Covers frontal pike counter versus flank, cavalry run-up, finite archer evasion, horse-archer fire, movement/hold orders, firearm and elephant cadence, target hysteresis and eventual melee resolution.
+- Existing camera browser test and new director browser test pass at 1366 and 390 px. Pause/manual override, map, pinch, toolbar fit and no browser errors.
+
+Local performance observations (not an Opera or user-device guarantee)
+- Chrome headless, 1366x768, DPR 2 adapting to 1; 1800 historical soldiers, warmed cache, 360 animation frames.
+- Fixed zoom 1.65: mean rendered interval 37.32 ms, p95 52.7, max 68.6; mean draw 18.27 ms / simulation step 11.73 ms.
+- Tracking: mean rendered interval 21.02 ms, p95 38.1, max 63.1; mean draw 8.79 ms / simulation step 11.66 ms.
+- Both runs: no rendered interval above 100 ms, no runtime pose generation or atlas revisions, no browser errors.
+- These are DIFFERENT views and simulation durations. Moving camera also triggers camera-only frames. Numbers do not establish a general FPS improvement; large-army performance remains limited. No 60 FPS claim.
+- Evidence: artifacts/battle-watch/perf-fixed.json, perf-follow.json, corresponding logs; follow-1366.jpg and follow-390.jpg.
+
+Integration
+- Another existing user-directed thread is changing recruitment/selection. Preserve its app.js edits; preserve camera.tick(elapsed, running && !document.hidden).
+- Pre-change copies for this work: artifacts/battle-watch/{camera-before.js,camera-before.css,app-before.js,engine-before.js}. Do not restore entire app.js over recruitment work.
+- Initial final cinema regression attempt ran while recruitment import pointed at a not-yet-created module. Recruitment files subsequently arrived and build passed (existing large-chunk warning).
+- Cinema regression passes 1366x768, 390x844, 320x568 and 844x390. Updated its stale height expectation to include the existing audio strip, separately asserting that strip stays <=64 px. It now waits for camera initialization.
+- Fixed visible literal "null" above maps: setupScroll had detached the army builder, so document.querySelector returned null. Query the detached setupScroll itself before prepending; coordinated this one-line app.js fix with the menu thread.

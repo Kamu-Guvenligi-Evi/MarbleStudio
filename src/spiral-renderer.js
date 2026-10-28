@@ -1,5 +1,6 @@
 import {drawChannelTitle,drawChannelWatermark} from './channel-branding.js';
 import { SPIRAL_THEMES } from './spiral-themes.js';
+import {drawSpiralScenery} from './spiral-scenery.js';
 import { gatePoint } from './spiral.js';
 import { ballImage } from './ball-images.js';
 import { ICE_THICKNESS } from './spiral-ice.js';
@@ -71,10 +72,13 @@ export function renderSpiral(ctx,race,{countdown=0,paused=false,channel}={}){
   ctx.save();ctx.setTransform(w/540,0,0,h/960,0,0);
   const background=ctx.createRadialGradient(270,450,60,270,480,530);
   background.addColorStop(0,theme.background[0]);background.addColorStop(1,theme.background[1]);
-  ctx.fillStyle=background;ctx.fillRect(0,0,540,960);
+  ctx.fillStyle=race.spiralBackground===false?'#080d15':background;ctx.fillRect(0,0,540,960);
   ctx.textAlign='center';ctx.fillStyle='#fff';
 
-  drawMaterialAmbience(ctx,theme,race.time);
+  if(race.spiralBackground!==false){
+    drawMaterialAmbience(ctx,theme,race.time);
+    drawSpiralScenery(ctx,theme.scenery,race.time);
+  }
   const texture=iceTexture(race.ice,theme);
   ctx.drawImage(texture,0,0,540,960);drawMaterialLight(ctx,texture,theme,race.time);
   ctx.beginPath();

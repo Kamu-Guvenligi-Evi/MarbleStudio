@@ -1,0 +1,23 @@
+Dört birlik entegrasyonu — bağımsız kontrol, 16 Ekim 2026
+
+Katalog: japan_naginata_foot, mughal_shamsherbaz, tang_crossbowman,
+ayyubid_foot_spearman. Çizim ve kaynak kaydı major-army-expansion modüllerinde.
+Takeda: 24 tabanda 2 naginatalı yaya; Selahaddin: 24 tabanda 4 mızraklı yaya.
+Tang ve Babür kartları kendi medeniyet menülerinde elle seçilir. Mevcut Qin,
+Ming veya Timur hazır ordularına dönem dışı birlik olarak eklenmez.
+
+Bu sekmenin değişikliği: tests/historical-army-presets.mjs.
+- Takeda/Selahaddin yeni birlikleri 24/97/241 kapasitede iki takımda gerçekten doğuyor.
+- Mevcut bütün komutan orduları Tang ve Babür kartlarını dışarıda tutuyor.
+
+Bağımsız doğrulamalar:
+- historical-army-presets: 20 ordu, minimum–1000 kapasite, rol ve taktik etkinleşmesi PASS.
+- historical-army-history: 20 dönem/kapsam/kaynak paneli PASS.
+- historical-army-presets-browser: 1440/390/320px, sayı değiştirme, takım ayrımı,
+  uygulama, kayıt ve ordu atölyesi kalıcılığı PASS.
+- historical-equipment-balance: 303 farklı donanım profili, kayıt korunması,
+  258 karşılıklı savaşta zaman aşımı olmaması PASS.
+Günlükler: artifacts/major-army-expansion/*-regression.log.
+
+units.jpg bir kez incelendi: dört farklı siluet, aynı insan ölçeği, farklı silahlar.
+Bu kayıt bütün tarihî orduların eksiksizliği veya genel FPS garantisi değildir.

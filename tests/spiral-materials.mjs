@@ -6,14 +6,14 @@ import {normalizeProject,serializeProject,parseProject} from '../src/projects.js
 import {copyFor,validateBatch} from '../src/factory-recipes.js';
 import {automaticCandidate} from '../scripts/production-automation.mjs';
 
-assert.equal(Object.keys(SPIRAL_THEMES).length,12);
+assert.equal(Object.keys(SPIRAL_THEMES).length,31);
 for(const [id,theme] of Object.entries(SPIRAL_THEMES)){
   const project=normalizeProject({name:theme.name,mode:'spiral',spiralTheme:id,count:1,sequence:[]});
   assert.equal(parseProject(serializeProject(project)).spiralTheme,id);
   assert.ok(copyFor({mode:'spiral',theme:id,seed:2048},'en').title.startsWith(theme.englishName+' — '));
 }
 const options={...validateBatch({modes:['spiral']}),automation:{rosterCategory:'colors',ballNames:[],ballImages:[],music:{mode:'fixed',track:'',volume:25}}};
-for(const theme of ['wood','honey','marble','copper','sand','coral']){
+for(const theme of ['chocolate','soap','opal','wood','honey','marble','copper','sand','coral','alien','amber','mushroom','pixels','starmap']){
   const guard={check:r=>({allowed:r.theme===theme})};
   assert.equal(automaticCandidate(options,42,[],[],guard).theme,theme,'Automatic generation must reach every new material');
 }
@@ -60,7 +60,7 @@ try{
   await page.locator('#material-sheet').screenshot({path:'artifacts/spiral-materials.png'});
   // Downsampling the transparent texture can round background channels by one.
   const samePixel=(a,b)=>a.every((value,i)=>Math.abs(value-b[i])<=2);
-  assert.equal(new Set(results.results.map(r=>r.intact)).size,12,'Every material must have its own appearance');
+  assert.equal(new Set(results.results.map(r=>r.intact)).size,Object.keys(SPIRAL_THEMES).length,'Every material must have its own appearance');
   for(const r of results.results){
     assert.ok(samePixel(r.hole,r.clear),r.id+': removed material must stay empty, including light effects: '+JSON.stringify([r.hole,r.clear]));
     assert.deepEqual(r.far,r.farAfter,r.id+': local fracture must preserve distant material');
@@ -71,13 +71,13 @@ try{
   await page.goto('http://127.0.0.1:5173/factory-render.html');await page.waitForFunction(()=>window.factoryRenderer);
   const exports=await page.evaluate(async()=>{
     const frames=[];
-    for(const theme of ['lava','candy','cosmic','wood','honey','copper']){
+    for(const theme of ['chocolate','soap','opal']){
       await window.factoryRenderer.begin({recipe:{mode:'spiral',theme,count:1,seed:2048},fps:240,width:540,height:960,speed:1,intro:0,analysis:{simulationSeconds:30},copy:{hook:'Test'}});
       frames.push(window.factoryRenderer.frame(240));
     }
     return frames;
   });
-  assert.equal(new Set(exports).size,6,'Exported video must use the selected material');
+  assert.equal(new Set(exports).size,3,'Exported video must use the selected material');
   assert.deepEqual(errors,[]);
-  console.log('PASS: 12 distinct textured materials, material debris, permanent fracture masks, cached surfaces, unchanged physics RNG, saved themes, automatic candidates, English titles and 240 FPS video frames.');
+  console.log('PASS: 31 distinct textured themes, material debris, permanent fracture masks, cached surfaces, unchanged physics RNG, saved themes, automatic candidates, English titles and 240 FPS video frames.');
 }finally{await browser.close();}

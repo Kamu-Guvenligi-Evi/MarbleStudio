@@ -8,26 +8,36 @@ import {setupBreakerWorkbench,videoRenderMode} from './breaker-workbench.js';
 import {drawChannelTitle,drawChannelWatermark} from './channel-branding.js';
 let videoChannel='';
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d');
-const field=document.createElement('canvas');field.width=WIDTH;field.height=ROWS*CELL;
+const requestedWidth=Number(new URLSearchParams(location.search).get('render-width'));
+const renderWidth=videoRenderMode?(Number.isFinite(requestedWidth)&&requestedWidth>0?Math.min(2160,Math.ceil(requestedWidth)):1080):WIDTH;
+canvas.width=renderWidth;canvas.height=Math.round(renderWidth*HEIGHT/WIDTH);
+const renderScaleX=canvas.width/WIDTH,renderScaleY=canvas.height/HEIGHT;
+ctx.setTransform(renderScaleX,0,0,renderScaleY,0,0);
+const field=document.createElement('canvas');field.width=canvas.width;field.height=Math.ceil(ROWS*CELL*renderScaleY);
 const tiles=field.getContext('2d');
+// Snap shared tile edges to output pixels so clearing a block leaves no fringe.
+function tileBounds(index){
+  const col=index%COLS,row=Math.floor(index/COLS),x=Math.round(col*CELL*renderScaleX),y=Math.round(row*CELL*renderScaleY);
+  return [x,y,Math.round((col+1)*CELL*renderScaleX)-x,Math.round((row+1)*CELL*renderScaleY)-y];
+}
+function clearTile(index){tiles.clearRect(...tileBounds(index));}
 let colors=BREAKER_MAPS[0].colors,speed=1,completionDelay=0;
 const soundtrack=new BreakerAudio({automatic:true});
 let keys=new Set(),lastTime=0,shownBroken=-1,shownBalls=-1;
 const bonusStyles={multiply:{label:'×3',color:'#9564b3',name:'Toplar üçe katlandı'},add:{label:'+3',color:'#489d98',name:'Üç yeni top'},wide:{label:'↔',color:'#749e44',name:'Çubuk uzadı'},shrink:{label:'−',color:'#b78b2a',name:'Çubuk kısaldı'}};
 function playSound(kind){
-  if(kind==='finish'&&!game.broken)$('status').textContent='Top hedefe ulaştı; şimdi blokları kırabilir.';
   if(kind==='lost')$('status').textContent='Bütün toplar düştü. Tekrar deneyebilirsin.';
   if(kind!=='bonus')soundtrack.play(kind);
 }
-const game=new SpiralBreaker({mapId:new URLSearchParams(location.search).get('map'),onBreak:index=>{tiles.clearRect(index%COLS*CELL,Math.floor(index/COLS)*CELL,CELL,CELL);soundtrack.play('break',{x:(index%COLS+.5)*CELL});},onHit:playSound,onBonus:(type,count)=>{soundtrack.play(type==='multiply'?'multiply':'bonus');$('status').textContent=count===BALL_LIMIT?`${BALL_LIMIT} top sahada · Top sınırına ulaşıldı`:`${bonusStyles[type].name} · ${count} top sahada`;}});
+const game=new SpiralBreaker({mapId:new URLSearchParams(location.search).get('map'),onBreak:index=>{clearTile(index);soundtrack.play('break',{x:(index%COLS+.5)*CELL});},onHit:playSound,onBonus:(type,count)=>{soundtrack.play(type==='multiply'?'multiply':'bonus');$('status').textContent=count===BALL_LIMIT?`${BALL_LIMIT} top sahada · Top sınırına ulaşıldı`:`${bonusStyles[type].name} · ${count} top sahada`;}});
 function rebuildField(){
   colors=game.map.colors;
   tiles.clearRect(0,0,field.width,field.height);
   game.cells.forEach((type,index)=>{
-    if(!type)return;const x=index%COLS*CELL,y=Math.floor(index/COLS)*CELL;
-    tiles.fillStyle=colors[type];tiles.fillRect(x,y,CELL,CELL);
-    tiles.fillStyle='#00000030';tiles.fillRect(x,y,CELL,.65);tiles.fillRect(x,y,.65,CELL);
-    tiles.fillStyle='#ffffff20';tiles.fillRect(x+1,y+CELL-1,CELL-1,.5);
+    if(!type)return;const [x,y,w,h]=tileBounds(index);
+    tiles.fillStyle=colors[type];tiles.fillRect(x,y,w,h);
+    tiles.fillStyle='#00000030';tiles.fillRect(x,y,w,.65*renderScaleY);tiles.fillRect(x,y,.65*renderScaleX,h);
+    tiles.fillStyle='#ffffff20';tiles.fillRect(x+renderScaleX,y+h-renderScaleY,w-renderScaleX,.5*renderScaleY);
   });
 }
 function rounded(x,y,w,h,r,fill,stroke,context=ctx){const ctx=context;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke();}}
@@ -47,12 +57,7 @@ function drawMascots(ctx){
   ctx.beginPath();ctx.moveTo(26,43);ctx.quadraticCurveTo(38,53,51,39);ctx.stroke();ctx.restore();
 }
 function render(){
-  ctx.fillStyle='#111516';ctx.fillRect(0,0,WIDTH,HEIGHT);ctx.drawImage(field,0,0);
-  if(!game.broken){
-    const [x,y]=game.path.at(-1);ctx.strokeStyle=colors[4];ctx.lineWidth=2;
-    ctx.beginPath();ctx.arc(x,y,7+Math.sin(game.time*3)*2,0,Math.PI*2);ctx.stroke();
-    ctx.fillStyle=colors[4];ctx.fillRect(x-2,y-2,4,4);
-  }
+  ctx.fillStyle='#111516';ctx.fillRect(0,0,WIDTH,HEIGHT);ctx.drawImage(field,0,0,field.width/renderScaleX,field.height/renderScaleY);
   for(const particle of game.particles){ctx.globalAlpha=particle.life*2;ctx.fillStyle=colors[particle.type];ctx.fillRect(particle.x,particle.y,2,2);}ctx.globalAlpha=1;
   for(const bonus of game.bonuses){
     if(bonus.collected)continue;
@@ -60,6 +65,8 @@ function render(){
     ctx.fillStyle='#fff';ctx.font='bold 22px Segoe UI';ctx.textAlign='center';ctx.fillText(style.label,bonus.x,bonus.y+8);ctx.textAlign='left';
   }
   const p=game.paddle;ctx.shadowColor='#edb92555';ctx.shadowBlur=9;rounded(p.x-p.width/2,p.y,p.width,p.height,5,'#e5ad25','#f7d966');ctx.shadowBlur=0;
+  ctx.strokeStyle='#b9f4ed55';ctx.lineWidth=3;ctx.lineCap='round';ctx.beginPath();
+  for(const b of game.balls){ctx.moveTo(b.x,b.y);ctx.lineTo(b.x-b.vx*.025,b.y-b.vy*.025);}ctx.stroke();ctx.lineCap='butt';
   ctx.fillStyle='#f9ffff';ctx.beginPath();for(const b of game.balls){ctx.moveTo(b.x+b.radius,b.y);ctx.arc(b.x,b.y,b.radius,0,Math.PI*2);}ctx.fill();
   rounded(18,561,game.balls.length>99?91:64,27,8,'#090d0ec9');ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(31,574,5.4,0,Math.PI*2);ctx.fill();ctx.font='18px Segoe UI';ctx.fillText(game.balls.length.toLocaleString('en-US'),44,580);
   ctx.drawImage(canvasLayer(ctx,'mascots',WIDTH,160,layer=>{layer.translate(0,-720);drawMascots(layer);}),0,720,WIDTH,160);
@@ -132,10 +139,10 @@ function frame(time){const dt=lastTime?Math.min(.05,(time-lastTime)/1000):0;last
   render();requestAnimationFrame(frame);
 }
 updateMapPicker();rebuildField();render();if(!videoRenderMode)requestAnimationFrame(frame);
-if(videoRenderMode)window.breakerVideo={reset(recipe,onImpact,channel){game.reset(recipe.mapId);game.onHit=type=>{if(type!=='bonus')onImpact({type});};game.onBreak=index=>{tiles.clearRect(index%COLS*CELL,Math.floor(index/COLS)*CELL,CELL,CELL);onImpact({type:'break',x:(index%COLS+.5)*CELL});};game.onBonus=type=>onImpact({type:type==='multiply'?'multiply':'bonus'});speed=recipe.playbackSpeed;videoChannel=channel;shownBroken=-1;shownBalls=-1;rebuildField();},step:dt=>game.step(dt),state:()=>game.state,draw(){render();return canvas;}};
+if(videoRenderMode)window.breakerVideo={reset(recipe,onImpact,channel){game.reset(recipe.mapId);game.onHit=type=>{if(type!=='bonus')onImpact({type});};game.onBreak=index=>{clearTile(index);onImpact({type:'break',x:(index%COLS+.5)*CELL});};game.onBonus=type=>onImpact({type:type==='multiply'?'multiply':'bonus'});speed=recipe.playbackSpeed;videoChannel=channel;shownBroken=-1;shownBalls=-1;rebuildField();},step:dt=>game.step(dt),state:()=>game.state,draw(){render();return canvas;}};
 setupBreakerWorkbench({canvas,capture:()=>({mode:'spiral-breaker',project:{mapId:game.map.id,playbackSpeed:speed,sound:!soundtrack.muted,soundStyle:soundtrack.soundStyle,soundOverrides:{...soundtrack.overrides},referenceMapping:{...soundtrack.mapping},name:'Spiral Kırıcı'}})});
 // Small read-only hook for local browser checks.
-window.spiralBreaker={getState:()=>({mapId:game.map.id,speed,sequence:$('sequence').checked,state:game.state,time:game.time,broken:game.broken,balls:game.balls.length,bonuses:game.bonusCount,armed:game.balls.filter(b=>b.armed).length,falling:game.bonuses.map(b=>({...b})),automatic:game.automatic,paddleX:game.paddle.x,paddleWidth:game.paddle.width,ball:{...game.ball}})};
+window.spiralBreaker={getState:()=>({mapId:game.map.id,speed,sequence:$('sequence').checked,state:game.state,time:game.time,broken:game.broken,balls:game.balls.length,bonuses:game.bonusCount,falling:game.bonuses.map(b=>({...b})),automatic:game.automatic,paddleX:game.paddle.x,paddleWidth:game.paddle.width,ball:{...game.ball}})};
 window.spiralBreaker.getAudioState=()=>soundtrack.getState();
 
 import './studio-workspace-layout.css';

@@ -1,0 +1,22 @@
+{
+  "id": "history-a9dccdc2ab",
+  "category": "history",
+  "name": "Marcus Aurelius",
+  "englishName": "Marcus Aurelius",
+  "src": "/catalog/history-a9dccdc2ab.jpg",
+  "fit": "cover",
+  "source": "https://commons.wikimedia.org/wiki/File:MSR-ra-61-b-1-DM.jpg",
+  "identitySource": "https://en.wikipedia.org/wiki/Marcus_Aurelius",
+  "credit": "Daniel Martin",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/MSR-ra-61-b-1-DM.jpg/330px-MSR-ra-61-b-1-DM.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "curated": true,
+  "historicalNote": "Roma · hükümdar ve filozof · Sanatsal tasvir",
+  "keywords": "Marcus Aurelius Roma · hükümdar ve filozof",
+  "portraitFrame": [
+    0.5,
+    0.25,
+    0.75
+  ]
+}

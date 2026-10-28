@@ -1,0 +1,36 @@
+2026-10-14 — Boş ordular ve seçili askerleri kaldırma
+
+Klasik yeni oyun 0/0 başlar. Tarihî modda kayıt yoksa ordular boştur;
+kayıtlı kullanıcı planı korunur. historical=new iki orduyu ve liderleri
+sıfırlar. historical=demo yalnız açık örnek savaş bağlantısıdır.
+
+Yönetilen ordu seçicisi Mavi/Kızıl arasında geçer; seçim temizlenir.
+Seçilenleri kaldır / Delete: aktif ordunun seçili yaşayan askerlerini kaldırır.
+Seçme, alan seçimi, ilerle, dur ve hedefe saldır iki takım için çalışır.
+İki komutan kartındaki seçim düğmesi ilgili takıma otomatik geçer.
+Sayı ve arama alanında Delete metin düzenler. Seçimi kaldır asker silmez.
+Ordu kutuları ve tarihî kayıt güncellenir; lider seçimi de temizlenir.
+Asker ID indeksleri korunur; removed işaretli askerler çizilmez.
+Kaldırılan hedefe uçan mermiler temizlenir. Savaş başladıktan sonra
+bir ordunun son askeri kaldırılırsa sonuç anında hesaplanır. Kurulumdaki boş
+ordu zafer/yenilgi oluşturmaz; iki taraf hazır olmadan başlat/kayıt kapalıdır.
+
+Engine varsayılan new Battle() örnekleri test/şablon için korunur.
+UI allowEmpty:true ile sayıları açıkça geçirir. validateHistoricalArmies
+normalde boş orduyu reddeder; kayıt yükleyici boş planları kabul eder.
+Katalogdan kaldırılan kimliklerin kayıt göçü historical-combat.js içindedir.
+
+PASS: crown-battle-removal.mjs; crown-battle-removal-browser.mjs
+(1366/390px); crown-battle.mjs; crown-battle-behavior.mjs;
+historical-combat.mjs; historical-commanders-combat.mjs.
+Diğer sekme selection/layout/camera tarayıcı testlerini PASS bildirdi.
+PASS: historical-combat-browser, historical-commanders-battle-browser,
+historical-commanders-browser; diğer sekme teams-browser (1366/390) PASS.
+Eski 5 Osmanlı süvari kartının sayıları ottoman_sipah altında toplanır;
+sıra bağımsız toplam, negatif sayı ve taşma denetimleri PASS.
+Yeni boş başlangıç Kurulum sekmesini açar. Tarihî modda sıfırdan kur linki var.
+Build PASS. Diğer sekme WebM indirme + 1080x1920 decode PASS bildirdi.
+İki takım eklemesi sonrası son build PASS (mevcut paket boyutu uyarısı).
+Removal-browser PC/telefon ve commanders-battle-browser tekrar PASS.
+Diğer sekme: teams-browser tarihî kırmızıya özgü birlik ve lider seç/sil,
+reload ile korunma, saha mouse/touch seçimi, selection/camera tekrar PASS.

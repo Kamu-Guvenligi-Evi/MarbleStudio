@@ -1,0 +1,40 @@
+14 EKİM 2026 / OYNANABİLİR TARİHÎ MUHAREBE
+
+Kullanıcı önceliği: savaş motoru ve oynanış. Video öncelik değil.
+Görsel araştırma diğer sekmede; bu çalışmada dış varlık indirilmedi.
+
+ROTA VE AKIŞ
+http://127.0.0.1:5173/crown-battle.html?historical=demo
+Hazır savaş: 83 mavi / 138 kızıl; başlat, birlik seç, hareket veya hücum emri ver.
+/historical-armies.html → Orduları meydana çıkar → ?historical=1
+Her iki ordunun 14 birlik sayısı değiştirilebilir; keyfî adet sınırı yok.
+Çok yüksek sayılarda performans donanıma bağlı. Boş/negatif/kesirli sayılar reddedilir.
+Komuta paneli önce gelir; yalnız orduda bulunan türlerin seçim düğmeleri görünür.
+Fareyle bölge seçimi; seçili birliklere tıklama/sağ tıklama/dokunma ile hareket.
+A tümünü seçer, H serbest hücum, Boşluk duraklatır; sayı alanlarında kısayol işlemez.
+
+DOSYALAR
+src/historical-combat.js: 14 türün oyun değerleri, örnek ordular, plan doğrulama.
+src/crown-battle.js: tarihî dizilim, zırh, fil alan hasarı/itme, süvari hücumu,
+mızrak karşı saldırısı, atlı okçunun mesafe koruması, tüfek ve ok uçuşu.
+src/historical-battle-art.js: kodla çizilmiş yerel animasyonlu prototip karakterler.
+src/crown-battle-art.js ve renderer: türlere göre çizim, filler, kanatlar, başlıklar.
+src/crown-battle-app.js: kayıtlı ordu aktarımı, 28 sayı alanı, komutlar ve sayımlar.
+src/historical-armies.js: savaşa aktarım ve plan doğrulama.
+Araştırma çizimleri doğrudan savaş karakteri olarak kullanılmadı.
+Oyun istatistikleri tasarım tercihidir; tarihsel ölçüm veya tarihsel denge iddiası yok.
+
+DOĞRULAMA
+tests/historical-combat.mjs: 14 tür, 2501 birlik, hatalı planlar, emirler,
+fil alan hasarı, mızrak savunması, atlı okçu, tüfek, deterministik tam savaşlar geçti.
+tests/crown-battle.mjs: klasik motor regresyonu geçti.
+tests/historical-armies-browser.mjs: atölye regresyonu geçti.
+tests/historical-combat-browser.mjs: aktarım, sayılar, kayıt, senaryo, yeniden kurma,
+oynat/duraklat ve mobil doğrulama; video TEST_RECORD=1 ile isteğe bağlı.
+WebM oluşturma ve 1080x1920 çözme kontrolü önceki çalıştırmada geçti.
+artifacts/historical-combat: küçük JPG önizlemeler, WebM örneği, build/decode günlükleri.
+Vite üretim paketi başarılı; mevcut büyük paket uyarısı var.
+
+SONRAKİ GELİŞTİRME
+Prototip çizimlerini diğer sekmenin araştırması tamamlandıktan sonra geliştirmek.
+Oyun dengesi kullanıcı denemesine göre ayarlanmalı; nihai denge tamamlanmış sayılmaz.

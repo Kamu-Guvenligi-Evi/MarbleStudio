@@ -1,0 +1,67 @@
+Taç Muharebesi — 15 Ekim 2026, üç yeni tarihî savaşçı
+
+Eklenenler ve menüleri
+- norse_berserker: İskandinavlar > İskandinavya; kılıçlı, uzun kalkanlı.
+- aragon_almogavar: İspanyollar > Aragon Tacı; hafif mızraklı.
+- japan_sohei: Japonlar > Japonya; naginatalı tapınak piyadesi.
+Bunların tamamı sürekli seçkin muhafız alayları olarak tanımlanmadı.
+Mevcut birlikler kopyalanmadı veya kaldırılmadı. Yeni ateşli silah yok.
+
+Kaynaklar ve sınırlar
+1. National Museums Scotland, H.NS 29, geç 12. yy Lewis berserker taşı:
+https://www.nms.ac.uk/collections/search/object?entry=21739
+https://shop.nms.ac.uk/products/lewis-chessmen-berserker-full-scale-replica-piece
+Müze replikasının küçük fotoğrafı incelendi: sivri miğfer, kapitone uzun
+giysi, ağza yükseltilen uzun kalkan, kılıç. Bütün Viking çağını temsil eden
+sabit üniforma iddiası yok. Ayı postu, boynuz ve doğaüstü güç eklenmedi.
+
+2. Museu d’Història de Catalunya, Els almogàvers, Muntaner bölüm 64:
+https://www.mhcat.cat/exposicions/exposicions_realitzades/el_temps_dels_almogavers/l_aventura_d_orient/els_almogavers
+https://cultura.gencat.cat/web/.content/ilc/11-Exposicions/PDF_Expos/2016_Ramon-Muntaner.pdf
+Ağ başlık, kısa giysi, deri bacaklık ve hafif ayakkabı yazılı dönem
+anlatımına dayanır; kalkan yok. Mızrak, büyük bıçak ve cirit donanımı
+belgelenir; oyunda yalnız mızrak yakın dövüşü uygulanır.
+Senatonun 1888 tarihli Roger de Flor tablosunun resmi indirilemedi.
+Bu birliğin çizimi fotoğraf incelemesine değil, yukarıdaki kıyafet ve
+donanım anlatımına dayanır. Renkler ve yüz yorumdur.
+
+3. Mikael S. Adolphson, The Teeth and Claws of the Buddha (2007):
+https://uhpress.hawaii.edu/9780824831233/
+Tapınak kuvvetlerinin tüm üyeleri ruhban değildi; savaşçı sınıfından
+tamamen ayrı yekpare bir sohei sınıfı şeklinde sunulmadı.
+https://umma.umich.edu/objects/otsu-e-benkei-with-a-halberd-naginata-benkei-1964-2-101/
+18. yy Benkei tasviri; dönem üniformasının doğrudan kanıtı değildir.
+https://www.tanabe-kanko.jp/view/jinja/musashibobenkei/
+Tanabe'nin geleneksel Benkei çizimi incelendi: beyaz örtü, koyu geniş
+kollu giysi ve naginata. Bu geç görsel gelenek açıkça belirtilir;
+Benkei'nin kendisi yeni lider olarak eklenmedi.
+
+Uygulama
+src/medieval-specialist-units.js: kaynaklar, dönem, açıklamalar, denge.
+src/medieval-specialist-art.js: üç ayrı başlık, gövde, silah; Lewis kalkanı.
+historical-catalogue, historical-art-profiles, historical-warrior-art ve
+historical-culture-groups bağlantıları tamamlandı. Aragon Tacı eklendi.
+Çizimler mevcut Canvas sprite önbelleğini kullanır; dış resim yüklemez.
+Diğer sekmenin savaş motoru/renderer dosyalarına müdahale edilmedi.
+
+Doğrulama
+tests/medieval-specialists.mjs PASS:
+- Üç kimlik tekil, doğru medeniyetlerde, üçü de savaşta hasar veriyor.
+- 2 takım x 5 eylem x 8 kare x 3 birlik = 240 dolu, kesilmeyen kare.
+- Üç farklı alfa silueti; önizleme ayrıca gözle incelendi.
+- Gerçek menülerden seçim, savaşa geçiş ve yenileme sonrası kadro PASS.
+- Tarayıcı JavaScript hatası yok.
+tests/andalus-rum.mjs --node-only PASS (2 birlik).
+tests/turkic-arab.mjs --node-only PASS (4 birlik).
+Vite build PASS (4.23 saniye). Mevcut 500 kB paket boyutu uyarısı sürüyor.
+FPS kıyaslaması yapılmadı; performans iyileşmesi iddia edilmiyor.
+
+Kanıtlar: artifacts/medieval-specialists/checks.json, build.log,
+three-warriors.jpg (16.947 bayt).
+Yerel referanslar: berserker-reference.jpg (14.276 bayt),
+sohei-reference.jpg (106.461 bayt). Bunlar ölçülmüş internet trafiği değildir.
+Referans fotoğrafları oyuna paketlenmedi; özgün Canvas çizimleri kullanılır.
+
+Sonraki araştırmalarda önce mevcut katalogla tekrar kontrolü yapılmalı.
+Belirsiz teşkilat veya üniforma iddiaları kesinleştirilmeden yeni ad altında
+kopya birlik üretilmemeli. Her yeni birlik menü ve savaş testiyle bitirilmeli.

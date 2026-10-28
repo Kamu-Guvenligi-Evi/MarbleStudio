@@ -1,0 +1,55 @@
+Ordu başlangıç mesafesi ve hazırlık — 15 Ekim 2026
+
+Bulgu
+- Geniş haritada da eski 220/380 ön hat merkezleri kullanılıyordu. Ölçülen
+  askerler arası tarafsız koridor yalnızca 170 birimdi; 24 askerlik Turan
+  senaryosunda ilk hasar 2.03 saniyede geliyordu.
+- Mesafeyi tek başına artırınca Turan eski 18 saniyelik hazırlık sınırında
+  düşmana ulaşmadan iptal oluyordu. Genel 240 askerlik formasyon da eski
+  5 saniyelik sınırda yalnızca %45 hazırken serbest bırakılıyordu.
+
+Uygulama ve değişen dosyalar
+- src/historical-army-deployment.js: geniş haritada ön hat aralığı
+  560 + formasyon derinliği * 0.6; üst sınır 960 birim. İç saf aralıkları
+  korunur. Kompakt yerleşimin 160 birimlik merkez aralığı değişmez.
+- src/historical-tactics.js: Turan hazırlığına yeni koridor ve karşı ordunun
+  ortalama hızından hesaplanan yaklaşma süresi eklenir. Ek süre en fazla
+  35 saniye; hazırlık en fazla 53, ardından toparlanma en fazla 6 saniye.
+- src/historical-commander-formations.js: genel formasyon hazırlık sınırı
+  askerlerin yuvalarına yürüme süresinin yüzde 90 dilimine göre 5–15 saniye.
+  %75 hazır olunca erken çıkış, yakın temas, komutan kaybı ve oyuncu emirleri
+  mevcut önceliklerini korur. Hesap yalnızca formasyon başlatılırken yapılır.
+- tests/historical-army-deployment.mjs: geniş/kompakt ayrımı güncellendi.
+- tests/historical-commander-formations.mjs: uyarlanan son süre kontrolü.
+- tests/historical-deployment-spacing.mjs: yeni sabit kadrolu regresyon testi.
+
+Doğrulama (yerel Node v24.21.0, başsız simülasyon)
+- Yeni test PASS: 24/96/240 asker, genel formasyon/Turan, iki tarafın aynası;
+  toplam 12 savaş doğal elemeyle 39.40–91.27 saniyede tamamlandı.
+- Ölçülen tarafsız koridor 607.8–704.7 birim; ilk hasar 12.37–31.97 saniye.
+  Altı Turan senaryosunun tamamında ricat ve hücum gerçekleşti.
+- Genel formasyonlar ilk hasardan önce hazır: 24 asker %91.7/3.03 saniye,
+  96 asker %79.2/4.03 saniye, 240 asker %77.1/8.03 saniye (iki taraf da).
+- Karşı ordu tamamen dur emrindeyken de Turan sınırlı sürede toparlanıp
+  taktik kontrolünü bıraktı; sonsuz hazırlık beklemesi oluşmadı.
+- Regresyonların tamamı PASS: historical-army-deployment,
+  historical-commander-formations, historical-multi-army-tactics,
+  historical-tactics, historical-tactics-discipline, historical-tactics-contact,
+  historical-turan-charge, historical-turan-horse-archers,
+  crown-battle-npc-routing, crown-battle-behavior.
+- Yerleşim testleri ayrıca 2/4/8 ordu, 24/240/1000 asker, filler, komutansız
+  ordu, sınır payı, manuel yerleşim ve kayıt geri yüklemeyi kapsar.
+- Çıktılar: artifacts/npc-routing/deployment-spacing.log ve spacing-*.log.
+
+Sınırlar ve eşgüdüm
+- Otomatik armyConfigs yerleşimi değişti; klasik/kompakt ve eski
+  historicalArmies yolu korunur. Manuel kaydedilmiş yerleşimler korunur;
+  oyuncu orduları elle yaklaştırırsa hazırlık alanı yeniden daralabilir.
+- Yaklaşma süresi bilinçli olarak uzar. Yakın tehdit/engel veya çok dağınık
+  manuel yerleşimde her askerin yuvasına varması garanti edilmez; süreler
+  savaşın hazırlıkta kilitlenmemesi için sınırlıdır.
+- Görsel tarayıcı ve FPS ölçümü yapılmadı. Her kare tüm asker çiftlerini
+  karşılaştıran yeni işlem eklenmedi.
+- Ana sekme komutan kadrolarını ayrıca değiştiriyor. Bu testler sabit kadro
+  kullanır; sonuçlar yeni presetlerin güç dengesi doğrulaması değildir.
+  Arayüz, katalog, görseller ve preset dosyaları bu işte değiştirilmedi.

@@ -1,0 +1,40 @@
+FPS VE MENÜ — 14 EKİM 2026
+Sahiplik ana oyun sekmesiyle önceden paylaşıldı; katalog/görsel modüllerine dokunulmadı.
+Sorunlar: duraklatılmış meydan her RAF'ta tekrar çiziliyordu; asker başına canvas
+dönüşümleri/gölgeler ve çok sayıda küçük doku çizimi pahalıydı. Komutan ayrıntıları
+birlik listesini aşağı itiyor, uzun ordu listesinde Uygula düğmesi kayboluyordu.
+
+PC askerleri yön/gölge/animasyon karesini ortak atlaslarda önbellekler; atlaslar
+çizimden önce hazırlanır. En çok 8 adet <=2048px sayfa (~128 MiB piksel verisi;
+tarayıcının toplam belleği değildir). Aynı karede kullanılan sayfa silinmez;
+taşan varyantlar eski çizim yolunu kullanır. Normal askerlerin PC toz efekti kaldırıldı.
+Duraklatmada yalnız seçim, kamera, yeniden kurma veya boyut değişiminde çizilir.
+Arama üstte, birlikler ayrı kaydırılır, komutan ayrıntıları açılır/kapanır.
+Ordu listesi kurulumda öne alındı; Orduları uygula sabit altta. İki ordu hazırsa
+uygulama sonrası Komuta açılır. Kırmızı/mavi seçim ve silme eşit yetkilidir.
+Görsel sekmesinin yeni lider sprite'ları renderer ve hit-test içinde u.type ile kullanılır.
+Motor, birlik kimlikleri, ordu kayıtları ve klasik mod değiştirilmedi.
+
+Dosyalar: src/crown-battle-{sprite-cache,renderer,app,hit-test}.js,
+src/crown-battle.css; tests/crown-battle-{performance,fps-menu}-browser.mjs (yeni),
+tests/crown-battle-teams-browser.mjs (açılır komutan paneline uyum), bu not.
+PASS: fps-menu (beklemede sıfır çizim; seçim/kamera/devam/reset/resize yeniden çizim;
+sabit arama/Uygula; atlas sınırı ve tahliye), layout (6 boyut), teams (PC/telefon),
+selection (PC/telefon), hit-test (144 kontrol), camera (PC/telefon), pc-visuals
+(DPR2, deterministik arazi, önbellek, PC öncesi/sonrası aynı portrait piksel hash),
+browser (klasik senaryolar, emir, duraklatma, hız, sinema, WebM indirme).
+Görsel sekmesi ayrıca 9 lider browser/combat, 432 lider ve 1968 elit kare PASS bildirdi.
+Üretim derlemesi PASS, 3.21 sn; mevcut >500 kB paket uyarısı sürüyor.
+
+Yerel izole headless Chrome, 1000x540, DPR1, 80 kare/ilk 20 ısınma:
+Asker   Önce çizim medyanı   Sonra çizim medyanı   Sonra ölçülen döngü FPS
+320     3.3 ms              0.7 ms               144.0
+2000   10.6 ms              2.5 ms                58.8
+4000   88.5 ms             31.6 ms                 9.9
+Bu sentetik test her RAF'ta 1/30 simülasyon adımı çalıştırır; gerçek oyun FPS'si
+ve kullanıcının donanımındaki sonuç değildir. Eşzamanlı yük ve sürücü sonuçları etkiler.
+4000 askerde simülasyon/çizim maliyeti hâlâ yüksek; akıcılık garantisi yok.
+Ayrı hareketsiz/ısınmış 4000 asker CPU çizimi medyan 10.4 ms, max 11.4 ms; FPS değildir.
+Telefon çizimi eski yolu korur; WebM için ek dikey çizim/kodlama maliyeti sürer.
+Kanıtlar: artifacts/crown-battle/performance-{before,after}.json,
+fps-menu-pc.jpg, pc-visuals-1920.jpg, fps-menu-build.log.

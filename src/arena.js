@@ -42,7 +42,7 @@ export function sweptLinkContact(start,end,ownerStart,ownerEnd,anchor,radius,cle
   return intersects(0,1,first,last,0);
 }
 export class Arena {
-  constructor({seed=2048,count=12,energy=1,ballImages=[],ballNames=[],rule='elimination',duration=60,onHit=()=>{},arenaGame='links',arenaLinkMode='wall',arenaInitialLinks=15,arenaShape='triangle',territoryDuration=45}={}){
+  constructor({seed=2048,count=12,energy=1,ballImages=[],ballNames=[],rule='elimination',duration=60,onHit=()=>{},arenaGame='links',arenaLinkMode='wall',arenaInitialLinks=15,arenaShape='triangle',territoryDuration=60}={}){
     if(arenaGame==='territory')return new TerritoryBattle({seed,count,ballImages,ballNames,onHit,arenaShape,territoryDuration});
     this.mode='arena';this.seed=seed;this.rule=rule;this.duration=duration;this.onHit=onHit;
     this.arenaLinkMode=arenaLinkMode==='prelinked'?'prelinked':'wall';

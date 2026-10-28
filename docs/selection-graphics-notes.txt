@@ -1,0 +1,78 @@
+ASKER SEÇİMİ VE GÖRÜNTÜ — 14 EKİM 2026
+
+Sorunlar: komuta listesi uzundu; birlik arama, çoklu seçme ve seçimi temizleme
+akışı belirsizdi. Ordu sayıları yalnız sayı kutularından değiştiriliyordu. PC'de
+zemin, 2x çözünürlüklü kaynak tuvalin yanlış bölümünden kırpılıp büyütülüyordu.
+
+Seçim fazı:
+- Komuta araması asker, medeniyet, silah/rol kelimelerini ve Türkçe karakterlerin
+  düz karşılıklarını eşleştirir. Boş birlikler seçilemez, sonuç yok bilgisi gösterilir.
+- Birlik satırına tekrar basmak seçimi kaldırır. Çoklu seçim düğmesi ve
+  Shift/Ctrl/Meta ile türler seçime eklenir/çıkarılır. Seçimi temizleme ayrıdır.
+- Meydanda dosta basmak o türü seçer; değiştirici tuşla tek asker eklenir/çıkarılır.
+  Dikdörtgen seçiminde de değiştirici tuş mevcut seçimi korur.
+- Ordu kurulumunda arama, yalnız eklenen birlikleri göster, takım başına +10,
+  -10 ve sıfırlama bulunur. Sayı kutularının kimlikleri ve kayıt verileri korunur.
+- Telefonda seçimi bitirip meydana dönme düğmesi; arama ve uygula kontrolleri
+  kaydırmada erişilebilir. Kayıt sırasında ordu düzenleme kilidi korunur.
+
+Görsel fazı (seçim testleri geçtikten sonra):
+- PC zemini kaynak tuvalin gerçek genişliğinden doğru oranda kırpılır.
+- Sprite konturları/gölgeleri ve hafif ışık tonları bir kez önbelleğe çizilir;
+  her asker/her kare için filtre hesaplanmaz. Seçili asker halkası belirginleştirildi.
+- %100–300 yakınlaştırma; +/−, fare tekerleği; ilk + seçili askerlere odaklanır.
+  Gezin düğmesi, Alt+sürükleme veya orta fareyle kaydırma. Yüzde düğmesi sıfırlar.
+  Ctrl+tekerlek tarayıcı erişilebilirlik yakınlaştırmasına bırakıldı.
+- Kamera hareketi emir üretmez. Fare/dokunma ve hedef seçimi kamera koordinatlarına
+  dönüştürülür. Görüş dışında kalan askerler çizim/sıralama dışında tutulur.
+- WebM için bağımsız portre kamera kalır; canlı yakınlaştırma kayda aktarılmaz.
+- Ana sekmenin removed işaretlediği askerler ceset olarak da çizilmez.
+
+Dosyalar: src/crown-battle-selection.js/.css (yeni),
+src/crown-battle-camera.js/.css (yeni), src/crown-battle-app.js,
+src/crown-battle-renderer.js, src/crown-battle-art.js;
+src/crown-battle.css: ana sekmenin beşinci kaldırma düğmesi için PC'de beş
+sütun; telefonda dört emir ve tam genişlikte ayrı kaldırma satırı.
+tests/crown-battle-selection-browser.mjs, tests/crown-battle-camera-browser.mjs,
+tests/crown-battle-layout-browser.mjs, tests/crown-battle-browser.mjs.
+App/selection dosyaları ana sekmeye boş başlangıç ve meydandan kaldırma için
+devredildi; ortak komutan entegrasyonu korunmuştur. Katalog/veri/görsel portre
+dosyaları değiştirilmedi; ağdan yeni görsel indirilmedi.
+
+İlk doğrulamalar: seçim/arama/sayı düzenleme PC 1366 ve telefon 390 PASS.
+Yerleşim ve dokunmatik emirler 1366,1920,900,390,320,844 px PASS.
+Kamera testi 1366/390 PASS: yakınlaştırma, kaydırırken emir vermeme, kamera sonrası
+doğru dünya koordinatında hareket emri, sıfırlama ve tarayıcı hata kontrolü.
+Görsel kontrol: artifacts/crown-battle/graphics-detail.jpg ve graphics-390.jpg.
+Ortak boş başlangıç/kaldırma entegrasyonuyla seçim, kamera ve altı ekran testi PASS.
+Üretim derlemesi PASS; mevcut paket boyutu uyarısı sürer.
+Tam crown-battle-browser testi PASS: emirler, duraklatma, hız, senaryo,
+PC/telefon, sinema, boyut değişirken kayıt ve 1080x1920 WebM ffmpeg çözümleme.
+Kayıtta Chrome CDP kutu/stability sorgusu zaman aşımı verdi; DOM üzerinden
+görünürlük, etkinlik ve hit-test doğrulanıp gerçek fare tıklamasıyla stop/download
+başarılı oldu. Test bu yolu kullanır; ürün düğmesinde programatik click yoktur.
+Çizim yumuşatma kalitesi iki tuvalde maliyeti sınırlamak için medium kullanır.
+Kullanıcının iki orduyu yönetme düzeltmesi: ana sekme engine/app/selection'a
+aktif takım ve Mavi/Kızıl seçicisi ekledi. Renderer halkası, kaldırılan asker
+gizleme ve kamera odağı zaten takım bağımsız çalışır.
+Yeni tests/crown-battle-teams-browser.mjs 1366/390 PASS: takım değişiminde
+seçim temizliği; kırmızı ilerle/dur/maviye saldır; mavi emirlerin korunması;
+kırmızı kısmi/tam kaldırma, yeniden kurulumda korunması ve maviye dönüp silme.
+Genişletilmiş aynı test PC/telefon PASS: sahada kırmızıya mouse/touch ile seçim;
+yalnız kırmızıda bulunan tarihî Roman kartı; takıma göre kart görünürlüğü;
+Mavi aktifken Kızıl Timur kartından otomatik takım değiştirip komutan seçme;
+kırmızı komutanı kaldırma ve sayfa yenilenince kayıtların doğru kalması.
+İki takım entegrasyonu sonrası selection-browser ve camera-browser tekrar PASS.
+Komutan tarayıcı testi ve historical-commanders-combat PASS: seçim, hareket/dur,
+can/ölüm, yeniden kurulum, tarihî kayıt ve klasik uyumluluk.
+Yerel headless Chrome çizim yoklaması (4000 asker, 2028x1068 tuval, 12 çağrı):
+%100 görünüm medyan 16.5 ms, en kötü 1059.9 ms; %300 medyan 1.8 ms, en kötü
+7.2 ms. Kamera elemesi çizilen sayıyı azaltır; bu kısa çağrı ölçümü GPU sunumu,
+motor ve etkileşimi kapsayan FPS ölçümü değildir. Yoğun tam görünümde takılma
+riski sürer; sonuçlar akıcılık garantisi olarak kullanılmamalıdır.
+
+Sınırlar: çizimler stilize 2B sprite'lardır; yakınlaştırma yeni 3B model veya kişiye
+özel tarihî komutan kostümü üretmez. Çok sık dizilen askerler örtüşebilir.
+PC geniş ekran mevcut savaş koordinatlarını kullanır. Kamera 3x ile sınırlıdır.
+Binlerce asker için genel FPS garantisi verilmez; mevcut uzamsal savaş araması
+korunur, yeni seçim sayacı birim sayısına doğrusal çalışır.

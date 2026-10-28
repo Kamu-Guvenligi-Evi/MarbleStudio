@@ -1,0 +1,75 @@
+14 Ekim 2026 — Yunan / İskandinav / Mısır mitolojik yaratıkları
+
+Kapsam: Mitoloji ana grubu altında üç alt grup, her birinde üç oynanabilir
+yaratık. Yunan: Minotor, Kentaur, Kiklop. İskandinav: Fenrir, Jotun, Nidhogg.
+Mısır: Sfenks, Ammit, Uraeus. Kimlikler myth_*; tarihî kimlikler, klasik
+birlikler ve marble-historical-armies-v1 kayıt biçimi değiştirilmedi.
+
+Dosyalar:
+- src/mythological-units.js: ayrı fantastik kayıtlar ve açık combat değerleri.
+- src/mythological-art.js: dokuz ayrı siluet, idle/walk/attack, takım renkleri.
+- src/historical-catalogue.js: yalnız yeni manifest importu ve listeye ekleme.
+- src/historical-culture-groups.js: Mitoloji > Yunan/İskandinav/Mısır.
+- src/historical-battle-art.js: standart 240x228 CPU canvas içinde dispatch.
+- src/historical-combat.js: unit.combat aktarımı LOTR sekmesiyle ortak.
+- tests/mythological-combat.mjs ve mythological-browser.mjs: yeni kapsam.
+- tests/historical-elite-art.mjs: ayrı yaratık çizim yolunun tanınması.
+
+Davranış: Kentaur hareketli yaylıdır; adı üzerinden rol çıkarılmaz, ranged ve
+skirmish açık verilir. Fenrir ve Sfenks koşu şartıyla mevcut hücumu kullanır.
+Kiklop, Jotun, Nidhogg ve Ammit ağır/büyük gövde hareketini kullanır; Minotor
+dahil alan saldırıları mevcut sınırlı uzamsal sorgudan geçer. Uraeus tek hedef
+ısırığı yapar. Yeni her-kare tüm-birlik döngüsü eklenmedi; sprite'lar mevcut
+önbelleği kullanır. Kaynak görsel indirilmedi, tarihî kaynak iddiası yoktur.
+
+Sınırlar: Fantastik oyun yorumları ve başlangıç denge değerleri. Nidhogg
+yerde savaşır; uçuş/ateş yoktur. Uraeus zehir uygulamaz. Ağır yaratıklar
+mevcut ağır birlik hareket/ses/alan hasarı sistemini paylaşır; özel kükreme
+sesleri eklenmedi. Savaş rolleri yeni bir fizik motoru gerektirmez.
+
+Koordinasyon: Ana sekme renderer/atlas performansında; LOTR sekmesi ayrı
+middle-earth-* dosyalarında; kart sekmesi kaynak bağlantısını yalnız varsa
+gösterir ve çizimi alfa sınırına sığdırır. Ortak ekler önceden bildirildi.
+
+Doğrulama:
+- tests/mythological-combat.mjs PASS: 9 kimlik, 3 alt grup, karma ordu
+  kaydı, iki takımda emirler/silme, alan hasarı ve yay saldırısı.
+  Aynı tohumla aynı sonuç: tüm yaratıklar 62.5 sn, Kentaur-Fenrir 13.8 sn,
+  Kiklop-Spartalı 8.1 sn oyun süresinde sonuçlandı.
+- tests/historical-combat.mjs ve tests/crown-battle.mjs PASS.
+- tests/crown-battle-behavior.mjs PASS: yönlü mızrak savunması, hücumun
+  yeniden hazırlanması, sınırlı kaçış, yığılma, hedef kararlılığı, emirler,
+  tüfek aralıkları, fil alan hasarı ve 2400 asker uzamsal sorgu kontrolü.
+- SpriteLibrary myth_* varyantlarını tek çizime indirger (ana sekme eki).
+- tests/mythological-browser.mjs PASS: 432 kare (9 yaratık x 2 takım x
+  3 eylem x 8 kare), kesilme/boş çizim yok, her eylem animasyonlu.
+  PC 1366 px ve telefon 390 px: üç alt grup, arama, iki takım kaydı,
+  savaşa aktarım, kırmızı miktarını sıfırlama ve yeniden yükleme PASS.
+  Tarayıcı hatası yok; dış ağ istekleri testte engellendi.
+- Son çizim revizyonundan sonra production build PASS (5.79 sn).
+  Mevcut 500 kB paket boyutu uyarısı sürüyor.
+
+Görsel kalite revizyonu (kullanıcı geri bildirimi):
+- Bu aşamada kaynak değişimi yalnız src/mythological-art.js dosyasında.
+  Dokuz yaratık eğri konturlar, hacimli renk geçişleri, küçük göz/yüz
+  ayrıntıları, kürk/pul, metal kenarları ve kumaşla yeniden çizildi.
+- Minotor: boğa başı, kıvrık boynuz, yele, çift ağızlı balta.
+  Kentaur: at gövdesi, insan üst gövdesi, tutulan yay ve gerilen kiriş.
+  Kiklop: tek göz, yüz kırışıklıkları ve ağır sopa.
+- Fenrir: yele, sivri kulaklar, uzun burun ve zincir.
+  Jotun: buz tacı, sakal, buz çekici. Nidhogg: boynuzlar, kanat zarları,
+  sürüngen gövdesi ve bükük bacaklar.
+- Sfenks: aslan gövdesi, insan yüzü, çizgili başlık ve yaka.
+  Ammit: geniş/ağır gövde, kalın bacaklar, timsah çenesi ve yele.
+  Uraeus: pullu halkalar, kobra başlığı ve bölümlü karın.
+- Silah pivotu bütün saldırı karelerinde tuval sınırları içinde tutuldu.
+  İki takım rengi, bakış yönü ve mevcut idle/walk/attack korunuyor.
+- Önizleme: artifacts/mythology/creatures.jpg. Önceki sürüm karşılaştırma
+  için creatures-before.jpg ve creatures-art-v1.txt dosyalarında.
+- Yeni texture/path ayrıntıları yalnız mevcut sprite üretim/önbellek
+  yolunda çalışır; ek her-asker/her-kare çizim döngüsü eklenmedi.
+  Bu revizyon için ayrı FPS ölçümü yapılmadı; FPS artışı iddia edilmiyor.
+- Sınır: oyun stiline uygun prosedürel 2B çizim; 3B model/fotogerçekçi
+  görsel değildir. Savaş dengesi, kimlikler ve kayıt biçimi değişmedi.
+- Ana oyun sekmesine dosya kapsamı önceden, son testler sonrasında
+  bildirildi. FPS kontrolleri sırasında tarayıcı yükü ertelendi.

@@ -1,0 +1,135 @@
+15 Ekim 2026 — fiziksel savaş simülasyonu
+
+Kapsam
+Kullanıcının talebiyle fiziksel temas, atış ve süvari hücumu geliştirildi.
+Yorgunluk ve moral eklenmedi. Bu katman oyunun ölçeğinde bir simülasyondur;
+ölçülmüş insan anatomisi, gerçek yaralanma veya zırh delme modeli değildir.
+
+Üretimdeki davranış
+- Oklar hedefe kilitlenmez. Çıkış anında hesaplanan hız ve yerçekimiyle uçar.
+  Seçilen hedef dışındaki ilk gövdeye, dost gövde dahil, çarpabilir.
+  Hedef silinirse uçuş devam eder; ıskalanan ok arkadaki askere ulaşabilir.
+- Gövde yüksekliği nedeniyle ok bir askerin üstünden geçebilir. Ara karelerde
+  hareket eden gövdeye temas da süpürülmüş kesişim hesabıyla değerlendirilir.
+  Kalabalıkta yapay zekânın örneklenmiş komşu listesi kullanılmaz; temas
+  bölgesindeki grid hücrelerinin bütün canlı gövdeleri kontrol edilir.
+- Atıştan önce dost engeli varsa yay, aynı toplam çıkış hızıyla yüksek açı
+  çözümünü dener. Bunun bedeli daha uzun uçuş ve hedefin dönmesine karşı
+  isabetsizliktir. Güvenli yol yoksa atış bekletilir. Arbalet, sapan ve tüfek
+  bu yüksek açı dönüşümünü kullanmaz. Sonradan hatta giren dost hâlâ vurulabilir.
+- Mevcut tüfek birliklerinin mermileri de sabit çıkış yönünde ilerler; hedefi
+  takip etmez. Kısa mesafede düz uçuş yaklaşımı kullanılır.
+- Süvari hücumunda hızlanma, ileri yönde temas hattı ve çarpışma sonrası
+  momentum kaybı var. Yakındaki yan/arka askerler alan hasarı almaz.
+  Hızlı temas yavaştan daha güçlüdür; ardışık saflar hücumu durdurur.
+  Yüzünü süvariye dönmüş ve yavaş/durağan kargıcı hücumu karşılayabilir.
+- Darbe mevcut zırh/hasar sisteminden geçer. Momentum katsayıları, gövde
+  yükseklikleri ve hasar katsayıları oyun parametreleridir, tarihsel ölçüm değildir.
+
+Dosyalar
+src/crown-battle-contact.js: gövde geometrisi, kesin grid teması, hücum hattı.
+src/crown-battle-projectiles.js: ok, yüksek açı çözümü, sabit yönlü mermi.
+src/crown-battle.js: ateş disiplini, gerçek temas, hızlanma ve momentum.
+Diğer açık sekmelerin NPC rota, separation/outcome ve renderer değişiklikleri
+korundu; ortak kaynak üzerinden regresyonlar çalıştırıldı.
+
+Doğrulama
+13 test dosyası PASS:
+crown-battle, crown-battle-physical-contact, crown-battle-projectiles,
+crown-battle-charge, crown-battle-behavior, crown-battle-impact,
+historical-combat, crown-battle-feedback, crown-battle-feedback-realism,
+historical-tactics-contact, historical-turan-charge,
+historical-turan-horse-archers, historical-tactics-discipline.
+Temas testleri 20/30/60/120 Hz; ilk/dost gövde, üstten geçiş, ıskalama,
+hızlı mermi, hedef silme, kalabalık grid, yönlü hücum ve momentum sınırı.
+Yüksek açı enerji korunumu, güvenli üstten atış ve engelli doğrudan ateş
+bekletme ayrıca kontrol edildi.
+9 sabit tohumlu fizik stres savaşı: 96/384/960 asker, seed19/71/137.
+Hepsi doğal elemeyle tamamlandı, sonlu konumlar; en uzun simülasyon75.4sn.
+Tarayıcı ok testi24 görünürlük/yön/ölçek/canvas durumu kontrolü PASS.
+Vitebuild exit0. Mevcut büyük paket boyutu uyarısı sürüyor.
+
+Kanıtlar
+artifacts/physical-simulation/*.log — regresyon, tarayıcı ve build günlükleri.
+artifacts/physical-simulation/stress.json — sonuçlar ve kaynak SHA256 değerleri.
+tests/crown-battle-physical-stress.mjs — tekrarlanabilir stres senaryoları.
+Headless çalışma süreleri tarayıcı FPS ölçümü değildir. Bu testler tüm tarihsel
+dengeyi veya her savaşın gerçek hayattaki sonucunu doğruladığı anlamına gelmez.
+
+Sonraki fizik kapsamları
+Silah türüne göre kalkan/zırh teması, arazi yüksekliği ve daha ayrıntılı
+binici/at gövdeleri bu değişiklikte modellenmedi. Moral/yorgunluk kullanıcının
+açık isteğiyle kapsam dışıdır.
+
+Devam çalışması — temas doğruluğu ve sorgu maliyeti (15 Ekim)
+src/crown-battle-contact.js:
+- Son kısmi uçuş karesinde hareketli hedefin kare sonuna yakın hareketi yerine
+  kare başından itibaren hareketi kullanılıyor. Böylece yere düşmeden önceki
+  gerçek geçiş kaçırılmıyor; düşüşten sonraki geçişe geriye dönük hasar verilmiyor.
+  Sonsuz frameDt ile kullanılan atış öncesi sabit konum kontrolü korundu.
+- Aday hücreler çapraz atışın bütün dikdörtgeninden değil, her satırda geçtiği
+  genişletilmiş koridordan seçiliyor. İlgili hücredeki askerler örneklenmiyor;
+  bütün canlı gövdeler yine kesin kesişim testine giriyor. Hücre sırası korundu.
+- crown-battle-engine-performance.mjs testindeki nearbyThreat döngüsel
+  referansı kimliğe çevrildi; charge.hit Set içeriği de durum özetine katıldı.
+
+Doğrulama:
+- Önce yeni son-kare testi eski kaynakta başarısız oldu; düzeltme sonrası
+  20/30/60/120 Hz testlerinin tamamı geçti.
+- crown-battle-contact-query.mjs: 2400 gövde üzerinde 3000 atış sorgusu,
+  tüm gövdeleri tarayan kesin hesapla aynı ilk hedef ve aynı temas zamanı.
+  2939 isabet; negatif koordinatlar, hücre sınırları, hareketli/büyük gövdeler,
+  yatay/dikey/çapraz hatlar, ölü/silinmiş askerler ve boş ızgara kapsandı.
+- 11 fizik/taktik test dosyası PASS; buna 96/384/960 askerli 9 doğal eleme
+  savaşı dahil. En uzun savaş 71.2 simülasyon saniyesi. Kaynak SHA256'ları
+  çalışma sonrası tekrar kontrol edildi, değişmemişti.
+- Tarayıcı ok testi 24/24; Vite build gerçek süreç çıkış kodu 0.
+  Önceden var olan 500 kB paket uyarısı devam ediyor.
+
+Ölçüm sınırı ve kanıt:
+artifacts/physical-simulation/contact-query-next.json
+Eski/yeni modüller aynı süreçte, sıraları değiştirilerek, 2 ısınma + 7 ölçüm
+turu çalıştırıldı. Her tur 4000 temas sorgusu. Medyan CPU süresi 59.70 ms'den
+28.45 ms'ye düştü (~%52); temel 1000 sorgudaki aday sayısı 311985 -> 109705.
+Bu temas mikroölçümüdür; toplam oyun FPS'si veya tarayıcı kare süresi değildir.
+Eski temas kaynağı tekrar karşılaştırma için contact-before-next.mjs içinde.
+Diğer kanıtlar artifacts/physical-simulation/*-next.log ve stress.json.
+Bu tur hasar/ordu/taktik dengesi değiştirilmedi, moral/yorgunluk eklenmedi.
+
+Turan kanatlarının yakın savunması — 15 Ekim 2026
+- historical-tactics.js: envelop evresinde yakın dövüş menzilindeki hedef,
+  kanadın rota yürüyüşünü yerel dövüşe bırakır. Önceden flanking bayrağı bu
+  karşılığı engelliyordu. Retreat/yem kaçışı ve charge evresindeki mesafe
+  açma korunur; uzak düşman için kuşatma rotası bozulmaz.
+- tests/historical-turan-interception.mjs eski kaynakta başarısız, düzeltmede
+  başarılı. İki tarafta gerçek motor vuruşu, yakın savunma, uzak hedefte rota,
+  yem çekilmesi ve hücum öncesi mesafe açma denetlenir.
+- 7 dosya PASS: interception, turan-charge, turan-horse-archers,
+  turan-pursuit, multi-army-tactics, crown-battle-charge, physical-contact.
+  Günlükler artifacts/physical-simulation/*-interception.log.
+- Vite build çıkış kodu 0; mevcut 500 kB parça uyarısı sürüyor.
+- tests/historical-turan-effectiveness.mjs: 96 asker, seed42/93, iki taraf,
+  özel plan açık/kapalı toplam 8 savaş. Hepsi doğal eleme; kaynak hashleri
+  koşu boyunca sabit. Evre, kalan asker, hasar ve gerçek hücum sayısı raporda.
+  Kanıt: artifacts/commander-balance/turan-effectiveness.json.
+- Bu sonuç ESKİ hazır kadroya aittir: Alparslan 64 hassa +32 Türkmen.
+  Özel plan açık 4/4 Timur kazandı; kapalı 2/4 Alparslan. Açık senaryolarda
+  retreat/envelop oluşuyor ama kayıp eşiği kuşatma kapanmadan devreye giriyor.
+  Yerel savunma düzeltmesi bu genel başarısızlığı çözmüş sayılmamalıdır.
+  Diğer sekme yeni 12 hassa +8 Türkmen +4 zırhlı atlı okçu oranını hazırlıyor;
+  bu kadro için yukarıdaki tanı yeniden çalıştırılmalı. Hasar/fizik sabit.
+- Önceki 52 maçlık audit-preparation-review.json koşusu sırasında başka
+  sekme historical-civilization-tactics.js değiştirdi; koşu hash kontrolünde
+  exit1 verdi. Güncel sabit kaynak denetimi olarak sunulmadı. 8 maçlık ayrı
+  tanı bu belirsizliği taşımıyor. Moral/yorgunluk eklenmedi.
+
+Yeni hazır kadro sonrası aynı tanı — 15 Ekim 2026
+- Diğer sekme kadroyu tamamladıktan sonra aynı 8 savaş yeniden çalıştırıldı.
+  Kaynak hashleri sabit; hepsi doğal eleme. Alparslan 48 hassa +32 Türkmen
+  +16 zırhlı atlı okçu. Özel plan açık4/4 Timur, kapalı3/4 Alparslan.
+- Açık seed42 iki yönde retreat/envelop fakat closure yok. Açık seed93
+  team0 assemble/regroup/done, team1 assemble/done. Yeni kadro tek başına
+  taktiğin fırsat seçimi sorununu çözmedi; genel başarı iddia edilmiyor.
+- Yeni rapor turan-effectiveness.json; önceki 64+32 kadronun raporu
+  turan-effectiveness-old-preset.json olarak korundu. Sonuçlar iki sekmeye
+  iletildi. Bu tekrar ölçümünde üretim kodu değiştirilmedi.

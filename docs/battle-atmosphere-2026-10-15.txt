@@ -1,0 +1,35 @@
+15 Ekim 2026 — doğal ve sinematik görünüm
+
+Kullanıcı doğal ve sinematik yönü seçti. Mevcut birlik çizimleriyle uyumlu
+arazi ve arayüz düzenlendi. Birlik görselleri, davranışlar ve statlar bu işte değiştirilmedi.
+
+Değişiklikler:
+- crown-battle-ground.js: tohumlu çok ölçekli renk dokusu, ot/toprak ayrıntıları,
+  hafif kıvrımlı patika, sıcak yönlü ışık ve kenar gölgesi. Altı harita destekleniyor.
+  Doku harita/boyut değişiminde bir kez üretiliyor; kare başına yeni efekt katmanı yok.
+- crown-battle-renderer.js: klasik dikey/mobil zemin de ortak arazi üreticisini
+  kullanıyor. Yatay HUD küçük başlık, ordu sayısı/kalan oranı ve zaman panellerine dönüştü.
+- crown-battle-polish.css: koyu arduvaz menüler, sıcak vurgu, okunaklı birlik kartları.
+- Binalar, köprüler veya çarpışma engelleri eklenmedi.
+
+Doğrulama:
+- crown-battle-maps-browser: 1366 ve 390px, altı harita, ordu/emir/kamera korunması,
+  doku önbelleği, harita kaydı/yüklemesi ve WebM kayıt renderer testi geçti.
+- crown-battle-frame-budget-browser: sınırlı poz üretimi, atlas ve harita kontrolleri geçti.
+- crown-battle-fps-menu-browser: duraklatılmış çizim, seçim/zoom/devam, arama/uygulama
+  ve atlas sınırı geçti. Son görsel yakalamada tarayıcı hatası ve mobil yatay taşma yok.
+- Vite build geçti; mevcut 500kB parça boyutu uyarısı sürüyor.
+- Yerel görsel kontrol: artifacts/battle-polish/ içindeki desktop/cinema/mobile JPEG'ler.
+
+Kısa performans karşılaştırması: Chrome headless, 1366x768, 1800 tarihî asker,
+önceden hazırlanmış pozlar, yakın çatışma ve kamera yakınlaşması, 360 RAF örneği.
+Önce / sonra ortalama çizilmiş kare aralığı: 32.33 / 33.79 ms (~30.9 / 29.6 FPS).
+Ortalama renderer süresi: 10.42 / 11.60 ms. >100ms kare: 0 / 0.
+Her ikisinde çalışma anında yeni sprite üretimi/atlas revizyonu/eksik sprite/JS hatası: 0.
+Bu kısa ölçüm FPS artışı veya eşitliği kanıtlamaz; Opera ve gerçek cihaz sonucu farklı olabilir.
+Ham yerel raporlar: artifacts/battle-polish/perf-before.json ve perf-after.json.
+Karşılaştırma statlar değiştirilmeden yapıldı. Diğer sekme sonrasında tarihî dengeyi değiştirebilir.
+
+Bu tur öncesi dosya kopyaları artifacts/battle-polish/*-before-atmosphere.* içinde.
+Renderer kopyası önceki FPS iyileştirmelerini içerir; yeni ortak çalışmaların üstüne
+körü körüne geri kopyalanmamalı. Bu görsel işte internetten varlık indirilmedi.

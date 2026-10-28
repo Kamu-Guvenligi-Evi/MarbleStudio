@@ -1,0 +1,38 @@
+İttifak komutanlarının cephe ve manevra alanı paylaşımı — 16 Ekim 2026
+
+Sorun ve karar
+- Ayrı ordu taktikleri aynı düşman ortalamasına yöneliyordu. Sınır kontrolleri yalnız harita kenarını görüyordu.
+- Mevcut tarihî doktrinler korunarak ortak ilerleme yönü ve birbirinden ayrılmış cephe aralıkları eklendi.
+- Bu, tek bir birleşik ittifak doktrini değildir. Her komutan kendi askerlerini yönetir.
+- Yeni tarih araştırması veya katalog değişikliği yapılmadı. Kullanıcı aynı projede başka çalışma olduğunu doğruladı; yeni chariot türü ve katalog işi o çalışmaya bırakıldı.
+
+Uygulama
+- src/historical-alliance-coordination.js: başlangıçtaki ordu sırasına göre sabit cephe aralıkları, arada 36 birim tampon; yerel düşman değerlendirmesi ve ortak ilerleme yönü.
+- historical-tactics.js ve historical-civilization-tactics.js: hazırlık, kanat yolu ve son manevra hedefleri ordu alanını kontrol eder. Diziliş tek parça ötelenir; askerler sınırda aynı noktaya sıkıştırılmaz.
+- historical-commander-formations.js: tarihî manevra alan yüzünden bırakılırsa komutayı genel diziliş sistemi devralabilir. Alan dar ise historical-compact-deployment.js genişlik yerine derinlik kullanır; yakın dövüş askerleri önde, atıcılar arkada tutulur.
+- crown-battle.js: uzak hedef seçiminde kendi cephesini tercih eden sınırlı puan farkı. Oyuncu emri ve yakın temas önceliğini korur.
+- crown-battle-tactical-visuals.js: dar cephe düzeni durumu gösterilir.
+- Komutan kaybında veya taktik bitiminde eski hareket hedefleri bırakılır.
+
+Doğrulama
+- tests/historical-alliance-coordination.mjs: 33 test geçti. 10 medeniyet doktrini iki tarafta; döndürülmüş ve farklı büyüklükte ordular; dar alan, geçiş, beden aralığı, oyuncu komutu; 3 müttefik ve 2 rakiple 90 saniyelik iki simülasyon.
+- tests/historical-alliance-battles.mjs: 11 tarihî komutanın iki tarafta denendiği 22 tam 2v2 savaş geçti. Her savaş doğal eleme ile sonuçlandı; manevra hedefleri cephe içinde kaldı, başka ordudan asker alınmadı, konum/sağlık değerleri sonlu kaldı. İzlenen kaynak dosyaları test boyunca değişmedi.
+- 12 mevcut regresyon dosyası geçti: historical-multi-army-tactics, historical-civilization-tactics, historical-commander-tactics, historical-turan-horse-archers, historical-commander-formations, historical-commander-deployment (33 test), historical-tactics-contact, historical-preparation-pressure, crown-battle-fire-discipline, crown-battle-tactical-visuals, historical-tactics-discipline, historical-tactics.
+- Yerel Vite üretim derlemesi geçti. Büyük paket uyarısı var.
+- Günlükler ve tam savaş özeti: artifacts/alliance-tactics/. Derleme aynı dizinin build/ altına alındı; diğer çalışmanın dist çıktısı değiştirilmedi.
+
+Sınırlar
+- Cephe aralıkları manevra hedeflerini ayırır; fiziksel duvar değildir. Yakın dövüşte, oyuncu emrinde veya taktik tamamlandıktan sonra yerel muharebe hareketleri alan dışına çıkabilir.
+- Kale navigasyonunda açık alan koordinasyonu uygulanmaz. Tek ordulu taraflar eski davranışı korur.
+- Ortak zamanlanmış kuşatma veya ordular arası asker devri eklenmedi. Yaşayan orduların cephe sırası korunur; askeri kalmayan orduların alanı aşağıdaki ek çalışmayla komşularına açılır.
+- Kontroller otomatik simülasyon ve derleme üzerinden yapıldı; bu turda tarayıcıda görsel doğrulama yapılmadı.
+
+Devam çalışması: boşalan müttefik cepheleri
+- Tekrarlanan sorun: ortadaki Fransız veya İtalyan süvarisinin kanat yolu müttefik alanıyla sınırlanıyordu. Komşu ordu yok edildiğinde bile eski sınır kaldığından süvari beklemeyi sürdürüyordu.
+- historical-alliance-coordination.js artık saniyede bir yaşayan muhariplerin ordu kimliklerini kontrol eder. Askeri kalmayan ordunun alanı komşu ordulara açılır; iki yaşayan komşu varsa boş alan aralarında paylaşılır. 36 birim tampon korunur.
+- historical-tactics.js koordinasyonu doktrin kararlarından önce günceller. Mevcut Fransız fırsat hücumu ve İtalyan ihtiyat davranışları yeni kanat yolunu kendileri fark eder; tarihî doktrin kuralları değiştirilmedi.
+- Mevcut cepheler yalnız genişler. Yaşayan orduların sırası, yönü ve diziliş yuvaları yeniden kurulmaz; boşluğa komşu olmayan sınırlar değişmez.
+- Komutan ölümü, oyuncu emri veya taktikten ayrılma alanı boşaltmaz. Tek bir muharip bile kalmışsa alan korunur; yalnız komutanı kalan ordu geniş bir cepheyi ayırmaya devam etmez.
+- tests/historical-alliance-redeployment.mjs: 19 test geçti. İki taraf ve iki eksende kenar/orta kayıpları, ardışık boşluklar, son ordunun tam cepheyi kullanması, emirler ve komutan kaybı, diğer ittifakın alanı, gerçek süvari hareket hedeflerinin yeni boşluğa çıkması ve mızrak önünden çapraz geçmemesi kontrol edildi. İlk 18 senaryo düzeltme öncesinde sorunu tekrar etti.
+- Önceki 13 regresyon dosyası ve 22 tam ittifak savaşı yeniden geçti. Tam savaşlarda izlenen kaynaklar test boyunca değişmedi. Günlükler artifacts/alliance-tactics/ altında; yeni test günlüğü redeployment.log.
+- Başlangıç alanı dar olduğu için doktrinini zaten tamamlamış/bırakmış bir komutan yeniden başlatılmaz. Değişiklik, hâlen bekleyen veya uygulanan manevralara alan sağlar. Canlı savaşçılar fiziksel duvarlarla ayrılmaz.

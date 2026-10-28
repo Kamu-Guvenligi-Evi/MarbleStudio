@@ -1,0 +1,26 @@
+.formation-tools{display:flex;flex-wrap:wrap;align-items:end;gap:8px;border-top:1px solid #46523c;padding-top:8px;margin-top:8px}
+.formation-tools label{display:flex;flex-direction:column;gap:3px;font-size:11px;color:#d7d2bc;flex:1;min-width:100px}
+.formation-tools select{width:100%;min-height:34px;padding:5px;background:#202b22;color:#f0e8ce;border:1px solid #59634a;border-radius:6px}
+.formation-tools button{min-height:36px;flex:1;white-space:normal;border:1px solid #a99b66;border-radius:6px;background:#3b4930;color:#f3e7b8;padding:7px;cursor:pointer}
+.formation-tools button:disabled{opacity:.45;cursor:default}
+.formation-tools #undo-placement{flex:0 0 auto;background:#202b22;border-color:#59634a}
+.formation-tools :focus-visible{outline:2px solid #edce75;outline-offset:2px}
+.formation-tools button[aria-pressed=true]{background:#ddc78b;color:#202b22}
+.formation-tools p{width:100%;margin:0;font-size:11px;color:#c5c4af}
+#battle.placing-formation{cursor:crosshair}
+.formation-guide{display:flex;align-items:center;gap:10px;flex:1 0 100%;min-width:0;padding:6px 8px;box-sizing:border-box;border-radius:6px;background:#18221c}
+.formation-guide svg{width:76px;height:76px;flex:0 0 76px;color:#e5c97d}
+.formation-guide circle{fill:currentColor}
+.formation-guide path{fill:none;stroke:#d4e8c2;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.formation-guide div{display:flex;flex-direction:column;gap:3px;min-width:0;font-size:11px;line-height:1.4;color:#d7d2bc}
+.formation-guide strong{color:#f0e8ce;font-size:12px}
+.formation-guide small{color:#aaa992;font-size:10px}
+.formation-size{flex:1 0 100%;min-width:0;display:grid;gap:5px}
+.formation-size label{flex-direction:row;justify-content:space-between}
+.formation-size output{color:#edce75;font-variant-numeric:tabular-nums}
+.formation-size>div{display:flex;align-items:center;gap:6px;min-width:0}
+.formation-size input{flex:1;min-width:0;width:70px;accent-color:#ddc78b;min-height:32px}
+.formation-size button{flex:0 0 34px;padding:5px}
+.formation-size #apply-formation-size{flex:0 1 108px}
+.formation-size small{font-size:10px;color:#aaa992;line-height:1.4}
+@media(max-width:899px){.formation-tools select,.formation-tools button{min-height:40px}.formation-tools{gap:6px}.formation-tools p{line-height:1.4}}

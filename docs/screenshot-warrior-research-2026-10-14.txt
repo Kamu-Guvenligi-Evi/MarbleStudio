@@ -1,0 +1,57 @@
+KULLANICI GÖRSELİ — BEŞ SAVAŞÇI / 14 EKİM 2026
+
+Kaynak: Ekran görüntüsü 2026-10-14 205925.png; 606×170, karlı orman.
+İnternet görsel aramalarında birebir kaynak bulunamadı. Aşağıdaki eşlemeler
+kıyafet/teçhizat yorumudur; oyunun/videonun gerçek karakter adları değildir.
+
+SOLDAN SAĞA
+1. Mavi kürklü savaşçı: Rus/bozkır teçhizatına benzer; medeniyet belirsiz.
+   Konik başlık yalnız Ruslara özgü değildir. Drujina olası karşılaştırma
+   olarak araştırıldı; screenshot = drujina iddiası yok.
+2. Yeşil-beyaz zırhlı savaşçı: Avrupa levha zırhlı yaya tipi. Renkler tek
+   başına İngiliz, Fransız, Alman veya İsviçre kimliğini belirlemiyor.
+3. Sarı, siyah kartala benzeyen motifli savaşçı: Alman/Kutsal Roma çağrışımı
+   olası; arma ayrıntısı kaynak görsel olmadan doğrulanamadı. Töton diye
+   kesin etiketlenmedi. Yeni zırhlı yaya kaydı bir tarihî karşılaştırmadır.
+4. Kırmızı sarıklı savaşçı: Güney Asya veya İslam dünyası olasılıkları açık.
+   Rajput, Memlük ya da Osmanlı diye kesinleştirilmedi. Bir sarık türü ve
+   renk, tek başına devlet veya seçkin birlik ispatı değildir.
+5. Gri katmanlı zırh, kabuto ve kılıç: Japon samurayı yorumu güçlü.
+   samurai mevcut; kopya kayıt açılmadı. Belirli klan/daimyo çıkarılmadı.
+
+EKLENEN KAYNAKLI KARŞILAŞTIRMALAR
+- rus_druzhina: Kiev Rus ve Rus Prenslikleri; prens maiyeti. Atlı temsil.
+  Kaynak: Internet Encyclopedia of Ukraine, Druzhyna.
+  Görsel: Prohorov 1884, Vladimir ve maiyeti; kamu malı tarihî tasvir.
+- german_armoured_foot: Kutsal Roma İmparatorluğu / Alman toprakları.
+  15. yy zırhlı yaya temsili; tek bir seçkin alay olduğu iddia edilmez.
+  Görsel: Talhoffer 1459, dönem zırhlı düellosu; kamu malı.
+İki görsel yerelde incelendi; dosyalar 31.915 ve 61.756 bayt.
+Bu sayılar disk dosya boyutudur, internet trafiği ölçümü değildir.
+
+TEÇHİZAT KAYNAKLARI
+https://www.metmuseum.org/art/collection/search/21975
+  Güney Rusya veya İran başlığı; konik başlık kimliği tek başına kesinleştirmez.
+https://art.thewalters.org/object/51.74/
+  Sarıklı miğfer karşılaştırması; kırmızı kumaş sarığın birebir eşleşmesi değil.
+https://www.tnm.jp/modules/r_exhibition/index.php?controller=item&id=6916&lang=en
+  Tokyo Ulusal Müzesi samuray teçhizatı açıklaması.
+
+KALAN İŞ
+Ekran görüntüsünün oyun/video/çizer kaynağını bulmak; özellikle 1 ve 4'ü
+kesinleştirmek. İki yeni kayıt bu belirsizlik çözülmüş gibi sunulmamalı.
+Rajput atlısı görseli bulundu, fakat 18. yy Rajasthan resmidir; ortaçağ
+ve kırmızı yaya savaşçının kesin görseli diye katalogda kullanılmadı:
+https://commons.wikimedia.org/wiki/File:Rajput_warrior_on_horseback,_with_caption_in_Kayathi_and_Nagari..jpg
+
+DOĞRULAMA
+- Katalog: 46 birlik, 31 medeniyet grubu, 34 yerel referans görseli.
+- İki yeni kart, görselin yüklenmesi ve cavalry/sword rolleri: PASS.
+- historical-civilizations.mjs: PASS. Test, yeni arayüzde kurulum panelini
+  #menu-setup ile açacak şekilde güncellendi.
+- Diğer oyun sekmesinin bildirdiği sonuç: historical-combat,
+  historical-portraits, historical-armies-browser, historical-combat-browser
+  ve komutan motor/tarayıcı kontrolleri PASS; build PASS (3,58 saniye).
+- Dokuz lider sahada ayrı komutan olarak entegre edildi. Ortak stilize
+  atlı çizimi kullanıyorlar; kişiye özgü savaş alanı kıyafeti/yüzü henüz yok.
+- Eksik 12 birlik görseli ve ekran görüntüsünün birebir kaynağı açık iş.

@@ -1,0 +1,90 @@
+15 Ekim 2026 — otomatik ordularda birlik çeşitliliği
+
+11 mevcut komutan hazır ordusu, yalnız doktrin askerlerinden oluşmak yerine
+2–6 farklı birlik içeren dönem uyumlu karışımlar kullanıyor. İstenen toplam
+asker sayısı korunuyor; en büyük kalan yöntemiyle küsuratlar dağıtılıyor.
+Minimumlar aynı: 24 asker; Qi Jiguang 40. Komutan ayrıca ekleniyor.
+Mevcut birlik kimlikleri, klasik mod ve eski iki taraflı kayıt biçimi korunuyor.
+
+Başlangıç karışımları:
+Osmanlı: 8 solak, 12 sipah, 4 akıncı.
+Alman: 12 Landsknecht, 4 teberci, 4 Doppelsöldner, 4 pavisli arbaletçi.
+İngiliz: 16 housecarl, 6 fyrd mızraklısı, 2 erken dönem okçusu.
+Fransız: 16 ordonnance süvarisi, 4 franc-archer, 4 yaya zırhlı asker.
+İtalyan: 10 Milano süvarisi, 6 Condotta mızraklısı, 8 Ceneviz arbaletçisi.
+Sparta: 16 ağır hoplit, 8 hafif helot destek piyadesi.
+Ahameniş: 8 ağır piyade, 8 yaya okçu, 8 atlı okçu.
+Japon: 8 yari ashigaru, 8 yumi ashigaru, 8 samuray.
+Qin: 8 ji piyadesi, 8 arbaletçi, 8 kısa kılıçlı destek piyadesi.
+Ming: 3 uzun kalkan, 3 rattan kalkan, 6 langxian, 14 uzun mızrak,
+      6 kısa silahlı destek, 8 fitilli tüfekçi.
+Selçuklu: 16 hassa süvarisi, 8 Türkmen atlı okçusu.
+
+Yeni yedi birliğin kimlikleri:
+english_fyrd_spearman, english_early_archer, spartan_helot_light,
+achaemenid_horse_archer, seljuk_turkmen_archer, qin_swordsman, ming_matchlock.
+Mevcut prosedürel insan çizimleri kullanılıyor; yeni görsel indirilmedi.
+Silah, zırh, menzil, hareket, doldurma ve hücum özellikleri rollere göre farklı.
+Atlı okçuların hücum hasarı sıfır; geri çekilmeleri sınırlı.
+
+Kaynaklar ve yorum sınırları:
+- İngiliz: English Heritage Hastings açıklaması. Bayeux'deki tek İngiliz okçusu
+  küçük destek grubuna dayanak; sonraki yüzyılların uzun yay ordusu kullanılmadı.
+  https://www.english-heritage.org.uk/visit/places/1066-battle-of-hastings-abbey-and-battlefield/history-and-stories/what-happened-battle-hastings
+- Helot: Herodotos 9.28, Plataia'da hafif silahlı destek. Tam silah listesi yok;
+  kısa mızrak oyun yorumu. Leonidas'ın gerçek Termopylai kadrosu iddiası yok.
+  https://lexundria.com/hdt/9.28/mcly
+- Ahameniş ve Selçuklu atlı okçuları: Encyclopaedia Iranica Army I / II.
+  https://www.iranicaonline.org/articles/army-i/
+  https://www.iranicaonline.org/articles/army-ii/
+- Qin: mezar ordusunun bronz silahları üzerine araştırma; ayrı standart bir
+  kılıç alayı olduğunu iddia etmeden kısa silahlı destek rolü temsil ediliyor.
+  https://www.nature.com/articles/s41598-019-40613-7
+- Ming: Qi Jiguang, Jixiao Xinshu, bölüm 15. Tüfekçi genel menzilli destek;
+  her mandarin ördeği takımının sabit üyesi olarak sunulmuyor.
+  https://zh.wikisource.org/wiki/紀效新書_(四庫全書本)/卷15
+Oranlar, sayısal güçler ve renkler tarihî ölçüm değil, oyun yorumudur.
+Helot silahı ve Qin'in ayrı kılıçlı kartı hakkındaki belirsizlikler araştırma
+sekmesine bildirildi; katalog notlarında da açıkça yazıyor.
+
+Değişen dosyalar:
+src/historical-army-presets.js
+src/historical-army-support-units.js (birlikler ve çizim profilleri)
+src/historical-catalogue.js / historical-art-profiles.js (yalnız import/spread)
+tests/historical-army-presets.mjs / historical-army-presets-browser.mjs
+tests/historical-army-support-units.mjs / historical-mixed-army-battles.mjs
+docs/battle-ai-audit-2026-10-15.txt ve bu not.
+Arayüz, savaş motoru ve diğer sekmenin taktik dosyaları değiştirilmedi.
+
+Doğrulama:
+- Preset testi PASS: 11 ordu, minimumdan 1000'e tüm tam sayı boyutları;
+  doktrin rol eşikleri, dört boyutta iki tarafta gerçek taktik başlatma.
+- Birlik testi PASS: 7 birlik iki tarafta gerçek hasar, doğru ok/mermi,
+  iki atlı okçuda hareketli atış ve 45 saniyede sınırlı ricat, kayıt dönüşümü.
+- Görsel testi PASS: 560 kare, boş/kırpılmış kare yok, 7 farklı siluet.
+  32 KB'lık yerel özet bir kez incelendi; mevcut insan çizim diliyle uyumlu.
+- Tarayıcı PASS: 1366/390'da iki tarafa destek ekleme/silme, savaşa geçiş,
+  yeniden yükleme. 1440/390/320'de 11 preset, ölçekleme, geçersiz sayı,
+  diğer orduyu koruma, uygulama ve kayıt; tarihî ordu atölyesi de geçti.
+  Yeni ittifak UI'sına test seçicileri uyarlandı; komutan adla aranıyor.
+  320'de filtresiz uzun komutan listesinde kaydırma takılması ana sekmeye bildirildi.
+- Tam savaş PASS: 66 koşu = 11 karma ordu x 3 rakip x 2 taraf; seed1427,
+  geniş harita, 1/30 saniye adım. 180 saniyeyi aşan/bitmeyen savaş yok,
+  sonlu koordinatlar; koşu başı/sonu kaynak hashleri aynı.
+  artifacts/historical-army-support/battles.json, checks.json, units.jpg.
+- Mevcut crown-battle, historical-combat ve historical-tactics-units
+  --node-only PASS. Tarihî test: 2501 asker, seçim/emirler, fil alan hasarı,
+  mızrak karşılaması, atlı okçuluk, tüfek ve deterministik sonuçlar.
+- Vite build PASS (mevcut büyük chunk uyarısı sürüyor).
+
+Tekrar: tools/node-runtime/node-v24.21.0-win-x64/node.exe ile yukarıdaki
+tests/*.mjs dosyalarını çalıştır. Tarayıcı testleri localhost:5173 kullanır.
+
+Kalan sınırlar:
+Bu paket mevcut 11 otomatik orduyu genişletir; bütün komutanlara yeni preset
+eklemez. Doktrin çekirdeği yüzde60 koşulu nedeniyle destek oranları sınırlıdır.
+Sparta ve Selçuklu iki ayrı role sahiptir; her orduda zorunlu yaya/atlı/okçu
+üçlüsü yoktur. Tam tarihî sefer kadrosu veya genel güç dengesi garantisi yok.
+66 savaş bitiş testi taktiğin her rakibe karşı yararlı olduğu anlamına gelmez.
+Önceki audit'te bulunan hareket sorunlarının diğer sekmedeki düzeltmeleri ve
+240 önce/sonra koşu sonuçları docs/tactics-review-2026-10-15.txt içindedir.

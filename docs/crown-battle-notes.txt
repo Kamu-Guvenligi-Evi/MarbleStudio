@@ -1,0 +1,76 @@
+TAÇ MUHAREBESİ — 14 Ekim 2026
+
+Yerel adres: http://127.0.0.1:5173/crown-battle.html
+Ana Marble Studio menüsüne ve Vite üretim derlemesine eklendi.
+Mevcut diğer oyun dosyalarındaki kullanıcı değişiklikleri korunuyor.
+
+REFERANSLAR
+Kullanıcının Videos/Ekran Kayıtları klasöründeki 185313, 185400, 185405,
+185435 son ekli dört MP4. Yerelde örnek kareler incelendi; videoların tamamı
+izlenmiş veya sesleri çözümlenmiş değildir. Örnekler artifacts/crown-reference.
+Gözlemler: dikey kadraj, açılı üstten piksel askerler, uzun cephe hatları,
+çoklu birlik blokları, süvari, mızrak ve kalkanlar; bazı sahnelerde kuşatma
+araçları. Instagram başlıklarında da süvarinin çoklu hedefe çarpması ve
+geri itme anlatılıyor. Referans görseller/karakterler kopyalanmadı.
+
+İLK SÜRÜM
+- Özgün Canvas asker/at/ağaç çizimleri, tohumlu üç senaryo.
+- Kılıçlı, mızraklı, okçu, süvari; taraf başına 80/160/240 asker seçimi.
+- Rakip asker sayısı %80/%100/%125; düşman otomatik komuta.
+- Hedef takibi, çarpışma ayrıştırması, ok uçuşu, hücum alan hasarı,
+  geri itme, mızrakla hücum kesme, komutla intikal ve serbest hücum.
+- Demir Hat senaryosunda düşman piyadesi ve okçuları mevzisini korur.
+- Sürükleyerek seçim, birlik türü düğmeleri, sağ tık/dokunma ile emir.
+- Boşluk duraklatma; 1/2/4 hız, sinema modu, 540x960 (9:16) sessiz WebM.
+- Kayıt kullanıcı başlattığında açılır; bitişte veya sekme gizlenince
+  kapanır; en fazla beş dakika. Yerel tarayıcı indirmesi kullanılır.
+- Bir taraf tükenince sonuç; 180 simülasyon saniyesinde hayatta kalan
+  asker sayısı eşit değilse üstün olan, eşitse beraberlik.
+
+14 EKİM GÖRSEL / ORDU GÜNCELLEMESİ
+- src/crown-battle-art.js: ayrıntılı önbellekli asker/at animasyonları,
+  zırh/silah çeşitleri, çimen, ağaçlar, taş kenarlar ve gölgeler.
+- Her iki taraf için kılıçlı, mızraklı, okçu ve süvari sayısı ayrı girilir.
+  Sıfır türü kaldırır; her ordu en az bir asker içerir. Yapay sayı tavanı yok;
+  2000 üzeri toplamda performans uyarısı bulunur, cihaz kapasitesi belirleyicidir.
+- Görüntü ve WebM 1080x1920; kayıt 30 fps, hedef 6 Mbps. Savaş mantığı korundu.
+- Birim testleri, masaüstü/mobil tarayıcı testi ve üretim derlemesi geçti.
+  Tarayıcı testi: özel ordu sayıları, 123 süvari, boş ordu doğrulaması,
+  emirler, duraklatma, hız, sinema ve çözümlenebilir 1080x1920 WebM.
+  Uzun tarayıcı testi bağımsız çalıştırıldı; çıkış 0.
+
+14 EKİM TARİHÎ BİRLİK ARAŞTIRMASI
+- Kullanıcı gerçek tarihî toplulukların birlikleri için görsel araştırma istedi.
+- artifacts/elite-references/index.html: çevrimdışı görsel galeri, dönem,
+  kaynak, fotoğraf lisansı ve oyun tasarımı notları.
+- Samuray: The Met yoroi, 23025; Yeniçeri: Arış 2024 makalesi görsel 1 ve 8;
+  Kıpçak: Lipovets maskeli miğferi (etnik aidiyet kesin değil);
+  hussar: Polonya Ordu Müzesi zırh fotoğrafları ve kanatlar üzerine müze kaydı.
+- Altı küçük kaynak görseli indirildi; internet trafiği bayt olarak ölçülmedi.
+- Henüz bu birlikler oyuna eklenmedi ve yeni karakter görseli üretilmedi.
+  Tam figürler ve ortak sprite açısı bir sonraki uygulama adımı.
+
+SINIRLAR / SONRAKİ İŞLER
+Bu ilk oynanabilir prototip; referanstaki ayrıntılı animasyon düzeyinde değil.
+Kuşatma makineleri, kale/yıkım, sesler, arazi engelleri ve kampanya yok.
+Ağaçlar dekoratif; hedef bulma açık meydan için. Ordu kompozisyonları düzenlenebilir.
+WebM bağımsız indirilir; mevcut ortak MP4/video atölyesi akışına bağlanmadı.
+Yeni videolara göre sprite detayları, formasyonlar ve denge geliştirilebilir.
+
+DOSYALAR
+crown-battle.html; src/crown-battle.js (saf simülasyon),
+src/crown-battle-renderer.js, src/crown-battle-app.js, src/crown-battle.css.
+
+DOĞRULAMA
+Yerel Node: tools/node-runtime/node-v24.21.0-win-x64/node.exe
+node tests/crown-battle.mjs
+  Alan hücumu, geri itme, mızrak karşılığı, ok uçuşu, emirler,
+  aynı tohum/komutla aynı sonuç, üç senaryo bitişi ve sonlu koordinatlar.
+node tests/crown-battle-browser.mjs
+  Chrome masaüstü/mobil, seçim/emir, hız, duraklama, senaryo,
+  sinema, yatay taşma yok, WebM indirme, tarayıcı hatası yok.
+node node_modules/vite/bin/vite.js build
+  Başarılı; uygulamanın büyük paket uyarısı mevcut.
+Kayıt örneği ffmpeg ile çözümlendi. Geçerli video; çıkış kodu 0.
+Çıktılar artifacts/crown-battle altında; kaynak videolar değiştirilmedi.
+Yeni paket, görsel/font indirilmedi. İnternet trafiği bayt olarak ölçülmedi.

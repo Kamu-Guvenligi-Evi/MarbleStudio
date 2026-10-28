@@ -1,0 +1,30 @@
+15 Ekim 2026 — Türk eklemeleri ve Alman / Rus / İspanyol kontrolü
+
+Eklenenler: gokturk_bori, karakhanid_palace_guard, karakhanid_hassa, santiago_knight.
+Türkler menüsüne Göktürk Kağanlığı ve Karahanlı Devleti; İspanyollar menüsüne León / Kastilya eklendi.
+Katalog, savaş türleri, çizim profilleri ve menü aynı ID'leri kullanıyor. Motor ve renderer değiştirilmedi.
+
+Almanlar: Landsknecht, Töton şövalye kardeşler, Alman zırhlı yaya mevcut. Birbirinden farklı siluetler; ayrı kültür altındaki doğru devletlerde. Zırhlı yaya adı belgelenmiş bir elit alay değildir; katalogda bu sınırlama var.
+Ruslar: Drujina mevcut. Kart mızraklı süvari dediği halde çizim kılıç kullanıyordu; lance olarak düzeltildi. Kiev Rus / Rus prenslikleri tarihî kimliği korundu.
+İspanyollar: Ayrı grup ve birlik yoktu. Santiago şövalyesiyle ilk kadro açıldı; tüm İber askerî geleneklerinin tamamlandığı iddia edilmiyor.
+
+Kaynaklar ve sınırlar:
+https://dergipark.org.tr/tr/download/article-file/3528902
+Eda Durmuş, Eski Türklerde Askerî Adlandırmalar (2024): Böri, kağanın seçilmiş muhafızları. Kurt başı kostümü veya standart birlik üniforması kanıtlanmıyor.
+https://dergipark.org.tr/tr/download/article-file/810705
+J. Özlem Oktay Çerezci, Göktürk Dönemi Madeni Silahları: dönem silah ve zırh buluntuları. Böri için hafif eğri kılıç, lamelli zırh ve dilimli miğfer yorumu.
+https://islamansiklopedisi.org.tr/karahanlilar
+Saray muhafızları ve hassa ayrı kurumlar. Yatgak / Turgak tek kartta birleşti. Hassa teşkilatının ayrıntıları sınırlı; atlı okçu rolü bir oyun tercihi. Kaftan kesimi, başlık, renkler ve taşıdıkları tam silah takımı kesin bir üniforma olarak sunulmuyor.
+https://pares.cultura.gob.es/ParesBusquedas20/catalogo/autoridad/21516/imprimir
+Santiago tarikatının kuruluşu için PARES kaydı esas alındı (1170, León / Cáceres).
+https://tesauros.cultura.gob.es/tesauros/bienesculturales/1190064.html
+Kırmızı kılıç-haç biçimi için. Bu sözlükteki farklı kuruluş tarihi kullanılmadı.
+https://www.metmuseum.org/essays/arms-and-armor-in-medieval-europe
+Santiago'nun 13. yy donanım yorumunda zincir zırh, miğfer, kalkan ve mızrak. Giysi ve koşum ayrıntıları yorum.
+
+Çizimler: src/turkic-elite-art.js, src/iberian-units.js ve historical-warrior-art.js Santiago dalı.
+Yeni raster indirilmedi; oyunun mevcut canvas çizim sistemi kullanıldı. Kaynak bağlantıları kartlarda.
+Doğrulama: tests/elite-audit.mjs. 8 birlik, 512 kare, iki takım, dört hareket; farklı siluet, boş çizim ve kesilme denetimi. Savaşta hasar, menüden seçim, savaşa geçiş ve kayıt yenileme geçti.
+İlk testte Böri kılıcı saldırının iki karesinde üstten kesildi; bıçak boyu düzeltildi ve test yeniden geçti.
+Önizleme: artifacts/elite-audit/eight-warriors.jpg (yaklaşık 58 KB); kontroller: artifacts/elite-audit/checks.json.
+Son kontrol: node-only testleri ve vite build geçti (7.36 sn). Derleme günlüğü: artifacts/elite-audit/build.log. Vite 500 kB üstü paket uyarısı verdi.

@@ -1,0 +1,13 @@
+Savaş kararları — 15 Ekim 2026
+
+src/crown-battle.js
+- Serbest yakın dövüş hedeflemesinde menzilde ve önde olan erişilebilir düşman, kalabalık hedef paylaşımı nedeniyle terk edilmiyor. Açık saldırı emirleri önceliğini koruyor.
+- Okçu/atlı okçu, mevcut sınırlı hedef taramasından ayrıca yakın tehdit seçiyor. Ateş ettiği düşman farklı yönde olsa bile yakın dövüş tehdidinden uzaklaşıyor. Bekle ve açık saldırı emirleri bu otomatik kaçışı bastırıyor; mevcut sonlu kaçış mesafesi korunuyor.
+- Normal yakın dövüş vuruşu hedefin isabet anındaki yönüne göre yandan yüzde 12, arkadan yüzde 25 ek hasar veriyor. Zırh sonrasında uygulanıyor; ok, mermi, fil alan vuruşu ve hücum hasarına ek çarpan uygulanmıyor.
+- Yeni yakın tehdit alanı asker nesnesinin başlangıç düzeninde tanımlı. Ek tam ordu taraması veya her kare yeni hedef araması yok.
+
+Test: tests/crown-battle-tactics.mjs
+Kalabalık temas önceliği, açık hedef emri, yaya/atlı okçu kaçış yönü, bekle emri, ölü tehdit temizliği, zırhlı/zırhsız ön/yan/arka hasar ve mevcut mızrak-hücum kesilmesi doğrulandı.
+Behavior, frontline, impact, charge, formations, projectiles ve feedback testleri geçti; 2400 asker komşuluk/aday tarama sınırları korundu. Bu kontrol FPS ölçümü değildir.
+Tarayıcı: beş birlik sınıfında 34 üretim çizimi kontrolü geçti. Derleme 21.15 saniyede geçti; mevcut 500 kB paket boyutu uyarısı sürüyor. Sonuçlar artifacts/battle-playability/tactics-browser.log ve tactics-build.log dosyalarında.
+Diğer kullanıcı sekmesi recruitment menüsünde çalışıyor; o dosyalara dokunulmadı. Çıktı çakışmaması için derleme artifacts/battle-playability/tactics-build dizinine alındı.

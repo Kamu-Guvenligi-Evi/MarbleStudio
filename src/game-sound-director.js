@@ -18,7 +18,7 @@ export function createGameSoundDirector(mode,style='balanced',overrides={}){
   const previous=new Map();
   return (event,time=event.time??0)=>{
     const type=event.type,final=endings.has(type),failed=['lost','timeout'].includes(type);
-    const reward=['finish','multiply','bonus','pickup','heal','wave'].includes(type);
+    const reward=['goal','finish','multiply','bonus','pickup','heal','wave'].includes(type);
     const fracture=['break','ice'].includes(type),damage=mode==='ball-duel'&&type==='hit';
     const contact=['brick','paddle','wall','bounce','hit','shot'].includes(type);
     if(!final&&!reward&&!fracture&&!contact)return null;
@@ -39,6 +39,9 @@ export function createGameSoundDirector(mode,style='balanced',overrides={}){
     const weapon=mode==='ball-duel'&&type==='shot';
     if(choice&&choice!=='original'){
       voice=choice;reason='Manuel seçilen efekt';
+    }else if(mode==='goal-arena'&&type==='goal'){
+      // Goals must remain audible even immediately after a post/ball contact.
+      voice='goal-horn';gain=.65;reason='Goal celebration';
     }else if(!choice&&style.startsWith('melodic-')&&!weapon){
       if(!final&&time-lastNote<.095)return null;
       voice=final?'soft-resolve':'soft-'+style.slice(8);

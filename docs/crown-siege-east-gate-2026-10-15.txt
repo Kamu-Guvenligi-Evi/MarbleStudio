@@ -1,0 +1,11 @@
+Kale kuşatması — sol kale / sağ saldırı düzenlemesi
+
+Kullanıcı isteği: kaleyi belirgin büyüt, soldaki takım savunsun, saldırı sağdan gelsin; ana oyunun görünümünü koru.
+Kale 750 x 1760 dünya birimi (önceki alanın yaklaşık 11,8 katı). Mavi takım 0 savunma, kızıl takım 1 saldırı. Doğu kapısı (100,480), avlu sancağı (-200,480). Kalın surlar, 12 kule, iç kale ve iki kışla; yapı geometrisi yol bulmada da engel.
+Mevcut asker çizimleri ve arazi kullanılıyor. Kale dokuları yerel canvas ile çiziliyor; dışarıdan varlık indirilmedi. Kamera başlangıç yakınlığı 0,38.
+Dosyalar: crown-siege.html, src/crown-siege.js, src/crown-siege-art.js, src/crown-siege-app.js, src/crown-siege.css; ilgili iki kuşatma testi.
+Bu düzenlemede klasik savaş dosyaları değiştirilmedi; kuşatma ayrı sayfa ve simülasyon alt sınıfında.
+Doğrulama: tests/crown-siege.mjs geçti (3 tohumda kapı kırıldı, saldıranlar avluya girdi, ele geçirme tamamlandı); tests/crown-battle.mjs geçti; tests/crown-siege-browser.mjs 1440x1000 ve 390x844 geçti; Vite build geçti (paket boyutu uyarısı mevcut).
+Günlükler: artifacts/crown-siege/east-gate-validation.log (ilk tarayıcı denemesindeki mobil zamanlama hatasını da içerir), east-gate-browser.log (son başarılı tekrar), east-gate-build.log.
+Önizlemeler: artifacts/crown-siege/deployment-1440.png ve deployment-390.png.
+Adres: http://127.0.0.1:5173/crown-siege.html

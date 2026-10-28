@@ -1,0 +1,13 @@
+﻿2026-10-14 — Cinema controls and map scenery
+
+Cinema: src/crown-battle-cinema.css; toggle/focus handling in src/crown-battle-app.js. Single 60px transport strip, optional floating commands, responsive to 320px width. Normal controls preserved.
+Scenery: src/crown-battle-map-structures.js called by crown-battle-maps.js. Steppe camps, desert adobe houses, snowy houses, autumn tiled houses, stone houses; creeks and bridges in all five maps. Classic unchanged. Decorative only: no collision or pathfinding change. Map UI explains this.
+
+Validation:
+- tests/crown-battle-cinema-browser.mjs PASS at 1366x768, 390x844, 320x568, 844x390; playback, commands, formation, Escape, no page errors.
+- Vite production build PASS; existing chunk-size warning. artifacts/crown-battle/cinema-structures-build.log.
+- artifacts/crown-battle/map-structures-smoke.mjs PASS at 1366px and 390px: six distinct maps, armies/orders/camera preserved, terrain cache reused, active battle map change, rebuild, deterministic scenery, no page errors.
+- Full maps browser test did not complete: recording/reload timed out while concurrent live edits were happening. Recording behavior was not changed; no full WebM regression pass claimed.
+- Visual previews inspected: artifacts/crown-battle/cinema-compact.jpg and structures-preview.jpg.
+
+Other tab implemented culture grouping concurrently; no overwritten work. Live URL: http://127.0.0.1:5173/crown-battle.html

@@ -1,0 +1,38 @@
+Nikephoros II Phokas — eksik destek birlikleri, 16 Ekim 2026
+
+Eklenenler:
+- byzantine_akontistes: kısa menzilli ciritçi; dart mermisi, kalkan ve yedek ciritler.
+- byzantine_sphendobolistes: sapancı; sling mermisi, taş kesesi, omuz örtüsü.
+- byzantine_prokoursator_lancer: öncü kuvvetin mızraklı süvarisi; kısa lamelli koruma ve zırhsız at.
+Üçü Bizans İmparatorluğu menüsünde ve Nikephoros otomatik ordusunda.
+24 kapasiteli temel dağılım: skoutatos 6, menavlatos 4, okçu 4, katafrakt 4,
+ciritçi 2, sapancı 2, öncü süvari 2. Oranlar oyun tercihi; tarihî asker sayımı değil.
+
+Dayanak ve sınırlar:
+Eric McGeer, Infantry versus Cavalry: The Byzantine Response, REB 46 (1988), s.138:
+https://www.persee.fr/doc/rebyz_0766-5598_1988_num_46_1_2225?pageId=T1_138
+Praecepta Militaria düzeninde akontistai ve sphendobolistai hafif yaya desteği.
+Akontistai arasında Rus ve başka yabancı askerler de vardır; menü hizmet ülkesidir.
+George T. Dennis, The Byzantines in Battle, s.172:
+https://deremilitari.org/wp-content/uploads/2014/03/dennis1.pdf
+Prokoursatores içinde hem mızraklı hem yaylı süvari vardır; kart yalnız mızraklı bileşendir.
+Özel keşif yapay zekâsı eklenmedi. Kıyafet kesimleri, başlık ve renkler dönemsel yorum;
+kesin üniforma veya birebir tarihî resim kopyası iddiası yok. Varegler eklenmedi.
+
+Dosyalar: commander-reinforcement-units/art.js, historical-army-presets/history.js;
+tests/commander-reinforcements.mjs ve historical-army-presets.mjs.
+Battle/taktik dosyalarına dokunulmadı. Hannibal fil maliyeti 10 korunuyor.
+
+Doğrulama:
+- 11 reinforcement türünde iki takım hasarı, doğru mermi, kayıt geri yükleme geçti.
+- 22 birim savaşı, 12 komutan savaşı tamamlandı; en uzun 89 / 74.23 saniye.
+- 880 animasyon karesi boşluk/kesilme; farklı siluetler; PC/telefon ekle-sil-kaydet geçti.
+- 20 komutanın minimum–1000 kapasite ve doğma testleri geçti.
+- 20 tarihî kapsam/kaynak paneli geçti; 1440/390/320 genişlikte preset arayüzü geçti.
+- 299 farklı donanım profili, 258 karşılıklı savaş geçti.
+- Vite üretim derlemesi geçti; mevcut büyük paket uyarısı sürüyor.
+- Görsel önizleme: artifacts/commander-reinforcements/units.jpg (ilk kontrol 57.531 bayt).
+  Bu yerel dosya boyutudur; ölçülmüş internet tüketimi değildir.
+- Son görsel incelemede üç Bizans biriminin kolları tunik renginde düzeltildi.
+
+Tüm tarihî orduların eksiksiz olduğu iddia edilmiyor; bu teslim Nikephoros desteğidir.

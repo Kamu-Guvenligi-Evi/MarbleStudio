@@ -1,0 +1,4 @@
+import fs from 'node:fs/promises';
+const cats=JSON.parse(await fs.readFile('artifacts/png-categories.json','utf8'));
+console.log(cats.filter(([url])=>/spider_man|helmet|harp|pirate|sail|saturn|neptune|lantern|gauntlet|marvel|dinosaur/.test(url)));
+for(const slug of ['spider_man','octopus','dragon','fish','ship']){const cat=cats.find(([u])=>u.endsWith('/'+slug));if(!cat)continue;let html=await(await fetch('https://pngimg.com'+cat[0])).text();const urls=[...new Set(html.match(/https:\/\/pngimg\.com\/uploads\/[^"\s<>]+\/small\/[^"\s<>]+\.png/g)||[])];for(let i=slug==='spider_man'?0:4;i<Math.min(urls.length,slug==='spider_man'?4:12);i++){let file=`public/merge-cutouts/${slug}-${i}.png`;try{await fs.access(file);continue;}catch{}let r=await fetch(urls[i]);if(r.ok)await fs.writeFile(file,Buffer.from(await r.arrayBuffer()));}console.log(slug,urls.length);}

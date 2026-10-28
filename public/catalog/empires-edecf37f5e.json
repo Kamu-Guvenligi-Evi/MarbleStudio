@@ -1,1 +1,15 @@
-{"id": "empires-edecf37f5e", "category": "empires", "name": "Timur İmparatorluğu", "source": "https://commons.wikimedia.org/wiki/File:Timurid_State.png", "credit": "DigitalNomadWikiKzRu", "license": "CC0", "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en", "fit": "contain", "src": "/catalog/empires-edecf37f5e.png", "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Timurid_State.png/330px-Timurid_State.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"}
+{
+  "id": "empires-edecf37f5e",
+  "category": "empires",
+  "name": "Timur İmparatorluğu",
+  "source": "https://commons.wikimedia.org/wiki/File:TimuridFlag_attributed.svg",
+  "credit": "Own work",
+  "license": "Public domain",
+  "licenseUrl": "",
+  "fit": "flag",
+  "src": "/catalog/empires-edecf37f5e-historical.png",
+  "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/TimuridFlag_attributed.svg/330px-TimuridFlag_attributed.svg.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "fileOverride": "TimuridFlag attributed.svg",
+  "historicalNote": "Modern atfedilen bayrak · tarihî bayrak değildir",
+  "curated": true
+}

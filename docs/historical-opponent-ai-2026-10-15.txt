@@ -1,0 +1,49 @@
+Rakibe göre taktik kararları — 15 Ekim 2026
+
+Sorunlar: savunma hattı menzilli rakibe karşı sabit bekliyordu; Condotta
+ihtiyatı kanadın savunmasını ölçmüyordu; Fransız hücumu yalnız en yakın
+okçuyu değerlendiriyor ve seçilen hedefi gerçek asker hedefine aktarmıyordu.
+Komutanlar bazı düşman analizlerine asker gibi dahil oluyordu.
+
+Değişen dosyalar:
+- src/historical-opponent-analysis.js: canlı savaşçıların silah/rol, sağlık,
+  mesafe, menzil tehdidi ve iki kanat baskısı; en fazla dört hedef adayı.
+- src/historical-civilization-tactics.js: menzilli baskıda ilerleme, yakın
+  süvariye karşı mızrak hattını tutma, savunması daha zayıf ve harita içinde
+  kalan kanadı seçme. Mızrak/fil ağırlıklı rakipte ön süvariler de önce yana
+  açılır. Kanat bir manevra boyunca sabit; koşullar değişince titreme yapmaz.
+  Açık menzilli hedef gerçekten saldırı hedefine aktarılır; koruma gelirse
+  toplu hücum bırakılır. Mevcut rol/profil alanları korunmuştur.
+- src/historical-tactics.js: komutanlar savaşçı analizinden çıkarıldı;
+  menzilli ağırlıklı rakipte ricat yerine normal hareketli muharebe;
+  tek takipçi yerine gerçek takip grubu ve aşırı güçlü takipte iptal.
+  Bu dosya daha sonra araştırma/taktik sekmesine devredildi; kanatların
+  arkaya geçmesi ve merkezin geri çekilmesi için ek geometri o sekmede.
+- tests/historical-opponent-ai.mjs: iki takımda karşılaştırmalı senaryolar,
+  fiziksel yana açılma, hedef/kanat kararlılığı, dört oyuncu emri ve komutan
+  kaybı; 4000/8000 askerde doğrusal analiz ve 2 Hz sınırı. Ricat senaryosunun
+  yeni geometriye uyarlanması aynı sekmeye bırakıldı.
+
+Korunanlar: kimlikler, katalog, kayıt biçimi, klasik mod, komutan zorunluluğu,
+oyuncu emirlerinin anında önceliği. Menü, görsel, otomatik ordu ve savaş motoru
+dosyaları bu çalışmada değiştirilmedi. İlave güç/zırh bonusu verilmedi.
+
+Doğrulama (geometri devrinden önce): historical-opponent-ai,
+historical-civilization-tactics, historical-tactics, historical-commander-tactics,
+historical-commanders-combat, historical-combat, crown-battle-tactics,
+crown-battle-behavior ve crown-battle-tactical-visuals PASS.
+Tarayıcı: 20 senaryo/600 kare; PC 1100x720, telefon 390x844, 0 sayfa hatası.
+Vite build artifacts/opponent-ai-build PASS; mevcut 500 KB paket uyarısı sürüyor.
+
+Sınırlar: açık alan için sınırlı karar kurallarıdır; tüm taktiklerin her rakibe
+karşı zafer garantisi yoktur. Kanat hesabı iki bölgenin baskısını karşılaştırır,
+engel rotası çözmez; kale haritalarında bu taktikler devre dışıdır. Tamamlanan
+veya iptal edilen manevra yerel savaş yapay zekasına döner. 4000/8000 kontrolü
+işlem sayısını ölçer, FPS ölçümü değildir. Yeni kaynak veya paket indirilmedi.
+
+Son entegrasyon: diğer sekme ricat testinin konumlarını güncelledi. Beş düşman
+takip etse bile kanatların önünde kaldığında kapanma başlamıyor; gerçek kapan
+alanına girdiklerinde başlıyor. Güncel kaynakla historical-opponent-ai,
+historical-civilization-tactics ve historical-commander-tactics yeniden PASS;
+son Vite build PASS (6.09 sn). Diğer sekme historical-tactics testini de PASS
+bildirdi; Turan geometrisinin ek kontrollerini kendi notunda sürdürüyor.

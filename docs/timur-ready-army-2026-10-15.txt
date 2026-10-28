@@ -1,0 +1,31 @@
+Timur hazır ordusu — 15 Ekim 2026
+
+Sorun: Timur komutan kataloğunda bulunuyor, fakat doctrineIds boş olduğu için
+yalnız doktrinlerden üretilen hazır ordu listesine girmiyordu.
+
+Çözüm: Doktrinden bağımsız Timur preseti eklendi. 24 askerlik temel karışım:
+8 Kıpçak atlı okçu, 6 Moğol atlı okçu, 5 Kıpçak mızraklı süvari,
+4 Kıpçak maskeli kılıçlı süvari ve 1 savaş fili. Komutan ayrıca eklenir.
+İstenen sayıya mevcut tam sayılı paylaştırma ile ölçeklenir. İki taraf da
+bu orduyu oluşturabilir. Mevcut komutan formasyonunu kullanır.
+
+Sınır: Bunlar mevcut katalogdaki donanım/rol temsilleridir; adlandırılmış
+Kıpçak birliklerinin birebir Timur alayı olduğu iddia edilmez. Döneme özgü
+Timurlu süvari/piyade donanımı açığı araştırma sekmesine bildirildi.
+Yeni özel Timur doktrini eklenmedi. Birlik kimlikleri ve kayıt biçimi korundu.
+
+Değişen dosyalar:
+src/historical-army-presets.js
+tests/historical-army-presets.mjs
+tests/timur-ready-army-browser.mjs
+docs/timur-ready-army-2026-10-15.txt
+
+Testler PASS:
+- historical-army-presets.mjs: 12 preset; minimum–1000 asker tam sayı/sayı
+  toplamı taraması; Timur her boyutta fil içeriyor. Dört ordu boyutu,
+  iki tarafta komutan formasyonu/doktrin aktivasyonu; geçersiz sayı reddi.
+- timur-ready-army-browser.mjs: 1440px PC ve 390px mobil. Her iki tarafta
+  Timur seçimi; 200 ve 97 asker + birer komutan; karşı ordu korunuyor;
+  uygulama, kayıt ve yenileme; yatay taşma ve tarayıcı hata kontrolü geçti.
+
+Ana sekmeye sonuç bildirildi. Motor/arayüz/katalog görselleri değiştirilmedi.

@@ -1,0 +1,43 @@
+İskender’in hafif müttefik piyadeleri — 16 Ekim 2026
+
+Kapsam: İki mevcut birlik komutanın hazır ordusuna bağlandı; yeni katalog
+kopyası eklenmedi. Trak peltastı savaş davranışı ve görseli düzeltildi.
+
+Arrianos, Anabasis 1.28: Sagalassos'ta Sitalces komutasındaki Trak ciritçileri.
+2.9: İssos sol kanadında Giritli okçular ve Traklar.
+https://www.gutenberg.org/files/46976/46976-h/46976-h.htm
+Giritli okçunun önceki Ksenophon kaynağı korundu; dönem MÖ 4. yy olarak
+genişletildi. Roma dönemi Giritli okçu birimi İskender'e taşınmadı.
+
+thracian_peltast: mevcut ID korunur; ranged/skirmish, dart, menzil 128,
+bekleme 1.7. Gerçek mermi fırlatır. Desenli zeira ve kulaklıklı başlık korunur;
+iki yedek cirit, atış/bırakış animasyonu ve yuvarlak gövdeli hilal pelta eklendi.
+Kıyafet daha erken Trak tasvirlerinin oyun yorumudur, kesin MÖ 333 üniforması
+değildir. Renkler ve savaş değerleri oyun tasarımıdır.
+
+Alexander hazır ordusu artık 10 birlik çeşidi; asgari kapasite 24 korunur.
+24 kişilik dağılım: sarissa 7, hypaspist 3, hetairoi 3, Tesalya 2, Agrian 2,
+Makedon okçu 1, prodromos 1, Paion 1, Trak 2, Girit 2.
+Bu sayılar tarihî asker oranları veya tek bir muharebenin kesin kadrosu değildir.
+Trak ve Girit birliklerinin medeniyet kimlikleri korundu.
+
+Değişiklikler: src/world-warrior-units.js, src/world-warrior-art.js,
+src/europe-crusader-units.js, src/historical-army-presets.js,
+src/historical-army-history.js; tests/alexander-light-infantry.mjs,
+tests/historical-army-presets.mjs.
+Savaş motoru, yorgunluk ve moral değiştirilmedi.
+
+Doğrulama:
+- 6 doğal savaş: iki tarafta cirit/ok isabetleri, İskender ordusunda doğma,
+  sonlanma ve kaydetme/geri yükleme başarılı.
+- 160 animasyon karesi: boş/kırpılmış kare veya tarayıcı hatası yok.
+- 20 hazır ordunun asgari–1000 kapasite ve yuvarlama testi başarılı.
+- 9 dünya ve 10 Avrupa/Haçlı biriminin canlı savaş testleri başarılı.
+- 20 tarih/kaynak panelinin testi başarılı.
+- 1440, 390, 320 pikselde komutan seçimi, ölçekleme, uygulama ve kayıt başarılı.
+- Vite üretim derlemesi başarılı; büyük paket boyutu uyarısı mevcut.
+Önizleme: artifacts/alexander-light-infantry.jpg.
+Tarayıcı günlüğü: artifacts/alexander-presets-browser.log.
+
+Sonraki tarama: mevcut komutanların kaynakça destekli eksik kontenjanları;
+katalogdaki mevcut birimleri kontrol etmeden yeni kopya oluşturma.

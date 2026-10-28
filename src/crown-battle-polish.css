@@ -1,0 +1,80 @@
+/* A compact command desk leaves the battlefield as the main surface. */
+body:not(.cinema) .battle-stage{border-color:#66735a66;box-shadow:0 10px 32px #0003}
+body:not(.cinema) .stage-bar{background:#17251f;color:#bbbda7;letter-spacing:.12em;font-size:10px}
+body:not(.cinema) .stage-commands{background:linear-gradient(180deg,#223027,#1b2821)}
+body:not(.cinema) .stage-commands button{transition:background-color .12s,border-color .12s}
+body:not(.cinema) .stage-commands button:not(:disabled):hover{border-color:#d5bc7a;background:#46533c}
+body:not(.cinema) .transport{background:#14221b}
+body:not(.cinema) .transport .primary{background:#cfb476;color:#1b251c;border:1px solid #edcf8e;box-shadow:inset 0 1px #fff3}
+body:not(.cinema) .transport .primary:hover{background:#e1c58b}
+body:not(.cinema) .panel{border-color:#77816a38}
+@media(min-width:900px){
+  body:not(.cinema) .page-heading{align-items:center;margin-bottom:8px}
+  body:not(.cinema) .page-heading h1{font-size:23px;letter-spacing:-.03em}
+  body:not(.cinema) .workspace{height:calc(100svh - 112px)}
+  body:not(.cinema) .battle-stage{grid-template-columns:minmax(0,1fr);grid-template-rows:26px minmax(0,1fr) auto auto auto}
+  body:not(.cinema) .stage-bar{padding:7px 12px}
+  body:not(.cinema) .stage-commands{display:grid;grid-template-columns:205px minmax(0,1fr);gap:5px 10px;padding:8px 10px}
+  body:not(.cinema) .field-team-selection{margin:0;gap:5px;align-items:center}
+  body:not(.cinema) .field-team-selection button{min-height:32px;padding:5px 7px;font-size:11px;white-space:nowrap}
+  body:not(.cinema) .stage-commands .command-row{gap:5px;align-items:center}
+  body:not(.cinema) .stage-commands .command-row button{min-height:32px;padding:5px;font-size:11px;line-height:1.2}
+  body:not(.cinema) #selection-note{grid-column:1/-1;margin:0;min-height:0;line-height:16px;text-align:left;font-size:10px;color:#b9c5ad}
+  body:not(.cinema) .formation-tools{grid-column:1/-1;gap:6px;margin:0;padding-top:6px;align-items:center}
+  body:not(.cinema) .formation-tools label{flex:1 1 140px;min-width:0;display:flex;flex-direction:row;align-items:center;gap:6px;margin:0;white-space:nowrap;font-size:10px}
+  body:not(.cinema) .formation-tools select{min-height:30px;height:30px;min-width:0;padding:3px 5px;font-size:11px}
+  body:not(.cinema) .formation-tools button{flex:0 1 auto;min-height:30px;padding:5px 9px;font-size:11px}
+  body:not(.cinema) .formation-tools p{font-size:10px;line-height:13px;color:#9ba992}
+  body:not(.cinema) .transport{padding:7px 10px;gap:7px}
+  body:not(.cinema) .transport .primary{min-height:34px;padding:7px 12px;font-size:12px}
+  body:not(.cinema) .transport .icon-button{width:34px;height:34px;min-height:34px}
+  body:not(.cinema) .transport .speed-control button{min-height:30px;padding:4px 9px}
+  body:not(.cinema) .transport time{font-size:11px}
+  body:not(.cinema) .battle-audio-controls{padding:4px 10px;gap:7px;min-width:0;flex-wrap:nowrap;font-size:10px;background:#14221b}
+  body:not(.cinema) .battle-audio-controls button{min-height:28px;padding:4px 7px;font-size:10px}
+  body:not(.cinema) .battle-audio-controls label{margin:0;font-size:10px;gap:4px}
+  body:not(.cinema) .battle-audio-controls input{width:70px;height:20px}
+  body:not(.cinema) .battle-audio-controls output{min-width:26px}
+  body:not(.cinema) .battle-audio-controls [role=status]{font-size:10px}
+  body:not(.cinema) .stage-help{display:none}
+}
+@media(min-width:1200px){
+  body:not(.cinema) .battle-stage{grid-template-columns:minmax(0,1fr) auto;grid-template-rows:26px minmax(0,1fr) auto auto}
+  body:not(.cinema) .stage-bar,body:not(.cinema) .theater,body:not(.cinema) .stage-commands{grid-column:1/-1}
+  body:not(.cinema) .transport{grid-column:1;grid-row:4;min-width:0}
+  body:not(.cinema) .battle-audio-controls{grid-column:2;grid-row:4;max-width:440px;border-top:1px solid #ffffff14}
+  body:not(.cinema) .battle-audio-controls [role=status]{max-width:106px;line-height:13px}
+}
+@media(max-width:899px){
+  body:not(.cinema) .formation-tools p{font-size:10px}
+  body:not(.cinema) .stage-commands{padding:8px}
+}
+
+/* Slate command furniture contrasts with the sunlit field. No animated filters. */
+body{background:radial-gradient(ellipse at 42% 0,#29323755,transparent 65%),#101719}
+.studio-header{background:#111a1d;border-color:#a8b7ac24}
+.page-heading h1{color:#f1e7cc}
+.page-heading h1 span{border-color:#b8a06c55;background:#b8a06c0c}
+body:not(.cinema) .battle-stage{border-color:#a6a68750;border-radius:9px;box-shadow:0 12px 30px #0004}
+body:not(.cinema) .stage-bar{background:#182327;color:#aab9b6}
+body:not(.cinema) .stage-commands{background:linear-gradient(#1e2b2e,#192528)}
+body:not(.cinema) .transport,body:not(.cinema) .battle-audio-controls{background:#152024}
+.controls .panel{background:linear-gradient(135deg,#1d292c,#182225);border-color:#b4c2b12c;border-radius:8px}
+.controls .panel-title{padding-bottom:12px;border-bottom:1px solid #b4c2b11c}
+.controls h2{color:#e9e0ca}
+.controls select,.controls input{background:#111d21;border-color:#afc0b52c;color:#e3e5d9}
+.controls input:focus,.controls select:focus{border-color:#d1b67c}
+.menu-tabs{gap:5px}
+.menu-tabs button{background:#172326;border-color:#a4b7b22a;color:#aabbb7;border-radius:6px}
+.menu-tabs button[aria-selected=true]{background:linear-gradient(135deg,#3e4437,#2e3831);border-color:#b6a473;color:#f1dfac;box-shadow:inset 0 2px #d6bc7c}
+.controls .menu-scroll{scrollbar-color:#566760 #152024;scrollbar-width:thin}
+.controls .command-civilization,.controls .roster-civilization h4{color:#d6c18d;letter-spacing:.03em}
+.menu-scroll .unit-grid button{background:linear-gradient(105deg,#2a3736,#202c2e);border:1px solid #9caf9e29;border-radius:7px;text-align:left;transition:border-color .12s,background-color .12s}
+.menu-scroll .unit-grid button:not(:disabled):hover{border-color:#bba574;background:#34433d}
+.menu-scroll .unit-grid button[aria-pressed=true]{background:linear-gradient(110deg,#405b57,#263b3d);border-color:#a8cbbd;box-shadow:inset 3px 0 #a8cbbd}
+.menu-scroll .unit-grid button small{color:#b2bdb2}
+.menu-scroll .unit-grid .unit-portrait{background:radial-gradient(ellipse at 50% 65%,#c7be8a20,transparent 70%)}
+#army-setup-shortcut{background:linear-gradient(105deg,#454b37,#303e35);border-color:#afa16c;color:#f0dfaa;box-shadow:inset 0 1px #ead9a218}
+body:not(.cinema) .stage-commands .quiet{border-color:#9aafa02c;color:#c7d0c3}
+.cinema .transport{background:#111c20;border-top:1px solid #c6ad763b}
+@media(prefers-reduced-motion:reduce){.menu-scroll .unit-grid button{transition:none}}

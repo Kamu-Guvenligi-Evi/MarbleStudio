@@ -4,7 +4,7 @@ $ProgressPreference = 'SilentlyContinue'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 $toolsRoot = Join-Path $projectRoot 'tools'
 $lockHash = (Get-FileHash -LiteralPath (Join-Path $projectRoot 'package-lock.json') -Algorithm SHA256).Hash
-if ($env:MARBLE_SETUP_READY -eq "$projectRoot|$lockHash") { return }
+if ($env:MARBLE_SETUP_READY -eq "$projectRoot|$lockHash" -and ($SkipBrowser -or $env:MARBLE_BROWSER_READY -eq "$projectRoot|$lockHash")) { return }
 New-Item -ItemType Directory -Force -Path $toolsRoot | Out-Null
 $setupLock = $null
 for ($attempt=0;$attempt -lt 600 -and -not $setupLock;$attempt++) {
@@ -75,6 +75,7 @@ if (-not $SkipBrowser) {
         & $nodeBinary (Join-Path $projectRoot 'node_modules/playwright/cli.js') install chromium --only-shell | Out-Host
         if ($LASTEXITCODE -ne 0) { throw 'Video browser download failed. Check your connection and run Baslat.cmd again.' }
     }
+    $env:MARBLE_BROWSER_READY = "$projectRoot|$lockHash"
 }
 $revisionFiles = @((Get-ChildItem -LiteralPath (Join-Path $projectRoot 'src'),(Join-Path $projectRoot 'scripts') -Recurse -File | Where-Object { $_.Extension -in @('.js','.mjs','.ps1') -and $_.FullName -notmatch '[\\/]statistics-cache[\\/]' }) | Sort-Object FullName)
 $revisionText = $lockHash + (($revisionFiles | ForEach-Object { $_.FullName.Substring($projectRoot.Length) + ':' + (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash }) -join '|')

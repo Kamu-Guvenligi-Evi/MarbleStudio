@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 $sourceRoot = Split-Path -Parent $PSScriptRoot
 $CloneRoot = (Resolve-Path -LiteralPath $CloneRoot).Path
 if (-not $CloneRoot.StartsWith((Join-Path $sourceRoot 'artifacts') + '\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Use a disposable clone inside artifacts.' }
-foreach ($relativeFile in @('Baslat.cmd','Start-Factory.cmd','Start-Studio.ps1','scripts/bootstrap-runtime.ps1','scripts/service-state.ps1','scripts/start-factory.ps1','scripts/browser-runtime.mjs')) {
+foreach ($relativeFile in @('Baslat.cmd','Start-Factory.cmd','Start-Studio.ps1','scripts/launch-studio.ps1','scripts/bootstrap-runtime.ps1','scripts/service-state.ps1','scripts/start-factory.ps1','scripts/browser-runtime.mjs')) {
     Copy-Item -LiteralPath (Join-Path $sourceRoot $relativeFile) -Destination (Join-Path $CloneRoot $relativeFile)
 }
 $env:PATH = 'C:\Windows\System32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0'

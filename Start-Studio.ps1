@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 $studioRoot = $PSScriptRoot
 $env:VITE_FACTORY_ORIGIN = "http://127.0.0.1:$FactoryPort"
 $env:MARBLE_STUDIO_PORT = "$StudioPort"
-& (Join-Path $studioRoot 'scripts/bootstrap-runtime.ps1')
+& (Join-Path $studioRoot 'scripts/bootstrap-runtime.ps1') -SkipBrowser
 . (Join-Path $studioRoot 'scripts/service-state.ps1')
 $studioAddress = "http://127.0.0.1:$StudioPort"
 $studioState = Join-Path $studioRoot "tools/studio-$StudioPort.json"
@@ -30,6 +30,6 @@ if (-not $studioOnline) {
     }
 }
 if (-not $studioOnline) { throw 'Marble Studio could not start. See server-error.log.' }
-try { & (Join-Path $studioRoot 'scripts\start-factory.ps1') -NoBrowser -Port $FactoryPort }
-catch { Write-Warning 'Video hizmeti açılamadı. Studio içinde yeniden deneyebilirsin.' }
 if (-not $NoBrowser) { Start-Process $studioAddress }
+try { & (Join-Path $studioRoot 'scripts\start-factory.ps1') -NoBrowser -Port $FactoryPort }
+catch { Write-Warning ("Video hizmeti acilamadi; oyunlari kullanabilirsiniz. Video icin Baslat.cmd dosyasini yeniden acin. Hata: " + $_.Exception.Message) }

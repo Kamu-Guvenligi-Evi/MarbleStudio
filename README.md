@@ -107,6 +107,8 @@ Süper Lig sayımı 1959’dan başlar; Beşiktaş’ın yıldız hesabına ekle
 
 **Ortak geliştirme ve kullanım:** GitHub Desktop'ta bu depoyu **Clone** ile bilgisayarına indir, ardından **Repository → Show in Explorer** ile klasörü açıp `Baslat.cmd` dosyasına çift tıkla. İlk açılışta Node.js, uygulama bağımlılıkları ve video tarayıcısı otomatik hazırlanır; elle kurulum, npm komutu veya yönetici izni gerekmez. İlk hazırlık için internet gerekir. Sonraki açılışlarda aynı araçlar tekrar kullanılır.
 
+Oyun ekranı hazır olduğunda video tarayıcısının kurulmasını beklemeden açılır. Video hazırlığı başarısız olursa oyunları kullanmaya devam edebilirsiniz; bağlantı düzeldikten sonra `Baslat.cmd` dosyasını yeniden açın. Başlatma ayrıntıları `artifacts/startup-*.log` dosyasına kaydedilir. ZIP indirdiyseniz önce tüm arşivi klasöre çıkarın. İki bilgisayarda aynı oyunları görmek için GitHub Desktop'ta aynı dalı seçip güncelleyin; 29 Ekim 2026 tarihli güncel oyun sürümü `codex/sync-two-computers-20261013` dalındadır.
+
 Güncelleme almak için GitHub Desktop'ta **Fetch origin → Pull origin**, ardından `Baslat.cmd`. Bağımlılıklar değiştiyse otomatik yenilenir; uygulamanın yönettiği sunucular yeni kodla açılır. Devam eden video üretimi varsa video hizmeti yeniden başlatılmaz; iş bitince `Baslat.cmd` yeniden açılır. Kod değişiklikleri editörde anında uygulanır. Kendi değişikliklerini GitHub Desktop'ta **Commit → Push origin** ile paylaş. Herkesin yazabilmesi için organizasyondaki ekibe bu depoda **Write** yetkisi verilmeli. Araçlar ve kişisel ayarlar Git'e gönderilmez; tamamlanan videolar aşağıdaki ortak arşive otomatik gönderilir.
 
 Geliştirme araçlarını elle yönetmek isteyenler için `npm install` ve `npm run dev` de kullanılabilir.

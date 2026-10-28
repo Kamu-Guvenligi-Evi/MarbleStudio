@@ -27,6 +27,11 @@ Object.assign(SPIRAL_THEMES,{
   emerald:{name:'Zümrüt Madeni',englishName:'Emerald Mine',description:'Yeşil kristal yüzeyler, açık renkli kesim kenarları ve prizma biçimli zümrüt parçaları.',material:'emerald',surface:['#9ae8b7','#258e61','#083f35'],background:['#11392c','#04100d'],edge:'#87e9b1',rail:'#2e6953',chip:['#b3ffd0','#27b47b'],hues:[330,45,210,280],effect:'emerald'},
   circuit:{name:'Devre Kartı',englishName:'Circuit Board',description:'Yeşil kart üzerinde altın iletken yollar ve mikroçipler; kopan parçaların üstünde devre izleri.',material:'circuit',surface:['#357c61','#15513f','#0c302c'],background:['#132d27','#050f10'],edge:'#b0c975',rail:'#416554',chip:['#3d916d','#1d5c48'],hues:[35,185,320,270],effect:'circuit'},
 });
+Object.assign(SPIRAL_THEMES,{
+  pearlShells:{name:'Pearl Shells',englishName:'Pearl Shells',description:'Overlapping ribbed shells with luminous pearls; fractures scatter nacre flakes and pearls.',material:'pearlShells',surface:['#ffe9db','#d6b0ba','#795b85'],background:['#253b4b','#080f19'],edge:'#ffe8df',rail:'#547489',chip:['#fff7e9','#dab6d9'],hues:[170,200,320,40],effect:'pearlShells'},
+  pomegranate:{name:'Pomegranate',englishName:'Pomegranate',description:'Ruby seeds packed inside pale curved membranes; impacts scatter glossy fruit seeds.',material:'pomegranate',surface:['#ffe5ba','#f6ba97','#a54c68'],background:['#382033','#100a16'],edge:'#ffccab',rail:'#70415b',chip:['#ffbdcb','#ee3965'],hues:[170,195,45,270],effect:'pomegranate'},
+  bubbleCells:{name:'Bubble Cells',englishName:'Bubble Cells',description:'Iridescent foam cells with bright curved rims; impacts leave delicate bubble rings.',material:'bubbleCells',surface:['#9dd9e5','#578ea8','#354869'],background:['#183444','#080e1b'],edge:'#bcf4ef',rail:'#465e86',chip:['#e4ffff','#efb9ed'],hues:[35,310,180,260],effect:'bubbleCells'},
+});
 // Each material has its own environment; the six scenery editions stay distinct.
 for(const [id,theme] of Object.entries(SPIRAL_THEMES))theme.scenery='material:'+id;
 const scenes={

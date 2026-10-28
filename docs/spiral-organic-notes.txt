@@ -1,0 +1,10 @@
+2026-10-28: Replaced rejected story scenery editions with three material themes.
+Existing Honeycomb is unchanged. New themes: Pearl Shells, Pomegranate, Bubble Cells.
+Removed Clockwork Vault, Dragon Nest, Deep Sea Sonar, Rainbow Loom and their story renderer/test.
+New surface motifs follow spiral geometry and use existing 1080x1920 texture cache.
+Matching particle drawings: pearls/nacre flakes, fruit seeds, bubble rings.
+Existing fracture physics remains unchanged; no shell-opening or fluid simulation claimed.
+Checks passed: spiral-organic.mjs, spiral-materials.mjs, spiral-scenery.mjs, Vite build.
+Factory video frames tested; full encoded video not tested here.
+Preview: artifacts/spiral-organic.png. Theme count: 34.
+Changes local, not pushed. Existing build chunk-size warning remains.

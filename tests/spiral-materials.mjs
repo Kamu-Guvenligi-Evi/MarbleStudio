@@ -6,7 +6,7 @@ import {normalizeProject,serializeProject,parseProject} from '../src/projects.js
 import {copyFor,validateBatch} from '../src/factory-recipes.js';
 import {automaticCandidate} from '../scripts/production-automation.mjs';
 
-assert.equal(Object.keys(SPIRAL_THEMES).length,31);
+assert.equal(Object.keys(SPIRAL_THEMES).length,34);
 for(const [id,theme] of Object.entries(SPIRAL_THEMES)){
   const project=normalizeProject({name:theme.name,mode:'spiral',spiralTheme:id,count:1,sequence:[]});
   assert.equal(parseProject(serializeProject(project)).spiralTheme,id);
@@ -71,13 +71,13 @@ try{
   await page.goto('http://127.0.0.1:5173/factory-render.html');await page.waitForFunction(()=>window.factoryRenderer);
   const exports=await page.evaluate(async()=>{
     const frames=[];
-    for(const theme of ['chocolate','soap','opal']){
+    for(const theme of ['chocolate','soap','opal','pearlShells','pomegranate','bubbleCells']){
       await window.factoryRenderer.begin({recipe:{mode:'spiral',theme,count:1,seed:2048},fps:240,width:540,height:960,speed:1,intro:0,analysis:{simulationSeconds:30},copy:{hook:'Test'}});
       frames.push(window.factoryRenderer.frame(240));
     }
     return frames;
   });
-  assert.equal(new Set(exports).size,3,'Exported video must use the selected material');
+  assert.equal(new Set(exports).size,6,'Exported video must use the selected material');
   assert.deepEqual(errors,[]);
-  console.log('PASS: 31 distinct textured themes, material debris, permanent fracture masks, cached surfaces, unchanged physics RNG, saved themes, automatic candidates, English titles and 240 FPS video frames.');
+  console.log('PASS: 34 distinct textured themes, material debris, permanent fracture masks, cached surfaces, unchanged physics RNG, saved themes, automatic candidates, English titles and 240 FPS video frames.');
 }finally{await browser.close();}

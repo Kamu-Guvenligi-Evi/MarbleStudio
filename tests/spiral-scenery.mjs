@@ -26,8 +26,8 @@ try{
     if(frames.size!==results.length)throw Error('Each theme must have distinct scenery');
     return results;
   });
-  assert.equal(results.length,31);
+  assert.equal(results.length,34);
   for(const r of results){assert.ok(r.moving,r.id+' should animate');assert.ok(r.repeat,r.id+' should reproduce paused/exported frames');assert.equal(r.alpha,1);assert.ok(r.transform);}
   await page.locator('#scenery-preview').screenshot({path:'artifacts/spiral-scenery-preview.png'});
-  console.log('PASS: 31 animated themes, repeatable frames and restored canvas state.');
+  console.log('PASS: 34 animated themes, repeatable frames and restored canvas state.');
 }finally{await browser.close();}

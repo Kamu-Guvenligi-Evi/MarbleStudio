@@ -60,7 +60,7 @@ export function createGameSoundDirector(mode,style='balanced',overrides={}){
 
 const sampleCache=new Map();
 export function directedSamples(event,rate=48000){
-  if(event.type==='original'&&event.mode==='glass-breaker')return originalGlassSamples(event,rate);
+  if(event.mode==='glass-breaker'&&(event.type==='original'||(event.originalType==='ice'&&event.cue?.voice==='glass'&&!event.manual)))return originalGlassSamples(event,rate);
   const {voice,degree,gain}=event.cue,key=[voice,degree,gain,rate].join('|');
   if(!sampleCache.has(key)){
     if(sampleCache.size>=64)sampleCache.delete(sampleCache.keys().next().value);

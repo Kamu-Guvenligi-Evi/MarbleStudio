@@ -19,10 +19,32 @@ async function renderCatalogImage(item) {
   const side=Math.min(img.naturalWidth,img.naturalHeight);
   const offsetY=(img.naturalHeight-side)*(item.fit==='contain'?.5:.22);
   if(item.fit==='flag') {
-    // Inscribe the entire flag in the circular marble, including its corners.
-    const scale=size*.94/Math.hypot(img.naturalWidth,img.naturalHeight);
-    const w=img.naturalWidth*scale,h=img.naturalHeight*scale;
-    ctx.drawImage(img,(size-w)/2,(size-h)/2,w,h);
+    // Extend the flag's edge colors into a round badge, keeping the original
+    // proportions of crescents, discs and coats of arms inside it.
+    const probe=document.createElement('canvas');probe.width=probe.height=32;
+    const scan=probe.getContext('2d',{willReadFrequently:true});scan.drawImage(img,0,0,32,32);
+    const pixels=scan.getImageData(0,0,32,32).data,colors=new Map();
+    for(let i=0;i<pixels.length;i+=4){
+      if(pixels[i+3]<240)continue;
+      const key=[pixels[i]>>4,pixels[i+1]>>4,pixels[i+2]>>4].join(',');
+      const color=colors.get(key)??{count:0,r:pixels[i],g:pixels[i+1],b:pixels[i+2]};
+      color.count++;colors.set(key,color);
+    }
+    const base=[...colors.values()].sort((a,b)=>b.count-a.count)[0]??{r:30,g:40,b:55};
+    const scale=Math.min(size/img.naturalWidth,size/img.naturalHeight);
+    const w=img.naturalWidth*scale,h=img.naturalHeight*scale,x=(size-w)/2,y=(size-h)/2;
+    ctx.clearRect(0,0,size,size);
+    ctx.save();ctx.beginPath();ctx.arc(size/2,size/2,size/2,0,Math.PI*2);ctx.clip();
+    ctx.fillStyle=`rgb(${base.r},${base.g},${base.b})`;ctx.fillRect(0,0,size,size);
+    if(y>0){
+      ctx.drawImage(img,0,0,img.naturalWidth,1,x,0,w,y+1);
+      ctx.drawImage(img,0,img.naturalHeight-1,img.naturalWidth,1,x,y+h-1,w,y+1);
+    }
+    if(x>0){
+      ctx.drawImage(img,0,0,1,img.naturalHeight,0,y,x+1,h);
+      ctx.drawImage(img,img.naturalWidth-1,0,1,img.naturalHeight,x+w-1,y,x+1,h);
+    }
+    ctx.drawImage(img,x,y,w,h);ctx.restore();
   }else if(item.fit==='contain') {
     // Trim transparent asset margins before cropping the visible artwork.
     const probe=document.createElement('canvas');probe.width=probe.height=128;

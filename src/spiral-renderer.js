@@ -77,7 +77,7 @@ export function renderSpiral(ctx,race,{countdown=0,paused=false,channel}={}){
 
   if(race.spiralBackground!==false){
     drawMaterialAmbience(ctx,theme,race.time);
-    drawSpiralScenery(ctx,theme.scenery,race.time);
+    drawSpiralScenery(ctx,theme.scenery,race.time,race.state==='finished'?1:race.progress);
   }
   const texture=iceTexture(race.ice,theme);
   ctx.drawImage(texture,0,0,540,960);drawMaterialLight(ctx,texture,theme,race.time);

@@ -1,0 +1,17 @@
+Historical library update, 2026-10-28
+- 40 -> 63 historical states. 23 Commons assets, downloaded image files total 497051 bytes (not a network traffic measurement).
+- Metadata and license/source links stored in public/catalog/manifest.json and matching sidecars. Unavailable Latin Empire asset skipped.
+- Flag badges: circular transparent corners, original symbol proportions, edge-color extension and dominant-color backing for transparent pennants. Original source files preserved.
+- Exact legacy image hashes added to legacy-padding.json; user uploads remain untouched. Browser canvas rasterization can produce multiple hashes for the same old flag.
+- Acquisition metadata: artifacts/empire-additions.json, empire-addition-files.json, empire-expansion-wiki.json. Publisher: scripts/publish-empire-additions.mjs.
+- Browser checks: 63 entries decode locally; notes/licenses, edge stripes, round corners, circular emblem proportions, exact old flag migration, personal upload preservation, search, roster, persistence, mobile width. PASS.
+- Visual review: artifacts/empires-contact-sheet.png. Build log: artifacts/empire-build.log.
+
+Follow-up: user requested broader geographic diversity, no Turkish-state emphasis.
+- Added 15 states from Africa, the Americas, Asia and Oceania; total now 78.
+- First/Second Haiti, Central African Empire, Kongo, Dahomey, Merina, Ashanti, Hawaii, Tahiti, Siam, Vietnam, Konbaung, Sulu, Laos, Nepal.
+- Ashanti uses a clearly labeled modern representative flag, not an asserted historical imperial flag. Konbaung reconstruction labeled; Tahiti dates follow the specific Commons source (1829-1842).
+- Metadata: artifacts/world-empires-{additions,addition-files,wiki}.json; replay: node scripts/publish-empire-additions.mjs world-empires.
+- Downloaded image files total 202207 bytes, not measured network traffic. Browser suite passes all 78 entries and source/sidecar, image, migration, selection, persistence and mobile checks.
+
+Avrupa genişletmesi: 14 yeni kayıt, toplam 92. Aragon, Kastilya, Navarra, Litvanya, Orta Çağ Norveç, İkinci Bulgar İmparatorluğu, Romanya, Yugoslavya, Burgonya, Yunanistan, Sırbistan, Minos, Antik Atina, Miken. Antik kayıtlar gerçek eser fotoğraflarıyla ve bayrak olmadıklarını belirten notlarla eklendi. Kaynak/lisans bilgileri sidecar ve manifestte. Batch: artifacts/europe-empires-additions.json; Commons metadata: artifacts/europe-empires-addition-files.json. İndirilen dosyaların toplam boyutu 325271 bayt (ölçülmüş ağ trafiği değildir). Tarayıcı testi PASS (92 kayıt); Vite build exit 0. Önizleme: artifacts/europe-empires-preview.png.

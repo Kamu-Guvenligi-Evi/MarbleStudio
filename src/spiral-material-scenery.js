@@ -1,6 +1,7 @@
 const TAU=Math.PI*2,wrap=(n,m)=>(n%m+m)%m;
 // Muted environments frame the breakable ribbon. All motion follows simulation time.
 const worlds={
+  pearlShells:['#d9c3df','seabed'],pomegranate:['#df9aaa','flow'],bubbleCells:['#b1e0eb','bubbles'],
   ice:['#a8e4ff','peaks'],lava:['#ff763c','volcano'],aurora:['#79e6bf','curtains'],
   gold:['#e8bf63','arches'],candy:['#f5accb','hills'],cosmic:['#e9a0e3','nebula'],
   wood:['#8fb688','trees'],honey:['#f4c65f','hills'],marble:['#cbd4dd','columns'],
@@ -64,8 +65,11 @@ function motif(c,id,t,i){
     case 'mushroom':line(c,[[0,12],[0,0]],3);c.beginPath();c.ellipse(0,0,13,9,0,Math.PI,TAU);c.closePath();c.stroke();circle(c,-4,-4,1.5,true);circle(c,4,-5,1.5,true);break;
     case 'pixels':c.fillRect(-9,-9,6,6);c.fillRect(-3,-3,6,6);c.fillRect(3,-9,6,6);c.fillRect(3,3,6,6);break;
     case 'starmap':circle(c,0,0,8);c.beginPath();c.ellipse(0,0,16,4,-.4,0,TAU);c.stroke();break;
+    case 'pomegranate':
     case 'chocolate':c.beginPath();c.ellipse(0,0,6,10,.4,0,TAU);c.fill();c.globalAlpha*=.5;line(c,[[-3,7],[0,0],[3,-7]],2);break;
+    case 'bubbleCells':
     case 'soap':circle(c,0,0,10+i%3*3);c.beginPath();c.arc(0,0,7+i%3*3,3.5,4.8);c.lineWidth=2;c.stroke();break;
+    case 'pearlShells':
     case 'opal':c.beginPath();c.ellipse(0,0,10,7,-.4,0,TAU);c.stroke();c.beginPath();c.ellipse(-2,-2,5,2,-.4,0,TAU);c.fill();break;
   }
 }

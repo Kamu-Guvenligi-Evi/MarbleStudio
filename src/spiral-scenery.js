@@ -11,7 +11,7 @@ function glow(ctx,x,y,r,color){
   ctx.fillStyle=g;ctx.fillRect(x-r,y-r,r*2,r*2);
 }
 // Simulation time keeps previews, pause and exported frames in sync. No physics RNG.
-export function drawSpiralScenery(ctx,scene,time){
+export function drawSpiralScenery(ctx,scene,time,progress=0){
   if(!scene)return;
   if(scene.startsWith('material:')){drawMaterialScenery(ctx,scene.slice(9),time);return;}
   ctx.save();ctx.lineCap='round';

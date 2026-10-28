@@ -1,3 +1,4 @@
+import {paintOrganicSurface,drawOrganicFragment} from './spiral-organic-materials.js';
 const TAU=Math.PI*2;
 const surfaces=new Map(),lightLayers=new Map(),materialPath=[];
 let materialLength=0;
@@ -312,7 +313,7 @@ export function spiralMaterial(theme){
   const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1920;
   const ctx=canvas.getContext('2d');ctx.scale(2,2);ctx.fillStyle=gradient(ctx,theme.surface);ctx.fillRect(0,0,540,960);
   const seed=[...theme.material].reduce((hash,char)=>Math.imul(hash,31)+char.charCodeAt(0),41),rng=random(seed);
-  painters[theme.material](ctx,rng);if(!['wood','sand'].includes(theme.material))grain(ctx,rng,.035);
+  if(['pearlShells','pomegranate','bubbleCells'].includes(theme.material))paintOrganicSurface(ctx,theme.material,materialPath);else painters[theme.material](ctx,rng);if(!['wood','sand'].includes(theme.material))grain(ctx,rng,.035);
   // Curved highlights and shaded edges make the material a thick spiral ribbon.
   const bevel=offset=>materialPath.map(p=>[p.x+Math.cos(p.angle)*offset,p.y+Math.sin(p.angle)*offset]);
   line(ctx,bevel(14),theme.material==='lava'?'#ff641950':'#ffffff66',1.5);line(ctx,bevel(-14),'#00000055',2);
@@ -360,7 +361,9 @@ export function drawMaterialParticle(ctx,p,theme){
   const size=p.size,color=p.white?theme.chip[0]:theme.chip[1];
   ctx.save();ctx.globalAlpha=Math.min(1,p.life*2);ctx.translate(p.x,p.y);ctx.rotate(p.rotation);ctx.lineWidth=.55;ctx.strokeStyle=theme.chip[0];
   const shard=[[-size,-size*.6],[size*.7,-size],[size*.4,size*.7],[-size*.8,size*.3]];
-  if(theme.effect==='chocolate'){
+  if(['pearlShells','pomegranate','bubbleCells'].includes(theme.effect)){
+    drawOrganicFragment(ctx,theme.effect,size,p.white);
+  }else if(theme.effect==='chocolate'){
     polygon(ctx,shard,'#d59b70');polygon(ctx,shard.map(([x,y])=>[x,y-size*.28]),color);
     line(ctx,[shard[0],shard[1]],'#f2c191',.9);
     line(ctx,[[-size*.3,-size*.4],[size*.4,-size*.4]],'#45281d',.7);

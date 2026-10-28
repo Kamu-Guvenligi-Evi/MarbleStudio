@@ -24,8 +24,8 @@ export const COURSE_PROFILES={
 export function validateBatch(raw={}){
   if(raw.automatic===true){const mode=raw.automaticMode??'auto';if(!['auto','track','arena','territory','spiral','statistics'].includes(mode))throw new Error('Otomatik tür geçersiz.');return {...validateBatch({...raw,automatic:false,source:null,strategy:'variations',modes:[['auto','statistics'].includes(mode)?'track':mode==='territory'?'arena':mode]}),arenaGame:mode==='territory'?'territory':'links',automatic:true,automaticMode:mode};}
   const count=Number(raw.count??3),duration=Number(raw.duration??55);
+  if(!Number.isInteger(duration)||duration<30||duration>180)throw new Error("Video duration must be 30?180 seconds.");
   if(!Number.isInteger(count)||count<1||count>30)throw new Error('Video sayısı 1–30 olmalı.');
-  if(!Number.isInteger(duration)||duration<30||duration>180)throw new Error('Süre 30–180 saniye olmalı.');
   const source=raw.source?normalizeSnapshot(raw.source):null;
   const modes=source?[source.mode]:raw.modes??['track','spiral','arena'];
   if(!Array.isArray(modes)||!modes.length||modes.some(x=>!['track','spiral','arena','statistics','pi','ball-duel','rock-paper-scissors','escape-multiply','merge-evolution','ball-multiplier','goal-arena','bounce-waves'].includes(x)&&!isBreaker(x))||(!source&&modes.some(mode=>['statistics','pi','ball-duel','rock-paper-scissors','escape-multiply','merge-evolution','ball-multiplier','goal-arena','bounce-waves'].includes(mode)||isBreaker(mode))))throw new Error('En az bir geçerli format seç.');

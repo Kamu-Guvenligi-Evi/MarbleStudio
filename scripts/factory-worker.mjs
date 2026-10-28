@@ -2,7 +2,6 @@ import {createRepetitionGuard,repetitionError,REPEAT_DAYS,REPEAT_COUNT} from './
 import {planAutomatic,automaticCandidate,outputQuality} from './production-automation.mjs';
 import {productionAudio} from './factory-audio.mjs';
 import {videoTiming} from './video-timing.mjs';
-import {fitTrackDuration} from './track-duration.mjs';
 import {visualSimilarity} from '../src/production-quality.js';
 import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
@@ -44,30 +43,23 @@ export async function produce(job,{root,origin,history,update,cancelled,novelty}
       const themes=Object.keys(SPIRAL_THEMES),theme=themes[(job.ordinal+attempt)%themes.length];
       const seed=exact?(job.options.source.project?.seed??1):randomInt(1,1000000);
       let r;try{r=automatic&&job.mode!=='statistics'?automaticCandidate(job.options,seed,history,attempted,guard):job.options.source?sourceRecipe(job.options.source,seed):recipe(seed,job.mode,theme);}catch(error){if(error.code==='REPETITION_LIMIT'&&candidates.length)break;throw error;}r.exact=exact;attempted.push(r);
-      if(!exact&&!automatic&&r.mode==='arena')Object.assign(r,{arenaGame:job.options.arenaGame??'links',arenaShape:['portrait','square','hexagon','triangle','circle'][attempt%5],territoryDuration:job.options.duration<=37?30:job.options.duration<=52?45:60});
+      if(!exact&&!automatic&&!job.options.source&&r.mode==='arena')Object.assign(r,{arenaGame:job.options.arenaGame??'links',arenaShape:['portrait','square','hexagon','triangle','circle'][attempt%5],territoryDuration:45});
       const intro=exact&&r.mode!=='statistics'?(r.presentation?.countdown??0):0;
       const outroSeconds=Math.max(r.arenaGame==='territory'?3:0,exact&&r.mode!=='statistics'?(r.presentation?.outro??2):2);
       if(r.mode==='spiral-breaker')r.clipSeconds=job.options.duration-intro-outroSeconds;
-      let fitted;
-      if(r.mode==='track'&&!exact&&!job.options.source){
-        fitted=await fitTrackDuration(r,job.options.duration,r=>page.evaluate(r=>window.factoryRenderer.probe(r),r),{intro,outro:outroSeconds,check,onPass:pass=>update({stage:'Parkur süresi ayarlanıyor · '+pass,progress:0})});
-        r=fitted.recipe;attempted[attempted.length-1]=r;
-      }
       const fingerprint=createHash('sha256').update(identity(r)).digest('hex'),shape=structure(r);
       if(!exact&&seen.has(fingerprint))continue;
       if(automatic&&!guard.check(r).allowed){if(exact)throw repetitionError(guard.check(r).reason);continue;}
-      const analysis=fitted?.analysis??await page.evaluate(r=>window.factoryRenderer.probe(r),r);
-      const timing=videoTiming(analysis.simulationSeconds,job.options.duration,{exact,intro,outro:outroSeconds,bounded:r.mode==='track'});
+      const analysis=await page.evaluate(r=>window.factoryRenderer.probe(r),r);
+      const timing=videoTiming(analysis.simulationSeconds,undefined,{intro,outro:outroSeconds});
       const duration=timing?.duration??null,speed=timing?.speed??1;
-      const review={attempt:attempt+1,seed:r.seed,structure:shape,score:analysis.score,duration,speed,output:outputQuality(analysis,speed),durationPasses:fitted?.passes,accepted:false};candidateReview.push(review);
-      if(exact&&!timing)throw new Error('Parkur videosu 30–180 saniye içinde tamamlanmalı. Bölüm sayısını veya düzeni değiştir.');
+      const review={attempt:attempt+1,seed:r.seed,structure:shape,score:analysis.score,duration,speed,output:outputQuality(analysis,speed),accepted:false};candidateReview.push(review);
       if(!analysis.complete||!analysis.finite){if(exact)throw new Error('Bu çalışma süre sınırı içinde tamamlanmadı. Ayarları değiştirip yeniden dene.');continue;}
       if(!exact&&(!timing||analysis.hits<3||analysis.rescues>40))continue;
       if(automatic&&!review.output.accepted)continue;
       review.accepted=true;
       const similarity=recent.length?Math.max(...recent.map(previous=>visualSimilarity(r,previous))):0;
-      candidates.push({recipe:r,analysis,speed,duration,intro,outroSeconds,fingerprint,structure:shape,similarity,selectionScore:analysis.score-similarity*30-(timing.durationDifference??0)*.15});
-      if(fitted)break;
+      candidates.push({recipe:r,analysis,speed,duration,intro,outroSeconds,fingerprint,structure:shape,similarity,selectionScore:analysis.score-similarity*30});
     }
     if(!candidates.length)throw new Error('Normal hızda tamamlanan uygun parkur bulunamadı. Başka bir düzenle yeniden dene.');
     candidates.sort((a,b)=>b.selectionScore-a.selectionScore);const best=candidates[0];best.candidateReview=candidateReview;best.outputQuality=outputQuality(best.analysis,best.speed);

@@ -1,0 +1,49 @@
+{
+  "id": "shared-b42bd987f69e52c4",
+  "title": "Who will win: Rock, Paper, or Scissors?",
+  "mode": "rock-paper-scissors",
+  "description": "Who will win: Rock, Paper, or Scissors?\nRock, Paper, Scissors arena battle.",
+  "recipe": {
+    "seed": 1142919599,
+    "count": 10,
+    "speed": 1,
+    "title": "",
+    "sound": true,
+    "soundStyle": "original",
+    "soundOverrides": {
+      "hit": "level-up"
+    },
+    "background": "nebula",
+    "map": "classic",
+    "name": "Taş Kâğıt Makas",
+    "version": 3,
+    "mode": "rock-paper-scissors",
+    "presentation": {
+      "countdown": 0,
+      "outro": 2
+    },
+    "music": {
+      "mode": "fixed",
+      "track": "",
+      "volume": 0,
+      "roster": []
+    },
+    "exact": true
+  },
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 144,
+    "duration": 32,
+    "speed": 1,
+    "codec": "H.264",
+    "audio": "effects",
+    "template": "minimal",
+    "intro": 0,
+    "outroSeconds": 2,
+    "outro": ""
+  },
+  "musicCredits": [],
+  "sha256": "b42bd987f69e52c402b093bcbc1fbf02a34b90f1de02938f1fde57af5b1241ce",
+  "bytes": 11125303
+}

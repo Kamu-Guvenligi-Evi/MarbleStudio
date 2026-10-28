@@ -189,3 +189,9 @@ Otomatik üretimde içerik imzası tüm geçmişle karşılaştırılır. Aynı 
 Spiral kütüphanesindeki 24 tema/davranışın tamamı koruma altındaysa **Bana bırak** diğer türlere geçer. Özellikle spiral seçilmişse veya istatistik verileri tükenmişse iş **Tekrar önlendi** açıklamasıyla durur; boş yere otomatik yeniden denenmez. Editörden özellikle istenen aynı çalışmanın dışa aktarımı bu otomatik engelin dışındadır.
 
 `node tests/repetition-guard.mjs` süre/adet sınırlarını, yeniden başlatmayı, arşivlemeyi ve hasarlı kayıt durumlarını; `node tests/repetition-service.mjs` gerçek hizmet üzerinden tekrar engelini denetler. Güncel otomatik ekran eski hizmetin koruma olmadan üretim yapmasına izin vermez; üretim hizmetini yeniden başlatmak gerekir.
+
+## Başka bilgisayarda açma
+
+ZIP dosyasının tamamını yeni bir klasöre çıkartıp **Baslat.cmd** dosyasını açın. HTML dosyasını veya ZIP içindeki dosyayı doğrudan açmayın. Başlatıcı görsel kütüphanesini, üç bağımsız oyun sayfasını ve video hizmetini kontrol eder. Oyun sayfaları, görseller, Node.js, FFmpeg ve video tarayıcısı arkadaş paketine dahildir.
+
+Yarışların video süresi oyunun bitişine bağlıdır. Spiral Kırıcı uzun süre devam edebilen bir arcade oyunudur; MP4 önizlemesi 55 saniyedir ve oyun hızı değiştirilmez. Alan Savaşı ve istatistikteki oyun/veri oynatma süresi ayarları korunur.

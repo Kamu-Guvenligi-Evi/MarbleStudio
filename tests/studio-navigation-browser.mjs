@@ -16,7 +16,7 @@ try {
     await page.setViewportSize({width:1440,height:900});
     await page.goto(origin+path);
     await page.waitForFunction(()=>!!document.querySelector('.studio-navigation .studio-game-list [aria-current="page"]'));
-    assert.equal(await page.locator('.studio-game-list [data-studio-game]').count(),15);
+    assert.equal(await page.locator('.studio-game-list [data-studio-game]').count(),19);
     assert.equal(await page.locator('.studio-navigation a[href="/crown-battle.html"]').count(),1);
     assert.equal(await page.locator('.studio-navigation a[href*="historical-armies"]').count(),0);
     assert.equal(await page.locator('.studio-game-list [data-studio-game="rock-paper-scissors"]').count(),1);

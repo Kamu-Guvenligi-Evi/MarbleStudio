@@ -11,7 +11,7 @@ const standalone=mode=>isBreaker(mode)||['escape-multiply','merge-evolution','ba
 const modeName={'escape-multiply':'Ka\u00e7\u0131\u015f \u00c7o\u011falmas\u0131','merge-evolution':'Evrim Arenası','collapse-arena':'Çöken Arena','bounce-waves':'Bounce Waves','goal-arena':'Goal Arena','ball-multiplier':'Ball Multiplier','rock-paper-scissors':'Taş Kâğıt Makas','ball-duel':'Top Düellosu',pi:'Pi Çarpışmaları',track:'Parkur yarışı',arena:'Küre arenası',territory:'Alan Savaşı',spiral:'Spiral çoğalma',statistics:'İstatistik yarışı','glass-breaker':'Cam Kırıcı','spiral-breaker':'Spiral Kırıcı'};
 const kindOf=record=>record.contentKind??(record.mode==='arena'&&(record.project?.arenaGame??record.recipe?.arenaGame??record.options?.arenaGame)==='territory'?'territory':record.mode);
 export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isLocked,getChannel}){
-  const store=createWorkStore();let source=null,ready=false,submitting=false,offset=0,poll=null,refreshing=false,works=[],exportRevision=0;
+  const store=createWorkStore();let source=null,ready=false,submitting=false,offset=0,poll=null,refreshing=false,works=[],exportRevision=0,retryExport=null;
   const root=document.createElement('div');root.innerHTML=`
   <dialog id="video-dialog" class="workbench-dialog" aria-labelledby="video-title">
     <div class="wb-heading"><div><p class="eyebrow">PAYLAŞMAYA HAZIRLA</p><h2 id="video-title">Video oluştur</h2></div><button class="wb-close" data-wb-close aria-label="Kapat">×</button></div>
@@ -38,7 +38,7 @@ export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isL
   const failure='Video hizmetine bağlanılamadı. Masaüstündeki Marble Studio kısayolunu yeniden açıp Tekrar dene düğmesine bas.';
   async function api(route,body){
     let res;try{res=await fetch(origin()+'/api/'+route,{...(body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(15000)});}catch{throw new Error(failure);}
-    const data=await res.json();if(!res.ok)throw new Error(data.error??'İşlem tamamlanamadı.');return data;
+    let data;try{data=await res.json();}catch{throw new Error(failure);}if(!res.ok)throw new Error(data.error??'İşlem tamamlanamadı.');return data;
   }
   async function checkService(){const data=await api('factory?limit=1');if((source?.mode==='escape-multiply'&&!data.capabilities?.includes('escape-production'))||data.apiVersion<5||!data.capabilities?.includes('temporary-downloads')||!data.capabilities?.includes('studio-workbench')||(isBreaker(source?.mode)&&!data.capabilities?.includes('breaker-production'))||(source?.mode==='merge-evolution'&&!data.capabilities?.includes('merge-production'))||(source?.mode==='bounce-waves'&&!data.capabilities?.includes('waves-production'))||(source?.mode==='goal-arena'&&!data.capabilities?.includes('goal-production'))||(source?.mode==='ball-multiplier'&&!data.capabilities?.includes('multiplier-production'))||(source?.mode==='rock-paper-scissors'&&!data.capabilities?.includes('rps-production'))||(source?.mode==='ball-duel'&&!data.capabilities?.includes('duel-production')))throw new Error('Video hizmetini güncellemek için mevcut render bitince Marble Studio kısayolunu yeniden aç.');return data;}
   function show(dialog){for(const d of root.querySelectorAll('dialog[open]'))d.close();dialog.showModal();}
@@ -53,7 +53,7 @@ export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isL
   }
   form.addEventListener('change',()=>{updateForm();if(source)try{localStorage.setItem('marble-studio-export-'+kindOf(source)+'-v1',JSON.stringify({...Object.fromEntries(new FormData(form)),fpsDefaultVersion:VIDEO_FPS_DEFAULT_VERSION,wavesAudioVersion:1}));}catch{}});
   async function openExport(snapshot,preview){
-    if(isLocked())return;const revision=++exportRevision;show($('video-dialog'));source=null;ready=false;$('video-submit').disabled=true;$('video-submit').textContent='Hazırlanıyor…';$('video-message').textContent='Çalışma hazırlanıyor…';$('video-source-name').textContent='Çalışma hazırlanıyor…';$('video-thumbnail').src=preview??thumbnail();
+    if(isLocked())return;retryExport=()=>openExport(snapshot,preview);const revision=++exportRevision;show($('video-dialog'));source=null;ready=false;$('video-submit').disabled=true;$('video-submit').textContent='Hazırlanıyor…';$('video-message').textContent='Çalışma hazırlanıyor…';$('video-source-name').textContent='Çalışma hazırlanıyor…';$('video-thumbnail').src=preview??thumbnail();
     try{
       const captured=normalizeSnapshot(snapshot??await capture());if(revision!==exportRevision)return;source=captured;form.reset();form.elements.orientation.value=source.mode==='statistics'?'landscape':'portrait';form.elements.audio.value=source.mode==='bounce-waves'?(source.project.sound?'all':'none'):source.mode==='pi'?(source.project.sound?'effects':'none'):source.mode==='statistics'?'none':source.mode==='spiral'&&source.project.spiralHypnotic?'effects':source.project.sound?'all':'music';
       try{const saved=JSON.parse(localStorage.getItem('marble-studio-export-'+kindOf(source)+'-v1')??'{}');if(source.mode==='bounce-waves'&&saved.wavesAudioVersion!==1&&saved.audio==='music'&&source.project.sound)saved.audio='all';saved.fps=String(source.mode==='escape-multiply'?(saved.fps??60):preferredVideoFps(saved));for(const key of ['orientation','resolution','fps','audio','template','language','channel','hook','outro','duration'])if(typeof saved[key]==='string'&&form.elements[key]){const input=form.elements[key];if(input.tagName==='SELECT'&&![...input.options].some(o=>o.value===saved[key]))continue;if(key==='orientation'&&!['portrait','landscape','square'].includes(saved[key]))continue;input.value=saved[key];}}catch{}
@@ -62,16 +62,16 @@ export function createWorkbench({capture,openSnapshot,thumbnail,title,notify,isL
       if(standalone(source.mode)&&!['ball-multiplier','goal-arena','bounce-waves'].includes(source.mode)&&!['effects','none'].includes(form.elements.audio.value))form.elements.audio.value=source.project.sound?'effects':'none';
       $('video-source-name').textContent=source.mode==='statistics'?source.statistics.heading:(source.project.name??modeName[source.mode]);updateForm();
       await checkService();if(revision!==exportRevision)return;ready=true;$('video-message').textContent='Hazır olduğunda videonu bu pencereden izleyip indirebilirsin.';
-    }catch(error){if(revision!==exportRevision)return;$('video-message').textContent=error.message;}
-    $('video-submit').disabled=!source;$('video-submit').textContent=ready?'Videoyu hazırla':'Tekrar dene';
+    }catch(error){if(revision!==exportRevision)return;$('video-message').textContent=error instanceof TypeError?failure:error.message;}
+    $('video-submit').disabled=false;$('video-submit').textContent=ready?'Videoyu hazırla':'Tekrar dene';
   }
   form.onsubmit=async e=>{
-    e.preventDefault();if(submitting||!source)return;submitting=true;$('video-submit').disabled=true;
+    e.preventDefault();if(submitting)return;if(!source){await retryExport?.();return;}submitting=true;$('video-submit').disabled=true;
     try{
       if(!ready){await checkService();ready=true;$('video-submit').textContent='Videoyu hazırla';$('video-message').textContent='Bağlantı hazır. Videoyu hazırlayabilirsin.';return;}
       const fields=Object.fromEntries(new FormData(form));const options=await brandVideoOptions({...fields,channel:getChannel?.(),strategy:'exact',count:1,duration:Number(fields.duration),resolution:Number(fields.resolution),fps:Number(fields.fps),source});if(!options)return;await api('queue',options);
       notify('Video hazırlanmaya başladı.');await openVideos();
-    }catch(error){$('video-message').textContent=error.message;}finally{submitting=false;$('video-submit').disabled=false;}
+    }catch(error){$('video-message').textContent=error instanceof TypeError?failure:error.message;}finally{submitting=false;$('video-submit').disabled=false;}
   };
   async function listWorks(){
     works=await store.list();$('works-list').innerHTML=works.length?works.map(work=>`<article class="wb-card"><img class="wb-cover" src="${work.thumbnail}" alt="${escape(work.name)} önizlemesi"><h3>${escape(work.name)}</h3><p>${modeName[kindOf(work.snapshot)]}</p><div class="wb-buttons"><button class="button secondary" data-work="${work.id}" data-action="open">Aç</button><button class="button secondary" data-work="${work.id}" data-action="copy">Kopyala</button><button class="button primary" data-work="${work.id}" data-action="export">Video oluştur</button></div></article>`).join(''):'<p class="wb-empty">İlk çalışmanı kaydet. Kadron, müziğin ve ayarların bir arada dursun.</p>';

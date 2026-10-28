@@ -1,6 +1,23 @@
 ﻿param([switch]$NoBrowser,[int]$StudioPort=5173,[int]$FactoryPort=5180)
 $ErrorActionPreference = 'Stop'
 $studioRoot = $PSScriptRoot
+. (Join-Path $studioRoot 'scripts/service-state.ps1')
+# A different extracted copy may still own the default ports. Never reuse it.
+function Get-StudioPort([int]$Preferred,[string]$Service) {
+    $listeners = @([Net.NetworkInformation.IPGlobalProperties]::GetIPGlobalProperties().GetActiveTcpListeners() | ForEach-Object { $_.Port })
+    for ($candidate = $Preferred; $candidate -lt $Preferred + 100; $candidate++) {
+        if ($candidate -notin $listeners) { return $candidate }
+        $record = Get-MarbleServiceRecord (Join-Path $studioRoot "tools/$Service-$candidate.json")
+        if ($record) {
+            $managed = Get-Process -Id $record.pid -ErrorAction SilentlyContinue
+            if ($managed -and $managed.StartTime.ToUniversalTime().Ticks.ToString() -eq $record.started) { return $candidate }
+        }
+    }
+    throw 'Uygulama icin bos yerel port bulunamadi.'
+}
+$StudioPort = Get-StudioPort $StudioPort 'studio'
+$FactoryPort = Get-StudioPort $FactoryPort 'factory'
+if ($FactoryPort -eq $StudioPort) { $FactoryPort = Get-StudioPort ($FactoryPort + 1) 'factory' }
 $env:VITE_FACTORY_ORIGIN = "http://127.0.0.1:$FactoryPort"
 $env:MARBLE_STUDIO_PORT = "$StudioPort"
 & (Join-Path $studioRoot 'scripts/bootstrap-runtime.ps1') -SkipBrowser

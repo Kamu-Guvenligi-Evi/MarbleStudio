@@ -30,4 +30,4 @@ if (-not (Test-Factory)) {
     }
     if (-not (Test-Factory)) { throw 'Uretim hizmeti baslatilamadi. artifacts/factory-server-error.log dosyasini kontrol et.' }
 }
-if (-not $NoBrowser) { Start-Process $factoryAddress }
+if (-not $NoBrowser) { Start-Process "$factoryAddress/factory.html" }

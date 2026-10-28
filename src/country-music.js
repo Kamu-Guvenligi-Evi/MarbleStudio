@@ -33,6 +33,12 @@ export async function createCountryMusic({tracks,getAudio,notify,onChange}) {
     if(!ball)return null;
     return byImage.get(ball.imageSrc)??countries.find(c=>fold(englishOutput(c.name))===fold(englishOutput(ball.name)))?.id??null;
   }
+  async function identifyImages(){
+    imageLookup??=Promise.all(countries.map(async country=>{
+      try{byImage.set(await prepareCatalogImage(country),country.id);}catch{}
+    }));
+    await imageLookup;
+  }
   function render(){
     const track=trackFor(selector.value);song.value=track?.id??'';
     preview.pause();
@@ -57,10 +63,7 @@ export async function createCountryMusic({tracks,getAudio,notify,onChange}) {
     async prepare(balls) {
       engine.reset();
       // Catalog portraits remain identifiable even after the user renames a ball.
-      if(!imageLookup)imageLookup=Promise.all(countries.map(async country=>{
-        try{byImage.set(await prepareCatalogImage(country),country.id);}catch{}
-      }));
-      await imageLookup;
+      await identifyImages();
       const ids=new Set(balls.map(identify).filter(Boolean));
       const tracksToLoad=[...new Map([...ids].map(id=>trackFor(id)).filter(Boolean).map(track=>[track.src,track])).values()];
       engine.retain(tracksToLoad);
@@ -69,7 +72,8 @@ export async function createCountryMusic({tracks,getAudio,notify,onChange}) {
     },
     importPlan(roster){for(const item of roster)if(countries.some(c=>c.id===item.entity))assignments[item.entity]=item.track;try{localStorage.setItem('marble-studio-country-music-v1',JSON.stringify(assignments));}catch{}render();},
     async exportPlan(balls){
-      await this.prepare(balls);
+      // A snapshot needs track IDs only. The video worker reads the audio files.
+      await identifyImages();
       return balls.map(ball=>{const entity=identify(ball);return {entity:entity??String(ball.id),track:trackFor(entity)?.id??''};});
     },
     sync(active,ball) {

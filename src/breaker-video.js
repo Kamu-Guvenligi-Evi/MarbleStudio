@@ -27,6 +27,7 @@ export function probeBreaker(recipe){
     return {complete,gameComplete:complete,simulationSeconds:seconds,winner:breakerOutcome(game.state),finite:[game.radius,...game.sparks.flatMap(s=>[s.x,s.y])].every(Number.isFinite),hits:game.hits,rescues:0,score:100,coverTime:seconds*.65,firstEventSeconds:first??seconds,longestQuietSeconds:Math.max(quiet,seconds-last)};
   }
   const game=recipe.mode==='glass-breaker'?new GlassBreaker({seed:recipe.seed}):new SpiralBreaker({mapId:recipe.mapId});
+  // This endless arcade mode records a preview; race exports run to completion.
   const timed=recipe.mode==='spiral-breaker',limit=Math.ceil(120*(timed?(recipe.clipSeconds??53)*recipe.playbackSpeed:600));
   let steps=0,first=null,last=0,quiet=0;
   const hit=()=>{const t=steps/120/recipe.playbackSpeed;first??=t;quiet=Math.max(quiet,t-last);last=t;};

@@ -5,6 +5,8 @@ if (-not $Destination) { $Destination = Join-Path $projectRoot ('MarbleStudio-Fr
 $Destination = [IO.Path]::GetFullPath($Destination)
 if (Test-Path -LiteralPath $Destination) { throw "Arşiv zaten var: $Destination" }
 $nodeBinary = (Get-Command node.exe -ErrorAction Stop).Source
+& $nodeBinary (Join-Path $PSScriptRoot 'verify-package.mjs')
+if ($LASTEXITCODE -ne 0) { throw 'Paket dosyalari eksik. Arsiv olusturulmadi.' }
 if (-not (Test-Path -LiteralPath (Join-Path $projectRoot 'node_modules/ffmpeg-static/ffmpeg.exe'))) { throw 'FFmpeg bağımlılığı eksik. Önce npm install çalıştır.' }
 if (-not $BrowserDirectory) {
     $browserCandidate = Get-ChildItem -LiteralPath (Join-Path $projectRoot 'artifacts/portable-browser-cache') -Filter 'chrome-headless-shell.exe' -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1

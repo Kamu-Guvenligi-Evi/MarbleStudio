@@ -37,16 +37,16 @@ try{
     await page.locator('#studio-export').click();
     await page.waitForFunction(()=>document.querySelector('#video-submit').textContent==='Videoyu hazırla');
     assert.equal(await page.locator('#video-form [name=strategy] option[value=variations]').evaluate(o=>o.disabled),true);
-    assert.equal(await page.locator('#video-series').isVisible(),source.mode==='spiral-breaker');
+
     assert.equal(await page.locator('[name=count]').isVisible(),false);
-    if(source.mode==='spiral-breaker')await page.selectOption('[name=duration]','30');
+    assert.equal(await page.locator('#video-series').isVisible(),source.mode==='spiral-breaker');
     await page.locator('#video-advanced summary').click();
     await page.selectOption('[name=resolution]','720');await page.locator('[name=fps]').fill('4');
     await page.selectOption('[name=audio]','effects');await page.locator('[name=orientation][value=square]').check();
     await page.locator('#video-submit').click();await page.waitForFunction(()=>document.querySelector('#videos-dialog').open);
     assert.equal(queued.source.mode,source.mode);assert.equal(queued.orientation,'square');assert.equal(queued.audio,'effects');
     if(source.mode==='glass-breaker'){assert.equal(queued.source.project.theme,'gold');assert.equal(queued.source.project.liveColors,true);}
-    else assert.equal(queued.duration,30);
+    else assert.equal(queued.duration,55);
     assert.deepEqual(errors,[]);await page.close();
   }
 }finally{await browser.close();}

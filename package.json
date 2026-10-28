@@ -53,7 +53,8 @@
     "test:output-language": "node tests/output-language.mjs",
     "test:output-language-browser": "node tests/output-language-browser.mjs",
     "test:branding": "node tests/channel-branding-browser.mjs",
-    "test:merge": "node tests/merge-sound.mjs && node tests/merge-evolution.mjs && node tests/merge-evolution-browser.mjs && node tests/merge-theme-editor.mjs && node tests/merge-finale.mjs"
+    "test:merge": "node tests/merge-sound.mjs && node tests/merge-evolution.mjs && node tests/merge-evolution-browser.mjs && node tests/merge-theme-editor.mjs && node tests/merge-finale.mjs",
+    "test:studio-crown": "node tests/studio-crown-browser.mjs"
   },
   "dependencies": {
     "matter-js": "0.20.0",

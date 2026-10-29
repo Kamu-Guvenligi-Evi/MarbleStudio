@@ -67,6 +67,7 @@ try {
   await page.locator('.studio-setting-group > summary').filter({hasText:'Ses ve müzik'}).click();
   await page.locator('#sound').check();assert.equal(await page.locator('#sound').isChecked(),true);
   await page.locator('#count').selectOption('8');assert.equal(await page.evaluate(()=>window.marbleStudio.getState().count),8);
+  await page.locator('#reset').click();
   await page.locator('#pause').click();
   await page.waitForFunction(()=>!document.querySelector('#nav-track').disabled);
   await page.waitForFunction(()=>window.marbleStudio.getState().countdown>0||window.marbleStudio.getState().state==='running');

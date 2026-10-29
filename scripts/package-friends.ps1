@@ -20,6 +20,7 @@ $archive = [IO.Compression.ZipFile]::Open($Destination,[IO.Compression.ZipArchiv
 try {
     $folders = @('src','public','scripts','node_modules')
     $files = @((Get-ChildItem -LiteralPath $projectRoot -Filter '*.html' -File).Name) + @('vite.config.js','package.json','package-lock.json','Baslat.cmd','Start-Factory.cmd','Start-Studio.ps1','README.md','FACTORY.md')
+    $files += 'docs/historical-elite-research-2026-10-14.json'
     foreach ($folder in $folders) {
         $base = Join-Path $projectRoot $folder
         Get-ChildItem -LiteralPath $base -Recurse -File | ForEach-Object {

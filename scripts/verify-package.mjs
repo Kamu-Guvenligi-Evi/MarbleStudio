@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 const root=path.resolve(process.argv[2]??fileURLToPath(new URL('../',import.meta.url)));
 const json=async file=>JSON.parse((await readFile(path.join(root,file),'utf8')).replace(/^\uFEFF/,''));
 const required=['index.html','factory.html','factory-render.html','spiral-breaker.html','glass-breaker.html','ball-duel.html','ring-escape.html','rock-paper-scissors.html','Baslat.cmd','Start-Studio.ps1','vite.config.js','public/catalog/legacy-padding.json','public/music/countries.json','public/music/people.json'];
+required.push('docs/historical-elite-research-2026-10-14.json');
 const catalog=await json('public/catalog/manifest.json');
 if(!catalog.items?.length||!catalog.categories?.length)throw new Error('Görsel kütüphanesi boş.');
 const music=await json('public/music/manifest.json');
